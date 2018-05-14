@@ -1,0 +1,63 @@
+@charset "UTF-8";
+
+
+.history_body {
+   cellspacing: 0;
+   width: 930px;
+	
+}
+.histoty_title {
+   width: 20%;
+   border: 1px solid #d7d7d7;
+   cellspacing: 0;
+}
+
+.space_left {
+   border-right: 1px solid #d7d7d7; 
+   width:463px;
+   height: 100px;
+
+}
+
+.space_right{
+   width:463px; 
+   padding: 0 0 0 0; 
+   border-right: 1px solid #d7d7d7;
+
+}
+.
+.history_right{
+   cursor: pointer;
+   width:463px;
+   valign:top;
+}
+
+.history_right_table{
+   cellspacing:0;
+   cellpadding:0;
+   width:463px;
+   position: relative;
+}
+
+.history_right_table_td1{
+   border-top: 1px solid #d7d7d7;
+   width:50px;
+
+}
+
+.history_right_table_span1{
+   position: relative; 
+   top: -10px;
+}
+
+.hi_title {
+   opacity: 0.5;
+}
+
+.hi_content_right div{
+   float:left;
+}
+
+.space_right2{
+   border-left: 1px solid #d7d7d7;
+}

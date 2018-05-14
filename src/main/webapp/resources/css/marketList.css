@@ -1,0 +1,78 @@
+@charset "UTF-8";
+
+.sort{
+	width:215px; height:200px; border: 1px solid #bdbdbd;  
+	float:left;
+	margin-right: 20px;
+	margin-bottom: 15px;
+	padding-left: 15px;
+}
+
+
+.category_menu{
+	width:200px; height:470px; border: 1px solid #bdbdbd;  
+	margin-left:0;
+	float: left;
+	margin-right: 20px;
+	padding-left: 15px;
+	padding-right: 15px;
+	
+}
+.left_box h4{
+	color:#462114;
+}
+	
+
+.market{
+	width:220px; height:272px; border: 1px solid #bdbdbd;
+	float: right;
+	margin-right: 10px;
+	margin-bottom: 10px;
+	
+}
+
+.left_box{
+	float: left;
+	width:230px;
+	color: gray;
+}
+
+.right_box{
+	float: right;
+	width: 730px;
+}
+
+.more_market{
+	background-color: #f37636;
+	width: 687px;
+	height: 35px;
+	margin-left: 33px;
+	text-align: center;
+	color: white;
+	font-family: dotum;
+	border-color: #f37636;
+	border-style: none;
+}
+
+.img_box{
+	width:220px;
+	height:170px;
+	border-bottom: 1px solid gray;  
+}
+.title_box{
+	width:200px;
+	height:102px;
+	padding-left: 10px;
+	padding-right: 10px;
+}
+
+.title{
+	 font-size: 12pt; margin-bottom: 0 ;
+	 font-weight: bold;
+	 color:#462114;
+}
+
+.content{
+	font-size: 10pt; margin-top: 0;
+	color:#756059
+}

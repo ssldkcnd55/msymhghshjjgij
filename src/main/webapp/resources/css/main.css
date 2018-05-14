@@ -1,0 +1,230 @@
+@charset "UTF-8";
+html,body{
+	height:100%;	
+}
+body{
+	display: table;
+	width:100%;
+}
+
+
+
+/* section 시작 */
+
+section{
+	background:#f3f3f3;
+	display:table-row;
+	width:100%;
+}
+#wrap{
+	width:1000px;
+	margin:0 auto;
+	height:100%;
+	overflow:hidden;
+	padding:10px 0px;	
+}
+#left_box{
+	float:left;	
+	width:730px;
+}
+#right_box{
+	float:right;
+}
+#notice_box{
+	background:#fff;
+	height:208px;
+	width:453px;
+	padding:20px;
+	float:right;
+}
+#left_box > img{
+	height:208px;
+	width:277px;
+}
+#notice_box > p{
+	margin-bottom:20px;
+	font-size:18px;
+	font-color:#555;
+}
+#notice_box .notice_date{
+	float:right;
+}
+#notice_box > ul > li{
+	font-size:14px;
+	margin-left:5px;
+}
+.btn_more{
+	float:right;
+	line-height:20px;
+}
+.btn_more > a{
+	text-decoration: none;
+	font-size:16px;
+	color:#777;	
+}
+
+/* login */
+
+
+#alarm_box{
+	width:260px;
+	background:#fff;
+	border:1px solid #DCDFE4;
+	margin-top:10px;
+	padding:20px;
+}
+#push .push_list a{
+	text-decoration:none;
+	color:black;
+	margin-bottom:10px;
+}
+#push .push_list a:hover{
+	color:#3b64af;
+	
+}
+#push .push_list{
+	overflow:hidden;
+	margin-bottom:10px;
+	padding-bottom:10px;
+	border-bottom:dashed 1px #ccc;	
+}
+.push_read{
+	width:100%;
+	text-align:right;
+}
+.pread{	
+	color:#3b64af !important;
+	font-weight:bold;
+}
+.pushdate{
+	font-size:12px;
+	float:left;
+	color:#999;
+	line-height:24px;
+}
+
+/* best class */
+
+#best_class{
+	width:100%;
+	margin:10px 0px;
+	background:#fff;
+	overflow:hidden;
+	padding:10px 20px;
+}
+.card{
+	text-align:center;
+}
+
+.card-img-top a{   
+    background:#fbfbfb;
+    text-align:center;  
+    width:150px;
+    height:150px;
+    display:inline-block;    
+   border:1px solid #DCDFE4;
+} 
+.card-img-top img{
+   width:100%;
+   height:100%;   
+    object-fit: contain;
+}
+/* #best_class .card .circle{ 
+	-webkit-clip-path: circle(50% at 50% 50%);
+	clip-path: circle(50% at 50% 50%);
+} */
+.card{
+	border:none;
+}
+.card-title{
+	font-weight:600;
+	font-size:18px;
+	color:#777;
+}
+.card-text{
+	text-align:center;
+	font-size:14px;
+}
+.card-body{
+	text-align:center;
+}
+.card-group .last_card{
+	margin-right:none;
+}
+/* my class */
+#my_class{
+	background:#fff;
+	width:100%;
+	height:260px;
+	margin-top:10px;
+	padding:10px 20px;	
+	position: relative;	
+}
+.new_class{
+	width:100px;
+	height:100px;
+	display:inline-block;
+	line-height:100px;
+	color:#999;
+}
+.MultiCarousel {
+	float: left;
+	overflow: hidden;
+	padding: 5px;
+	width: 100%;
+}
+
+.MultiCarousel .MultiCarousel-inner {
+	transition: 1s ease all;
+	float: left;
+}
+
+.MultiCarousel .MultiCarousel-inner .item {
+	float: left;
+}
+
+.MultiCarousel .MultiCarousel-inner .item>div {
+	text-align: center;
+	padding: 10px;
+	margin: 10px;
+	background: #f1f1f1;
+	color: #666;
+}
+
+.MultiCarousel .leftLst, .MultiCarousel .rightLst {
+	position: absolute;
+	border-radius: 50%;
+	top: calc(50% - 20px);
+	line-height:1.3;
+}
+
+.MultiCarousel .leftLst {
+	left: 10px;
+}
+
+.MultiCarousel .rightLst {
+	right:10px;
+}
+
+.MultiCarousel .leftLst.over, .MultiCarousel .rightLst.over {
+	pointer-events: none;
+	background: #ccc;
+}
+.MultiCarousel .item p{
+   display:inline-block;
+   padding-left:10px;
+   overflow: hidden; 
+   white-space:nowrap;
+   text-overflow: ellipsis;
+   width:160px;
+   text-align:center;
+}
+/* new notice */
+#notice_new > li > a{
+   display:inline-block;
+   overflow: hidden; 
+   white-space:nowrap;
+   text-overflow: ellipsis;
+   width:330px;
+   
+}

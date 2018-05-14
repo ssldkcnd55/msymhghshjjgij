@@ -1,0 +1,197 @@
+@charset "UTF-8";
+/* 구인구직 */
+
+.board-wrap{
+   width:960px;
+   margin:20px auto 0;
+   position:relative;
+   
+}
+/* 상단 */
+#top{
+   padding:10px;
+}
+
+
+/* Job_title */
+.Job_title{
+   padding: 15px;
+   font-size:14pt;
+   font-family:  "굴림", gulim, arial, helvetica, sans-serif;
+   float:left;
+}
+
+/* 상단 select_box */
+.select_box{
+   float:right;
+   padding: 15px;
+}
+.select{
+   height:40px;
+}
+
+
+/* sort 왼쪽 지역 박스 */
+#sort_all{
+   width: 180px; 
+   height:700px;
+   float:left; 
+}
+
+.sort{
+   width:120px; height:300px; border: 2px solid #cfc085;    
+}
+
+#left_area_table > div{
+   align:center;
+   margin-top:5px;
+}
+#left_area_table a{
+   text-decoration: none;
+   color:black;   
+}
+
+#left_area_table a:hover{
+   color:#cfc085;
+}
+
+
+/* sort 왼쪽 밑 구역 박스 */
+.sort2{
+   width:125px; height:400px; border: 2px solid #cfc085;     
+}
+
+#left_area_table2 > div{
+   align:center;
+   margin-top:5px;
+}
+#left_area_table2 td{
+   padding-left:2px;
+   text-align:left;
+}
+#left_area_table2 a{
+   text-decoration: none;
+   color:black;   
+}
+
+#left_area_table2 a:hover{
+   color:#cfc085;
+}
+
+
+/* table */
+#table_div{
+      
+   border-collapse: collapse;
+}
+.job_table{
+   width: 80%;
+}
+#job_table_span_find{
+   color:#ff0000;
+}
+#job_table_span_finded{
+   color:#c0c0c0;
+   
+}
+
+.job_table th{
+   padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+    border-top: 3px solid #ECE6CE;
+    height:60px;
+    text-align:center;
+    font-size:12pt;
+}
+
+.job_table td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+    height:60px;
+    text-align:center;
+    font-size:12pt;
+}
+
+
+.job_table > tr:hover {background-color:#f5f5f5;}
+
+#job_td{
+   text-align:left;
+}
+
+.job_table a{ 
+   text-decoration: none;
+   color:black;
+}
+
+
+/* 페이징 */
+.pagination {
+    display: inline-block;
+    padding-top:40px;
+    margin-left:170px;
+}
+
+.pagination a { 
+    color: black;
+    float: left;
+    padding: 10px 20px;
+    text-decoration: none;
+    font-size:12pt;
+}
+
+.pagination a.active {
+    background-color: #ECE6CE;
+    color: white;
+    border-radius: 5px;
+}
+
+.pagination a:hover:not(.active) {
+    background-color: #cfc085;
+    border-radius: 5px;
+}
+
+/* 검색 */
+.search_box{
+   float:right;
+   padding-top:5px;
+   padding-right:10px;
+   
+}
+.green_window {
+   display: inline-block;
+   width: 250px; height: 34px;
+   border: 3px solid #ECE6CE;
+   background: white;
+   margin-top:40px;
+   
+}
+.input_text {
+   width: 247px; height: 11px;
+   margin-top:40px ;
+   border: 0;
+   line-height: 21px;
+   font-weight: bold;
+   font-size: 12pt;
+   outline: none;
+}
+.sch_smit {
+   width: 54px; height: 40px;
+   margin-top:40px ; border: 0;
+   vertical-align: top;
+   background: #ECE6CE;
+   color: white;
+   font-weight: bold;
+   border-radius: 1px;
+   cursor: pointer;
+}
+.sch_smit:hover {
+   background: #cfc085;
+}
+
+/* 하단영역 */
+#bottom{
+   margin-bottom:40px;
+}
