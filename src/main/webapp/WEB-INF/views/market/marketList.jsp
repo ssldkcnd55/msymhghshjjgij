@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<!-- 영미낭 -->
+<!-- 영미낭 --> 
 <meta charset="UTF-8">
 <title>Farm</title>
 <link href="/farm/resources/css/style.css" rel="stylesheet" type="text/css" />
