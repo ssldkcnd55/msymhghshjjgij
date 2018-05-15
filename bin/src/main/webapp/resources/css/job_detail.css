@@ -1,0 +1,197 @@
+@charset "UTF-8";
+
+/* 구인구직 디테일 */
+
+
+.board-wrap{
+   width:960px;
+   margin:20px auto 0;
+   position:relative;
+   
+}
+/* 상단 */
+#top{
+   padding:5px;
+}
+
+#top_div{
+   height:40px;
+   margin-bottom:-31px;
+}
+
+
+/* Job_Detail_title */
+.Job_Detail_title{
+   padding: 15px;
+   font-size:14pt;
+   font-family:  "굴림", gulim, arial, helvetica, sans-serif;
+   float:left;
+}
+
+#job_detail_date{   
+   float:left;
+   margin-top:28px;
+   margin-left:620px;
+   width:130px;
+   font-size:10pt;
+   color:#c0c0c0;
+   font-family: "굴림", gulim, arial, helvetica, sans-serif;
+   
+}
+
+#job_detail_button{
+   float:left;   
+   margin-top:15px;
+   padding-right:10px;
+}
+
+#job_detail_button button{
+   background-color: #cfc085; 
+    border: none;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    /* display: inline-block; */
+   /*  cursor: pointer; */
+    border-radius: 5px;
+    font-size:11pt;
+    padding:6px;
+}
+
+#detail_note_top{
+    border-top: 3px solid #ECE6CE; 
+    margin-top:50px;
+}
+
+/* 농장이름 */
+#detail_note_farmname{
+   padding:20px 0px 0px 20px;
+   font-family:  "굴림", gulim, arial, helvetica, sans-serif;
+   font-size:12pt;
+}
+
+/* 구직제목 */
+#detail_note_farmtitle{
+   padding:0px 0px 0px 20px;
+   
+   font-size:18pt;
+   font-family:  "굴림", gulim, arial, helvetica, sans-serif;
+   
+   
+}
+#detail_note_farmtitle_bottom{
+   width:90%;
+   margin-left:30px;
+    border-bottom: 1px solid #d9d9d9; 
+} 
+
+
+/* 이미지 */
+#img:nth-child(1){
+   margin: 5px 5px 5px 80px;
+   width:250px;
+   height:168px;
+}
+#img:nth-child(2){
+   margin: 5px 10px 45px 5px;
+   width:95px;
+   height:85px;
+}
+
+#img:nth-child(3){
+   margin: 5px 15px 40px 5px;
+   width:90px;
+   height:90px;
+}
+#img:nth-child(4){
+   margin: 5px 15px 45px 7px;
+   width:70px;
+   height:80px;
+}
+#img:nth-child(5){
+   margin: 5px 10px 45px 8px;
+   width:66px;
+   height:80px;
+}
+#detail_note_farmimg_bottom{
+   width:90%;
+
+   margin-left:30px;
+    border-bottom: 1px solid #d9d9d9; 
+} 
+
+/* 모집조건 */
+#top_detail_condition{
+   float:left;
+   height:290px;
+   width:400px;
+}
+#detail_condition{      
+
+   padding:20px 10px 20px 90px;
+   font-family:  "굴림", gulim, arial, helvetica, sans-serif;
+   font-size:18pt;
+   color:#808080;
+}
+
+#detail_condition_dead_date input{
+   width:200px;
+   height:30px;
+   margin-bottom:20px;
+   font-size:16pt;
+   border:none;
+}
+
+/* 채용담당자 정보 */
+#detail_condition_seller{
+   float:right;
+   width:340px;
+   margin-left:20px;
+   margin-right:150px;
+   padding:20px 20px 20px 30px;
+   font-family:  "굴림", gulim, arial, helvetica, sans-serif;
+   font-size:18pt;
+   color:#808080;
+}
+#detail_condition_seller_detail input:nth-child(1){
+   width:200px;
+   height:30px;
+   font-size:16pt;
+   border:none;   
+   margin-bottom:25px;
+}
+#detail_condition_seller_detail input:nth-child(3){
+   width:200px;
+   height:30px;
+   font-size:16pt;
+   border:none;   
+   margin-bottom:25px;
+}
+#detail_condition_seller_detail input:nth-child(5){
+   width:300px;
+   height:30px;
+   font-size:12pt;
+   border:none;      
+}
+#detail_condition_seller_detail input:nth-child(7){
+   width:310px;
+   height:30px;
+   font-size:12pt;
+   border:none;   
+}
+
+#detail{
+   margin-left:50px;
+   font-family:  "굴림", gulim, arial, helvetica, sans-serif;
+   font-size:18pt;
+   color:#808080;
+}
+
+.detail_note_area{
+   margin-left:70px;
+   width:80%;
+   height:800px;
+   /* height:auto; */
+   border:1px solid #c0c0c0;
+   overflow: auto;
+}

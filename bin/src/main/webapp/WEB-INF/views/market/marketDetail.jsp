@@ -1,0 +1,367 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<link href="/farm/resources/css/style.css" rel="stylesheet" type="text/css" />
+<link href="/farm/resources/css/qna.css" rel="stylesheet" type="text/css" />
+<link href="/farm/resources/css/dailyList.css" rel="stylesheet" type="text/css" />
+<link href="/farm/resources/css/marketDetail.css" rel="stylesheet" type="text/css" />
+<script src="/farm/resources/js/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="/farm/resources/js/tabMove.js"></script>
+<title>Farm</title>
+</head>
+<body>
+	<div id="top_line"></div>
+	<div id="wrap">
+		<div id="header">
+			<%@  include file="../inc/top_menu.jsp"%>
+		</div>
+		<!-- account-wrap -->
+	
+		<div id="container">
+        	<div class="inner-wrap"> 
+				<div class="title_box">
+					<span class="title">신선한 청송 사과</span> &nbsp;
+					<span class="release_date">출고예정일</span>&nbsp;<span class="date">2018.05.05</span>
+				</div>
+        		<div class="img_box" style="background-image: url('/farm/resources/images/apple.jpg'); background-size:cover;">
+        			
+        		</div>
+        		<div class="title_box">
+        			<div style="border-bottom: 1px solid #bdbdbd; padding-bottom:20px;">
+					<span class="title">신선한 청송 사과</span> &nbsp;
+					<span class="release_date">출고예정일</span>&nbsp;<span class="date">2018.05.05</span>
+					</div>
+				</div>
+       			<div class="note">
+       				<center>
+       				<div class="note_img" style="background-image: url('/farm/resources/images/gift.png'); background-size: cover;"></div>
+       				</center>
+       				<p class="note_title">제주도부터 강원도까지,<br>
+       				최고의 산지에서 난 농산물만을<br>
+       				전해 드립니다.</p>
+       				<p class="note_content">
+       				자연의 힘으로 길러낸 유기 농산물은<br>
+       				기후에 영향을 많이 받습니다. 예를 들어<br>
+       				같은 파프리카라 하더라도 한기물과<br>
+       				한여름에 맞는 최고의 산지가 따로<br>
+       				있지요. 컬리는 1년 내내 전국을 뒤져<br>
+       				최고만을 전해 드립니다.</p>
+       			</div>
+       			<div class="note">
+       			<center>
+       				<div class="note_img" style="background-image: url('/farm/resources/images/contract.png'); background-size: cover;"></div>
+       				</center>
+       				<p class="note_title">직영 혹은 농가와의<br>
+       				계약재배를 통해 철저한 품질<br>
+       				관리가 가능합니다.</p>
+       				<p class="note_content">
+       				자연의 힘으로 길러낸 유기 농산물은<br>
+       				기후에 영향을 많이 받습니다. 예를 들어<br>
+       				같은 파프리카라 하더라도 한기물과<br>
+       				한여름에 맞는 최고의 산지가 따로<br>
+       				있지요. 컬리는 1년 내내 전국을 뒤져<br>
+       				최고만을 전해 드립니다.</p>
+       			</div>
+       			<div class="note">
+       			<center>
+       				<div class="note_img" style="background-image: url('/farm/resources/images/delivery.png'); background-size: cover;"></div>
+       				</center>
+       				<p class="note_title">국내 온라인 업체 최초로 식품 전용<br>
+       				자체 물류 창고와 냉장 차량을<br>
+       				이용해 더 신선 합니다.</p>
+       				<p class="note_content">
+       				자연의 힘으로 길러낸 유기 농산물은<br>
+       				기후에 영향을 많이 받습니다. 예를 들어<br>
+       				같은 파프리카라 하더라도 한기물과<br>
+       				한여름에 맞는 최고의 산지가 따로<br>
+       				있지요. 컬리는 1년 내내 전국을 뒤져<br>
+       				최고만을 전해 드립니다.</p>
+       			</div>
+       			<ul class="tabs">
+				    <li class="tab-link current" data-tab="tab-1"><div class="menu introduce">소개</div></li>
+				    <li class="tab-link" data-tab="tab-2"><div class="menu daily">일지</div></li>
+				    <li class="tab-link" data-tab="tab-3"><div class="menu question">문의</div></li>
+				    <li class="tab-link" data-tab="tab-4"><div id="menu" class="menu review">후기</div></li>
+				</ul>
+	       		<!-- <div class="menu introduce">소개</div>
+	       		<div class="menu daily">일지</div>
+	       		<div class="menu question">문의</div>
+	       		<div id="menu" class="menu review">후기</div> -->
+	       		
+	       	<!-- introduce_box -->
+	       	<div id="tab-1" class="tab-content current">
+	       	<div class="introduce_box"></div>
+	       	</div>
+	       	<!-- introduce_box -->
+       		
+       		<!-- Daily box -->
+       		<div id="tab-2" class="tab-content">
+       		<div class="daily_box">
+       			
+       			 <table class="history_body" >
+      <tr>   
+         <td class="history_start" colspan="3" align="center">
+         <!-- 농사 시작일자 넣는 부분 -->
+            <table class="histoty_title">
+               <tr>
+                  <td class="start_date" align="center">농사시작일자</td>
+               </tr>
+               <tr>
+                  <td class="start_date" align="center">2018/01/01</td>
+               </tr>
+            </table>
+         <!-- 농사 시작일자 넣는 부분 끝 -->   
+         </td>
+      </tr>
+         <!-- 공백 -->
+         <tr>
+            <td class="space_left"></td>
+            <td></td>
+         </tr>
+         <tr>
+            <td class="space_left"></td>
+         </tr>   
+         <!-- 공백 끝 -->
+         
+         
+         <!-- 일지란 시작 오른쪽 -->
+         <tr>
+            <td class="space_right"></td>
+            <td class="history_right" align="left">
+               <table class="history_right_table" cellspacing="0" cellpadding="0" >
+                  <tbody>
+                     <tr>
+                        <td class="history_right_table_td1" rowspan="3" ></td>
+                        <td class="history_right_table_td2" align="left" valign="top">
+                           <span class="history_right_table_span1">2017-08-16 15:37:01</span>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td align="left" class="hi_title">안녕하세요 타노스입니다.</td>
+                     </tr>
+                     <tr>
+                        <td align="left" class="hi_content_right">
+                           <div>지구 침공 예정입니다. 돌은 3개 모았구요. 지구에 2개있다고 해서<br>
+                              <span class="more">...더보기</span>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+         </tr>
+         <!-- 일지란 끝 -->
+         <!-- 공백 -->
+         <tr>
+            <td class="space_left"></td>
+            <td></td>
+         </tr>
+         <!-- 공백끝 -->
+         <!-- 일지란 시작 왼쪽  -->
+         <tr>
+            <td class="space_left"></td>
+            <td></td>
+         </tr>
+         <tr>
+            <td valign="top" class="history_right" align="right" onclick="">
+               <table class="history_right_table" cellspacing="0" cellpadding="0">
+                  <tbody>
+                     <tr>
+                        <td align="right" class="hi_date" valign="top">
+                           <span class="history_right_table_span1">2017-08-17 15:37:01</span>
+                        </td>
+                        <td rowspan="3" class="history_right_table_td1" ></td>
+                     </tr>
+                     <tr>
+                        <td align="right" class="hi_title">안녕하세요 타노스입니다.</td>
+                     </tr>
+                     <tr>
+                        <td align="right" class="hi_content_right">
+                           <div style="float: right;">지구 침공중입니다. 비전 이마에서 때어냈습니다.<br>
+                              <span class="more">...더보기</span>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="space_right2"></td>
+         </tr>
+         <!-- 일지란 끝 왼쪽 -->
+         <!-- 공백 -->
+         <tr>
+            <td class="space_left"></td>
+            <td></td>
+         </tr>
+         <!-- 공백끝 -->
+         <!-- 일지란 시작 오른쪽 -->
+         <tr>
+            <td class="space_left"></td>
+            <td></td>
+         </tr>   
+         <tr>
+            <td class="space_right"></td>
+            <td valign="top"  class="history_right" align="left" onclick="">
+               <table cellspacing="0" cellpadding="0" class="history_right_table">
+                  <tbody>
+                     <tr>
+                        <td rowspan="3" class="history_right_table_td1"></td>
+                        <td align="left" class="hi_date" valign="top">
+                           <span class="history_right_table_span1">2017-08-16 15:37:01</span>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td align="left" class="hi_title">안녕하세요 타노스입니다.</td>
+                     </tr>
+                     <tr>
+                        <td align="left" class="hi_content_right">
+                           <div style="float: left;">돌다모아서 인구의 반을 줄였습니다 이제 쉽니다<br>
+                              <span class="more">...더보기</span>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+         </tr>
+         <!-- 일지란 끝 -->
+            <!-- 공백 -->
+         <tr>
+            <td class="space_left"></td>
+            <td></td>
+         </tr>
+         <tr>
+            <td class="space_left"></td>
+            <td></td>
+         </tr>
+         <!-- 공백끝 -->
+         <tr>   
+            <td colspan="3" align="center">
+         <!-- 농사 끝일자 넣는 부분 -->
+               <table id="histoty_title" cellspacing="0" style="width: 20%;border: 1px solid #d7d7d7;">
+                  <tr>
+                     <td align="center">농사끝일자</td>
+                  </tr>
+                  <tr>
+                     <td align="center">2018/01/01</td>
+                  </tr>
+               </table>
+         <!-- 농사 끝일자 넣는 부분 끝 -->   
+            </td>
+         </tr>
+         <tr>
+            <td height="100"></td>
+         </tr>
+   </table>
+<!-- 농사일지 끝 -->
+
+       			</div>
+       			</div>
+       			<!-- Daily box -->
+ 			
+ 			 	       	<!-- qna_Box -->
+	       	<div id="tab-3" class="tab-content">
+		       	<div class="qna_box">
+	
+	            <table class="QnA_table">
+	               <tr>
+	                  <th width="12%">번호</th>
+	                  <th width="50%">제목</th>
+	                  <th width="13%">작성자</th>
+	                  <th width="15%">날짜</th>
+	               </tr>
+	               <tr id="hover">
+	                  <td>1</td>
+	                  <td id="QnA_td"><a href="">문의사항_01</a></td>
+	                  <td>김민선</td>
+	                  <td>2018-05-06</td>
+	               </tr>
+	               <tr id="hover">
+	                  <td>2</td>
+	                  <td id="QnA_td">문의사항_02</td>
+	                  <td>김민선</td>
+	                  <td>2018-05-06</td>
+	               </tr>
+	               <tr id="hover">
+	                  <td>3</td>
+	                  <td id="QnA_td">문의사항_03</td>
+	                  <td>김민선</td>
+	                  <td>2018-05-06</td>
+	               </tr>
+	               <tr>
+	                  <td>4</td>
+	                  <td id="QnA_td">문의사항_04</td>
+	                  <td>김민선</td>
+	                  <td>2018-05-06</td>
+	               </tr>
+	               <tr>
+	                  <td>5</td>
+	                  <td id="QnA_td">문의사항_04</td>
+	                  <td>김민선</td>
+	                  <td>2018-05-06</td>
+	               </tr>
+	               <tr>
+	                  <td>6</td>
+	                  <td id="QnA_td">문의사항_04</td>
+	                  <td>김민선</td>
+	                  <td>2018-05-06</td>
+	               </tr>
+	               <tr>
+	                  <td>7</td>
+	                  <td id="QnA_td">문의사항_04</td>
+	                  <td>김민선</td>
+	                  <td>2018-05-06</td>
+	               </tr>
+	               <tr>
+	                  <td>8</td>
+	                  <td id="QnA_td">문의사항_04</td>
+	                  <td>김민선</td>
+	                  <td>2018-05-06</td>
+	               </tr>
+	               <tr>
+	                  <td>9</td>
+	                  <td id="QnA_td">문의사항_04</td>
+	                  <td>김민선</td>
+	                  <td>2018-05-06</td>
+	               </tr>
+	               <tr>
+	                  <td>10</td>
+	                  <td id="QnA_td">문의사항_04</td>
+	                  <td>김민선</td>
+	                  <td>2018-05-06</td>
+	               </tr>
+	            </table>
+	
+	            <!-- 하단 페이징, 검색 묶음 -->
+	            <div id="bottom">
+	               <!-- 페이징 처리 -->
+	               <div class="pagination">
+	                  <a href="#">&laquo;</a> <a href="#">1</a> <a href="#"
+	                     class="active">2</a> <a href="#">3</a> <a href="#">4</a> <a
+	                     href="#">5</a> <a href="#">&raquo;</a>
+	               </div>
+	
+	               <!-- 검색 -->
+	               <div class="search_box">
+	               <span class='green_window'> 
+	                  <input type='text'class='input_text' />
+	               </span>
+	               <button type='submit' class='sch_smit'>검색</button>
+	               </div>
+	            </div>
+			</div>
+         </div>
+	       	<!-- qna Box -->
+ 			  </div>
+        </div>
+
+		<!-- account-wrap -->
+		 <%@ include file="../messenger/msg_box.jsp"%>
+		<div id="footer">
+			<%@  include file="../inc/foot.jsp"%>
+		</div>
+	</div>
+</body>
+</html>

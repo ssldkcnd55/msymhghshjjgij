@@ -1,0 +1,74 @@
+@charset "UTF-8";
+#container { width:100%; min-height:415px; position:relative; clear:both;  }
+#container div.inner-wrap { width:960px; margin:20px auto 0 ; position:relative; }
+
+h2{
+	text-align:center;
+	color:#462114;
+}
+#userid, #userpwd{
+	width:200px;
+	height:28px;
+	padding:4px 8px;
+	font-size:14px;	
+}
+#userid{
+	margin-bottom:5px;
+}
+.join{
+	font-size:13px;
+	margin-top:8px;
+	text-align:center;
+}
+.join a{
+	color:#777;
+	font-weight:bold;
+}
+.join > div{
+	float:right;
+	font-size:13px;
+}
+#login_btn{
+	width:220px;
+	height:38px;
+	background:#82736e;
+	border-radius:5px;
+	color:white;
+	font-size:16px;
+	font-weight: bold;
+	border:none;
+	cursor:pointer;
+	margin-top:12px;
+	margin-left:0px;
+	margin-bottom:10px;
+}
+#join_btn{
+	width:224px;
+	height:38px;	
+	font-size:16px;
+	border:none;
+	cursor:pointer;
+	margin-top:12px;	
+}
+.login_div{
+	text-align:center;
+	margin:0 auto;
+	width:300px;
+	height:200px;
+	background:#fff;
+	padding: 30px;
+	padding-top:10px;
+}
+.login_img{
+	margin-bottom:20px;
+}
+.login_img > img{
+	margin-top:-50px;
+}
+.wel{
+	color:#777;
+	font-weight:bold;
+}
+h5{
+	margin: 0 0 8px 0;
+}

@@ -1,0 +1,135 @@
+@charset "UTF-8";
+#container { width:100%; min-height:700px; position:relative; clear:both;  }
+#container div.inner-wrap1 { width:960px;  position:relative; }
+
+html, body {
+	height: 100%;
+}
+label {
+	display: inline-block;
+	margin-bottom: .5rem
+}
+body {
+	display: table;
+	width: 100%;
+}
+#searchId{
+	background: #82736e;
+	border:none;
+}
+
+
+#userId { /*ID LABEL 서식  */
+	width: 350px;
+	float: left;
+}
+
+#vCode { /*ID LABEL 서식  */
+	width: 350px;
+	float: left;
+}
+
+.h2{
+	color:#777;margin-bottom:20px;
+	text-align:center;	
+	margin-left: 40px;
+}
+
+#addr {
+	width: 350px;
+	float: left;
+}
+.searchBtn{
+	background: #f2f2f2;
+	
+}
+
+.loginBtn{
+	
+}
+#userEmail { /*ID LABEL 서식  */
+	width: 350px;
+	float: left;
+}
+
+.join_form { /*mainform을 담고 있는 div구역  */
+	width: 600px;
+	background: #fff;
+	margin: 0 auto;
+	padding: 20px 80px;
+}
+
+#confirmId { /*p 태그의 아이디로 아이디 중복검사 시 사용 가능 여부를 보여줌  */
+	margin-top: -10px;
+}
+.pwd_box{
+	border: 1px solid #dcdcdc;
+	padding:30px;
+	width:480px;
+}
+.h3 {
+	text-align:center;
+	margin-bottom:40px;
+	font-size: 13px;
+	line-height: 16px;
+	color: gray;
+	font-weight: normal;
+	font-family: Roboto, 'Noto Sans KR', sans-serif;
+	margin-left: 40px;
+}
+
+.confirmPwd { /*비밀번호의 불일치 여부를 확인하기위한 p태그 */
+	margin-top: 8px;
+	color: red;
+}
+
+#addrbtn { /*아이디 중복검사 버튼  */
+	background: #82736e;
+	border: none;
+}
+#cancelBt{
+	background:#f77734;
+	border:none;
+}
+#dupliBt { /*아이디 중복검사 버튼  */
+	float: left;
+	background: #82736e;
+	border: none
+}
+
+#vCodecheck { /*아이디 중복검사 버튼  */
+	float: left;
+	background: #82736e;
+	border: none
+}
+
+#mailsend { /*아이디 중복검사 버튼  */
+	float: left;
+	background: #82736e;
+	border: none
+}
+
+#find { /*파일 찾기 태그  */
+	width: 260px;
+	display: block;
+	margin: 0 auto;
+}
+
+#joinBt {
+	background: #82736e;
+	border: none
+}
+
+#profile { /*프로필 사진 태그  */
+	width: 100px;
+	height: 130px;
+	margin: 10px 0px;
+}
+
+.join_form2 {
+	width: 500px;
+	background: #fff;
+	margin: 0 auto;
+	height: 520px;	
+	margin-left:400px;
+}
