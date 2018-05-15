@@ -18,6 +18,7 @@
                     <li><a href="moveAuction.do">경매</a></li>
                     <li><a href="#">시세</a></li>
                     <li><a href="moveJob.do">구인구직</a></li>
+                    <li><a href="moveAdminPage.do">관리자</a></li>
         </ul>
         <ul class="weather">
 					<li><img src="/farm/resources/images/weather.jpg"></li>

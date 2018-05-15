@@ -110,5 +110,9 @@ public class MoveController {
 	public String moveShoppingBasket() {
 		return "shoppingBasket/shoppingBasket";
 	}
+	@RequestMapping("moveAdminPage.do")
+	public String moveAdminPage() {
+		return "admin/admin_page";
+	}
 }
 
