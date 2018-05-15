@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -77,26 +78,28 @@ public class MemberController {
 		int insertmember = memberService.insertMember(member);
 		return "home";
 	}
+	
+	
 	@RequestMapping(value="login.do",method=RequestMethod.POST)
-	//@ModelAttribute("loginUser") 
-	public String loginCheck(Member member,Model model,
-			SessionStatus status) {
+	public String loginCheck(Member member,Model model) {
 		
 		String viewName = null;
-		//System.out.println("전송와서 저장된 값 확인 : "+member);
 		try {
 			Member returnMember = memberService.loginCheck(member);
 			System.out.println("returnMember : " + returnMember);
-			
-			//if(returnMember != null) {
 			model.addAttribute("loginUser", returnMember);
-			//session.setAttribute("loginUser", returnMember);
-			status.setComplete();
 			viewName = "home";
 		}catch(Exception e) {
 			System.out.println("0");
 			viewName = "member/login";
 		}
 		return viewName;
+	}
+	
+	@RequestMapping("logout.do")
+	public String logout(SessionStatus status)
+	{	
+			status.setComplete();
+		return "home";
 	}
 }

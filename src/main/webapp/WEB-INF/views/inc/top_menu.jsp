@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE HTML>
 <html>
 <head>
@@ -27,9 +27,14 @@
         <ul class="global-menu">
 					<li class="search"></li>
                     <li class="s_input"><input name="search" type="text" style="visibility: collapse"></li>
+                    <c:if test="${empty sessionScope.loginUser }">
                     <li><a href="moveLogin.do" title="로그인">로그인</a></li>
 					<li><a href="moveSignUp.do" title="회원가입" >회원가입</a></li>
-					
+					</c:if>
+					<c:if test="${! empty sessionScope.loginUser }">
+					<li>${loginUser.member_id}님</li>
+					<li><a href="logout.do">로그아웃</a></li>
+					</c:if>
 				</ul>
                 
         </div>    </div>
