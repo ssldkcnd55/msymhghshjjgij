@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE configuration PUBLIC
+"-//mybatis.org//DTD Config 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<typeAliases>
+		 <typeAlias type="com.kh.farm.auction.model.vo.Auction" alias="Auction" /> 
+		 <typeAlias type="com.kh.farm.auction.model.vo.AuctionHistory" alias="AuctionHistory" /> 
+		 <typeAlias type="com.kh.farm.chat.model.vo.Chat" alias="Chat" /> 
+		 <typeAlias type="com.kh.farm.chat.model.vo.ChatHistory" alias="ChatHistory" /> 
+		 <typeAlias type="com.kh.farm.job.model.vo.Job" alias="Job" /> 
+		 <typeAlias type="com.kh.farm.market.model.vo.Category" alias="Category" /> 
+		 <typeAlias type="com.kh.farm.market.model.vo.Daily" alias="Daily" /> 
+		 <typeAlias type="com.kh.farm.market.model.vo.Market" alias="Market" /> 
+		 <typeAlias type="com.kh.farm.market.model.vo.Reply" alias="Reply" /> 
+		 <typeAlias type="com.kh.farm.market.model.vo.Report" alias="Report" /> 
+		 <typeAlias type="com.kh.farm.market.model.vo.Review" alias="Review" /> 
+		 <typeAlias type="com.kh.farm.market.model.vo.UnderReply" alias="UnderReply" /> 
+		 <typeAlias type="com.kh.farm.member.model.vo.Member" alias="Member" /> 
+		 <typeAlias type="com.kh.farm.notice.model.vo.Notice" alias="Notice" /> 
+		 <typeAlias type="com.kh.farm.payment.model.vo.Payment" alias="Payment" /> 
+		 <typeAlias type="com.kh.farm.qna.model.vo.MainQna" alias="MainQna" /> 
+		 <typeAlias type="com.kh.farm.qna.model.vo.SellQna" alias="SellQna" /> 
+		 <typeAlias type="com.kh.farm.shoppingBasket.model.vo.ShoppingBasket" alias="ShoppingBasket" /> 
+	
+
+	</typeAliases>
+
+	<mappers>
+		<mapper resource="mybatis/mappers/auction-mapper.xml" />
+		<mapper resource="mybatis/mappers/chat-mapper.xml" />
+		<mapper resource="mybatis/mappers/job-mapper.xml" />
+		<mapper resource="mybatis/mappers/market-mapper.xml" />
+		<mapper resource="mybatis/mappers/member-mapper.xml" />
+		<mapper resource="mybatis/mappers/notice-mapper.xml" />
+		<mapper resource="mybatis/mappers/payment-mapper.xml" />
+		<mapper resource="mybatis/mappers/qna-mapper.xml" />
+		<mapper resource="mybatis/mappers/shoppingBasket-mapper.xml" />
+	</mappers>
+</configuration>
