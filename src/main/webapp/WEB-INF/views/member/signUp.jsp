@@ -12,9 +12,9 @@
 <link  href="/farm/resources/css/boot.css" rel="stylesheet" type="text/css">
 <link href="/farm/resources/css/style.css" rel="stylesheet" type="text/css" />
 <link href="/farm/resources/css/join.css" rel="stylesheet" type="text/css">
-<link href="/farm/resources/css/reset.css" rel="stylesheet" type="text/css">
+
 <script type="text/javascript" src="/farm/resources/js/jquery-3.3.1.min.js"></script>
-<script type="text/javascript" src="/farm/resources/js/signUp.js"></script>
+<!-- <script type="text/javascript" src="/farm/resources/js/signUp.js"></script> -->
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
@@ -34,7 +34,7 @@
 
 				<div class="join_form">
 					<!--  -->
-					<form id="mainform" action="/farm/mjoin" method="post"
+					<form id="mainform" action="/farm/signUp.do" method="post"
 						enctype="multipart/form-data" onsubmit="return formValidation();">
 						<!--Join_form 구역 내에 mainform을 담았음  -->
 						<div>
@@ -63,7 +63,7 @@
 									<!--e-Mail 기입란  -->
 									<label for="userEmail">E-mail</label><br> <input
 										type="email" class="form-control" id="userEmail"
-										name="useremail" placeholder="ex)abcd@naver.com">
+										name="member_id" placeholder="ex)abcd@naver.com">
 									<div class="form-group text-center">
 										<input type="button" class="btn btn-info" id="mailsend"
 											name="dupliBt" value="메일인증" onclick="sendMail();" required />
@@ -84,7 +84,7 @@
 									<!--비밀번호 입력란    -->
 									<label for="InputPwd1">비밀번호를 입력하세요.</label> <input
 										type="password" class="form-control" id="inputPwd1"
-										name="userpwd" placeholder="비밀번호" required>
+										name="member_pwd" placeholder="비밀번호" required>
 								</div>
 
 								<div class="form-group">
@@ -95,19 +95,28 @@
 										class="confirmPwd" id="confirmPwd"></label>
 									<!--ID 불일치의 P태그와 동일함  -->
 								</div>
-
+								
+								
 								<div class="form-group">
 									<!--이름 기입란  -->
 									<label for="userName">이름</label><input type="text"
-										class="form-control" id="userName" name="username"
+										class="form-control" id="userName" name="member_name"
 										placeholder="이름을 입력해 주세요." required>
 								</div>
+								
+								<div class="form-group">
+									<label for="tel">전화번호</label><input
+										type="text" class="form-control" id="tel"
+										name="member_tel" placeholder="핸드폰 번호" required>
+								</div>
+
+								
 
 
 								<div class="form-group">
 									<!--e-Mail 기입란  -->
 									<label for="addr">주소</label><br> <input type="text"
-										class="form-control" id="addr" name="addr">
+										class="form-control" id="addr" name="member_addr">
 									<div class="form-group text-center">
 										<input type="button" class="btn btn-info" id="addrbtn"
 											name="addrbtn" value="주소검색" onclick="addrSearch();" required>

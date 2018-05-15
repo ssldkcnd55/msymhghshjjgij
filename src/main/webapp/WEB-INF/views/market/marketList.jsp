@@ -9,7 +9,6 @@
 <link href="/farm/resources/css/style.css" rel="stylesheet" type="text/css" />
 <link href="/farm/resources/css/marketList.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="/farm/resources/js/jquery-3.3.1.min.js"></script>
-
 </head>
 <body>
 	<div id="top_line"></div>

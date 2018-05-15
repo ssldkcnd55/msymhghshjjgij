@@ -3,7 +3,27 @@
 "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="member">
-
+<resultMap type="Member" id="resultMember">
+		<id column="member_id" property="member_id" />
+		<result column="member_pwd" property="member_pwd" />
+		<result column="member_name" property="member_name" />
+		<result column="member_category" property="member_category" />
+		<result column="member_addr" property="member_addr" />
+		<result column="member_tel" property="member_tel" />
+		<result column="member_approval" property="member_approval" />
+		<result column="member_withdraw" property="member_withdraw" />
+		<result column="member_img" property="member_img" />
+	</resultMap>
 	
-
+	
+<select id="loginMember" parameterType="member" resultType="member">
+		<![CDATA[
+			select * from member where member_id=#{member_id}
+		]]>
+</select>
+<insert parameterType="Member" id="insertMember" useGeneratedKeys="true" statementType="PREPARED" flushCache="true">
+		<![CDATA[ insert into member values (
+					#{member_id}, #{member_pwd}, 0, #{member_name}, 
+					#{member_addr}, #{member_tel}, 'Y', #{member_img},'N',0) ]]>
+</insert>
 </mapper>

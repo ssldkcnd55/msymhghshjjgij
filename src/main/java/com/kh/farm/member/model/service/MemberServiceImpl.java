@@ -5,10 +5,24 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.kh.farm.member.model.dao.MemberDao;
+import com.kh.farm.member.model.vo.Member;
+import com.kh.farm.member.exception.LoginFailException;
 
 @Service
 public class MemberServiceImpl implements MemberService {
 	@Autowired private MemberDao memberDao;
 	@Autowired
 	private SqlSessionTemplate sqlSession;
+	@Override
+	public int insertMember(Member member) {
+		// TODO Auto-generated method stub
+		return memberDao.insertMember(member,sqlSession);
+	}
+	@Override
+	public Member loginCheck(Member member) throws LoginFailException{
+		// TODO Auto-generated method stub
+		return memberDao.loginCheck(member,sqlSession);
+	}
+	
+	
 }

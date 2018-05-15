@@ -19,14 +19,14 @@
 		<div id="container">
         	<div class="inner-wrap">
        			<h2>로그인</h2>
-		<form action="/classKing/mlogin" method="post">
+		<form action="/farm/login.do" method="post">
 			<div class="login_div" >
 				<div>
-					<input type="text" name="userid" id="userid" class="form-control"
+					<input type="text" name="member_id" id="userid" class="form-control"
 						placeholder="아이디">
 				</div>
 				<div>
-					<input type="password" name="userpwd" id="userpwd"
+					<input type="password" name="member_pwd" id="userpwd"
 						class="form-control" placeholder="비밀번호">
 				</div>
 				<input type="submit" name="login_btn" id="login_btn"
