@@ -35,7 +35,8 @@ img{border:0}
 			#header ul.global-menu li.search { width:18px; height:17px; background:url(/farm/resources/images/search.png) no-repeat; }		
 			#header ul.global-menu li.s_input{ min-width:104px; border-bottom:solid 2px #f27634;}
 			
-		#header ul.weather { margin:0; padding:0; list-style:none; position:absolute; top:15px;right:0px; width:80px; height:40px; }
+		#header ul.weather { margin:0; padding:0; list-style:none; position:absolute; right:0px;}
+		#header ul.weather li img{width:30px; height: 30px}
 		
 		/*main content*/			
 #container { width:100%; min-height:1085px; position:relative; clear:both;  }
