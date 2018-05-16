@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html >
 <html>
 <head>
@@ -62,14 +63,13 @@
 				<table>
 						<tr>
 							<td class="list_profile" rowspan="2"><img
-								src="/farm/resources/images/logo.jpg"></td>
-							<td class="list_name">${chat.member_id1 }</td>
-							<td class="list_time">오후 2:41</td>
+								src="/farm/resources/upload/memberUpload/${chat.member_img }"></td>
+							<td class="list_name">${chat.member_name }</td>
+							<td class="list_time"><fmt:formatDate value="${chat.chat_history_date}" type="time" timeStyle="short" /> </td>
 
 						</tr>
 						<tr>
-							<td colspan="2"><span class="list_content">대화내용 대화내용
-									대화내용 대화내용 대화내용 대화내용 대화내용 대화내용 대화내용 </span></td>
+							<td colspan="2"><span class="list_content">${chat.chat_history_contents } </span></td>
 						</tr>
 					</table>
 				</a>

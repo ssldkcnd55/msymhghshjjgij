@@ -47,7 +47,7 @@ public class MemberController {
 				// 첨부된 파일이 있을 경우, 폴더에 기록된 해당 파일의 이름바꾸기 처리함
 				// 새로운 파일명 만들기 : '년월일시분초'
 				SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
-				String renameFileName = sdf.format(new java.sql.Date(System.currentTimeMillis())) + "."
+				String renameFileName = member.getMember_id()+"_"+sdf.format(new java.sql.Date(System.currentTimeMillis())) + "."
 						+ file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf(".") + 1);
 
 				// 파일명 바꾸려면 File객체의 renameTo() 사용함
@@ -94,11 +94,12 @@ public class MemberController {
 			System.out.println("returnMember : " + returnMember);
 			session.setAttribute("loginUser", returnMember);
 			//로그인 멤버 채팅 정보 가져오기
-			/*ArrayList<ChatList> chatList = (ArrayList<ChatList>)chatService.selectChatList(returnMember);
+			ArrayList<ChatList> chatList = (ArrayList<ChatList>)chatService.selectChatList(returnMember);
 			session.setAttribute("chatList", chatList);
-			*/
+			System.out.println(chatList);
 			viewName = "home";
 		}catch(Exception e) {
+			e.printStackTrace();
 			System.out.println("0");
 			viewName = "member/login";
 		}

@@ -13,7 +13,7 @@ public class ChatDao {
 
 	public List<ChatList> selectChatList(SqlSessionTemplate sqlSession, Member member) {
 		
-		return null; /*sqlSession.selectList("selectChatList", member);*/
+		return sqlSession.selectList("selectChatList", member);
 	}
 	
 }
