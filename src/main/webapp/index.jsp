@@ -9,6 +9,6 @@
 <title>index</title>
 </head>
 <body>
- <c:redirect url="moveHome.do" />
+<jsp:forward page="moveHome.do"></jsp:forward>
 </body>
 </html>
