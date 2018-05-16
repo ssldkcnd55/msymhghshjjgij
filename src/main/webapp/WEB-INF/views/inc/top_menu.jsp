@@ -32,7 +32,7 @@
 					<li><a href="moveSignUp.do" title="회원가입" >회원가입</a></li>
 					</c:if>
 					<c:if test="${! empty sessionScope.loginUser }">
-					<li>${loginUser.member_id}님</li>
+					<li><a href="moveCustomerMypage.do">${loginUser.member_name}님</a></li>
 					<li><a href="logout.do">로그아웃</a></li>
 					</c:if>
 				</ul>
