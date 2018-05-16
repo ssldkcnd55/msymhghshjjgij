@@ -12,51 +12,44 @@ public class Market implements java.io.Serializable{
 	 */
 	private static final long serialVersionUID = 7777L;
 	
-	private int sell_no;// 판매글 번호
+	private int market_no;// 판매글 번호
 	
 	private int category_no;//카테고리 번호
 	private String member_id;//판매글 작성자 아이디
-	private String sell_title;//판매글 제목
-	private String sell_note;//판매글 노트
-	private String sell_img;//판매글 이미지
-	private Date sell_releasedate;//출고예정일
-	private int sell_amount;//총 판매 수량
-	private String sell_intro;//판매글 소개
-	private String sell_complete;//판매글 상태
-	private int sell_price;//판매 가격 
+	private String market_title;//판매글 제목
+	private String market_note;//판매글 노트
+	private String market_img;//판매글 이미지
+	private Date market_releasedate;//출고예정일
+	private int market_amount;//총 판매 수량
+	private String market_intro;//판매글 소개
+	private String market_complete;//판매글 상태
+	private int market_price;//판매 가격 
 	
 	public Market() {}
 
-	public Market(int sell_no, int category_no, String member_id, String sell_title, String sell_note, String sell_img,
-			Date sell_releasedate, int sell_amount, String sell_intro, String sell_complete, int sell_price) {
+	public Market(int market_no, int category_no, String member_id, String market_title, String market_note,
+			String market_img, Date market_releasedate, int market_amount, String market_intro, String market_complete,
+			int market_price) {
 		super();
-		this.sell_no = sell_no;
+		this.market_no = market_no;
 		this.category_no = category_no;
 		this.member_id = member_id;
-		this.sell_title = sell_title;
-		this.sell_note = sell_note;
-		this.sell_img = sell_img;
-		this.sell_releasedate = sell_releasedate;
-		this.sell_amount = sell_amount;
-		this.sell_intro = sell_intro;
-		this.sell_complete = sell_complete;
-		this.sell_price = sell_price;
+		this.market_title = market_title;
+		this.market_note = market_note;
+		this.market_img = market_img;
+		this.market_releasedate = market_releasedate;
+		this.market_amount = market_amount;
+		this.market_intro = market_intro;
+		this.market_complete = market_complete;
+		this.market_price = market_price;
 	}
 
-	@Override
-	public String toString() {
-		return "Market [sell_no=" + sell_no + ", category_no=" + category_no + ", member_id=" + member_id
-				+ ", sell_title=" + sell_title + ", sell_note=" + sell_note + ", sell_img=" + sell_img
-				+ ", sell_releasedate=" + sell_releasedate + ", sell_amount=" + sell_amount + ", sell_intro="
-				+ sell_intro + ", sell_complete=" + sell_complete + ", sell_price=" + sell_price + "]";
+	public int getMarket_no() {
+		return market_no;
 	}
 
-	public int getSell_no() {
-		return sell_no;
-	}
-
-	public void setSell_no(int sell_no) {
-		this.sell_no = sell_no;
+	public void setMarket_no(int market_no) {
+		this.market_no = market_no;
 	}
 
 	public int getCategory_no() {
@@ -75,70 +68,67 @@ public class Market implements java.io.Serializable{
 		this.member_id = member_id;
 	}
 
-	public String getSell_title() {
-		return sell_title;
+	public String getMarket_title() {
+		return market_title;
 	}
 
-	public void setSell_title(String sell_title) {
-		this.sell_title = sell_title;
+	public void setMarket_title(String market_title) {
+		this.market_title = market_title;
 	}
 
-	public String getSell_note() {
-		return sell_note;
+	public String getMarket_note() {
+		return market_note;
 	}
 
-	public void setSell_note(String sell_note) {
-		this.sell_note = sell_note;
+	public void setMarket_note(String market_note) {
+		this.market_note = market_note;
 	}
 
-	public String getSell_img() {
-		return sell_img;
+	public String getMarket_img() {
+		return market_img;
 	}
 
-	public void setSell_img(String sell_img) {
-		this.sell_img = sell_img;
+	public void setMarket_img(String market_img) {
+		this.market_img = market_img;
 	}
 
-	public Date getSell_releasedate() {
-		return sell_releasedate;
+	public Date getMarket_releasedate() {
+		return market_releasedate;
 	}
 
-	public void setSell_releasedate(Date sell_releasedate) {
-		this.sell_releasedate = sell_releasedate;
+	public void setMarket_releasedate(Date market_releasedate) {
+		this.market_releasedate = market_releasedate;
 	}
 
-	public int getSell_amount() {
-		return sell_amount;
+	public int getMarket_amount() {
+		return market_amount;
 	}
 
-	public void setSell_amount(int sell_amount) {
-		this.sell_amount = sell_amount;
+	public void setMarket_amount(int market_amount) {
+		this.market_amount = market_amount;
 	}
 
-	public String getSell_intro() {
-		return sell_intro;
+	public String getMarket_intro() {
+		return market_intro;
 	}
 
-	public void setSell_intro(String sell_intro) {
-		this.sell_intro = sell_intro;
+	public void setMarket_intro(String market_intro) {
+		this.market_intro = market_intro;
 	}
 
-	public String getSell_complete() {
-		return sell_complete;
+	public String getMarket_complete() {
+		return market_complete;
 	}
 
-	public void setSell_complete(String sell_complete) {
-		this.sell_complete = sell_complete;
+	public void setMarket_complete(String market_complete) {
+		this.market_complete = market_complete;
 	}
 
-	public int getSell_price() {
-		return sell_price;
+	public int getMarket_price() {
+		return market_price;
 	}
 
-	public void setSell_price(int sell_price) {
-		this.sell_price = sell_price;
+	public void setMarket_price(int market_price) {
+		this.market_price = market_price;
 	}
-
-	
-	
 }

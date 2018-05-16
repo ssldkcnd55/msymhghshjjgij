@@ -25,7 +25,7 @@
 
 .market{
 	width:220px; height:272px; border: 1px solid #bdbdbd;
-	float: right;
+	float: left;
 	margin-right: 10px;
 	margin-bottom: 10px;
 	
@@ -39,14 +39,14 @@
 
 .right_box{
 	float: right;
-	width: 730px;
+	margin-left:33px;
+	width: 697px;
 }
 
 .more_market{
 	background-color: #f37636;
 	width: 687px;
 	height: 35px;
-	margin-left: 33px;
 	text-align: center;
 	color: white;
 	font-family: dotum;
