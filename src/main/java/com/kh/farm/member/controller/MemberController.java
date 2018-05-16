@@ -5,6 +5,7 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -20,14 +21,17 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.kh.farm.chat.model.service.ChatService;
+import com.kh.farm.chat.model.vo.*;
 import com.kh.farm.member.model.service.MemberService;
-import com.kh.farm.member.model.vo.Member;
+import com.kh.farm.member.model.vo.*;
 
 @Controller
-@SessionAttributes("loginUser")
 public class MemberController {
 	@Autowired
 	private MemberService memberService;
+	@Autowired
+	private ChatService chatService;
 	@Autowired
 	private BCryptPasswordEncoder pwdEncoder;
 
@@ -81,13 +85,18 @@ public class MemberController {
 	
 	
 	@RequestMapping(value="login.do",method=RequestMethod.POST)
-	public String loginCheck(Member member,Model model) {
+	public String loginCheck(Member member,HttpSession session) {
 		
 		String viewName = null;
 		try {
+			//로그인 멤버 정보 가져오기
 			Member returnMember = memberService.loginCheck(member);
 			System.out.println("returnMember : " + returnMember);
-			model.addAttribute("loginUser", returnMember);
+			session.setAttribute("loginUser", returnMember);
+			//로그인 멤버 채팅 정보 가져오기
+			/*ArrayList<ChatList> chatList = (ArrayList<ChatList>)chatService.selectChatList(returnMember);
+			session.setAttribute("chatList", chatList);
+			*/
 			viewName = "home";
 		}catch(Exception e) {
 			System.out.println("0");
@@ -97,9 +106,10 @@ public class MemberController {
 	}
 	
 	@RequestMapping("logout.do")
-	public String logout(SessionStatus status)
-	{	
-			status.setComplete();
+	public String logout(HttpSession session)
+	{		session.removeAttribute("loginUser");
+		session.invalidate();
+			
 		return "home";
 	}
 }
