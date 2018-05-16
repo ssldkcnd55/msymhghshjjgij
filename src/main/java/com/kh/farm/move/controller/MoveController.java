@@ -114,5 +114,9 @@ public class MoveController {
 	public String moveAdminPage() {
 		return "admin/admin_page";
 	}
+	@RequestMapping("moveQuote.do")
+	public String moveQuote() {
+		return "quote/quote";
+	}
 }
 
