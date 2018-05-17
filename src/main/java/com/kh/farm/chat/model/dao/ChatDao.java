@@ -12,8 +12,13 @@ import com.kh.farm.member.model.vo.*;
 public class ChatDao {
 
 	public List<ChatList> selectChatList(SqlSessionTemplate sqlSession, Member member) {
-		
-		return sqlSession.selectList("selectChatList", member);
+
+		return sqlSession.selectList("chat.selectChatList", member);
+	}
+
+	public List<ChatHistory> selectChatHistory(SqlSessionTemplate sqlSession, Chat chat) {
+
+		return sqlSession.selectList("chat.selectChatHistory", chat);
 	}
 	
 }

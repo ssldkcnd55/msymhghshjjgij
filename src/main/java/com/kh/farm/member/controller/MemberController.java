@@ -91,12 +91,12 @@ public class MemberController {
 		try {
 			//로그인 멤버 정보 가져오기
 			Member returnMember = memberService.loginCheck(member);
-			System.out.println("returnMember : " + returnMember);
+			//System.out.println("returnMember : " + returnMember);
 			session.setAttribute("loginUser", returnMember);
 			//로그인 멤버 채팅 정보 가져오기
 			ArrayList<ChatList> chatList = (ArrayList<ChatList>)chatService.selectChatList(returnMember);
 			session.setAttribute("chatList", chatList);
-			System.out.println(chatList);
+			//System.out.println(chatList);
 			viewName = "home";
 		}catch(Exception e) {
 			e.printStackTrace();
@@ -109,6 +109,7 @@ public class MemberController {
 	@RequestMapping("logout.do")
 	public String logout(HttpSession session)
 	{		session.removeAttribute("loginUser");
+	session.removeAttribute("chatList");
 		session.invalidate();
 			
 		return "home";

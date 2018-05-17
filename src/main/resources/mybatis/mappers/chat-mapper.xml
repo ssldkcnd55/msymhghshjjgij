@@ -8,7 +8,7 @@
 	
 	<![CDATA[ 
 	
-	select chat.CHAT_NO,member_id,member_name,member_img,chhis.CHAT_HISTORY_CONTENTS,chhis.chat_history_date,chhis.chat_history_alarm
+	select chat.CHAT_NO,member_id,member_name,member_img,chhis.CHAT_HISTORY_CONTENTS, to_char(chhis.chat_history_date,'YYYY-MM-DD hh24:mi') as "chat_history_date" ,chhis.chat_history_alarm
 from chat,
 (
 SELECT CHAT_HISTORY_CONTENTS,aa.chat_no, aaa.CHAT_HISTORY_DATE,aaa.CHAT_HISTORY_ALARM from (
