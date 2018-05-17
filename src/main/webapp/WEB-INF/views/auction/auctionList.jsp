@@ -19,6 +19,9 @@
 
 		<div id="container">
         	<div class="inner-wrap"> 
+        	<div class="top_margin">
+        	<button>경매 등록</button>
+        	</div>	<!-- 모든 -->
         	<div class="left_box">
         	
         	<!-- 정렬 메뉴바 -->
@@ -88,7 +91,7 @@
        			
        			<button class="more_market">장터 더보기 ▼</button>
        		</div>	
-       			
+       		
        			
  			 </div>
         </div>

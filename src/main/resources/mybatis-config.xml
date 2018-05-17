@@ -8,6 +8,7 @@
 		 <typeAlias type="com.kh.farm.auction.model.vo.AuctionHistory" alias="AuctionHistory" /> 
 		 <typeAlias type="com.kh.farm.chat.model.vo.Chat" alias="Chat" /> 
 		 <typeAlias type="com.kh.farm.chat.model.vo.ChatHistory" alias="ChatHistory" /> 
+		 <typeAlias type="com.kh.farm.chat.model.vo.ChatList" alias="ChatList" /> 
 		 <typeAlias type="com.kh.farm.job.model.vo.Job" alias="Job" /> 
 		 <typeAlias type="com.kh.farm.market.model.vo.Category" alias="Category" /> 
 		 <typeAlias type="com.kh.farm.market.model.vo.Daily" alias="Daily" /> 

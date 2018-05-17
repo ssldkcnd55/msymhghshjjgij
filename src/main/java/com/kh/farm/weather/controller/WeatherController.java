@@ -66,7 +66,7 @@ public class WeatherController {
 		File file = new File(this.getClass().getResource(".").getPath() + "weather_info.xls");
 
 		if (!file.exists()) {
-			System.out.println("ÆÄÀÏÀÌ ¾ø½À´Ï´Ù.");
+			System.out.println("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½.");
 		}
 
 		Workbook workbook = null;
@@ -81,7 +81,7 @@ public class WeatherController {
 
 			for (int i = 0; i < row; i++) {
 				for (int j = 0; j < col; j++) {
-					if(sheet.getCell(j, i).getContents().equals("±¤ÁÖ±¤¿ª½Ã") && sheet.getCell(j+1, i).getContents().equals("µ¿±¸")) {
+					if(sheet.getCell(j, i).getContents().equals("ê´‘ì£¼ê´‘ì—­ì‹œ") && sheet.getCell(j+1, i).getContents().equals("ì„œêµ¬")) {
 						nx=""+sheet.getCell(j+3, i).getContents();
 						ny=""+sheet.getCell(j+4, i).getContents();
 						check=1;

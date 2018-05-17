@@ -114,5 +114,26 @@ public class MoveController {
 	public String moveAdminPage() {
 		return "admin/admin_page";
 	}
+
+	@RequestMapping("moveQnAPage.do")
+	public String moveQnAPage() {
+		return "qna/qna";
+	}
+	@RequestMapping("moveNoticePage.do")
+	public String moveNoticePage() {
+		return "notice/notice";
+		
+	}
+
+	@RequestMapping("moveQuote.do")
+	public String moveQuote() {
+		return "quote/quote";
+
+	}
+	
+	@RequestMapping("moveAdminCategory.do")
+	public String moveAdminCategory() {
+		return "admin/admin_category";
+	}
 }
 

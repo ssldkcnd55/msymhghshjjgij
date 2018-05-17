@@ -405,6 +405,7 @@ div.msg_you {
 .list_time {
 	font-size: 8pt;
 	float: right;
+	margin-right: 11px;
 }
 
 .list_content {

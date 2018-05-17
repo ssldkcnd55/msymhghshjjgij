@@ -27,7 +27,7 @@
 						<h2 align="center" style="color:#777;margin-bottom:20px;">
 								ID 찾기
 						</h2>
-						<h3 id="p">작물팜은 이메일을 아이디로 사용합니다.<br>소유하고 계신 계정을 입력해보세요.<br>가입여부를 확인해드립니다.</h3>
+						<h3 class="h3">작물팜은 이메일을 아이디로 사용합니다.<br>소유하고 계신 계정을 입력해보세요.<br>가입여부를 확인해드립니다.</h3>
 						<div>
 								<div class="form-group"> <!--이름 label 및 이름 입력란 -->
 									<label for="userName">이름</label> <input type="text"

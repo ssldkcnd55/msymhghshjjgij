@@ -36,6 +36,9 @@
 					<a href="#"><img src="/farm/resources/images/naver_login.PNG"
 						style="width: 220px;"></a>
 				</div>
+				<div class="find_div">
+					<a href="/farm/moveFindId.do">아이디 찾기</a>&nbsp;&nbsp;<a>|</a>&nbsp;&nbsp;<a href="/farm/moveFindPwd.do">비밀번호 찾기</a>
+				</div>
 			</div>
 
 		</form>

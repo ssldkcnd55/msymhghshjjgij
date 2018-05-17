@@ -104,7 +104,7 @@
       <tr>   
          <td class="history_start" colspan="3" align="center">
          <!-- 농사 시작일자 넣는 부분 -->
-            <table class="histoty_title">
+            <table class="history_title">
                <tr>
                   <td class="start_date" align="center">농사시작일자</td>
                </tr>
@@ -240,12 +240,12 @@
          <tr>   
             <td colspan="3" align="center">
          <!-- 농사 끝일자 넣는 부분 -->
-               <table id="histoty_title" cellspacing="0" style="width: 20%;border: 1px solid #d7d7d7;">
+               <table class="history_title" cellspacing="0">
                   <tr>
-                     <td align="center">농사끝일자</td>
+                     <td class="start_date" align="center">농사끝일자</td>
                   </tr>
                   <tr>
-                     <td align="center">2018/01/01</td>
+                     <td class="start_date" align="center">2018/01/01</td>
                   </tr>
                </table>
          <!-- 농사 끝일자 넣는 부분 끝 -->   

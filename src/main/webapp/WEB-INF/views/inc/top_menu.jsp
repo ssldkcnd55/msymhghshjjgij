@@ -6,6 +6,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Farm</title>
+<script type="text/javascript"
+	src="/farm/resources/js/jquery-3.3.1.min.js"></script>
 <link href="/farm/resources/css/style.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript">
     $(function() {

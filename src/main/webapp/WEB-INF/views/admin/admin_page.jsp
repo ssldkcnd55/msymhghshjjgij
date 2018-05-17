@@ -45,7 +45,7 @@
     	관리목록 </a>
       <a href="" class="list-group-item"><span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>
       	&nbsp;공지사항관리</a>
-      <a href="" class="list-group-item"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+      <a href="/farm/moveAdminCategory.do" class="list-group-item"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
       	&nbsp;카테고리관리</a>
       <a href="" class="list-group-item"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
       	&nbsp;신고관리</a>
