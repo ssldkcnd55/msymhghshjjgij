@@ -1,4 +1,4 @@
-package com.kh.farm.category.model.service;
+/*package com.kh.farm.category.model.service;
 
 import java.util.List;
 
@@ -23,3 +23,4 @@ public class CategoryImpl implements CategoryService{
 	}
 	
 }
+*/

@@ -1,4 +1,4 @@
-package com.kh.farm.category.model.dao;
+/*package com.kh.farm.category.model.dao;
 
 import org.springframework.stereotype.Repository;
 
@@ -6,3 +6,4 @@ import org.springframework.stereotype.Repository;
 public class CategoryDao {
 
 }
+*/

@@ -1,4 +1,4 @@
-package com.kh.farm.category.controller;
+/*package com.kh.farm.category.controller;
 
 import org.springframework.stereotype.Controller;
 
@@ -6,3 +6,4 @@ import org.springframework.stereotype.Controller;
 public class CategoryController {
 
 }
+*/
