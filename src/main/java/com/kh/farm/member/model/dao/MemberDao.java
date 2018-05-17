@@ -49,4 +49,9 @@ public class MemberDao {
 		System.out.println("111");
 		return result;
 	}
+
+	public Member selectMember(String member_id2, SqlSessionTemplate sqlSession) {
+		
+		return sqlSession.selectOne("selectMember", member_id2);
+	}
 }
