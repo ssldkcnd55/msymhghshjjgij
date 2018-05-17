@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html >
 <html>
 <head>
@@ -11,6 +12,10 @@
 <script type="text/javascript" src="/farm/resources/js/jquery-3.3.1.min.js"></script>
  <script type="text/javascript" src="/farm/resources/js/messenger.js"></script> 
 </head>
+
+<script type="text/javascript">
+
+</script>
 <body>
 	<div class="messenger_frame">
 		<!-- 메신져 상단부분 -->
@@ -49,7 +54,28 @@
 			<div class="search_list"></div>
 			<!--/////////////////////// 검색내용 끝 //////////////////////-->
 			<!-- //////////////////////////////대화목록 /////////////////////////////-->
+
 			<div class="chat_list_table">
+				<!-- 실제 기능 -->
+				<c:if test="${! empty chatList}">
+				<c:forEach items="${chatList}" var="chat">
+				<a href="javascript: move_msg_table();">
+				<table>
+						<tr>
+							<td class="list_profile" rowspan="2"><img
+								src="/farm/resources/upload/memberUpload/${chat.member_img }"></td>
+							<td class="list_name">${chat.member_name }</td>
+							<td class="list_time"><fmt:formatDate value="${chat.chat_history_date}" type="time" timeStyle="short" /> </td>
+
+						</tr>
+						<tr>
+							<td colspan="2"><span class="list_content">${chat.chat_history_contents } </span></td>
+						</tr>
+					</table>
+				</a>
+				</c:forEach>
+			</c:if>
+			
 				<!-- profile: 사진  / name: 이름 / time: 시간 / content: 내용 -->
 				<a href="javascript: move_msg_table();">
 					<!-- 대화창으로 이동 A태그-->

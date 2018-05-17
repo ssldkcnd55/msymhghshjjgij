@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+	<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -56,10 +58,16 @@
         	
         	<!-- 장터 -->
         	<div class="right_box">
-        	<a href="moveMarketDetail.do">
+        	<c:forEach var="m" items="${list }">
+        		<a href="moveMarketDetail.do">
+        		<div class="market"><div class="img_box" style="background-image: url('/farm/resources/upload/marketUpload/${m.market_img}'); background-size: cover;" ></div>
+       			<div class="title_box"><p class="title">${m.market_title }</p> <p class="content">${m.market_note }</p></div></div>
+       			</a>
+        	</c:forEach>
+        	<!-- <a href="moveMarketDetail.do">
        			<div class="market"><div class="img_box" style="background-image: url('/farm/resources/images/jamong.jpg'); background-size: cover;" ></div>
        			<div class="title_box"><p class="title">플로리다 자몽</p> <p class="content">자몽속이 꽉찬 자몽을 더욱 합리적인 가격에!</p></div></div>   
-       			    	</a>	
+       		</a>	
        			    	
        			    	<a href="moveMarketDetail.do">	
        			<div class="market"><div class="img_box" style="background-image: url('/farm/resources/images/bean.jpg'); background-size: cover;" ></div>
@@ -92,7 +100,7 @@
        			<a href="moveMarketDetail.do">
        			<div class="market"><div class="img_box" style="background-image: url('/farm/resources/images/jamong.jpg'); background-size: cover;"></div>
        			<div class="title_box"><p class="title">플로리다 자몽</p> <p class="content">자몽속이 꽉찬 자몽을 더욱 합리적인 가격에!</p></div></div>
-       			</a>
+       			</a> -->
        			<button class="more_market">장터 더보기 ▼</button>
        		</div>	
        			

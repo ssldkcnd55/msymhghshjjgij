@@ -12,10 +12,12 @@
 </head>
 <body>
 
+<c:if test="${ !empty sessionScope.loginUser }">
 <span class="msgbox">
 <iframe class="msgframe" src="moveMessenger.do"> 
  </iframe> 
 </span>
+</c:if>
 <span  class="sidebox"> 
       <a href="#top_line" class="move_top_atag">
       <div class="move_top">↑<br>TOP</div></a>
@@ -35,9 +37,9 @@
       <div class="sh1_title last">제스프리 <br>썬골드키위</div>
       <div class="arrow bottom">▼</div>
       </div><br>
- 
+ <c:if test="${ !empty sessionScope.loginUser }">
   <a href="javascript: msgIcon() "><img class="msgIcon" src="/farm/resources/images/messenger_icon_green2.png"></a><br>    
- 
+ </c:if>
         </span>
 
 

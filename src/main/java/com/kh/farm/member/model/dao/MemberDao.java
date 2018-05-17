@@ -23,17 +23,13 @@ public class MemberDao {
 	public Member loginCheck(Member member, SqlSessionTemplate sqlSession) throws LoginFailException{
 		Member resultMember = sqlSession.selectOne("member.loginMember", member);
 		if(resultMember != null) {
-			System.out.println("1");
 			if(pwdEncoder.matches(member.getMember_pwd(), resultMember.getMember_pwd())) {
-				System.out.println("2");
 				return resultMember;
 			}else {
 				//return null;
-				System.out.println("3");
 				throw new LoginFailException("로그인 실패");
 			}
 		}else {
-			System.out.println("4");
 			throw new LoginFailException("로그인 실패");
 		}
 	}

@@ -4,6 +4,30 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="chat">
 
+	<select id="selectChatList" parameterType="Member" resultType="ChatList">
+	
+	<![CDATA[ 
+	
+	select chat.CHAT_NO,member_id,member_name,member_img,chhis.CHAT_HISTORY_CONTENTS,chhis.chat_history_date,chhis.chat_history_alarm
+from chat,
+(
+SELECT CHAT_HISTORY_CONTENTS,aa.chat_no, aaa.CHAT_HISTORY_DATE,aaa.CHAT_HISTORY_ALARM from (
+select CHAT_NO, max(CHAT_HISTORY_DATE)  as cdate
+ from chat_history 
+ where chat_no in ( select  chat_no from chat where member_id1 = #{member_id} or member_id2 = #{member_id}  ) 
+ group by CHAT_NO
+ ) aa , CHAT_HISTORY aaa
+ where aa.CHAT_NO=aaa.CHAT_NO and aa.cdate = aaa.CHAT_HISTORY_DATE
+) chhis, member, (select CASE MEMBER_ID1 when #{member_id} then MEMBER_ID2
+            else MEMBER_ID1 
+        end as id, chat.CHAT_NO
+from chat
+where MEMBER_ID1=#{member_id} or MEMBER_ID2 = #{member_id}) mid
+where chat.chat_no = chhis.chat_no and  member.member_id = mid.id and  chhis.chat_no=mid.CHAT_NO
+order by chhis.chat_history_date desc
+	]]>
+	
+	</select>
 	
 
 </mapper>
