@@ -157,7 +157,7 @@ $(function() {
 						if( beforeName==my_id || beforeName==null )
 						{  
 							// 사진+이름+메세지+시간
-							$('.msg_table_middle').append('<div class="msg_middle_left_img"><table><tr><th rowspan="2"><img src="/farm/resources/upload/memberUpload/'+decodeURIComponent((c.img).replace(/\+/g, '%20'))+' "></th><td>'+decodeURIComponent((c.name).replace(/\+/g, '%20'))+'</td></tr><tr><td class="msg_you">'+decodeURIComponent((c.ht[i].contents).replace(/\+/g, '%20'))+'</td></table></div> ');
+							$('.msg_table_middle').append('<div class="msg_middle_left_img"><table><tr><th rowspan="2"><img src="/farm/resources/upload/memberUpload/'+decodeURIComponent((c.img).replace(/\+/g, '%20'))+' "></th><td>'+decodeURIComponent((c.name).replace(/\+/g, '%20'))+'</td></tr><tr><td class="msg_you">'+decodeURIComponent((c.ht[i].contents).replace(/\+/g, '%20'))+'</td></tr></table></div> ');
 						}
 						// case 4 : 너=>너 and 시간 같음
 						else if(beforeName==your_id && beforeTime==c.ht[i].date)
