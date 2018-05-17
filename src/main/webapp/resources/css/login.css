@@ -72,3 +72,11 @@ h2{
 h5{
 	margin: 0 0 8px 0;
 }
+.find_div{
+	
+}
+.find_div a{
+	font-size:10pt;
+	color: gray;
+	text-decoration: none;
+}
