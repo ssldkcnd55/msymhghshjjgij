@@ -20,10 +20,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.farm.chat.model.service.ChatService;
 import com.kh.farm.chat.model.vo.*;
 import com.kh.farm.member.model.service.MemberService;
+import com.kh.farm.member.model.service.MemberServiceImpl;
 import com.kh.farm.member.model.vo.*;
 
 @Controller
@@ -113,5 +115,41 @@ public class MemberController {
 		session.invalidate();
 			
 		return "home";
+	}
+	
+	@RequestMapping("findId.do")
+	public ModelAndView findId(Member member,ModelAndView mv)
+	
+	{
+		
+			Member MemberIdFind =memberService.selectFindId(member);
+			
+			if(MemberIdFind != null) {
+				mv.setViewName("member/findId");
+				mv.addObject("MemberIdFind",MemberIdFind);
+			}else {
+				mv.setViewName("member/findId");
+				mv.addObject("NotFound","해당 정보에 대한 아이디가 존재하지 않음");
+				System.out.println("존재하지 않니?");
+			}
+		return mv;
+	}
+	
+	@RequestMapping("moveupdatePwd.do")
+	public ModelAndView moveupdatePwd(ModelAndView mv, Member member) {
+		 System.out.println(member.getMember_id());
+		mv.setViewName("member/makeNewPwd");
+		mv.addObject("member",member);
+		return mv;
+	}
+	
+	@RequestMapping("updatePwd.do")
+	public ModelAndView updatePwd(ModelAndView mv, Member member) {
+		member.setMember_pwd(pwdEncoder.encode(member.getMember_pwd()));
+		int updatePwd = memberService.updatePwd(member);
+		mv.setViewName("member/login");
+		mv.addObject("message","비밀번호 수정 성공 !");
+		System.out.println(updatePwd);
+		return mv;
 	}
 }

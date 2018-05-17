@@ -130,5 +130,10 @@ public class MoveController {
 		return "quote/quote";
 
 	}
+	
+	@RequestMapping("moveAdminCategory.do")
+	public String moveAdminCategory() {
+		return "admin/admin_category";
+	}
 }
 

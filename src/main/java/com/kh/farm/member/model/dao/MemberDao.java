@@ -33,4 +33,20 @@ public class MemberDao {
 			throw new LoginFailException("로그인 실패");
 		}
 	}
+
+	public Member findId(Member member, SqlSessionTemplate sqlSession) {
+		
+		Member memberId = sqlSession.selectOne("member.findId",member);
+		
+		return memberId;
+		
+	}
+
+	public int updatePwd(Member member, SqlSessionTemplate sqlSession) {
+		System.out.println(member.getMember_id());
+		System.out.println(member.getMember_pwd());
+		int result = sqlSession.update("member.updatePwd",member);
+		System.out.println("111");
+		return result;
+	}
 }

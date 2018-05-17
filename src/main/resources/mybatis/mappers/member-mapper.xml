@@ -26,4 +26,17 @@
 					#{member_id}, #{member_pwd}, 0, #{member_name}, 
 					#{member_addr}, #{member_tel}, 'Y', #{member_img},'N',0) ]]>
 </insert>
+
+<select id="findId" parameterType="member" resultType="member">
+		<![CDATA[
+			select * from member where member_id=#{member_id} and member_name=#{member_name}
+		]]>
+
+</select>
+
+<update parameterType="member" id="updatePwd" flushCache="true">
+		<![CDATA[
+			update member set member_pwd = #{member_pwd} where member_id = #{member_id}
+		]]>
+</update>
 </mapper>

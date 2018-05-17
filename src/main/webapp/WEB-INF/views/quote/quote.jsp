@@ -35,21 +35,51 @@
 							var jsonData = JSON.parse(jsonStr);
 							var myitem = jsonData.data.item
 							console.log(myitem);
-							var html = "";
-							var tempArr = [];
-							html += "<table>";
-							html += "<tr>"
-							for ( var i in myitem) {
-								if (tempArr.length == 0) {
-									tempArr.puch(myitem[i].countyname)
-								} else {
-									html += "<td>" + myitem[i].countyname
-											+ "</td>"
+
+							var result = [];
+
+							var html1 = "";
+							var html2 = "";
+							var html3 = "";
+							var html4 = "";
+							
+							
+							$.each(myitem, function(index, item) {
+								
+								if ($.inArray(item.regday, result) == -1) {
+									result.push(item.regday);
+									html1 += "<th>" + item.regday + "</th>"
 								}
-							}
-							html += "</tr>"
-							html += "</table>";
-							$("#list").html(html);
+								if (item.countyname == "평균") {
+								if ($.inArray(item.countyname, result) == -1) {
+									result.push(item.countyname);									
+										html2 += "<td>" + item.countyname
+												+ "</td>"	
+								}
+								html2 += "<td>" + item.price + "</td>"
+								}
+								if (item.countyname == "평년") {
+									if ($.inArray(item.countyname, result) == -1) {
+										result.push(item.countyname);									
+											html3 += "<td>" + item.countyname
+													+ "</td>"	
+									}
+									html3 += "<td>" + item.price + "</td>"
+									}
+								if (item.countyname == "서울" && item.marketname =="경동") {
+									if ($.inArray(item.countyname, result) == -1) {
+										result.push(item.countyname);									
+											html4 += "<td>" + item.countyname
+													+ "</td>"
+									}																	
+									html4 += "<td>" + item.price + "</td>"
+								}
+								
+							});
+							$("#tr").append(html1);
+							$("#tr2").append(html2);
+							$("#tr3").append(html3);
+							$("#tr4").append(html4);
 
 						},
 						error : function(request, status, errorData) {
@@ -65,6 +95,19 @@
 </head>
 <body>
 	<button id="button">작동</button>
-	<div id="list"></div>
+	<div id="list">
+		<table style="border: 1px solid">
+			<tr id="tr">
+			<th>날짜</th>
+			</tr>
+			<tr id="tr2">
+			</tr>
+			<tr id="tr3">
+			</tr>
+			</tr>
+			<tr id="tr4">
+			</tr>
+		</table>
+	</div>
 </body>
 </html>

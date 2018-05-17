@@ -9,4 +9,8 @@ public interface MemberService {
 
 	Member loginCheck(Member member) throws LoginFailException;
 
+	Member selectFindId(Member member);
+
+	int updatePwd(Member member);
+
 }
