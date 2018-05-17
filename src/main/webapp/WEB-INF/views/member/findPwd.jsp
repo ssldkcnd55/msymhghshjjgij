@@ -20,7 +20,7 @@
 		<div id="container">
         	<div class="inner-wrap1">
 			<div class="join_form join_form2" style="padding:20px 40px;"> <!--div구역내에 mainform을 담았음  -->
-				<form id="mainform" method="post" action="/classKing/idfind">
+				<form id="mainform" method="post" action="/farm/moveupdatePwd.do">
 					<div>
 						<h2 class="h2">
 								FIND PWD
@@ -33,9 +33,9 @@
 								</div>
 								
 								<div class="form-group">
-								<!--e-Mail 기입란  -->
-								<label for="userEmail">E-mail</label><br><input type="email"
-									class="form-control" id="userEmail" name="useremail" style="width:330px;"
+								<!--e-Mail 기입란  --><!-- 원래 이메일인데 테스트할라구 text로바ㅜㄲㅁ -->
+								<label for="userEmail">E-mail</label><br><input type="text" 
+									class="form-control" id="userEmail" name="member_id" style="width:330px;"
 									placeholder="ex)abcd@naver.com">
 								<div class="form-group text-center">
 									<input type="button" class="btn btn-info" id="mailsend" name="dupliBt" value="메일인증" onclick="sendMail();" required/>
