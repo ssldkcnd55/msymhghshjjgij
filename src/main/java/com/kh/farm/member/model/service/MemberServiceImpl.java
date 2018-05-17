@@ -23,6 +23,18 @@ public class MemberServiceImpl implements MemberService {
 		// TODO Auto-generated method stub
 		return memberDao.loginCheck(member,sqlSession);
 	}
+	@Override
+	public Member selectFindId(Member member) {
+		// TODO Auto-generated method stub
+		return memberDao.findId(member,sqlSession);
+	}
+	@Override
+	public int updatePwd(Member member) {
+		// TODO Auto-generated method stub
+		return memberDao.updatePwd(member,sqlSession);
+	}
+	
+	
 	
 	
 }

@@ -1,11 +1,27 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <!DOCTYPE html>
 <html>
 <head>
 <link href="/farm/resources/css/join.css" rel="stylesheet" type="text/css">
 <link href="/farm/resources/css/style.css" rel="stylesheet" type="text/css" />
 <link href="/farm/resources/css/login.css" rel="stylesheet" type="text/css">
+
+<script type="text/javascript" src="/farm/resources/js/jquery-3.3.1.min.js"></script>
+<script>
+
+$(function(){
+	var message = '<c:out value="${message}" />';
+	
+	if(message != null && message != ""){
+		alert(message);
+	}
+	
+});
+
+</script>
 </head>
 <body>
 	<div id="top_line"></div>
