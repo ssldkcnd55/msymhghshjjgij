@@ -1,5 +1,25 @@
 @charset "UTF-8";
 
+.top_margin{
+	margin-top:20px;
+}
+
+.top_margin button{
+	margin-right:14px;
+	border:none;
+	width:90px;
+	height:40px;
+	disply:inline-block;
+	font-size:12pt;
+	font-weight: bold;
+	color:gray;
+	float:right;
+	margin-bottom:10px;
+	background: #e4dcbc;
+	outline: none;
+    overflow: visible;
+	
+}
 .sort{
 	width:215px; height:200px; border: 1px solid #bdbdbd;  
 	float:left;

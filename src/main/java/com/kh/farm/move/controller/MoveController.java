@@ -114,5 +114,13 @@ public class MoveController {
 	public String moveAdminPage() {
 		return "admin/admin_page";
 	}
+	@RequestMapping("moveQnAPage.do")
+	public String moveQnAPage() {
+		return "qna/qna";
+	}
+	@RequestMapping("moveNoticePage.do")
+	public String moveNoticePage() {
+		return "notice/notice";
+	}
 }
 
