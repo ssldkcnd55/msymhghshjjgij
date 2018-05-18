@@ -6,7 +6,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.kh.farm.common.vo.PageNumber;
+import com.kh.farm.common.model.vo.*;
 import com.kh.farm.market.model.dao.MarketDao;
 import com.kh.farm.market.model.vo.Market;
 
