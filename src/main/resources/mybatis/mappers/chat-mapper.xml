@@ -45,7 +45,7 @@ order by chhis.chat_history_date desc
 	
 	<insert id="insertChatHistory" parameterType="ChatHistory">
 	<![CDATA[
-		insert into CHAT_HISTORY values( #{chat_no},#{member_id},#{chat_history_contents},sysdate, #{chat_history_alarm} )
+		insert into CHAT_HISTORY values( #{chat_no},#{member_id},#{chat_history_contents},sysdate, #{chat_history_alarm}   )
 	]]>
 
 	</insert>
