@@ -10,31 +10,39 @@ import com.kh.farm.member.exception.LoginFailException;
 
 @Service
 public class MemberServiceImpl implements MemberService {
-	@Autowired private MemberDao memberDao;
+	@Autowired
+	private MemberDao memberDao;
 	@Autowired
 	private SqlSessionTemplate sqlSession;
+
 	@Override
 	public int insertMember(Member member) {
 		// TODO Auto-generated method stub
-		return memberDao.insertMember(member,sqlSession);
+		return memberDao.insertMember(member, sqlSession);
 	}
+
 	@Override
-	public Member loginCheck(Member member) throws LoginFailException{
+	public Member loginCheck(Member member) throws LoginFailException {
 		// TODO Auto-generated method stub
-		return memberDao.loginCheck(member,sqlSession);
+		return memberDao.loginCheck(member, sqlSession);
 	}
+
 	@Override
 	public Member selectFindId(Member member) {
 		// TODO Auto-generated method stub
-		return memberDao.findId(member,sqlSession);
+		return memberDao.findId(member, sqlSession);
 	}
+
 	@Override
 	public int updatePwd(Member member) {
 		// TODO Auto-generated method stub
-		return memberDao.updatePwd(member,sqlSession);
+		return memberDao.updatePwd(member, sqlSession);
 	}
-	
-	
-	
-	
+
+	@Override
+	public Member selectMember(String member_id2) {
+
+		return memberDao.selectMember(member_id2, sqlSession);
+	}
+
 }

@@ -12,14 +12,21 @@ import com.kh.farm.member.model.vo.*;
 
 @Service
 public class ChatServiceImpl implements ChatService {
-	
+
 	@Autowired
 	private ChatDao chatDao;
 	@Autowired
 	private SqlSessionTemplate sqlSession;
+
 	@Override
 	public List<ChatList> selectChatList(Member member) {
-		
-		return chatDao.selectChatList(sqlSession,member);
+
+		return chatDao.selectChatList(sqlSession, member);
+	}
+
+	@Override
+	public List<ChatHistory> selectChatHistory(Chat chat) {
+
+		return chatDao.selectChatHistory(sqlSession, chat);
 	}
 }

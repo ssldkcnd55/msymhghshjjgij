@@ -270,6 +270,8 @@
 	z-index: 1;
 	top: 0px;
 	visibility: hidden;
+	display: block;
+	    white-space: unset;
 }
 
 .msg_table_middle tr {
@@ -308,6 +310,11 @@ msg_middle_left_img tr td {
 	word-break: break-all;
 }
 
+.msg_both
+{
+	min-height: 33px;
+}
+
 .msg_my {
 	/* 내 메세지 창 */
 	/* #FAF79D */
@@ -324,6 +331,7 @@ msg_middle_left_img tr td {
 	text-align: left;
 	float: right;
 	word-break: break-all;
+	display: block;
 }
 
 .msg_you {
@@ -338,6 +346,7 @@ msg_middle_left_img tr td {
 	float: left;
 	word-break: break-all;
 	margin-bottom: 5px;
+	display: block;
 }
 
 div.msg_you {

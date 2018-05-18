@@ -2,7 +2,7 @@ package com.kh.farm.category.model.vo;
 
 import org.springframework.stereotype.Component;
 
-@Component("category2")
+@Component("category")
 public class Category  implements java.io.Serializable{
 
 	private static final long serialVersionUID = 9872L;
