@@ -36,5 +36,18 @@ order by chhis.chat_history_date desc
 	order by "CHAT_HISTORY_DATE" asc
 	]]>
 	</select>
+	
+	<update id="updateChatHistoryAlarm" parameterType="Chat" >
+	<![CDATA[
+	update CHAT_HISTORY set CHAT_HISTORY_ALARM = 'Y' where CHAT_NO= #{chat_no} and MEMBER_ID = #{member_id2}
+	]]>
+	</update>
+	
+	<insert id="insertChatHistory" parameterType="ChatHistory">
+	<![CDATA[
+		insert into CHAT_HISTORY values( #{chat_no},#{member_id},#{chat_history_contents},sysdate, #{chat_history_alarm} )
+	]]>
+
+	</insert>
 
 </mapper>

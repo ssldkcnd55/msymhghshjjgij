@@ -20,5 +20,14 @@ public class ChatDao {
 
 		return sqlSession.selectList("chat.selectChatHistory", chat);
 	}
+
+	public int updateChatHistoryAlarm(SqlSessionTemplate sqlSession, Chat chat) {
+		return sqlSession.update("chat.updateChatHistoryAlarm", chat);
+	}
+
+	public int insertChatHistory(SqlSessionTemplate sqlSession, ChatHistory chatHistory) {
+		
+		return sqlSession.insert("chat.insertChatHistory", chatHistory);
+	}
 	
 }
