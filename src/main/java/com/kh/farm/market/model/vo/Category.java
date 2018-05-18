@@ -2,7 +2,7 @@ package com.kh.farm.market.model.vo;
 
 import org.springframework.stereotype.Component;
 
-@Component("category")
+@Component("category2")
 public class Category implements java.io.Serializable{
 
 	/**
