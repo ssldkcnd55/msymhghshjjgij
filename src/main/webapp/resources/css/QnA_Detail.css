@@ -1,0 +1,194 @@
+@charset "UTF-8";
+/* QnA 디테일 */
+
+.board-wrap{
+	width:960px;
+	margin:20px auto 0;
+	position:relative;	
+}
+
+.QnA_title {
+	font-size: 20pt;
+	font-weight: bold;
+	padding-left: 15px;
+}
+
+.QnA_full {
+	width: 100%;
+	height: auto;
+	margin: 20px 0px 40px 0px;
+	border-top: 3px solid #cfc085;
+}
+
+.QnA_table {
+	width: 100%;
+	height: 40px;
+	background: #F1F1F1;
+}
+
+.QnA_table td:nth-child(1) {
+	padding: 15px; width : 80%;
+	font-size: 15pt;
+	width: 80%;
+}
+
+.QnA_table td:nth-child(2) {
+	width: 10%;
+}
+
+.QnA_table td:nth-child(3) {
+	width: 10%;
+}
+
+.QnA_modify {
+	display: flex;
+	justify-content: flex-end;
+	padding: 0px 0px 5px 0px ;
+	margin-top:10px;
+}
+
+.QnA_modify button:nth-child(1){
+	color: #fff;
+    padding: 9px 10px;
+    margin: 0 0 0 3px;
+    background-color: #516B82;
+    border: none;
+    outline: none;
+    overflow: visible;
+    width:50px;
+    font-size:11pt;
+    font-weight: bold;
+    
+}
+.QnA_modify button:nth-child(2){
+	color: #fff;
+	background-color: #D7625E;
+	margin-right:15px;
+	border: none;
+    outline: none;
+    overflow: visible;
+    width:50px;
+    font-size:11pt;
+    font-weight: bold;
+}
+
+.QnA_note{
+	padding: 0px 20px 20px 30px;
+	font-size: 14pt;
+	line-height: 2.5;
+	font-family: "Noto Sans KR", "Roboto", "Nanum Gothic", Malgun Gothic,
+		맑은고딕, 굴림, 돋움, Dotum, sans-serif;
+}
+
+/* 댓글 */
+.QnA_comment_title{
+	
+	padding-left:10px;
+	font-size: 14pt;
+	border-bottom:3px solid #cfc085;
+}
+
+.QnA_comment{
+	width:100%;
+	margin-bottom:70px;
+	
+}
+
+.QnA_comment_top_writer{
+	background: #F1F1F1;
+	width:100%;
+	margin-bottom:-15px;
+}
+
+.QnA_comment_top_writer p{
+	padding:20px; 
+	font-size: 12pt;
+	line-height: 2;
+	font-family: "Noto Sans KR", "Roboto", "Nanum Gothic", Malgun Gothic,
+		맑은고딕, 굴림, 돋움, Dotum, sans-serif;
+}
+
+.QnA_comment_writer img{
+	margin:10px 0px 10px 10px;
+	width:30px;
+	height:30px;
+}
+
+.QnA_comment_writer span:nth-child(2){
+	width:30px;
+	height:30px;
+	font-size:15pt;
+	margin-left:10px;
+	font-weight: bold;
+}
+
+.QnA_comment_writer span:nth-child(3){
+	font-size:15pt;
+	width:30px;
+	height:30px;
+	color:#c0c0c0;
+	margin-left:10px;
+	font-weight: bold;
+}
+
+.QnA_comment_writer span:nth-child(4){
+	font-size:15pt;
+	width:50px;
+	height:30px;
+	margin-top:20px;
+	margin-right:10px;
+	color:#c0c0c0;
+	margin-left:10px;
+	font-weight: bold;
+	float:right;
+}
+
+.QnA_comment_writer span:nth-child(5){
+	font-size:15pt;
+	width:50px;
+	height:30px;
+	margin-top:20px;
+	color:#c0c0c0;
+	margin-left:10px;
+	font-weight: bold;
+	float:right;
+}
+
+.QnA_comment_writer{
+	border-bottom:1px solid #F1F1F1;
+}
+
+.commont_modify{
+	border-top:3px solid #F1F1F1;
+	
+}
+
+.commont_modify td:nth-child(1){
+	width:86%;
+	height:100px;
+	
+}
+
+.commont_modify td:nth-child(2){
+	width:30%;
+	
+}
+
+.commont_modify textarea{
+	width:91%;
+	margin-left:50px;
+	margin-right:50px;
+	line-height: 2;
+	background: white;
+}
+
+.commont_modify input{
+	margin-left:10px;
+	border:none;
+	width:120px;
+	height:107px;
+	disply:inline-block;
+	font-size:15pt;
+	font-weight: bold;
+	color:#000000;	
+}

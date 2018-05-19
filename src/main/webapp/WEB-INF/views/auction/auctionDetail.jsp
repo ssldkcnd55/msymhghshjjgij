@@ -95,7 +95,7 @@
 
 				<!-- introduce_box -->
 				<div id="tab-1" class="tab-content current">
-					<div class="introduce_box"></div>
+					<div class="introduce_box">${auction.auction_note } </div>
 				</div>
 				<!-- introduce_box -->
 
@@ -106,7 +106,7 @@
 					<div class="auction_history_box">
 
 						<div class="bidding_top">
-							<h2 class="history_title">입찰 내	역</h2>
+							<h2 class="history_title">입찰 내역</h2>
 
 							<!-- 경매정보 -->
 							<div class="bidding_info">

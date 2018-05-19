@@ -19,6 +19,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.kh.farm.category.model.service.CategoryImpl;
 import com.kh.farm.category.model.service.CategoryService;
 import com.kh.farm.category.model.vo.Category;
+import com.kh.farm.member.model.vo.Member;
 
 import net.sf.json.JSONArray;
 
@@ -39,7 +40,7 @@ public class CategoryController {
 			for(Category c : category) {
 				JSONObject job = new JSONObject();
 				job.put("category_no", c.getCategory_no());
-				job.put("cateogry_main", c.getCategory_main());
+				job.put("category_main", c.getCategory_main());
 				job.put("category_small", c.getCategory_small());
 				job.put("category_name", c.getCategory_name());
 				
@@ -53,6 +54,8 @@ public class CategoryController {
 			out.println(sendJson.toJSONString());
 			out.flush();
 			out.close();
+			
+			
 		}
 	}
 	

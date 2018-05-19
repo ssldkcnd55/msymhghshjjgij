@@ -43,6 +43,10 @@
 					</div>
 			</div>
 			
+			<div>
+			<input type="text" value="${id.member_id}">
+			<p></p>			
+						</div>
 
 		<!--  -->
  			 </div>
