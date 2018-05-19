@@ -39,4 +39,12 @@
 			update member set member_pwd = #{member_pwd} where member_id = #{member_id}
 		]]>
 </update>
+
+<select id="selectMember" parameterType="string" resultType="Member">
+<![CDATA[
+select member_name, member_img from member where member_id=#{member_id2}
+]]>
+</select>
+
+
 </mapper>

@@ -12,5 +12,6 @@ public interface MemberService {
 	Member selectFindId(Member member);
 
 	int updatePwd(Member member);
-
+	
+	Member selectMember(String member_id2);
 }

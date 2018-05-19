@@ -1,7 +1,5 @@
 package com.kh.farm.chat.model.vo;
 
-import java.sql.Date;
-
 import org.springframework.stereotype.Component;
 
 @Component("chatHistory")
@@ -15,12 +13,12 @@ public class ChatHistory implements java.io.Serializable{
 	private int chat_no;// 채팅 번호
 	private String member_id;//작성자 아이디
 	private String chat_history_contents;//채팅 내용
-	private Date chat_history_date;//채팅 작성일
+	private String chat_history_date;//채팅 작성일
 	private String chat_history_alarm;//채팅 확인 여부
 
 	public ChatHistory() {}
 
-	public ChatHistory(int chat_no, String member_id, String chat_history_contents, Date chat_history_date,
+	public ChatHistory(int chat_no, String member_id, String chat_history_contents, String chat_history_date,
 			String chat_history_alarm) {
 		super();
 		this.chat_no = chat_no;
@@ -61,11 +59,11 @@ public class ChatHistory implements java.io.Serializable{
 		this.chat_history_contents = chat_history_contents;
 	}
 
-	public Date getChat_history_date() {
+	public String getChat_history_date() {
 		return chat_history_date;
 	}
 
-	public void setChat_history_date(Date chat_history_date) {
+	public void setChat_history_date(String chat_history_date) {
 		this.chat_history_date = chat_history_date;
 	}
 
@@ -76,6 +74,8 @@ public class ChatHistory implements java.io.Serializable{
 	public void setChat_history_alarm(String chat_history_alarm) {
 		this.chat_history_alarm = chat_history_alarm;
 	}
+
+	
 	
 	
 }

@@ -84,7 +84,6 @@
 					<li><a href="logout.do">로그아웃</a></li>
 					</c:if>
 				</ul>
-                
         </div>    </div>
 </body>
 </html>

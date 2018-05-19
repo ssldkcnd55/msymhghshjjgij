@@ -24,6 +24,8 @@
 		 <typeAlias type="com.kh.farm.qna.model.vo.Market_qna" alias="Market_qna" /> 
 		 <typeAlias type="com.kh.farm.shoppingBasket.model.vo.ShoppingBasket" alias="ShoppingBasket" /> 
 	
+		 <typeAlias type="com.kh.farm.shoppingBasket.model.vo.ShoppingBasket" alias="ShoppingBasket" />
+		 <typeAlias type="com.kh.farm.common.model.vo.PageNumber" alias="PageNumber" />  
 
 	</typeAliases>
 

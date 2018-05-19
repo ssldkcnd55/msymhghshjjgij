@@ -11,8 +11,40 @@
 <link href="/farm/resources/css/style.css" rel="stylesheet" type="text/css" />
 <link href="/farm/resources/css/marketList.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="/farm/resources/js/jquery-3.3.1.min.js"></script>
+<script>
+	var count = 1;
+</script>
+<script>
+		function moreBtn(){
+			count = count+1;
+			$.ajax({
+				url: "ajaxMoreMarket.do",
+				type: "post",
+				data : {page : count},
+				dataType: "JSON",
+				success: function(obj){
+					console.log(obj);	//object라고 출력
+					var objStr = JSON.stringify(obj);
+					var jsonObj = JSON.parse(objStr);
+					//문자열 변수 준비
+					var outValues = $(".market_box").html();
+					for(var i in jsonObj.list){
+						outValues += "<a href='marketDetail.do?market_no=" + jsonObj.list[i].market_no + "'>" +
+								"<div class='market'><div class='img_box' style='background-image:url(\"/farm/resources/upload/marketUpload/"+ jsonObj.list[i].market_img+"\"); background-size: cover;'>"+
+								"</div><div class='title_box'><p class='title'>"+jsonObj.list[i].market_title +
+								"</p><p class='content'>"+jsonObj.list[i].market_note+"</p></div></div></a>";
+					}
+					$(".market_box").html(outValues);
+				},error: function(request,status,errorData){
+					alert("error code : " + request.status + "\nmessage" + 
+							request.responseText + "\nerror" + errorData);
+				}
+			});
+		}
+</script>
 </head>
 <body>
+	<c:set var="count" value="1"/>
 	<div id="top_line"></div>
 	<div id="wrap">
 			<div id="header">
@@ -54,16 +86,16 @@
         	</div>
         	
         	</div>
-        	
-        	
         	<!-- 장터 -->
         	<div class="right_box">
+        	<div class="market_box">
         	<c:forEach var="m" items="${list }">
         		<a href="marketDetail.do?market_no=${m.market_no }">
         		<div class="market"><div class="img_box" style="background-image: url('/farm/resources/upload/marketUpload/${m.market_img}'); background-size: cover;" ></div>
        			<div class="title_box"><p class="title">${m.market_title }</p> <p class="content">${m.market_note }</p></div></div>
        			</a>
         	</c:forEach>
+        	</div>
         	<!-- <a href="moveMarketDetail.do">
        			<div class="market"><div class="img_box" style="background-image: url('/farm/resources/images/jamong.jpg'); background-size: cover;" ></div>
        			<div class="title_box"><p class="title">플로리다 자몽</p> <p class="content">자몽속이 꽉찬 자몽을 더욱 합리적인 가격에!</p></div></div>   
@@ -101,19 +133,16 @@
        			<div class="market"><div class="img_box" style="background-image: url('/farm/resources/images/jamong.jpg'); background-size: cover;"></div>
        			<div class="title_box"><p class="title">플로리다 자몽</p> <p class="content">자몽속이 꽉찬 자몽을 더욱 합리적인 가격에!</p></div></div>
        			</a> -->
-       			<button class="more_market">장터 더보기 ▼</button>
-       		</div>	
-       			
-       			
+       			<button class="more_market" onclick="moreBtn();">장터 더보기 ▼</button>
+       		</div>
  			 </div>
         </div>
-		
-
 		<!-- //account-wrap -->
 		 <%@ include file="../messenger/msg_box.jsp"%>
 		<div id="footer">
 			<%@  include file="../inc/foot.jsp"%>
 		</div>
 	</div>
+
 </body>
 </html>

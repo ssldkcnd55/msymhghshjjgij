@@ -1,4 +1,4 @@
-/*package com.kh.farm.category.model.service;
+package com.kh.farm.category.model.service;
 
 import java.util.List;
 
@@ -17,10 +17,9 @@ public class CategoryImpl implements CategoryService{
 	@Autowired
 	private SqlSessionTemplate sqlSession;
 	@Override
-	public List<Category> selectCategory(Category category) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Category> selectCategory() {
+		//카테고리 가져오기
+		return categoryDao.selectCategory(sqlSession);
 	}
 	
 }
-*/

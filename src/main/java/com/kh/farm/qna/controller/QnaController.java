@@ -11,6 +11,7 @@ import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.kh.farm.market.model.vo.Market;
 import com.kh.farm.qna.model.service.QnaService;
@@ -23,10 +24,10 @@ public class QnaController {
 @Autowired private QnaService qnaService;
 
 @RequestMapping(value="qnaList.do")
-public void qnaList(Market mk, HttpServletResponse response) throws IOException{
+public void qnaList(Market mk, HttpServletResponse response,@RequestParam("page") int currentPage) throws IOException{
 	
 	JSONArray jarr =new JSONArray();
-	int currentPage = 1;
+	
 	ArrayList<Market_qna> qnaList = qnaService.selectQnaList(mk,currentPage);
 	int limitPage = 10;
 	
@@ -47,7 +48,10 @@ public void qnaList(Market mk, HttpServletResponse response) throws IOException{
 		jsq.put("member_id", sq.getMember_id());
 		jsq.put("market_qna_question_date", sq.getMarket_qna_question_date().toString());
 		jsq.put("market_qna_title", sq.getMarket_qna_title());
-		
+		jsq.put("startPage", startPage);
+		jsq.put("endPage", endPage);
+		jsq.put("maxPage", maxPage);
+		jsq.put("currentPage",currentPage);
 		jarr.add(jsq);
 	}
 	
