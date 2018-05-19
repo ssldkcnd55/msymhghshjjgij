@@ -21,4 +21,13 @@ public class MarketController {
 		mv.addObject("list",list);
 		return mv;
 	}
+	
+	@RequestMapping(value="marketDetail.do")
+	public ModelAndView marketDetail(ModelAndView mv, Market mk) {
+		Market market = marketService.selectMarketInfo(mk.getMarket_no());
+		mv.setViewName("market/marketDetail");
+		mv.addObject("market",market);
+		return mv;
+		
+	}
 }

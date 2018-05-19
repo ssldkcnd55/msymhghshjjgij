@@ -59,7 +59,7 @@
         	<!-- 장터 -->
         	<div class="right_box">
         	<c:forEach var="m" items="${list }">
-        		<a href="moveMarketDetail.do">
+        		<a href="marketDetail.do?market_no=${m.market_no }">
         		<div class="market"><div class="img_box" style="background-image: url('/farm/resources/upload/marketUpload/${m.market_img}'); background-size: cover;" ></div>
        			<div class="title_box"><p class="title">${m.market_title }</p> <p class="content">${m.market_note }</p></div></div>
        			</a>

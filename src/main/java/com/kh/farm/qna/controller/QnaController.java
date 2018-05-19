@@ -1,14 +1,65 @@
 package com.kh.farm.qna.controller;
 
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.ArrayList;
+
+import javax.servlet.http.HttpServletResponse;
+
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.kh.farm.market.model.vo.Market;
 import com.kh.farm.qna.model.service.QnaService;
+import com.kh.farm.qna.model.vo.Market_qna;
+
+
 
 @Controller
 public class QnaController {
 @Autowired private QnaService qnaService;
+
+@RequestMapping(value="qnaList.do")
+public void qnaList(Market mk, HttpServletResponse response) throws IOException{
+	
+	JSONArray jarr =new JSONArray();
+	int currentPage = 1;
+	ArrayList<Market_qna> qnaList = qnaService.selectQnaList(mk,currentPage);
+	int limitPage = 10;
+	
+	int listCount = qnaService.selectQnaCount(mk);
+	
+	int maxPage=(int)((double)listCount/limitPage+0.9); //ex) 41개면 '5'페이지나와야되는데 '5'를 계산해줌
+	int startPage=((int)((double)currentPage/5+0.8)-1)*5+1;
+	int endPage=startPage+5-1;
+	
+	if(maxPage<endPage) {
+		endPage = maxPage;
+	}
+	
+	
+	for (Market_qna sq : qnaList) {
+		JSONObject jsq = new JSONObject();
+		jsq.put("market_qna_no", sq.getMarket_qna_no());
+		jsq.put("member_id", sq.getMember_id());
+		jsq.put("market_qna_question_date", sq.getMarket_qna_question_date().toString());
+		jsq.put("market_qna_title", sq.getMarket_qna_title());
+		
+		jarr.add(jsq);
+	}
+	
+	JSONObject sendJson = new JSONObject();
+	sendJson.put("list", jarr);
+	response.setContentType("application/json; charset=utf-8");
+	PrintWriter out = response.getWriter();
+	out.append(sendJson.toJSONString());
+	out.flush();
+	out.close();
+}
+
 
 
 }

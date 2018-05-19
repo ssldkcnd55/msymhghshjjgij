@@ -15,4 +15,10 @@ public class MarketDao {
 		List<Market> list = sqlSession.selectList("market.marketList");
 		return (ArrayList)list;
 	}
+
+	public Market marketInfo(SqlSessionTemplate sqlSession, int market_no) {
+		Market mk = sqlSession.selectOne("market.marketInfo",market_no);
+		
+		return mk;
+	}
 }
