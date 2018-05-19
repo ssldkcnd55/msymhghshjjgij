@@ -29,7 +29,8 @@
 				<br>
 				<h1 style="text-align: center; margin: auto;">경매</h1>
 				<br> 
-				<form action="insertAuctionMake.do?${loginUser.member_id}" method="post">
+				<form action="insertAuctionMake.do" method="post">
+				<input type="hidden" value="${loginUser.member_id}" name="member_id">
 				<div class="main_width">
 					<table class="jung_table">
 						<tbody>

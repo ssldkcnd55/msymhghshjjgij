@@ -1,6 +1,7 @@
 package com.kh.farm.auction.controller;
 
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -23,8 +24,8 @@ public class AuctionController {
 		int insertAuctionMake =  auctionService.insertAuctionMake(auction);
 		System.out.println("insertAuctionMake : "+insertAuctionMake);
 		
-		mv.addObject("auction", insertAuctionMake);
-		mv.setViewName("auction/auctionDetail");
+		//mv.addObject("auction", insertAuctionMake);
+		mv.setViewName("auction/auctionList");
 		return mv;
 		
 	}

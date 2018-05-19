@@ -55,8 +55,7 @@ public class CategoryController {
 			out.flush();
 			out.close();
 			
-			Member userid = session.getattribute("loginmember")
-					String username = userid.get
+			
 		}
 	}
 	

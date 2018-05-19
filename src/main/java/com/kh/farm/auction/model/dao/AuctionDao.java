@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.kh.farm.auction.model.vo.Auction;
+import com.kh.farm.member.model.vo.Member;
 
 @Repository
 public class AuctionDao {
