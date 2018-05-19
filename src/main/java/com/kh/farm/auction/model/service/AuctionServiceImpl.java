@@ -8,12 +8,16 @@ import com.kh.farm.auction.model.vo.*;
 
 @Service
 public class AuctionServiceImpl implements AuctionService{
-
 	
 
 	@Autowired
 	private AuctionDao auctionDao;
 	@Autowired
-	private SqlSessionTemplate sqlSession;
+	private SqlSessionTemplate sqlSession;/*커넥션*/
+	
+	@Override
+	public int insertAuctionMake(Auction auction) {
+		return auctionDao.insertAuctionMake(auction,sqlSession);
+	}
 
 }

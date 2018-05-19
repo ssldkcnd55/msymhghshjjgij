@@ -41,7 +41,7 @@
                </tr>
                <tr id="hover">
                   <td>1</td>
-                  <td id="QnA_td"><a href="">문의사항_01</a></td>
+                  <td id="QnA_td"><a href="/farm/moveQnA_Detail.do">문의사항_01</a></td>
                   <td>김민선</td>
                   <td>2018-05-06</td>
                </tr>

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans:beans xmlns="http://www.springframework.org/schema/mvc"
+xmlns:websocket="http://www.springframework.org/schema/websocket" 
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:beans="http://www.springframework.org/schema/beans"
 	xmlns:context="http://www.springframework.org/schema/context"
@@ -7,7 +8,10 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
-		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd">
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
+		http://www.springframework.org/schema/websocket http://www.springframework.org/schema/websocket/spring-websocket.xsd">
+
+
 
 	<!-- DispatcherServlet Context: defines this servlet's request-processing 
 		infrastructure -->
@@ -53,6 +57,21 @@
 	<!-- 파일 다운로드 클래스 등록 id 명이 뷰리졸버로 리턴된 뷰이름임 -->
 	<!-- <beans:bean id="filedown" class="com.kh.first.test.controller.FiledownloadView"> 
 		</beans:bean> -->
+
+
+<beans:bean id="ChatHandler" class="com.kh.farm.chat.handler.ChatHandler"/>
+
+<websocket:handlers>
+
+	<websocket:mapping path="chat.do" handler="ChatHandler"/>
+
+	<websocket:handshake-interceptors>
+
+	       <beans:bean class="com.kh.farm.chat.interceptor.ChatInterceptor"/>
+
+	</websocket:handshake-interceptors>
+
+</websocket:handlers>
 
 
 

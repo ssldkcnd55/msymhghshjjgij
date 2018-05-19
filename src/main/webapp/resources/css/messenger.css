@@ -189,9 +189,24 @@
 }
 
 .msg_title_online {
-	text-align: left;
-	font-size: 8pt;
-	color: #dee4db;
+    text-align: left;
+    font-size: 10pt;
+    color: #478318;
+    font-weight: 900;
+}
+
+.msg_alram{
+	position:absolute;
+	    font-size: 10pt;
+    color: black;
+	top: 10px;
+    bottom: 0px;
+    left: 123px;
+    right: 0px;
+    height: 24px;
+    padding-bottom: 5px;
+    border-bottom-width: 1px;
+    margin-bottom: 5px;
 }
 
 .messenger_close {
@@ -310,11 +325,59 @@ msg_middle_left_img tr td {
 	word-break: break-all;
 }
 
-.msg_both
+.msg_date, .msg_date table
 {
-	min-height: 33px;
+	width:304px;
+	margin-bottom: 13px;
+	margin-top: 13px;
+}
+.msg_date td
+{
+	padding:0px;
+	
+}
+.msg_date hr
+{
+	border-left-width: 0px;
+	border-right-width: 0px;
+	border-bottom-width: 0px;
+	border-color:#f2f2f2;
+}
+.msg_date th
+{
+	padding:0px;
+	font-size: 7pt;
+	width:118px;
+	font-weight: 400;
+	color:#bcbcbc;
 }
 
+.msg_both
+{
+	min-height: 34px;
+	
+}
+.msg_leftBox
+{
+	min-height: 34px;
+	display: table-row;
+}
+.msg_rightBox
+{
+	min-height: 34px;
+	width:304px;
+	position: relative;
+}
+.msg_rightBox th{
+	font-size: 10pt;
+	text-align: right;
+	  
+}
+.msg_rightBox tr{
+	height: auto;
+	    display: inline-flex;
+    float: right;
+}
 .msg_my {
 	/* 내 메세지 창 */
 	/* #FAF79D */
@@ -326,7 +389,7 @@ msg_middle_left_img tr td {
 	background-color: #e1f5d5;
 	font-size: 9pt;
 	padding: 5px;
-	margin-right: 20px;
+	/* margin-right: 20px; */
 	margin-bottom: 5px;
 	text-align: left;
 	float: right;
@@ -353,7 +416,14 @@ div.msg_you {
 	margin-left: 58px;
 }
 
-.msg_time {
+.msg_time
+{	
+	width:304px;
+	min-height: 17px;
+	display: inline-block;
+}
+
+.msg_time_you {
 	/* 상대방 시간 */
 	font-size: 8pt;
 	text-align: left;
@@ -365,7 +435,7 @@ div.msg_you {
 .msg_time_my {
 	/* 내 시간 */
 	font-size: 8pt;
-	margin-right: 20px;
+	/* margin-right: 20px; */
 	text-align: right;
 	float: right;
 	width: 250px;

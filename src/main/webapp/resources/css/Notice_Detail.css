@@ -1,0 +1,81 @@
+@charset "UTF-8";
+
+/* Notcie 디테일 */
+.board-wrap {
+	width: 960px;
+	margin: 20px auto 0;
+	position: relative;
+}
+
+.Notice_title {
+	font-size: 20pt;
+	font-weight: bold;
+	padding-left: 15px;
+}
+
+.Notice_full {
+	width: 100%;
+	height: 800px;
+	margin: 20px 0px 40px 0px;
+	border-top: 3px solid #cfc085;
+}
+
+.Notcie_table {
+	width: 100%;
+	height: 40pt;
+	background: #F1F1F1;
+}
+
+.Notcie_table td:nth-child(1) {
+	padding: 15px; width : 80%;
+	font-size: 15pt;
+	width: 80%;
+}
+
+.Notcie_table td:nth-child(2) {
+	width: 10%;
+}
+
+.Notcie_table td:nth-child(3) {
+	width: 10%;
+}
+
+.Notice_modify {
+	display: flex;
+	justify-content: flex-end;
+	padding: 0px 0px 5px 0px ;
+	margin-top:10px;
+}
+
+.Notice_modify button:nth-child(1){
+	color: #fff;
+    padding: 9px 10px;
+    margin: 0 0 0 3px;
+    background-color: #516B82;
+    border: none;
+    outline: none;
+    overflow: visible;
+    width:50px;
+    font-size:11pt;
+    font-weight: bold;
+    
+}
+.Notice_modify button:nth-child(2){
+	color: #fff;
+	background-color: #D7625E;
+	margin-right:15px;
+	border: none;
+    outline: none;
+    overflow: visible;
+    width:50px;
+    font-size:11pt;
+    font-weight: bold;
+}
+
+.Notice_note{
+	padding: 0px 20px 20px 30px;
+	font-size: 14pt;
+	line-height: 2.5;
+	font-family: "Noto Sans KR", "Roboto", "Nanum Gothic", Malgun Gothic,
+		맑은고딕, 굴림, 돋움, Dotum, sans-serif;
+}

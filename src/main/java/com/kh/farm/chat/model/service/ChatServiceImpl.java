@@ -29,4 +29,15 @@ public class ChatServiceImpl implements ChatService {
 
 		return chatDao.selectChatHistory(sqlSession, chat);
 	}
+
+	@Override
+	public int updateChatHistoryAlarm(Chat chat) {
+		return chatDao.updateChatHistoryAlarm(sqlSession,chat);
+	}
+
+	@Override
+	public int insertChatHistory(ChatHistory chatHistory) {
+		return chatDao.insertChatHistory(sqlSession,chatHistory);
+	}
+	
 }

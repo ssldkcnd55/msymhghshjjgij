@@ -18,7 +18,6 @@ public class MoveController {
 	{
 		return "naver/SmartEditor2Skin";
 	}
-	
 	@RequestMapping("moveHome.do")
 	public String moveHomePage() {
 		return "home";
@@ -141,5 +140,38 @@ public class MoveController {
 		model.addAttribute("id", session.getAttribute("loginUser"));
 		return "admin/admin_category";
 	}
+	
+	@RequestMapping("moveAcution_write.do")
+	public String moveAcution_writePage() {
+		return "auction/auctionMake";
+	}
+	
+	@RequestMapping("moveAcutionDetail.do")
+	public String moveAcutionDetailPage() {
+		return "auction/auctionDetail";
+	}
+	
+	@RequestMapping("moveNotice_Detail.do")
+	public String moveNotice_DetailPage() {
+		return "notice/Notice_Detail";
+	}
+	
+	@RequestMapping("moveQnA_Detail.do")
+	public String moveQnA_DetailPage() {
+		return "qna/QnA_Detail";
+	}
+	
+	@RequestMapping("moveQnA_write.do")
+	public String moveQnA_writePage() {
+		return "qna/qnaMake";
+	}
+	
+	@RequestMapping("moveNotcie_write.do")
+	public String moveNotcie_writePage() {
+		return "notice/noticeMake";
+	}
+	
+	
+	
 }
 

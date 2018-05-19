@@ -1,0 +1,25 @@
+@charset "UTF-8";
+
+/* 경매 매인 */
+
+.auction_write{
+	margin-right:14px;
+	border:none;
+	width:82px;
+	height:36px;
+	disply:inline-block;
+	font-size:12pt;
+	font-weight: bold;
+	color:gray;
+	float:right;
+	margin-bottom:10px;
+	background: #e4dcbc;
+	outline: none;
+    overflow: visible;
+    border-radius: 5px;	
+	
+}
+
+.left_box {
+	margin-top:47px;	
+}
