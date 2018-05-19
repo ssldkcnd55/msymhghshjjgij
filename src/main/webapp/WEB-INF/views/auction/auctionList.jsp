@@ -8,7 +8,16 @@
 <title>Farm</title>
 <link href="/farm/resources/css/style.css" rel="stylesheet" type="text/css" />
 <link href="/farm/resources/css/marketList.css" rel="stylesheet" type="text/css" />
+<link href="/farm/resources/css/auctionList.css" rel="stylesheet" type="text/css" />
+
+<script type="text/javascript">
+	function auction_write(){
+		location.href="/farm/moveAcution_write.do";
+	}
+
+</script>
 </head>
+
 <body>
 	<div id="top_line"></div>
 	<div id="wrap">
@@ -19,9 +28,8 @@
 
 		<div id="container">
         	<div class="inner-wrap"> 
-        	<div class="top_margin">
-        	<button>경매 등록</button>
-        	</div>	<!-- 모든 -->
+        	<!-- 경매 등록버튼 -->
+        	<button class="auction_write" onclick="auction_write();">경매 등록</button>
         	<div class="left_box">
         	
         	<!-- 정렬 메뉴바 -->

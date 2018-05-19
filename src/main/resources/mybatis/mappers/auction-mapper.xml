@@ -4,6 +4,27 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="auction">
 
-	
+<!-- <resultMap type="Auction" id="resultAuction">
+		<id column="auction_no" property="auction_no" />
+		<result column="member_id" property="member_id" />
+		<result column="category_no" property="category_no" />
+		<result column="auction_title" property="auction_title" />
+		<result column="auction_note" property="auction_note" />
+		<result column="auction_img" property="auction_img" />
+		<result column="auction_startdate" property="auction_startdate" />
+		<result column="auction_enddate" property="auction_enddate" />
+		<result column="auction_intro" property="auction_intro" />
+		<result column="auction_status" property="auction_status" />
+		<result column="auction_startprice" property="auction_startprice" />
+		<result column="auction_directprice" property="auction_directprice" />
+		
+	</resultMap> -->
+
+	<insert id="insertAuctionMake" parameterType="auction" flushCache="true" useGeneratedKeys="true">
+	<![CDATA[
+		insert into auction values(3,'skc@naver.cim','1',#{auction_title},#{auction_note},null,
+		#{auction_startdate},#{auction_enddate},null,'0',#{auction_startprice},#{auction_directprice})
+	]]>
+	</insert>
 
 </mapper>
