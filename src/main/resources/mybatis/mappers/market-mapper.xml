@@ -5,9 +5,13 @@
 <mapper namespace="market">
 
 
-<select id="marketList" resultType="market">
+<select id="marketList" parameterType="pageNumber" resultType="market">
 	<![CDATA[
-		select * from market
+		select * from 
+			(select rownum rnum, market_no,
+			market_title,market_releasedate,market_note,market_img,
+			member_id from (select * from market order by 
+			market_no desc)) where rnum >= #{startRow} and rnum <= #{endRow}
 	]]>
 </select>
 	

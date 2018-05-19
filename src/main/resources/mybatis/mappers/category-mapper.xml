@@ -3,7 +3,18 @@
 "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="category">
-
+<resultMap type="Category" id="resultCategory">
+	<id column="category_no" property="category_no" />
+	<result column="category_main" property="category_main" />
+	<result column="category_small" property="category_small" />
+	<result column="category_name" property="category_name" />
+</resultMap>
 	
+<select id="selectCategory" parameterType="category" resultType="category">
+	<![CDATA[
+		select * from category
+	]]>
+</select>
+
 
 </mapper>

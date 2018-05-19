@@ -83,75 +83,7 @@
 					</c:forEach>
 				</c:if>
 
-				<!-- profile: 사진  / name: 이름 / time: 시간 / content: 내용 -->
-				<a href="javascript: move_msg_table();"> <!-- 대화창으로 이동 A태그-->
-					<table>
-						<tr>
-							<td class="list_profile" rowspan="2"><img
-								src="/farm/resources/images/logo.jpg"></td>
-							<td class="list_name">상대방1</td>
-							<td class="list_time">오후 2:41</td>
-
-						</tr>
-						<tr>
-							<td colspan="2"><span class="list_content">대화내용 대화내용
-									대화내용 대화내용 대화내용 대화내용 대화내용 대화내용 대화내용 </span></td>
-						</tr>
-					</table>
-				</a>
-
-
-				<!-- 테스트용 반복 코드 -->
-				<a href="javascript: move_msg_table(); "> <!-- 대화창으로 이동 A태그-->
-					<table>
-						<tr>
-							<td class="list_profile" rowspan="2"><img
-								src="/farm/resources/images/send_msg_icon_2.png"></td>
-							<td class="list_name">상대방2</td>
-							<td class="list_time">오후 3:06</td>
-						</tr>
-						<tr>
-							<td colspan="2"><span class="list_content">대화내용</span></a></td>
-						</tr>
-					</table>
-				</a> <a href="javascript: move_msg_table();"> <!-- 대화창으로 이동 A태그-->
-					<table>
-						<tr>
-							<td class="list_profile" rowspan="2"><img
-								src="/farm/resources/images/logo01.png"></td>
-							<td class="list_name">상대방3</td>
-							<td class="list_time">오전 1:11</td>
-						</tr>
-						<tr>
-							<td colspan="2"><span class="list_content">대화내용</span></a></td>
-						</tr>
-					</table>
-				</a> <a href="javascript: move_msg_table();"> <!-- 대화창으로 이동 A태그-->
-					<table>
-						<tr>
-							<td class="list_profile" rowspan="2"><img
-								src="/farm/resources/images/person_icon.png"></td>
-							<td class="list_name">상대방4</td>
-							<td class="list_time">오후 11:10</td>
-						</tr>
-						<tr>
-							<td colspan="2"><span class="list_content">대화내용</span></a></td>
-						</tr>
-					</table>
-				</a> <a href="javascript: move_msg_table();"> <!-- 대화창으로 이동 A태그-->
-					<table>
-						<tr>
-							<td class="list_profile" rowspan="2"><img
-								src="/farm/resources/images/farm.jpg"></td>
-							<td class="list_name">상대방5</td>
-							<td class="list_time">오후 5:11</td>
-						</tr>
-						<tr>
-							<td colspan="2"><span class="list_content">대화내용aaaaaaa</span></a></td>
-						</tr>
-					</table>
-				</a>
-				<!-- 테스트용 반복코드 끝 -->
+				
 			</div>
 			<!-- ///////////////////////////////대화목록 끝 ///////////////////////////////////////-->
 
@@ -217,5 +149,6 @@
 			</table>
 		</div>
 	</div>
+	
 </body>
 </html>

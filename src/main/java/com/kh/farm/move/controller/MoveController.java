@@ -13,7 +13,6 @@ public class MoveController {
 	{
 		return "naver/SmartEditor2Skin";
 	}
-	
 	@RequestMapping("moveHome.do")
 	public String moveHomePage() {
 		return "home";

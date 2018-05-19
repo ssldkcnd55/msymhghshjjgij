@@ -34,7 +34,6 @@ public class ChatContoller {
 		 response.setContentType("application/json; chatset=utf-8;");
 		 ArrayList<ChatHistory> chatHistory = (ArrayList<ChatHistory>)chatService.selectChatHistory(chat);
 		 Member you= memberService.selectMember(chat.getMember_id2());
-		 System.out.println(you);
 		 JSONArray jarr = new JSONArray();
 		 for(ChatHistory c : chatHistory)
 		 {
