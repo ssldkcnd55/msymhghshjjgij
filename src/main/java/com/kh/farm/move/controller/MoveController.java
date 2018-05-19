@@ -1,7 +1,12 @@
 package com.kh.farm.move.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.kh.farm.member.model.vo.Member;
 
 @Controller
 public class MoveController {
@@ -132,7 +137,8 @@ public class MoveController {
 	}
 	
 	@RequestMapping("moveAdminCategory.do")
-	public String moveAdminCategory() {
+	public String moveAdminCategory(HttpSession session, Model model) {
+		model.addAttribute("id", session.getAttribute("loginUser"));
 		return "admin/admin_category";
 	}
 }

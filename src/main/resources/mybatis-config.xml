@@ -10,7 +10,7 @@
 		 <typeAlias type="com.kh.farm.chat.model.vo.ChatHistory" alias="ChatHistory" /> 
 		 <typeAlias type="com.kh.farm.chat.model.vo.ChatList" alias="ChatList" /> 
 		 <typeAlias type="com.kh.farm.job.model.vo.Job" alias="Job" /> 
-		 <typeAlias type="com.kh.farm.market.model.vo.Category" alias="Category" /> 
+		 <typeAlias type="com.kh.farm.market.model.vo.Category" alias="Category2" /> 
 		 <typeAlias type="com.kh.farm.market.model.vo.Daily" alias="Daily" /> 
 		 <typeAlias type="com.kh.farm.market.model.vo.Market" alias="Market" /> 
 		 <typeAlias type="com.kh.farm.market.model.vo.Reply" alias="Reply" /> 
@@ -23,6 +23,7 @@
 		 <typeAlias type="com.kh.farm.qna.model.vo.MainQna" alias="MainQna" /> 
 		 <typeAlias type="com.kh.farm.qna.model.vo.SellQna" alias="SellQna" /> 
 		 <typeAlias type="com.kh.farm.shoppingBasket.model.vo.ShoppingBasket" alias="ShoppingBasket" /> 
+		 <typeAlias type="com.kh.farm.category.model.vo.Category" alias="Category" /> 
 	
 
 	</typeAliases>
@@ -37,5 +38,6 @@
 		<mapper resource="mybatis/mappers/payment-mapper.xml" />
 		<mapper resource="mybatis/mappers/qna-mapper.xml" />
 		<mapper resource="mybatis/mappers/shoppingBasket-mapper.xml" />
+		<mapper resource="mybatis/mappers/category-mapper.xml" />
 	</mappers>
 </configuration>
