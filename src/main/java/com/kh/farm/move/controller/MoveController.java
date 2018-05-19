@@ -145,5 +145,27 @@ public class MoveController {
 		return "auction/auctionDetail";
 	}
 	
+	@RequestMapping("moveNotice_Detail.do")
+	public String moveNotice_DetailPage() {
+		return "notice/Notice_Detail";
+	}
+	
+	@RequestMapping("moveQnA_Detail.do")
+	public String moveQnA_DetailPage() {
+		return "qna/QnA_Detail";
+	}
+	
+	@RequestMapping("moveQnA_write.do")
+	public String moveQnA_writePage() {
+		return "qna/qnaMake";
+	}
+	
+	@RequestMapping("moveNotcie_write.do")
+	public String moveNotcie_writePage() {
+		return "notice/noticeMake";
+	}
+	
+	
+	
 }
 
