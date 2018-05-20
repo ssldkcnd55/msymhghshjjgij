@@ -7,6 +7,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script type="text/javascript" src="/farm/resources/js/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="/farm/resources/js/messenger.js"></script>
 <script type="text/javascript" src="/farm/resources/js/msg_box.js"></script>
 <link href="/farm/resources/css/messenger.css" rel="stylesheet" type="text/css" />
 </head>

@@ -4,6 +4,17 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="job">
 
+	<select id="jobListCount" resultType="int">
+	<![CDATA[
+		select count(*) from job
+	]]>
+	</select>
 	
+	<select id="jobList" parameterType="PageNumber" resultType="Job">
+	<![CDATA[
+		select * from (select rownum rnum, job_no, job_status, job_title, member_id, job_date from job
+		order by job_no desc) where rnum >=#{startRow} and rnum<=#{endRow} 
+	]]>
+	</select>
 
 </mapper>

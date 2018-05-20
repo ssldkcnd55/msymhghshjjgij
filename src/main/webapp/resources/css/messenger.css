@@ -189,9 +189,24 @@
 }
 
 .msg_title_online {
-	text-align: left;
-	font-size: 8pt;
-	color: #dee4db;
+    text-align: left;
+    font-size: 10pt;
+    color: #478318;
+    font-weight: 900;
+}
+
+.msg_alram{
+	position:absolute;
+	    font-size: 10pt;
+    color: black;
+	top: 10px;
+    bottom: 0px;
+    left: 123px;
+    right: 0px;
+    height: 24px;
+    padding-bottom: 5px;
+    border-bottom-width: 1px;
+    margin-bottom: 5px;
 }
 
 .messenger_close {
@@ -290,6 +305,7 @@
 	margin-left: 60px;
 }
 
+
 .msg_middle_left_img img {
 	/* 상대방 프로필사진 */
 	width: 44px;
@@ -310,11 +326,65 @@ msg_middle_left_img tr td {
 	word-break: break-all;
 }
 
-.msg_both
+.msg_date, .msg_date table
 {
-	min-height: 33px;
+	width:304px;
+	margin-bottom: 13px;
+	margin-top: 13px;
+}
+.msg_date td
+{
+	padding:0px;
+	
+}
+.msg_date hr
+{
+	border-left-width: 0px;
+	border-right-width: 0px;
+	border-bottom-width: 0px;
+	border-color:#f2f2f2;
+}
+.msg_date th
+{
+	padding:0px;
+	font-size: 7pt;
+	width:118px;
+	font-weight: 400;
+	color:#bcbcbc;
 }
 
+.msg_both
+{
+	min-height: 34px;
+	
+}
+.msg_leftBox
+{
+	min-height: 34px;
+	display: table-row;
+}
+.msg_rightBox
+{
+	min-height: 34px;
+	width:304px;
+	position: relative;
+}
+.msg_rightBox th{
+	position: relative;
+	  
+}
+.msg_rightBox th div
+{
+	position: absolute;
+	font-size: 8pt;
+	bottom: 5px;
+    right: 4px;
+}
+.msg_rightBox tr{
+	height: auto;
+	    display: inline-flex;
+    float: right;
+}
 .msg_my {
 	/* 내 메세지 창 */
 	/* #FAF79D */
@@ -326,7 +396,7 @@ msg_middle_left_img tr td {
 	background-color: #e1f5d5;
 	font-size: 9pt;
 	padding: 5px;
-	margin-right: 20px;
+	/* margin-right: 20px; */
 	margin-bottom: 5px;
 	text-align: left;
 	float: right;
@@ -353,7 +423,14 @@ div.msg_you {
 	margin-left: 58px;
 }
 
-.msg_time {
+.msg_time
+{	
+	width:304px;
+	min-height: 17px;
+	display: inline-block;
+}
+
+.msg_time_you {
 	/* 상대방 시간 */
 	font-size: 8pt;
 	text-align: left;
@@ -365,7 +442,7 @@ div.msg_you {
 .msg_time_my {
 	/* 내 시간 */
 	font-size: 8pt;
-	margin-right: 20px;
+	/* margin-right: 20px; */
 	text-align: right;
 	float: right;
 	width: 250px;
@@ -433,7 +510,18 @@ div.msg_you {
 	text-align: center;
 	text-decoration: none;
 }
-
+.list_alarm{
+	font-size: 8pt;
+    font-weight: 100;
+	    float: right;
+    margin-right: 11px;
+    text-align: center;
+    width: 16px;
+    height: 16px;
+    background-color: #98c779;
+    border-radius: 8px;
+    color: #fdfef6;
+}
 .chat_list_table a {
 	text-decoration: none;
 	color: black;
@@ -524,10 +612,11 @@ div.msg_you {
 }
 
 .searchedMember {
-	width: auto;
+	width: 340px;
 	height: 54px;
-	padding: 5px 10px 0px 10px;
+	padding: 3px 10px 3px 10px;
 }
+
 
 .searchedMember img {
 	width: 44px;
@@ -536,18 +625,40 @@ div.msg_you {
 	float: left;
 	border: 1px solid #f5f7e4;
 }
-
-.searchedMember span {
-	float: left;
-	line-height: 54px;
-	font-size: 14px;
-	margin-left: 16px;
+.searchMemberId{
+	  float: left;
+    font-size: 14px;
+    margin-left: 16px;
+    width: 160px;
+    height: 18px;
+    overflow: hidden;
 }
+.searchMemberName{
+	  float: left;
+    font-size: 13px;
+    font-weight:900;
+    margin-left: 16px;
+    width: 160px;
+    height: 18px;
+    overflow: hidden;
+}
+.searchMemberNametd{
+	padding-bottom: 0px;
+    padding-top: 5px;
+}
+.searchMemberIdtd{
+	    padding-top: 0px;
+    padding-bottom: 5px;
+}
+table.searchedMember:hover{
+	background-color: #e1f5d5;
+}
+
 
 .searchedMember input {
 	float: right;
 	width: 76px;
-	margin: 14px 5px 0px 0px;
+	margin: 0px 5px 0px 0px;
 	border-radius: 5px;
 	border: 0px;
 	height: 26px;

@@ -15,15 +15,14 @@ public class ChatList implements java.io.Serializable{
 	private String member_id;//상대방 아이디
 	private String member_name;//상대방 이름
 	private String member_img;//상대방 프로필 사진
-	
 	private String chat_history_contents;//채팅 내용
 	private String chat_history_date;//채팅 작성일
-	private String chat_history_alarm;//채팅 확인 여부
+	private int chat_history_alarm;//채팅 확인 여부
 	
 	public ChatList() {}
 
 	public ChatList(int chat_no, String member_id, String member_name, String member_img, String chat_history_contents,
-			String chat_history_date, String chat_history_alarm) {
+			String chat_history_date, int chat_history_alarm) {
 		super();
 		this.chat_no = chat_no;
 		this.member_id = member_id;
@@ -89,13 +88,15 @@ public class ChatList implements java.io.Serializable{
 		this.chat_history_date = chat_history_date;
 	}
 
-	public String getChat_history_alarm() {
+	public int getChat_history_alarm() {
 		return chat_history_alarm;
 	}
 
-	public void setChat_history_alarm(String chat_history_alarm) {
+	public void setChat_history_alarm(int chat_history_alarm) {
 		this.chat_history_alarm = chat_history_alarm;
 	}
+
+	
 
 
 }

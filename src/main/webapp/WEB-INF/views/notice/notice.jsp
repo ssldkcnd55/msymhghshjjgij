@@ -41,7 +41,7 @@
                </tr>
                <tr id="hover">
                   <td>1</td>
-                  <td id="Notice_td"><a href="">공지사항_01</a></td>
+                  <td id="Notice_td"><a href="/farm/moveNotice_Detail.do">공지사항_01</a></td>
                   <td>김민선</td>
                   <td>2018-05-08</td>
                </tr>

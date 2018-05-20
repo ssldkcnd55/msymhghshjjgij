@@ -15,5 +15,11 @@
 	]]>
 </select>
 	
+	<select id="marketInfo" parameterType="int" resultType="market">
+	<![CDATA[
+		select * from market where market_no =#{market_no}
+	]]>
+	
+	</select>
 
 </mapper>
