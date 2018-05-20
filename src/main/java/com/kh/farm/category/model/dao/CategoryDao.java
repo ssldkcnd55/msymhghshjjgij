@@ -14,4 +14,19 @@ public class CategoryDao {
 		
 		return sqlSession.selectList("selectCategory");
 	}
+
+	public List<Category> selectCategory_main(SqlSessionTemplate sqlSession) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList("selectCategory_main");
+	}
+
+	public List<Category> selectCategory_small(SqlSessionTemplate sqlSession) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList("selectCategory_small");
+	}
+
+	public List<Category> selectCategory_name(SqlSessionTemplate sqlSession) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList("selectCategory");
+	}
 }
