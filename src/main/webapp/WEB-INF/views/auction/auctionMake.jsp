@@ -11,6 +11,8 @@
 <meta charset="UTF-8">
 <title>Farm</title>
 <script type="text/javascript">
+
+	/* 경매등록 버튼 */
 	function auctionDetail(){
 		location.href="/farm/moveAcutionDetail.do";
 	}
@@ -43,7 +45,15 @@
 									 name="category_no" value="카테고리검색" class="input_text_box">
 									<br></td>
 							</tr>
-							<tr class="tr1">
+								<tr class="tr1">
+									<td class="td1">
+										<p class="p">부제목</p>
+									
+									</td>
+									<td class="td2" colspan="3"><input type="text"
+									name="auction_intro"></td>
+							</tr>
+								<tr class="tr1">
 								<td class="td1">
 
 									<p class="p">경매시작가</p>

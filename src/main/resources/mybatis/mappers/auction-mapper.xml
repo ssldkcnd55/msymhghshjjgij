@@ -26,5 +26,17 @@
 		#{auction_startdate},#{auction_enddate},null,'0',#{auction_startprice},#{auction_directprice})
 	]]>
 	</insert>
+	
+	<select id="selectAuctionList" parameterType="auction" flushCache="true" resultType="auction">
+	<![CDATA[
+		select * from auction
+	]]>
+	</select>
+	
+	<select id="selectAuctionDetail" parameterType="auction" flushCache="true" resultType="auction">
+	<![CDATA[
+		select * from auction where auction_no=#{auction_no}
+	]]>
+	</select>
 
 </mapper>

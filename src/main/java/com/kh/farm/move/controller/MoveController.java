@@ -38,14 +38,14 @@ public class MoveController {
 	public String moveMarketMake() {
 		return "market/marketMake";
 	}
-	@RequestMapping("moveAuction.do")
+	/*@RequestMapping("moveAuction.do")
 	public String moveAuction() {
 		return "auction/auctionList";
-	}
-	@RequestMapping("moveAuctionDetail.do")
+	}*/
+/*	@RequestMapping("moveAuctionDetail.do")
 	public String moveAuctionDetail() {
 		return "auction/auctionDetail";
-	}
+	}*/
 	@RequestMapping("moveAuctionMake.do")
 	public String moveAuctionMake() {
 		return "auction/auctionMake";
