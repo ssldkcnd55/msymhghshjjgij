@@ -4,7 +4,7 @@
 
 /* 메신져 자바스크립트 파일 */
 
-var ws ; 
+var ws =null; 
 var beforeName = null;
 var beforeTime = null;
 var beforeDate = null;
@@ -14,47 +14,172 @@ $(function() {
 	/* 검색 엔터키 연동 */
 	$('.search_member input').keydown(function(key) {
 		if (key.keyCode == 13) {
-			searchMember();
+		searchMember();
 		}
 	});
 
 
 });
 
+
+function insertChat(my_id,your_id)
+{//대화상대 추가
+	
+	if(my_id != your_id){
+	$.ajax({
+	url : "insertChat.do",
+	type : "post",
+	dataType :"json",
+	data:{ 
+		'my_id':my_id,
+		'your_id':your_id
+		},
+	success : function(resultData) {
+		var objStr = JSON.stringify(resultData);
+		var c = JSON.parse(objStr);
+		$('.chat_list_table').css('visibility', 'visible');
+		$('.chat_list_table').css('z-index', 2);
+		$('.search_list').css('visibility', 'hidden');
+		$('.search_list').css('z-index', 1);
+		$('.msg_top_div img').css('visibility', 'hidden');
+
+		// 검색창 가리기
+		$('.chat_list_table').css('visibility', 'vidible');
+		$('.chat_list_table').css('z-index', 2);
+		// 검색리스트 가리기
+		$('.search_member').css('visibility', 'visible');
+		$('.search_member').css('z-index', 2);
+		// 대화창 띄우기
+		$('.msg_table_middle').css('visibility', 'hidden');
+		$('.msg_table_middle').css('z-index', 1);
+		$('.msg_top_div').css('visibility', 'visible');
+		$('.msg_top_div').css('z-index', 1);
+		$('.msg_top_table').css('visibility', 'hidden');
+		$('.msg_top_table').css('z-index', 2);
+		// 메세지 입력칸 가리기
+		$('.msg_bottom_table').css('visibility', 'hidden');
+		move_msg_table(c.chat_no,my_id,your_id);
+		
+	},
+	error : function(request, status, errorData) {
+		alert("error code : " + request.status + "\n"
+				+ "message : " + request.responseText + "\n"
+				+ "error : " + errorData);
+	}
+		
+	});
+	}
+	else if (my_id==your_id)
+		{
+		$('.search_list').html('');
+		$('.search_member input').val('');
+		var fail_msg = " <div class='searchNotFoundID'>본인과는 대화를 할 수 없습니다</div "
+				
+		$('.search_list').html(fail_msg);
+		}
+	
+	
+}
+
 /* 대화추가 검색 메서드 */
 function searchMember() {
-
-	/* 대화목록 가리고 검색결과창 띄우기 */
-	$('.search_list').css('visibility', 'visible');
-	$('.search_list').css('z-index', 2);
-	$('.chat_list_table').css('visibility', 'hidden');
-	$('.chat_list_table').css('z-index', 1);
-	$('.msg_top_div img').css('visibility', 'visible');
-
-	var input_value = $('.search_member input').val();
-	$('.search_member input').val('');
-
-	if (input_value.length <= 0) {
-		/* 검색결과 있을 때 여기 실행 */
-		var searchedMember = "<div class='searchedMember'><img src='/farm/resources/images/logo01.png'><span>회원이름</span><input type='button' value='1:1 채팅'></div>";
-		searchedMember += "<div class='searchedMember'><img src='/farm/resources/images/farm.jpg'><span>회원이름2</span><input type='button' value='1:1 채팅'></div>";
-		searchedMember += "<div class='searchedMember'><img src='/farm/resources/images/person_icon.png'><span>회원이름3</span><input type='button' value='1:1 채팅'></div>";
-		searchedMember += "<div class='searchedMember'><img src='/farm/resources/images/messenger_icon_orange.png'><span>회원이름4</span><input type='button' value='1:1 채팅'></div>";
-
-		$('.search_list').html(searchedMember);
-	} else {
-		/* 검색결과 없을 때 여기 실행 */
-		var fail_msg = " <div class='searchNotFoundID'> '"
-				+ input_value
-				+ "'를<br> 찾을 수 없습니다.</div>"
-				+ " <div class='searchNotFoundMsg'>입력하신 아이디, 이름으로 등록된 회원이 없습니다.</div> "
-		$('.search_list').html(fail_msg);
-	}
+	
+	
+	$.ajax({
+		url : "searchChatMember.do",
+		type : "post",
+		dataType :"json",
+		data:{ sv:$('.search_member>input').val() },
+		success : function(resultData) {
+			var objStr = JSON.stringify(resultData);
+			var c = JSON.parse(objStr);
+			$('.search_list').html('');
+			
+		if	(c.ml.length>0) {
+			$('.search_member input').val('');
+			for(var i in c.ml)
+				{
+				
+				var searchedMember ="<table class='searchedMember'><tr><td rowspan='2'><img src='/farm/resources/upload/memberUpload/"+decodeURIComponent((c.ml[i].member_img).replace(/\+/g,'%20'))+"'></td><td class='searchMemberNametd'><span class='searchMemberName'>"+decodeURIComponent((c.ml[i].member_name).replace(/\+/g,'%20'))+"</span></td><td rowspan='2'><input type='button' onclick='insertChat(\""+$('#login_id').val()+"\",\""+c.ml[i].member_id+"\");' value='1:1 채팅'></td></tr><tr><td class='searchMemberIdtd'><span class='searchMemberId'>"+c.ml[i].member_id+"</span></td></tr></table>"
+				
+				$('.search_list').append(searchedMember);
+				}
+				
+		}	
+		else{
+			/* 검색결과 없을 때 여기 실행 */
+			var input_value = $('.search_member input').val();
+			$('.search_member input').val('');
+			var fail_msg = " <div class='searchNotFoundID'> '"
+					+ input_value
+					+ "'를<br> 찾을 수 없습니다.</div>"
+					+ " <div class='searchNotFoundMsg'>입력하신 아이디, 이름으로 등록된 회원이 없습니다.</div> "
+			$('.search_list').html(fail_msg);
+		}
+			
+		
+		/* 대화목록 가리고 검색결과창 띄우기 */
+		$('.search_list').css('visibility', 'visible');
+		$('.search_list').css('z-index', 2);
+		$('.chat_list_table').css('visibility', 'hidden');
+		$('.chat_list_table').css('z-index', 1);
+		$('.msg_top_div img').css('visibility', 'visible');
+		
+		
+		},
+		error : function(request, status, errorData) {
+			alert("error code : " + request.status + "\n"
+					+ "message : " + request.responseText + "\n"
+					+ "error : " + errorData);
+		}
+	});
+		
 
 }
 
 /* 검색결과 가리고 대화목록 띄우기 */
 function back_chat_list() {
+	
+	$.ajax({
+		url : "getChatList.do",
+		type : "post",
+		dataType :"json",
+		success : function(resultData) {
+			//window.location.reload();
+			var objStr = JSON.stringify(resultData);
+			var c = JSON.parse(objStr);
+			$('.chat_list_table').html('');
+			
+		
+			if(c.cl.length>0){ 
+			for(var i in c.cl)
+			{	
+				var con;
+				con = '<a href=\'javascript: move_msg_table('+c.cl[i].chat_no+',"'+$('#login_id').val() +'","'+c.cl[i].member_id+'" );\'>';
+				con += '<table><tr><td class="list_profile" rowspan="2"><img src="/farm/resources/upload/memberUpload/'+decodeURIComponent((c.cl[i].member_img).replace(/\+/g,'%20'))+'"></td>';
+				con += '<td class="list_name">'+decodeURIComponent((c.cl[i].member_name).replace(/\+/g,'%20'))+'</td>';
+				con += '<td class="list_time">'+ trans_time(c.cl[i].date.slice(-5)) +'</td></tr>';
+				con += '<tr><td colspan="2"><span class="list_content">'+decodeURIComponent((c.cl[i].contents).replace(/\+/g,'%20'))+'</span>';
+				if(c.cl[i].alarm>0){
+				con +=	'<span class="list_alarm">'+c.cl[i].alarm+'</span>';
+				}
+				con +=  '</td></tr></table></a>';
+				
+				$('.chat_list_table').append(con);
+			}
+			}
+			else {
+				$('.chat_list_table').append('<div class="searchNotFoundID">진행중인 대화가 없습니다.</div><div class="searchNotFoundMsg">아이디 또는 이름을 검색하여 대화를 시작하세요.</div></div>');
+			}
+		},
+		error : function(request, status, errorData) {
+			alert("error code : " + request.status + "\n"
+					+ "message : " + request.responseText + "\n"
+					+ "error : " + errorData);
+		}
+	});
+		
+	
 	$('.chat_list_table').css('visibility', 'visible');
 	$('.chat_list_table').css('z-index', 2);
 	$('.search_list').css('visibility', 'hidden');
@@ -78,7 +203,10 @@ function back_chat_list() {
 	$('.msg_bottom_table').css('visibility', 'hidden');
 	
 	//webSocket닫기
+	if(ws != null){
 	ws.close();
+	ws=null;
+	}
 }
 
 function trans_time(time)
@@ -118,8 +246,8 @@ function move_msg_table(chat_no, my_id, your_id) {
 					'member_id1' : my_id,
 					'member_id2' : your_id
 				},
-				success : function(c) {
-					var objStr = JSON.stringify(c);
+				success : function(resultData) {
+					var objStr = JSON.stringify(resultData);
 					var c = JSON.parse(objStr);
 					
 					$('.msg_table_middle').html('');
@@ -128,7 +256,7 @@ function move_msg_table(chat_no, my_id, your_id) {
 							"src",
 							"/farm/resources/upload/memberUpload/"
 									+ decodeURIComponent((c.img).replace(/\+/g,
-											'%20')));
+											'%20'))  );
 					$('.msg_title_name').text(
 							decodeURIComponent((c.name).replace(/\+/g, '%20'))
 									+ '(' + your_id + ')');
@@ -196,7 +324,7 @@ function move_msg_table(chat_no, my_id, your_id) {
 								if (c.ht[i].alarm =='N')
 								{//안읽음
 									$('.msg_table_middle').append(
-											'<table class="msg_rightBox"><tr><th>1</th><td class="msg_my">'
+											'<table class="msg_rightBox"><tr><th><div>1</div></th><td class="msg_my">'
 													+ decodeURIComponent((c.ht[i].contents)
 															.replace(/\+/g,
 																	'%20'))
@@ -278,6 +406,8 @@ function move_msg_table(chat_no, my_id, your_id) {
 					}
 
 					// //////////////////
+					$('.search_list').css('visibility', 'hidden');
+					$('.search_list').css('z-index', 1);
 					// 검색창 가리기
 					$('.chat_list_table').css('visibility', 'hidden');
 					$('.chat_list_table').css('z-index', 1);
@@ -293,6 +423,8 @@ function move_msg_table(chat_no, my_id, your_id) {
 					$('.msg_top_table').css('z-index', 1);
 					// 메시지 입련칸 띄우기
 					$('.msg_bottom_table').css('visibility', 'visible');
+					
+					
 					/////////////////////////////////////
 					/////////채팅방생성////////////////
 					//chat_no, my_id, your_id
@@ -405,7 +537,7 @@ function move_msg_table(chat_no, my_id, your_id) {
 		    		else if(msgCode=='mex')
 		    			{
 		    			$('.msg_title_online').text('미접속');
-		    			$('.msg_table_middle').append('<table class="msg_rightBox"><tr><th>1</th><td class="msg_my">'+msgContents+'</td></tr></table>');
+		    			$('.msg_table_middle').append('<table class="msg_rightBox"><tr><th><div>1</div></th><td class="msg_my">'+msgContents+'</td></tr></table>');
 		    			}
 
 			    		$('.msg_table_middle').append('<div class="msg_time"><div class="msg_time_my">'+msg_time+'</div></div>');

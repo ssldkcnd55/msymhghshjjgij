@@ -98,6 +98,7 @@ public class MemberController {
 			//로그인 멤버 채팅 정보 가져오기
 			ArrayList<ChatList> chatList = (ArrayList<ChatList>)chatService.selectChatList(returnMember);
 			session.setAttribute("chatList", chatList);
+			System.out.println(returnMember.getMember_name()+chatList);
 			//System.out.println(chatList);
 			viewName = "home";
 		}catch(Exception e) {

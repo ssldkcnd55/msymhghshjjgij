@@ -39,5 +39,23 @@ public class ChatServiceImpl implements ChatService {
 	public int insertChatHistory(ChatHistory chatHistory) {
 		return chatDao.insertChatHistory(sqlSession,chatHistory);
 	}
+
+	@Override
+	public List<Member> selectChatMember(String sv) {
+		
+		return chatDao.selectChatMember(sqlSession,sv);
+	}
+
+	@Override
+	public int selectChatNo(Chat chat) {
+		
+		return chatDao.selectChatNo(sqlSession,chat);
+	}
+
+	@Override
+	public int insertChat(Chat chat) {
+		
+		return chatDao.insertChat(sqlSession,chat);
+	}
 	
 }
