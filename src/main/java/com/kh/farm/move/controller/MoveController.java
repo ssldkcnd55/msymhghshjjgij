@@ -136,8 +136,8 @@ public class MoveController {
 	}
 	
 	@RequestMapping("moveAdminCategory.do")
-	public String moveAdminCategory(HttpSession session, Model model) {
-		model.addAttribute("id", session.getAttribute("loginUser"));
+	public String moveAdminCategory() {
+		//model.addAttribute("id", session.getAttribute("loginUser"));
 		return "admin/admin_category";
 	}
 	
