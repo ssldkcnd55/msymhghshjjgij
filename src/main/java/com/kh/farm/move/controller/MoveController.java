@@ -1,7 +1,12 @@
 package com.kh.farm.move.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.kh.farm.member.model.vo.Member;
 
 @Controller
 public class MoveController {
@@ -131,8 +136,42 @@ public class MoveController {
 	}
 	
 	@RequestMapping("moveAdminCategory.do")
-	public String moveAdminCategory() {
+	public String moveAdminCategory(HttpSession session, Model model) {
+		model.addAttribute("id", session.getAttribute("loginUser"));
 		return "admin/admin_category";
 	}
+	
+	@RequestMapping("moveAcution_write.do")
+	public String moveAcution_writePage() {
+		return "auction/auctionMake";
+	}
+	
+	@RequestMapping("moveAcutionDetail.do")
+	public String moveAcutionDetailPage() {
+		return "auction/auctionDetail";
+	}
+	
+	@RequestMapping("moveNotice_Detail.do")
+	public String moveNotice_DetailPage() {
+		return "notice/Notice_Detail";
+	}
+	
+	@RequestMapping("moveQnA_Detail.do")
+	public String moveQnA_DetailPage() {
+		return "qna/QnA_Detail";
+	}
+	
+	@RequestMapping("moveQnA_write.do")
+	public String moveQnA_writePage() {
+		return "qna/qnaMake";
+	}
+	
+	@RequestMapping("moveNotcie_write.do")
+	public String moveNotcie_writePage() {
+		return "notice/noticeMake";
+	}
+	
+	
+	
 }
 

@@ -1,9 +1,126 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
    pageEncoding="UTF-8"%>
+   <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+   <%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 <head>
 <script src="/farm/resources/js/jquery-3.3.1.min.js"></script>
+<script>
+$(function(){
+	$.ajax({
+		url:"jobList.do",
+		type:"post",
+		dataType:"json",
+		success: function(data){
+			var jsonStr = JSON.stringify(data);
+			var json = JSON.parse(jsonStr);
+			var values="<tr><th width='10%'>번호</th><th width='12%'>상태</th><th width='45%'>제목</th><th width='13%'>작성자</th><th width='20%'>날짜</th></tr>";
+			
+			for(var i in json.list){
+				values += "<tr id='hover'><td>"+json.list[i].job_no+"</td>";
+				if(json.list[i].job_status=="1"){
+					values+="<td><span id='job_table_span_find'><strong>구인중</strong></span></td>";
+				}else{
+					values+="<td><span id='job_table_span_finded'>마감</span></td>";
+				}
+				
+				values+="<td id='job_td'><a href='moveJobDetail.do'>"+json.list[i].job_title
+				+"</a></td><td>"+json.list[i].member_id+"</td><td>"+json.list[i].job_date+"</td></tr>";
+			}
+			$(".job_table").html(values);
+			
+			var startPage= json.list[0].startPage;
+			var endPage = json.list[0].endPage;
+			var maxPage = json.list[0].maxPage;
+			var currentPage = json.list[0].currentPage;
+			
+			var values1 ="";
+			if(startPage>5){
+				values1+= "<a href='javascript:jobPage("+(startPage-1)+")'>&laquo;</a>" 
+			}else{
+				values1+="<a>&laquo;</a>";	
+			}
+			for(var i=startPage;i<=endPage;i++  ){
+				if(i==currentPage){
+					values1+= "<a class='active'>"+i+"</a>";
+				}else{
+					values1+= "<a href='javascript:jobPage("+i+");'>"+i+"</a>";
+				}
+			}
+			if(endPage<maxPage){
+				values1+="<a href='javascript:jobPage("+(endPage+1)+")'>&raquo;</a>";
+				
+			}else{
+				values1+="<a>&raquo;</a>";
+			}
+			$(".pagination").html(values1);
+		},error: function(request,status,errorData){
+            alert("error code : " + request.status + "\nmessage" + 
+                    request.responseText + "\nerror" + errorData);
+           }
+		
+	});
+	
+	
+});
+function jobPage(page){
+	$.ajax({
+		url:"jobList.do",
+		type:"post",
+		data:{page:page},
+		dataType:"json",
+		success: function(data){
+			var jsonStr = JSON.stringify(data);
+			var json = JSON.parse(jsonStr);
+			var values="<tr><th width='10%'>번호</th><th width='12%'>상태</th><th width='45%'>제목</th><th width='13%'>작성자</th><th width='20%'>날짜</th></tr>";
+			
+			for(var i in json.list){
+				values += "<tr id='hover'><td>"+json.list[i].job_no+"</td>";
+				if(json.list[i].job_status=="1"){
+					values+="<td><span id='job_table_span_find'><strong>구인중</strong></span></td>";
+				}else{
+					values+="<td><span id='job_table_span_finded'>마감</span></td>";
+				}
+				
+				values+="<td id='job_td'><a href='moveJobDetail.do'>"+json.list[i].job_title
+				+"</a></td><td>"+json.list[i].member_id+"</td><td>"+json.list[i].job_date+"</td></tr>";
+			}
+			$(".job_table").html(values);
+			
+			var startPage= json.list[0].startPage;
+			var endPage = json.list[0].endPage;
+			var maxPage = json.list[0].maxPage;
+			var currentPage = json.list[0].currentPage;
+			
+			var values1 ="";
+			if(startPage>5){
+				values1+= "<a href='javascript:jobPage("+(startPage-1)+")'>&laquo;</a>" 
+			}else{
+				values1+="<a>&laquo;</a>";	
+			}
+			for(var i=startPage;i<=endPage;i++  ){
+				if(i==currentPage){
+					values1+= "<a class='active'>"+i+"</a>";
+				}else{
+					values1+= "<a href='javascript:jobPage("+i+");'>"+i+"</a>";
+				}
+			}
+			if(endPage<maxPage){
+				values1+="<a href='javascript:jobPage("+(endPage+1)+")'>&raquo;</a>";
+				
+			}else{
+				values1+="<a>&raquo;</a>";
+			}
+			$(".pagination").html(values1);
+		},error: function(request,status,errorData){
+            alert("error code : " + request.status + "\nmessage" + 
+                    request.responseText + "\nerror" + errorData);
+           }
+		
+	});
+}
+</script>
 <!-- Job.css -->
 <link rel="stylesheet" type="text/css" href="/farm/resources/css/style.css" />
 <link rel="stylesheet" type="text/css" href="/farm/resources/css/job.css" />
@@ -145,7 +262,7 @@
             <!--  -->
             <div id="table_div">
                <table class="job_table">
-                  <tr>
+                 <!--  <tr>
                      <th width="10%">번호</th>
                      <th width="12%">상태</th>
                      <th width="45%">제목</th>
@@ -221,7 +338,7 @@
                      <td id="job_td"><a href="moveJobDetail.do">딸기농장_10</a></td>
                      <td>김민선</td>
                      <td>2018-05-08</td>
-                  </tr>
+                  </tr> -->
                </table>
             </div>
 
@@ -229,9 +346,9 @@
             <div id="bottom">
                <!-- 페이징 처리 -->
                <div class="pagination">
-                  <a href="#">&laquo;</a> <a href="#">1</a> <a href="#"
+                 <!--  <a href="#">&laquo;</a> <a href="#">1</a> <a href="#"
                      class="active">2</a> <a href="#">3</a> <a href="#">4</a> <a
-                     href="#">5</a> <a href="#">&raquo;</a>
+                     href="#">5</a> <a href="#">&raquo;</a> -->
                </div>
 
                <!-- 검색 -->

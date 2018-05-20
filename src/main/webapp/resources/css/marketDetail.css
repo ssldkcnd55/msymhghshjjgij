@@ -1,4 +1,10 @@
 @charset "UTF-8";
+.test{
+	width: 900px;
+	text-align: left;
+	padding-left: 15px;
+	border: 1px soljd #bdbdbd;
+}
 .tabs{
 	 float:left;
 	 list-style: none;

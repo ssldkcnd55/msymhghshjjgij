@@ -19,4 +19,9 @@ public class MarketServiceImpl implements MarketService{
 	public ArrayList<Market> marketList(int page) {
 		return marketDao.marketList(page,sqlSession);
 	}
+	@Override
+	public Market selectMarketInfo(int market_no) {
+		// TODO Auto-generated method stub
+		return marketDao.marketInfo(sqlSession,market_no);
+	}
 }

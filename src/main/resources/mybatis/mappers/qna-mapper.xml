@@ -4,6 +4,17 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="qna">
 
+<select id="qnaList" parameterType="PageNumber" resultType="Market_qna">
+	<![CDATA[
+	select * from (select rownum rnum, market_qna_no, market_qna_title, member_id,market_qna_question_date from market_qna 
+	where market_no=#{market_no} order by market_qna_no desc) where rnum >=#{startRow} and rnum <=#{endRow}
 	
+	]]>
 
+</select>
+	
+	<select id="qnaCount" parameterType="int" resultType="int">
+		select count(*) from market_qna where market_no = #{market_no}
+	</select>
+	
 </mapper>

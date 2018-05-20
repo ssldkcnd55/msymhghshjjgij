@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+	<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+	
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,6 +12,118 @@
 <link href="/farm/resources/css/marketDetail.css" rel="stylesheet" type="text/css" />
 <script src="/farm/resources/js/jquery-3.3.1.min.js"></script>
 <script type="text/javascript" src="/farm/resources/js/tabMove.js"></script>
+<script>
+/* $(function(){
+	$.ajax({
+		url:"qnaList.do",
+		type:"post",
+		data:{market_no:${market.market_no}},
+		dataType: "JSON",
+		success: function(data){
+			console.log(data);
+			var objStr = JSON.stringify(data);
+			var jsonObj = JSON.parse(objStr);
+			
+			var outValues = "<tr><th width='12%'>번호</th><th width='50%'>제목</th><th width='13%'>작성자</th><th width='15%'>날짜</th></tr>";
+			
+			for(var i in jsonObj.list){
+				outValues += "<tr id='hover'><td>"+jsonObj.list[i].market_qna_no+"</td>"
+				+"<td id='QnA_td'><a href='#'>"+jsonObj.list[i].market_qna_title+"</a></td>"
+				+"<td>"+jsonObj.list[i].member_id+"</td><td>"+jsonObj.list[i].market_qna_question_date+"</td></tr>";
+			}
+			$(".QnA_table").html(outValues);	
+			
+			var startPage= jsonObj.list[0].startPage;
+			var endPage = jsonObj.list[0].endPage;
+			var maxPage = jsonObj.list[0].maxPage;
+			var currentPage = jsonObj.list[0].currentPage;
+			
+			var values ="";
+			if(startPage>5){
+				values+= "<a href='javascript:qnaPage("+(startPage-1)+")'>&laquo;</a>" 
+			}else{
+				values+="<a>&laquo;</a>";	
+			}
+			for(var i=startPage;i<=endPage;i++  ){
+				if(i==currentPage){
+					values+= "<a class='active'>"+i+"</a>";
+				}else{
+					values+= "<a href='javascript:qnaPage("+i+");'>"+i+"</a>";
+				}
+			}
+			if(endPage<maxPage){
+				values+="<a href='javascript:qnaPage("+(endPage+1)+")'>&raquo;</a>";
+				
+			}else{
+				values+="<a>&raquo;</a>";
+			}
+			$(".pagination").html(values);
+		
+			
+		},error: function(request,status,errorData){
+            alert("error code : " + request.status + "\nmessage" + 
+                    request.responseText + "\nerror" + errorData);
+           }
+	});
+}); */
+
+function qnaPage(page){
+	$.ajax({
+		url:"qnaList.do",
+		type:"post",
+		data:{
+			market_no:${market.market_no},
+			page:page
+		},
+		dataType: "JSON",
+		success: function(data){
+			console.log(data);
+			var objStr = JSON.stringify(data);
+			var jsonObj = JSON.parse(objStr);
+			
+			var outValues = "<tr><th width='12%'>번호</th><th width='50%'>제목</th><th width='13%'>작성자</th><th width='15%'>날짜</th></tr>";
+			
+			for(var i in jsonObj.list){
+				outValues += "<tr id='hover'><td>"+jsonObj.list[i].market_qna_no+"</td>"
+				+"<td id='QnA_td'><a href='#'>"+jsonObj.list[i].market_qna_title+"</a></td>"
+				+"<td>"+jsonObj.list[i].member_id+"</td><td>"+jsonObj.list[i].market_qna_question_date+"</td></tr>";
+			}
+			$(".QnA_table").html(outValues);	
+			
+			var startPage= jsonObj.list[0].startPage;
+			var endPage = jsonObj.list[0].endPage;
+			var maxPage = jsonObj.list[0].maxPage;
+			var currentPage = jsonObj.list[0].currentPage;
+			
+			var values ="";
+			if(startPage>5){
+				values+= "<a href='javascript:qnaPage("+(startPage-1)+")'>&laquo;</a>" 
+			}else{
+				values+="<a>&laquo;</a>";	
+			}
+			for(var i=startPage;i<=endPage;i++  ){
+				if(i==currentPage){
+					values+= "<a class='active'>"+i+"</a>";
+				}else{
+					values+= "<a href='javascript:qnaPage("+i+");'>"+i+"</a>";
+				}
+			}
+			if(endPage<maxPage){
+				values+="<a href='javascript:qnaPage("+(endPage+1)+")'>&raquo;</a>";
+				
+			}else{
+				values+="<a>&raquo;</a>";
+			}
+			$(".pagination").html(values);
+		
+			
+		},error: function(request,status,errorData){
+            alert("error code : " + request.status + "\nmessage" + 
+                    request.responseText + "\nerror" + errorData);
+           }
+	});
+}
+</script>
 <title>Farm</title>
 </head>
 <body>
@@ -22,20 +137,28 @@
 		<div id="container">
         	<div class="inner-wrap"> 
 				<div class="title_box">
-					<span class="title">신선한 청송 사과</span> &nbsp;
-					<span class="release_date">출고예정일</span>&nbsp;<span class="date">2018.05.05</span>
+					<span class="title">${market.market_title }</span> &nbsp;
+					<span class="release_date">출고예정일</span>&nbsp;<span class="date">${market.market_releasedate }</span>
 				</div>
-        		<div class="img_box" style="background-image: url('/farm/resources/images/apple.jpg'); background-size:cover;">
+        		<div class="img_box" style="background-image: url('/farm/resources/upload/marketUpload/${market.market_img}'); background-size:cover;">
         			
         		</div>
         		<div class="title_box">
         			<div style="border-bottom: 1px solid #bdbdbd; padding-bottom:20px;">
-					<span class="title">신선한 청송 사과</span> &nbsp;
-					<span class="release_date">출고예정일</span>&nbsp;<span class="date">2018.05.05</span>
+					<span class="title">${market.market_title }</span> &nbsp;
+					<span class="release_date">출고예정일</span>&nbsp;<span class="date">${market.market_releasedate }</span>
 					</div>
 				</div>
-       			<div class="note">
+				<div class="test">
+				<p class="note_content">자연의 힘으로 길러낸 유기 농산물은
+       				기후에 영향을 많이 받습니다. 예를 들어
+       				같은 파프리카라 하더라도 한기물과
+       				한여름에 맞는 최고의 산지가 따로
+       				있지요. 컬리는 1년 내내 전국을 뒤져
+       				최고만을 전해 드립니다.</p></div>
+       			<%-- <div class="note">
        				<center>
+       				
        				<div class="note_img" style="background-image: url('/farm/resources/images/gift.png'); background-size: cover;"></div>
        				</center>
        				<p class="note_title">제주도부터 강원도까지,<br>
@@ -78,11 +201,11 @@
        				한여름에 맞는 최고의 산지가 따로<br>
        				있지요. 컬리는 1년 내내 전국을 뒤져<br>
        				최고만을 전해 드립니다.</p>
-       			</div>
+       			</div> --%>
        			<ul class="tabs">
 				    <li class="tab-link current" data-tab="tab-1"><div class="menu introduce">소개</div></li>
 				    <li class="tab-link" data-tab="tab-2"><div class="menu daily">일지</div></li>
-				    <li class="tab-link" data-tab="tab-3"><div class="menu question">문의</div></li>
+				    <li class="tab-link" data-tab="tab-3"><div class="menu question" onclick="qnaPage(1);">문의</div></li>
 				    <li class="tab-link" data-tab="tab-4"><div id="menu" class="menu review">후기</div></li>
 				</ul>
 	       		<!-- <div class="menu introduce">소개</div>
@@ -92,7 +215,7 @@
 	       		
 	       	<!-- introduce_box -->
 	       	<div id="tab-1" class="tab-content current">
-	       	<div class="introduce_box"></div>
+	       	<div class="introduce_box">${market.market_intro }</div>
 	       	</div>
 	       	<!-- introduce_box -->
        		
@@ -266,81 +389,23 @@
 		       	<div class="qna_box">
 	
 	            <table class="QnA_table">
-	               <tr>
-	                  <th width="12%">번호</th>
-	                  <th width="50%">제목</th>
-	                  <th width="13%">작성자</th>
-	                  <th width="15%">날짜</th>
-	               </tr>
-	               <tr id="hover">
-	                  <td>1</td>
-	                  <td id="QnA_td"><a href="">문의사항_01</a></td>
-	                  <td>김민선</td>
-	                  <td>2018-05-06</td>
-	               </tr>
-	               <tr id="hover">
-	                  <td>2</td>
-	                  <td id="QnA_td">문의사항_02</td>
-	                  <td>김민선</td>
-	                  <td>2018-05-06</td>
-	               </tr>
-	               <tr id="hover">
-	                  <td>3</td>
-	                  <td id="QnA_td">문의사항_03</td>
-	                  <td>김민선</td>
-	                  <td>2018-05-06</td>
-	               </tr>
-	               <tr>
-	                  <td>4</td>
-	                  <td id="QnA_td">문의사항_04</td>
-	                  <td>김민선</td>
-	                  <td>2018-05-06</td>
-	               </tr>
-	               <tr>
-	                  <td>5</td>
-	                  <td id="QnA_td">문의사항_04</td>
-	                  <td>김민선</td>
-	                  <td>2018-05-06</td>
-	               </tr>
-	               <tr>
-	                  <td>6</td>
-	                  <td id="QnA_td">문의사항_04</td>
-	                  <td>김민선</td>
-	                  <td>2018-05-06</td>
-	               </tr>
-	               <tr>
-	                  <td>7</td>
-	                  <td id="QnA_td">문의사항_04</td>
-	                  <td>김민선</td>
-	                  <td>2018-05-06</td>
-	               </tr>
-	               <tr>
-	                  <td>8</td>
-	                  <td id="QnA_td">문의사항_04</td>
-	                  <td>김민선</td>
-	                  <td>2018-05-06</td>
-	               </tr>
-	               <tr>
-	                  <td>9</td>
-	                  <td id="QnA_td">문의사항_04</td>
-	                  <td>김민선</td>
-	                  <td>2018-05-06</td>
-	               </tr>
-	               <tr>
+	              
+	              <!--   <tr>
 	                  <td>10</td>
 	                  <td id="QnA_td">문의사항_04</td>
 	                  <td>김민선</td>
 	                  <td>2018-05-06</td>
-	               </tr>
+	               </tr> -->
 	            </table>
 	
 	            <!-- 하단 페이징, 검색 묶음 -->
 	            <div id="bottom">
+	            
 	               <!-- 페이징 처리 -->
 	               <div class="pagination">
-	                  <a href="#">&laquo;</a> <a href="#">1</a> <a href="#"
+	                  <!-- <a href="#">&laquo;</a> <a href="#">1</a> <a href="#"
 	                     class="active">2</a> <a href="#">3</a> <a href="#">4</a> <a
-	                     href="#">5</a> <a href="#">&raquo;</a>
+	                     href="#">5</a> <a href="#">&raquo;</a> -->
 	               </div>
 	
 	               <!-- 검색 -->

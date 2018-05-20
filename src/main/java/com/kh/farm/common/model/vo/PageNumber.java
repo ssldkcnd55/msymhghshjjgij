@@ -5,14 +5,32 @@ public class PageNumber implements java.io.Serializable{
 	
 	private int startRow;
 	private int endRow;
+	private int market_no;
 	
 	public PageNumber() {}
 
-	public PageNumber(int startRow, int endRow) {
+	
+
+	public PageNumber(int startRow, int endRow, int market_no) {
 		super();
 		this.startRow = startRow;
 		this.endRow = endRow;
+		this.market_no = market_no;
 	}
+
+
+
+	public int getMarket_no() {
+		return market_no;
+	}
+
+
+
+	public void setMarket_no(int market_no) {
+		this.market_no = market_no;
+	}
+
+
 
 	public int getStartRow() {
 		return startRow;

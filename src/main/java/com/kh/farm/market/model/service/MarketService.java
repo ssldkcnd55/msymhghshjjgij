@@ -8,4 +8,6 @@ public interface MarketService {
 
 	ArrayList<Market> marketList(int page);
 
+	Market selectMarketInfo(int market_no);
+
 }
