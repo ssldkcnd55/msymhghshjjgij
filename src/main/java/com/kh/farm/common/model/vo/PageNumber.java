@@ -29,6 +29,4 @@ public class PageNumber implements java.io.Serializable{
 	public void setEndRow(int endRow) {
 		this.endRow = endRow;
 	}
-	
-	
 }

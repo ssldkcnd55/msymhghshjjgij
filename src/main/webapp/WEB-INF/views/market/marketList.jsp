@@ -23,7 +23,6 @@
 				data : {page : count},
 				dataType: "JSON",
 				success: function(obj){
-					console.log(obj);	//object라고 출력
 					var objStr = JSON.stringify(obj);
 					var jsonObj = JSON.parse(objStr);
 					//문자열 변수 준비
