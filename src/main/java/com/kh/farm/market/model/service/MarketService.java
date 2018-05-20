@@ -6,8 +6,10 @@ import com.kh.farm.market.model.vo.Market;
 
 public interface MarketService {
 
-	ArrayList<Market> marketList(int page);
+	ArrayList<Market> selectMarketList(int page);
 
 	Market selectMarketInfo(int market_no);
+
+	int insertMarket(Market market);
 
 }

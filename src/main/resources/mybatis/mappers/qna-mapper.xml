@@ -16,5 +16,7 @@
 	<select id="qnaCount" parameterType="int" resultType="int">
 		select count(*) from market_qna where market_no = #{market_no}
 	</select>
-	
+	<select id="selectQna" parameterType="int" resultType="Market_qna">
+		select * from market_qna where market_qna_no = #{qna_no}
+	</select>
 </mapper>

@@ -79,7 +79,6 @@ public class MemberController {
 			}
 		} catch (IllegalStateException | IOException e) {
 			member.setMember_img("default.png");
-			e.printStackTrace();
 		}
 		int insertmember = memberService.insertMember(member);
 		return "home";

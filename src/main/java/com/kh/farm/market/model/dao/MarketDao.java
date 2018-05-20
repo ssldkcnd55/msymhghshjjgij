@@ -25,4 +25,9 @@ public class MarketDao {
 		
 		return mk;
 	}
+
+	public int insertMarket(SqlSessionTemplate sqlSession, Market market) {
+		int insertMarket = sqlSession.insert("market.insertMarket", market);
+		return insertMarket;
+	}
 }

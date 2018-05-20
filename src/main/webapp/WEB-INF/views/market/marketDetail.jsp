@@ -84,8 +84,8 @@ function qnaPage(page){
 			var outValues = "<tr><th width='12%'>번호</th><th width='50%'>제목</th><th width='13%'>작성자</th><th width='15%'>날짜</th></tr>";
 			
 			for(var i in jsonObj.list){
-				outValues += "<tr id='hover'><td>"+jsonObj.list[i].market_qna_no+"</td>"
-				+"<td id='QnA_td'><a href='#'>"+jsonObj.list[i].market_qna_title+"</a></td>"
+				outValues += "<tr id='hover'><td>"+jsonObj.list[i].rnum+"</td>"
+				+"<td id='QnA_td'><a href='/farm/marketQnaDetail.do?qna_no="+jsonObj.list[i].market_qna_no+"'>"+jsonObj.list[i].market_qna_title+"</a></td>"
 				+"<td>"+jsonObj.list[i].member_id+"</td><td>"+jsonObj.list[i].market_qna_question_date+"</td></tr>";
 			}
 			$(".QnA_table").html(outValues);	

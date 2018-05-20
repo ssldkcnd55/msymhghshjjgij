@@ -16,12 +16,17 @@ public class MarketServiceImpl implements MarketService{
 	@Autowired
 	private SqlSessionTemplate sqlSession;
 	@Override
-	public ArrayList<Market> marketList(int page) {
+	public ArrayList<Market> selectMarketList(int page) {
 		return marketDao.marketList(page,sqlSession);
 	}
 	@Override
 	public Market selectMarketInfo(int market_no) {
 		// TODO Auto-generated method stub
 		return marketDao.marketInfo(sqlSession,market_no);
+	}
+	@Override
+	public int insertMarket(Market market) {
+		// TODO Auto-generated method stub
+		return marketDao.insertMarket(sqlSession,market);
 	}
 }

@@ -21,5 +21,10 @@
 	]]>
 	
 	</select>
-
+<insert id="insertMarket" parameterType="Market" flushCache="true" useGeneratedKeys="true">
+	<![CDATA[
+		insert into market values((select max(market_no) from market)+1,1,#{member_id},#{market_title},#{market_note},#{market_img},
+		#{market_releasedate},#{market_amount},#{market_intro},'0',#{market_price})
+	]]>
+	</insert>
 </mapper>

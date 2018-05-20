@@ -3,6 +3,7 @@
 /* 경매 매인 */
 
 .auction_write{
+	cursor: pointer;
 	margin-right:14px;
 	border:none;
 	width:82px;
@@ -18,8 +19,4 @@
     overflow: visible;
     border-radius: 5px;	
 	
-}
-
-.left_box {
-	margin-top:47px;	
 }

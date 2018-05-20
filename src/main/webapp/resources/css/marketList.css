@@ -3,7 +3,23 @@
 .top_margin{
 	margin-top:20px;
 }
-
+.market_write{
+	margin-right:14px;
+	border:none;
+	width:82px;
+	height:36px;
+	disply:inline-block;
+	font-size:12pt;
+	font-weight: bold;
+	color:gray;
+	float:right;
+	margin-bottom:10px;
+	background: #e4dcbc;
+	outline: none;
+    overflow: visible;
+    border-radius: 5px;	
+	cursor: pointer;
+}
 .top_margin button{
 	margin-right:14px;
 	border:none;
@@ -52,6 +68,7 @@
 }
 
 .left_box{
+	margin-top: 47px;
 	float: left;
 	width:230px;
 	color: gray;
@@ -72,6 +89,7 @@
 	font-family: dotum;
 	border-color: #f37636;
 	border-style: none;
+	cursor: pointer;
 }
 
 .img_box{

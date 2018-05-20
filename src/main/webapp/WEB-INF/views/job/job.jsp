@@ -18,14 +18,14 @@ $(function(){
 			var values="<tr><th width='10%'>번호</th><th width='12%'>상태</th><th width='45%'>제목</th><th width='13%'>작성자</th><th width='20%'>날짜</th></tr>";
 			
 			for(var i in json.list){
-				values += "<tr id='hover'><td>"+json.list[i].job_no+"</td>";
+				values += "<tr id='hover'><td>"+json.list[i].rnum+"</td>";
 				if(json.list[i].job_status=="1"){
 					values+="<td><span id='job_table_span_find'><strong>구인중</strong></span></td>";
 				}else{
 					values+="<td><span id='job_table_span_finded'>마감</span></td>";
 				}
 				
-				values+="<td id='job_td'><a href='moveJobDetail.do'>"+json.list[i].job_title
+				values+="<td id='job_td'><a href='jobDetail.do?job_no=" + json.list[i].job_no + "'>"+json.list[i].job_title
 				+"</a></td><td>"+json.list[i].member_id+"</td><td>"+json.list[i].job_date+"</td></tr>";
 			}
 			$(".job_table").html(values);
@@ -76,14 +76,14 @@ function jobPage(page){
 			var values="<tr><th width='10%'>번호</th><th width='12%'>상태</th><th width='45%'>제목</th><th width='13%'>작성자</th><th width='20%'>날짜</th></tr>";
 			
 			for(var i in json.list){
-				values += "<tr id='hover'><td>"+json.list[i].job_no+"</td>";
+				values += "<tr id='hover'><td>"+json.list[i].rnum+"</td>";
 				if(json.list[i].job_status=="1"){
 					values+="<td><span id='job_table_span_find'><strong>구인중</strong></span></td>";
 				}else{
 					values+="<td><span id='job_table_span_finded'>마감</span></td>";
 				}
 				
-				values+="<td id='job_td'><a href='moveJobDetail.do'>"+json.list[i].job_title
+				values+="<td id='job_td'><a href='jobDetail.do?job_no=" + json.list[i].job_no + "'>"+json.list[i].job_title
 				+"</a></td><td>"+json.list[i].member_id+"</td><td>"+json.list[i].job_date+"</td></tr>";
 			}
 			$(".job_table").html(values);
