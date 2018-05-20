@@ -1,5 +1,8 @@
 package com.kh.farm.auction.model.service;
 
+
+import java.util.List;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,6 +22,16 @@ public class AuctionServiceImpl implements AuctionService{
 	@Override
 	public int insertAuctionMake(Auction auction) {
 		return auctionDao.insertAuctionMake(auction,sqlSession);
+	}
+	
+	@Override
+	public List<Auction> selectAuctionList() {
+		return auctionDao.selectAuctionList(sqlSession);
+	}
+	
+	@Override
+	public Auction selectAuctionDetail(int auction_no) {
+		return auctionDao.selectAuctionDetail(sqlSession,auction_no);
 	}
 
 }
