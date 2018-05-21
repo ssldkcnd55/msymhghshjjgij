@@ -27,6 +27,9 @@ public class AuctionDao {
 		return sqlSession.selectOne("auction.selectAuctionDetail",auction_no);
 	}
 	
+	/*public Auction total(SqlSessionTemplate sqlSession) {
+		return sqlSession.selectOne("auction.total");
+	}*/
 	
 	
 }

@@ -20,8 +20,7 @@
 		alert(list);
 	} */
 	
-	
-	
+
 </script>
 </head>
 
@@ -70,7 +69,7 @@
         	<div id="more">
         	<c:forEach items="${auctionlist}" var="list" varStatus="status">
         	<%-- <c:if test="${list}.length <= 9"> --%>
-        	<a href="AuctionDetail_controller.do?auction_no=${list.auction_no }">
+        	<a href="AuctionDetail.do?auction_no=${list.auction_no }">
        			<div class="market"><div class="img_box" style="background-image: url('/farm/resources/images/jamong.jpg'); background-size: cover;" ></div>
        			<div class="title_box"><p class="title" style="text-align:center;">${list.auction_title}</p> <p class="content" style="text-align:center;">${list.auction_intro}</p></div></div>   
        		</a>
