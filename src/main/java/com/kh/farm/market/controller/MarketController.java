@@ -25,6 +25,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.farm.market.model.service.MarketService;
 import com.kh.farm.market.model.vo.Market;
+import com.kh.farm.market.model.vo.Review;
+import com.kh.farm.qna.model.vo.Market_qna;
 
 @Controller
 public class MarketController {
@@ -64,6 +66,44 @@ public class MarketController {
 			jarr.add(jmarket);
 		}
 		//전송용 최종 json 객체 선언
+		JSONObject sendJson = new JSONObject();
+		sendJson.put("list", jarr);
+		response.setContentType("application/json; charset=utf-8");
+		PrintWriter out = response.getWriter();
+		out.append(sendJson.toJSONString());
+		out.flush();
+		out.close();
+	}
+	
+	@RequestMapping("reviewList.do")
+	public void reiviewList(Market mk,HttpServletResponse response,@RequestParam("Rpage") int currentPage)
+	throws IOException{
+		JSONArray jarr = new JSONArray();
+		
+		ArrayList<Review> reviewList = marketService.selectReviewList(mk,currentPage);
+		int limit = 10;
+		int listCount = marketService.selectReviewCount(mk);
+		int maxPage=(int)((double)listCount/limit+0.9); //ex) 41개면 '5'페이지나와야되는데 '5'를 계산해줌
+		int startPage=((int)((double)currentPage/5+0.8)-1)*5+1;
+		int endPage=startPage+5-1;
+		
+		if(maxPage<endPage) {
+			endPage = maxPage;
+		}
+		
+		for(Review rv : reviewList) {
+			JSONObject jsq = new JSONObject();
+			jsq.put("review_no",rv.getReview_no());
+			jsq.put("review_title", rv.getReview_title());
+			jsq.put("member_id", rv.getMember_id());
+			jsq.put("review_date", rv.getReview_date().toString());
+			jsq.put("startPage", startPage);
+			jsq.put("endPage", endPage);
+			jsq.put("maxPage", maxPage);
+			jsq.put("currentPage",currentPage);
+			jarr.add(jsq);
+		}
+		
 		JSONObject sendJson = new JSONObject();
 		sendJson.put("list", jarr);
 		response.setContentType("application/json; charset=utf-8");
@@ -119,4 +159,22 @@ public class MarketController {
 		int insertMarket = marketService.insertMarket(market);
 		return "forward:/marketList.do";
 	}
+	
+	@RequestMapping(value="marketQnaMake.do", method=RequestMethod.POST)
+	public String marketQnaMake (Market_qna qna) {
+		int mk_no = qna.getMarket_no();
+		System.out.println(qna.getMarket_no()+","+qna.getMarket_qna_title()+","+qna.getMarket_qna_contents()+","+qna.getMember_id());
+		int insertMarket_qna = marketService.insertMarket_qna(qna);
+		return "forward:/marketDetail.do?market_no="+mk_no;
+	}
+	
+	@RequestMapping(value="MarketQnaMakeMove.do")
+	public ModelAndView marketQnaMakeMove(ModelAndView mv, Market mk) {
+		mv.addObject("market",mk);
+		mv.setViewName("market/marketQnaMake");
+		return mv;
+		
+		
+	}
+	
 }
