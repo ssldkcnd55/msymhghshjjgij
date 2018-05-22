@@ -12,6 +12,20 @@
 <title>Farm</title>
 <script type="text/javascript">
 
+	/* 사진 */
+	function getThumbnailPrivew(html, $target) {
+		if (html.files && html.files[0]) {
+			var reader = new FileReader();
+			reader.onload = function(e) {
+				$target.css('display', '');
+				//$target.css('background-image', 'url(\"' + e.target.result + '\")'); // 배경으로 지정시
+				$target
+						.html('<img src="' + e.target.result + '" border="0" alt="" />');
+			}
+			reader.readAsDataURL(html.files[0]);
+		}
+	}
+
 	/* 경매등록 버튼 */
 	function auctionDetail(){
 		location.href="/farm/moveAcutionDetail.do";
@@ -31,7 +45,7 @@
 				<br>
 				<h1 style="text-align: center; margin: auto;">경매</h1>
 				<br> 
-				<form action="insertAuctionMake.do" method="post">
+				<form action="insertAuctionMake.do" method="post" enctype="multipart/form-data">
 				<input type="hidden" value="${loginUser.member_id}" name="member_id">
 				<div class="main_width">
 					<table class="jung_table">
@@ -45,13 +59,29 @@
 									 name="category_no" value="카테고리검색" class="input_text_box">
 									<br></td>
 							</tr>
-								<tr class="tr1">
+							<tr class="tr1">
 									<td class="td1">
 										<p class="p">부제목</p>
 									
 									</td>
 									<td class="td2" colspan="3"><input type="text"
 									name="auction_intro"></td>
+							</tr>
+							<tr class="tr1">
+									<td class="td1">
+										<p class="p">이미지</p>
+									
+									</td>
+									<td class="td2" colspan="3">
+									<div class="filebox">
+											<input type="file" name="upfile" id="cma_file"
+												accept="image/*" capture="camera"
+												onchange="getThumbnailPrivew(this,$('#cma_image'))"
+												style="margin-left: 2px;" /> <br /> <br />
+											<div id="cma_image"
+												style="width: 100px; max-width: 100px; margin-left: 210px;"></div>
+										</div>
+									</td>
 							</tr>
 								<tr class="tr1">
 								<td class="td1">
