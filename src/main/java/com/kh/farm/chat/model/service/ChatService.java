@@ -11,4 +11,7 @@ public interface ChatService {
 	List<ChatHistory> selectChatHistory(Chat chat);
 	int updateChatHistoryAlarm(Chat chat);
 	int insertChatHistory(ChatHistory chatHistory);
+	List<Member> selectChatMember(String sv);
+	int selectChatNo(Chat chat);
+	int insertChat(Chat chat);
 }

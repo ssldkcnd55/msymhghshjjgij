@@ -30,19 +30,19 @@ public class CategoryController {
 	
 	@RequestMapping(value="category_big.do", method=RequestMethod.POST)
 	@ResponseBody
-	public void selectCategory(HttpServletResponse response) throws IOException{
-		System.out.println("selectCategory 메소드 실행");
-		List<Category> category = categoryService.selectCategory();
+	public void selectCategory_main(HttpServletResponse response) throws IOException{
+		System.out.println("selectCategory_main 메소드 실행");
+		List<Category> category = categoryService.selectCategory_main();
 		category.toString();
 		if(category.size()> 0) {
 			JSONArray jarr = new JSONArray();
 			
 			for(Category c : category) {
 				JSONObject job = new JSONObject();
-				job.put("category_no", c.getCategory_no());
+				
 				job.put("category_main", c.getCategory_main());
 				job.put("category_small", c.getCategory_small());
-				job.put("category_name", c.getCategory_name());
+			
 				
 				jarr.add(job);
 			}
@@ -58,5 +58,65 @@ public class CategoryController {
 			
 		}
 	}
+	
+	@RequestMapping(value="category_small.do", method=RequestMethod.POST)
+	@ResponseBody
+	public void selectCategory_small(HttpServletResponse response) throws IOException{
+		System.out.println("selectCategory_small 메소드 실행");
+		List<Category> category = categoryService.selectCategory_main();
+		category.toString();
+		if(category.size()> 0) {
+			JSONArray jarr = new JSONArray();
+			
+			for(Category c : category) {
+				JSONObject job = new JSONObject();
+				
+				job.put("category_small", c.getCategory_small());
+			
+				
+				jarr.add(job);
+			}
+			JSONObject sendJson = new JSONObject();
+			sendJson.put("small", jarr);
+			
+			response.setContentType("application/json; charset=utf-8"); 
+			PrintWriter out = response.getWriter();
+			out.println(sendJson.toJSONString());
+			out.flush();
+			out.close();
+			
+			
+		}
+	}
+	@RequestMapping(value="category_name.do", method=RequestMethod.POST)
+	@ResponseBody
+	public void selectCategory_name (HttpServletResponse response) throws IOException{
+		System.out.println("selectCategory_name 메소드 실행");
+		List<Category> category = categoryService.selectCategory_name();
+		category.toString();
+		if(category.size()> 0) {
+			JSONArray jarr = new JSONArray();
+			
+			for(Category c : category) {
+				JSONObject job = new JSONObject();
+				job.put("category_no", c.getCategory_no());
+				job.put("category_main", c.getCategory_main());
+				job.put("category_small", c.getCategory_small());
+				job.put("category_name", c.getCategory_name());
+				
+				jarr.add(job);
+			}
+			JSONObject sendJson = new JSONObject();
+			sendJson.put("name", jarr);
+			
+			response.setContentType("application/json; charset=utf-8"); 
+			PrintWriter out = response.getWriter();
+			out.println(sendJson.toJSONString());
+			out.flush();
+			out.close();
+			
+		}
+	}
+	
 	
 }

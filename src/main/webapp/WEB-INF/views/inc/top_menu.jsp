@@ -63,7 +63,7 @@
         <h1 class="logo"><a href="moveHome.do">Farm Main</a></h1>
         <ul class="main-menu">
 					<li><a href="marketList.do">장터</a></li>
-                    <li><a href="moveAuction.do">경매</a></li>
+                    <li><a href="AuctionList_controller.do">경매</a></li>
                     <li><a href="#">시세</a></li>
                     <li><a href="moveJob.do">구인구직</a></li>
                     <li><a href="moveAdminPage.do">관리자</a></li>

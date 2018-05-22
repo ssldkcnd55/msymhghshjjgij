@@ -23,7 +23,7 @@
 		<!-- 메신져 상단부분 -->
 
 		<div class="msg_top">
-
+	<input type="hidden" id="login_id" value="${sessionScope.loginUser.member_id }">
 			<div class="msg_top_div">
 				<a href="javascript: back_chat_list() "><img
 					src="/farm/resources/images/back_white.png"></a>
@@ -76,14 +76,21 @@
 											 timeStyle="short" /></td>
 								</tr>
 								<tr>
-									<td colspan="2"><span class="list_content"> ${chat.chat_history_contents }  </span></td>
+									<td colspan="2"><span class="list_content"> ${chat.chat_history_contents }</span>
+									<c:if test="${chat.chat_history_alarm > 0 }">
+									<span class="list_alarm">${chat.chat_history_alarm}</span>
+									</c:if>
+									</td>
 								</tr>
 							</table>
 						</a>
 					</c:forEach>
 				</c:if>
-
-				
+				<c:if test="${empty chatList }">
+				<div class="searchNotFoundID">진행중인 대화가 없습니다.</div>
+				<div class="searchNotFoundMsg">아이디 또는 이름을 검색하여 대화를 시작하세요.</div></div>
+				</c:if>
+			
 			</div>
 			<!-- ///////////////////////////////대화목록 끝 ///////////////////////////////////////-->
 
@@ -92,46 +99,8 @@
 			<div class="msg_table_middle">
 
 
-				<!--  본인이 보내는 메시지 -->
-
-				<div class="msg_my">내가 보낸 짧은 메세지</div>
-				<div class="msg_my">내가 보낸 긴 메세지ㅁㅁㅁㅁㅁ</div>
-				<div class="msg_my">내가 보낸 긴 개행 메세지 ㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁ</div>
-
-				<!--  본인 메시지 묶음 마지막에 시간 출력 -->
-				<div class="msg_time_my">오전 2:47</div>
-
-				<!-- ///////////////////////////// -->
-				<!-- 상대방이 처음 메시지를 보내거나,  또는 직전 메시지가 상대방이 아닌경우  프로필사진+이름 포함하여 메시지 출력-->
-
-				<div class="msg_middle_left_img">
-					<table>
-						<tr>
-							<th rowspan="2"><img
-								src="/farm/resources/images/person_icon.png"></th>
-							<td>회원이름</td>
-						</tr>
-						<tr>
-							<td class="msg_you">상대방 짧은 메세지</td>
-						</tr>
-					</table>
-				</div>
-
-				<!-- 직전 메시지가 상대방일경우, 메시지만 출력 -->
-				<div class="msg_you">상대방 긴 메세지ㅁㅁㅁㅁㅁㅁㅁ</div>
-				<div class="msg_you">상대방 긴 개행 메세지 ㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁ</div>
-				<div class="msg_time">오전 2:04</div>
-
-
-
-
 			</div>
-
 			<!-- ///////////////////////////////대화창 끝 ///////////////////////////////////////-->
-
-
-
-
 
 		</div>
 		<!-- 메신져 하단 -->

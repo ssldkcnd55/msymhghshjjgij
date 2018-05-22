@@ -40,15 +40,16 @@
 				<br> <br> <br>
 
 				<div class="div">
+				<form action="insertMarketMake.do" method="post" enctype="multipart/form-data">
+					<input type="hidden" name="member_id" value="${loginUser.member_id }">
 					<table class="jung_table">
 						<tbody>
 							<tr class="tr">
 								<td class="td">
-
 									<p class="p">판매제목</p>
 								</td>
 								<td colspan="3" class="td2"><input type="text"
-									name="product_name" class="input_text_box"> <br></td>
+									name="market_title" class="input_text_box"> <br></td>
 							</tr>
 							<tr class="tr">
 								<td class="td">
@@ -56,7 +57,7 @@
 									<p class="p">판매노트</p>
 								</td>
 								<td colspan="3" class="td2"><input type="text"
-									name="product_name" class="input_text_box"> <br></td>
+									name="market_note" class="input_text_box"> <br></td>
 							</tr>
 							<tr class="tr">
 								<td class="td">
@@ -65,17 +66,14 @@
 								</td>
 								<td colspan="3" class="td2">
 
-									<form name="form" id="form" action="" method="post"
-										enctype="multipart/form-data" autocomplete="off">
 										<div class="filebox">
-											<input type="file" name="cma_file" id="cma_file"
+											<input type="file" name="upfile" id="cma_file"
 												accept="image/*" capture="camera"
 												onchange="getThumbnailPrivew(this,$('#cma_image'))"
 												style="margin-left: 2px;" /> <br /> <br />
 											<div id="cma_image"
 												style="width: 100px; max-width: 100px; margin-left: 210px;"></div>
 										</div>
-									</form>
 								</td>
 							</tr>
 							<tr class="tr">
@@ -83,7 +81,7 @@
 
 									<p class="p">출고예정일</p>
 								</td>
-								<td class="td4"><input type="date" name="product_name"
+								<td class="td4"><input type="date" name="market_releasedate"
 									class="input_date_box"> <br></td>
 
 							</tr>
@@ -92,11 +90,18 @@
 
 									<p class="p">판매가격</p>
 								</td>
-								<td colspan="3" class="td2"><input type="text"
-									name="product_name" class="input_text_box2" placeholder="가격입력">
+								<td colspan="3" class="td2"><input type="number"
+									name="market_price" class="input_text_box2" placeholder="가격입력">
 									원 <br></td>
 							</tr>
-
+							<tr class="tr">
+								<td class="td">
+									<p class="p">판매수량</p>
+								</td>
+								<td colspan="3" class="td2"><input type="number"
+									name="market_amount" class="input_text_box2" placeholder="수량입력">
+									kg <br></td>
+							</tr>
 							<table class="jung_table2">
 								<tbody>
 									<tr class="tr2">
@@ -110,16 +115,15 @@
 					<table class="jung_table2">
 						<tbody>
 							<tr>
-								<td style="width: 100%;"><form
-										action="sample/viewer/index.php" method="post">
-										<textarea name="ir1" id="ir1" rows="10" cols="100"
+								<td style="width: 100%;">
+										<textarea name="market_intro" id="ir1" rows="10" cols="100"
 											style="width: 100%; height: 250px; display: none;"></textarea>
-									</form></td>
+								</td>
 							</tr>
 						</tbody>
 					</table>
 
-					<table class="jung_table2" style="margin-top: 30px;">
+					<!-- <table class="jung_table2" style="margin-top: 30px;">
 						<tbody>
 							<tr class="tr">
 								<td class="td">
@@ -132,12 +136,12 @@
 									</ul> <br></td>
 							</tr>
 						</tbody>
-					</table>
-					<ul class="ui2">
-						<li class="li3" onclick="location.href='/#'">뒤로가기</li>
-						<li class="li4" onclick="location.href='/#'">판매등록</li>
-					</ul>
+					</table> -->
+						<input class="li4_input" type="button" value="뒤로가기">
+						<input class="li4_input submit" type="submit" value="판매등록">
+				</form>
 				</div>
+				
 			</div>
 		</div>
 		<div id="footer">

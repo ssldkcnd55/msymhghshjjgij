@@ -8,22 +8,27 @@
 	
 	<![CDATA[ 
 	
-	select chat.CHAT_NO,member_id,member_name,member_img,chhis.CHAT_HISTORY_CONTENTS, to_char(chhis.chat_history_date,'YYYY-MM-DD hh24:mi') as "chat_history_date"  ,chhis.chat_history_alarm
+	select  chat.CHAT_NO,member_id,member_name,member_img,chhis.CHAT_HISTORY_CONTENTS, to_char(chhis.chat_history_date,'YYYY-MM-DD hh24:mi') as "chat_history_date" , co.CHAT_HISTORY_ALARM  
 from chat,
 (
-SELECT CHAT_HISTORY_CONTENTS,aa.chat_no, aaa.CHAT_HISTORY_DATE,aaa.CHAT_HISTORY_ALARM from (
-select CHAT_NO, max(CHAT_HISTORY_DATE)  as cdate
- from chat_history 
- where chat_no in ( select  chat_no from chat where member_id1 = #{member_id} or member_id2 = #{member_id}  ) 
- group by CHAT_NO
- ) aa , CHAT_HISTORY aaa
- where aa.CHAT_NO=aaa.CHAT_NO and aa.cdate = aaa.CHAT_HISTORY_DATE
+select  chat_no,CHAT_HISTORY_CONTENTS, CHAT_HISTORY_DATE
+from (
+    select chat_no, CHAT_HISTORY_DATE, CHAT_HISTORY_CONTENTS,
+      row_number () over (PARTITION by chat_no order by CHAT_INDEX desc) as "r"
+      from chat_history
+      where chat_no in ( select chat_no from chat where MEMBER_ID1 =#{member_id} or MEMBER_ID2 = #{member_id}  )
+      )
+      where "r"=1
 ) chhis, member, (select CASE MEMBER_ID1 when #{member_id} then MEMBER_ID2
             else MEMBER_ID1 
         end as id, chat.CHAT_NO
 from chat
-where MEMBER_ID1=#{member_id} or MEMBER_ID2 = #{member_id}) mid
-where chat.chat_no = chhis.chat_no and  member.member_id = mid.id and  chhis.chat_no=mid.CHAT_NO
+where MEMBER_ID1=#{member_id} or MEMBER_ID2 = #{member_id}  ) mid, 
+(select chat_no, count(case when (CHAT_HISTORY_ALARM ='N' and MEMBER_ID != #{member_id}) then 1 else null end) as "CHAT_HISTORY_ALARM"
+from CHAT_HISTORY
+where  chat_no in( (select CHAT_NO from chat where MEMBER_ID1=#{member_id} or MEMBER_ID2=#{member_id} ) ) 
+group by chat_no) co
+where chat.chat_no = chhis.chat_no and  member.member_id = mid.id and  chhis.chat_no=mid.CHAT_NO and chat.chat_no=co.chat_no
 order by chhis.chat_history_date desc
 	]]>
 	
@@ -33,7 +38,7 @@ order by chhis.chat_history_date desc
 	select CHAT_NO,MEMBER_ID,CHAT_HISTORY_CONTENTS,  to_char(CHAT_HISTORY_DATE,'YYYY-MM-DD hh24:mi') as "CHAT_HISTORY_DATE"   ,CHAT_HISTORY_ALARM
 	from CHAT_HISTORY 
 	where CHAT_NO= #{chat_no} and member_id in ( #{member_id1}, #{member_id2}  )
-	order by "CHAT_HISTORY_DATE" asc
+	order by CHAT_INDEX, CHAT_HISTORY.CHAT_HISTORY_DATE asc
 	]]>
 	</select>
 	
@@ -45,9 +50,40 @@ order by chhis.chat_history_date desc
 	
 	<insert id="insertChatHistory" parameterType="ChatHistory">
 	<![CDATA[
-		insert into CHAT_HISTORY values( #{chat_no},#{member_id},#{chat_history_contents},sysdate, #{chat_history_alarm}   )
+		insert into CHAT_HISTORY values( (select (case when max(chat_index) is null then 0 else max(chat_index) end)+1 from CHAT_HISTORY),#{chat_no},#{member_id},#{chat_history_contents},sysdate, #{chat_history_alarm}   )
 	]]>
 
 	</insert>
+	
+	<select id="selectMemberByNameId" parameterType="string"  resultType="Member">
+	<![CDATA[
+	select MEMBER_ID, MEMBER_IMG, MEMBER_NAME
+	from member
+	where member_name = #{sv} or member_id = #{sv}
+	order by member_name, member_id
+	]]>
+</select>
+
+
+<select id="selectChatNo" parameterType="Chat" resultType="int">
+<![CDATA[
+select chat_no
+from chat
+where ( member_id1 = #{member_id1} and member_id2 = #{member_id2} ) or ( member_id1 = #{member_id2} and member_id2 = #{member_id1} )  
+]]>
+</select>
+
+<insert id="insertChat" keyProperty="chat_no" parameterType="Chat">
+
+<![CDATA[
+insert into chat values (  #{chat_no}  ,#{member_id1},#{member_id2})
+]]>
+
+ <selectKey resultType="int" keyProperty="chat_no" statementType="STATEMENT" order="BEFORE" >
+select (case when max(chat_no) is null then 0 else max(chat_no) end)+1  as "max(chat_no)"  from CHAT
+ </selectKey>
+
+</insert>
+
 
 </mapper>

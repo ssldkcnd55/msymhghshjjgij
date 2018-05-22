@@ -32,18 +32,18 @@
 		<div id="container">
 			<div class="inner-wrap">
 				<div class="title_box">
-					<span class="title">신선한 청송 사과</span> &nbsp; <span
-						class="release_date">출고예정일</span>&nbsp;<span class="date">2018.05.05</span>
+					<span class="title">${auction.auction_title }</span> &nbsp; <span
+						class="release_date">경매 시작일</span>&nbsp;<span class="date">${auction.auction_startdate}</span>
 				</div>
 				<div class="img_box"
-					style="background-image: url('/farm/resources/images/apple.jpg'); background-size: cover;">
+					style="background-image: url('/farm/resources/upload/auctionUpload/${auction.auction_img}'); background-size: cover;">
 
 				</div>
 				<div class="title_box">
 					<div
 						style="border-bottom: 1px solid #bdbdbd; padding-bottom: 20px;">
-						<span class="title">신선한 청송 사과</span> &nbsp; <span
-							class="release_date">출고예정일</span>&nbsp;<span class="date">2018.05.05</span>
+						<span class="title">${auction.auction_title }</span> &nbsp; <span
+							class="release_date">경매 시작일</span>&nbsp;<span class="date">${auction.auction_startdate}</span>
 					</div>
 				</div>
 				<div class="note">

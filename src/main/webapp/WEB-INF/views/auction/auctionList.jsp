@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%> 
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,6 +15,11 @@
 	function auction_write(){
 		location.href="/farm/moveAcution_write.do";
 	}
+	/* $(function(){
+		var list = ${auctionlist}.length; 
+		alert(list);
+	} */
+	
 
 </script>
 </head>
@@ -60,44 +66,17 @@
         	
         	<!-- 장터 -->
         	<div class="right_box">
-        	<a href="moveAuctionDetail.do">
+        	<div id="more">
+        	<c:forEach items="${auctionlist}" var="list" varStatus="status">
+        	<%-- <c:if test="${list}.length <= 9"> --%>
+        	<a href="AuctionDetail.do?auction_no=${list.auction_no }">
        			<div class="market"><div class="img_box" style="background-image: url('/farm/resources/images/jamong.jpg'); background-size: cover;" ></div>
-       			<div class="title_box"><p class="title">플로리다 자몽</p> <p class="content">자몽속이 꽉찬 자몽을 더욱 합리적인 가격에!</p></div></div>   
-       			    	</a>
-       			    			<a href="moveAuctionDetail.do">	
-       			<div class="market"><div class="img_box" style="background-image: url('/farm/resources/images/bean.jpg'); background-size: cover;" ></div>
-       			<div class="title_box"><p class="title">플로리다 자몽</p> <p class="content">자몽속이 꽉찬 자몽을 더욱 합리적인 가격에!</p></div></div>
-       			</a>
-       				<a href="moveAuctionDetail.do">
-       			<div class="market"><div class="img_box" style="background-image: url('/farm/resources/images/duroop.jpg'); background-size: cover;"></div>
-       			<div class="title_box"><p class="title">플로리다 자몽</p> <p class="content">자몽속이 꽉찬 자몽을 더욱 합리적인 가격에!</p></div></div>
-       			</a>
-       				<a href="moveAuctionDetail.do">
-       			<div class="market"><div class="img_box" style="background-image: url('/farm/resources/images/banana.jpg'); background-size: cover;"></div>
-       			<div class="title_box"><p class="title">플로리다 자몽</p> <p class="content">자몽속이 꽉찬 자몽을 더욱 합리적인 가격에!</p></div></div>
-       			       			</a>
-       			       				<a href="moveAuctionDetail.do">
-       			<div class="market"><div class="img_box" style="background-image: url('/farm/resources/images/rice.jpg'); background-size: cover;"></div>
-       			<div class="title_box"><p class="title">플로리다 자몽</p> <p class="content">자몽속이 꽉찬 자몽을 더욱 합리적인 가격에!</p></div></div>
-       			</a>
-       				<a href="moveAuctionDetail.do">
-       			<div class="market"><div class="img_box" style="background-image: url('/farm/resources/images/pepper.jpg'); background-size: cover;"></div>
-       			<div class="title_box"><p class="title">플로리다 자몽</p> <p class="content">자몽속이 꽉찬 자몽을 더욱 합리적인 가격에!</p></div></div>
-       			</a>
-       				<a href="moveAuctionDetail.do">
-       			<div class="market"><div class="img_box" style="background-image: url('/farm/resources/images/jamong.jpg'); background-size: cover;"></div>
-       			<div class="title_box"><p class="title">플로리다 자몽</p> <p class="content">자몽속이 꽉찬 자몽을 더욱 합리적인 가격에!</p></div></div>
-       			       			</a>
-       			       				<a href="moveAuctionDetail.do">
-       			<div class="market"><div class="img_box" style="background-image: url('/farm/resources/images/jamong.jpg'); background-size: cover;"></div>
-       			<div class="title_box"><p class="title">플로리다 자몽</p> <p class="content">자몽속이 꽉찬 자몽을 더욱 합리적인 가격에!</p></div></div>
-       			</a>
-       				<a href="moveAuctionDetail.do">
-       			<div class="market"><div class="img_box" style="background-image: url('/farm/resources/images/jamong.jpg'); background-size: cover;"></div>
-       			<div class="title_box"><p class="title">플로리다 자몽</p> <p class="content">자몽속이 꽉찬 자몽을 더욱 합리적인 가격에!</p></div></div>
-       			</a>
-       			
-       			<button class="more_market">장터 더보기 ▼</button>
+       			<div class="title_box"><p class="title" style="text-align:center;">${list.auction_title}</p> <p class="content" style="text-align:center;">${list.auction_intro}</p></div></div>   
+       		</a>
+       		<%-- </c:if> --%>
+       		</c:forEach>    
+      	    </div>
+       			<button class="more_market" onclick="more_auction();">장터 더보기 ▼</button>
        		</div>	
        		
        			

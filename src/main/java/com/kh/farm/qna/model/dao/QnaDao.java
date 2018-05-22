@@ -33,4 +33,9 @@ public class QnaDao {
 		return listCount;
 	}
 
+	public Market_qna selectQna(SqlSessionTemplate sqlSession, int qna_no) {
+		Market_qna qna = sqlSession.selectOne("qna.selectQna",qna_no);
+		return qna;
+	}
+
 }

@@ -11,4 +11,6 @@ public interface QnaService {
 
 	int selectQnaCount(Market mk);
 
+	Market_qna selectQna(int qna_no);
+
 }

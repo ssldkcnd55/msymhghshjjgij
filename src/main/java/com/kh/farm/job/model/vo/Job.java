@@ -22,13 +22,13 @@ public class Job implements java.io.Serializable{
 	private Date job_enddate;//구인구직 종료일
 	private String job_addr;//구인구직 주소
 	private String job_tel;//구인구직 전화번호
-	
+	private String rnum;
 	public Job() {
 	
 	}
 
 	public Job(int job_no, String member_id, String job_title, String job_contents, Date job_date, String job_status,
-			Date job_startdate, Date job_enddate, String job_addr, String job_tel) {
+			Date job_startdate, Date job_enddate, String job_addr, String job_tel, String rnum) {
 		super();
 		this.job_no = job_no;
 		this.member_id = member_id;
@@ -40,6 +40,7 @@ public class Job implements java.io.Serializable{
 		this.job_enddate = job_enddate;
 		this.job_addr = job_addr;
 		this.job_tel = job_tel;
+		this.rnum = rnum;
 	}
 
 	@Override
@@ -48,6 +49,14 @@ public class Job implements java.io.Serializable{
 				+ job_contents + ", job_date=" + job_date + ", job_status=" + job_status + ", job_startdate="
 				+ job_startdate + ", job_enddate=" + job_enddate + ", job_addr=" + job_addr + ", job_tel=" + job_tel
 				+ "]";
+	}
+
+	public String getRnum() {
+		return rnum;
+	}
+
+	public void setRnum(String rnum) {
+		this.rnum = rnum;
 	}
 
 	public int getJob_no() {

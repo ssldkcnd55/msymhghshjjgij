@@ -21,16 +21,15 @@ public class Market_qna implements java.io.Serializable{
 	private String market_qna_title; //질문글 제목
 	private String market_qna_contents; //질문글 내용
 	private String market_category; //질문글 카테고리	
-	
+	private String rnum;
 	
 	public Market_qna() {
 	
 	}
 
-
 	public Market_qna(int market_qna_no, int market_no, String member_id, Date market_qna_question_date,
 			String market_qna_answer, Date market_qna_answer_date, String market_qna_title, String market_qna_contents,
-			String market_category) {
+			String market_category, String rnum) {
 		super();
 		this.market_qna_no = market_qna_no;
 		this.market_no = market_no;
@@ -41,8 +40,14 @@ public class Market_qna implements java.io.Serializable{
 		this.market_qna_title = market_qna_title;
 		this.market_qna_contents = market_qna_contents;
 		this.market_category = market_category;
+		this.rnum = rnum;
 	}
-
+	public String getRnum() {
+		return rnum;
+	}
+	public void setRnum(String rnum) {
+		this.rnum = rnum;
+	}
 
 	public int getMarket_qna_no() {
 		return market_qna_no;

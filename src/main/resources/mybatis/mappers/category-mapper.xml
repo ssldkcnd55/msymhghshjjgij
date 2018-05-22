@@ -16,5 +16,17 @@
 	]]>
 </select>
 
+<select id="selectCategory_main" parameterType="category" resultType="category">
+	<![CDATA[
+		select category_small,category_main from category group by category_small,category_main
+	]]>
+</select>
+
+<select id="selectCategory_small" parameterType="category" resultType="category">
+	<![CDATA[
+		select category_small from category group by category_small
+	]]>
+</select>
+
 
 </mapper>

@@ -3,12 +3,14 @@ package com.kh.farm.market.model.dao;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.eclipse.jdt.internal.compiler.flow.InsideSubRoutineFlowContext;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.kh.farm.common.model.vo.PageNumber;
 import com.kh.farm.market.model.vo.Market;
 import com.kh.farm.market.model.vo.Review;
+import com.kh.farm.qna.model.vo.Market_qna;
 
 @Repository
 public class MarketDao {
@@ -42,5 +44,15 @@ public class MarketDao {
 		// TODO Auto-generated method stub
 		int listCount = sqlSession.selectOne("market.reviewCount",mk.getMarket_no());
 		return listCount;
+	}
+	public int insertMarket(SqlSessionTemplate sqlSession, Market market) {
+		int insertMarket = sqlSession.insert("market.insertMarket", market);
+		return insertMarket;
+	}
+
+	public int insertMarket_qna(SqlSessionTemplate sqlSession, Market_qna qna) {
+		// TODO Auto-generated method stub
+		int insertMarket_qna = sqlSession.insert("market.insertMarket_qna",qna);
+		return insertMarket_qna;
 	}
 }

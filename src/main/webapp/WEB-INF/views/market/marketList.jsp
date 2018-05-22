@@ -14,6 +14,12 @@
 <script>
 	var count = 1;
 </script>
+<script type="text/javascript">
+	function marketMake(){
+		location.href="/farm/moveMarketMake.do";
+	}
+
+</script>
 <script>
 		function moreBtn(){
 			count = count+1;
@@ -23,7 +29,6 @@
 				data : {page : count},
 				dataType: "JSON",
 				success: function(obj){
-					console.log(obj);	//object라고 출력
 					var objStr = JSON.stringify(obj);
 					var jsonObj = JSON.parse(objStr);
 					//문자열 변수 준비
@@ -56,6 +61,7 @@
 	
 		<div id="container">
         	<div class="inner-wrap"> 
+        	<button class="market_write" onclick="marketMake();">장터 등록</button>
         	<div class="left_box">
         	
         	<!-- 정렬 메뉴바 -->
