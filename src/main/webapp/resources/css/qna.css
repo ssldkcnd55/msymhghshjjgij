@@ -6,12 +6,21 @@
 }
 /* QnA_title */
 .QnA_title{
+	width:928px;
+	height:80px;
+	border: 2px solid #4a2419;
    padding: 15px;
-   font-size:14pt;
+   margin:0px;
+   font-size:18pt;
+   color:#4a2419;
+   font-weight:bold;
    font-family:  "굴림", gulim, arial, helvetica, sans-serif;
    float:left;
 }
-
+.titleP{
+	margin-top:25px;
+	margin-left:40px;
+}
 /* 상단 select_box */
 .select_box{
    float:right;
@@ -26,14 +35,14 @@
 /* table */
 .QnA_table {
     border-collapse: collapse;
-    width: 930px;
+    width: 960px;
 }
 
 .QnA_table th{
    padding: 8px;
     text-align: left;
     border-bottom: 1px solid #ddd;
-    border-top: 3px solid #ECE6CE;
+    border-top: 1px solid #4a2419;
     height:60px;
     text-align:center;
     font-size:12pt;
@@ -71,7 +80,7 @@
 }
 
 .pagination a.active {
-    background-color: #ECE6CE;
+    background-color: #4a2419;
     color: white;
     border-radius: 5px;
 }
@@ -91,7 +100,7 @@
 .green_window {
    display: inline-block;
    width: 250px; height: 34px;
-   border: 3px solid #ECE6CE;
+   border: 3px solid #4a2419;
    background: white;
    margin-top:40px;
    
@@ -109,7 +118,7 @@
    width: 54px; height: 40px;
    margin-top:40px ; border: 0;
    vertical-align: top;
-   background: #ECE6CE;
+   background: #4a2419;
    color: white;
    font-weight: bold;
    border-radius: 1px;
