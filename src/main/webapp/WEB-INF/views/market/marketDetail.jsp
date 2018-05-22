@@ -134,7 +134,7 @@ function reviewPage(page){
 		type:"post",
 		data:{
 			market_no:${market.market_no},
-			Rpage:page
+			Rpage:page 
 		},
 		dataType: "JSON",
 		success: function(data){
