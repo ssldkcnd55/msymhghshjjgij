@@ -48,4 +48,18 @@
 		select count(auction_no) from auction 
 	]]>
 	</select> -->
+	
+	
+	<delete id="deleteAuction" parameterType="auction">
+	<![CDATA[
+		delete from auction where auction_no=#{auction_no}
+	]]>
+	</delete>
+	
+	<select id="selectmodifyAuction" parameterType="auction">
+	<![CDATA[
+		select * from auction where auction_no=#{auction_no}
+	]]>
+	</select>
+	
 </mapper>

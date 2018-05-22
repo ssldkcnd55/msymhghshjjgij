@@ -34,4 +34,14 @@ public class AuctionDao {
 		return list;
 	}
 
+
+	public Auction deleteAuction(SqlSessionTemplate sqlSession, int auction_no) {
+		return sqlSession.selectOne("auction.deleteAuction",auction_no);
+	}
+
+
+	public Auction selectModifyAuction(SqlSessionTemplate sqlSession, int auction_no) {
+		return sqlSession.selectOne("auction.selectmodifyAuction",auction_no);
+	}
+
 }

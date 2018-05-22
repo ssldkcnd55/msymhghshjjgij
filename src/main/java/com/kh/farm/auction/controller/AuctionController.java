@@ -138,4 +138,21 @@ public class AuctionController {
 		out.flush();
 		out.close();
 	}
+	
+	/*삭제*/
+	@RequestMapping(value="auctionDelete.do")
+	public String deleteAuction(Model model, @RequestParam(value="auction_no") int auction_no) {
+		Auction deleteAuction = auctionService.deleteAuction(auction_no);
+		model.addAttribute("auction", deleteAuction);
+		return "forward:/AuctionList_controller.do";
+	}
+	
+	/*수정버튼*/
+	@RequestMapping(value="auctionModify.do")
+	public String ModifyAuction(Model model, @RequestParam(value="auction_no") int auction_no) {
+		Auction selectModifyAuction = auctionService.selectModifyAuction(auction_no);
+		selectModifyAuction.toString();
+		model.addAttribute("auction", selectModifyAuction);
+		return "auction/auctionModify.do";
+	}
 }

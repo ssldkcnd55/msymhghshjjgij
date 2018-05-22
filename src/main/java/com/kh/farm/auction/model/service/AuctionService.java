@@ -17,4 +17,8 @@ public interface AuctionService {
 	
 	/*경매 디테일*/
 	Auction selectAuctionDetail(int auction_no);
+
+	Auction deleteAuction(int auction_no);
+
+	Auction selectModifyAuction(int auction_no);
 }
