@@ -150,6 +150,10 @@ public class MoveController {
 	public String moveAcutionDetailPage() {
 		return "auction/auctionDetail";
 	}
+	@RequestMapping("moveMarketQnaMake.do")
+	public String moveMarketQnaMake() {
+		return "market/marketQnaMake";
+	}
 	
 	@RequestMapping("moveNotice_Detail.do")
 	public String moveNotice_DetailPage() {

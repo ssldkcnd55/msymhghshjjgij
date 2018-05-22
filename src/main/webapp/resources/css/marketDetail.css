@@ -117,5 +117,67 @@ ul.tabs li{
   display: inherit;
 }
 
+.QnA_title{
+   padding: 15px;
+   font-size:14pt;
+   font-family:  "굴림", gulim, arial, helvetica, sans-serif;
+   float:left;
+}
 
+.review_table {
+    border-collapse: collapse;
+    width: 930px;
+}
+
+.review_table th{
+   padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+    border-top: 3px solid #ECE6CE;
+    height:60px;
+    text-align:center;
+    font-size:12pt;
+}
+
+.review_table td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+    height:60px;
+    text-align:center;
+    font-size:12pt;
+}
+
+.review_table tr:hover {background-color:#f5f5f5;}
+
+#QnA_td{
+   text-align:left;
+}
+
+
+/* 페이징 */
+.review_pagination {
+    display: inline-block;
+    align:center;
+    padding-top:40px;
+}
+
+.review_pagination a { 
+    color: black;
+    float: left;
+    padding: 10px 20px;
+    text-decoration: none;
+    font-size:12pt;
+}
+
+.review_pagination a.active {
+    background-color: #4a2419;
+    color: white;
+    border-radius: 5px;
+}
+
+.review_pagination a:hover:not(.active) {
+    background-color: #cfc085;
+    border-radius: 5px;
+}
 
