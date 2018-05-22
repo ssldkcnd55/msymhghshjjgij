@@ -30,6 +30,8 @@
 	function auctionDetail(){
 		location.href="/farm/moveAcutionDetail.do";
 	}
+	
+
 
 </script>
 </head>
@@ -52,7 +54,7 @@
 									<p class="p">상품명</p>
 								</td>
 								<td class="td2" colspan="3"><input type="text"
-									name="auction_title"> <input type="submit"
+									name="auction_title" required="required"> <input type="submit"
 									 name="category_no" value="카테고리검색" class="input_text_box">
 									<br></td>
 							</tr>
@@ -62,7 +64,7 @@
 									
 									</td>
 									<td class="td2" colspan="3"><input type="text"
-									name="auction_intro"></td>
+									name="auction_intro" required="required"></td>
 							</tr>
 							<tr class="tr1">
 									<td class="td1">
@@ -74,7 +76,7 @@
 											<input type="file" name="upfile" id="cma_file"
 												accept="image/*" capture="camera"
 												onchange="getThumbnailPrivew(this,$('#cma_image'))"
-												style="margin-left: 2px;" /> <br /> <br />
+												style="margin-left: 2px;"  /> <br /> <br />
 											<div id="cma_image"
 												style="width: 100px; max-width: 100px; margin-left: 210px;"></div>
 										</div>
@@ -104,13 +106,13 @@
 									<p class="p">경매시작날짜</p>
 								</td>
 								<td class="td4"><input type="date" name="auction_startdate"
-									class="input_datebox"> <br></td>
+									class="input_datebox" required> <br></td>
 								<td class="td3">
 
 									<p class="p">경매마감날짜</p>
 								</td>
 								<td class="td4"><input type="date" name="auction_enddate"
-									class="input_datebox"></td>
+									class="input_datebox" required></td>
 							</tr>
 							<table class="jung_table2">
 								<tbody>

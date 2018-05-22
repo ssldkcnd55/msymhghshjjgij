@@ -27,9 +27,13 @@
 	]]>
 	</insert>
 	
-	<select id="selectAuctionList" parameterType="auction" flushCache="true" resultType="auction">
+	<select id="selectAuctionList" parameterType="pageNumber"  resultType="auction">
 	<![CDATA[
-		select * from auction order by auction_no desc
+		select * from 
+			(select rownum rnum, auction_no,
+			auction_title,auction_intro,auction_img,
+			member_id from (select * from auction order by 
+			auction_no desc)) where rnum >= #{startRow} and rnum <= #{endRow}
 	]]>
 	</select>
 	

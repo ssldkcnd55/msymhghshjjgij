@@ -15,6 +15,8 @@
 	type="text/css" />
 <link href="/farm/resources/css/payList.css" rel="stylesheet"
 	type="text/css" />
+<link href="/farm/resources/css/auctionDetail.css" rel="stylesheet"
+	type="text/css" />
 
 <script type="text/javascript"
 	src="/farm/resources/js/jquery-3.3.1.min.js"></script>
@@ -34,6 +36,8 @@
 				<div class="title_box">
 					<span class="title">${auction.auction_title }</span> &nbsp; <span
 						class="release_date">경매 시작일</span>&nbsp;<span class="date">${auction.auction_startdate}</span>
+						<span><button class="modify">수정</button></span>
+						<span><button class="delete" onclick="">삭제</button></span>
 				</div>
 				<div class="img_box"
 					style="background-image: url('/farm/resources/upload/auctionUpload/${auction.auction_img}'); background-size: cover;">

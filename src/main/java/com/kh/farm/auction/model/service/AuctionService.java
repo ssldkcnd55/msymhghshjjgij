@@ -13,7 +13,7 @@ public interface AuctionService {
 	int insertAuctionMake(Auction auction);
 
 	/*경매 메인 */
-	List<Auction> selectAuctionList();
+	List<Auction> selectAuctionList(int page);
 	
 	/*경매 디테일*/
 	Auction selectAuctionDetail(int auction_no);

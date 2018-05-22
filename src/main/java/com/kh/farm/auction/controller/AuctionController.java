@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.List;
 
@@ -13,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.catalina.Session;
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,7 +26,10 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.farm.auction.model.service.AuctionService;
 import com.kh.farm.auction.model.vo.Auction;
+import com.kh.farm.market.model.vo.Market;
 import com.kh.farm.member.model.vo.Member;
+
+import net.sf.json.JSONArray;
 
 @Controller
 public class AuctionController {
@@ -87,11 +92,14 @@ public class AuctionController {
 	
 	/*경매 메인 list뿌려주기*/
 	@RequestMapping(value="AuctionList_controller.do")
-	public String AuctionList(Auction auction, Model model){		
-		List<Auction> AuctionList =  auctionService.selectAuctionList();
+	public ModelAndView AuctionList(ModelAndView mv){	
+		int page = 1;
+		List<Auction> AuctionList =  auctionService.selectAuctionList(page);
 		System.out.println(AuctionList.size());
-		model.addAttribute("auctionlist", AuctionList);
-		return "auction/auctionList";	
+		mv.setViewName("auction/auctionList");
+		mv.addObject("list",AuctionList);
+		return mv;
+		
 	}
 	
 	/*경매 디테일*/
@@ -102,5 +110,32 @@ public class AuctionController {
 		return "auction/auctionDetail";
 	}
 	
-	
+	/*경매 메인 더보기 */
+	@RequestMapping(value="moreAuctionList.do",method=RequestMethod.POST)
+	public void moreMarketList(HttpServletResponse response, @RequestParam("page") int page) throws IOException{
+		System.out.println("auction more...");
+		List<Auction> list = auctionService.selectAuctionList(page);
+		JSONArray jarr = new JSONArray();
+		
+		//list를 jarr로 복사하기
+		for(Auction a : list) {
+			//추출한 user를 json 객체에 담기
+			JSONObject jauction = new JSONObject();
+			jauction.put("auction_title", a.getAuction_title());
+			jauction.put("auction_no", a.getAuction_no());
+			jauction.put("auction_intro", a.getAuction_intro());
+			jauction.put("auction_img", a.getAuction_img());
+			
+			jarr.add(jauction);
+		}
+		//전송용 최종 json 객체 선언
+		jarr.toString();
+		JSONObject sendJson = new JSONObject();
+		sendJson.put("list", jarr);
+		response.setContentType("application/json; charset=utf-8");
+		PrintWriter out = response.getWriter();
+		out.append(sendJson.toJSONString());
+		out.flush();
+		out.close();
+	}
 }
