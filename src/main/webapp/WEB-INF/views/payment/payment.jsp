@@ -19,7 +19,7 @@
       <div id="container">
          <div class="inner-wrap">
          <!--  -->
-        <div class="title payment"><p class="titleP">주문/결제</p></div>
+        <div class="title1 payment"><p class="titleP">주문/결제</p></div>
       <!--  <div class="wrapper" align="center"> -->
           <!-- 상품정보 -->
           <div class="product">

@@ -41,7 +41,7 @@
 		</div>
 		<div id="container">
 			<div class="inner-wrap">
-				<div class="title auctionMake"><p class="titleP">경매 글쓰기</p></div>
+				<div class="title1 auctionMake"><p class="titleP">경매 글쓰기</p></div>
 				<form action="insertAuctionMake.do" method="post" enctype="multipart/form-data">
 				<input type="hidden" value="${loginUser.member_id}" name="member_id">
 				<div class="main_width">
