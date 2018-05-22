@@ -79,12 +79,17 @@
 			var json = JSON.parse(jsonStr);
 			var category_big = ""; 
 			
-			for(var i in json.big) {
+			/* for(var i in json.big) {
 				category_big+='<button class="accordion" onclick="toggleList();">'
 				+json.big[i].category_main+'</button>'
 				+'<div class="panel" id="'+json.big[i].category_main+'"><button class="accordion" onclick="toggleList();">'
 				+json.big[i].category_small+'</button>'
 				+'<div class="panel" id="'+json.big[i].category_small+'"><p>데이터</p></div></div>'
+			} */
+			for(var i in json.big) {
+				category_big+='<button onclick="deleteBig('+json.big[i].category_main+')">대분류삭제</button><button class="accordion" onclick="toggleList();">'
+				+json.big[i].category_main+'</button>'
+				+'<div class="panel" id="'+json.big[i].category_main+'"></div>'
 			}
 			$('.category_list').append(category_big);
 		}
@@ -104,7 +109,9 @@
 			var category_big = ""; 
 			
 			for(var i in json.small) {
-				$("#"+json.small[i].category_small).append()
+				$("#"+json.small[i].category_main).append('<button onclick="deleteSmall('+json.small[i].category_main+')">소분류삭제</button><button class="accordion" onclick="toggleList();">'
+						+json.small[i].category_small+'</button>'
+						+'<div class="panel" id="'+json.small[i].category_small+'"></div>')
 			}
 			$('.category_list').append(category_big);
 		}
@@ -123,7 +130,7 @@
 			var category_big = ""; 
 			
 			for(var i in json.name) {
-				$("#"+json.name[i].category_small).append('<p>'+json.name[i].category_name+'</p>')
+				$("#"+json.name[i].category_small).append("<p>"+json.name[i].category_name+"<button>항목삭제</button></p>")
 			}
 		}
 		

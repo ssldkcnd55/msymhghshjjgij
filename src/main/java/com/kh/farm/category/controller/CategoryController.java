@@ -41,7 +41,7 @@ public class CategoryController {
 				JSONObject job = new JSONObject();
 				
 				job.put("category_main", c.getCategory_main());
-				job.put("category_small", c.getCategory_small());
+				//job.put("category_small", c.getCategory_small());
 			
 				
 				jarr.add(job);
@@ -63,7 +63,7 @@ public class CategoryController {
 	@ResponseBody
 	public void selectCategory_small(HttpServletResponse response) throws IOException{
 		System.out.println("selectCategory_small 메소드 실행");
-		List<Category> category = categoryService.selectCategory_main();
+		List<Category> category = categoryService.selectCategory_small();
 		category.toString();
 		if(category.size()> 0) {
 			JSONArray jarr = new JSONArray();
@@ -72,7 +72,7 @@ public class CategoryController {
 				JSONObject job = new JSONObject();
 				
 				job.put("category_small", c.getCategory_small());
-			
+				job.put("category_main", c.getCategory_main());
 				
 				jarr.add(job);
 			}
