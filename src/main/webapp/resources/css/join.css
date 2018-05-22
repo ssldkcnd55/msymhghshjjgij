@@ -1,6 +1,6 @@
 @charset "UTF-8";
-#container { width:100%; min-height:700px; position:relative; clear:both;  }
-#container div.inner-wrap1 { width:960px;  position:relative; }
+/* #container { width:100%; min-height:700px; position:relative; clear:both;  }
+#container div.inner-wrap1 { width:960px;  position:relative; } */
 
 html, body {
 	height: 100%;
@@ -131,5 +131,4 @@ body {
 	background: #fff;
 	margin: 0 auto;
 	height: 520px;	
-	margin-left:400px;
 }

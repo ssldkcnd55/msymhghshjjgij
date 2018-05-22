@@ -5,22 +5,7 @@
 	width:960px; margin:20px auto 0 ; position:relative;
 }
 /* QnA_title */
-.QnA_title{
-	width:928px;
-	height:80px;
-	border: 2px solid #4a2419;
-   padding: 15px;
-   margin:0px;
-   font-size:18pt;
-   color:#4a2419;
-   font-weight:bold;
-   font-family:  "굴림", gulim, arial, helvetica, sans-serif;
-   float:left;
-}
-.titleP{
-	margin-top:25px;
-	margin-left:40px;
-}
+
 /* 상단 select_box */
 .select_box{
    float:right;

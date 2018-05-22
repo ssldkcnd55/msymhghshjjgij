@@ -21,7 +21,7 @@
       <div id="container">
          <div class="inner-wrap">
          <div class="board-wrap">
-            <div class="QnA_title"><p class="titleP">QnA</p></div>
+            <div class="title qna"><p class="titleP">QnA</p></div>
 
             <!-- select box -->
             <div class="select_box">

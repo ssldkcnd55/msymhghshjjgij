@@ -20,9 +20,7 @@
 		</div>
 		<div id="container">
 			<div class="inner-wrap">
-				<br> <br> <br> <br> <br> <br>
-				<h1 style="text-align: center; margin: auto;">QNA</h1>
-				<br> <br> <br>
+				<div class="title qna"><p class="titleP">QnA</p></div>
 
 				<div class="div">
 					<table class="jung_table">
