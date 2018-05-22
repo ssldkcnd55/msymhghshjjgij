@@ -20,7 +20,7 @@
 		</div>
 		<div id="container">
 			<div class="inner-wrap">
-				<div class="title qna"><p class="titleP">QnA</p></div>
+				<div class="title1 qna"><p class="titleP">QnA</p></div>
 
 				<div class="div">
 					<table class="jung_table">
