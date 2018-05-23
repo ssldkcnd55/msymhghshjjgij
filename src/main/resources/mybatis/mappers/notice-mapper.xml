@@ -4,6 +4,15 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="notice">
 
+<select id="noticeList" parameterType="PageNumber" resultType="notice">
+	<![CDATA[
+	select * from (select rownum rnum, notice_no, notice_title, notice_date from notice 
+	order by notice_no desc) where rnum >=#{startRow} and rnum <=#{endRow}
 	
+	]]>
+</select>
+<select id="noticeCount" parameterType="int" resultType="int">
+		select count(*) from notice
+</select>
 
 </mapper>
