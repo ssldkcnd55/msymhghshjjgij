@@ -21,10 +21,40 @@
 	]]>
 	
 	</select>
+	
+	<select id="reviewList" parameterType="pageNumber" resultType="Review">
+	<![CDATA[
+		select * from (select rownum rnum, review_no,review_title,member_id,review_date from review where market_no =#{market_no}
+		order by review_no desc) where rnum>= #{startRow} and rnum <=#{endRow}
+	]]>
+	</select>
+	
+	<select id="reviewCount" parameterType="int" resultType="int" >
+	 <![CDATA[
+	 select count(*) from review where market_no = #{market_no}
+	 ]]>
+	</select>
+
 <insert id="insertMarket" parameterType="Market" flushCache="true" useGeneratedKeys="true">
 	<![CDATA[
 		insert into market values((select max(market_no) from market)+1,1,#{member_id},#{market_title},#{market_note},#{market_img},
 		#{market_releasedate},#{market_amount},#{market_intro},'0',#{market_price})
 	]]>
 	</insert>
+	
+	
+	<insert id="insertMarket_qna" parameterType="market_qna" flushCache="true" useGeneratedKeys="true">
+	<![CDATA[
+		insert into market_qna values((select max(market_qna_no) from market_qna)+1,#{market_no},#{member_id},sysdate,null,null,#{market_qna_title},#{market_qna_contents}
+		,1)
+	]]>
+	</insert>
+	
+	<insert id="insertReview" parameterType="review" flushCache="true" useGeneratedKeys="true">
+	<![CDATA[
+		insert into review values((select max(review_no) from review)+1,#{member_id},#{market_no},sysdate,#{review_title},#{review_contents}
+		)
+	]]>
+	</insert>
+	
 </mapper>

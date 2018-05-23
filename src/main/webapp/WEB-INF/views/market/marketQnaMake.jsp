@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+	<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -20,9 +22,10 @@
 		</div>
 		<div id="container">
 			<div class="inner-wrap">
-				<div class="title1 qna"><p class="titleP">QnA</p></div>
+				<div class="title qna"><p class="titleP">QnA</p></div>
 
 				<div class="div">
+				<form action="marketQnaMake.do" method="post">
 					<table class="jung_table">
 						<tbody>
 							<tr class="tr">
@@ -30,7 +33,7 @@
 									<p class="p">제목</p>
 								</td>
 								<td colspan="3" class="td2"><input type="text"
-									name="product_name" class="input_text_box"> <br></td>
+									name="market_qna_title" class="input_text_box"> <br></td>
 							</tr>
 							<table class="jung_table2">
 								<tbody>
@@ -45,18 +48,20 @@
 					<table class="jung_table2">
 						<tbody>
 							<tr>
-								<td style="width: 100%;"><form
-										action="sample/viewer/index.php" method="post">
-										<textarea name="ir1" id="ir1" rows="10" cols="100"
+								<td style="width: 100%;">
+									
+										<textarea name="market_qna_contents" id="ir1" rows="10" cols="100"
 											style="width: 100%; height: 250px; display: none;"></textarea>
-									</form></td>
+									</td>
 							</tr>
 						</tbody>
 					</table>
-					<ul style="list-style: none;">
-						<li class="li3" onclick="location.href='/#'">뒤로가기</li>
-						<li class="li4" onclick="location.href='/#'">글쓰기</li>
-					</ul>
+					<input class="li4_input" type="button" value="뒤로가기">
+						<input class="li4_input submit" type="submit" value="글쓰기" onclick="submitContents();">
+						<input type="hidden" name="member_id" value="${loginUser.member_id }">
+						
+						<input type="hidden" name="market_no" value="${market.market_no }">
+				</form>
 				</div>
 			</div>
 		</div>

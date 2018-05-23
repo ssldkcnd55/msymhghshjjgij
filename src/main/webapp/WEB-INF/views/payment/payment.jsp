@@ -19,9 +19,8 @@
       <div id="container">
          <div class="inner-wrap">
          <!--  -->
-         <br>
-         <h2>주문/결제</h2>
-       <div class="wrapper" align="center">
+        <div class="title1 payment"><p class="titleP">주문/결제</p></div>
+      <!--  <div class="wrapper" align="center"> -->
           <!-- 상품정보 -->
           <div class="product">
              <table class="pay_top_table">
@@ -180,7 +179,7 @@
           
          <!-- 결제창 -->      
          
-       </div>   
+       <!-- </div>    -->
        
          
          

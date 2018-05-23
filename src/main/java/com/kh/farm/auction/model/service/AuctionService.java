@@ -12,7 +12,13 @@ public interface AuctionService {
 	/*경매 등록*/
 	int insertAuctionMake(Auction auction);
 
-	List<Auction> selectAuctionList();
+	/*경매 메인 */
+	List<Auction> selectAuctionList(int page);
 	
+	/*경매 디테일*/
 	Auction selectAuctionDetail(int auction_no);
+
+	Auction deleteAuction(int auction_no);
+
+	Auction selectModifyAuction(int auction_no);
 }

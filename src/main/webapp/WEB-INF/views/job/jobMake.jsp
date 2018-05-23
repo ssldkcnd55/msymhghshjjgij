@@ -36,10 +36,7 @@
 		</div>
 		<div id="container">
 			<div class="inner-wrap">
-				<br> <br> <br> <br> <br> <br> <br>
-				<br>
-				<h1 class="h1">구인구직</h1>
-				<br> <br> <br>
+				<div class="title1 jobMake"><p class="titleP">구인구직 글쓰기</p></div>
 
 				<div class="div">
 					<table class="jung_table">

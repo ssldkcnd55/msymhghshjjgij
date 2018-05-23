@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,7 +11,7 @@
 <script type="text/javascript" src="/farm/resources/js/jquery-3.3.1.min.js"></script>
 <script type="text/javascript" src="/farm/resources/js/HuskyEZCreator.js" charset="utf-8"></script>
 <meta charset="UTF-8">
-<title>Farm</title>
+<title>경매 수정</title>
 <script type="text/javascript">
 
 	/* 사진 */
@@ -43,9 +45,9 @@
 		</div>
 		<div id="container">
 			<div class="inner-wrap">
-				<div class="title1 auctionMake"><p class="titleP">경매 글쓰기</p></div>
-				<form action="insertAuctionMake.do" method="post" enctype="multipart/form-data">
-				<input type="hidden" value="${loginUser.member_id}" name="member_id">
+				<div class="title1 auctionMake"><p class="titleP">경매 수정</p></div>
+				<%-- <form action="insertAuctionMake.do" method="post" enctype="multipart/form-data">
+				<input type="hidden" value="${loginUser.member_id}" name="member_id"> --%>
 				<div class="main_width">
 					<table class="jung_table">
 						<tbody>
@@ -54,7 +56,7 @@
 									<p class="p">상품명</p>
 								</td>
 								<td class="td2" colspan="3"><input type="text"
-									name="auction_title" required="required"> <input type="submit"
+									name="auction_title" value="${auction.auction_title}" required="required"> <input type="submit"
 									 name="category_no" value="카테고리검색" class="input_text_box">
 									<br></td>
 							</tr>
@@ -64,7 +66,7 @@
 									
 									</td>
 									<td class="td2" colspan="3"><input type="text"
-									name="auction_intro" required="required"></td>
+									name="auction_intro" value="${auction.auction_intro}" required="required"></td>
 							</tr>
 							<tr class="tr1">
 									<td class="td1">
@@ -76,7 +78,8 @@
 											<input type="file" name="upfile" id="cma_file"
 												accept="image/*" capture="camera"
 												onchange="getThumbnailPrivew(this,$('#cma_image'))"
-												style="margin-left: 2px;"  /> <br /> <br />
+												style=" margin-left: 2px;, background-image: url('/farm/resources/upload/auctionUpload/${auction.auction_img}'); background-size: cover;"
+												/> <br /> <br />
 											<div id="cma_image"
 												style="width: 100px; max-width: 100px; margin-left: 210px;"></div>
 										</div>
@@ -88,7 +91,7 @@
 									<p class="p">경매시작가</p>
 								</td>
 								<td colspan="3" class="td2"><input type="text"
-									name="auction_startprice"> <br></td>
+									name="auction_startprice" value="${auction.auction_startprice}"> <br></td>
 							</tr>
 							<tr class="tr1">
 								<td class="td1">
@@ -98,7 +101,7 @@
 								<td colspan="3" class="td2"><input type="text"
 									name="auction_directprice"> <input type="checkbox"
 									 class="input_checkbox"
-									style="margin-left: 15px;">즉시구매가설정안함<br></td>
+									style="margin-left: 15px;" value="${auction.auction_directprice}">즉시구매가설정안함<br></td>
 							</tr>
 							<tr class="tr1">
 								<td class="td3">
@@ -106,13 +109,13 @@
 									<p class="p">경매시작날짜</p>
 								</td>
 								<td class="td4"><input type="date" name="auction_startdate"
-									class="input_datebox" required> <br></td>
+									class="input_datebox" value="${auction.auction_startdate}"> <br></td>
 								<td class="td3">
 
 									<p class="p">경매마감날짜</p>
 								</td>
 								<td class="td4"><input type="date" name="auction_enddate"
-									class="input_datebox" required></td>
+									class="input_datebox" value="${auction.auction_enddate}"></td>
 							</tr>
 							<table class="jung_table2">
 								<tbody>
@@ -129,7 +132,7 @@
 							<tr>
 								<td class="main_width">
 										<textarea name="auction_note" id="auction_note" rows="10" cols="100"
-											style="width: 100%; height: 600px; display: none;"></textarea>
+											style="width: 100%; height: 600px; display: none;" ></textarea>
 									</td>
 							</tr>
 						</tbody>
@@ -154,10 +157,10 @@
 					<ul style="list-style: none;">
 						<li class="li3" onclick="location.href='/#'">뒤로가기</li>
 						<li class="li4"><input class="li4_input" type="submit" value="경매등록" onclick="auctionDetail();"></li>
-						<!-- <li class="li4" onclick="location.href='/#'">물품등록</li> -->
+					
 					</ul>
 				</div>
-				</form>
+			<!-- 	</form> -->
 			</div>
 		</div>
 		 <%@ include file="../messenger/msg_box.jsp"%>

@@ -15,11 +15,24 @@
 	type="text/css" />
 <link href="/farm/resources/css/payList.css" rel="stylesheet"
 	type="text/css" />
+<link href="/farm/resources/css/auctionDetail.css" rel="stylesheet"
+	type="text/css" />
 
 <script type="text/javascript"
 	src="/farm/resources/js/jquery-3.3.1.min.js"></script>
 <script type="text/javascript" src="/farm/resources/js/tabMove.js"></script>
 
+<script type="text/javascript">
+	/* 삭제 버튼 */
+	function auctionDelete(){
+		location.href="/farm/auctionDelete.do?auction_no=${auction.auction_no}";
+	}
+	
+	/* 수정 버튼 */
+	function auctionModify(){
+		location.href="/farm/auctionModify.do?auction_no=${auction.auction_no}";
+	}
+</script>
 </head>
 <body>
 	<div id="top_line"></div>
@@ -32,18 +45,20 @@
 		<div id="container">
 			<div class="inner-wrap">
 				<div class="title_box">
-					<span class="title">신선한 청송 사과</span> &nbsp; <span
-						class="release_date">출고예정일</span>&nbsp;<span class="date">2018.05.05</span>
+					<span class="title">${auction.auction_title }</span> &nbsp; <span
+						class="release_date">경매 시작일</span>&nbsp;<span class="date">${auction.auction_startdate}</span>
+						<span><button class="modify" onclick="auctionModify();">수정</button></span>
+						<span><button class="delete" onclick="auctionDelete();">삭제</button></span>
 				</div>
 				<div class="img_box"
-					style="background-image: url('/farm/resources/images/apple.jpg'); background-size: cover;">
+					style="background-image: url('/farm/resources/upload/auctionUpload/${auction.auction_img}'); background-size: cover;">
 
 				</div>
 				<div class="title_box">
 					<div
 						style="border-bottom: 1px solid #bdbdbd; padding-bottom: 20px;">
-						<span class="title">신선한 청송 사과</span> &nbsp; <span
-							class="release_date">출고예정일</span>&nbsp;<span class="date">2018.05.05</span>
+						<span class="title">${auction.auction_title }</span> &nbsp; <span
+							class="release_date">경매 시작일</span>&nbsp;<span class="date">${auction.auction_startdate}</span>
 					</div>
 				</div>
 				<div class="note">
