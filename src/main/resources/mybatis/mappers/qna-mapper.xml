@@ -31,4 +31,8 @@
 <select id="mainQnaCount" parameterType="int" resultType="int">
 		select count(*) from main_qna
 	</select>
+	
+	<select id="mainQnaDetail" parameterType="int" resultType="MainQna">
+	select * from main_qna where main_qna_no = #{main_qna_no}
+	</select>
 </mapper>

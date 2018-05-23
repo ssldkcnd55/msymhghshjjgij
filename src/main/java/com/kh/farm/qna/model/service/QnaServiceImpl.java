@@ -41,4 +41,9 @@ public class QnaServiceImpl implements QnaService{
 		// TODO Auto-generated method stub
 		return qnaDao.selectMainQnaCount(sqlSession);
 	}
+	@Override
+	public MainQna selectMainQnaDetail(int qna_no) {
+		// TODO Auto-generated method stub
+		return qnaDao.selectMainQnaDetail(sqlSession,qna_no);
+	}
 }

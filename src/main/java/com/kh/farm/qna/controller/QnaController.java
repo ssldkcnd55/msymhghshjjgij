@@ -112,4 +112,12 @@ public class QnaController {
 		out.close();
 		
 	}
+	
+	@RequestMapping(value="qnaDetail.do")
+	public ModelAndView qnaDetail(ModelAndView mv,@RequestParam("main_qna_no") int qna_no) {
+		MainQna mq = qnaService.selectMainQnaDetail(qna_no);
+		mv.addObject("main_qna",mq);
+		mv.setViewName("qna/qnaDetail");
+		return mv;
+	}
 }
