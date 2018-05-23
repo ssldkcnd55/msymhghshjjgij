@@ -27,13 +27,23 @@ public class CategoryImpl implements CategoryService{
 		return categoryDao.selectCategory_main(sqlSession);
 	}
 	@Override
-	public List<Category> selectCategory_small() {
-		// 카테고리 소분류
-		return categoryDao.selectCategory_small(sqlSession);
-	}
-	@Override
 	public List<Category> selectCategory_name() {
 		// 카테고리 이름
 		return categoryDao.selectCategory_name(sqlSession);	}
+	@Override
+	public int deleteCategory_main(String category_main) {
+		// TODO Auto-generated method stub
+		return categoryDao.deleteCategory_main(sqlSession,category_main);
+	}
+	@Override
+	public int deleteCategory_name(int category_no) {
+		// TODO Auto-generated method stub
+		return categoryDao.deleteCategory_name(sqlSession,category_no);
+	}
+	@Override
+	public int addCategory_main(String category_main) {
+		// TODO Auto-generated method stub
+		return categoryDao.addCategory_main(sqlSession,category_main);
+	}
 	
 }
