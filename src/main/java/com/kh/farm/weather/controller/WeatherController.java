@@ -66,7 +66,7 @@ public class WeatherController {
 		File file = new File(this.getClass().getResource(".").getPath() + "weather_info.xls");
 
 		if (!file.exists()) {
-			System.out.println("������ �����ϴ�.");
+			System.out.println("파일이 없습니다.");
 		}
 
 		Workbook workbook = null;
@@ -81,7 +81,7 @@ public class WeatherController {
 
 			for (int i = 0; i < row; i++) {
 				for (int j = 0; j < col; j++) {
-					if(sheet.getCell(j, i).getContents().equals("광주광역시") && sheet.getCell(j+1, i).getContents().equals("서구")) {
+					if(sheet.getCell(j, i).getContents().equals("서울특별시") && sheet.getCell(j+1, i).getContents().equals("강남구")) {
 						nx=""+sheet.getCell(j+3, i).getContents();
 						ny=""+sheet.getCell(j+4, i).getContents();
 						check=1;
@@ -125,7 +125,6 @@ public class WeatherController {
 		bos.close();
 
 		String str = bos.toString("UTF-8");
-		System.out.println("str: " + str);
 
 		JSONObject json = new JSONObject();
 		json.put("data", str);
