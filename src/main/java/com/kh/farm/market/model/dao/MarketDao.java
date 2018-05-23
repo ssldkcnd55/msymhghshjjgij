@@ -45,6 +45,7 @@ public class MarketDao {
 		int listCount = sqlSession.selectOne("market.reviewCount",mk.getMarket_no());
 		return listCount;
 	}
+	
 	public int insertMarket(SqlSessionTemplate sqlSession, Market market) {
 		int insertMarket = sqlSession.insert("market.insertMarket", market);
 		return insertMarket;
@@ -55,4 +56,12 @@ public class MarketDao {
 		int insertMarket_qna = sqlSession.insert("market.insertMarket_qna",qna);
 		return insertMarket_qna;
 	}
+
+
+
+	public int insertReview(SqlSessionTemplate sqlSession, Review rv) {
+		int insertReview = sqlSession.insert("market.insertReview",rv);
+		return insertReview;
+	}
+
 }

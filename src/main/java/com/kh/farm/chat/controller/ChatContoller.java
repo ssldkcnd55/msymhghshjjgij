@@ -37,9 +37,11 @@ public class ChatContoller {
 	 @ResponseBody
 	 public String selectChatHistory(HttpServletResponse response, Chat chat) throws IOException
 	 {
+		chatService.updateChatHistoryAlarm(chat);
 		 response.setContentType("application/json; chatset=utf-8;");
 		 ArrayList<ChatHistory> chatHistory = (ArrayList<ChatHistory>)chatService.selectChatHistory(chat);
 		 Member you= memberService.selectMember(chat.getMember_id2());
+		 int alarmCount = chatService.selectAlarmCount(chat.getMember_id1());
 		 JSONArray jarr = new JSONArray();
 		 for(ChatHistory c : chatHistory)
 		 {
@@ -53,10 +55,11 @@ public class ChatContoller {
 			 jarr.add(j);
 		 }
 		 JSONObject json = new JSONObject();
+		 
 		 json.put("ht", jarr);
 		 json.put("name", URLEncoder.encode(you.getMember_name(),"utf-8"));
 		 json.put("img", URLEncoder.encode(you.getMember_img(),"utf-8"));
-
+		 json.put("alarmCount", alarmCount);
 		return json.toJSONString();
 	 }
 	
