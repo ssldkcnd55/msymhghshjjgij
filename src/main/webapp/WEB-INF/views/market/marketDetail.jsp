@@ -128,6 +128,10 @@ function qnaMake(){
 	location.href ="/farm/MarketQnaMakeMove.do?market_no=${market.market_no}";
 }
 
+function writeReview(){
+	location.href ="/farm/writeReviewMove.do?market_no=${market.market_no}";
+}
+
 function reviewPage(page){
 	$.ajax({
 		url:"reviewList.do",
@@ -483,6 +487,7 @@ function reviewPage(page){
 	       	<!-- qna Box -->
 	       	
 	       	<div id="tab-4" class="tab-content">
+	       	<button class="market_write" onclick="writeReview();">후기 쓰기</button>
 		       	<div class="qna_box">
 	
 	            <table class="review_table">

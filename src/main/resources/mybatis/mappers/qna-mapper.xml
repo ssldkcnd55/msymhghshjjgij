@@ -19,4 +19,20 @@
 	<select id="selectQna" parameterType="int" resultType="Market_qna">
 		select * from market_qna where market_qna_no = #{qna_no}
 	</select>
+	
+<select id="mainQnaList" parameterType="PageNumber" resultType="MainQna">
+	<![CDATA[
+	select * from (select rownum rnum, main_qna_no, main_qna_title, member_id,main_qna_date from main_qna 
+	order by main_qna_no desc) where rnum >=#{startRow} and rnum <=#{endRow}
+	
+	]]>
+
+</select>
+<select id="mainQnaCount" parameterType="int" resultType="int">
+		select count(*) from main_qna
+	</select>
+	
+	<select id="mainQnaDetail" parameterType="int" resultType="MainQna">
+	select * from main_qna where main_qna_no = #{main_qna_no}
+	</select>
 </mapper>

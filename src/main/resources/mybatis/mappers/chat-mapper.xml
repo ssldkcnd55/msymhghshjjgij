@@ -86,4 +86,22 @@ select (case when max(chat_no) is null then 0 else max(chat_no) end)+1  as "max(
 </insert>
 
 
+<select id="selectChatFriends" parameterType="String" resultType="String">
+<![CDATA[
+select chat_no||'_'||case when member_id1=#{member_id} then member_id2 else member_id1 end from chat  where member_id1=#{member_id} or member_id2=#{member_id}
+]]>
+
+</select>
+
+<select id="selectAlarmCount" parameterType="String" resultType="int">
+<![CDATA[
+select count( CHAT_HISTORY_ALARM) 
+from CHAT_HISTORY 
+where 
+  CHAT_HISTORY_ALARM = 'N' and
+  MEMBER_ID != #{member_id} and
+  CHAT_NO in (select CHAT_NO from chat where chat.MEMBER_ID1=#{member_id} or chat.MEMBER_ID2=#{member_id})
+]]>
+</select>
+
 </mapper>

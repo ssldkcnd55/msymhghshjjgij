@@ -42,11 +42,11 @@ img{border:0}
 #container { width:100%; min-height:1085px; position:relative; clear:both;  }
 		#container div.inner-wrap { width:960px; margin:20px auto 0 ; position:relative; display: flow-root;}
 		
-		#container div.main_visual{ width:630px; height:440px; border:1px solid #9CC; float:left;}
+		#container div.main_visual{ width:630px; height:440px;/*  border:1px solid #9CC; */ float:left;}
 		
 		#container div.tab_main{width:300px; height:440px; border:1px solid #9CC; float:right; }
-		#container div.box { width:300px; height:503px; border:1px solid #9CC; margin:36px 27px 30px 0; float:left;}
-		#container div.box2 { width:300px; height:503px; border:1px solid #9CC; margin:36px 0px 30px 0;float:left; }
+		#container div.box { width:300px; height:503px; border:1px solid #9CC; margin:45px 27px 30px 0; float:left;}
+		#container div.box2 { width:300px; height:503px; border:1px solid #9CC; margin:45px 0px 30px 0;float:left; }
 
 
 #footer { width:100%; padding:20px 0 40px 0; border-top:solid 1px #CCC; margin:0 auto; position:relative; }
@@ -71,4 +71,67 @@ img{border:0}
 .titleP{
 	margin-top:25px;
 	margin-left:40px;
+}
+
+.pagination {
+    display: inline-block;
+    align:center;
+    padding-top:40px;
+}
+
+.pagination a { 
+    color: black;
+    float: left;
+    padding: 10px 20px;
+    text-decoration: none;
+    font-size:12pt;
+}
+
+.pagination a.active {
+    background-color: #4a2419;
+    color: white;
+    border-radius: 5px;
+}
+
+.pagination a:hover:not(.active) {
+    background-color: #cfc085;
+    border-radius: 5px;
+}
+
+/* 검색 */
+.search_box{
+   float:right;
+   padding-top:5px;
+   padding-right:10px;
+   
+}
+.green_window {
+   display: inline-block;
+   width: 250px; height: 34px;
+   border: 3px solid #4a2419;
+   background: white;
+   margin-top:40px;
+   
+}
+.input_text {
+   width: 247px; height: 11px;
+   margin-top:40px ;
+   border: 0;
+   line-height: 21px;
+   font-weight: bold;
+   font-size: 12pt;
+   outline: none;
+}
+.sch_smit {
+   width: 54px; height: 40px;
+   margin-top:40px ; border: 0;
+   vertical-align: top;
+   background: #4a2419;
+   color: white;
+   font-weight: bold;
+   border-radius: 1px;
+   cursor: pointer;
+}
+.sch_smit:hover {
+   background: #cfc085;
 }
