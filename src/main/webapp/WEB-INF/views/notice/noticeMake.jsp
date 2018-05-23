@@ -20,7 +20,7 @@
 		</div>
 		<div id="container">
 			<div class="inner-wrap">
-				<br> <br> <br> <br> <br> <br>
+				<br> <br> 
 				<h1 style="text-align: center; margin: auto;">공지사항</h1>
 				<br> <br> <br>
 

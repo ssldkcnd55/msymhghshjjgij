@@ -72,7 +72,7 @@
 				category_big+='<button id="'+json.big[i].category_main+'" onclick="deleteBig(this)">'
 				+'대분류삭제</button><button class="accordion"  onclick="toggleList();">'
 				+json.big[i].category_main+'</button>'
-				+'<div class="panel" id="'+json.big[i].category_main+'1"></div>'
+				+'<div class="panel" id="'+json.big[i].category_main+'1" name="'+json.big[i].category_main+'"></div>'
 			}
 			$('.category_list').append(category_big);
 			$.ajax({
@@ -95,7 +95,7 @@
 						}
 						
 					}
-					$(".panel").append("<button onclick="add_category_name()">항목추가</button>");
+					$(".panel").append("<button onclick='add_category_name(this);'>항목추가</button>");
 				}
 				
 			});
@@ -142,6 +142,19 @@
 			return false;
 		}else{
 			location.href='addCategory_main.do?category_main='+input;
+		
+		}
+	}
+	
+	//카테고리 소분류 추가
+	function add_category_name(str) {
+		console.log($(str).closest('div').attr('name'));
+		var main = $(str).closest('div').attr('name');
+		var input = prompt('소분류 카테고리의 이름을 적으세요.');
+		if(input == null) {
+			return false;
+		}else{
+			location.href='addCategory_name.do?category_name='+input+"&category_main="+main;
 		
 		}
 	}

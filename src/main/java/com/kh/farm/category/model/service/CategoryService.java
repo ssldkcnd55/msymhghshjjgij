@@ -18,4 +18,6 @@ public interface CategoryService {
 	int deleteCategory_name(int category_no);
 
 	int addCategory_main(String category_main);
+
+	int addCategory_name(Category category);
 }

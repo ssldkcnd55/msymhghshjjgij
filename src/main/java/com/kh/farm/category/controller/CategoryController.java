@@ -125,4 +125,15 @@ public class CategoryController {
 		return "에러페이지";
 		}
 	}
+	
+	@RequestMapping(value="addCategory_name.do")
+	public String addCategory_name(Category category) {
+		int result = categoryService.addCategory_name(category);
+		if(result > 0) {
+			
+			return "redirect:/moveAdminCategory.do";
+		}else {
+		return "에러페이지";
+		}
+	}
 }

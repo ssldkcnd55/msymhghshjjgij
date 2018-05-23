@@ -39,4 +39,11 @@
 	]]>
 
 </insert>
+
+<insert id="addCategory_name" parameterType="category" flushCache="true" useGeneratedKeys="true">
+	<![CDATA[
+		insert into category values((select max(category_no) from category)+1,#{category_main},#{category_name})
+	]]>
+
+</insert>
 </mapper>
