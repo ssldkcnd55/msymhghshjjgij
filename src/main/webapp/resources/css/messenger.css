@@ -219,10 +219,23 @@ width: 20px;
 
 .msg_title_name {
 	margin-top: 2px;
-	font-size: 13pt;
-	color: #ffffffdb;
+    max-width: 241px;
+    max-height: 23px;
+    color: #ffffffdb;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    float: left;
+    display: inline-block;
+    white-space: nowrap;
 }
-
+.msg_title_name:hover {
+    white-space: unset;
+    max-height: none;
+    overflow: unset;
+    text-overflow: unset;
+    float: left;
+    display: block;
+}
 .msg_title_online {
     text-align: left;
     font-size: 10pt;
