@@ -29,12 +29,13 @@ public class Auction implements java.io.Serializable {
 	
 	}
 
-	public Auction(int auction_no, String member_id, String auction_title, String auction_note, String auction_img,
-			Date auction_startdate, Date auction_enddate, String auction_intro, String auction_status,
-			int auction_startprice, int auction_directprice) {
+	public Auction(int auction_no, String member_id, String category_no, String auction_title, String auction_note,
+			String auction_img, Date auction_startdate, Date auction_enddate, String auction_intro,
+			String auction_status, int auction_startprice, int auction_directprice) {
 		super();
 		this.auction_no = auction_no;
 		this.member_id = member_id;
+		this.category_no = category_no;
 		this.auction_title = auction_title;
 		this.auction_note = auction_note;
 		this.auction_img = auction_img;
@@ -45,6 +46,7 @@ public class Auction implements java.io.Serializable {
 		this.auction_startprice = auction_startprice;
 		this.auction_directprice = auction_directprice;
 	}
+
 
 	@Override
 	public String toString() {
@@ -69,6 +71,16 @@ public class Auction implements java.io.Serializable {
 
 	public void setMember_id(String member_id) {
 		this.member_id = member_id;
+	}
+
+	
+	
+	public String getCategory_no() {
+		return category_no;
+	}
+
+	public void setCategory_no(String category_no) {
+		this.category_no = category_no;
 	}
 
 	public String getAuction_title() {

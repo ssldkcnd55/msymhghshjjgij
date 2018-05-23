@@ -25,13 +25,24 @@ public class AuctionServiceImpl implements AuctionService{
 	}
 	
 	@Override
-	public List<Auction> selectAuctionList() {
-		return auctionDao.selectAuctionList(sqlSession);
+	public List<Auction> selectAuctionList(int page) {
+		return auctionDao.selectAuctionList(sqlSession,page);
 	}
 	
 	@Override
 	public Auction selectAuctionDetail(int auction_no) {
 		return auctionDao.selectAuctionDetail(sqlSession,auction_no);
+	}
+	
+	@Override
+	public Auction deleteAuction(int auction_no) {
+		return auctionDao.deleteAuction(sqlSession,auction_no);
+	}
+	
+	@Override
+	public Auction selectModifyAuction(int auction_no) {
+		return auctionDao.selectModifyAuction(sqlSession,auction_no);
+
 	}
 
 }
