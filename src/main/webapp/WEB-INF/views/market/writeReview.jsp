@@ -22,10 +22,10 @@
 		</div>
 		<div id="container">
 			<div class="inner-wrap">
-				<div class="title qna"><p class="titleP">QnA</p></div>
+				<div class="title qna"><p class="titleP">후기 쓰기</p></div>
 
 				<div class="div">
-				<form action="marketQnaMake.do" method="post">
+				<form action="writeReivew.do" method="post">
 					<table class="jung_table">
 						<tbody>
 							<tr class="tr">
@@ -33,12 +33,12 @@
 									<p class="p">제목</p>
 								</td>
 								<td colspan="3" class="td2"><input type="text"
-									name="market_qna_title" class="input_text_box"> <br></td>
+									name="review_title" class="input_text_box"> <br></td>
 							</tr>
 							<table class="jung_table2">
 								<tbody>
 									<tr class="tr2">
-										<td class="td3"><h3 class="h3">질문내용</h3></td>
+										<td class="td3"><h3 class="h3">내용</h3></td>
 									</tr>
 								</tbody>
 							</table>
@@ -50,7 +50,7 @@
 							<tr>
 								<td style="width: 100%;">
 									
-										<textarea name="market_qna_contents" id="ir1" rows="10" cols="100"
+										<textarea name="review_contents" id="ir1" rows="10" cols="100"
 											style="width: 100%; height: 250px; display: none;"></textarea>
 									</td>
 							</tr>
