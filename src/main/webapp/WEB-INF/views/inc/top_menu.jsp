@@ -45,12 +45,7 @@
             
             $("#weather_img").attr("src",img);
             $("#w_text").html(img_text);
-         },
-         error: function(request, status, errorData){
-            alert("error code : " + request.status + "\n"
-                  + "message : " + request.responseText + "\n"
-                  + "error : " + errorData);
-            }
+         }
       });
    }); 
 </script>
