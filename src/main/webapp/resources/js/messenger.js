@@ -9,7 +9,7 @@ var beforeName = null;
 var beforeTime = null;
 var beforeDate = null;
 var nowDate = null;
-var contents_height = 0;
+
 $(function() {
 	/* 검색 엔터키 연동 */
 	$('.search_member input').keydown(function(key) {
@@ -79,8 +79,7 @@ function insertChat(my_id, your_id) {// 대화상대 추가
 /* 대화추가 검색 메서드 */
 function searchMember() {
 
-	$
-			.ajax({
+	$.ajax({
 				url : "searchChatMember.do",
 				type : "post",
 				dataType : "json",
@@ -143,7 +142,10 @@ function searchMember() {
 
 /* 검색결과 가리고 대화목록 띄우기 */
 function back_chat_list() {
-
+	 beforeName = null;
+	 beforeTime = null;
+	 beforeDate = null;
+	 nowDate = null;
 	$.ajax({
 				url : "getChatList.do",
 				type : "post",
