@@ -42,11 +42,11 @@ img{border:0}
 #container { width:100%; min-height:1085px; position:relative; clear:both;  }
 		#container div.inner-wrap { width:960px; margin:20px auto 0 ; position:relative; display: flow-root;}
 		
-		#container div.main_visual{ width:630px; height:440px; border:1px solid #9CC; float:left;}
+		#container div.main_visual{ width:630px; height:440px;/*  border:1px solid #9CC; */ float:left;}
 		
 		#container div.tab_main{width:300px; height:440px; border:1px solid #9CC; float:right; }
-		#container div.box { width:300px; height:503px; border:1px solid #9CC; margin:36px 27px 30px 0; float:left;}
-		#container div.box2 { width:300px; height:503px; border:1px solid #9CC; margin:36px 0px 30px 0;float:left; }
+		#container div.box { width:300px; height:503px; border:1px solid #9CC; margin:45px 27px 30px 0; float:left;}
+		#container div.box2 { width:300px; height:503px; border:1px solid #9CC; margin:45px 0px 30px 0;float:left; }
 
 
 #footer { width:100%; padding:20px 0 40px 0; border-top:solid 1px #CCC; margin:0 auto; position:relative; }
