@@ -45,4 +45,9 @@ public class MarketServiceImpl implements MarketService{
 		// TODO Auto-generated method stub
 		return marketDao.insertMarket_qna(sqlSession,qna);
 	}
+	@Override
+	public int insertReview(Review rv) {
+		// TODO Auto-generated method stub
+		return marketDao.insertReview(sqlSession,rv);
+	}
 }

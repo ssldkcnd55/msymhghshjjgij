@@ -19,4 +19,6 @@ public interface MarketService {
 
 	int insertMarket_qna(Market_qna qna);
 
+	int insertReview(Review rv);
+
 }

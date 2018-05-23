@@ -50,4 +50,11 @@
 	]]>
 	</insert>
 	
+	<insert id="insertReview" parameterType="review" flushCache="true" useGeneratedKeys="true">
+	<![CDATA[
+		insert into review values((select max(review_no) from review)+1,#{member_id},#{market_no},sysdate,#{review_title},#{review_contents}
+		)
+	]]>
+	</insert>
+	
 </mapper>

@@ -174,7 +174,20 @@ public class MarketController {
 		mv.setViewName("market/marketQnaMake");
 		return mv;
 		
-		
+	}
+	
+	@RequestMapping(value="writeReviewMove.do")
+	public ModelAndView writeReviewMove(ModelAndView mv, Market mk) {
+		mv.addObject("market",mk);
+		mv.setViewName("market/writeReview");
+		return mv;
+	}
+	
+	@RequestMapping(value="writeReivew.do", method=RequestMethod.POST)
+	public String writeReview (Review rv) {
+		int rv_no = rv.getMarket_no();
+		int insertReview = marketService.insertReview(rv);
+		return "forward:/marketDetail.do?market_no="+rv_no;
 	}
 	
 }
