@@ -57,5 +57,18 @@ public class ChatServiceImpl implements ChatService {
 		
 		return chatDao.insertChat(sqlSession,chat);
 	}
+
+	@Override
+	public List<String> selectChatFriends(String member_id) {
+		
+		return chatDao.selectChatFriends(sqlSession,member_id);
+	}
+
+	@Override
+	public int selectAlarmCount(String member_id) {
+		
+		return chatDao.selectAlarmCount(sqlSession,member_id);
+	}
+	
 	
 }

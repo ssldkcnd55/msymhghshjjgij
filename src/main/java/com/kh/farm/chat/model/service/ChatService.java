@@ -14,4 +14,6 @@ public interface ChatService {
 	List<Member> selectChatMember(String sv);
 	int selectChatNo(Chat chat);
 	int insertChat(Chat chat);
+	List<String> selectChatFriends(String member_id);
+	int selectAlarmCount(String member_id);
 }
