@@ -18,4 +18,6 @@ public interface QnaService {
 
 	int selectMainQnaCount();
 
+	MainQna selectMainQnaDetail(int qna_no);
+
 }

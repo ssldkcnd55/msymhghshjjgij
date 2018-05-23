@@ -55,4 +55,11 @@ public class QnaDao {
 		return listCount;
 	}
 
+	public MainQna selectMainQnaDetail(SqlSessionTemplate sqlSession, int main_qna_no) {
+		// TODO Auto-generated method stub
+		
+		MainQna mq = sqlSession.selectOne("qna.mainQnaDetail",main_qna_no);
+		return mq;
+	}
+
 }

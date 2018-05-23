@@ -22,7 +22,7 @@ $(function(){
 			
 			for(var i in jsonObj.list){
 				outValues += "<tr id='hover'><td>"+jsonObj.list[i].rnum+"</td>"
-				+"<td id='QnA_td'><a href='/farm/marketQnaDetail.do?qna_no="+jsonObj.list[i].main_qna_no+"'>"+jsonObj.list[i].main_qna_title+"</a></td>"
+				+"<td id='QnA_td'><a href='/farm/qnaDetail.do?main_qna_no="+jsonObj.list[i].main_qna_no+"'>"+jsonObj.list[i].main_qna_title+"</a></td>"
 				+"<td>"+jsonObj.list[i].member_id+"</td><td>"+jsonObj.list[i].main_qna_date+"</td></tr>";
 			}
 			$(".QnA_table").html(outValues);	
@@ -76,7 +76,7 @@ function qnaPage(page){
 			
 			for(var i in jsonObj.list){
 				outValues += "<tr id='hover'><td>"+jsonObj.list[i].rnum+"</td>"
-				+"<td id='QnA_td'><a href='/farm/marketQnaDetail.do?qna_no="+jsonObj.list[i].main_qna_no+"'>"+jsonObj.list[i].main_qna_title+"</a></td>"
+				+"<td id='QnA_td'><a href='/farm/qnaDetail.do?main_qna_no="+jsonObj.list[i].main_qna_no+"'>"+jsonObj.list[i].main_qna_title+"</a></td>"
 				+"<td>"+jsonObj.list[i].member_id+"</td><td>"+jsonObj.list[i].main_qna_date+"</td></tr>";
 			}
 			$(".QnA_table").html(outValues);	
@@ -114,6 +114,10 @@ function qnaPage(page){
 	       }
 	});
 }
+
+function qnaMake(){
+	location.href ="/farm/moveQnaMake.do";
+}
 </script>
 <!-- QnA.css -->
 <link rel="stylesheet" type="text/css" href="/farm/resources/css/style.css" />
@@ -132,7 +136,7 @@ function qnaPage(page){
          <div class="inner-wrap">
          <div class="board-wrap">
             <div class="title1 qna"><p class="titleP">QnA</p></div>
-
+	<button class="market_write" onclick="qnaMake();">QnA 등록</button>
             <!-- select box -->
             <div class="select_box">
                <select class="select">
