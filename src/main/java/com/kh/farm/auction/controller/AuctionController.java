@@ -123,7 +123,7 @@ public class AuctionController {
 			JSONObject jauction = new JSONObject();
 			jauction.put("auction_title", a.getAuction_title());
 			jauction.put("auction_no", a.getAuction_no());
-			jauction.put("auction_intro", a.getAuction_intro());
+			jauction.put("auction_note", a.getAuction_note());
 			jauction.put("auction_img", a.getAuction_img());
 			
 			jarr.add(jauction);
@@ -147,12 +147,70 @@ public class AuctionController {
 		return "forward:/AuctionList_controller.do";
 	}
 	
-	/*수정버튼*/
+	/*수정버튼 정보들고 수정화면으로 이동*/
 	@RequestMapping(value="auctionModify.do")
 	public String ModifyAuction(Model model, @RequestParam(value="auction_no") int auction_no) {
 		Auction selectModifyAuction = auctionService.selectModifyAuction(auction_no);
 		selectModifyAuction.toString();
 		model.addAttribute("auction", selectModifyAuction);
-		return "auction/auctionModify.do";
+		return "auction/auctionModify";
 	}
+	
+	/*수정 등록 */
+	@RequestMapping(value="updateAuctionMake.do",method=RequestMethod.POST)
+	public String updateAuctionMake(Model model, @RequestParam(value="auction_no") int auction_no,
+			@RequestParam(name = "upfile", required = false) MultipartFile file, @RequestParam(name = "auction_img") String auction_img,
+			 Auction auction,HttpServletResponse response,HttpServletRequest request) {
+		
+		if(file.getOriginalFilename() == null) {
+			auction.setAuction_img(auction_img); 
+		}
+		String path = request.getSession().getServletContext().getRealPath("resources/upload/auctionUpload");
+		
+		try {
+			
+			if (file.getOriginalFilename() != null && !file.getOriginalFilename().equals("")) {
+				//file.transferTo(new File(path + "\\" + file.getOriginalFilename()));
+				// 첨부된 파일이 있을 경우, 폴더에 기록된 해당 파일의 이름바꾸기 처리함
+				// 새로운 파일명 만들기 : '년월일시분초'
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
+				String renameFileName = auction.getMember_id()+"_"+sdf.format(new java.sql.Date(System.currentTimeMillis())) + "."
+						+ file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf(".") + 1);
+
+				// 파일명 바꾸려면 File객체의 renameTo() 사용함
+				File originFile = new File(path + "//" + file.getOriginalFilename());
+				File renameFile = new File(path + "//" + renameFileName);
+
+				// 파일 이름바꾸기 실행함
+				// 이름바꾸기 실패할 경우에는 직접 바꾸기함
+				// 직접바꾸기는 원본파일에 대한 복사본 파일을 만든 다음 원본 삭제함
+				if (!originFile.renameTo(renameFile)) {
+					int read = -1;
+					byte[] buf = new byte[1024];
+					// 원본을 읽기 위한 파일스트림 생성
+					FileInputStream fin = new FileInputStream(originFile);
+					// 읽은 내용 기록할 복사본 파일 출력용 파일스트림 생성
+					FileOutputStream fout = new FileOutputStream(renameFile);
+
+					// 원본 읽어서 복사본에 기록 처리
+					while ((read = fin.read(buf, 0, buf.length)) != -1) {
+						fout.write(buf, 0, read);
+					}
+					fin.close();
+					fout.close();
+					originFile.delete(); // 원본파일 삭제
+				}
+				auction.setAuction_img(renameFileName);
+			}
+		} catch (IllegalStateException | IOException e) {
+			e.printStackTrace();
+		}
+		int updateAuctionMake = auctionService.updateAuctionMake(auction);
+		
+		System.out.println("updateAuctionMake : "+updateAuctionMake);
+		
+		return "forward:/AuctionDetail.do";
+	}
+	
+	
 }

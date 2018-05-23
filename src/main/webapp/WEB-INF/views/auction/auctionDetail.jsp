@@ -110,7 +110,7 @@
 
 				<!-- introduce_box -->
 				<div id="tab-1" class="tab-content current">
-					<div class="introduce_box">${auction.auction_note } </div>
+					<div class="introduce_box" style="height:auto;">${auction.auction_intro} </div>
 				</div>
 				<!-- introduce_box -->
 

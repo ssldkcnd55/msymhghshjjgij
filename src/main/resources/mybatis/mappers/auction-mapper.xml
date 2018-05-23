@@ -23,7 +23,7 @@
 	<insert id="insertAuctionMake" parameterType="auction" flushCache="true" useGeneratedKeys="true">
 	<![CDATA[
 		insert into auction values((select max(auction_no) from auction)+1,#{member_id},1,#{auction_title},#{auction_note},#{auction_img},
-		#{auction_startdate},#{auction_enddate},null,'0',#{auction_startprice},#{auction_directprice})
+		#{auction_startdate},#{auction_enddate},#{auction_intro},'0',#{auction_startprice},#{auction_directprice})
 	]]>
 	</insert>
 	
@@ -31,7 +31,7 @@
 	<![CDATA[
 		select * from 
 			(select rownum rnum, auction_no,
-			auction_title,auction_intro,auction_img,
+			auction_title,auction_note,auction_img,
 			member_id from (select * from auction order by 
 			auction_no desc)) where rnum >= #{startRow} and rnum <= #{endRow}
 	]]>
@@ -43,12 +43,6 @@
 	]]>
 	</select>
 	
-	<!-- <select id="total" parameterType="auction" flushCache="true" resultType="auction">
-	<![CDATA[
-		select count(auction_no) from auction 
-	]]>
-	</select> -->
-	
 	
 	<delete id="deleteAuction" parameterType="auction">
 	<![CDATA[
@@ -56,10 +50,20 @@
 	]]>
 	</delete>
 	
-	<select id="selectmodifyAuction" parameterType="auction">
+	<select id="selectmodifyAuction" parameterType="auction" flushCache="true" resultType="auction">
 	<![CDATA[
 		select * from auction where auction_no=#{auction_no}
 	]]>
 	</select>
+	
+	<update id="updateAuctionMake">
+	<![CDATA[
+		update auction set auction_title=#{auction_title},auction_note=#{auction_note},auction_img=#{auction_img},
+		auction_intro=#{auction_intro},auction_startprice=#{auction_startprice},auction_directprice=#{auction_directprice} 
+		where auction_no = #{auction_no}
+	]]>
+	</update>
+	
+	
 	
 </mapper>

@@ -21,4 +21,7 @@ public interface AuctionService {
 	Auction deleteAuction(int auction_no);
 
 	Auction selectModifyAuction(int auction_no);
+
+	/*경매 수정 등록*/
+	int updateAuctionMake(Auction auction);
 }
