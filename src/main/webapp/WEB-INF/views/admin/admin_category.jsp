@@ -28,22 +28,11 @@
 		<!--  -->
 			<h2>카테고리 관리</h2>
 			<div class="category_top" >
-				<button class="big_add">대분류 추가</button>
+				<button class="big_add" onclick="add_category_big()">대분류 추가</button>
 			</div>
 			
 			<div class="category_list">
-				<!-- <button class="accordion">Section 1</button>
-					<div class="panel">
-  					<p></p>
-					</div> -->
 				
-				<button class="accordion" onclick="toggleList();">대분류</button>
-					<div class="panel">
-  						<button class="accordion" onclick="toggleList();">중분류</button>
-							<div class="panel">
-  							<p>div에 div 인거임ㅋㅋㅋㅋㅋ</p>
-							</div>
-					</div>
 				
 			</div>
 			
@@ -79,64 +68,83 @@
 			var json = JSON.parse(jsonStr);
 			var category_big = ""; 
 			
-			/* for(var i in json.big) {
-				category_big+='<button class="accordion" onclick="toggleList();">'
-				+json.big[i].category_main+'</button>'
-				+'<div class="panel" id="'+json.big[i].category_main+'"><button class="accordion" onclick="toggleList();">'
-				+json.big[i].category_small+'</button>'
-				+'<div class="panel" id="'+json.big[i].category_small+'"><p>데이터</p></div></div>'
-			} */
 			for(var i in json.big) {
-				category_big+='<button onclick="deleteBig('+json.big[i].category_main+')">대분류삭제</button><button class="accordion" onclick="toggleList();">'
+				category_big+='<button id="'+json.big[i].category_main+'" onclick="deleteBig(this)">'
+				+'대분류삭제</button><button class="accordion"  onclick="toggleList();">'
 				+json.big[i].category_main+'</button>'
-				+'<div class="panel" id="'+json.big[i].category_main+'"></div>'
+				+'<div class="panel" id="'+json.big[i].category_main+'1"></div>'
 			}
 			$('.category_list').append(category_big);
+			$.ajax({
+				url:"category_name.do" ,
+				type: "post",
+				dateType: "json",
+				success: function(obj){
+					console.log(obj);
+					var jsonStr = JSON.stringify(obj);
+					var json = JSON.parse(jsonStr);
+					var category_big = ""; 
+					
+					
+					for(var i in json.name) {
+						console.log(json.name[i].category_name);
+						if(json.name[i].category_name != "더미") {
+						$("#"+json.name[i].category_main+"1").append("<p>"+json.name[i].category_name
+								+"<button id='"+json.name[i].category_no
+								+"' onclick='deleteName(this)'>항목삭제</button></p>")
+						}
+						
+					}
+					$(".panel").append("<button onclick="add_category_name()">항목추가</button>");
+				}
+				
+			});
 		}
 		
 	});
-	
-	//소분류 출력
-	
-	$.ajax({
-		url:"category_small.do" ,
-		type: "post",
-		dateType: "json",
-		success: function(obj){
-			console.log(obj);
-			var jsonStr = JSON.stringify(obj);
-			var json = JSON.parse(jsonStr);
-			var category_big = ""; 
-			
-			for(var i in json.small) {
-				$("#"+json.small[i].category_main).append('<button onclick="deleteSmall('+json.small[i].category_main+')">소분류삭제</button><button class="accordion" onclick="toggleList();">'
-						+json.small[i].category_small+'</button>'
-						+'<div class="panel" id="'+json.small[i].category_small+'"></div>')
-			}
-			$('.category_list').append(category_big);
-		}
-		
-	});
-	
-	//상품 이름 출력
-	$.ajax({
-		url:"category_name.do" ,
-		type: "post",
-		dateType: "json",
-		success: function(obj){
-			console.log(obj);
-			var jsonStr = JSON.stringify(obj);
-			var json = JSON.parse(jsonStr);
-			var category_big = ""; 
-			
-			for(var i in json.name) {
-				$("#"+json.name[i].category_small).append("<p>"+json.name[i].category_name+"<button>항목삭제</button></p>")
-			}
-		}
-		
-	}); 
 
-
+	
+	
+	//항목 삭제
+	
+	function deleteBig(str) {
+		var inputString = prompt('최고관리자의 승인을 받았습니까? (Y or N)','N');
+		
+		if(inputString=='Y'){
+			console.log(str.id);
+			
+			location.href = "delCategory_big.do?category_main="+ str.id;
+		
+		
+		}else{
+		console.log("bb");
+		return false;
+		}	
+		
+	}	
+	function deleteName(str) {
+		var inputString = prompt('정말 삭제하시겠습니까? (Y or N)','N');
+		
+		if(inputString=='Y'){
+			console.log(str.id);
+			
+			location.href = "delCategory_name.do?category_no="+ str.id;
+		}
+		console.log(str.id);
+	}
+	
+	
+	//카테고리 대분류 추가 
+	function add_category_big() {
+		
+		var input = prompt('대분류 카테고리의 이름을 적으세요.');
+		if(input == null) {
+			return false;
+		}else{
+			location.href='addCategory_main.do?category_main='+input;
+		
+		}
+	}
 	/* 리스트 열림 */
 	function toggleList() {
 	var acc = document.getElementsByClassName("accordion");
@@ -153,8 +161,10 @@
         }
     });
 	}
+	}
 	
-}
+	
+	
 	
 </script>
 	<!-- 스크립트 -->
