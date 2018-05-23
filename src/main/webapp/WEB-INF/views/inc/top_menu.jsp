@@ -23,7 +23,6 @@
             var sky_check=0;
             
             for (var i in myItem) {
-               console.log(i);
                if(myItem[i].category == "T3H" && t3h_check == 0){
                   img_text = myItem[i].fcstValue+"℃";
                   t3h_check=1;
@@ -46,12 +45,7 @@
             
             $("#weather_img").attr("src",img);
             $("#w_text").html(img_text);
-         },
-         error: function(request, status, errorData){
-            alert("error code : " + request.status + "\n"
-                  + "message : " + request.responseText + "\n"
-                  + "error : " + errorData);
-            }
+         }
       });
    }); 
 </script>
