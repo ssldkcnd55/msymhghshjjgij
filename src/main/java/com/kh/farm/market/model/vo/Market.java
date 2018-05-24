@@ -44,6 +44,14 @@ public class Market implements java.io.Serializable{
 		this.market_price = market_price;
 	}
 
+	@Override
+	public String toString() {
+		return "Market [market_no=" + market_no + ", category_no=" + category_no + ", member_id=" + member_id
+				+ ", market_title=" + market_title + ", market_note=" + market_note + ", market_img=" + market_img
+				+ ", market_releasedate=" + market_releasedate + ", market_amount=" + market_amount + ", market_intro="
+				+ market_intro + ", market_complete=" + market_complete + ", market_price=" + market_price + "]";
+	}
+
 	public int getMarket_no() {
 		return market_no;
 	}

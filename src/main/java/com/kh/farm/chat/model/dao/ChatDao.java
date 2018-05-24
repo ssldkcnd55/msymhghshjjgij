@@ -6,6 +6,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.kh.farm.chat.model.vo.*;
+import com.kh.farm.market.model.vo.Market;
 import com.kh.farm.member.model.vo.*;
 
 @Repository
@@ -57,12 +58,17 @@ public class ChatDao {
 
 	public List<String> selectChatFriends(SqlSessionTemplate sqlSession, String member_id) {
 	
-		return sqlSession.selectList("selectChatFriends", member_id);
+		return sqlSession.selectList("chat.selectChatFriends", member_id);
 	}
 
 	public int selectAlarmCount(SqlSessionTemplate sqlSession, String member_id) {
 
-		return sqlSession.selectOne("selectAlarmCount", member_id);
+		return sqlSession.selectOne("chat.selectAlarmCount", member_id);
+	}
+
+	public Market selectRecentViewMarketList(SqlSessionTemplate sqlSession, Market m) {
+	
+		return sqlSession.selectOne("chat.selectRecentViewMarketList",m);
 	}
 	
 }

@@ -50,12 +50,15 @@
 
 .shoppinglist {
 	width: 100px;
-	height: 470px;
+	height: 490px;
 	border: 1PX solid #dcdcdc;
 	padding-top: 0px;
 	background-color: white;
 }
-
+.shoppinglist>a {
+	text-decoration: none;
+	color: black;
+}
 .sh_list1, .sh_list2, .sh_list3 {
 	margin: 15px 15px 0px 15px;
 	width: 70px;
@@ -67,15 +70,24 @@
 	margin-bottom: 2.5px;
 }
 
-.sh1_title {
-	font-size: 10pt;
-	text-align: center;
+.sh1_title, .sh1_title_last {
+    font-size: 10pt;
+    text-align: center;
+    height: 36px;
+    width: 94px;
+    overflow: hidden;
+}
+.page1 a {
+	text-decoration: none;
+	color: black;
+	height: auto;
+	width: auto;
+	display: inline-block;
 }
 
-.sh1_title.last {
-	margin-bottom: 10px;
+.page1 a:hover {
+	background-color: #f2f2f2;
 }
-
 .msgframe {
 	border: 0px;
 	height: 630px;
@@ -108,7 +120,7 @@
 	height: 20px;
 	border: none;
 	border-bottom: 1px solid #DCDCDC;
-	margin-bottom: 5px;
+/* 	margin-bottom: 5px; */
 	line-height: 15px;
 }
 
@@ -122,6 +134,8 @@
 	margin-bottom: 5px;
 	line-height: 15px;
 	border-top: 1px solid #DCDCDC;
+	position: absolute;
+top: 543px;
 }
 
 .move_top {
