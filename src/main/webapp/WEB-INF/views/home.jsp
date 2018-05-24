@@ -31,6 +31,8 @@
 
 		<div id="container">
 			<div class="inner-wrap">
+			
+			
 				<div class="main_visual">
 					<div class="flexslider" style="direction: rtl; border: none;">
 						<ul class="slides">
@@ -73,6 +75,7 @@
 
 
 				</div>
+		
 
 				<div class="bigbox">
 					<div class="big_title">
