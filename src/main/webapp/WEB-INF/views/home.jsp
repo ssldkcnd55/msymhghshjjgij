@@ -20,7 +20,8 @@
 	type="text/css" />
 <script type="text/javascript"
 	src="/farm/resources/js/jquery-3.3.1.min.js"></script>
-
+<script type="text/javascript"
+	src="/farm/resources/js/modernizr.js"></script>
 
 </head>
 
@@ -175,12 +176,9 @@
 
 <script>
 	$(function() {
-		$('.flexslider').flexslider({
-			/* 	animation : "slide",
-		 rtl: true  */
-		});
-	});
-	$(function() {
+		 $('.flexslider').flexslider({
+			 animation: Modernizr.touch ? "slide" : "fade"
+		 });
 
 		$(".tab_content").hide();
 		$(".tab_content:first").show();

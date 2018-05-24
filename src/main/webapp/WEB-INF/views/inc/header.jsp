@@ -72,8 +72,8 @@
                	  <li class="menu1 none_sub"><a href="moveCustomerMypage.do" class="link_menu">${loginUser.member_name}님</a></li>
                   <li class="menu1 none_sub"><a href="logout.do" class="link_menu">로그아웃</a></li>
                </c:if>
-                  <li class="menu1"><a href="#" class="link_menu">고객센터</a></li>
-                  <li class="menu1 lst"><a href="#" class="link_menu">공지사항 </a></li>
+                  <li class="menu1"><a href="/farm/moveQnAPage.do" class="link_menu">고객센터</a></li>
+                  <li class="menu1 lst"><a href="/farm/moveNoticePage.do" class="link_menu">공지사항 </a></li>
                </ul>
             </div>
             <div class="header_main">
