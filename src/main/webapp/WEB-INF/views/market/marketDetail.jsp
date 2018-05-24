@@ -72,7 +72,7 @@ function qnaPage(page){
 		url:"qnaList.do",
 		type:"post",
 		data:{
-			market_no:${market.market_no},
+			market_no: ${market.market_no},
 			page:page
 		},
 		dataType: "JSON",
