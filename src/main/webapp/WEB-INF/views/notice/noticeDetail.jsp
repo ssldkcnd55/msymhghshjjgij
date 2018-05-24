@@ -24,18 +24,18 @@ function moveNotice_write(){
 	<div id="top_line"></div>
 	<div id="wrap">
 		<div id="header">
-			<%@ include file="../inc/top_menu.jsp"%>
+			<%@ include file="../inc/header.jsp"%>
 		</div>
 		<div id="container">
 			<div class="inner-wrap">
 				<div class="board-wrap">
 
-					<div class="Notice_title">${notice.notice_title}</div>
+					<div class="Notice_title">공지사항</div>
 
 					<div class="Notice_full">
 						<table class="Notcie_table">
 							<tr>
-								<td>홈페이지 공지사항</td>
+								<td>${notice.notice_title}</td>
 								<td>운영자</td>
 								<td>${notice.notice_date}</td>
 							</tr>
