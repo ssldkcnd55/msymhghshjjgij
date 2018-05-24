@@ -8,8 +8,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Farm</title>
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link href="/farm/resources/css/homeauction.css" rel="stylesheet"
+	type="text/css" />
 <link href="/farm/resources/css/style.css" rel="stylesheet"
 	type="text/css" />
 <link href="/farm/resources/css/flexslider-rtl.css" rel="stylesheet"
@@ -275,8 +275,6 @@
 
 				</div>
 
-				</table>
-
 			</div>
 		</div>
 
@@ -286,17 +284,12 @@
 
 	</div>
 
-	</div>
-
-	</div>
-
 	<!-- 채팅,최근 본 상품 목록 import jsp ,  footer 위에서 하면됨 -->
 	<c:import url="messenger/msg_box.jsp"></c:import>
 
 	<div id="footer">
 		<c:import url="inc/foot.jsp"></c:import>
 
-	</div>
 	</div>
 
 </body>
