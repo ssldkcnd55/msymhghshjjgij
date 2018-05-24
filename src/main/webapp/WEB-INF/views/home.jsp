@@ -22,20 +22,17 @@
 	src="/farm/resources/js/jquery-3.3.1.min.js"></script>
 
 
-
-
 </head>
 
 <body>
 
-	<div id="top_line"></div>
 	<div id="wrap">
-		<c:import url="inc/top_menu.jsp"></c:import>
+		<c:import url="inc/header.jsp"></c:import>
 
 		<div id="container">
 			<div class="inner-wrap">
 				<div class="main_visual">
-					<div class="flexslider" style="direction: rtl;border:none;">
+					<div class="flexslider" style="direction: rtl; border: none;">
 						<ul class="slides">
 							<li><img src="/farm/resources/images/banana.jpg" /></li>
 							<li><img src="/farm/resources/images/apple.jpg" /></li>
@@ -45,40 +42,119 @@
 					</div>
 				</div>
 				<div class="tab_main">
-						<ul class="tabs">
-							<li class="active" rel="tab1">공지사항</li>
-							<li rel="tab2">구매랭킹</li>
-							<li rel="tab3">공지사항</li>
-						</ul>
-						<div class="tab_container">
-							<div id="tab1" class="tab_content">
-								<ul>
-									<li><a href="#">이것은 두 번째 탭의</a></li>
-									<li><a href="#">이것은 두 번째 탭의</a></li>
-									<li><a href="#">이것은 두 번째 탭의</a></li>
-									<li><a href="#">이것은 두 번째 탭의</a></li>
-									<li><a href="#">이것은 두 번째 탭의</a></li>
-								</ul>
-							</div>
-							<!-- #tab1 -->
-							<div id="tab2" class="tab_content">2222Mortal Kombat
-								returns after a lengthy hiatus and puts players back into the
-								Tournament for 2D fighting with gruesome combat.</div>
-							<!-- #tab2 -->
-							<div id="tab3" class="tab_content">3333Halo: Reach is the
-								culmination of the superlative combat, sensational multiplayer,
-								and seamless online integration that are the hallmarks of this
-								superb series.</div>
-							<!-- #tab3 -->
+					<ul class="tabs">
+						<li class="active" rel="tab1">공지사항</li>
+						<li rel="tab2">구매랭킹</li>
+						<li rel="tab3">공지사항</li>
+					</ul>
+					<div class="tab_container">
+						<div id="tab1" class="tab_content">
+							<ul>
+								<li><a href="#">이것은 두 번째 탭의</a></li>
+								<li><a href="#">이것은 두 번째 탭의</a></li>
+								<li><a href="#">이것은 두 번째 탭의</a></li>
+								<li><a href="#">이것은 두 번째 탭의</a></li>
+								<li><a href="#">이것은 두 번째 탭의</a></li>
+							</ul>
 						</div>
-						<!-- .tab_container -->
+						<!-- #tab1 -->
+						<div id="tab2" class="tab_content">2222Mortal Kombat returns
+							after a lengthy hiatus and puts players back into the Tournament
+							for 2D fighting with gruesome combat.</div>
+						<!-- #tab2 -->
+						<div id="tab3" class="tab_content">3333Halo: Reach is the
+							culmination of the superlative combat, sensational multiplayer,
+							and seamless online integration that are the hallmarks of this
+							superb series.</div>
+						<!-- #tab3 -->
+					</div>
+					<!-- .tab_container -->
 					<!-- #container -->
 
 
 				</div>
-				<div class="box"></div>
-				<div class="box"></div>
-				<div class="box2"></div>
+
+				<div class="bigbox">
+					<div class="big_title">
+						<h2>인기상품</h2>
+					</div>
+
+					<div class="box_border">
+						<div class="box"
+							style="background-image: url('/farm/resources/images/1481854976669l0.jpg');"></div>
+
+						<div class="box_nametag">
+							<div class="box_title">[영미네 농장] 신선한 수박</div>
+
+							<div class="box_price">10,500원</div>
+						</div>
+					</div>
+				</div>
+
+
+				<div class="bigbox">
+					<div class="big_title"></div>
+					<div class="box_border">
+						<div class="box"
+							style="background-image: url('/farm/resources/images/1483669170519l0.jpg');"></div>
+						<div class="box_nametag">
+							<div class="box_title">[영미네 농장] 팜 후레쉬 부어스첸 2종</div>
+
+							<div class="box_price">10,500원</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="bigbox2">
+					<div class="big_title2">
+						<h2>경매</h2>
+					</div>
+					<div class="box_border2">
+						<div class="box2">
+							<table class="auction_table">
+								<tr>
+									
+									<th>상품</th>
+									<th>판매가</th>
+								</tr>
+
+								<tr>
+									<td><div class="auction_img" style="background-image: url('/farm/resources/images/고구마.jpg');"></div>
+									<div>유기농 고구마 1kg</div></td>
+									<td>5,700원</td>
+									<!-- <td style="color: red; font-weight: bold;">진행중</td> -->
+									
+								</tr>
+								
+								<tr>
+									<td><div class="auction_img" style="background-image: url('/farm/resources/images/아산 맑은 토마토.jpg');"></div>
+									<div>아산 맑은 토마토 1박스</div></td>
+									<td>10,500원</td>							
+								</tr>
+								
+								<tr>
+									<td><div class="auction_img" style="background-image: url('/farm/resources/images/아산 맑은 포도.jpg');"></div>
+									<div>아산 맑은 포도</div></td>
+									<td>10,500원</td>							
+								</tr>
+								
+								<tr>
+									<td><div class="auction_img" style="background-image: url('/farm/resources/images/청주 사과.jpg');"></div>
+									<div>청주 사과</div></td>
+									<td>10,500원</td>							
+								</tr>
+								
+								
+							</table>
+						</div>
+					</div>
+					
+					
+					
+					
+					
+				</div>
+
 			</div>
 
 		</div>
@@ -93,29 +169,30 @@
 	</div>
 
 </body>
+
 <script type="text/javascript"
 	src="/farm/resources/js/jquery.flexslider.js"></script>
 
 <script>
 	$(function() {
 		$('.flexslider').flexslider({
-		/*  animation: "slide",
-		 rtl: true */
+			/* 	animation : "slide",
+		 rtl: true  */
 		});
 	});
-	$(function () {
+	$(function() {
 
-	    $(".tab_content").hide();
-	    $(".tab_content:first").show();
+		$(".tab_content").hide();
+		$(".tab_content:first").show();
 
-	    $("ul.tabs li").click(function () {
-	        $("ul.tabs li").removeClass("active").css("color", "#333");
-	        //$(this).addClass("active").css({"color": "darkred","font-weight": "bolder"});
-	        $(this).addClass("active").css("color", "darkred");
-	        $(".tab_content").hide()
-	        var activeTab = $(this).attr("rel");
-	        $("#" + activeTab).fadeIn()
-	    });
+		$("ul.tabs li").click(function() {
+			$("ul.tabs li").removeClass("active").css("color", "#333");
+			//$(this).addClass("active").css({"color": "darkred","font-weight": "bolder"});
+			$(this).addClass("active").css("color", "darkred");
+			$(".tab_content").hide()
+			var activeTab = $(this).attr("rel");
+			$("#" + activeTab).fadeIn()
+		});
 	});
 </script>
 </html>

@@ -22,7 +22,7 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public Member loginCheck(Member member) throws LoginFailException {
+	public Member selectLoginCheck(Member member) throws LoginFailException {
 		// TODO Auto-generated method stub
 		return memberDao.loginCheck(member, sqlSession);
 	}
