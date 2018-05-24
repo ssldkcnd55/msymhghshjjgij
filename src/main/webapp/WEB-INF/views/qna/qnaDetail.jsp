@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -43,9 +44,9 @@
 					<div class="QnA_full">
 						<table class="QnA_table">
 							<tr>
-								<td>홈페이지 공지사항</td>
-								<td>김민선</td>
-								<td>2018-05-12</td>
+								<td>${main_qna.main_qna_title }</td>
+								<td>${main_qna.member_id }</td>
+								<td>${main_qna.main_qna_date }</td>
 							</tr>
 						</table>
 						<div class="QnA_modify">
@@ -70,38 +71,21 @@
 						<div class="QnA_comment_top_writer">
 							<div class="QnA_comment_writer">
 								<img alt="" src="/Farm/img/user.png">&nbsp; 
-								<span>아이디</span>&nbsp;
-								<span>2018-05-14</span>&nbsp; 
+								<span>운영자</span>&nbsp;<!-- 아이디 -->
+								<span>${main_qna.main_qna_answer_date }</span>&nbsp; <!-- 작성일 -->
 								<span  onclick="comment_modify">수정</span>&nbsp;
 								<span onclick="comment_delete">삭제</span>&nbsp;
 							</div>
 							<p>
-							안녕하세요. 사랑하는 고객님, 마켓컬리 대표 김슬아입니다. 마켓컬리와 함께 따뜻한 연말 보내시길
-							바랍니다. 오늘은 마켓컬리의 환불 정책과, 이와 관련한 후기게시판의 용도에 대해서 설명 드리고자 합니다.
+							${main_qna.main_qna_answer}
 							</p>
 
-						</div>
+						<c:if test="${loginUser.member_id == 'user01'} ">
+						<div>sdfsdf</div><input type="text">
 						
-						<div class="QnA_comment_top_writer">
-							<div class="QnA_comment_writer">
-								<img alt="" src="/Farm/img/user.png">&nbsp; 
-								<span>아이디</span>&nbsp;
-								<span>2018-05-14</span>&nbsp; 
-								<span>수정</span>&nbsp;
-								<span>삭제</span>&nbsp;
-							</div>
-							<p>
-							안녕하세요. 사랑하는 고객님, 마켓컬리 대표 김슬아입니다. 마켓컬리와 함께 따뜻한 연말 보내시길
-							바랍니다. 오늘은 마켓컬리의 환불 정책과, 이와 관련한 후기게시판의 용도에 대해서 설명 드리고자 합니다.
-							</p>
-							<table class="commont_modify">
-								<tr>
-									<td><textarea rows="4" cols="4"></textarea></div></td>
-									<td><input type="submit" value="등록"/></td>
-								</tr>
-							</table>
-
+						</c:if>
 						</div>
+					
 					</div>
 
 

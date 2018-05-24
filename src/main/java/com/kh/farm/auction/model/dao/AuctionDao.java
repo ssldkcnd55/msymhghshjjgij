@@ -52,7 +52,7 @@ public class AuctionDao {
 
 
 	public int insertAuctionQnAMake(SqlSessionTemplate sqlSession, AuctionQnA auctionqna) {
-		return sqlSession.insert("auctionqna.insertAuctionQnAMake",auctionqna);
+		return sqlSession.insert("insertAuctionQnAMake",auctionqna);
 	}
 
 
