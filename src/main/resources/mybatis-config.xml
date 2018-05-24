@@ -6,6 +6,7 @@
 	<typeAliases>
 		 <typeAlias type="com.kh.farm.auction.model.vo.Auction" alias="Auction" /> 
 		 <typeAlias type="com.kh.farm.auction.model.vo.AuctionHistory" alias="AuctionHistory" /> 
+		 <typeAlias type="com.kh.farm.auction.model.vo.AuctionQnA" alias="AuctionQnA" /> 
 		 <typeAlias type="com.kh.farm.chat.model.vo.Chat" alias="Chat" /> 
 		 <typeAlias type="com.kh.farm.chat.model.vo.ChatHistory" alias="ChatHistory" /> 
 		 <typeAlias type="com.kh.farm.chat.model.vo.ChatList" alias="ChatList" /> 

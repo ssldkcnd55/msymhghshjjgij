@@ -11,4 +11,10 @@ public interface NoticeService {
 
 	int selectNoticeCount();
 
+	int insertNotice(Notice notice);
+
+	Notice noticeDeatil(int notice_no); 
+
+	
+
 }

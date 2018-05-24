@@ -64,6 +64,26 @@
 	]]>
 	</update>
 	
+	<insert id="insertAuctionQnAMake" parameterType="auctionqna" >
+	<![CDATA[
+		insert into auction_qna values((select max(auction_qna_no) from auction_qna)+1,#{auction_no},#{member_id},#{auction_qna_question_date},#{auction_qna_answer},
+		#{auction_qna_answer_date},#{auction_qna_title},#{auction_qna_contents},'1')
+	]]>
+	</insert>
+	
+	<select id="selectAuctionQnAList" parameterType="pageNumber" resultType="auctionqna">
+	<![CDATA[
+		select * from (select rownum rnum, auction_no,auction_qna_title,member_id,auction_qna_question_date from auction_qna where auction_no =#{auction_no}
+		order by auction_qna_no desc) where rnum>= #{startRow} and rnum <=#{endRow}
+	]]>
+	</select>
+	
+	
+	<select id="selectAuctionReviewCount" parameterType="int" resultType="int">
+	<![CDATA[
+		select count(*) from auction_qna where auction_no = #{auction_no}
+	]]>
+	</select>
 	
 	
 </mapper>
