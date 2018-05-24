@@ -22,15 +22,12 @@
 	src="/farm/resources/js/jquery-3.3.1.min.js"></script>
 
 
-
-
 </head>
 
 <body>
 
-	<div id="top_line"></div>
 	<div id="wrap">
-		<c:import url="inc/top_menu.jsp"></c:import>
+		<c:import url="inc/header.jsp"></c:import>
 
 		<div id="container">
 			<div class="inner-wrap">
@@ -93,14 +90,15 @@
 	</div>
 
 </body>
+
 <script type="text/javascript"
 	src="/farm/resources/js/jquery.flexslider.js"></script>
 
 <script>
 	$(function() {
 		$('.flexslider').flexslider({
-		/*  animation: "slide",
-		 rtl: true */
+			/* 	animation : "slide",
+		 rtl: true  */
 		});
 	});
 	$(function () {

@@ -1,77 +1,156 @@
 @charset "UTF-8";
-@import url(http://fonts.googleapis.com/earlyaccess/notosanskr.css);
-/* header 시작 */
-header{
-	display:table-row;	
-	height:60px;	
+
+
+html { overflow-y:scroll; }
+html, body { margin:0; padding:0; width:100%;}
+
+img{border:0}
+#header{    position: relative;}
+#top_line {width:100%; height:10px; background-color:#462114;}
+#wrap{width:100%; position: relative;}
+
+.userMenu{
+   width: 1050px;
+    margin: 0 auto;
+    overflow:hidden;
 }
-#top{
-	width:900px;
-	margin:0 auto;
-	height:60px;	
+.list_menu{
+   float:right;
+   list-style: none;
+   margin:0px;
 }
-#top img {
-	float:left;
-	margin-top:10px;	
+.tab_menu{
+   padding:0px;
+   font-family: 'Noto Sans KR';
+    font-weight: 400;
+   margin:0px;
+   list-style: none;
+   float:left;
 }
-#login_box a{
-	color: #44484b;
-	font-size: 15px;
+.tab_menu li{
+   float:left;
+   background: url(https://res.kurly.com/pc/ico/1221/img_1x11_c_ddd.png) no-repeat 100% 18px;
 }
-#menu a{
-	color: #44484b;
-	font-family: Roboto,Noto Sans KR,-apple-system,Dotum,sans-serif;
-	font-weight: 700;
-	font-size: 17px;
-	padding: 0 8px;
+.tab_menu li:last-child{
+   float:left;
+   background: none;
 }
-.top_right{
-	float:right;
-	width:224px;
-	height:60px;
-	line-height:60px;
-	margin-right:10px;
-}
-.ad_box{
-	width:730px;
-	height:208px;
-	background:#3b64af;
-	float:left;
-}
-.box_search{	
-    padding: 6px 8px 6px 14px;
-    border-radius: 30px;
-    border: 1px solid #c5cdd7;
-    height:34px;    
-    display: inline;  
-    position:relative;
-    overflow: hidden;
-}
-.tf_search{
-    width: 200px;
-    height: 20px;
-    padding: 0;
-    margin: 0;
-    border: 0 none;
+.tab_menu li a{
+   overflow: hidden;
+    float: left;
+    padding: 13px 60px 0 58px;
     font-size: 14px;
-    line-height: 18px;
-    color: #666;
-    outline: 0;
+    color: #fff;
+    line-height: 20px;
+    text-decoration: none;
+}
+.tab_menu li a:hover{
+	text-decoration: underline;
+}
+.tabMenu_inner{
+   width:50%;
+   height:45px;
+   margin: 0 auto;
+   overflow:hidden;
+}
+.search_box{
+    margin:0px;
+    padding:0px;
+    float:left;
+}
+.search{
+       width: 176px;
+    height: 28px;
+    margin-top:3px;
+    padding: 0 24px 0 9px;
+    border: 1px solid #ddd;
+    background-color: #fafafa;
+    font-family: 'Noto Sans KR';
+    letter-spacing: 0;
+    float:left;
 }
 .btn_search{
-	height:20px;
-    position: absolute;
-    top: 5px;
-    right: 5px;  
-    border: 0 none;
-    background-color: transparent;   
-    cursor:pointer;      
+   width:16px;
+   float:left;
+   margin-top:10px;
+   margin-left:8px;
 }
-.ico_search{
-	display: inline-block;	
-    overflow: hidden;
+
+.inner_cartcount{
+	height:45px;
+   text-align: center;
+    font-family: 'Noto Sans KR';
+}
+.btn_cart{
+   background-color: transparent;
+    text-decoration: none;
+    color: inherit;
+    float:left;
+   margin-top:3px;
+}
+.cart_img{
+       display: block;
     width: 25px;
-    height: 20px;	
-    background: url(../images/search.png) no-repeat 0 0;
-    vertical-align:top;   
+    margin: 0 auto;
+}
+.num{
+
+    height: 17px;
+    padding: 0 5px 0 5px;
+    border-radius: 8px;
+    background-color: #fff;
+    font-size: 9px;
+    color: #512772;
+    line-height: 15px;
+    text-align: center;
+    white-space: nowrap;
+}
+.header_main{
+   width: 1050px;
+    position: relative;
+    margin: 0 auto;
+    height: 100%;
+    
+}
+
+.header_main_img{
+   position: absolute;
+   left:0;
+}
+.h1{
+   text-align: center;
+   margin-top:0px;
+}
+.tabMenu{
+   height:45px;
+   border-top:1px solid #dcdcdc;
+   border-bottom:1px solid #dcdcdc;
+   background: #512772;
+}
+.bg{
+    z-index: 299;
+    left: 0;
+    top: 45px;
+    width: 100%;
+    height: 9px;
+    background: url(https://res.kurly.com/pc/ico/1221/bg_gnb.png) repeat-x 0 100%;
+}
+.menu1{
+   position: relative;
+    z-index: 400;
+    float: left;
+}
+.link_menu{
+   float: left;
+    height: 31px;
+    padding: 0 23px 0 10px;
+    color: #3b3b3b;
+    line-height: 29px;
+    white-space: nowrap;
+    padding-right: 10px;
+    text-decoration: none;
+    font-size:10pt;
+    font-family: 'Noto Sans KR';
+    font-weight: 400;
+    letter-spacing: -0.3px;
 }

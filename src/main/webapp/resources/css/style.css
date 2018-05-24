@@ -9,9 +9,9 @@ img{border:0}
 #wrap{width:100%; }
 
 
-#header {width:100%; 
+/* #header {width:100%; 
  		background: url(/farm/resources/images/top_bg.jpg) top repeat-x; 
-		/*position:relative;*/
+		position:relative;
 		top:10px;
 		left:0;
 		z-index:9999;
@@ -23,13 +23,13 @@ img{border:0}
 		#header div.inner-wrap h1.logo { width:117px; height:119px; margin:0; padding:0; position:absolute; top:0; left:0; }
 		#header div.inner-wrap h1.logo a { width:117px; height:119px; text-indent:-999em; background:transparent url(/farm/resources/images/logo.jpg) 0 0 no-repeat; display:block;}
 		
-		/* main menu */
+		main menu
 		#header ul.main-menu { margin:0; padding:0; list-style:none; position:absolute; bottom:50px; left:170px; width:450px;}
 			#header ul.main-menu li { padding:0 30px; float:left; font-size:14pt; font-style: normal; color: #462114;}
 				#header ul.main-menu li a { height:20px; display:block; text-decoration:none; color: #462114; }
 				#header ul.main-menu li a:hover{ color:#478318;}
 				
-		/* global menu */
+		global menu
 		#header ul.global-menu { margin:0; padding:0; list-style:none; position:absolute; bottom:45px;right:0px; width:350px;}
 			#header ul.global-menu li { padding:0 0 0 10px; float:left; }	
 			#header ul.global-menu li a{color:#717070;  font-style: normal; font-family: dotum;font-size: 9pt; text-decoration:none;}
@@ -38,7 +38,7 @@ img{border:0}
 			
 		#header ul.weather { margin:0; padding:0; list-style:none; position:absolute; right:0px;}
 		#header ul.weather li img{width:30px; height: 30px}
-		
+		 */
 		/*main content*/			
 #container { width:100%; min-height:1085px; position:relative; clear:both;  }
 		#container div.inner-wrap { width:960px; margin:20px auto 0 ; position:relative; display: flow-root;}
