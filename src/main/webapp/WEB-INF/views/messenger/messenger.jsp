@@ -98,21 +98,21 @@
 				</c:if>
 				<c:if test="${empty chatList }">
 				<div class="searchNotFoundID">진행중인 대화가 없습니다.</div>
-				<div class="searchNotFoundMsg">아이디 또는 이름을 검색하여 대화를 시작하세요.</div></div>
+				<div class="searchNotFoundMsg">아이디 또는 이름을 검색하여 대화를 시작하세요.</div>
 				</c:if>
-			
 			</div>
+			
 			<!-- ///////////////////////////////대화목록 끝 ///////////////////////////////////////-->
 
 
 			<!-- /////////////////////////////대화창 //////////////////////////////////////////////-->
 			<div class="msg_table_middle">
-
+			대화창대화창
 
 			</div>
 			<!-- ///////////////////////////////대화창 끝 ///////////////////////////////////////-->
-
-		</div>
+</div>
+		
 		<!-- 메신져 하단 -->
 		<div class="msg_bottom">
 			<table class="msg_bottom_table">

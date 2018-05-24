@@ -9,26 +9,27 @@ img{border:0}
 #wrap{width:100%; }
 
 
-#header {width:100%; 
+/* #header {width:100%; 
  		background: url(/farm/resources/images/top_bg.jpg) top repeat-x; 
-		/*position:relative;*/
+		position:relative;
 		top:10px;
 		left:0;
 		z-index:9999;
 		float:left;
-		clear:both; }
+		clear:both; 
+}
 		
 #header div.inner-wrap { width:960px; height:125px; margin:0 auto; position:relative; }
 		#header div.inner-wrap h1.logo { width:117px; height:119px; margin:0; padding:0; position:absolute; top:0; left:0; }
 		#header div.inner-wrap h1.logo a { width:117px; height:119px; text-indent:-999em; background:transparent url(/farm/resources/images/logo.jpg) 0 0 no-repeat; display:block;}
 		
-		/* main menu */
+		main menu
 		#header ul.main-menu { margin:0; padding:0; list-style:none; position:absolute; bottom:50px; left:170px; width:450px;}
 			#header ul.main-menu li { padding:0 30px; float:left; font-size:14pt; font-style: normal; color: #462114;}
 				#header ul.main-menu li a { height:20px; display:block; text-decoration:none; color: #462114; }
 				#header ul.main-menu li a:hover{ color:#478318;}
 				
-		/* global menu */
+		global menu
 		#header ul.global-menu { margin:0; padding:0; list-style:none; position:absolute; bottom:45px;right:0px; width:350px;}
 			#header ul.global-menu li { padding:0 0 0 10px; float:left; }	
 			#header ul.global-menu li a{color:#717070;  font-style: normal; font-family: dotum;font-size: 9pt; text-decoration:none;}
@@ -37,7 +38,7 @@ img{border:0}
 			
 		#header ul.weather { margin:0; padding:0; list-style:none; position:absolute; right:0px;}
 		#header ul.weather li img{width:30px; height: 30px}
-		
+		 */
 		/*main content*/			
 #container { width:100%; min-height:1085px; position:relative; clear:both;  }
 		#container div.inner-wrap { width:960px; margin:20px auto 0 ; position:relative; display: flow-root;}
@@ -45,11 +46,94 @@ img{border:0}
 		#container div.main_visual{ width:630px; height:440px;/*  border:1px solid #9CC; */ float:left;}
 		
 		#container div.tab_main{width:300px; height:440px; border:1px solid #9CC; float:right; }
-		#container div.box { width:300px; height:503px; border:1px solid #9CC; margin:45px 27px 30px 0; float:left;}
-		#container div.box2 { width:300px; height:503px; border:1px solid #9CC; margin:45px 0px 30px 0;float:left; }
-
-
-#footer { width:100%; padding:20px 0 40px 0; border-top:solid 1px #CCC; margin:0 auto; position:relative; }
+		#container div.box { width:300px; height:400px; border:1px solid #DCDCDC; margin:0px 27px 0px 0; float:left; background-size: cover;}
+		.box_nametag{width:300px; height: 70px; border:none; margin:0px 27px 30px 0; float: left; padding: 13px; font-size: 10pt;  color: dimgray;}
+		.box_border{width:300px; height: 470px; border: 1px solid #dcdcdc; margin:0px 27px 0px 0; float: left;}
+		.box_title{
+		font-weight: bold; margin-bottom :5px; padding: 0px; 
+		}
+		.big_title{
+		width: 300px; height: 50px; float:left; margin:0px 27px 15px 0;
+		color: darkslategray;
+		}
+		.big_title2{
+		width: 300px; height: 50px; float:left; margin:0px 27px 15px 0;
+		color: darkslategray;
+		}
+		.box_price{
+		margin: 0px;
+		}
+		.bigbox{
+		width:300px; height: 530px; float:left; margin:80px 27px 0px 0;
+		}
+		#container div.box2 { width:300px; height:470px; border:1px solid #DCDCDC; margin:0px 0px 30px 0;float:left; }
+	
+			
+		.bigbox2{
+		width:300px; height: 530px; float:left; margin:80px 0px 0px 0;
+		}
+		
+		.big_title{
+		width: 300px; height: 50px; float:left; margin:0px 0px 15px 0;
+		color: darkslategray;
+		
+		}
+		.auction_table{
+		border-collapse:collapse;
+		/* border-top: 2px solid #512772; */
+		margin: 20px;
+		margin-top:10px;
+		font-size: 10pt;
+		}
+		.auction_table th{
+		padding: 10px;
+		border-bottom:1px solid #dcdcdc;
+		
+		padding-bottom: 10px;
+		padding-top: 10px;
+		
+		}
+		.auction_table  th:nth-child(1){
+		width:100px;
+		text-align: left;
+		} 
+		
+		.auction_table  th:nth-child(2){
+		width:100px;
+		text-align: center;
+		} 
+		
+		/* .auction_table  th:nth-child(3){
+		width:80px;
+		text-align: center;
+		}  */
+		
+		.auction_table td{
+		padding: 10px;
+		font-size: 10pt;
+		border-bottom: 1px solid #dcdcdc;
+		
+		}
+		.auction_table td:nth-child(1){
+		
+		text-align: left;
+	
+		
+		}
+		.auction_table td:nth-child(2){
+	
+		text-align: center;
+	
+		}
+		
+		
+		.auction_img{
+		width:80px;
+		height:50px;
+		background-size: cover;
+		}
+		
+#footer { width:100%; padding:20px 0 40px 0; border-top:solid 1px #DCDCDC; margin:0 auto; position:relative; }
 		#footer div.inner-foot { width:960px;  margin: auto; padding:0;}
 		#footer div.inner-foot h5{ list-style:none;  font-style: normal; font-family: dotum;color: #929292;font-size: 9pt;line-height: 180%; font-weight:normal; }
 		#footer div.inner-foot-qna{font-style: normal; font-family: dotum;font-size: 12pt;font-weight:normal; }

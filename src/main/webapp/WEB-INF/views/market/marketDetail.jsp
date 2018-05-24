@@ -72,7 +72,7 @@ function qnaPage(page){
 		url:"qnaList.do",
 		type:"post",
 		data:{
-			market_no:${market.market_no},
+			market_no: ${market.market_no},
 			page:page
 		},
 		dataType: "JSON",
@@ -195,7 +195,7 @@ function reviewPage(page){
 	<div id="top_line"></div>
 	<div id="wrap">
 		<div id="header">
-			<%@  include file="../inc/top_menu.jsp"%>
+			<%@  include file="../inc/header.jsp"%>
 		</div>
 		<!-- account-wrap -->
 	
