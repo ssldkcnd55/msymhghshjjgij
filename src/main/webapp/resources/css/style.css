@@ -221,3 +221,31 @@ img{border:0}
 .sch_smit:hover {
    background: #cfc085;
 }
+
+.slide {
+	width: 300px;
+	height: 500px;
+	overflow: hidden;
+	position: relative;
+	margin: 0 auto;
+}
+
+.carousel-control.left {
+	background: rgba(0, 0, 0, 0);
+	color: black;
+	left:-10px;
+}
+
+.carousel-control.right {
+	background: rgba(0, 0, 0, 0);
+	color: black;
+	right:-10px;
+}
+
+.item {
+	width: 100%;
+}
+
+.auction_table {
+	width: 250px;
+}
