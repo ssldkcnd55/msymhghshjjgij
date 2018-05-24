@@ -3,6 +3,13 @@
 <!DOCTYPE html>
 <html>
 <head>
+<style type="text/css">
+a:link {text-decoration: none; color: black;}
+a:visited {text-decoration: none; color: green;}
+a:active {text-decoration: none; color: grey;}
+a:hover {text-decoration: underline; color: gray;}
+</style> 
+
 <script src="/farm/resources/js/jquery-3.3.1.min.js"></script>
 <!-- Notice.css -->
 <script>
@@ -23,7 +30,7 @@ $(function(){
 			
 			for(var i in jsonObj.list){
 				outValues += "<tr id='hover'><td>"+jsonObj.list[i].rnum+"</td>"
-				+"<td id='Notice_td'><a href='/farm/marketNoticeDetail.do?notice_no="+jsonObj.list[i].notice_no+"'>"+jsonObj.list[i].notice_title+"</a></td>"
+				+"<td id='Notice_td'><a href='/farm/noticeDetail.do?notice_no="+jsonObj.list[i].notice_no+"'>"+jsonObj.list[i].notice_title+"</a></td>"
 				+"<td>운영자</td><td>"+jsonObj.list[i].notice_date+"</td></tr>";
 			}
 			$(".Notice_table").html(outValues);	
@@ -125,7 +132,7 @@ function noticePage(page){
 <div id="top_line"></div>
    <div id="wrap">
       <div id="header">
-         <%@ include file="../inc/top_menu.jsp" %>
+         <%@ include file="../inc/header.jsp" %>
       </div>
       <div id="container">
          <div class="inner-wrap">

@@ -28,7 +28,7 @@
 <div id="top_line"></div>
 	<div id="wrap">
 		<div id="header">
-			<%@  include file="../inc/top_menu.jsp"%>
+			<%@  include file="../inc/header.jsp"%>
 		</div>
 		<div id="container">
 			<div class="inner-wrap">
@@ -43,14 +43,14 @@
         <div class="list-group">
       <a class="list-group-item active main-color-bg"><span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
     	관리목록 </a>
-      <a href="" class="list-group-item"><span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>
+      <a href="/farm/moveNotice.do" class="list-group-item"><span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>
       	&nbsp;공지사항관리</a>
       <a href="/farm/moveAdminCategory.do" class="list-group-item"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
       	&nbsp;카테고리관리</a>
       <a href="" class="list-group-item"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
       	&nbsp;신고관리</a>
       <a href="/farm/moveNotcie_write.do" class="list-group-item"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
-      	&nbsp;공지사항작성</a>
+      	&nbsp;공지사항작성</a>	
       <a href="" class="list-group-item"><span class="glyphicon glyphicon-user" aria-hidden="true" ></span>
       	&nbsp;유저검색</a>
       <a href="" class="list-group-item"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>

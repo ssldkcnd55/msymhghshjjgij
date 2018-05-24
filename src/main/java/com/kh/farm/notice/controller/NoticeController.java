@@ -10,7 +10,9 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.kh.farm.notice.model.service.NoticeService;
@@ -59,5 +61,33 @@ public class NoticeController {
 		out.flush();
 		out.close();
 		
+	}
+	
+	@RequestMapping(value="insertNotice.do", method=RequestMethod.POST)
+	public String insertNotice(Notice notice) {
+		String a = "ab";
+		int result = noticeService.insertNotice(notice);
+		
+		if(result > 0) {
+			
+			return "admin/admin_page";
+			
+		}
+		return a;
+	}
+	
+	@RequestMapping(value="noticeDetail.do")
+	public String noticeDetail(Model model, @RequestParam(value="notice_no") int notice_no) {
+		
+		System.out.println(notice_no);
+		Notice notice = noticeService.noticeDeatil(notice_no);
+		System.out.println(notice.getNotice_title());
+		notice.toString();
+		if(notice != null) {
+		
+			model.addAttribute("notice",notice);
+			return "notice/noticeDetail";
+		}
+		return "에러페이지";
 	}
 }

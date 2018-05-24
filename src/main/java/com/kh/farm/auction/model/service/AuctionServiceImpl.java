@@ -1,6 +1,7 @@
 package com.kh.farm.auction.model.service;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -48,6 +49,21 @@ public class AuctionServiceImpl implements AuctionService{
 	@Override
 	public int updateAuctionMake(Auction auction) {
 		return auctionDao.updateAuctionMake(sqlSession,auction);
+	}
+	
+	@Override
+	public int insertAuctionQnAMake(AuctionQnA auctionqna) {
+		return auctionDao.insertAuctionQnAMake(sqlSession,auctionqna);
+	}
+	
+	@Override
+	public ArrayList<AuctionQnA> selectAuctionQnAList(Auction auction, int currentPage) {
+		return auctionDao.selectAuctionQnAList(sqlSession,auction,currentPage);
+	}
+	
+	@Override
+	public int selectAuctionReviewCount(Auction auction) {
+		return auctionDao.selectAuctionReviewCount(sqlSession,auction);
 	}
 
 }

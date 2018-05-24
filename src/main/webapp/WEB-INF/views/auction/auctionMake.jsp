@@ -48,12 +48,12 @@
 	<div id="top_line"></div>
 	<div id="wrap">
 		<div id="header">
-			<%@  include file="../inc/top_menu.jsp"%>
+			<%@  include file="../inc/header.jsp"%>
 		</div>
 		<div id="container">
 			<div class="inner-wrap">
 				<div class="title1 auctionMake"><p class="titleP">경매 글쓰기</p></div>
-				<form action="updateAuctionMake.do" method="post" enctype="multipart/form-data">
+				<form action="insertAuctionMake.do" method="post" enctype="multipart/form-data">
 				<input type="hidden" value="${loginUser.member_id}" name="member_id">
 				<div class="main_width">
 					<table class="jung_table">

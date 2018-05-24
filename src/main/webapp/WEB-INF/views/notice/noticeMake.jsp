@@ -1,3 +1,4 @@
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -16,14 +17,14 @@
 	<div id="top_line"></div>
 	<div id="wrap">
 		<div id="header">
-			<%@  include file="../inc/top_menu.jsp"%>
+			<%@  include file="../inc/header.jsp"%>
 		</div>
 		<div id="container">
 			<div class="inner-wrap">
 				<br> <br> 
 				<h1 style="text-align: center; margin: auto;">공지사항</h1>
 				<br> <br> <br>
-
+				<form action="insertNotice.do" method="post">
 				<div class="div">
 					<table class="jung_table">
 						<tbody>
@@ -32,7 +33,7 @@
 									<p class="p">제목</p>
 								</td>
 								<td colspan="3" class="td2"><input type="text"
-									name="product_name" class="input_text_box"> <br></td>
+									name="notice_title" class="input_text_box"> <br></td>
 							</tr>
 							<table class="jung_table2">
 								<tbody>
@@ -49,7 +50,7 @@
 							<tr>
 								<td style="width: 100%;"><form
 										action="sample/viewer/index.php" method="post">
-										<textarea name="ir1" id="ir1" rows="10" cols="100"
+										<textarea name="notice_contents" id="ir1" rows="10" cols="100"
 											style="width: 100%; height: 250px; display: none;"></textarea>
 									</form></td>
 							</tr>
@@ -57,9 +58,10 @@
 					</table>
 					<ul style="list-style: none;">
 						<li class="li3" onclick="location.href='/#'">뒤로가기</li>
-						<li class="li4" onclick="location.href='/#'">글쓰기</li>
+						<li class="li4"><input class="li4_input2" type="submit" onclick="submitContents();" value="등록"></li>
 					</ul>
 				</div>
+				</form>
 			</div>
 		</div>
 		 <%@ include file="../messenger/msg_box.jsp"%>

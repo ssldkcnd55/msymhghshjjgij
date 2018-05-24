@@ -6,7 +6,11 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Date;
+import java.sql.ResultSet;
+import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -26,7 +30,9 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.farm.auction.model.service.AuctionService;
 import com.kh.farm.auction.model.vo.Auction;
+import com.kh.farm.auction.model.vo.AuctionQnA;
 import com.kh.farm.market.model.vo.Market;
+import com.kh.farm.market.model.vo.Review;
 import com.kh.farm.member.model.vo.Member;
 
 import net.sf.json.JSONArray;
@@ -165,6 +171,7 @@ public class AuctionController {
 		if(file.getOriginalFilename() == null) {
 			auction.setAuction_img(auction_img); 
 		}
+		
 		String path = request.getSession().getServletContext().getRealPath("resources/upload/auctionUpload");
 		
 		try {
@@ -210,6 +217,64 @@ public class AuctionController {
 		System.out.println("updateAuctionMake : "+updateAuctionMake);
 		
 		return "forward:/AuctionDetail.do";
+	}
+	/*QnA 등록 페이지이동*/
+	@RequestMapping(value="moveAuctionQnAMake.do")
+	public ModelAndView moveAuctionQnAMake(ModelAndView mv, Auction auction) {
+		mv.addObject("auction", auction);
+		mv.setViewName("auction/auctionWriteQnA");
+		return mv;
+	}
+	
+	/*QnA 등록*/
+	@RequestMapping(value="AuctionQnAMake.do",method=RequestMethod.POST)
+	public String insertAuctionQnAMake(AuctionQnA auctionqna) {
+		int at_no=auctionqna.getAuction_no();
+		System.out.println("Auction_no : "+auctionqna.getAuction_no()+" / "+"tilte : "+auctionqna.getAuction_qna_title()+"member_id : "+auctionqna.getMember_id()
+		+" / "+"note : "+auctionqna.getAuction_qna_contents());
+		int insertAuctionQnAMake = auctionService.insertAuctionQnAMake(auctionqna);
+		System.out.println("insertAuctionQnAMake : "+insertAuctionQnAMake );
+		return "redirect:/AuctionDetail.do?auction_no="+at_no;
+	}
+	
+	/*경매 QnAList뿌리기*/
+	@RequestMapping(value="AuctionQnAList.do")
+	public void AuctionQnAList(Auction auction,HttpServletResponse response,@RequestParam("page") int currentPage,
+			@RequestParam("auction_no") String auction_no) 
+		throws IOException{
+		JSONArray jarr = new JSONArray();
+		
+		ArrayList<AuctionQnA> list = auctionService.selectAuctionQnAList(auction,currentPage);
+		int limit = 10;
+		int listCount = auctionService.selectAuctionReviewCount(auction);
+		int maxPage=(int)((double)listCount/limit+0.9); //ex) 41개면 '5'페이지나와야되는데 '5'를 계산해줌
+		int startPage=((int)((double)currentPage/5+0.8)-1)*5+1;
+		int endPage=startPage+5-1;
+		
+		if(maxPage<endPage) {
+			endPage = maxPage;
+		}
+		
+		for(AuctionQnA aq : list) {
+			JSONObject jsq = new JSONObject();
+			jsq.put("auction_no",aq.getAuction_no());
+			jsq.put("auction_qna_title", aq.getAuction_qna_title());
+			jsq.put("member_id", aq.getMember_id());
+			jsq.put("auction_qna_question_date", aq.getAuction_qna_question_date().toString());
+			jsq.put("startPage", startPage);
+			jsq.put("endPage", endPage);
+			jsq.put("maxPage", maxPage);
+			jsq.put("currentPage",currentPage);
+			jarr.add(jsq);
+			JSONObject sendJson = new JSONObject();
+			sendJson.put("list", jarr);
+			response.setContentType("application/json; charset=utf-8");
+			PrintWriter out = response.getWriter();
+			out.append(sendJson.toJSONString());
+			out.flush();
+			out.close();
+		}
+		
 	}
 	
 	

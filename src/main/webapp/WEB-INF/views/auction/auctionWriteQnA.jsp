@@ -8,10 +8,11 @@
 <script src="/farm/resources/js/jquery-3.3.1.min.js"></script>
 <script type="text/javascript" src="naver/js/HuskyEZCreator.js" charset="utf-8"></script>
 <link href="/farm/resources/css/style.css" rel="stylesheet" type="text/css" />
+<link href="/farm/resources/css/auctionWriteReview.css" rel="stylesheet" type="text/css" />
 <link href="/farm/resources/css/qnaMake.css" rel="stylesheet" type="text/css" />
 
 <meta charset="UTF-8">
-<title>Farm</title>
+<title>경매문의작성</title>
 
 </head>
 <body>
@@ -22,18 +23,21 @@
 		</div>
 		<div id="container">
 			<div class="inner-wrap">
-				<div class="title qna"><p class="titleP">후기 쓰기</p></div>
-
+			<br>
+				<div class="title qna"><p class="auctionQnA_title">경매문의작성</p></div>
+				<br>
 				<div class="div">
-				<form action="writeReivew.do" method="post">
+				<form action="AuctionQnAMake.do" method="post">
+				<input type="hidden" name="member_id" value="${loginUser.member_id }">
+				<input type="hidden" name="auction_no" value="${auction.auction_no }">
 					<table class="jung_table">
 						<tbody>
-							<tr class="tr">
+							<tr class="tr" >
 								<td class="td">
 									<p class="p">제목</p>
 								</td>
 								<td colspan="3" class="td2"><input type="text"
-									name="review_title" class="input_text_box"> <br></td>
+									name="auction_qna_title" class="input_text_box"> <br></td>
 							</tr>
 							<table class="jung_table2">
 								<tbody>
@@ -50,17 +54,15 @@
 							<tr>
 								<td style="width: 100%;">
 									
-										<textarea name="review_contents" id="ir1" rows="10" cols="100"
-											style="width: 100%; height: 250px; display: none;"></textarea>
+										<textarea name="auction_qna_contents" id="ir1" rows="10" cols="100"
+											style="width: 100%; height: 650px; display: none;"></textarea>
 									</td>
 							</tr>
 						</tbody>
 					</table>
 					<input class="li4_input" type="button" value="뒤로가기">
-						<input class="li4_input submit" type="submit" value="글쓰기" onclick="submitContents();">
-						<input type="hidden" name="member_id" value="${loginUser.member_id }">
+						<input class="li4_input submit" type="submit" value="문의등록" onclick="submitContents();">
 						
-						<input type="hidden" name="market_no" value="${market.market_no }">
 				</form>
 				</div>
 			</div>
