@@ -239,14 +239,14 @@ public class AuctionController {
 	
 	/*경매 QnAList뿌리기*/
 	@RequestMapping(value="AuctionQnAList.do")
-	public void AuctionQnAList(Auction auction,HttpServletResponse response,@RequestParam("page") int currentPage,
-			@RequestParam("auction_no") String auction_no) 
+	public void AuctionQnAList(Auction auction,HttpServletResponse response,@RequestParam("page") int currentPage) 
 		throws IOException{
 		JSONArray jarr = new JSONArray();
-		
 		ArrayList<AuctionQnA> list = auctionService.selectAuctionQnAList(auction,currentPage);
+		list.toString();
 		int limit = 10;
 		int listCount = auctionService.selectAuctionReviewCount(auction);
+		System.out.println("listCount : "+listCount);
 		int maxPage=(int)((double)listCount/limit+0.9); //ex) 41개면 '5'페이지나와야되는데 '5'를 계산해줌
 		int startPage=((int)((double)currentPage/5+0.8)-1)*5+1;
 		int endPage=startPage+5-1;
@@ -266,6 +266,7 @@ public class AuctionController {
 			jsq.put("maxPage", maxPage);
 			jsq.put("currentPage",currentPage);
 			jarr.add(jsq);
+		}
 			JSONObject sendJson = new JSONObject();
 			sendJson.put("list", jarr);
 			response.setContentType("application/json; charset=utf-8");
@@ -274,8 +275,6 @@ public class AuctionController {
 			out.flush();
 			out.close();
 		}
-		
-	}
 	
 	
 }
