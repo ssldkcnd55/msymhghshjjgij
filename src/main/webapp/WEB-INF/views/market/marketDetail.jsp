@@ -307,9 +307,6 @@ function reviewPage(page){
          <tr>
             <td class="space_left"></td>
             <td></td>
-         </tr>
-         <tr>
-            <td class="space_left"></td>
          </tr>   
          <!-- 공백 끝 -->
          
@@ -332,6 +329,8 @@ function reviewPage(page){
                      <tr>
                         <td align="left" class="hi_content_right">
                            <div>지구 침공 예정입니다. 돌은 3개 모았구요. 지구에 2개있다고 해서<br>
+                           아이우에오아이우오<br>
+                           아이우에오앙이우이에<br>
                               <span class="more">...더보기</span>
                            </div>
                         </td>
@@ -368,6 +367,8 @@ function reviewPage(page){
                      <tr>
                         <td align="right" class="hi_content_right">
                            <div style="float: right;">지구 침공중입니다. 비전 이마에서 때어냈습니다.<br>
+                           아이우에오아이우오<br>
+                           아이우에오앙이우이에<br>
                               <span class="more">...더보기</span>
                            </div>
                         </td>
@@ -406,6 +407,8 @@ function reviewPage(page){
                      <tr>
                         <td align="left" class="hi_content_right">
                            <div style="float: left;">돌다모아서 인구의 반을 줄였습니다 이제 쉽니다<br>
+                           아이우에오아이우오<br>
+                           아이우에오앙이우이에<br>
                               <span class="more">...더보기</span>
                            </div>
                         </td>
