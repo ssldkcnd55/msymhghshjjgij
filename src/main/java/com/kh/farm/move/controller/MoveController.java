@@ -170,7 +170,10 @@ public class MoveController {
 	public String moveNotcie_writePage() {
 		return "notice/noticeMake";
 	}
-	
+	@RequestMapping("moveHeader.do")
+	public String moveHeader() {
+		return "inc/header";
+	}
 	
 	
 }

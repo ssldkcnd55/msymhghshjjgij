@@ -18,7 +18,6 @@
 	function marketMake(){
 		location.href="/farm/moveMarketMake.do";
 	}
-
 </script>
 <script>
 		function moreBtn(){
@@ -102,43 +101,6 @@
        			</a>
         	</c:forEach>
         	</div>
-        	<!-- <a href="moveMarketDetail.do">
-       			<div class="market"><div class="img_box" style="background-image: url('/farm/resources/images/jamong.jpg'); background-size: cover;" ></div>
-       			<div class="title_box"><p class="title">플로리다 자몽</p> <p class="content">자몽속이 꽉찬 자몽을 더욱 합리적인 가격에!</p></div></div>   
-       		</a>	
-       			    	
-       			    	<a href="moveMarketDetail.do">	
-       			<div class="market"><div class="img_box" style="background-image: url('/farm/resources/images/bean.jpg'); background-size: cover;" ></div>
-       			<div class="title_box"><p class="title">플로리다 자몽</p> <p class="content">자몽속이 꽉찬 자몽을 더욱 합리적인 가격에!</p></div></div>
-       			</a>
-       			<a href="moveMarketDetail.do">
-       			<div class="market"><div class="img_box" style="background-image: url('/farm/resources/images/duroop.jpg'); background-size: cover;"></div>
-       			<div class="title_box"><p class="title">플로리다 자몽</p> <p class="content">자몽속이 꽉찬 자몽을 더욱 합리적인 가격에!</p></div></div>
-       			</a>
-       			<a href="moveMarketDetail.do">
-       			<div class="market"><div class="img_box" style="background-image: url('/farm/resources/images/banana.jpg'); background-size: cover;"></div>
-       			<div class="title_box"><p class="title">플로리다 자몽</p> <p class="content">자몽속이 꽉찬 자몽을 더욱 합리적인 가격에!</p></div></div>
-       			       			</a>
-       			       			<a href="moveMarketDetail.do">
-       			<div class="market"><div class="img_box" style="background-image: url('/farm/resources/images/rice.jpg'); background-size: cover;"></div>
-       			<div class="title_box"><p class="title">플로리다 자몽</p> <p class="content">자몽속이 꽉찬 자몽을 더욱 합리적인 가격에!</p></div></div>
-       			</a>
-       			<a href="moveMarketDetail.do">
-       			<div class="market"><div class="img_box" style="background-image: url('/farm/resources/images/pepper.jpg'); background-size: cover;"></div>
-       			<div class="title_box"><p class="title">플로리다 자몽</p> <p class="content">자몽속이 꽉찬 자몽을 더욱 합리적인 가격에!</p></div></div>
-       			</a>
-       			<a href="moveMarketDetail.do">
-       			<div class="market"><div class="img_box" style="background-image: url('/farm/resources/images/jamong.jpg'); background-size: cover;"></div>
-       			<div class="title_box"><p class="title">플로리다 자몽</p> <p class="content">자몽속이 꽉찬 자몽을 더욱 합리적인 가격에!</p></div></div>
-       			       			</a>
-       			       			<a href="moveMarketDetail.do">
-       			<div class="market"><div class="img_box" style="background-image: url('/farm/images/jamong.jpg'); background-size: cover;"></div>
-       			<div class="title_box"><p class="title">플로리다 자몽</p> <p class="content">자몽속이 꽉찬 자몽을 더욱 합리적인 가격에!</p></div></div>
-       			</a>
-       			<a href="moveMarketDetail.do">
-       			<div class="market"><div class="img_box" style="background-image: url('/farm/resources/images/jamong.jpg'); background-size: cover;"></div>
-       			<div class="title_box"><p class="title">플로리다 자몽</p> <p class="content">자몽속이 꽉찬 자몽을 더욱 합리적인 가격에!</p></div></div>
-       			</a> -->
        			<button class="more_market" onclick="moreBtn();">장터 더보기 ▼</button>
        		</div>
  			 </div>
