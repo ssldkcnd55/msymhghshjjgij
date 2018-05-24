@@ -25,4 +25,14 @@ public class NoticeServiceImpl implements NoticeService{
 		// TODO Auto-generated method stub
 		return noticeDao.noticeCount(sqlSession);
 	}
+	@Override
+	public int insertNotice(Notice notice) {
+		// TODO Auto-generated method stub
+		return noticeDao.insertNotice(sqlSession,notice);
+	}
+	@Override
+	public Notice noticeDeatil(int notice_no) {
+		// TODO Auto-generated method stub
+		return noticeDao.noticeDeatil(sqlSession,notice_no);
+	}
 }

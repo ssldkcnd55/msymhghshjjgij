@@ -72,8 +72,14 @@
                	  <li class="menu1 none_sub"><a href="moveCustomerMypage.do" class="link_menu">${loginUser.member_name}님</a></li>
                   <li class="menu1 none_sub"><a href="logout.do" class="link_menu">로그아웃</a></li>
                </c:if>
+<<<<<<< HEAD
                   <li class="menu1"><a href="#" class="link_menu">고객센터</a></li>
-                  <li class="menu1 lst"><a href="#" class="link_menu">공지사항 </a></li>
+                  <li class="menu1 lst"><a href="moveNotice.do" class="link_menu">공지사항 </a></li>
+                  <li class="menu1 lst"><a href="moveAdminPage.do" class="link_menu">관리자 </a></li>
+=======
+                  <li class="menu1"><a href="/farm/moveQnAPage.do" class="link_menu">고객센터</a></li>
+                  <li class="menu1 lst"><a href="/farm/moveNoticePage.do" class="link_menu">공지사항 </a></li>
+>>>>>>> branch 'master' of https://github.com/ssldkcnd55/msymhghshjjgij.git
                </ul>
             </div>
             <div class="header_main">
