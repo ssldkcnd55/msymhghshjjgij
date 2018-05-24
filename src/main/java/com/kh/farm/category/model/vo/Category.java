@@ -8,16 +8,14 @@ public class Category  implements java.io.Serializable{
 	private static final long serialVersionUID = 9872L;
 	private int category_no;
 	private String category_main;
-	private String category_small;
 	private String category_name;
 	
 	public Category() {}
 
-	public Category(int category_no, String category_main, String category_small, String category_name) {
+	public Category(int category_no, String category_main, String category_name) {
 		super();
 		this.category_no = category_no;
 		this.category_main = category_main;
-		this.category_small = category_small;
 		this.category_name = category_name;
 	}
 
@@ -37,13 +35,6 @@ public class Category  implements java.io.Serializable{
 		this.category_main = category_main;
 	}
 
-	public String getCategory_small() {
-		return category_small;
-	}
-
-	public void setCategory_small(String category_small) {
-		this.category_small = category_small;
-	}
 
 	public String getCategory_name() {
 		return category_name;
@@ -60,7 +51,7 @@ public class Category  implements java.io.Serializable{
 	@Override
 	public String toString() {
 		return "Category [category_no=" + category_no + ", category_main=" + category_main + ", category_small="
-				+ category_small + ", category_name=" + category_name + "]";
+				+ ", category_name=" + category_name + "]";
 	}
 	
 	

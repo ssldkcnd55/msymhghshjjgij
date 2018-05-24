@@ -44,4 +44,9 @@ public class AuctionDao {
 		return sqlSession.selectOne("auction.selectmodifyAuction",auction_no);
 	}
 
+
+	public int updateAuctionMake(SqlSessionTemplate sqlSession, Auction auction) {
+		return sqlSession.update("auction.updateAuctionMake",auction);
+	}
+
 }

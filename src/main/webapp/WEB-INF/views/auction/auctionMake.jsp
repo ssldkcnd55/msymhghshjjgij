@@ -10,6 +10,15 @@
 <script type="text/javascript" src="/farm/resources/js/HuskyEZCreator.js" charset="utf-8"></script>
 <meta charset="UTF-8">
 <title>Farm</title>
+
+<style type="text/css">
+ #cma_image img{
+ 	height:250px;
+ 	width:auto;
+ 	float:center;
+ }
+</style>
+
 <script type="text/javascript">
 
 	/* 사진 */
@@ -27,7 +36,7 @@
 	}
 
 	/* 경매등록 버튼 */
-	function auctionDetail(){
+	function submitContents(){
 		location.href="/farm/moveAcutionDetail.do";
 	}
 	
@@ -44,7 +53,7 @@
 		<div id="container">
 			<div class="inner-wrap">
 				<div class="title1 auctionMake"><p class="titleP">경매 글쓰기</p></div>
-				<form action="insertAuctionMake.do" method="post" enctype="multipart/form-data">
+				<form action="updateAuctionMake.do" method="post" enctype="multipart/form-data">
 				<input type="hidden" value="${loginUser.member_id}" name="member_id">
 				<div class="main_width">
 					<table class="jung_table">
@@ -64,7 +73,7 @@
 									
 									</td>
 									<td class="td2" colspan="3"><input type="text"
-									name="auction_intro" required="required"></td>
+									name="auction_note" required="required"></td>
 							</tr>
 							<tr class="tr1">
 									<td class="td1">
@@ -77,8 +86,8 @@
 												accept="image/*" capture="camera"
 												onchange="getThumbnailPrivew(this,$('#cma_image'))"
 												style="margin-left: 2px;"  /> <br /> <br />
-											<div id="cma_image"
-												style="width: 100px; max-width: 100px; margin-left: 210px;"></div>
+											<div id="cma_image" style="margin-left:200px;">
+												<img src="/farm/resources/upload/auctionUpload/${auction.auction_img}"></div>
 										</div>
 									</td>
 							</tr>
@@ -128,7 +137,7 @@
 						<tbody>
 							<tr>
 								<td class="main_width">
-										<textarea name="auction_note" id="auction_note" rows="10" cols="100"
+										<textarea name="auction_intro" id="auction_note" rows="10" cols="100"
 											style="width: 100%; height: 600px; display: none;"></textarea>
 									</td>
 							</tr>
@@ -153,9 +162,10 @@
 					</table> -->
 					<ul style="list-style: none;">
 						<li class="li3" onclick="location.href='/#'">뒤로가기</li>
-						<li class="li4"><input class="li4_input" type="submit" value="경매등록" onclick="auctionDetail();"></li>
+						<li class="li4"><input class="li4_input" type="submit" value="경매등록" onclick="submitContents();"></li>
 						<!-- <li class="li4" onclick="location.href='/#'">물품등록</li> -->
 					</ul>
+					<br><br><br><br>
 				</div>
 				</form>
 			</div>

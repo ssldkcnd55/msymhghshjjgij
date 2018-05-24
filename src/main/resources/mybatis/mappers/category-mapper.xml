@@ -6,7 +6,6 @@
 <resultMap type="Category" id="resultCategory">
 	<id column="category_no" property="category_no" />
 	<result column="category_main" property="category_main" />
-	<result column="category_small" property="category_small" />
 	<result column="category_name" property="category_name" />
 </resultMap>
 	
@@ -22,11 +21,29 @@
 	]]>
 </select>
 
-<select id="selectCategory_small" parameterType="category" resultType="category">
+<delete id="deleteCategory_main" parameterType="category">
 	<![CDATA[
-		select category_small,category_main from category group by category_small,category_main
+		delete from category where category_main=#{category_main}
 	]]>
-</select>
+</delete>
 
+<delete id="deleteCategory_name" parameterType="category">
+	<![CDATA[
+		delete from category where category_no=#{category_no}
+	]]>
+</delete>
 
+<insert id="addCategory_main" parameterType="category" flushCache="true" useGeneratedKeys="true">
+	<![CDATA[
+		insert into category values((select max(category_no) from category)+1,#{category_main},'더미')
+	]]>
+
+</insert>
+
+<insert id="addCategory_name" parameterType="category" flushCache="true" useGeneratedKeys="true">
+	<![CDATA[
+		insert into category values((select max(category_no) from category)+1,#{category_main},#{category_name})
+	]]>
+
+</insert>
 </mapper>

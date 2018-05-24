@@ -44,5 +44,10 @@ public class AuctionServiceImpl implements AuctionService{
 		return auctionDao.selectModifyAuction(sqlSession,auction_no);
 
 	}
+	
+	@Override
+	public int updateAuctionMake(Auction auction) {
+		return auctionDao.updateAuctionMake(sqlSession,auction);
+	}
 
 }
