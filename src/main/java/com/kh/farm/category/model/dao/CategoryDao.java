@@ -40,4 +40,9 @@ public class CategoryDao {
 		// TODO Auto-generated method stub
 		return sqlSession.insert("addCategory_main", category_main);
 	}
+
+	public int addCategory_name(SqlSessionTemplate sqlSession, Category category) {
+		// TODO Auto-generated method stub
+		return sqlSession.insert("addCategory_name", category);
+	}
 }

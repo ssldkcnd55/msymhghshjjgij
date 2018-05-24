@@ -45,5 +45,11 @@ public class CategoryImpl implements CategoryService{
 		// TODO Auto-generated method stub
 		return categoryDao.addCategory_main(sqlSession,category_main);
 	}
+	@Override
+	public int addCategory_name(Category category) {
+		// TODO Auto-generated method stub
+		return categoryDao.addCategory_name(sqlSession,category);
+	}
+	
 	
 }
