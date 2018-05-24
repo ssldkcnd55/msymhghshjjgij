@@ -30,4 +30,14 @@ public class NoticeDao {
 		return listCount;
 	}
 
+	public int insertNotice(SqlSessionTemplate sqlSession, Notice notice) {
+		// TODO Auto-generated method stub
+		return sqlSession.insert("insertNotice",notice);
+	}
+
+	public Notice noticeDeatil(SqlSessionTemplate sqlSession, int notice_no) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("notice.noticeDetail", notice_no);
+	}
+
 }
