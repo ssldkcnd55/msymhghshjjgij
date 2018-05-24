@@ -16,7 +16,8 @@ img{border:0}
 		left:0;
 		z-index:9999;
 		float:left;
-		clear:both; }
+		clear:both; 
+}
 		
 #header div.inner-wrap { width:960px; height:125px; margin:0 auto; position:relative; }
 		#header div.inner-wrap h1.logo { width:117px; height:119px; margin:0; padding:0; position:absolute; top:0; left:0; }
