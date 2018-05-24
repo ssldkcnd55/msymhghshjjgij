@@ -31,7 +31,7 @@
 	<div id="top_line"></div>
 	<div id="wrap">
 		<div id="header">
-			<%@  include file="../inc/top_menu.jsp"%>
+			<%@  include file="../inc/header.jsp"%>
 		</div>
 		<div id="container">
 			<div class="inner-wrap">
@@ -138,7 +138,7 @@
 						</tbody>
 					</table> -->
 						<input class="li4_input" type="button" value="뒤로가기">
-						<input class="li4_input submit" type="submit" value="판매등록">
+						<input class="li4_input submit" type="submit" value="판매등록" onclick="submitContents();">
 				</form>
 				</div>
 				
@@ -189,7 +189,7 @@
 			oEditors.getById["ir1"].exec("UPDATE_CONTENTS_FIELD", []); // 에디터의 내용이 textarea에 적용됩니다.
 
 			// 에디터의 내용에 대한 값 검증은 이곳에서 document.getElementById("ir1").value를 이용해서 처리하면 됩니다.
-
+			alert(document.getElementById("ir1").value);
 			try {
 				elClickedObj.form.submit();
 			} catch (e) {

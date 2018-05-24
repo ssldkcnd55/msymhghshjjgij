@@ -4,6 +4,28 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="notice">
 
+
+<select id="noticeList" parameterType="PageNumber" resultType="notice">
+	<![CDATA[
+	select * from (select rownum rnum, notice_no, notice_title, notice_date from notice 
+	order by notice_no desc) where rnum >=#{startRow} and rnum <=#{endRow}
 	
+	]]>
+</select>
+<select id="noticeCount" parameterType="int" resultType="int">
+		select count(*) from notice
+</select>
+
+<select id="noticeDetail" parameterType="notice" resultType="notice">
+	<![CDATA[
+		select * from notice where notice_no = #{notice_no}
+	]]>
+</select>
+
+<insert id="insertNotice" parameterType="notice" flushCache="true" useGeneratedKeys="true">
+	<![CDATA[
+		insert into notice values((select max(notice_no) from notice)+1,#{notice_title},#{notice_contents},sysdate)
+	]]>
+</insert>
 
 </mapper>

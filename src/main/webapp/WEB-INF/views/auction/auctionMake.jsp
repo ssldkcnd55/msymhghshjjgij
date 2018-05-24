@@ -10,6 +10,15 @@
 <script type="text/javascript" src="/farm/resources/js/HuskyEZCreator.js" charset="utf-8"></script>
 <meta charset="UTF-8">
 <title>Farm</title>
+
+<style type="text/css">
+ #cma_image img{
+ 	height:250px;
+ 	width:auto;
+ 	float:center;
+ }
+</style>
+
 <script type="text/javascript">
 
 	/* 사진 */
@@ -27,9 +36,11 @@
 	}
 
 	/* 경매등록 버튼 */
-	function auctionDetail(){
+	function submitContents(){
 		location.href="/farm/moveAcutionDetail.do";
 	}
+	
+
 
 </script>
 </head>
@@ -37,7 +48,7 @@
 	<div id="top_line"></div>
 	<div id="wrap">
 		<div id="header">
-			<%@  include file="../inc/top_menu.jsp"%>
+			<%@  include file="../inc/header.jsp"%>
 		</div>
 		<div id="container">
 			<div class="inner-wrap">
@@ -52,7 +63,7 @@
 									<p class="p">상품명</p>
 								</td>
 								<td class="td2" colspan="3"><input type="text"
-									name="auction_title"> <input type="submit"
+									name="auction_title" required="required"> <input type="submit"
 									 name="category_no" value="카테고리검색" class="input_text_box">
 									<br></td>
 							</tr>
@@ -62,7 +73,7 @@
 									
 									</td>
 									<td class="td2" colspan="3"><input type="text"
-									name="auction_intro"></td>
+									name="auction_note" required="required"></td>
 							</tr>
 							<tr class="tr1">
 									<td class="td1">
@@ -74,9 +85,9 @@
 											<input type="file" name="upfile" id="cma_file"
 												accept="image/*" capture="camera"
 												onchange="getThumbnailPrivew(this,$('#cma_image'))"
-												style="margin-left: 2px;" /> <br /> <br />
-											<div id="cma_image"
-												style="width: 100px; max-width: 100px; margin-left: 210px;"></div>
+												style="margin-left: 2px;"  /> <br /> <br />
+											<div id="cma_image" style="margin-left:200px;">
+												<img src="/farm/resources/upload/auctionUpload/${auction.auction_img}"></div>
 										</div>
 									</td>
 							</tr>
@@ -104,13 +115,13 @@
 									<p class="p">경매시작날짜</p>
 								</td>
 								<td class="td4"><input type="date" name="auction_startdate"
-									class="input_datebox"> <br></td>
+									class="input_datebox" required> <br></td>
 								<td class="td3">
 
 									<p class="p">경매마감날짜</p>
 								</td>
 								<td class="td4"><input type="date" name="auction_enddate"
-									class="input_datebox"></td>
+									class="input_datebox" required></td>
 							</tr>
 							<table class="jung_table2">
 								<tbody>
@@ -126,7 +137,7 @@
 						<tbody>
 							<tr>
 								<td class="main_width">
-										<textarea name="auction_note" id="auction_note" rows="10" cols="100"
+										<textarea name="auction_intro" id="auction_note" rows="10" cols="100"
 											style="width: 100%; height: 600px; display: none;"></textarea>
 									</td>
 							</tr>
@@ -151,9 +162,10 @@
 					</table> -->
 					<ul style="list-style: none;">
 						<li class="li3" onclick="location.href='/#'">뒤로가기</li>
-						<li class="li4"><input class="li4_input" type="submit" value="경매등록" onclick="auctionDetail();"></li>
+						<li class="li4"><input class="li4_input" type="submit" value="경매등록" onclick="submitContents();"></li>
 						<!-- <li class="li4" onclick="location.href='/#'">물품등록</li> -->
 					</ul>
+					<br><br><br><br>
 				</div>
 				</form>
 			</div>

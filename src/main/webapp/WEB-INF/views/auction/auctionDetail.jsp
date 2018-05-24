@@ -15,17 +15,98 @@
 	type="text/css" />
 <link href="/farm/resources/css/payList.css" rel="stylesheet"
 	type="text/css" />
+<link href="/farm/resources/css/auctionDetail.css" rel="stylesheet"
+	type="text/css" />
+<!-- <link href="/farm/resources/css/QnA_Detail.css" rel="stylesheet"
+	type="text/css" /> -->
 
 <script type="text/javascript"
 	src="/farm/resources/js/jquery-3.3.1.min.js"></script>
 <script type="text/javascript" src="/farm/resources/js/tabMove.js"></script>
 
+<script type="text/javascript">
+	/* 삭제 버튼 */
+	function auctionDelete(){
+		location.href="/farm/auctionDelete.do?auction_no=${auction.auction_no}";
+	}
+	
+	/* 수정 버튼 */
+	function auctionModify(){
+		location.href="/farm/auctionModify.do?auction_no=${auction.auction_no}";
+	}
+	
+	/* QnA 등록으로 가는 버튼 */
+	function Auction_qnaMake(){
+		/* location.href ="/farm/AuctionQnAMake.do?auction_no=${auction.auction_no}"; */
+		location.href ="/farm/moveAuctionQnAMake.do?auction_no="+${auction.auction_no};
+	}
+	
+	/* 경매문의 List */
+	 function auctionQnAReview(page){
+		$.ajax({
+			url:"AuctionQnAList.do",
+			type:"post",
+			data:{
+				auction_no:${auction.auction_no},
+				page:page
+			},
+			dataType: "JSON",
+			success: function(data){
+				console.log(data);
+				var objStr = JSON.stringify(data);
+				var jsonObj = JSON.parse(objStr);
+				
+				var outValues = "<tr><th width='12%'>번호</th><th width='50%'>제목</th><th width='13%'>작성자</th><th width='15%'>작성일</th></tr>";
+				
+				for(var i in jsonObj.list){
+					outValues += "<tr id='hover'><td>"+jsonObj.list[i].rnum+"</td>"
+					+"<td id='QnA_td'><a href='/farm/auctionQnaDetail.do?auction_qna_no="+jsonObj.list[i].auction_qna_no+"'>"+jsonObj.list[i].auction_qna_title+"</a></td>"
+					+"<td>"+jsonObj.list[i].member_id+"</td><td>"+jsonObj.list[i].auction_qna_question_date+"</td></tr>";
+				}
+				$(".QnA_table").html(outValues);	
+				
+				var startPage= jsonObj.list[0].startPage;
+				var endPage = jsonObj.list[0].endPage;
+				var maxPage = jsonObj.list[0].maxPage;
+				var currentPage = jsonObj.list[0].currentPage;
+				
+				var values ="";
+				if(startPage>5){
+					values+= "<a href='javascript:qnaPage("+(startPage-1)+")'>&laquo;</a>" 
+				}else{
+					values+="<a>&laquo;</a>";	
+				}
+				for(var i=startPage;i<=endPage;i++  ){
+					if(i==currentPage){
+						values+= "<a class='active'>"+i+"</a>";
+					}else{
+						values+= "<a href='javascript:qnaPage("+i+");'>"+i+"</a>";
+					}
+				}
+				if(endPage<maxPage){
+					values+="<a href='javascript:qnaPage("+(endPage+1)+")'>&raquo;</a>";
+					
+				}else{
+					values+="<a>&raquo;</a>";
+				}
+				$(".pagination").html(values);
+			
+				
+			},error: function(request,status,errorData){
+	            alert("error code : " + request.status + "\nmessage" + 
+	                    request.responseText + "\nerror" + errorData);
+	           }
+		});
+	}
+	
+	
+</script>
 </head>
 <body>
 	<div id="top_line"></div>
 	<div id="wrap">
 		<div id="header">
-			<%@  include file="../inc/top_menu.jsp"%>
+			<%@  include file="../inc/header.jsp"%>
 		</div>
 		<!-- account-wrap -->
 
@@ -34,6 +115,8 @@
 				<div class="title_box">
 					<span class="title">${auction.auction_title }</span> &nbsp; <span
 						class="release_date">경매 시작일</span>&nbsp;<span class="date">${auction.auction_startdate}</span>
+						<span><button class="modify" onclick="auctionModify();">수정</button></span>
+						<span><button class="delete" onclick="auctionDelete();">삭제</button></span>
 				</div>
 				<div class="img_box"
 					style="background-image: url('/farm/resources/upload/auctionUpload/${auction.auction_img}'); background-size: cover;">
@@ -90,12 +173,12 @@
 					<li class="tab-link" data-tab="tab-3"><div
 							class="menu question">경매이력</div></li>
 					<li class="tab-link" data-tab="tab-4"><div id="menu"
-							class="menu review">문의</div></li>
+							class="menu review" onclick="auctionQnAReview(1);">문의</div></li>
 				</ul>
 
 				<!-- introduce_box -->
 				<div id="tab-1" class="tab-content current">
-					<div class="introduce_box">${auction.auction_note } </div>
+					<div class="introduce_box" style="height:auto;">${auction.auction_intro} </div>
 				</div>
 				<!-- introduce_box -->
 
@@ -225,7 +308,46 @@
 					<div class="daily_box"></div>
 				</div>
 				<!-- Daily box -->
+				
+				
+				<!-- QnA box -->
+	       	<div id="tab-4" class="tab-content" >
+	       	<button class="auctionwrite_button" onclick="Auction_qnaMake();">문의 작성</button>
+		       	<div class="qna_box">
+				
+	            <table class="QnA_table">
+	              
+	              <!-- <tr>
+	                  <td>번호</td>
+	                  <td >제목</td>
+	                  <td>작성자</td>
+	                  <td>작성일</td>
+	               </tr> --> 
+	            </table>
+	
+	            <!-- 하단 페이징, 검색 묶음 -->
+	            <div id="bottom">
+	            
+	               <!-- 페이징 처리 -->
+	               <div class="pagination">
+	                  <a href="#">&laquo;</a> <a href="#">1</a> <a href="#"
+	                     class="active">2</a> <a href="#">3</a> <a href="#">4</a> <a
+	                     href="#">5</a> <a href="#">&raquo;</a> 
+	               </div>
+	
+	               <!-- 검색 -->
+	               <div class="search_box">
+	               <span class='green_window'> 
+	                  <input type='text'class='input_text' />
+	               </span>
+	               <button type='submit' class='sch_smit'>검색</button>
+	               </div>
+	            </div>
 			</div>
+         </div>
+	      <!-- qna Box -->
+	       	
+			</div><!-- inner-wrap -->
 		</div>
 		<!-- account-wrap -->
 		<%@ include file="../messenger/msg_box.jsp"%>

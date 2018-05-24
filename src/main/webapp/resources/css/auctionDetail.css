@@ -1,0 +1,89 @@
+@charset "UTF-8";
+
+.modify{
+	cursor: pointer;
+	margin-right:5px;
+	border:none;
+	width:80px;
+	height:36px;
+	disply:inline-block;
+	font-size:12pt;
+	font-weight: bold;
+	color:gray;
+	/* margin-left:761px; */
+	/* margin-bottom:10px; */
+	background: #e4dcbc;
+	outline: none;
+    overflow: visible;
+    border-radius: 5px;
+    float:right;
+}
+
+.delete{
+	cursor: pointer;
+	margin-right:10px;
+	border:none;
+	width:80px;
+	height:36px;
+	disply:inline-block;
+	font-size:12pt;
+	font-weight: bold;
+	color:gray;
+	float:right;
+	/* margin-bottom:10px; */
+	background: #e4dcbc;
+	outline: none;
+    overflow: visible;
+    border-radius: 5px;
+}
+
+.tab-content{
+	width:100%; 
+	height:auto;
+}
+
+.QnA_table {
+	width: 100%;
+	background: #F1F1F1;
+}
+.QnA_table td:nth-child(1){
+	width:10%;
+	font-weight: bold;
+	color:gray;
+}
+.QnA_table td:nth-child(2){
+	width:60%;
+	float:center;
+	font-weight: bold;
+	color:gray;
+}
+.QnA_table td:nth-child(3){
+	width:10%;
+	font-weight: bold;
+	color:gray;
+}
+.QnA_table td:nth-child(4){
+	width:15%;
+	font-weight: bold;
+	color:gray;
+}
+
+.auctionwrite_button{
+	cursor: pointer;
+	margin-right:5px;
+	margin-bottom:10px;
+	border:none;
+	width:100px;
+	height:36px;
+	disply:inline-block;
+	font-size:12pt;
+	font-weight: bold;
+	color:gray;
+	/* margin-left:761px; */
+	/* margin-bottom:10px; */
+	background: #e4dcbc;
+	outline: none;
+    overflow: visible;
+    border-radius: 5px;
+    float:right;
+}

@@ -3,9 +3,125 @@
 <!DOCTYPE html>
 <html>
 <head>
+<style type="text/css">
+a:link {text-decoration: none; color: black;}
+a:visited {text-decoration: none; color: green;}
+a:active {text-decoration: none; color: grey;}
+a:hover {text-decoration: underline; color: gray;}
+</style> 
+
 <script src="/farm/resources/js/jquery-3.3.1.min.js"></script>
 <!-- Notice.css -->
-
+<script>
+$(function(){
+	$.ajax({
+		url:"noticeList.do",
+		type:"post",
+		data:{
+			page:1
+		},
+		dataType: "JSON",
+		success: function(data){
+			console.log(data);
+			var objStr = JSON.stringify(data);
+			var jsonObj = JSON.parse(objStr);
+			
+			var outValues = "<tr><th width='12%'>번호</th><th width='50%'>제목</th><th width='13%'>작성자</th><th width='15%'>날짜</th></tr>";
+			
+			for(var i in jsonObj.list){
+				outValues += "<tr id='hover'><td>"+jsonObj.list[i].rnum+"</td>"
+				+"<td id='Notice_td'><a href='/farm/noticeDetail.do?notice_no="+jsonObj.list[i].notice_no+"'>"+jsonObj.list[i].notice_title+"</a></td>"
+				+"<td>운영자</td><td>"+jsonObj.list[i].notice_date+"</td></tr>";
+			}
+			$(".Notice_table").html(outValues);	
+			
+			var startPage= jsonObj.list[0].startPage;
+			var endPage = jsonObj.list[0].endPage;
+			var maxPage = jsonObj.list[0].maxPage;
+			var currentPage = jsonObj.list[0].currentPage;
+			
+			var values ="";
+			if(startPage>5){
+				values+= "<a href='javascript:noticePage("+(startPage-1)+")'>&laquo;</a>" 
+			}else{
+				values+="<a>&laquo;</a>";	
+			}
+			for(var i=startPage;i<=endPage;i++  ){
+				if(i==currentPage){
+					values+= "<a class='active'>"+i+"</a>";
+				}else{
+					values+= "<a href='javascript:noticePage("+i+");'>"+i+"</a>";
+				}
+			}
+			if(endPage<maxPage){
+				values+="<a href='javascript:noticePage("+(endPage+1)+")'>&raquo;</a>";
+				
+			}else{
+				values+="<a>&raquo;</a>";
+			}
+			$(".pagination").html(values);
+			
+		},error: function(request,status,errorData){
+	        alert("error code : " + request.status + "\nmessage" + 
+	                request.responseText + "\nerror" + errorData);
+	       }
+	});
+});
+function noticePage(page){
+	$.ajax({
+		url:"noticeList.do",
+		type:"post",
+		data:{
+			page:page
+		},
+		dataType: "JSON",
+		success: function(data){
+			console.log(data);
+			var objStr = JSON.stringify(data);
+			var jsonObj = JSON.parse(objStr);
+			
+			var outValues = "<tr><th width='12%'>번호</th><th width='50%'>제목</th><th width='13%'>작성자</th><th width='15%'>날짜</th></tr>";
+			
+			for(var i in jsonObj.list){
+				outValues += "<tr id='hover'><td>"+jsonObj.list[i].rnum+"</td>"
+				+"<td id='Notice_td'><a href='/farm/marketNoticeDetail.do?notice_no="+jsonObj.list[i].notice_no+"'>"+jsonObj.list[i].notice_title+"</a></td>"
+				+"<td>운영자</td><td>"+jsonObj.list[i].notice_date+"</td></tr>";
+			}
+			$(".Notice_table").html(outValues);	
+			
+			var startPage= jsonObj.list[0].startPage;
+			var endPage = jsonObj.list[0].endPage;
+			var maxPage = jsonObj.list[0].maxPage;
+			var currentPage = jsonObj.list[0].currentPage;
+			
+			var values ="";
+			if(startPage>5){
+				values+= "<a href='javascript:noticePage("+(startPage-1)+")'>&laquo;</a>" 
+			}else{
+				values+="<a>&laquo;</a>";	
+			}
+			for(var i=startPage;i<=endPage;i++  ){
+				if(i==currentPage){
+					values+= "<a class='active'>"+i+"</a>";
+				}else{
+					values+= "<a href='javascript:noticePage("+i+");'>"+i+"</a>";
+				}
+			}
+			if(endPage<maxPage){
+				values+="<a href='javascript:noticePage("+(endPage+1)+")'>&raquo;</a>";
+				
+			}else{
+				values+="<a>&raquo;</a>";
+			}
+			$(".pagination").html(values);
+			
+		},error: function(request,status,errorData){
+	        alert("error code : " + request.status + "\nmessage" + 
+	                request.responseText + "\nerror" + errorData);
+	       }
+	});
+}
+</script>
 <link rel="stylesheet" type="text/css" href="/farm/resources/css/style.css" />
 <link rel="stylesheet" type="text/css" href="/farm/resources/css/notice.css" />
 <meta charset="UTF-8">
@@ -16,12 +132,12 @@
 <div id="top_line"></div>
    <div id="wrap">
       <div id="header">
-         <%@ include file="../inc/top_menu.jsp" %>
+         <%@ include file="../inc/header.jsp" %>
       </div>
       <div id="container">
          <div class="inner-wrap">
          <div class="board-wrap">
-            <div class="Notice_title">공지사항</div>
+            <div class="title1 notice"><p class="titleP">공지사항</p></div>
 
             <!-- select box -->
             <div class="select_box">
@@ -33,81 +149,14 @@
             </div>
 
             <table class="Notice_table">
-               <tr>
-                  <th width="12%">번호</th>
-                  <th width="50%";>제목</th>
-                  <th width="13%";>작성자</th>
-                  <th width="15%";>날짜</th>
-               </tr>
-               <tr id="hover">
-                  <td>1</td>
-                  <td id="Notice_td"><a href="/farm/moveNotice_Detail.do">공지사항_01</a></td>
-                  <td>김민선</td>
-                  <td>2018-05-08</td>
-               </tr>
-               <tr id="hover">
-                  <td>2</td>
-                  <td id="Notice_td">공지사항_02</td>
-                  <td>김민선</td>
-                  <td>2018-05-08</td>
-               </tr>
-               <tr id="hover">
-                  <td>3</td>
-                  <td id="Notice_td">공지사항_03</td>
-                  <td>김민선</td>
-                  <td>2018-05-08</td>
-               </tr>
-               <tr>
-                  <td>4</td>
-                  <td id="Notice_td">공지사항_04</td>
-                  <td>김민선</td>
-                  <td>2018-05-08</td>
-               </tr>
-               <tr>
-                  <td>5</td>
-                  <td id="Notice_td">공지사항_05</td>
-                  <td>김민선</td>
-                  <td>2018-05-08</td>
-               </tr>
-               <tr>
-                  <td>6</td>
-                  <td id="Notice_td">공지사항_06</td>
-                  <td>김민선</td>
-                  <td>2018-05-08</td>
-               </tr>
-               <tr>
-                  <td>7</td>
-                  <td id="Notice_td">공지사항_07</td>
-                  <td>김민선</td>
-                  <td>2018-05-08</td>
-               </tr>
-               <tr>
-                  <td>8</td>
-                  <td id="Notice_td">문의사항_08</td>
-                  <td>김민선</td>
-                  <td>2018-05-08</td>
-               </tr>
-               <tr>
-                  <td>9</td>
-                  <td id="Notice_td">공지사항_09</td>
-                  <td>김민선</td>
-                  <td>2018-05-08</td>
-               </tr>
-               <tr>
-                  <td>10</td>
-                  <td id="Notice_td">공지사항_10</td>
-                  <td>김민선</td>
-                  <td>2018-05-08</td>
-               </tr>
+              
             </table>
 
             <!-- 하단 페이징, 검색 묶음 -->
             <div id="bottom">
                <!-- 페이징 처리 -->
                <div class="pagination">
-                  <a href="#">&laquo;</a> <a href="#">1</a> <a href="#"
-                     class="active">2</a> <a href="#">3</a> <a href="#">4</a> <a
-                     href="#">5</a> <a href="#">6</a> <a href="#">&raquo;</a>
+                 
                </div>
 
                <!-- 검색 -->

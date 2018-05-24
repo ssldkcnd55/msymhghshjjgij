@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.kh.farm.market.model.vo.Market;
 import com.kh.farm.qna.model.dao.QnaDao;
+import com.kh.farm.qna.model.vo.MainQna;
 import com.kh.farm.qna.model.vo.Market_qna;
 
 @Service
@@ -29,5 +30,20 @@ public class QnaServiceImpl implements QnaService{
 	public Market_qna selectQna(int qna_no) {
 		// TODO Auto-generated method stub
 		return qnaDao.selectQna(sqlSession, qna_no);
+	}
+	@Override
+	public ArrayList<MainQna> selectMainQnaList(int currentPage) {
+		// TODO Auto-generated method stub
+		return qnaDao.mainQnaList(sqlSession,currentPage);
+	}
+	@Override
+	public int selectMainQnaCount() {
+		// TODO Auto-generated method stub
+		return qnaDao.selectMainQnaCount(sqlSession);
+	}
+	@Override
+	public MainQna selectMainQnaDetail(int qna_no) {
+		// TODO Auto-generated method stub
+		return qnaDao.selectMainQnaDetail(sqlSession,qna_no);
 	}
 }

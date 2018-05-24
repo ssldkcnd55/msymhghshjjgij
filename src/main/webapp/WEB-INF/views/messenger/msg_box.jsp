@@ -10,6 +10,17 @@
 <script type="text/javascript" src="/farm/resources/js/messenger.js"></script>
 <script type="text/javascript" src="/farm/resources/js/msg_box.js"></script>
 <link href="/farm/resources/css/messenger.css" rel="stylesheet" type="text/css" />
+
+
+
+<c:if test="${! empty sessionScope.loginUser}">
+<script type="text/javascript">
+loginPage();
+login_id='${loginUser.member_id}';
+</script>
+</c:if>
+
+
 </head>
 <body>
 
@@ -39,7 +50,17 @@
       <div class="arrow bottom">▼</div>
       </div><br>
  <c:if test="${ !empty sessionScope.loginUser }">
-  <a href="javascript: msgIcon() "><img class="msgIcon" src="/farm/resources/images/messenger_icon_green2.png"></a><br>    
+  <a href="javascript: msgIcon()" class="msgA"><img class="msgIcon" src="/farm/resources/images/messenger_icon_green2.png">
+  
+  <c:if test="${! empty chatList}">
+					<c:forEach items="${chatList}" var="chat" varStatus="cList" >	
+					<c:set var="alarm_count"  value="${chat.chat_history_alarm +alarm_count}" />	
+				 	${chat_history_alarm }
+					</c:forEach>
+					<c:if test="${ alarm_count > 0}">
+					<span class="msgAlarm"><c:out value="${alarm_count }"></c:out></span></c:if>
+					</c:if>
+  </a><br>    
  </c:if>
         </span>
 

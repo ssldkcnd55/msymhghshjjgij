@@ -7,7 +7,7 @@ public interface MemberService {
 
 	int insertMember(Member member);
 
-	Member loginCheck(Member member) throws LoginFailException;
+	Member selectLoginCheck(Member member) throws LoginFailException;
 
 	Member selectFindId(Member member);
 

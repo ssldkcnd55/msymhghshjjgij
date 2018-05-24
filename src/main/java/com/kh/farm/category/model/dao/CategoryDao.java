@@ -20,13 +20,29 @@ public class CategoryDao {
 		return sqlSession.selectList("selectCategory_main");
 	}
 
-	public List<Category> selectCategory_small(SqlSessionTemplate sqlSession) {
-		// TODO Auto-generated method stub
-		return sqlSession.selectList("selectCategory_small");
-	}
 
 	public List<Category> selectCategory_name(SqlSessionTemplate sqlSession) {
 		// TODO Auto-generated method stub
 		return sqlSession.selectList("selectCategory");
+	}
+
+	public int deleteCategory_main(SqlSessionTemplate sqlSession, String category_main) {
+		// TODO Auto-generated method stub
+		return sqlSession.delete("deleteCategory_main", category_main);
+	}
+
+	public int deleteCategory_name(SqlSessionTemplate sqlSession, int category_no) {
+		// TODO Auto-generated method stub
+		return sqlSession.delete("deleteCategory_name", category_no);
+	}
+
+	public int addCategory_main(SqlSessionTemplate sqlSession, String category_main) {
+		// TODO Auto-generated method stub
+		return sqlSession.insert("addCategory_main", category_main);
+	}
+
+	public int addCategory_name(SqlSessionTemplate sqlSession, Category category) {
+		// TODO Auto-generated method stub
+		return sqlSession.insert("addCategory_name", category);
 	}
 }

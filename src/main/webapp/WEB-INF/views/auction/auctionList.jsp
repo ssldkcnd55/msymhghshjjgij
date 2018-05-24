@@ -1,34 +1,67 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%> 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html>
 <html>
 <head>
-<!-- dkssudddddddd -->
+
 <meta charset="UTF-8">
-<title>Farm</title>
+<title>Auction</title>
+
 <link href="/farm/resources/css/style.css" rel="stylesheet" type="text/css" />
 <link href="/farm/resources/css/marketList.css" rel="stylesheet" type="text/css" />
 <link href="/farm/resources/css/auctionList.css" rel="stylesheet" type="text/css" />
-
+<script type="text/javascript" src="/farm/resources/js/jquery-3.3.1.min.js"></script>
+<script>
+	var count = 1;
+</script>
 <script type="text/javascript">
+	
 	function auction_write(){
 		location.href="/farm/moveAcution_write.do";
 	}
-	/* $(function(){
-		var list = ${auctionlist}.length; 
-		alert(list);
-	} */
-	
-
 </script>
+	
+<script>
+	function more_auction(){
+		count = count+1;
+		$.ajax({
+			
+			url: "moreAuctionList.do",
+			type:"post",
+			data: {page: count},
+			dataType: "JSON",
+			success: function(obj){
+				console.log(obj);
+				var objStr = JSON.stringify(obj);
+				var jsonObj = JSON.parse(objStr);
+				var outValues = $(".auction_box").html();
+				for(var i in jsonObj.list){
+					outValues += 
+					"<a href='AuctionDetail.do?auction_no="+jsonObj.list[i].auction_no +"'>"+
+	       			"<div class='market'><div class='img_box' style='background-image: url(\"/farm/resources/upload/auctionUpload/"+jsonObj.list[i].auction_img+"\"); background-size: cover;'></div>"+
+	       			"<div class='title_box'><p class='title' style='text-align:center;'>"+jsonObj.list[i].auction_title+"</p> <p class='content' style='text-align:center;'>"+jsonObj.list[i].auction_intro+"</p></div></div></a>"   
+	       			
+				}
+				$(".auction_box").html(outValues);
+				},error: function(request,status,errorData){
+					alert("error code : " + request.status + "\nmessage" + 
+							request.responseText + "\nerror" + errorData);
+				}
+		});
+	}
+	
+</script>
+
 </head>
 
 <body>
+	<c:set var="count" value="1"/>
 	<div id="top_line"></div>
 	<div id="wrap">
 		<div id="header">
-			<%@  include file="../inc/top_menu.jsp"%>
+			<%@  include file="../inc/header.jsp"%>
 		</div>
 		<!-- account-wrap -->
 
@@ -64,16 +97,14 @@
         	
         	</div>
         	
-        	<!-- 장터 -->
+        	<!-- 경매 -->
         	<div class="right_box">
-        	<div id="more">
-        	<c:forEach items="${auctionlist}" var="list" varStatus="status">
-        	<%-- <c:if test="${list}.length <= 9"> --%>
+        	<div class="auction_box">
+        	<c:forEach items="${list}" var="list" varStatus="status">
         	<a href="AuctionDetail.do?auction_no=${list.auction_no }">
-       			<div class="market"><div class="img_box" style="background-image: url('/farm/resources/images/jamong.jpg'); background-size: cover;" ></div>
+       			<div class="market"><div class="img_box" style="background-image: url('/farm/resources/upload/auctionUpload/${list.auction_img}'); background-size: cover;" ></div>
        			<div class="title_box"><p class="title" style="text-align:center;">${list.auction_title}</p> <p class="content" style="text-align:center;">${list.auction_intro}</p></div></div>   
        		</a>
-       		<%-- </c:if> --%>
        		</c:forEach>    
       	    </div>
        			<button class="more_market" onclick="more_auction();">장터 더보기 ▼</button>

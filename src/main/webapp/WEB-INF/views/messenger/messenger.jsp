@@ -35,7 +35,17 @@
 					<th class="messenger_back"><a
 						href="javascript: back_chat_list()"><img
 							src="/farm/resources/images/back_white.png">
-						<!-- 채팅목록으로 이동 --></a></th>
+						<!-- 채팅목록으로 이동 --></a></th><th class="messenger_back_th">
+						<c:if test="${! empty chatList}">
+					<c:forEach items="${chatList}" var="chat" varStatus="cList" >	
+					<c:set var="alarm_count"  value="${chat.chat_history_alarm +alarm_count}" />	
+				 	${chat_history_alarm }
+					</c:forEach>
+					<c:if test="${ alarm_count > 0}">
+					<div class="messenger_back_count"><c:out value="${alarm_count }"></c:out></div></c:if>
+					</c:if>
+						
+						</th>
 					<th class="messenger_title"><table>
 							<tr>
 								<th><img src="/farm/resources/images/person_icon.png"></th>
@@ -88,28 +98,28 @@
 				</c:if>
 				<c:if test="${empty chatList }">
 				<div class="searchNotFoundID">진행중인 대화가 없습니다.</div>
-				<div class="searchNotFoundMsg">아이디 또는 이름을 검색하여 대화를 시작하세요.</div></div>
+				<div class="searchNotFoundMsg">아이디 또는 이름을 검색하여 대화를 시작하세요.</div>
 				</c:if>
-			
 			</div>
+			
 			<!-- ///////////////////////////////대화목록 끝 ///////////////////////////////////////-->
 
 
 			<!-- /////////////////////////////대화창 //////////////////////////////////////////////-->
 			<div class="msg_table_middle">
-
+			대화창대화창
 
 			</div>
 			<!-- ///////////////////////////////대화창 끝 ///////////////////////////////////////-->
-
-		</div>
+</div>
+		
 		<!-- 메신져 하단 -->
 		<div class="msg_bottom">
 			<table class="msg_bottom_table">
 				<tr>
 					<th><input class="msg_input" type="text"
 						placeholder="메시지전송..." autofocus="autofocus"></th>
-					<th><a href="#">
+					<th><a href="javascript: return false;">
 							<!-- servlet method 실행 -->
 							<img class="send_msg_icon"
 							src="/farm/resources/images/send_msg_icon_3.png">

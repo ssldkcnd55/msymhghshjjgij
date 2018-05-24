@@ -72,7 +72,7 @@ function qnaPage(page){
 		url:"qnaList.do",
 		type:"post",
 		data:{
-			market_no:${market.market_no},
+			market_no: ${market.market_no},
 			page:page
 		},
 		dataType: "JSON",
@@ -123,6 +123,71 @@ function qnaPage(page){
            }
 	});
 }
+
+function qnaMake(){
+	location.href ="/farm/MarketQnaMakeMove.do?market_no=${market.market_no}";
+}
+
+function writeReview(){
+	location.href ="/farm/writeReviewMove.do?market_no=${market.market_no}";
+}
+
+function reviewPage(page){
+	$.ajax({
+		url:"reviewList.do",
+		type:"post",
+		data:{
+			market_no:${market.market_no},
+			Rpage:page 
+		},
+		dataType: "JSON",
+		success: function(data){
+			console.log(data);
+			var objStr = JSON.stringify(data);
+			var jsonObj = JSON.parse(objStr);
+			
+			var outValues = "<tr><th width='12%'>번호</th><th width='50%'>제목</th><th width='13%'>작성자</th><th width='15%'>날짜</th></tr>";
+			
+			for(var i in jsonObj.list){
+				outValues += "<tr id='hover'><td>"+jsonObj.list[i].review_no+"</td>"
+				+"<td id='QnA_td'><a href='#'>"+jsonObj.list[i].review_title+"</a></td>"
+				+"<td>"+jsonObj.list[i].member_id+"</td><td>"+jsonObj.list[i].review_date+"</td></tr>";
+			}
+			$(".review_table").html(outValues);	
+			
+			var startPage= jsonObj.list[0].startPage;
+			var endPage = jsonObj.list[0].endPage;
+			var maxPage = jsonObj.list[0].maxPage;
+			var currentPage = jsonObj.list[0].currentPage;
+			
+			var values ="";
+			if(startPage>5){
+				values+= "<a href='javascript:reviewPage("+(startPage-1)+")'>&laquo;</a>" 
+			}else{
+				values+="<a>&laquo;</a>";	
+			}
+			for(var i=startPage;i<=endPage;i++  ){
+				if(i==currentPage){
+					values+= "<a class='active'>"+i+"</a>";
+				}else{
+					values+= "<a href='javascript:reviewPage("+i+");'>"+i+"</a>";
+				}
+			}
+			if(endPage<maxPage){
+				values+="<a href='javascript:reviewPage("+(endPage+1)+")'>&raquo;</a>";
+				
+			}else{
+				values+="<a>&raquo;</a>";
+			}
+			$(".review_pagination").html(values);
+		
+			
+		},error: function(request,status,errorData){
+            alert("error code : " + request.status + "\nmessage" + 
+                    request.responseText + "\nerror" + errorData);
+           }
+	});
+}
 </script>
 <title>Farm</title>
 </head>
@@ -130,7 +195,7 @@ function qnaPage(page){
 	<div id="top_line"></div>
 	<div id="wrap">
 		<div id="header">
-			<%@  include file="../inc/top_menu.jsp"%>
+			<%@  include file="../inc/header.jsp"%>
 		</div>
 		<!-- account-wrap -->
 	
@@ -206,7 +271,7 @@ function qnaPage(page){
 				    <li class="tab-link current" data-tab="tab-1"><div class="menu introduce">소개</div></li>
 				    <li class="tab-link" data-tab="tab-2"><div class="menu daily">일지</div></li>
 				    <li class="tab-link" data-tab="tab-3"><div class="menu question" onclick="qnaPage(1);">문의</div></li>
-				    <li class="tab-link" data-tab="tab-4"><div id="menu" class="menu review">후기</div></li>
+				    <li class="tab-link" data-tab="tab-4"><div id="menu" class="menu review" onclick="reviewPage(1);">후기</div></li>
 				</ul>
 	       		<!-- <div class="menu introduce">소개</div>
 	       		<div class="menu daily">일지</div>
@@ -242,9 +307,6 @@ function qnaPage(page){
          <tr>
             <td class="space_left"></td>
             <td></td>
-         </tr>
-         <tr>
-            <td class="space_left"></td>
          </tr>   
          <!-- 공백 끝 -->
          
@@ -267,6 +329,8 @@ function qnaPage(page){
                      <tr>
                         <td align="left" class="hi_content_right">
                            <div>지구 침공 예정입니다. 돌은 3개 모았구요. 지구에 2개있다고 해서<br>
+                           아이우에오아이우오<br>
+                           아이우에오앙이우이에<br>
                               <span class="more">...더보기</span>
                            </div>
                         </td>
@@ -303,6 +367,8 @@ function qnaPage(page){
                      <tr>
                         <td align="right" class="hi_content_right">
                            <div style="float: right;">지구 침공중입니다. 비전 이마에서 때어냈습니다.<br>
+                           아이우에오아이우오<br>
+                           아이우에오앙이우이에<br>
                               <span class="more">...더보기</span>
                            </div>
                         </td>
@@ -341,6 +407,8 @@ function qnaPage(page){
                      <tr>
                         <td align="left" class="hi_content_right">
                            <div style="float: left;">돌다모아서 인구의 반을 줄였습니다 이제 쉽니다<br>
+                           아이우에오아이우오<br>
+                           아이우에오앙이우이에<br>
                               <span class="more">...더보기</span>
                            </div>
                         </td>
@@ -386,8 +454,9 @@ function qnaPage(page){
  			
  			 	       	<!-- qna_Box -->
 	       	<div id="tab-3" class="tab-content">
+	       	<button class="market_write" onclick="qnaMake();">QnA 등록</button>
 		       	<div class="qna_box">
-	
+				
 	            <table class="QnA_table">
 	              
 	              <!--   <tr>
@@ -419,6 +488,41 @@ function qnaPage(page){
 			</div>
          </div>
 	       	<!-- qna Box -->
+	       	
+	       	<div id="tab-4" class="tab-content">
+	       	<button class="market_write" onclick="writeReview();">후기 쓰기</button>
+		       	<div class="qna_box">
+	
+	            <table class="review_table">
+	              
+	              <!--   <tr>
+	                  <td>10</td>
+	                  <td id="QnA_td">문의사항_04</td>
+	                  <td>김민선</td>
+	                  <td>2018-05-06</td>
+	               </tr> -->
+	            </table>
+	
+	            <!-- 하단 페이징, 검색 묶음 -->
+	            <div id="bottom">
+	            
+	               <!-- 페이징 처리 -->
+	               <div class="review_pagination">
+	                  <!-- <a href="#">&laquo;</a> <a href="#">1</a> <a href="#"
+	                     class="active">2</a> <a href="#">3</a> <a href="#">4</a> <a
+	                     href="#">5</a> <a href="#">&raquo;</a> -->
+	               </div>
+	
+	               <!-- 검색 -->
+	               <div class="search_box">
+	               <span class='green_window'> 
+	                  <input type='text'class='input_text' />
+	               </span>
+	               <button type='submit' class='sch_smit'>검색</button>
+	               </div>
+	            </div>
+			</div>
+         </div>
  			  </div>
         </div>
 

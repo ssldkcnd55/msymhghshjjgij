@@ -12,6 +12,18 @@ import com.kh.farm.member.model.vo.Member;
 public class MoveController {
 	public MoveController() {}
 	
+	@RequestMapping("movceTestGetCookie.do")
+	public String moveTestGetCookie()
+	{
+		return "messenger/test_getCookie";
+	}
+	
+	
+	@RequestMapping("movceTestSetCookie.do")
+	public String moveTestSetCookie()
+	{
+		return "messenger/test_setCookie";
+	}
 	
 	@RequestMapping("moveSmartEditor2Skin.do")
 	public String moveSmartEditor2Skin()
@@ -150,6 +162,10 @@ public class MoveController {
 	public String moveAcutionDetailPage() {
 		return "auction/auctionDetail";
 	}
+	@RequestMapping("moveMarketQnaMake.do")
+	public String moveMarketQnaMake() {
+		return "market/marketQnaMake";
+	}
 	
 	@RequestMapping("moveNotice_Detail.do")
 	public String moveNotice_DetailPage() {
@@ -174,6 +190,7 @@ public class MoveController {
 	public String moveHeader() {
 		return "inc/header";
 	}
+	
 	
 	
 }

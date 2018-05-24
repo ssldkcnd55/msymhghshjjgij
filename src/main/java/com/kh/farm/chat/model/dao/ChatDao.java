@@ -54,5 +54,15 @@ public class ChatDao {
 
 		return chat.getChat_no();
 	}
+
+	public List<String> selectChatFriends(SqlSessionTemplate sqlSession, String member_id) {
+	
+		return sqlSession.selectList("selectChatFriends", member_id);
+	}
+
+	public int selectAlarmCount(SqlSessionTemplate sqlSession, String member_id) {
+
+		return sqlSession.selectOne("selectAlarmCount", member_id);
+	}
 	
 }

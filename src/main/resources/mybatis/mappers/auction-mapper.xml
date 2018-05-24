@@ -23,13 +23,17 @@
 	<insert id="insertAuctionMake" parameterType="auction" flushCache="true" useGeneratedKeys="true">
 	<![CDATA[
 		insert into auction values((select max(auction_no) from auction)+1,#{member_id},1,#{auction_title},#{auction_note},#{auction_img},
-		#{auction_startdate},#{auction_enddate},null,'0',#{auction_startprice},#{auction_directprice})
+		#{auction_startdate},#{auction_enddate},#{auction_intro},'0',#{auction_startprice},#{auction_directprice})
 	]]>
 	</insert>
 	
-	<select id="selectAuctionList" parameterType="auction" flushCache="true" resultType="auction">
+	<select id="selectAuctionList" parameterType="pageNumber"  resultType="auction">
 	<![CDATA[
-		select * from auction order by auction_no desc
+		select * from 
+			(select rownum rnum, auction_no,
+			auction_title,auction_note,auction_img,
+			member_id from (select * from auction order by 
+			auction_no desc)) where rnum >= #{startRow} and rnum <= #{endRow}
 	]]>
 	</select>
 	
@@ -39,9 +43,47 @@
 	]]>
 	</select>
 	
-	<!-- <select id="total" parameterType="auction" flushCache="true" resultType="auction">
+	
+	<delete id="deleteAuction" parameterType="auction">
 	<![CDATA[
-		select count(auction_no) from auction 
+		delete from auction where auction_no=#{auction_no}
 	]]>
-	</select> -->
+	</delete>
+	
+	<select id="selectmodifyAuction" parameterType="auction" flushCache="true" resultType="auction">
+	<![CDATA[
+		select * from auction where auction_no=#{auction_no}
+	]]>
+	</select>
+	
+	<update id="updateAuctionMake">
+	<![CDATA[
+		update auction set auction_title=#{auction_title},auction_note=#{auction_note},auction_img=#{auction_img},
+		auction_intro=#{auction_intro},auction_startprice=#{auction_startprice},auction_directprice=#{auction_directprice} 
+		where auction_no = #{auction_no}
+	]]>
+	</update>
+	
+	<insert id="insertAuctionQnAMake" parameterType="auctionqna" flushCache="true" useGeneratedKeys="true">
+	<![CDATA[
+		insert into auction_qna values((select max(auction_qna_no) from auction_qna)+1,#{auction_no},#{member_id},sysdate,null,
+		null,#{auction_qna_title},#{auction_qna_contents},'1')
+	]]>
+	</insert>
+	
+	<select id="selectAuctionQnAList" parameterType="pageNumber" resultType="auctionqna">
+	<![CDATA[
+		select * from (select rownum rnum, auction_no,auction_qna_title,member_id,auction_qna_question_date from auction_qna where auction_no =#{auction_no}
+		order by auction_qna_no desc) where rnum>= #{startRow} and rnum <=#{endRow}
+	]]>
+	</select>
+	
+	
+	<select id="selectAuctionReviewCount" parameterType="int" resultType="int">
+	<![CDATA[
+		select count(*) from auction_qna where auction_no = #{auction_no}
+	]]>
+	</select>
+	
+	
 </mapper>

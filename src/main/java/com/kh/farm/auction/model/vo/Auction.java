@@ -29,22 +29,24 @@ public class Auction implements java.io.Serializable {
 	
 	}
 
-	public Auction(int auction_no, String member_id, String auction_title, String auction_note, String auction_img,
-			Date auction_startdate, Date auction_enddate, String auction_intro, String auction_status,
-			int auction_startprice, int auction_directprice) {
+	public Auction(int auction_no, String member_id, String category_no, String auction_title, String auction_note,
+			String auction_img, Date auction_startdate, Date auction_enddate, String auction_intro,
+			String auction_status, int auction_startprice, int auction_directprice) {
 		super();
-		this.auction_no = auction_no;
-		this.member_id = member_id;
-		this.auction_title = auction_title;
-		this.auction_note = auction_note;
-		this.auction_img = auction_img;
-		this.auction_startdate = auction_startdate;
-		this.auction_enddate = auction_enddate;
-		this.auction_intro = auction_intro;
-		this.auction_status = auction_status;
-		this.auction_startprice = auction_startprice;
-		this.auction_directprice = auction_directprice;
+		this.auction_no = auction_no; //경매 번호
+		this.member_id = member_id; //판매자 아이디
+		this.category_no = category_no;// 카테고리 번호
+		this.auction_title = auction_title;//경매 제목
+		this.auction_note = auction_note;//경매 노트
+		this.auction_img = auction_img;//경매 이미지
+		this.auction_startdate = auction_startdate;//경매 시작 시간
+		this.auction_enddate = auction_enddate;//경매 종료 시간
+		this.auction_intro = auction_intro;//경매 소개
+		this.auction_status = auction_status;//경매 상태
+		this.auction_startprice = auction_startprice;//경매 시작가
+		this.auction_directprice = auction_directprice;//즉시 구매가
 	}
+
 
 	@Override
 	public String toString() {
@@ -69,6 +71,16 @@ public class Auction implements java.io.Serializable {
 
 	public void setMember_id(String member_id) {
 		this.member_id = member_id;
+	}
+
+	
+	
+	public String getCategory_no() {
+		return category_no;
+	}
+
+	public void setCategory_no(String category_no) {
+		this.category_no = category_no;
 	}
 
 	public String getAuction_title() {
