@@ -27,7 +27,12 @@
 	function move_QnA_modify(){
 		location.href="/farm/moveQnA_write.do";
 	}
+	
+	
+	
 </script>
+
+
 </head>
 <body>
 	<div id="top_line"></div>
@@ -63,45 +68,24 @@
 
 
 					<div class="QnA_comment_title">
-						<h3>댓글</h3>
+						<h3>답변</h3>
 					</div>
 					<div class="QnA_comment">
-
 						<div class="QnA_comment_top_writer">
 							<div class="QnA_comment_writer">
 								<img alt="" src="/Farm/img/user.png">&nbsp; 
-								<span>아이디</span>&nbsp;
-								<span>2018-05-14</span>&nbsp; 
+								<span>운영자</span>&nbsp;
+								<span>${qna.market_qna_answer_date}</span>&nbsp; 
 								<span  onclick="comment_modify">수정</span>&nbsp;
 								<span onclick="comment_delete">삭제</span>&nbsp;
 							</div>
 							<p>
-							안녕하세요. 사랑하는 고객님, 마켓컬리 대표 김슬아입니다. 마켓컬리와 함께 따뜻한 연말 보내시길
-							바랍니다. 오늘은 마켓컬리의 환불 정책과, 이와 관련한 후기게시판의 용도에 대해서 설명 드리고자 합니다.
+							${qna.market_qna_answer }
 							</p>
 
 						</div>
 						
-						<div class="QnA_comment_top_writer">
-							<div class="QnA_comment_writer">
-								<img alt="" src="/Farm/img/user.png">&nbsp; 
-								<span>아이디</span>&nbsp;
-								<span>2018-05-14</span>&nbsp; 
-								<span>수정</span>&nbsp;
-								<span>삭제</span>&nbsp;
-							</div>
-							<p>
-							안녕하세요. 사랑하는 고객님, 마켓컬리 대표 김슬아입니다. 마켓컬리와 함께 따뜻한 연말 보내시길
-							바랍니다. 오늘은 마켓컬리의 환불 정책과, 이와 관련한 후기게시판의 용도에 대해서 설명 드리고자 합니다.
-							</p>
-							<table class="commont_modify">
-								<tr>
-									<td><textarea rows="4" cols="4"></textarea></div></td>
-									<td><input type="submit" value="등록"/></td>
-								</tr>
-							</table>
-
-						</div>
+						
 					</div>
 
 

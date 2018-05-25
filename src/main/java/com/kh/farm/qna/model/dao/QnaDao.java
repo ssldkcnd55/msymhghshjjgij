@@ -62,4 +62,30 @@ public class QnaDao {
 		return mq;
 	}
 
+	public int updateAnswer(SqlSessionTemplate sqlSession, MainQna mq) {
+		// TODO Auto-generated method stub
+		int result = sqlSession.update("qna.updateAnswer",mq);
+		return result;
+	}
+
+	public int deleteQnaAnswer(SqlSessionTemplate sqlSession, int qanswer_no) {
+		
+		int result = sqlSession.delete("qna.deleteQnaAnswer",qanswer_no);
+		return result;
+	}
+
+	public int insertMainQna(SqlSessionTemplate sqlSession, MainQna mq) {
+		// TODO Auto-generated method stub
+	
+		int result = sqlSession.insert("qna.insertMainQna",mq);
+		
+		return result;
+	}
+
+	public int updateMainQna(SqlSessionTemplate sqlSession, MainQna mq) {
+		// TODO Auto-generated method stub
+		int result = sqlSession.update("qna.updateMainQna",mq);
+		return result;
+	}
+
 }

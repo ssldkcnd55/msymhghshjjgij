@@ -11,6 +11,7 @@ import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -120,4 +121,50 @@ public class QnaController {
 		mv.setViewName("qna/qnaDetail");
 		return mv;
 	}
+	
+	@RequestMapping(value="qnaAnswer.do", method=RequestMethod.POST )
+	public String qnaAnswer(@RequestParam("main_qna_answer") String qna_answer, @RequestParam("main_qna_no") int qna_no) {
+		MainQna mq = new MainQna();
+		mq.setMain_qna_answer(qna_answer);
+		mq.setMain_qna_no(qna_no);
+		
+		int mainQ = qnaService.updateAnswer(mq); 
+
+		return "forward:/qnaDetail.do?main_qna_no="+qna_no;
+	}
+	
+	@RequestMapping(value ="deleteQnaAnswer.do")
+	public String deleteQnaAnswer(@RequestParam("main_qna_no") int qanswer_no) {
+		
+		int deleteQnaAnswer = qnaService.deleteQnaAnswer(qanswer_no);
+		return "forward:/qnaDetail.do?main_qna_no="+qanswer_no;
+	}
+	
+	@RequestMapping(value ="qnaMake.do", method=RequestMethod.POST)
+	public String qnaMake(MainQna mq) {
+		
+		int insertMainQna= qnaService.insertMainQna(mq);
+		
+		return "qna/qna"; 
+		
+	}
+	@RequestMapping(value="qnaUpdateMove.do") 
+	public ModelAndView qnaUpdateMove(ModelAndView mv, MainQna mq) {
+		mv.addObject("main_qna",mq);
+		mv.setViewName("qna/qnaUpdate");
+		
+		return mv;
+	}
+	
+	@RequestMapping(value="qnaUpdate.do", method=RequestMethod.POST)
+	public String qnaUpdate(MainQna mq) {
+		int qnaUpdate = qnaService.updateMainQna(mq);
+		
+		return "forward:/qnaDetail.do?main_qna_no="+mq.getMain_qna_no();
+				
+			
+		
+	}
+	
+	
 }

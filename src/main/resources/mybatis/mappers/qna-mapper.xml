@@ -35,4 +35,25 @@
 	<select id="mainQnaDetail" parameterType="int" resultType="MainQna">
 	select * from main_qna where main_qna_no = #{main_qna_no}
 	</select>
+	
+	<update id="updateAnswer" parameterType="MainQna" >
+	update main_qna set main_qna_answer =#{main_qna_answer} where main_qna_no= #{main_qna_no}
+	</update>
+	
+	<delete id="deleteQnaAnswer" parameterType="int" flushCache="true">
+	delete from main_qna where main_qna_no = #{qanswer_no}
+	</delete>
+	
+	<insert id="insertMainQna" parameterType="MainQna" flushCache="true" useGeneratedKeys="true" >
+	
+	<![CDATA[
+	insert into main_qna values((select max(main_qna_no)+1 from main_qna),#{member_id},#{main_qna_title},
+	#{main_qna_contents},sysdate, null, null)
+	]]>  
+	</insert>
+	
+	
+	<update id="updateMainQna" parameterType="MainQna">
+	update main_qna set main_qna_title =#{main_qna_title}, main_qna_contents =#{main_qna_contents} where main_qna_no = #{main_qna_no}
+	</update>
 </mapper>

@@ -67,7 +67,10 @@ img{border:0}
 		width:300px; height: 530px; float:left; margin:80px 27px 0px 0;
 		}
 		#container div.box2 { width:300px; height:470px; border:1px solid #DCDCDC; margin:0px 0px 30px 0;float:left; }
-	
+		.tarea{
+		width: 800px;
+		height: 200px;
+		}
 			
 		.bigbox2{
 		width:300px; height: 530px; float:left; margin:80px 0px 0px 0;
@@ -122,7 +125,8 @@ img{border:0}
 		}
 		.auction_table td:nth-child(2){
 	
-		text-align: center;
+		text-align: left;
+		
 	
 		}
 		
@@ -130,10 +134,17 @@ img{border:0}
 		.auction_img{
 		width:80px;
 		height:50px;
-		background-size: cover;s
+		background-size: cover;
 		}
 		
-	
+		.currentPrice{
+		font-size: 12pt;
+		font-weight: bold;
+		
+		}
+		.directPrice{
+		margin-top: 5px;
+		}
 		
 #footer { width:100%; padding:20px 0 40px 0; border-top:solid 1px #DCDCDC; margin:0 auto; position:relative; }
 		#footer div.inner-foot { width:960px;  margin: auto; padding:0;}

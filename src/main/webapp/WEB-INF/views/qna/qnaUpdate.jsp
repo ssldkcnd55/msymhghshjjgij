@@ -21,7 +21,7 @@
 		<div id="container">
 			<div class="inner-wrap">
 				<div class="title1 qna"><p class="titleP">QnA</p></div>
-<form action="qnaMake.do" method="post">
+<form action="qnaUpdate.do" method="post">
 				<div class="div">
 				
 					<table class="jung_table">
@@ -31,7 +31,7 @@
 									<p class="p">제목</p>
 								</td>
 								<td colspan="3" class="td2"><input type="text"
-									name="main_qna_title" class="input_text_box"> <br></td>
+									name="main_qna_title" class="input_text_box" value="${main_qna.main_qna_title}"> <br></td>
 							</tr>
 							<table class="jung_table2">
 								<tbody>
@@ -43,13 +43,13 @@
 						</tbody>
 					</table>
 		
-					<input type="hidden" name="member_id" value="${loginUser.member_id}">
+					<input type="hidden" name="main_qna_no" value="${main_qna.main_qna_no}">
 					<table class="jung_table2">
 						<tbody>
 							<tr>
 								<td style="width: 100%;">
 										<textarea name="main_qna_contents" id="ir1" rows="10" cols="100"
-											style="width: 100%; height: 250px; display: none;"></textarea>
+											style="width: 100%; height: 250px; display: none;" >${main_qna.main_qna_contents }</textarea>
 									</td>
 							</tr>
 						</tbody>

@@ -20,4 +20,12 @@ public interface QnaService {
 
 	MainQna selectMainQnaDetail(int qna_no);
 
+	int updateAnswer(MainQna mq);
+
+	int deleteQnaAnswer(int qanswer_no);
+
+	int insertMainQna(MainQna mq);
+
+	int updateMainQna(MainQna mq);
+
 }

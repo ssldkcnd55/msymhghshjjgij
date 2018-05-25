@@ -97,6 +97,7 @@
 .QnA_comment_top_writer{
 	background: #F1F1F1;
 	width:100%;
+	height:200px;
 	margin-bottom:-15px;
 }
 
@@ -191,4 +192,23 @@
 	font-size:15pt;
 	font-weight: bold;
 	color:#000000;	
+}
+
+.answerArea{	
+		width: 800px;
+		height: 100px;
+		float: left;		
+		
+		}
+		
+.answerBtn{
+	background-color:red;
+	color: white;
+	width: 60px;
+	height: 30px;
+	padding-top:5px;
+	font-weight: bold;
+	text-align: center;
+	float: left;
+	margin-left: 10px;
 }
