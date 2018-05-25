@@ -10,6 +10,8 @@
 <!--QnA_Detail.css -->
 <link rel="stylesheet" type="text/css" href="/farm/resources/css/style.css" />
 <link rel="stylesheet" type="text/css" href="/farm/resources/css/QnA_Detail.css" />
+<link rel="stylesheet" type="text/css" href="/farm/resources/css/auctionQnADetail.css" />
+
 <title>경매 QnA Detail 정보</title>
 
 
@@ -85,22 +87,25 @@
 						<div class="QnA_comment_top_writer">
 							<div class="QnA_comment_writer">
 								<img alt="" src="/Farm/img/user.png">&nbsp; 
-								<span>아이디</span>&nbsp;
-								<span>2018-05-14</span>&nbsp; 
+								<span>${auctionqna.member_id}</span>&nbsp;
+								<span>${auctionqna.auction_qna_answer_date}</span>&nbsp; 
 								<span>수정</span>&nbsp;
 								<span>삭제</span>&nbsp;
 							</div>
 							<p>
-							안녕하세요. 사랑하는 고객님, 마켓컬리 대표 김슬아입니다. 마켓컬리와 함께 따뜻한 연말 보내시길
-							바랍니다. 오늘은 마켓컬리의 환불 정책과, 이와 관련한 후기게시판의 용도에 대해서 설명 드리고자 합니다.
+							${auctionqna.auction_qna_answer}
 							</p>
-							<table class="commont_modify">
+							<form action="updateauctionQnA_Answer.do" method="post">
+							<input type="hidden" name="auction_qna_no" value="${auctionqna.auction_qna_no}">
+							<table class="commont_modify2">
 								<tr>
-									<td><textarea rows="4" cols="4"></textarea></div></td>
-									<td><input type="submit" value="등록"/></td>
+									<td >판매자</td>
+									<td ><textarea rows="5" cols="90" name="auction_qna_answer"></textarea></div></td>
+									<td><input type="submit" value="등록" class="commont_modify2_button"/></td>
+									
 								</tr>
 							</table>
-
+							</form>
 						</div>
 					</div>
 

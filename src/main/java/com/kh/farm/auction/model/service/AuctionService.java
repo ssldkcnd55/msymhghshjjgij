@@ -40,4 +40,6 @@ public interface AuctionService {
 	AuctionQnA selectshowAuctionQnAModify(int auction_qna_no);
 
 	int updateAuctionQnA(AuctionQnA auctionqna);
+
+	int updateauctionQnA_Answer(AuctionQnA auctionqna);
 }

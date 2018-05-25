@@ -297,14 +297,23 @@ public class AuctionController {
 		return mv;
 	}
 	
-	
+	//경매 QnA 수정
 	@RequestMapping(value="registerAuctionQnAModify.do")
 	public String registerAuctionQnAModify(AuctionQnA auctionqna) {
-		
 		int updateauctionqua = auctionService.updateAuctionQnA(auctionqna);
 		return "redirect:/moveauctionQnADetail.do?auction_qna_no="+auctionqna.getAuction_qna_no();
 		
 	}
+	
+	@RequestMapping(value="updateauctionQnA_Answer.do" ,method=RequestMethod.POST)
+	public String insertauctionQnA_Answer(AuctionQnA auctionqna) {
+		System.out.println("답글내용 : "+auctionqna.getAuction_qna_answer()+" / "+"댓글 시간 : "+auctionqna.getAuction_qna_answer_date());
+		int updateauctionQnA_Answer = auctionService.updateauctionQnA_Answer(auctionqna);
+		System.out.println("updateauctionQnA_Answer :"+updateauctionQnA_Answer);
+		return "redirect:/moveauctionQnADetail.do?auction_qna_no="+auctionqna.getAuction_qna_no();
+		
+	}
+	
 	
 	
 	

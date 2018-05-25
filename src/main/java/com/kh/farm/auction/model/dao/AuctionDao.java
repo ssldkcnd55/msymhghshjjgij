@@ -89,4 +89,9 @@ public class AuctionDao {
 		return sqlSession.update("auction.updateAuctionQnA",auctionqna);
 	}
 
+
+	public int updateauctionQnA_Answer(SqlSessionTemplate sqlSession, AuctionQnA auctionqna) {
+		return sqlSession.update("auction.updateauctionQnA_Answer",auctionqna);
+	}
+
 }

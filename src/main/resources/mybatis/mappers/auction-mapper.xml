@@ -106,5 +106,11 @@
 	]]>
 	</update>
 	
+	<update id="updateauctionQnA_Answer" parameterType="AuctionQnA">
+	<![CDATA[
+		update auction_qna set auction_qna_answer=#{auction_qna_answer},auction_qna_answer_date=sysdate
+		where AUCTION_QNA_NO=#{auction_qna_no}
+	]]>
+	</update>
 	
 </mapper>
