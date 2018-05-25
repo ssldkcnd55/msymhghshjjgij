@@ -54,7 +54,6 @@
 </head>
 
 <body>
-<<<<<<< HEAD
       <div id="header">
          <div class="inner-wrap">
             <div class="userMenu">
@@ -70,10 +69,7 @@
 
                   <li class="menu1"><a href="#" class="link_menu">고객센터</a></li>
                   <li class="menu1 lst"><a href="moveNotice.do" class="link_menu">공지사항 </a></li>
-                  <li class="menu1 lst"><a href="moveAdminPage.do" class="link_menu">관리자 </a></li>
-
-                  <li class="menu1"><a href="/farm/moveQnAPage.do" class="link_menu">고객센터</a></li>
-                  <li class="menu1 lst"><a href="/farm/moveNoticePage.do" class="link_menu">공지사항 </a></li>
+                  <li class="menu1 lst"><a href="moveAdminPage.do" class="link_menu">관리자 페이지</a></li>
 
                </ul>
             </div>
@@ -111,7 +107,6 @@
             </div>
             <div class="bg"></div>
             <%-- <h1 class="logo">
-=======
 	<div id="header">
 		<div class="inner-wrap">
 			<div class="userMenu">
@@ -169,7 +164,6 @@
 			</div>
 			<div class="bg"></div>
 			<%-- <h1 class="logo">
->>>>>>> branch 'master' of https://github.com/ssldkcnd55/msymhghshjjgij.git
                <a href="moveHome.do">Farm Main</a>
             </h1>
             <ul class="main-menu">
