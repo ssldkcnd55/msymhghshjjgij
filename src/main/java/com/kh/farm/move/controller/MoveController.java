@@ -144,6 +144,11 @@ public class MoveController {
 		return "admin/admin_category";
 	}
 	
+	@RequestMapping("moveAdminMember.do")
+	public String moveAdminMember() {
+		return "admin/admin_member";
+	}
+	
 	@RequestMapping("moveAcution_write.do")
 	public String moveAcution_writePage() {
 		return "auction/auctionMake";
