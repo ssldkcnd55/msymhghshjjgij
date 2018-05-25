@@ -107,7 +107,9 @@ $(function(){
            }
 	});
 }); */
-
+function dailyMake(){
+	location.href="dailyMakeMove.do?market_no=${market.market_no}";
+}
 function qnaPage(page){
 	$.ajax({
 		url:"qnaList.do",
@@ -380,143 +382,13 @@ function dailyPage(){
        		<!-- Daily box -->
        		<div id="tab-2" class="tab-content">
        		<div class="daily_box">
-       			
-       			 <table class="history_body" >
-     <!--  <tr>   
-         <td class="history_start" colspan="3" align="center">
-         농사 시작일자 넣는 부분
-            <table class="history_title">
-               <tr>
-                  <td class="start_date" align="center">농사시작일자</td>
-               </tr>
-               <tr>
-                  <td class="start_date" align="center">2018/01/01</td>
-               </tr>
-            </table>
-         농사 시작일자 넣는 부분 끝   
-         </td>
-      </tr>
-         공백
-         <tr>
-            <td class="space_left"></td>
-            <td></td>
-         </tr>   
-         공백 끝
-         
-         
-         일지란 시작 오른쪽
-         <tr>
-            <td class="space_right"></td>
-            <td class="history_right" align="left">
-               <table class="history_right_table" cellspacing="0" cellpadding="0" >
-                  <tbody>
-                     <tr>
-                        <td class="history_right_table_td1" rowspan="3" ></td>
-                        <td class="history_right_table_td2" align="left" valign="top">
-                           <span class="history_right_table_span1">2017-08-16 15:37:01</span>
-                        </td>
-                     </tr>
-                     <tr>
-                        <td align="left" class="hi_title">안녕하세요 타노스입니다.</td>
-                     </tr>
-                     <tr>
-                        <td align="left" class="hi_content_right">
-                           <div>지구 침공 예정입니다. 돌은 3개 모았구요. 지구에 2개있다고 해서<br>
-                           아이우에오아이우오<br>
-                           아이우에오앙이우이에<br>
-                              <span class="more">...더보기</span>
-                           </div>
-                        </td>
-                     </tr>
-                  </tbody>
-               </table>
-            </td>
-         </tr>
-         일지란 끝
+       		<c:if test="${loginUser.member_id eq market.member_id}">
+					<button class="dailyMakeBtn" onclick="dailyMake()">일지쓰기</button>
+			</c:if>
+						<table class="history_body">
 
-         <tr>
-            <td valign="top" class="history_right" align="right" onclick="">
-               <table class="history_right_table" cellspacing="0" cellpadding="0">
-                  <tbody>
-                     <tr>
-                        <td align="right" class="hi_date" valign="top">
-                           <span class="history_right_table_span1">2017-08-17 15:37:01</span>
-                        </td>
-                        <td rowspan="3" class="history_right_table_td1" ></td>
-                     </tr>
-                     <tr>
-                        <td align="right" class="hi_title">안녕하세요 타노스입니다.</td>
-                     </tr>
-                     <tr>
-                        <td align="right" class="hi_content_right">
-                           <div style="float: right;">지구 침공중입니다. 비전 이마에서 때어냈습니다.<br>
-                           아이우에오아이우오<br>
-                           아이우에오앙이우이에<br>
-                              <span class="more">...더보기</span>
-                           </div>
-                        </td>
-                     </tr>
-                  </tbody>
-               </table>
-            </td>
-            <td class="space_right2"></td>
-         </tr>
-         일지란 끝 왼쪽
-  
-         <tr>
-            <td class="space_right"></td>
-            <td valign="top"  class="history_right" align="left" onclick="">
-               <table cellspacing="0" cellpadding="0" class="history_right_table">
-                  <tbody>
-                     <tr>
-                        <td rowspan="3" class="history_right_table_td1"></td>
-                        <td align="left" class="hi_date" valign="top">
-                           <span class="history_right_table_span1">2017-08-16 15:37:01</span>
-                        </td>
-                     </tr>
-                     <tr>
-                        <td align="left" class="hi_title">안녕하세요 타노스입니다.</td>
-                     </tr>
-                     <tr>
-                        <td align="left" class="hi_content_right">
-                           <div style="float: left;">돌다모아서 인구의 반을 줄였습니다 이제 쉽니다<br>
-                           아이우에오아이우오<br>
-                           아이우에오앙이우이에<br>
-                              <span class="more">...더보기</span>
-                           </div>
-                        </td>
-                     </tr>
-                  </tbody>
-               </table>
-            </td>
-         </tr>
-         일지란 끝
-            공백
-
-         <tr>
-            <td class="space_left"></td>
-            <td></td>
-         </tr>
-         공백끝
-         <tr>   
-            <td colspan="3" align="center">
-         농사 끝일자 넣는 부분
-               <table class="history_title" cellspacing="0">
-                  <tr>
-                     <td class="start_date" align="center">농사끝일자</td>
-                  </tr>
-                  <tr>
-                     <td class="start_date" align="center">2018/01/01</td>
-                  </tr>
-               </table>
-         농사 끝일자 넣는 부분 끝   
-            </td>
-         </tr>
-         <tr>
-            <td height="100"></td>
-         </tr> -->
-   </table>
-<!-- 농사일지 끝 -->
+						</table>
+						<!-- 농사일지 끝 -->
 
        			</div>
        			</div>
@@ -529,12 +401,6 @@ function dailyPage(){
 				
 	            <table class="QnA_table">
 	              
-	              <!--   <tr>
-	                  <td>10</td>
-	                  <td id="QnA_td">문의사항_04</td>
-	                  <td>김민선</td>
-	                  <td>2018-05-06</td>
-	               </tr> -->
 	            </table>
 	
 	            <!-- 하단 페이징, 검색 묶음 -->
@@ -542,9 +408,6 @@ function dailyPage(){
 	            
 	               <!-- 페이징 처리 -->
 	               <div class="pagination">
-	                  <!-- <a href="#">&laquo;</a> <a href="#">1</a> <a href="#"
-	                     class="active">2</a> <a href="#">3</a> <a href="#">4</a> <a
-	                     href="#">5</a> <a href="#">&raquo;</a> -->
 	               </div>
 	
 	               <!-- 검색 -->
@@ -565,12 +428,6 @@ function dailyPage(){
 	
 	            <table class="review_table">
 	              
-	              <!--   <tr>
-	                  <td>10</td>
-	                  <td id="QnA_td">문의사항_04</td>
-	                  <td>김민선</td>
-	                  <td>2018-05-06</td>
-	               </tr> -->
 	            </table>
 	
 	            <!-- 하단 페이징, 검색 묶음 -->
@@ -578,9 +435,6 @@ function dailyPage(){
 	            
 	               <!-- 페이징 처리 -->
 	               <div class="review_pagination">
-	                  <!-- <a href="#">&laquo;</a> <a href="#">1</a> <a href="#"
-	                     class="active">2</a> <a href="#">3</a> <a href="#">4</a> <a
-	                     href="#">5</a> <a href="#">&raquo;</a> -->
 	               </div>
 	
 	               <!-- 검색 -->

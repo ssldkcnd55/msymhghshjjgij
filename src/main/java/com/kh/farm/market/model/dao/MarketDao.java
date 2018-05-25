@@ -71,4 +71,9 @@ public class MarketDao {
 		return (ArrayList<Daily>)list;
 	}
 
+	public int insertMarket_daily(SqlSessionTemplate sqlSession, Daily daily) {
+		// TODO Auto-generated method stub
+		return sqlSession.insert("market.insertMarketDaily",daily);
+	}
+
 }

@@ -61,4 +61,10 @@
 		select * from daily where market_no = #{market_no} order by daily_no desc
 	]]>
 	</select>
+	<insert id="insertMarketDaily" parameterType="Daily" flushCache="true" useGeneratedKeys="true">
+		<![CDATA[
+		insert into daily values((select max(daily_no) from daily)+1,#{market_no},sysdate,#{daily_title},#{daily_contents}
+		)
+	]]>
+	</insert>
 </mapper>

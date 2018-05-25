@@ -8,7 +8,13 @@
    border-collapse: collapse;
 
 }
-
+.dailyMakeBtn{
+	background: #512772;
+	width:100px;
+	height:30px;
+	border:none;
+	color:#fff;
+}
 .history_title {
    width: 30%;
    border: 4px solid #d7d7d7;

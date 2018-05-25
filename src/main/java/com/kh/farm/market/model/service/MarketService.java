@@ -24,4 +24,6 @@ public interface MarketService {
 
 	ArrayList<Daily> selectDailyList(Market market);
 
+	int insertMarket_daily(Daily daily);
+
 }
