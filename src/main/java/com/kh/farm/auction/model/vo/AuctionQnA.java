@@ -18,12 +18,15 @@ public class AuctionQnA implements java.io.Serializable{
 	private String auction_qna_title;
 	private String auction_qna_contents;
 	private String auction_category;
+	private String rnum;
 	
 	public AuctionQnA() {}
 	
+	
+
 	public AuctionQnA(int auction_qna_no, int auction_no, String member_id, Date auction_qna_question_date,
 			String auction_qna_answer, Date auction_qna_answer_date, String auction_qna_title,
-			String auction_qna_contents, String auction_category) {
+			String auction_qna_contents, String auction_category, String rnum) {
 		super();
 		this.auction_qna_no = auction_qna_no;
 		this.auction_no = auction_no;
@@ -34,7 +37,9 @@ public class AuctionQnA implements java.io.Serializable{
 		this.auction_qna_title = auction_qna_title;
 		this.auction_qna_contents = auction_qna_contents;
 		this.auction_category = auction_category;
+		this.rnum = rnum;
 	}
+
 
 
 	public int getAuction_qna_no() {
@@ -125,8 +130,13 @@ public class AuctionQnA implements java.io.Serializable{
 	public void setAuction_category(String auction_category) {
 		this.auction_category = auction_category;
 	}
-	
-	
-	
 
+	public String getRnum() {
+		return rnum;
+	}
+
+	public void setRnum(String rnum) {
+		this.rnum = rnum;
+	}
+	
 }

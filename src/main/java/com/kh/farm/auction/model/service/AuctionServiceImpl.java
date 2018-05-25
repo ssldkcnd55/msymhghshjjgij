@@ -62,8 +62,8 @@ public class AuctionServiceImpl implements AuctionService{
 	}
 	
 	@Override
-	public int selectAuctionReviewCount(Auction auction) {
-		return auctionDao.selectAuctionReviewCount(sqlSession,auction);
+	public int selectAuctionQnACount(Auction auction) {
+		return auctionDao.selectAuctionQnACount(sqlSession,auction);
 	}
 
 }

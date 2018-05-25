@@ -230,8 +230,9 @@ public class AuctionController {
 	@RequestMapping(value="AuctionQnAMake.do",method=RequestMethod.POST)
 	public String insertAuctionQnAMake(AuctionQnA auctionqna) {
 		int at_no=auctionqna.getAuction_no();
+		
 		System.out.println("Auction_no : "+auctionqna.getAuction_no()+" / "+"tilte : "+auctionqna.getAuction_qna_title()+"member_id : "+auctionqna.getMember_id()
-		+" / "+"note : "+auctionqna.getAuction_qna_contents());
+		+" / "+"note : "+auctionqna.getAuction_qna_contents()+" / "+"qna_no : "+auctionqna.getAuction_qna_no());
 		int insertAuctionQnAMake = auctionService.insertAuctionQnAMake(auctionqna);
 		System.out.println("insertAuctionQnAMake : "+insertAuctionQnAMake );
 		return "redirect:/AuctionDetail.do?auction_no="+at_no;
@@ -243,11 +244,11 @@ public class AuctionController {
 		throws IOException{
 		JSONArray jarr = new JSONArray();
 		ArrayList<AuctionQnA> list = auctionService.selectAuctionQnAList(auction,currentPage);
-		list.toString();
-		int limit = 10;
-		int listCount = auctionService.selectAuctionReviewCount(auction);
+		System.out.println("list : "+list.toString());
+		int limitPage = 10;
+		int listCount = auctionService.selectAuctionQnACount(auction);
 		System.out.println("listCount : "+listCount);
-		int maxPage=(int)((double)listCount/limit+0.9); //ex) 41개면 '5'페이지나와야되는데 '5'를 계산해줌
+		int maxPage=(int)((double)listCount/limitPage+0.9); //ex) 41개면 '5'페이지나와야되는데 '5'를 계산해줌
 		int startPage=((int)((double)currentPage/5+0.8)-1)*5+1;
 		int endPage=startPage+5-1;
 		
@@ -257,7 +258,8 @@ public class AuctionController {
 		
 		for(AuctionQnA aq : list) {
 			JSONObject jsq = new JSONObject();
-			jsq.put("auction_no",aq.getAuction_no());
+			jsq.put("rnum", aq.getRnum());
+			jsq.put("auction_qna_no",aq.getAuction_qna_no());
 			jsq.put("auction_qna_title", aq.getAuction_qna_title());
 			jsq.put("member_id", aq.getMember_id());
 			jsq.put("auction_qna_question_date", aq.getAuction_qna_question_date().toString());

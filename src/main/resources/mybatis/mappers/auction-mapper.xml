@@ -71,15 +71,15 @@
 	]]>
 	</insert>
 	
-	<select id="selectAuctionQnAList" parameterType="pageNumber" resultType="auctionqna">
+	<select id="selectAuctionQnAList" parameterType="pageNumber" resultType="AuctionQnA">
 	<![CDATA[
-		select * from (select rownum rnum, auction_no,auction_qna_title,member_id,auction_qna_question_date from auction_qna where auction_no =#{auction_no}
+		select * from (select rownum rnum, auction_qna_no,auction_qna_title,member_id,auction_qna_question_date from auction_qna where auction_no =#{auction_no}
 		order by auction_qna_no desc) where rnum>= #{startRow} and rnum <=#{endRow}
 	]]>
 	</select>
 	
 	
-	<select id="selectAuctionReviewCount" parameterType="int" resultType="int">
+	<select id="selectAuctionQnACount" parameterType="int" resultType="int">
 	<![CDATA[
 		select count(*) from auction_qna where auction_no = #{auction_no}
 	]]>

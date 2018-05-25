@@ -64,7 +64,7 @@ $(function(){
 			},
 			dataType: "JSON",
 			success: function(data){
-				
+				console.log(data);
 				var objStr = JSON.stringify(data);
 				var jsonObj = JSON.parse(objStr);
 				

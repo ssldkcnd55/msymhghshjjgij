@@ -52,7 +52,7 @@ public class AuctionDao {
 
 
 	public int insertAuctionQnAMake(SqlSessionTemplate sqlSession, AuctionQnA auctionqna) {
-		return sqlSession.insert("insertAuctionQnAMake",auctionqna);
+		return sqlSession.insert("auction.insertAuctionQnAMake",auctionqna);
 	}
 
 
@@ -62,15 +62,15 @@ public class AuctionDao {
 		PageNumber pnum = new PageNumber();
 		pnum.setStartRow(startRow);
 		pnum.setEndRow(endRow);
-		pnum.setMarket_no(auction.getAuction_no());
+		pnum.setAuction_no(auction.getAuction_no());
 		List<AuctionQnA> list =sqlSession.selectList("auction.selectAuctionQnAList",pnum);
 		return (ArrayList<AuctionQnA>)list;
 	}
 
 
-	public int selectAuctionReviewCount(SqlSessionTemplate sqlSession, Auction auction) {
-		int selectAuctionReviewCount = sqlSession.selectOne("auction.selectAuctionReviewCount",auction.getAuction_no());
-		return selectAuctionReviewCount;
+	public int selectAuctionQnACount(SqlSessionTemplate sqlSession, Auction auction) {
+		int selectAuctionQnACount = sqlSession.selectOne("auction.selectAuctionQnACount",auction.getAuction_no());
+		return selectAuctionQnACount;
 	}
 
 }
