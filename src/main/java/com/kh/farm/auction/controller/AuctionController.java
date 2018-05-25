@@ -314,7 +314,31 @@ public class AuctionController {
 		
 	}
 	
-	
+	/*home.jsp 경매 리스트*/
+	@RequestMapping(value="homeAuctionList.do")
+	public void homeAuctionList(HttpServletResponse response) throws IOException {
+		ArrayList<Auction> list= auctionService.selectHomeAuctionList();
+		JSONArray jarr = new JSONArray();
+		
+		for(Auction a : list) {
+			//추출한 user를 json 객체에 담기
+			JSONObject jauction = new JSONObject();
+			jauction.put("auction_title", a.getAuction_title());
+			jauction.put("auction_img", a.getAuction_img());
+			jauction.put("auction_startprice", a.getAuction_startprice());
+			jauction.put("auction_directprice", a.getAuction_directprice());
+			jauction.put("auction_no", a.getAuction_no());
+			jarr.add(jauction);
+		}
+		//전송용 최종 json 객체 선언
+		JSONObject sendJson = new JSONObject();
+		sendJson.put("list", jarr);
+		response.setContentType("application/json; charset=utf-8");
+		PrintWriter out = response.getWriter();
+		out.append(sendJson.toJSONString());
+		out.flush();
+		out.close();
+	}
 	
 	
 }
