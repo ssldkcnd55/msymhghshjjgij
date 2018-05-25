@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.kh.farm.common.model.vo.*;
 import com.kh.farm.market.model.dao.MarketDao;
+import com.kh.farm.market.model.vo.Daily;
 import com.kh.farm.market.model.vo.Market;
 import com.kh.farm.market.model.vo.Review;
 import com.kh.farm.qna.model.vo.Market_qna;
@@ -49,5 +50,10 @@ public class MarketServiceImpl implements MarketService{
 	public int insertReview(Review rv) {
 		// TODO Auto-generated method stub
 		return marketDao.insertReview(sqlSession,rv);
+	}
+	@Override
+	public ArrayList<Daily> selectDailyList(Market market) {
+		// TODO Auto-generated method stub
+		return marketDao.selectDailyList(sqlSession,market);
 	}
 }

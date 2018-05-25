@@ -56,5 +56,9 @@
 		)
 	]]>
 	</insert>
-	
+	<select id="dailyList" parameterType="int" resultType="Daily">
+	<![CDATA[
+		select * from daily where market_no = #{market_no} order by daily_no desc
+	]]>
+	</select>
 </mapper>
