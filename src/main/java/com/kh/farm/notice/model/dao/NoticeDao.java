@@ -40,4 +40,14 @@ public class NoticeDao {
 		return sqlSession.selectOne("notice.noticeDetail", notice_no);
 	}
 
+	public int updateNotice(SqlSessionTemplate sqlSession, Notice notice) {
+		// TODO Auto-generated method stub
+		return sqlSession.update("updateNotice",notice);
+	}
+
+	public int deleteNotice(SqlSessionTemplate sqlSession, int notice_no) {
+		// TODO Auto-generated method stub
+		return sqlSession.delete("deleteNotice",notice_no);
+	}
+
 }
