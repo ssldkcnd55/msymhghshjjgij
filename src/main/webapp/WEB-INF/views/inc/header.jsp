@@ -11,7 +11,7 @@
 <link href="/farm/resources/css/header.css" rel="stylesheet"
 	type="text/css" />
 <script type="text/javascript">
-	$(function() {
+	/* $(function() {
 
 		$.ajax({
 					url : 'Weather.do',
@@ -49,7 +49,7 @@
 						$("#w_text").html(img_text);
 					}
 				});
-	});
+	}); */
 </script>
 </head>
 
