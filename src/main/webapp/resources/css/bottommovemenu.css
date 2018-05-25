@@ -17,3 +17,4 @@
 .goods-view-show-option-button{text-align:center;width:170px;height:48px;background-color:#56297a;position:absolute;right:0;top:-70px;border:0}
 .goods-view-show-option-button-value{color:#fff;font-size:14px;padding-left:20px;background-image:url(/farm/resources/images/icon/icon-arrow-top-white.png);background-repeat:no-repeat;background-position:left center}
 .goods-view-show-option-button.__active .goods-view-show-option-button-value{background-image:url(/farm/resources/images/icon/icon-arrow-bottom-white.png)}
+#flow-cart2{display:none;}

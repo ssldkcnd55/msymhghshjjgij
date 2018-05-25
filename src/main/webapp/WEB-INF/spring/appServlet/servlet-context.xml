@@ -73,7 +73,8 @@ xmlns:websocket="http://www.springframework.org/schema/websocket"
 
 </websocket:handlers>
 
-
+	<!-- Naver -->
+	<beans:bean id="naverLoginBo" class="com.kh.farm.login.bo.NaverLoginBO"/>
 
 
 	
