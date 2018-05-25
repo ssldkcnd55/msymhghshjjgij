@@ -65,5 +65,20 @@ public class AuctionServiceImpl implements AuctionService{
 	public int selectAuctionQnACount(Auction auction) {
 		return auctionDao.selectAuctionQnACount(sqlSession,auction);
 	}
+	
+	@Override
+	public AuctionQnA selectAuctionQnADetail(int auction_qna_no) {
+		return auctionDao.selectAuctionQnADetail(sqlSession,auction_qna_no);
+	}
+	
+	@Override
+	public AuctionQnA selectshowAuctionQnAModify(int auction_qna_no) {
+		return auctionDao.selectshowAuctionQnAModify(sqlSession,auction_qna_no);
+	}
+	
+	@Override
+	public int updateAuctionQnA(AuctionQnA auctionqna) {
+		return auctionDao.updateAuctionQnA(sqlSession,auctionqna);
+	}
 
 }

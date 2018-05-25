@@ -86,4 +86,25 @@
 	</select>
 	
 	
+	<select id="selectAuctionQnADetail" parameterType="AuctionQnA" resultType="AuctionQnA">
+	<![CDATA[
+		select * from auction_qna where auction_qna_no = #{auction_qna_no}
+	]]>
+	</select>
+	
+	
+	<select id="selectshowAuctionQnAModify" parameterType="AuctionQnA" resultType="AuctionQnA">
+	<![CDATA[
+		select * from auction_qna where auction_qna_no = #{auction_qna_no}
+	]]>
+	</select>
+	
+	<update id="updateAuctionQnA" parameterType="AuctionQnA" >
+		<![CDATA[
+		update auction_qna set AUCTION_QNA_TITLE=#{auction_qna_title},AUCTION_QNA_CONTENTS=#{auction_qna_contents}
+		where AUCTION_QNA_NO=#{auction_qna_no}
+	]]>
+	</update>
+	
+	
 </mapper>

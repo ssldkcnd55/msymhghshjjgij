@@ -73,4 +73,20 @@ public class AuctionDao {
 		return selectAuctionQnACount;
 	}
 
+
+	public AuctionQnA selectAuctionQnADetail(SqlSessionTemplate sqlSession, int auction_qna_no) {
+		return sqlSession.selectOne("auction.selectAuctionQnADetail",auction_qna_no);
+
+	}
+
+
+	public AuctionQnA selectshowAuctionQnAModify(SqlSessionTemplate sqlSession, int auction_qna_no) {
+		return sqlSession.selectOne("auction.selectshowAuctionQnAModify",auction_qna_no);
+	}
+
+
+	public int updateAuctionQnA(SqlSessionTemplate sqlSession,AuctionQnA auctionqna) {
+		return sqlSession.update("auction.updateAuctionQnA",auctionqna);
+	}
+
 }

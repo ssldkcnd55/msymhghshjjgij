@@ -72,7 +72,7 @@ $(function(){
 				
 				for(var i in jsonObj.list){
 					outValues += "<tr id='hover'><td>"+jsonObj.list[i].rnum+"</td>"
-					+"<td id='QnA_td'><a href='#'>"+jsonObj.list[i].auction_qna_title+"</a></td>"
+					+"<td id='QnA_td'><a href='/farm/moveauctionQnADetail.do?auction_qna_no="+jsonObj.list[i].auction_qna_no+"'>"+jsonObj.list[i].auction_qna_title+"</a></td>"
 					+"<td>"+jsonObj.list[i].member_id+"</td><td>"+jsonObj.list[i].auction_qna_question_date+"</td></tr>";
 				}
 				$(".QnA_table").html(outValues);	

@@ -34,4 +34,10 @@ public interface AuctionService {
 	ArrayList<AuctionQnA> selectAuctionQnAList(Auction auction, int currentPage);
 
 	int selectAuctionQnACount(Auction auction);
+
+	AuctionQnA selectAuctionQnADetail(int auction_qna_no);
+
+	AuctionQnA selectshowAuctionQnAModify(int auction_qna_no);
+
+	int updateAuctionQnA(AuctionQnA auctionqna);
 }

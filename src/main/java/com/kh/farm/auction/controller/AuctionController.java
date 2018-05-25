@@ -88,7 +88,7 @@ public class AuctionController {
 		}
 		
 		int insertAuctionMake =  auctionService.insertAuctionMake(auction);
-		System.out.println("insertAuctionMake : "+insertAuctionMake);
+		/*System.out.println("insertAuctionMake : "+insertAuctionMake);*/
 		
 		//mv.addObject("auction", insertAuctionMake);
 		/*mv.setViewName("/farm/AuctionList_controller.do");*/
@@ -101,7 +101,7 @@ public class AuctionController {
 	public ModelAndView AuctionList(ModelAndView mv){	
 		int page = 1;
 		List<Auction> AuctionList =  auctionService.selectAuctionList(page);
-		System.out.println(AuctionList.size());
+		/*System.out.println(AuctionList.size());*/
 		mv.setViewName("auction/auctionList");
 		mv.addObject("list",AuctionList);
 		return mv;
@@ -230,9 +230,8 @@ public class AuctionController {
 	@RequestMapping(value="AuctionQnAMake.do",method=RequestMethod.POST)
 	public String insertAuctionQnAMake(AuctionQnA auctionqna) {
 		int at_no=auctionqna.getAuction_no();
-		
-		System.out.println("Auction_no : "+auctionqna.getAuction_no()+" / "+"tilte : "+auctionqna.getAuction_qna_title()+"member_id : "+auctionqna.getMember_id()
-		+" / "+"note : "+auctionqna.getAuction_qna_contents()+" / "+"qna_no : "+auctionqna.getAuction_qna_no());
+		/*System.out.println("Auction_no : "+auctionqna.getAuction_no()+" / "+"tilte : "+auctionqna.getAuction_qna_title()+"member_id : "+auctionqna.getMember_id()
+		+" / "+"note : "+auctionqna.getAuction_qna_contents()+" / "+"qna_no : "+auctionqna.getAuction_qna_no());*/
 		int insertAuctionQnAMake = auctionService.insertAuctionQnAMake(auctionqna);
 		System.out.println("insertAuctionQnAMake : "+insertAuctionQnAMake );
 		return "redirect:/AuctionDetail.do?auction_no="+at_no;
@@ -244,7 +243,7 @@ public class AuctionController {
 		throws IOException{
 		JSONArray jarr = new JSONArray();
 		ArrayList<AuctionQnA> list = auctionService.selectAuctionQnAList(auction,currentPage);
-		System.out.println("list : "+list.toString());
+		/*System.out.println("list : "+list.toString());*/
 		int limitPage = 10;
 		int listCount = auctionService.selectAuctionQnACount(auction);
 		System.out.println("listCount : "+listCount);
@@ -277,6 +276,36 @@ public class AuctionController {
 			out.flush();
 			out.close();
 		}
+	
+	/*경매 QnA Detail 이동*/
+	@RequestMapping(value="moveauctionQnADetail.do")
+	public ModelAndView moveAuctionQnADetail(ModelAndView mv, @RequestParam("auction_qna_no") int auction_qna_no) {
+		AuctionQnA auctionQnADetail = auctionService.selectAuctionQnADetail(auction_qna_no);
+		/*System.out.println("qna_no? : "+auctionQnADetail.getAuction_qna_no());*/
+		mv.addObject("auctionqna", auctionQnADetail);
+		mv.setViewName("auction/auctionQnADetail");
+		return mv;
+	}
+	
+	/*경매 QnA 데테일에서 수정 버튼*/
+	@RequestMapping(value="moveAuctionQnAModify.do")
+	public ModelAndView moveAuctionQnAModify(ModelAndView mv,@RequestParam(value="auction_qna_no") int auction_qna_no) {
+		AuctionQnA auctionqua = auctionService.selectshowAuctionQnAModify(auction_qna_no);
+		/*System.out.println("qna_no? : "+auctionQnADetail.getAuction_qna_no());*/
+		mv.addObject("auctionqna", auctionqua);
+		mv.setViewName("auction/auctionQnAModify");
+		return mv;
+	}
+	
+	
+	@RequestMapping(value="registerAuctionQnAModify.do")
+	public String registerAuctionQnAModify(AuctionQnA auctionqna) {
+		
+		int updateauctionqua = auctionService.updateAuctionQnA(auctionqna);
+		return "redirect:/moveauctionQnADetail.do?auction_qna_no="+auctionqna.getAuction_qna_no();
+		
+	}
+	
 	
 	
 }
