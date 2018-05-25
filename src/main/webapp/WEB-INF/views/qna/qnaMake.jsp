@@ -21,8 +21,9 @@
 		<div id="container">
 			<div class="inner-wrap">
 				<div class="title1 qna"><p class="titleP">QnA</p></div>
-
+<form action="qnaMake.do" method="post">
 				<div class="div">
+				
 					<table class="jung_table">
 						<tbody>
 							<tr class="tr">
@@ -30,7 +31,7 @@
 									<p class="p">제목</p>
 								</td>
 								<td colspan="3" class="td2"><input type="text"
-									name="product_name" class="input_text_box"> <br></td>
+									name="main_qna_title" class="input_text_box"> <br></td>
 							</tr>
 							<table class="jung_table2">
 								<tbody>
@@ -41,23 +42,24 @@
 							</table>
 						</tbody>
 					</table>
-
+		
+					<input type="hidden" name="member_id" value="${loginUser.member_id}">
 					<table class="jung_table2">
 						<tbody>
 							<tr>
-								<td style="width: 100%;"><form
-										action="sample/viewer/index.php" method="post">
-										<textarea name="ir1" id="ir1" rows="10" cols="100"
+								<td style="width: 100%;">
+										<textarea name="main_qna_contents" id="ir1" rows="10" cols="100"
 											style="width: 100%; height: 250px; display: none;"></textarea>
-									</form></td>
+									</td>
 							</tr>
 						</tbody>
 					</table>
 					<ul style="list-style: none;">
 						<li class="li3" onclick="location.href='/#'">뒤로가기</li>
-						<li class="li4" onclick="location.href='/#'">글쓰기</li>
+						<li class="li4"><input type="submit" onclick="submitContents();" value="글쓰기"></li>
 					</ul>
 				</div>
+				</form>
 			</div>
 		</div>
 		 <%@ include file="../messenger/msg_box.jsp"%>

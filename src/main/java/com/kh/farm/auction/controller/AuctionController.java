@@ -88,7 +88,7 @@ public class AuctionController {
 		}
 		
 		int insertAuctionMake =  auctionService.insertAuctionMake(auction);
-		System.out.println("insertAuctionMake : "+insertAuctionMake);
+		/*System.out.println("insertAuctionMake : "+insertAuctionMake);*/
 		
 		//mv.addObject("auction", insertAuctionMake);
 		/*mv.setViewName("/farm/AuctionList_controller.do");*/
@@ -101,7 +101,7 @@ public class AuctionController {
 	public ModelAndView AuctionList(ModelAndView mv){	
 		int page = 1;
 		List<Auction> AuctionList =  auctionService.selectAuctionList(page);
-		System.out.println(AuctionList.size());
+		/*System.out.println(AuctionList.size());*/
 		mv.setViewName("auction/auctionList");
 		mv.addObject("list",AuctionList);
 		return mv;
@@ -230,8 +230,8 @@ public class AuctionController {
 	@RequestMapping(value="AuctionQnAMake.do",method=RequestMethod.POST)
 	public String insertAuctionQnAMake(AuctionQnA auctionqna) {
 		int at_no=auctionqna.getAuction_no();
-		System.out.println("Auction_no : "+auctionqna.getAuction_no()+" / "+"tilte : "+auctionqna.getAuction_qna_title()+"member_id : "+auctionqna.getMember_id()
-		+" / "+"note : "+auctionqna.getAuction_qna_contents());
+		/*System.out.println("Auction_no : "+auctionqna.getAuction_no()+" / "+"tilte : "+auctionqna.getAuction_qna_title()+"member_id : "+auctionqna.getMember_id()
+		+" / "+"note : "+auctionqna.getAuction_qna_contents()+" / "+"qna_no : "+auctionqna.getAuction_qna_no());*/
 		int insertAuctionQnAMake = auctionService.insertAuctionQnAMake(auctionqna);
 		System.out.println("insertAuctionQnAMake : "+insertAuctionQnAMake );
 		return "redirect:/AuctionDetail.do?auction_no="+at_no;
@@ -239,15 +239,15 @@ public class AuctionController {
 	
 	/*경매 QnAList뿌리기*/
 	@RequestMapping(value="AuctionQnAList.do")
-	public void AuctionQnAList(Auction auction,HttpServletResponse response,@RequestParam("page") int currentPage,
-			@RequestParam("auction_no") String auction_no) 
+	public void AuctionQnAList(Auction auction,HttpServletResponse response,@RequestParam("page") int currentPage) 
 		throws IOException{
 		JSONArray jarr = new JSONArray();
-		
 		ArrayList<AuctionQnA> list = auctionService.selectAuctionQnAList(auction,currentPage);
-		int limit = 10;
-		int listCount = auctionService.selectAuctionReviewCount(auction);
-		int maxPage=(int)((double)listCount/limit+0.9); //ex) 41개면 '5'페이지나와야되는데 '5'를 계산해줌
+		/*System.out.println("list : "+list.toString());*/
+		int limitPage = 10;
+		int listCount = auctionService.selectAuctionQnACount(auction);
+		System.out.println("listCount : "+listCount);
+		int maxPage=(int)((double)listCount/limitPage+0.9); //ex) 41개면 '5'페이지나와야되는데 '5'를 계산해줌
 		int startPage=((int)((double)currentPage/5+0.8)-1)*5+1;
 		int endPage=startPage+5-1;
 		
@@ -257,7 +257,8 @@ public class AuctionController {
 		
 		for(AuctionQnA aq : list) {
 			JSONObject jsq = new JSONObject();
-			jsq.put("auction_no",aq.getAuction_no());
+			jsq.put("rnum", aq.getRnum());
+			jsq.put("auction_qna_no",aq.getAuction_qna_no());
 			jsq.put("auction_qna_title", aq.getAuction_qna_title());
 			jsq.put("member_id", aq.getMember_id());
 			jsq.put("auction_qna_question_date", aq.getAuction_qna_question_date().toString());
@@ -266,6 +267,7 @@ public class AuctionController {
 			jsq.put("maxPage", maxPage);
 			jsq.put("currentPage",currentPage);
 			jarr.add(jsq);
+		}
 			JSONObject sendJson = new JSONObject();
 			sendJson.put("list", jarr);
 			response.setContentType("application/json; charset=utf-8");
@@ -274,8 +276,45 @@ public class AuctionController {
 			out.flush();
 			out.close();
 		}
+	
+	/*경매 QnA Detail 이동*/
+	@RequestMapping(value="moveauctionQnADetail.do")
+	public ModelAndView moveAuctionQnADetail(ModelAndView mv, @RequestParam("auction_qna_no") int auction_qna_no) {
+		AuctionQnA auctionQnADetail = auctionService.selectAuctionQnADetail(auction_qna_no);
+		/*System.out.println("qna_no? : "+auctionQnADetail.getAuction_qna_no());*/
+		mv.addObject("auctionqna", auctionQnADetail);
+		mv.setViewName("auction/auctionQnADetail");
+		return mv;
+	}
+	
+	/*경매 QnA 데테일에서 수정 버튼*/
+	@RequestMapping(value="moveAuctionQnAModify.do")
+	public ModelAndView moveAuctionQnAModify(ModelAndView mv,@RequestParam(value="auction_qna_no") int auction_qna_no) {
+		AuctionQnA auctionqua = auctionService.selectshowAuctionQnAModify(auction_qna_no);
+		/*System.out.println("qna_no? : "+auctionQnADetail.getAuction_qna_no());*/
+		mv.addObject("auctionqna", auctionqua);
+		mv.setViewName("auction/auctionQnAModify");
+		return mv;
+	}
+	
+	//경매 QnA 수정
+	@RequestMapping(value="registerAuctionQnAModify.do")
+	public String registerAuctionQnAModify(AuctionQnA auctionqna) {
+		int updateauctionqua = auctionService.updateAuctionQnA(auctionqna);
+		return "redirect:/moveauctionQnADetail.do?auction_qna_no="+auctionqna.getAuction_qna_no();
 		
 	}
+	
+	@RequestMapping(value="updateauctionQnA_Answer.do" ,method=RequestMethod.POST)
+	public String insertauctionQnA_Answer(AuctionQnA auctionqna) {
+		System.out.println("답글내용 : "+auctionqna.getAuction_qna_answer()+" / "+"댓글 시간 : "+auctionqna.getAuction_qna_answer_date());
+		int updateauctionQnA_Answer = auctionService.updateauctionQnA_Answer(auctionqna);
+		System.out.println("updateauctionQnA_Answer :"+updateauctionQnA_Answer);
+		return "redirect:/moveauctionQnADetail.do?auction_qna_no="+auctionqna.getAuction_qna_no();
+		
+	}
+	
+	
 	
 	
 }

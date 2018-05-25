@@ -13,8 +13,20 @@
 <script type="text/javascript">
 
 /* Notcie수정 버튼 */
-function moveNotice_write(){
-	location.href="/farm/moveNotcie_write.do";
+function moveUpdateNotice(){
+	location.href="/farm/moveUpdateNotice.do?notice_no=${notice.notice_no}&notice_title=${notice.notice_title}&notice_contents=${notice.notice_contents}";
+}
+
+/* 삭제 버튼 */
+function deleteNotice(){
+	var result = confirm('정말로 삭제하시겠습니까?'); 
+
+	if(result) {
+		
+		location.href="/farm/deleteNotice.do?notice_no=${notice.notice_no}"
+	}else {
+		
+	}
 }
 </script>
 
@@ -41,8 +53,8 @@ function moveNotice_write(){
 							</tr>
 						</table>
 						<div class="Notice_modify">
-							<button onclick="moveNotice_write();">수정</button>&nbsp;
-							<button>삭제</button>
+							<button onclick="moveUpdateNotice();">수정</button>&nbsp;
+							<button onclick="deleteNotice();">삭제</button>
 						</div>
 						<div class="Notice_note">
 							${notice.notice_contents}

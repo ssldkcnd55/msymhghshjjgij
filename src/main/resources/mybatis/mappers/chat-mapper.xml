@@ -104,4 +104,11 @@ where
 ]]>
 </select>
 
+
+<select id="selectRecentViewMarketList" parameterType="Market" resultType="Market" >
+<![CDATA[
+select MARKET_NO,MARKET_TITLE,MARKET_IMG from market where MARKET_NO=#{market_no}
+]]>
+</select>
+
 </mapper>

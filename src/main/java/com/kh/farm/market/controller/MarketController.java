@@ -24,6 +24,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.farm.market.model.service.MarketService;
+import com.kh.farm.market.model.vo.Daily;
 import com.kh.farm.market.model.vo.Market;
 import com.kh.farm.market.model.vo.Review;
 import com.kh.farm.qna.model.vo.Market_qna;
@@ -189,5 +190,27 @@ public class MarketController {
 		int insertReview = marketService.insertReview(rv);
 		return "forward:/marketDetail.do?market_no="+rv_no;
 	}
-	
+	@RequestMapping("dailyList.do")
+	public void dailyList(Market market,HttpServletResponse response) throws IOException{
+		JSONArray jarr =new JSONArray();
+		
+		ArrayList<Daily> dailyList = marketService.selectDailyList(market);
+		
+		for (Daily sq : dailyList) {
+			JSONObject jsq = new JSONObject();
+			jsq.put("daily_no", sq.getDaily_no());
+			jsq.put("daily_title", sq.getDaily_title());
+			jsq.put("daily_date", sq.getDaily_date().toString());
+			jsq.put("daily_contents", sq.getDaily_contents().toString());
+			jarr.add(jsq);
+		}
+		
+		JSONObject sendJson = new JSONObject();
+		sendJson.put("list", jarr);
+		response.setContentType("application/json; charset=utf-8");
+		PrintWriter out = response.getWriter();
+		out.append(sendJson.toJSONString());
+		out.flush();
+		out.close();
+	}
 }

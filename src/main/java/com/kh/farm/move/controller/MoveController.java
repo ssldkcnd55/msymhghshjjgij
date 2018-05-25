@@ -2,29 +2,20 @@ package com.kh.farm.move.controller;
 
 import javax.servlet.http.HttpSession;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.kh.farm.member.model.vo.Member;
+import com.kh.farm.notice.model.vo.Notice;
 
 @Controller
 public class MoveController {
 	public MoveController() {}
 	
-	@RequestMapping("movceTestGetCookie.do")
-	public String moveTestGetCookie()
-	{
-		return "messenger/test_getCookie";
-	}
-	
-	
-	@RequestMapping("movceTestSetCookie.do")
-	public String moveTestSetCookie()
-	{
-		return "messenger/test_setCookie";
-	}
-	
+
 	@RequestMapping("moveSmartEditor2Skin.do")
 	public String moveSmartEditor2Skin()
 	{
@@ -98,7 +89,7 @@ public class MoveController {
 	public String moveNotice() {
 		return "notice/notice";
 	}
-	@RequestMapping("moveNoticeMake.do")
+	@RequestMapping("moveNotcie_write.do")
 	public String moveNoticeMake() {
 		return "notice/noticeMake";
 	}
@@ -153,6 +144,11 @@ public class MoveController {
 		return "admin/admin_category";
 	}
 	
+	@RequestMapping("moveAdminMember.do")
+	public String moveAdminMember() {
+		return "admin/admin_member";
+	}
+	
 	@RequestMapping("moveAcution_write.do")
 	public String moveAcution_writePage() {
 		return "auction/auctionMake";
@@ -182,11 +178,19 @@ public class MoveController {
 		return "qna/qnaMake";
 	}
 	
-	@RequestMapping("moveNotcie_write.do")
-	public String moveNotcie_writePage() {
-		return "notice/noticeMake";
+	@RequestMapping("moveUpdateNotice.do")
+	public String moveNotcie_writePage(Model model, Notice notice, @RequestParam(value="notice_no") int notice_no,
+			@RequestParam(value="notice_title") String notice_title,@RequestParam(value="notice_contents") String notice_contents) {
+		notice.setNotice_no(notice_no);
+		notice.setNotice_title(notice_title);
+		notice.setNotice_contents(notice_contents);
+		model.addAttribute("notice",notice);
+		return "notice/noticeUpdate";
 	}
-	
+	@RequestMapping("moveHeader.do")
+	public String moveHeader() {
+		return "inc/header";
+	}
 	
 	
 	

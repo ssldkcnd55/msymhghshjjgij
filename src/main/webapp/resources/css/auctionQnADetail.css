@@ -1,0 +1,38 @@
+@charset "UTF-8";
+
+.commont_modify2{
+	padding-top:15px;
+	padding-bottom:10px;
+	border-top:1px solid #ffffff;
+	width:100%;
+	height:auto;
+}
+
+.commont_modify2 td:nth-child(1){
+	padding-left:45px;
+	width:15%;
+}
+
+.commont_modify2 td:nth-child(2){
+	width:65%;
+}
+
+.commont_modify2 td:nth-child(3){
+	width:20%;
+	
+}
+
+.commont_modify2 input{
+
+	marging-left:40px;
+}
+
+.commont_modify2_button{
+	font-size:15pt;
+	color:#808080;
+	font-weight:bold;
+	margin-left:25px;
+	margin-bottom:3px;
+	width:101px;
+	height:80px;
+}

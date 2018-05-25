@@ -71,19 +71,46 @@
 	]]>
 	</insert>
 	
-	<select id="selectAuctionQnAList" parameterType="pageNumber" resultType="auctionqna">
+	<select id="selectAuctionQnAList" parameterType="pageNumber" resultType="AuctionQnA">
 	<![CDATA[
-		select * from (select rownum rnum, auction_no,auction_qna_title,member_id,auction_qna_question_date from auction_qna where auction_no =#{auction_no}
+		select * from (select rownum rnum, auction_qna_no,auction_qna_title,member_id,auction_qna_question_date from auction_qna where auction_no =#{auction_no}
 		order by auction_qna_no desc) where rnum>= #{startRow} and rnum <=#{endRow}
 	]]>
 	</select>
 	
 	
-	<select id="selectAuctionReviewCount" parameterType="int" resultType="int">
+	<select id="selectAuctionQnACount" parameterType="int" resultType="int">
 	<![CDATA[
 		select count(*) from auction_qna where auction_no = #{auction_no}
 	]]>
 	</select>
 	
+	
+	<select id="selectAuctionQnADetail" parameterType="AuctionQnA" resultType="AuctionQnA">
+	<![CDATA[
+		select * from auction_qna where auction_qna_no = #{auction_qna_no}
+	]]>
+	</select>
+	
+	
+	<select id="selectshowAuctionQnAModify" parameterType="AuctionQnA" resultType="AuctionQnA">
+	<![CDATA[
+		select * from auction_qna where auction_qna_no = #{auction_qna_no}
+	]]>
+	</select>
+	
+	<update id="updateAuctionQnA" parameterType="AuctionQnA" >
+		<![CDATA[
+		update auction_qna set AUCTION_QNA_TITLE=#{auction_qna_title},AUCTION_QNA_CONTENTS=#{auction_qna_contents}
+		where AUCTION_QNA_NO=#{auction_qna_no}
+	]]>
+	</update>
+	
+	<update id="updateauctionQnA_Answer" parameterType="AuctionQnA">
+	<![CDATA[
+		update auction_qna set auction_qna_answer=#{auction_qna_answer},auction_qna_answer_date=sysdate
+		where AUCTION_QNA_NO=#{auction_qna_no}
+	]]>
+	</update>
 	
 </mapper>

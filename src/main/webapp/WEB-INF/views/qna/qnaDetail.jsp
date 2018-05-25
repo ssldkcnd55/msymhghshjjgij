@@ -17,17 +17,22 @@
 
 <script type="text/javascript">
 	/* 댓글 수정 */
-	function comment_modify(num) {
-		$(".galcomUpdate" + i).after(
-
-		);
-
+	function comment_modify() {
+		$(".QnA_comment").html("<form action='/farm/qnaAnswer.do' method='post'><input type='hidden' value='${main_qna.main_qna_no }'"+
+					"name='main_qna_no'><div class='QnA_comment_top_writer'>"+
+					"<textarea class='answerArea' name='main_qna_answer'>${main_qna.main_qna_answer}</textarea>"+
+					"<input type='submit' class='answerBtn' value='작성'></div></form>");
+		
+	}
+	
+	function comment_delete(){
+		location.href ="deleteQnaAnswer.do?main_qna_no="+${main_qna.main_qna_no};
 	}
 
 	/* QnA수정 버튼 */
 	function move_QnA_modify() {
-		/* location.href="/farm/moveQnA_write.do"; */
-		alert('${loginUser.member_id}');
+		location.href = "qnaUpdateMove.do?main_qna_title=${main_qna.main_qna_title}"+
+				"&main_qna_contents=${main_qna.main_qna_contents}&main_qna_no=${main_qna.main_qna_no}";
 	}
 </script>
 </head>
@@ -42,7 +47,7 @@
 			<div class="inner-wrap">
 				<div class="board-wrap">
 
-					<div class="QnA_title">공지사항</div>
+					<div class="QnA_title">문의사항</div>
 
 					<div class="QnA_full">
 						<table class="QnA_table">
@@ -96,8 +101,8 @@
 									<span>${main_qna.main_qna_answer_date }</span>&nbsp;
 									<!-- 작성일 -->
 									<c:if test="${loginUser.member_category eq '2'}">
-										<span onclick="comment_modify">수정</span>&nbsp; <span
-											onclick="comment_delete">삭제</span>&nbsp;
+										<span onclick="comment_modify();">수정</span>&nbsp; <span
+											onclick="comment_delete();">삭제</span>&nbsp;
 											</c:if>
 								</div>
 								<p>${main_qna.main_qna_answer}</p>

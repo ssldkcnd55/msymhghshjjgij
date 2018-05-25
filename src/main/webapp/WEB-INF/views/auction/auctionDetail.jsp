@@ -5,6 +5,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Farm</title>
+<link href="/farm/resources/css/bottommovemenu.css" rel="stylesheet"
+	type="text/css" />	
 <link href="/farm/resources/css/style.css" rel="stylesheet"
 	type="text/css" />
 <link href="/farm/resources/css/qna.css" rel="stylesheet"
@@ -23,7 +25,17 @@
 <script type="text/javascript"
 	src="/farm/resources/js/jquery-3.3.1.min.js"></script>
 <script type="text/javascript" src="/farm/resources/js/tabMove.js"></script>
-
+<script type="text/javascript">
+$(function(){
+	$('.goods-view-show-option-button').click(function(){
+		if($('#flow-cart2').css('display') == 'none'){
+			$('#flow-cart2').css('display','block');
+		}else{
+			$('#flow-cart2').css('display','none');
+		}
+    });
+});
+</script>
 <script type="text/javascript">
 	/* 삭제 버튼 */
 	function auctionDelete(){
@@ -41,8 +53,8 @@
 		location.href ="/farm/moveAuctionQnAMake.do?auction_no="+${auction.auction_no};
 	}
 	
-	/* 경매문의 List */
-	 function auctionQnAReview(page){
+	/* 경매 문의 List */
+	 function auctionQnA(page){
 		$.ajax({
 			url:"AuctionQnAList.do",
 			type:"post",
@@ -60,7 +72,7 @@
 				
 				for(var i in jsonObj.list){
 					outValues += "<tr id='hover'><td>"+jsonObj.list[i].rnum+"</td>"
-					+"<td id='QnA_td'><a href='/farm/auctionQnaDetail.do?auction_qna_no="+jsonObj.list[i].auction_qna_no+"'>"+jsonObj.list[i].auction_qna_title+"</a></td>"
+					+"<td id='QnA_td'><a href='/farm/moveauctionQnADetail.do?auction_qna_no="+jsonObj.list[i].auction_qna_no+"'>"+jsonObj.list[i].auction_qna_title+"</a></td>"
 					+"<td>"+jsonObj.list[i].member_id+"</td><td>"+jsonObj.list[i].auction_qna_question_date+"</td></tr>";
 				}
 				$(".QnA_table").html(outValues);	
@@ -72,7 +84,7 @@
 				
 				var values ="";
 				if(startPage>5){
-					values+= "<a href='javascript:qnaPage("+(startPage-1)+")'>&laquo;</a>" 
+					values+= "<a href='javascript:auctionQnA("+(startPage-1)+")'>&laquo;</a>" 
 				}else{
 					values+="<a>&laquo;</a>";	
 				}
@@ -80,11 +92,11 @@
 					if(i==currentPage){
 						values+= "<a class='active'>"+i+"</a>";
 					}else{
-						values+= "<a href='javascript:qnaPage("+i+");'>"+i+"</a>";
+						values+= "<a href='javascript:auctionQnA("+i+");'>"+i+"</a>";
 					}
 				}
 				if(endPage<maxPage){
-					values+="<a href='javascript:qnaPage("+(endPage+1)+")'>&raquo;</a>";
+					values+="<a href='javascript:auctionQnA("+(endPage+1)+")'>&raquo;</a>";
 					
 				}else{
 					values+="<a>&raquo;</a>";
@@ -173,7 +185,7 @@
 					<li class="tab-link" data-tab="tab-3"><div
 							class="menu question">경매이력</div></li>
 					<li class="tab-link" data-tab="tab-4"><div id="menu"
-							class="menu review" onclick="auctionQnAReview(1);">문의</div></li>
+							class="menu review" onclick="auctionQnA(1);">문의</div></li>
 				</ul>
 
 				<!-- introduce_box -->
@@ -330,9 +342,9 @@
 	            
 	               <!-- 페이징 처리 -->
 	               <div class="pagination">
-	                  <a href="#">&laquo;</a> <a href="#">1</a> <a href="#"
+	                  <!-- <a href="#">&laquo;</a> <a href="#">1</a> <a href="#"
 	                     class="active">2</a> <a href="#">3</a> <a href="#">4</a> <a
-	                     href="#">5</a> <a href="#">&raquo;</a> 
+	                     href="#">5</a> <a href="#">&raquo;</a>  -->
 	               </div>
 	
 	               <!-- 검색 -->
@@ -353,6 +365,28 @@
 		<%@ include file="../messenger/msg_box.jsp"%>
 		<div id="footer">
 			<%@  include file="../inc/foot.jsp"%>
+		</div>
+	</div>
+		<div class="goods-view-flow-cart __active" id="flow-cart">
+		<div class="goods-view-flow-cart-wrapper">
+			<button type="button" id="show-option-button"
+				class="goods-view-show-option-button">
+				<span class="goods-view-show-option-button-value">옵션선택</span>
+			</button>
+
+			<div class="goods-view-flow-cart __active" id="flow-cart2">
+				<div class="goods-view-flow-cart-wrapper">
+					<button type="button" id="show-option-button"
+						class="goods-view-show-option-button __active">
+						<span class="goods-view-show-option-button-value">옵션선택</span>
+					</button>
+					<div id="flow-cart-content"
+						class="goods-view-flow-cart-content __active">
+						<br> <br> <br> <br> <br> <br> <br>
+					</div>
+				</div>
+			</div>
+
 		</div>
 	</div>
 </body>

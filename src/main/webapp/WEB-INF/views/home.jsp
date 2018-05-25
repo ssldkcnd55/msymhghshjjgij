@@ -9,6 +9,8 @@
 <meta charset="UTF-8">
 <title>Farm</title>
 
+<link href="/farm/resources/css/homeauction.css" rel="stylesheet"
+	type="text/css" />
 <link href="/farm/resources/css/style.css" rel="stylesheet"
 	type="text/css" />
 <link href="/farm/resources/css/flexslider-rtl.css" rel="stylesheet"
@@ -19,15 +21,15 @@
 	type="text/css" />
 <link href="/farm/resources/css/home.css" rel="stylesheet"
 	type="text/css" />
+
 <script type="text/javascript"
 	src="/farm/resources/js/jquery-3.3.1.min.js"></script>
 <script type="text/javascript" src="/farm/resources/js/modernizr.js"></script>
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
 </head>
 
 <body>
-
 	<div id="wrap">
 		<c:import url="inc/header.jsp"></c:import>
 
@@ -274,18 +276,12 @@
 
 				</div>
 
-				</table>
-
 			</div>
 		</div>
 
 
 
 
-
-	</div>
-
-	</div>
 
 	</div>
 
@@ -296,7 +292,7 @@
 		<c:import url="inc/foot.jsp"></c:import>
 
 	</div>
-	</div>
+
 
 </body>
 

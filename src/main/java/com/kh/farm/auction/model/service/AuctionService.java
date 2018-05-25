@@ -33,5 +33,13 @@ public interface AuctionService {
 	/*경매 QnA List*/
 	ArrayList<AuctionQnA> selectAuctionQnAList(Auction auction, int currentPage);
 
-	int selectAuctionReviewCount(Auction auction);
+	int selectAuctionQnACount(Auction auction);
+
+	AuctionQnA selectAuctionQnADetail(int auction_qna_no);
+
+	AuctionQnA selectshowAuctionQnAModify(int auction_qna_no);
+
+	int updateAuctionQnA(AuctionQnA auctionqna);
+
+	int updateauctionQnA_Answer(AuctionQnA auctionqna);
 }

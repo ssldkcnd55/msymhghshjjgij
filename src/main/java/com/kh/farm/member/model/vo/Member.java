@@ -20,14 +20,14 @@ public class Member implements java.io.Serializable{
 	private String member_img;//회원 프로필 사진
 	private String member_withdraw;//회원 탈퇴여부
 	private int member_warning_count;//회원 경고 횟수
-	
+	private int rnum;
 	public Member() {
 	
 	}
 
 	public Member(String member_id, String member_pwd, String member_category, String member_name, String member_addr,
 			String member_tel, String member_approval, String member_img, String member_withdraw,
-			int member_warning_count) {
+			int member_warning_count,int rnum) {
 		super();
 		this.member_id = member_id;
 		this.member_pwd = member_pwd;
@@ -39,6 +39,7 @@ public class Member implements java.io.Serializable{
 		this.member_img = member_img;
 		this.member_withdraw = member_withdraw;
 		this.member_warning_count = member_warning_count;
+		this.rnum = rnum;
 	}
 
 	@Override
@@ -129,5 +130,11 @@ public class Member implements java.io.Serializable{
 		this.member_warning_count = member_warning_count;
 	}
 	
+	public int getRnum() {
+		return rnum;
+	}
 	
+	public void setRnum(int rnum) {
+		this.rnum = rnum;
+	}
 }

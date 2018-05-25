@@ -22,4 +22,10 @@ public interface QnaService {
 
 	int updateAnswer(MainQna mq);
 
+	int deleteQnaAnswer(int qanswer_no);
+
+	int insertMainQna(MainQna mq);
+
+	int updateMainQna(MainQna mq);
+
 }

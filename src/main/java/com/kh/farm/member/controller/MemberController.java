@@ -4,12 +4,17 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -17,6 +22,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.multipart.MultipartFile;
@@ -152,4 +158,41 @@ public class MemberController {
 		System.out.println(updatePwd);
 		return mv;
 	}
+	
+	@RequestMapping("memberList.do")
+	public void memberList(HttpServletResponse response,@RequestParam("page") int currentPage) throws IOException{
+		JSONArray jarr =new JSONArray();
+		List<Member> memberList = memberService.selectMemberList(currentPage);
+		int limitPage = 10;
+		System.out.println("111");
+		int listCount = memberService.selectMemberCount();
+		
+		int maxPage=(int)((double)listCount/limitPage+0.9); //ex) 41개면 '5'페이지나와야되는데 '5'를 계산해줌
+		int startPage=((int)((double)currentPage/5+0.8)-1)*5+1;
+		int endPage=startPage+5-1;
+		
+		if(maxPage<endPage) {
+			endPage = maxPage;
+		}
+		for (Member m : memberList) {
+			JSONObject json = new JSONObject();
+			json.put("rnum", m.getRnum());
+			json.put("member_id", m.getMember_id());
+			json.put("member_category", m.getMember_category());
+			json.put("member_name", m.getMember_name());
+			json.put("member_approval", m.getMember_approval());
+			json.put("member_withdraw", m.getMember_withdraw());
+			json.put("member_warning_count", m.getMember_warning_count());
+			jarr.add(json);
+		}
+		
+		JSONObject sendJson = new JSONObject();
+		sendJson.put("list", jarr);
+		response.setContentType("application/json; charset=utf-8");
+		PrintWriter out = response.getWriter();
+		out.append(sendJson.toJSONString());
+		out.flush();
+		out.close();
+	}
+	
 }

@@ -6,13 +6,54 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link href="/farm/resources/css/bottommovemenu.css" rel="stylesheet"
+	type="text/css" />	
 <link href="/farm/resources/css/style.css" rel="stylesheet" type="text/css" />
 <link href="/farm/resources/css/qna.css" rel="stylesheet" type="text/css" />
 <link href="/farm/resources/css/dailyList.css" rel="stylesheet" type="text/css" />
 <link href="/farm/resources/css/marketDetail.css" rel="stylesheet" type="text/css" />
 <script src="/farm/resources/js/jquery-3.3.1.min.js"></script>
 <script type="text/javascript" src="/farm/resources/js/tabMove.js"></script>
-<script>
+<script type="text/javascript">
+$(function(){
+	$('.goods-view-show-option-button').click(function(){
+		if($('#flow-cart2').css('display') == 'none'){
+			$('#flow-cart2').css('display','block');
+		}else{
+			$('#flow-cart2').css('display','none');
+		}
+    });
+});
+
+</script>
+<script type="text/javascript">
+
+///최근 본 상품 쿠키 (현준)///
+ $(function(){
+
+	
+		var time = new Date();
+		time.setDate(time.getDate() + 7);
+		var oldtime = new Date();
+		oldtime.setDate(oldtime.getDate() - 7);
+		var decodedCookie = decodeURIComponent(document.cookie);
+		var ca = decodedCookie.split(';');
+
+		if (document.cookie.indexOf(  ${market.market_no} + "="+ ${market.market_no} + "a") == -1) {
+			//없음
+			if (ca.length > 8) {
+				document.cookie = ca[0] + "; expires=" + oldtime;
+			}
+		} else {
+			//있음
+			document.cookie = ${market.market_no} + "=" + ${market.market_no}+ "a; expires=" + oldtime;
+		}
+
+		document.cookie = ${market.market_no} + "=" + ${market.market_no}+ "a; expires=" + time;
+
+}); 
+///쿠키 끝///
+
 /* $(function(){
 	$.ajax({
 		url:"qnaList.do",
@@ -148,6 +189,7 @@ function reviewPage(page){
 			
 			var outValues = "<tr><th width='12%'>번호</th><th width='50%'>제목</th><th width='13%'>작성자</th><th width='15%'>날짜</th></tr>";
 			
+			 
 			for(var i in jsonObj.list){
 				outValues += "<tr id='hover'><td>"+jsonObj.list[i].review_no+"</td>"
 				+"<td id='QnA_td'><a href='#'>"+jsonObj.list[i].review_title+"</a></td>"
@@ -188,6 +230,57 @@ function reviewPage(page){
            }
 	});
 }
+function dailyPage(){
+	$.ajax({
+		url:"dailyList.do",
+		type:"post",
+		data:{
+			market_no:${market.market_no},
+		},
+		dataType: "JSON",
+		success: function(data){
+			console.log(data);
+			var objStr = JSON.stringify(data);
+			var jsonObj = JSON.parse(objStr);
+			
+			var outValues = "<tr><td class='history_start' colspan='3' align='center'>"
+				+"<table class='history_title'><tr><td class='start_date' align='center'>농사시작일자</td></tr>"
+				+"<tr><td class='start_date' align='center'>2018/01/01</td></tr></table></td></tr>"
+				+"<tr><td class='space_left'></td><td></td></tr>";
+			
+			for(var i in jsonObj.list){
+				if(i % 2 == 0){
+					outValues += "<tr><td class='space_right'></td><td class='history_right' align='left'>"
+						+"<table class='history_right_table' cellspacing='0' cellpadding='0'>"
+						+"<tbody><tr><td class='history_right_table_td1' rowspan='3'></td>"
+						+"<td class='history_right_table_td2' align='left' valign='top'>"
+						+"<span class='history_right_table_span1'>"+jsonObj.list[i].daily_date+"</span>"
+						+"</td></tr><tr><td align='left' class='hi_title'>"+jsonObj.list[i].daily_title+"</td></tr>"
+						+"<tr><td align='left' class='hi_content_right'><div>"+jsonObj.list[i].daily_contents
+						+"<span class='more'>...더보기</span></div></td></tr></tbody></table></td></tr>";
+				}else{
+					outValues += "<tr></td><td valign='top' class='history_right' align='right'>"
+						+"<table class='history_right_table' cellspacing='0' cellpadding='0'>"
+						+"<tbody><tr><td align='right' class='hi_date' valign='top'><span class='history_right_table_span1'>"+jsonObj.list[i].daily_date+"</span></td>"
+						+"<td rowspan='3' class='history_right_table_td1' ></td>"
+						+"</tr><tr><td align='right' class='hi_title'>"+jsonObj.list[i].daily_title+"</td></tr>"
+						+"<tr><td align='right' class='hi_content_right'><div style='float:right;'>"+jsonObj.list[i].daily_contents
+						+"<span class='more'>...더보기</span></div></td></tr></tbody></table></td><td class='space_right2'></tr>";
+				}
+			}
+
+			outValues += "<tr><td class='space_left'></td><td></td></tr><tr><td colspan='3' align='center'>"
+				+"<table class='history_title' cellspacing='0'><tr><td class='start_date' align='center'>농사끝일자</td>"
+				+"</tr><tr><td class='start_date' align='center'>2018/01/01</td></tr></table></td></tr><tr><td height='100'></td></tr>";
+			$(".history_body").html(outValues);	
+
+		},error: function(request,status,errorData){
+            alert("error code : " + request.status + "\nmessage" + 
+                    request.responseText + "\nerror" + errorData);
+        }
+	});
+}
+
 </script>
 <title>Farm</title>
 </head>
@@ -269,7 +362,7 @@ function reviewPage(page){
        			</div> --%>
        			<ul class="tabs">
 				    <li class="tab-link current" data-tab="tab-1"><div class="menu introduce">소개</div></li>
-				    <li class="tab-link" data-tab="tab-2"><div class="menu daily">일지</div></li>
+				    <li class="tab-link" data-tab="tab-2"><div class="menu daily" onclick="dailyPage();">일지</div></li>
 				    <li class="tab-link" data-tab="tab-3"><div class="menu question" onclick="qnaPage(1);">문의</div></li>
 				    <li class="tab-link" data-tab="tab-4"><div id="menu" class="menu review" onclick="reviewPage(1);">후기</div></li>
 				</ul>
@@ -289,9 +382,9 @@ function reviewPage(page){
        		<div class="daily_box">
        			
        			 <table class="history_body" >
-      <tr>   
+     <!--  <tr>   
          <td class="history_start" colspan="3" align="center">
-         <!-- 농사 시작일자 넣는 부분 -->
+         농사 시작일자 넣는 부분
             <table class="history_title">
                <tr>
                   <td class="start_date" align="center">농사시작일자</td>
@@ -300,18 +393,18 @@ function reviewPage(page){
                   <td class="start_date" align="center">2018/01/01</td>
                </tr>
             </table>
-         <!-- 농사 시작일자 넣는 부분 끝 -->   
+         농사 시작일자 넣는 부분 끝   
          </td>
       </tr>
-         <!-- 공백 -->
+         공백
          <tr>
             <td class="space_left"></td>
             <td></td>
          </tr>   
-         <!-- 공백 끝 -->
+         공백 끝
          
          
-         <!-- 일지란 시작 오른쪽 -->
+         일지란 시작 오른쪽
          <tr>
             <td class="space_right"></td>
             <td class="history_right" align="left">
@@ -339,18 +432,8 @@ function reviewPage(page){
                </table>
             </td>
          </tr>
-         <!-- 일지란 끝 -->
-         <!-- 공백 -->
-         <tr>
-            <td class="space_left"></td>
-            <td></td>
-         </tr>
-         <!-- 공백끝 -->
-         <!-- 일지란 시작 왼쪽  -->
-         <tr>
-            <td class="space_left"></td>
-            <td></td>
-         </tr>
+         일지란 끝
+
          <tr>
             <td valign="top" class="history_right" align="right" onclick="">
                <table class="history_right_table" cellspacing="0" cellpadding="0">
@@ -378,18 +461,8 @@ function reviewPage(page){
             </td>
             <td class="space_right2"></td>
          </tr>
-         <!-- 일지란 끝 왼쪽 -->
-         <!-- 공백 -->
-         <tr>
-            <td class="space_left"></td>
-            <td></td>
-         </tr>
-         <!-- 공백끝 -->
-         <!-- 일지란 시작 오른쪽 -->
-         <tr>
-            <td class="space_left"></td>
-            <td></td>
-         </tr>   
+         일지란 끝 왼쪽
+  
          <tr>
             <td class="space_right"></td>
             <td valign="top"  class="history_right" align="left" onclick="">
@@ -417,20 +490,17 @@ function reviewPage(page){
                </table>
             </td>
          </tr>
-         <!-- 일지란 끝 -->
-            <!-- 공백 -->
+         일지란 끝
+            공백
+
          <tr>
             <td class="space_left"></td>
             <td></td>
          </tr>
-         <tr>
-            <td class="space_left"></td>
-            <td></td>
-         </tr>
-         <!-- 공백끝 -->
+         공백끝
          <tr>   
             <td colspan="3" align="center">
-         <!-- 농사 끝일자 넣는 부분 -->
+         농사 끝일자 넣는 부분
                <table class="history_title" cellspacing="0">
                   <tr>
                      <td class="start_date" align="center">농사끝일자</td>
@@ -439,12 +509,12 @@ function reviewPage(page){
                      <td class="start_date" align="center">2018/01/01</td>
                   </tr>
                </table>
-         <!-- 농사 끝일자 넣는 부분 끝 -->   
+         농사 끝일자 넣는 부분 끝   
             </td>
          </tr>
          <tr>
             <td height="100"></td>
-         </tr>
+         </tr> -->
    </table>
 <!-- 농사일지 끝 -->
 
@@ -530,6 +600,32 @@ function reviewPage(page){
 		 <%@ include file="../messenger/msg_box.jsp"%>
 		<div id="footer">
 			<%@  include file="../inc/foot.jsp"%>
+		</div>
+	</div>
+	<div class="goods-view-flow-cart __active" id="flow-cart">
+		<div class="goods-view-flow-cart-wrapper">
+			<button type="button" id="show-option-button"
+				class="goods-view-show-option-button">
+				<span class="goods-view-show-option-button-value">옵션선택</span>
+			</button>
+
+			<div class="goods-view-flow-cart __active" id="flow-cart2">
+				<div class="goods-view-flow-cart-wrapper">
+					<button type="button" id="show-option-button"
+						class="goods-view-show-option-button __active">
+						<span class="goods-view-show-option-button-value">옵션선택</span>
+					</button>
+					<div id="flow-cart-content"
+						class="goods-view-flow-cart-content __active">
+						<form action="marketBuy.do" method="post">
+							<input type="hidden" name="market_no" value="${market.market_no }">
+							<input type="number" name="buy_amount">
+							<input type="submit" value="구매하기">
+						</form> <br> <br> <br> <br>
+					</div>
+				</div>
+			</div>
+
 		</div>
 	</div>
 </body>

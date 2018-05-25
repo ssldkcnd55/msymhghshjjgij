@@ -133,4 +133,38 @@ public class QnaController {
 		return "forward:/qnaDetail.do?main_qna_no="+qna_no;
 	}
 	
+	@RequestMapping(value ="deleteQnaAnswer.do")
+	public String deleteQnaAnswer(@RequestParam("main_qna_no") int qanswer_no) {
+		
+		int deleteQnaAnswer = qnaService.deleteQnaAnswer(qanswer_no);
+		return "forward:/qnaDetail.do?main_qna_no="+qanswer_no;
+	}
+	
+	@RequestMapping(value ="qnaMake.do", method=RequestMethod.POST)
+	public String qnaMake(MainQna mq) {
+		
+		int insertMainQna= qnaService.insertMainQna(mq);
+		
+		return "qna/qna"; 
+		
+	}
+	@RequestMapping(value="qnaUpdateMove.do") 
+	public ModelAndView qnaUpdateMove(ModelAndView mv, MainQna mq) {
+		mv.addObject("main_qna",mq);
+		mv.setViewName("qna/qnaUpdate");
+		
+		return mv;
+	}
+	
+	@RequestMapping(value="qnaUpdate.do", method=RequestMethod.POST)
+	public String qnaUpdate(MainQna mq) {
+		int qnaUpdate = qnaService.updateMainQna(mq);
+		
+		return "forward:/qnaDetail.do?main_qna_no="+mq.getMain_qna_no();
+				
+			
+		
+	}
+	
+	
 }

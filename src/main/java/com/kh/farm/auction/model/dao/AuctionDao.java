@@ -52,7 +52,7 @@ public class AuctionDao {
 
 
 	public int insertAuctionQnAMake(SqlSessionTemplate sqlSession, AuctionQnA auctionqna) {
-		return sqlSession.insert("insertAuctionQnAMake",auctionqna);
+		return sqlSession.insert("auction.insertAuctionQnAMake",auctionqna);
 	}
 
 
@@ -62,15 +62,36 @@ public class AuctionDao {
 		PageNumber pnum = new PageNumber();
 		pnum.setStartRow(startRow);
 		pnum.setEndRow(endRow);
-		pnum.setMarket_no(auction.getAuction_no());
+		pnum.setAuction_no(auction.getAuction_no());
 		List<AuctionQnA> list =sqlSession.selectList("auction.selectAuctionQnAList",pnum);
 		return (ArrayList<AuctionQnA>)list;
 	}
 
 
-	public int selectAuctionReviewCount(SqlSessionTemplate sqlSession, Auction auction) {
-		int selectAuctionReviewCount = sqlSession.selectOne("auction.selectAuctionReviewCount",auction.getAuction_no());
-		return selectAuctionReviewCount;
+	public int selectAuctionQnACount(SqlSessionTemplate sqlSession, Auction auction) {
+		int selectAuctionQnACount = sqlSession.selectOne("auction.selectAuctionQnACount",auction.getAuction_no());
+		return selectAuctionQnACount;
+	}
+
+
+	public AuctionQnA selectAuctionQnADetail(SqlSessionTemplate sqlSession, int auction_qna_no) {
+		return sqlSession.selectOne("auction.selectAuctionQnADetail",auction_qna_no);
+
+	}
+
+
+	public AuctionQnA selectshowAuctionQnAModify(SqlSessionTemplate sqlSession, int auction_qna_no) {
+		return sqlSession.selectOne("auction.selectshowAuctionQnAModify",auction_qna_no);
+	}
+
+
+	public int updateAuctionQnA(SqlSessionTemplate sqlSession,AuctionQnA auctionqna) {
+		return sqlSession.update("auction.updateAuctionQnA",auctionqna);
+	}
+
+
+	public int updateauctionQnA_Answer(SqlSessionTemplate sqlSession, AuctionQnA auctionqna) {
+		return sqlSession.update("auction.updateauctionQnA_Answer",auctionqna);
 	}
 
 }

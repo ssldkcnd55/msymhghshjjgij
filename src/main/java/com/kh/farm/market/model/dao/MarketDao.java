@@ -8,6 +8,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.kh.farm.common.model.vo.PageNumber;
+import com.kh.farm.market.model.vo.Daily;
 import com.kh.farm.market.model.vo.Market;
 import com.kh.farm.market.model.vo.Review;
 import com.kh.farm.qna.model.vo.Market_qna;
@@ -62,6 +63,12 @@ public class MarketDao {
 	public int insertReview(SqlSessionTemplate sqlSession, Review rv) {
 		int insertReview = sqlSession.insert("market.insertReview",rv);
 		return insertReview;
+	}
+
+	public ArrayList<Daily> selectDailyList(SqlSessionTemplate sqlSession, Market market) {
+		// TODO Auto-generated method stub
+		List<Daily> list =sqlSession.selectList("market.dailyList",market.getMarket_no());
+		return (ArrayList<Daily>)list;
 	}
 
 }
