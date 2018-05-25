@@ -13,7 +13,11 @@ public interface NoticeService {
 
 	int insertNotice(Notice notice);
 
-	Notice noticeDeatil(int notice_no); 
+	Notice noticeDeatil(int notice_no);
+
+	int updateNotice(Notice notice);
+
+	int deleteNotice(int notice_no); 
 
 	
 

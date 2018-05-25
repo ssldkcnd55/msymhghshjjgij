@@ -11,7 +11,7 @@
 <link href="/farm/resources/css/header.css" rel="stylesheet"
 	type="text/css" />
 <script type="text/javascript">
-	$(function() {
+	/* $(function() {
 
 		$.ajax({
 					url : 'Weather.do',
@@ -49,7 +49,7 @@
 						$("#w_text").html(img_text);
 					}
 				});
-	});
+	}); */
 </script>
 </head>
 
@@ -127,6 +127,8 @@
 						class="link_menu">고객센터</a></li>
 					<li class="menu1 lst"><a href="/farm/moveNoticePage.do"
 						class="link_menu">공지사항 </a></li>
+					<li class="menu1 lst"><a href="/farm/moveAdminPage.do"
+						class="link_menu">관리자페이지 </a></li>
 				</ul>
 			</div>
 			<div class="header_main">
@@ -150,7 +152,7 @@
 					<div class="search_box">
 						<input class="search" type="text"> <input type="image"
 							src="/farm/resources/images/search1.png" class="btn_search">
-					</div>
+			  		</div>
 					<div class="cart_count">
 						<div class="inner_cartcount">
 							<a href="/shop/goods/goods_cart.php" class="btn_cart"> <img
