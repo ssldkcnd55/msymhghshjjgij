@@ -53,8 +53,8 @@ $(function(){
 		location.href ="/farm/moveAuctionQnAMake.do?auction_no="+${auction.auction_no};
 	}
 	
-	/* 경매문의 List */
-	 function auctionQnAReview(page){
+	/* 경매 문의 List */
+	 function auctionQnA(page){
 		$.ajax({
 			url:"AuctionQnAList.do",
 			type:"post",
@@ -64,7 +64,7 @@ $(function(){
 			},
 			dataType: "JSON",
 			success: function(data){
-				console.log(data);
+				
 				var objStr = JSON.stringify(data);
 				var jsonObj = JSON.parse(objStr);
 				
@@ -72,7 +72,7 @@ $(function(){
 				
 				for(var i in jsonObj.list){
 					outValues += "<tr id='hover'><td>"+jsonObj.list[i].rnum+"</td>"
-					+"<td id='QnA_td'><a href='/farm/auctionQnaDetail.do?auction_qna_no="+jsonObj.list[i].auction_qna_no+"'>"+jsonObj.list[i].auction_qna_title+"</a></td>"
+					+"<td id='QnA_td'><a href='#'>"+jsonObj.list[i].auction_qna_title+"</a></td>"
 					+"<td>"+jsonObj.list[i].member_id+"</td><td>"+jsonObj.list[i].auction_qna_question_date+"</td></tr>";
 				}
 				$(".QnA_table").html(outValues);	
@@ -84,7 +84,7 @@ $(function(){
 				
 				var values ="";
 				if(startPage>5){
-					values+= "<a href='javascript:qnaPage("+(startPage-1)+")'>&laquo;</a>" 
+					values+= "<a href='javascript:auctionQnA("+(startPage-1)+")'>&laquo;</a>" 
 				}else{
 					values+="<a>&laquo;</a>";	
 				}
@@ -92,11 +92,11 @@ $(function(){
 					if(i==currentPage){
 						values+= "<a class='active'>"+i+"</a>";
 					}else{
-						values+= "<a href='javascript:qnaPage("+i+");'>"+i+"</a>";
+						values+= "<a href='javascript:auctionQnA("+i+");'>"+i+"</a>";
 					}
 				}
 				if(endPage<maxPage){
-					values+="<a href='javascript:qnaPage("+(endPage+1)+")'>&raquo;</a>";
+					values+="<a href='javascript:auctionQnA("+(endPage+1)+")'>&raquo;</a>";
 					
 				}else{
 					values+="<a>&raquo;</a>";
@@ -185,7 +185,7 @@ $(function(){
 					<li class="tab-link" data-tab="tab-3"><div
 							class="menu question">경매이력</div></li>
 					<li class="tab-link" data-tab="tab-4"><div id="menu"
-							class="menu review" onclick="auctionQnAReview(1);">문의</div></li>
+							class="menu review" onclick="auctionQnA(1);">문의</div></li>
 				</ul>
 
 				<!-- introduce_box -->
@@ -342,9 +342,9 @@ $(function(){
 	            
 	               <!-- 페이징 처리 -->
 	               <div class="pagination">
-	                  <a href="#">&laquo;</a> <a href="#">1</a> <a href="#"
+	                  <!-- <a href="#">&laquo;</a> <a href="#">1</a> <a href="#"
 	                     class="active">2</a> <a href="#">3</a> <a href="#">4</a> <a
-	                     href="#">5</a> <a href="#">&raquo;</a> 
+	                     href="#">5</a> <a href="#">&raquo;</a>  -->
 	               </div>
 	
 	               <!-- 검색 -->
