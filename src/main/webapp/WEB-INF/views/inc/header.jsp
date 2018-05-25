@@ -127,6 +127,8 @@
 						class="link_menu">고객센터</a></li>
 					<li class="menu1 lst"><a href="/farm/moveNoticePage.do"
 						class="link_menu">공지사항 </a></li>
+					<li class="menu1 lst"><a href="/farm/moveAdminPage.do"
+						class="link_menu">관리자페이지 </a></li>
 				</ul>
 			</div>
 			<div class="header_main">

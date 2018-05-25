@@ -70,7 +70,7 @@ public class NoticeController {
 		
 		if(result > 0) {
 			
-			return "admin/admin_page";
+			return "notice/notice";
 			
 		}
 		return a;
@@ -89,5 +89,29 @@ public class NoticeController {
 			return "notice/noticeDetail";
 		}
 		return "에러페이지";
+	}
+	
+	@RequestMapping(value="updateNotice.do", method=RequestMethod.POST)
+	public String updateNotice(Notice notice) {
+		int result = noticeService.updateNotice(notice);
+		
+		if(result > 0) {
+			
+			return "redirect:/noticeDetail.do?notice_no="+notice.getNotice_no();
+			/*return "notice/notice";*/
+		}
+		
+		
+		return null;
+	}
+	
+	@RequestMapping(value="deleteNotice.do")
+	public String deleteNotice(@RequestParam(value="notice_no") int notice_no) {
+		int result = noticeService.deleteNotice(notice_no);
+		
+		if(result > 0) {
+			return "notice/notice";
+		}
+		return null;
 	}
 }

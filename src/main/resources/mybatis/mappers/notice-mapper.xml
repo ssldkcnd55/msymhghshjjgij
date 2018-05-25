@@ -28,4 +28,15 @@
 	]]>
 </insert>
 
+<update id="updateNotice" parameterType="notice" flushCache="true" useGeneratedKeys="true">
+	<![CDATA[
+		update notice set notice_title = #{notice_title},notice_contents = #{notice_contents} where notice_no = #{notice_no}
+	]]>
+</update>
+
+<delete id="deleteNotice" parameterType="notice" flushCache="true">
+	<![CDATA[
+		delete from notice where notice_no = #{notice_no}
+	]]>
+</delete>
 </mapper>
