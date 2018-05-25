@@ -4,6 +4,12 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="shoppingBasket">
 
+	<select id="selectShoppingBasket" parameterType="String" resultType="ShowBasket">
+		
+		select mk.market_no, mk.MARKET_IMG, mk.MARKET_TITLE, mk.MARKET_PRICE, sb.BUY_AMOUNT
+from market mk, shop_basket sb
+where mk.MARKET_NO=sb.MARKET_NO and sb.MEMBER_ID= #{member_id}
 	
+	</select>
 
 </mapper>

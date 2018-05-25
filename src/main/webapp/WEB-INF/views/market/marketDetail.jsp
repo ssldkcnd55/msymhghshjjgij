@@ -1,17 +1,23 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-	<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
-	
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+
 <!DOCTYPE html>
 <html>
 <head>
 <link href="/farm/resources/css/bottommovemenu.css" rel="stylesheet"
-	type="text/css" />	
-<link href="/farm/resources/css/style.css" rel="stylesheet" type="text/css" />
-<link href="/farm/resources/css/qna.css" rel="stylesheet" type="text/css" />
-<link href="/farm/resources/css/dailyList.css" rel="stylesheet" type="text/css" />
-<link href="/farm/resources/css/marketDetail.css" rel="stylesheet" type="text/css" />
+	type="text/css" />
+<link href="/farm/resources/css/style.css" rel="stylesheet"
+	type="text/css" />
+<link href="/farm/resources/css/qna.css" rel="stylesheet"
+	type="text/css" />
+<link href="/farm/resources/css/dailyList.css" rel="stylesheet"
+	type="text/css" />
+<link href="/farm/resources/css/marketDetail.css" rel="stylesheet"
+	type="text/css" />
+<link href="/farm/resources/css/marketDetail_modal.css" rel="stylesheet"
+	type="text/css" />
 <script src="/farm/resources/js/jquery-3.3.1.min.js"></script>
 <script type="text/javascript" src="/farm/resources/js/tabMove.js"></script>
 <script type="text/javascript">
@@ -53,6 +59,33 @@ $(function(){
 
 }); 
 ///쿠키 끝///
+
+//장바구니 (현준)//
+function addBasket()
+{
+	$.ajax({
+		url:"addSoppingBasket.do",
+		type:"post",
+		data:{
+			market_no: $('[name=market_no]').val(),
+			member_id: $('[name=member_id]').val(),
+			buy_amount: $('[name=buy_amount]').val()
+		},
+		success:function(){
+			$('#myModal').css("display","block");
+		},
+		error: function(request,status,errorData){
+            alert("error code : " + request.status + "\nmessage" + 
+                    request.responseText + "\nerror" + errorData);
+           }
+	});
+}
+function closeModal()
+{
+	$('#myModal').css("display","none");
+}
+
+
 
 /* $(function(){
 	$.ajax({
@@ -293,30 +326,30 @@ function dailyPage(){
 			<%@  include file="../inc/header.jsp"%>
 		</div>
 		<!-- account-wrap -->
-	
+
 		<div id="container">
-        	<div class="inner-wrap"> 
+			<div class="inner-wrap">
 				<div class="title_box">
-					<span class="title">${market.market_title }</span> &nbsp;
-					<span class="release_date">출고예정일</span>&nbsp;<span class="date">${market.market_releasedate }</span>
+					<span class="title">${market.market_title }</span> &nbsp; <span
+						class="release_date">출고예정일</span>&nbsp;<span class="date">${market.market_releasedate }</span>
 				</div>
-        		<div class="img_box" style="background-image: url('/farm/resources/upload/marketUpload/${market.market_img}'); background-size:cover;">
-        			
-        		</div>
-        		<div class="title_box">
-        			<div style="border-bottom: 1px solid #bdbdbd; padding-bottom:20px;">
-					<span class="title">${market.market_title }</span> &nbsp;
-					<span class="release_date">출고예정일</span>&nbsp;<span class="date">${market.market_releasedate }</span>
+				<div class="img_box"
+					style="background-image: url('/farm/resources/upload/marketUpload/${market.market_img}'); background-size:cover;">
+
+				</div>
+				<div class="title_box">
+					<div
+						style="border-bottom: 1px solid #bdbdbd; padding-bottom: 20px;">
+						<span class="title">${market.market_title }</span> &nbsp; <span
+							class="release_date">출고예정일</span>&nbsp;<span class="date">${market.market_releasedate }</span>
 					</div>
 				</div>
 				<div class="test">
-				<p class="note_content">자연의 힘으로 길러낸 유기 농산물은
-       				기후에 영향을 많이 받습니다. 예를 들어
-       				같은 파프리카라 하더라도 한기물과
-       				한여름에 맞는 최고의 산지가 따로
-       				있지요. 컬리는 1년 내내 전국을 뒤져
-       				최고만을 전해 드립니다.</p></div>
-       			<%-- <div class="note">
+					<p class="note_content">자연의 힘으로 길러낸 유기 농산물은 기후에 영향을 많이 받습니다. 예를
+						들어 같은 파프리카라 하더라도 한기물과 한여름에 맞는 최고의 산지가 따로 있지요. 컬리는 1년 내내 전국을 뒤져
+						최고만을 전해 드립니다.</p>
+				</div>
+				<%-- <div class="note">
        				<center>
        				
        				<div class="note_img" style="background-image: url('/farm/resources/images/gift.png'); background-size: cover;"></div>
@@ -362,96 +395,99 @@ function dailyPage(){
        				있지요. 컬리는 1년 내내 전국을 뒤져<br>
        				최고만을 전해 드립니다.</p>
        			</div> --%>
-       			<ul class="tabs">
-				    <li class="tab-link current" data-tab="tab-1"><div class="menu introduce">소개</div></li>
-				    <li class="tab-link" data-tab="tab-2"><div class="menu daily" onclick="dailyPage();">일지</div></li>
-				    <li class="tab-link" data-tab="tab-3"><div class="menu question" onclick="qnaPage(1);">문의</div></li>
-				    <li class="tab-link" data-tab="tab-4"><div id="menu" class="menu review" onclick="reviewPage(1);">후기</div></li>
+				<ul class="tabs">
+					<li class="tab-link current" data-tab="tab-1"><div
+							class="menu introduce">소개</div></li>
+					<li class="tab-link" data-tab="tab-2"><div class="menu daily"
+							onclick="dailyPage();">일지</div></li>
+					<li class="tab-link" data-tab="tab-3"><div
+							class="menu question" onclick="qnaPage(1);">문의</div></li>
+					<li class="tab-link" data-tab="tab-4"><div id="menu"
+							class="menu review" onclick="reviewPage(1);">후기</div></li>
 				</ul>
-	       		<!-- <div class="menu introduce">소개</div>
+				<!-- <div class="menu introduce">소개</div>
 	       		<div class="menu daily">일지</div>
 	       		<div class="menu question">문의</div>
 	       		<div id="menu" class="menu review">후기</div> -->
-	       		
-	       	<!-- introduce_box -->
-	       	<div id="tab-1" class="tab-content current">
-	       	<div class="introduce_box">${market.market_intro }</div>
-	       	</div>
-	       	<!-- introduce_box -->
-       		
-       		<!-- Daily box -->
-       		<div id="tab-2" class="tab-content">
-       		<div class="daily_box">
-       		<c:if test="${loginUser.member_id eq market.member_id}">
-					<button class="dailyMakeBtn" onclick="dailyMake()">일지쓰기</button>
-			</c:if>
+
+				<!-- introduce_box -->
+				<div id="tab-1" class="tab-content current">
+					<div class="introduce_box">${market.market_intro }</div>
+				</div>
+				<!-- introduce_box -->
+
+				<!-- Daily box -->
+				<div id="tab-2" class="tab-content">
+					<div class="daily_box">
+						<c:if test="${loginUser.member_id eq market.member_id}">
+							<button class="dailyMakeBtn" onclick="dailyMake()">일지쓰기</button>
+						</c:if>
 						<table class="history_body">
 
 						</table>
 						<!-- 농사일지 끝 -->
 
-       			</div>
-       			</div>
-       			<!-- Daily box -->
- 			
- 			 	       	<!-- qna_Box -->
-	       	<div id="tab-3" class="tab-content">
-	       	<button class="market_write" onclick="qnaMake();">QnA 등록</button>
-		       	<div class="qna_box">
-				
-	            <table class="QnA_table">
-	              
-	            </table>
-	
-	            <!-- 하단 페이징, 검색 묶음 -->
-	            <div id="bottom">
-	            
-	               <!-- 페이징 처리 -->
-	               <div class="pagination">
-	               </div>
-	
-	               <!-- 검색 -->
-	               <div class="search_box">
-	               <span class='green_window'> 
-	                  <input type='text'class='input_text' />
-	               </span>
-	               <button type='submit' class='sch_smit'>검색</button>
-	               </div>
-	            </div>
+					</div>
+				</div>
+				<!-- Daily box -->
+
+				<!-- qna_Box -->
+				<div id="tab-3" class="tab-content">
+					<button class="market_write" onclick="qnaMake();">QnA 등록</button>
+					<div class="qna_box">
+
+						<table class="QnA_table">
+
+						</table>
+
+						<!-- 하단 페이징, 검색 묶음 -->
+						<div id="bottom">
+
+							<!-- 페이징 처리 -->
+							<div class="pagination"></div>
+
+							<!-- 검색 -->
+							<div class="search_box">
+								<span class='green_window'> <input type='text'
+									class='input_text' />
+								</span>
+								<button type='submit' class='sch_smit'>검색</button>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- qna Box -->
+
+				<div id="tab-4" class="tab-content">
+					<button class="market_write" onclick="writeReview();">후기
+						쓰기</button>
+					<div class="qna_box">
+
+						<table class="review_table">
+
+						</table>
+
+						<!-- 하단 페이징, 검색 묶음 -->
+						<div id="bottom">
+
+							<!-- 페이징 처리 -->
+							<div class="review_pagination"></div>
+
+							<!-- 검색 -->
+							<div class="search_box">
+								<span class='green_window'> <input type='text'
+									class='input_text' />
+								</span>
+								<button type='submit' class='sch_smit'>검색</button>
+							</div>
+						</div>
+					</div>
+				</div>
 			</div>
-         </div>
-	       	<!-- qna Box -->
-	       	
-	       	<div id="tab-4" class="tab-content">
-	       	<button class="market_write" onclick="writeReview();">후기 쓰기</button>
-		       	<div class="qna_box">
-	
-	            <table class="review_table">
-	              
-	            </table>
-	
-	            <!-- 하단 페이징, 검색 묶음 -->
-	            <div id="bottom">
-	            
-	               <!-- 페이징 처리 -->
-	               <div class="review_pagination">
-	               </div>
-	
-	               <!-- 검색 -->
-	               <div class="search_box">
-	               <span class='green_window'> 
-	                  <input type='text'class='input_text' />
-	               </span>
-	               <button type='submit' class='sch_smit'>검색</button>
-	               </div>
-	            </div>
-			</div>
-         </div>
- 			  </div>
-        </div>
+		</div>
 
 		<!-- account-wrap -->
-		 <%@ include file="../messenger/msg_box.jsp"%>
+		<%@ include file="../messenger/msg_box.jsp"%>
 		<div id="footer">
 			<%@  include file="../inc/foot.jsp"%>
 		</div>
@@ -471,11 +507,37 @@ function dailyPage(){
 					</button>
 					<div id="flow-cart-content"
 						class="goods-view-flow-cart-content __active">
-						<form action="marketBuy.do" method="post">
-							<input type="hidden" name="market_no" value="${market.market_no }">
-							<input type="number" name="buy_amount">
-							<input type="submit" value="구매하기">
-						</form> <br> <br> <br> <br>
+
+
+						<c:if test="${(not empty sessionScope.loginUser) && loginUser.member_category==1  }">
+							<form action="marketBuy.do" method="post">
+								<input type="hidden" name="market_no"
+									value="${market.market_no }"> <input type="hidden"
+									name="member_id" value="${sessionScope.loginUser.member_id}">
+								<input type="number" name="buy_amount" min="1" value="1">
+								<input type="submit" value="구매하기"> <input type="button"
+									value="장바구니" onclick="addBasket()">
+							</form>
+
+						</c:if>
+						<div id="myModal" class="modal">
+
+							<!-- Modal content -->
+							<div class="modal-content">
+								<div class="md_top">
+									<span class="md_top_title"><strong>장바구니 담기</strong></span>
+								</div>
+								<div class="md_mid">
+									<div class="md_mid_content">선택하신 상품을 장바구니에 담았습니다.</div>
+									<div class="md_mid_box">
+									<a href="javascript: closeModal();" class="md_mid_close_a"> <span class="md_mid_close">계속쇼핑</span></a> 
+									<a href="selectShoppingBasket.do" class="md_mid_basket_a"> <span class="md_mid_basket">장바구니</span></a>
+									</div>
+								</div>
+							</div>
+
+						</div>
+						<br> <br> <br> <br>
 					</div>
 				</div>
 			</div>

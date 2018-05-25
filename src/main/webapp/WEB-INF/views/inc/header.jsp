@@ -11,6 +11,9 @@
 <link href="/farm/resources/css/header.css" rel="stylesheet"
 	type="text/css" />
 <script type="text/javascript">
+
+
+
 	/* $(function() {
 
 		$.ajax({
@@ -95,14 +98,19 @@
                         src="/farm/resources/images/search1.png"
                         class="btn_search">
                   </div>
+                  <c:if test="${ not empty sessionScope.loginUser}">
                   <div class="cart_count">
                      <div class="inner_cartcount">
-                        <a href="/shop/goods/goods_cart.php" class="btn_cart"> <img class="cart_img"
+                        <a href="moveShoppingBasket.do" class="btn_cart"> <img class="cart_img"
                            src="/farm/resources/images/shoppingBasket.png" alt="장바구니">
                            <span class="num realtime_cartcount" id="cart_item_count">0</span>
                         </a>
                      </div>
                   </div>
+                  	<script type="text/javascript">
+                  	test();
+                  	</script>
+                  </c:if>
                </div>
             </div>
             <div class="bg"></div>

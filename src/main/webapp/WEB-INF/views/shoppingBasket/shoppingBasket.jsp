@@ -37,12 +37,30 @@
                <tr class="hover">               
                     <th width="8%" ><input type="checkbox"></th>
                   <th width="13%">전체선택</th>
-                  <th width="47%";>상품정보</th>
-                  <th width="13%";>수량</th>
-                  <th width="13%";>상품금액</th>
+                  <th width="47%">상품정보</th>
+                  <th width="13%">수량</th>
+                  <th width="13%">상품금액</th>
                   <th width="6%"></th>
                </tr>
-               <tr class="hover">
+               <c:forEach var="basket" items="${basketList}">
+                <tr class="hover">
+                  <td><input type="checkbox"></td>
+                  <td><center><a href="marketDetail.do?market_no=${basket.market_no}"><div class="images" style="background-image: url('/farm/resources/upload/marketUpload/${basket.market_img}');"></div></a></center></td>
+                  <td id="Notice_td"><a href="marketDetail.do?market_no=${basket.market_no}">${basket.market_title }</a></td>
+                  <td>
+                  <div class="amount_box" >
+                     <a href="marketDetail.do?market_no=${basket.market_no}"><div class="operator">+</div></a>
+                     <input type="number" class="count" value="${basket.buy_amount }">
+                    <a href="marketDetail.do?market_no=${basket.market_no}"><div class="operator">-</div></a>
+                 </div>
+                  </td>
+                  <td>${basket.market_price}원</td>
+                  <td><a href="marketDetail.do?market_no=${basket.market_no}"><div class="x">x</div></a></td>
+               </tr>
+               
+               </c:forEach>
+              
+              <!--  <tr class="hover">
                   <td><input type="checkbox"></td>
                   <td><center><a href="#"><div class="images" style="background-image: url('/farm/resources/images/pineapple.jpg');"></div></a></center></td>
                   <td id="Notice_td"><a href="#">[스미후루]감숙왕 파인애플</a></td>
@@ -56,6 +74,8 @@
                   <td>9700원</td>
                   <td><a href="#"><div class="x">x</div></a></td>
                </tr>
+               
+               
                <tr class="hover">
                   <td><input type="checkbox"></td>
                   <td><center><a href="#"><div class="images" style="background-image: url('/farm/resources/images/pineapple.jpg');"></div></a></center></td>
@@ -69,7 +89,9 @@
                   </td>
                   <td>9700원</td>
                   <td><a href="#"><div class="x">x</div></a></td>
-               </tr>
+               </tr> -->
+               
+               
             </table>
             <br>
            <input id="selectAll_checkbox" type="checkbox">
