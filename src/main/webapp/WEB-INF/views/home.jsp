@@ -8,6 +8,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Farm</title>
+<link href="/farm/resources/css/homeauction.css" rel="stylesheet"
+	type="text/css" />
 <link href="/farm/resources/css/style.css" rel="stylesheet"
 	type="text/css" />
 <link href="/farm/resources/css/flexslider-rtl.css" rel="stylesheet"
@@ -18,20 +20,33 @@
 	type="text/css" />
 <link href="/farm/resources/css/home.css" rel="stylesheet"
 	type="text/css" />
+<link href="/farm/resources/css/bottommovemenu.css" rel="stylesheet"
+	type="text/css" />	
 <script type="text/javascript"
 	src="/farm/resources/js/jquery-3.3.1.min.js"></script>
-<script type="text/javascript"
-	src="/farm/resources/js/modernizr.js"></script>
-
+<script type="text/javascript" src="/farm/resources/js/modernizr.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+$(function(){
+	$('.goods-view-show-option-button').click(function(){
+		if($('#flow-cart2').css('display') == 'none'){
+			$('#flow-cart2').css('display','block');
+		}else{
+			$('#flow-cart2').css('display','none');
+		}
+    });
+});
+</script>
 </head>
 
 <body>
-
 	<div id="wrap">
 		<c:import url="inc/header.jsp"></c:import>
 
 		<div id="container">
 			<div class="inner-wrap">
+
+
 				<div class="main_visual">
 					<div class="flexslider" style="direction: rtl; border: none;">
 						<ul class="slides">
@@ -75,6 +90,7 @@
 
 				</div>
 
+
 				<div class="bigbox">
 					<div class="big_title">
 						<h2>인기상품</h2>
@@ -112,63 +128,203 @@
 					</div>
 					<div class="box_border2">
 						<div class="box2">
-							<table class="auction_table">
-								<tr>
-									
-									<th>상품</th>
-									<th>판매가</th>
-								</tr>
 
-								<tr>
-									<td><div class="auction_img" style="background-image: url('/farm/resources/images/고구마.jpg');"></div>
-									<div>유기농 고구마 1kg</div></td>
-									<td>5,700원</td>
-									<!-- <td style="color: red; font-weight: bold;">진행중</td> -->
-									
-								</tr>
-								
-								<tr>
-									<td><div class="auction_img" style="background-image: url('/farm/resources/images/아산 맑은 토마토.jpg');"></div>
-									<div>아산 맑은 토마토 1박스</div></td>
-									<td>10,500원</td>							
-								</tr>
-								
-								<tr>
-									<td><div class="auction_img" style="background-image: url('/farm/resources/images/아산 맑은 포도.jpg');"></div>
-									<div>아산 맑은 포도</div></td>
-									<td>10,500원</td>							
-								</tr>
-								
-								<tr>
-									<td><div class="auction_img" style="background-image: url('/farm/resources/images/청주 사과.jpg');"></div>
-									<div>청주 사과</div></td>
-									<td>10,500원</td>							
-								</tr>
-								
-								
-							</table>
+							<div id="myCarousel" class="carousel slide" data-ride="carousel">
+								<!-- Indicators -->
+								<ol class="carousel-indicators">
+									<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+									<li data-target="#myCarousel" data-slide-to="1"></li>
+									<li data-target="#myCarousel" data-slide-to="2"></li>
+								</ol>
+
+								<!-- Wrapper for slides -->
+								<div class="carousel-inner">
+									<div class="item active" align="center">
+										<table class="auction_table">
+											<tr>
+
+												<th>상품</th>
+												<th>판매가</th>
+											</tr>
+
+											<tr>
+												<td><div class="auction_img"
+														style="background-image: url('/farm/resources/images/고구마.jpg');"></div>
+													<div>유기농 고구마 1kg</div></td>
+												<td>5,700원</td>
+												<td style="color: red; font-weight: bold;">진<br>행<br>중
+												</td>
+
+											</tr>
+
+											<tr>
+												<td><div class="auction_img"
+														style="background-image: url('/farm/resources/images/아산 맑은 토마토.jpg');"></div>
+													<div>아산 맑은 토마토 1박스</div></td>
+												<td>10,500원</td>
+											</tr>
+
+											<tr>
+												<td><div class="auction_img"
+														style="background-image: url('/farm/resources/images/아산 맑은 포도.jpg');"></div>
+													<div>아산 맑은 포도</div></td>
+												<td>10,500원</td>
+											</tr>
+
+											<tr>
+												<td><div class="auction_img"
+														style="background-image: url('/farm/resources/images/청주 사과.jpg');"></div>
+													<div>청주 사과</div></td>
+												<td>10,500원</td>
+											</tr>
+
+
+										</table>
+									</div>
+
+									<div class="item" align="center">
+										<table class="auction_table">
+											<tr>
+
+												<th>상품</th>
+												<th>판매가</th>
+											</tr>
+
+											<tr>
+												<td><div class="auction_img"
+														style="background-image: url('/farm/resources/images/고구마.jpg');"></div>
+													<div>유기농 고구마 1kg</div></td>
+												<td>5,700원</td>
+												<td style="color: red; font-weight: bold;">진<br>행<br>중
+												</td>
+
+											</tr>
+
+											<tr>
+												<td><div class="auction_img"
+														style="background-image: url('/farm/resources/images/아산 맑은 토마토.jpg');"></div>
+													<div>아산 맑은 토마토 1박스</div></td>
+												<td>10,500원</td>
+											</tr>
+
+											<tr>
+												<td><div class="auction_img"
+														style="background-image: url('/farm/resources/images/아산 맑은 포도.jpg');"></div>
+													<div>아산 맑은 포도</div></td>
+												<td>10,500원</td>
+											</tr>
+
+											<tr>
+												<td><div class="auction_img"
+														style="background-image: url('/farm/resources/images/청주 사과.jpg');"></div>
+													<div>청주 사과</div></td>
+												<td>10,500원</td>
+											</tr>
+
+
+										</table>
+									</div>
+
+									<div class="item" align="center">
+										<table class="auction_table">
+											<tr>
+
+												<th>상품</th>
+												<th>판매가</th>
+											</tr>
+
+											<tr>
+												<td><div class="auction_img"
+														style="background-image: url('/farm/resources/images/고구마.jpg');"></div>
+													<div>유기농 고구마 1kg</div></td>
+												<td>5,700원</td>
+												<td style="color: red; font-weight: bold;">진<br>행<br>중
+												</td>
+
+											</tr>
+
+											<tr>
+												<td><div class="auction_img"
+														style="background-image: url('/farm/resources/images/아산 맑은 토마토.jpg');"></div>
+													<div>아산 맑은 토마토 1박스</div></td>
+												<td>10,500원</td>
+											</tr>
+
+											<tr>
+												<td><div class="auction_img"
+														style="background-image: url('/farm/resources/images/아산 맑은 포도.jpg');"></div>
+													<div>아산 맑은 포도</div></td>
+												<td>10,500원</td>
+											</tr>
+
+											<tr>
+												<td><div class="auction_img"
+														style="background-image: url('/farm/resources/images/청주 사과.jpg');"></div>
+													<div>청주 사과</div></td>
+												<td>10,500원</td>
+											</tr>
+
+
+										</table>
+									</div>
+								</div>
+
+								<!-- Left and right controls -->
+								<a class="left carousel-control" href="#myCarousel"
+									data-slide="prev"> <span
+									class="glyphicon glyphicon-chevron-left"></span> <span
+									class="sr-only">Previous</span>
+								</a> <a class="right carousel-control" href="#myCarousel"
+									data-slide="next"> <span
+									class="glyphicon glyphicon-chevron-right"></span> <span
+									class="sr-only">Next</span>
+								</a>
+							</div>
 						</div>
 					</div>
-					
-					
-					
-					
-					
+
+
 				</div>
 
 			</div>
-
 		</div>
 
-		<!-- 채팅,최근 본 상품 목록 import jsp ,  footer 위에서 하면됨 -->
-		<c:import url="messenger/msg_box.jsp"></c:import>
 
-		<div id="footer">
-			<c:import url="inc/foot.jsp"></c:import>
 
-		</div>
+
+
 	</div>
 
+	<!-- 채팅,최근 본 상품 목록 import jsp ,  footer 위에서 하면됨 -->
+	<c:import url="messenger/msg_box.jsp"></c:import>
+
+	<div id="footer">
+		<c:import url="inc/foot.jsp"></c:import>
+
+	</div>
+
+
+
+<div class="goods-view-flow-cart __active" id="flow-cart">
+<div class="goods-view-flow-cart-wrapper">
+<button type="button" id="show-option-button" class="goods-view-show-option-button"><span class="goods-view-show-option-button-value">옵션선택</span></button>
+
+<div class="goods-view-flow-cart __active" id="flow-cart2">
+<div class="goods-view-flow-cart-wrapper">
+<button type="button" id="show-option-button" class="goods-view-show-option-button __active"><span class="goods-view-show-option-button-value">옵션선택</span></button>
+<div id="flow-cart-content" class="goods-view-flow-cart-content __active">
+<br>
+<br>
+<br>
+<br>
+<br>
+<br><br>
+</div>
+</div>
+</div>
+
+</div>
+</div>
 </body>
 
 <script type="text/javascript"
@@ -176,9 +332,9 @@
 
 <script>
 	$(function() {
-		 $('.flexslider').flexslider({
-			 animation: Modernizr.touch ? "slide" : "fade"
-		 });
+		$('.flexslider').flexslider({
+			animation : Modernizr.touch ? "slide" : "fade"
+		});
 
 		$(".tab_content").hide();
 		$(".tab_content:first").show();

@@ -130,8 +130,10 @@ img{border:0}
 		.auction_img{
 		width:80px;
 		height:50px;
-		background-size: cover;
+		background-size: cover;s
 		}
+		
+	
 		
 #footer { width:100%; padding:20px 0 40px 0; border-top:solid 1px #DCDCDC; margin:0 auto; position:relative; }
 		#footer div.inner-foot { width:960px;  margin: auto; padding:0;}
@@ -218,4 +220,32 @@ img{border:0}
 }
 .sch_smit:hover {
    background: #cfc085;
+}
+
+.slide {
+	width: 300px;
+	height: 500px;
+	overflow: hidden;
+	position: relative;
+	margin: 0 auto;
+}
+
+.carousel-control.left {
+	background: rgba(0, 0, 0, 0);
+	color: black;
+	left:-10px;
+}
+
+.carousel-control.right {
+	background: rgba(0, 0, 0, 0);
+	color: black;
+	right:-10px;
+}
+
+.item {
+	width: 100%;
+}
+
+.auction_table {
+	width: 250px;
 }
