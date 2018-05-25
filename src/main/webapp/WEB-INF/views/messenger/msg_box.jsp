@@ -49,22 +49,23 @@ $(function(){
 	         list1= '';
 	         list2= '';
 	         list3= '';
-	         for(var i=0 in c.ml)
+	         var rv=c.ml.reverse();
+	         for(var i=0 in rv)
 	        	 {
 	        	 if(i<3)
 	        		 {
-	        		 list1 += '<a href="marketDetail.do?market_no='+c.ml[i].no+'"><div class="sh_list'+((i%3)+1)+'" style="background-image: url(\'/farm/resources/upload/marketUpload/'+decodeURIComponent((c.ml[i].img).replace(/\+/g, '%20'))+'\');"></div><div class="sh1_title">'
-	        				+decodeURIComponent((c.ml[i].title).replace(/\+/g, '%20'))+'</div></a>';
+	        		 list1 += '<a href="marketDetail.do?market_no='+rv[i].no+'"><div class="sh_list'+((i%3)+1)+'" style="background-image: url(\'/farm/resources/upload/marketUpload/'+decodeURIComponent((rv[i].img).replace(/\+/g, '%20'))+'\');"></div><div class="sh1_title">'
+	        				+decodeURIComponent((rv[i].title).replace(/\+/g, '%20'))+'</div></a>';
 	        		 }
 	        	 else if(i<6)
 	        		 {
-	        		 list2 += '<a href="marketDetail.do?market_no='+c.ml[i].no+'"><div class="sh_list'+((i%3)+1)+'" style="background-image: url(\'/farm/resources/upload/marketUpload/'+decodeURIComponent((c.ml[i].img).replace(/\+/g, '%20'))+'\');"></div><div class="sh1_title">'
-     				+decodeURIComponent((c.ml[i].title).replace(/\+/g, '%20'))+'</div></a>';
+	        		 list2 += '<a href="marketDetail.do?market_no='+rv[i].no+'"><div class="sh_list'+((i%3)+1)+'" style="background-image: url(\'/farm/resources/upload/marketUpload/'+decodeURIComponent((rv[i].img).replace(/\+/g, '%20'))+'\');"></div><div class="sh1_title">'
+     				+decodeURIComponent((rv[i].title).replace(/\+/g, '%20'))+'</div></a>';
 	        		 }
 	        	 else if(i<9)
 	        		 {
-	        		 list3 += '<a href="marketDetail.do?market_no='+c.ml[i].no+'"><div class="sh_list'+((i%3)+1)+'" style="background-image: url(\'/farm/resources/upload/marketUpload/'+decodeURIComponent((c.ml[i].img).replace(/\+/g, '%20'))+'\');"></div><div class="sh1_title">'
-     				+decodeURIComponent((c.ml[i].title).replace(/\+/g, '%20'))+'</div></a>';
+	        		 list3 += '<a href="marketDetail.do?market_no='+rv[i].no+'"><div class="sh_list'+((i%3)+1)+'" style="background-image: url(\'/farm/resources/upload/marketUpload/'+decodeURIComponent((rv[i].img).replace(/\+/g, '%20'))+'\');"></div><div class="sh1_title">'
+     				+decodeURIComponent((rv[i].title).replace(/\+/g, '%20'))+'</div></a>';
 	        		 }
 	        	 }       
 	         $('.page1').html(list1);
@@ -86,8 +87,8 @@ function changeList(order)
 {	
 	
 	
-	
-	switch (   index = parseInt ( (index + order) >= 0 ? (index+order) % (parseInt(len/3)+1) : len/3  )  ) {
+
+	switch (   index = parseInt ( (index + order) >= 0 ? (index+order) % (Math.ceil(len/3)) : ( Math.ceil(len/3) )-1 )  ) {
 	case 0:
 		$('.page1').html(list1);
 		break;
