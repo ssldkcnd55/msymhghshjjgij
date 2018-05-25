@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.kh.farm.chat.model.dao.ChatDao;
 import com.kh.farm.chat.model.vo.*;
+import com.kh.farm.market.model.vo.Market;
 import com.kh.farm.member.model.vo.*;
 
 @Service
@@ -68,6 +69,12 @@ public class ChatServiceImpl implements ChatService {
 	public int selectAlarmCount(String member_id) {
 		
 		return chatDao.selectAlarmCount(sqlSession,member_id);
+	}
+
+	@Override
+	public Market selectRecentViewMarketList(Market m) {
+	
+		return chatDao.selectRecentViewMarketList(sqlSession,m);
 	}
 	
 	

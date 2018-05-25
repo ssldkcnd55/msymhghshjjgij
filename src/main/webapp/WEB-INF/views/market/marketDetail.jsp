@@ -12,7 +12,34 @@
 <link href="/farm/resources/css/marketDetail.css" rel="stylesheet" type="text/css" />
 <script src="/farm/resources/js/jquery-3.3.1.min.js"></script>
 <script type="text/javascript" src="/farm/resources/js/tabMove.js"></script>
-<script>
+<script type="text/javascript">
+
+///최근 본 상품 쿠키 (현준)///
+ $(function(){
+
+	
+		var time = new Date();
+		time.setDate(time.getDate() + 7);
+		var oldtime = new Date();
+		oldtime.setDate(oldtime.getDate() - 7);
+		var decodedCookie = decodeURIComponent(document.cookie);
+		var ca = decodedCookie.split(';');
+
+		if (document.cookie.indexOf(  ${market.market_no} + "="+ ${market.market_no} + "a") == -1) {
+			//없음
+			if (ca.length > 8) {
+				document.cookie = ca[0] + "; expires=" + oldtime;
+			}
+		} else {
+			//있음
+			document.cookie = ${market.market_no} + "=" + ${market.market_no}+ "a; expires=" + oldtime;
+		}
+
+		document.cookie = ${market.market_no} + "=" + ${market.market_no}+ "a; expires=" + time;
+
+}); 
+///쿠키 끝///
+
 /* $(function(){
 	$.ajax({
 		url:"qnaList.do",

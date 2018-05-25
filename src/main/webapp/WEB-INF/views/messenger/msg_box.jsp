@@ -21,6 +21,88 @@ login_id='${loginUser.member_id}';
 </c:if>
 
 
+<script type="text/javascript">
+var list1= '';
+var list2 = '';
+var list3 = '';
+var len=0;
+var index=0;
+$(function(){
+	
+	var decodedCookie = decodeURIComponent(document.cookie);
+	var ca = decodedCookie.split(';');
+	var marketNoArray=[];
+	for (var i = ca.length - 1; i >= 0; i--) {
+		marketNoArray[i]=	ca[i].substring(ca[i].indexOf("=") + 1, ca[i].length-1);
+	}
+	var marketNo= { 'marketNo': marketNoArray };
+	
+	$.ajax({
+		url:"recentViewList.do",
+		type:"post",
+		data: marketNo,
+		dataType : "json",
+		success:function(data){
+			 var objStr = JSON.stringify(data);
+	         var c = JSON.parse(objStr);
+	       len=c.ml.length;
+	         list1= '';
+	         list2= '';
+	         list3= '';
+	         for(var i=0 in c.ml)
+	        	 {
+	        	 if(i<3)
+	        		 {
+	        		 list1 += '<a href="marketDetail.do?market_no='+c.ml[i].no+'"><div class="sh_list'+((i%3)+1)+'" style="background-image: url(\'/farm/resources/upload/marketUpload/'+decodeURIComponent((c.ml[i].img).replace(/\+/g, '%20'))+'\');"></div><div class="sh1_title">'
+	        				+decodeURIComponent((c.ml[i].title).replace(/\+/g, '%20'))+'</div></a>';
+	        		 }
+	        	 else if(i<6)
+	        		 {
+	        		 list2 += '<a href="marketDetail.do?market_no='+c.ml[i].no+'"><div class="sh_list'+((i%3)+1)+'" style="background-image: url(\'/farm/resources/upload/marketUpload/'+decodeURIComponent((c.ml[i].img).replace(/\+/g, '%20'))+'\');"></div><div class="sh1_title">'
+     				+decodeURIComponent((c.ml[i].title).replace(/\+/g, '%20'))+'</div></a>';
+	        		 }
+	        	 else if(i<9)
+	        		 {
+	        		 list3 += '<a href="marketDetail.do?market_no='+c.ml[i].no+'"><div class="sh_list'+((i%3)+1)+'" style="background-image: url(\'/farm/resources/upload/marketUpload/'+decodeURIComponent((c.ml[i].img).replace(/\+/g, '%20'))+'\');"></div><div class="sh1_title">'
+     				+decodeURIComponent((c.ml[i].title).replace(/\+/g, '%20'))+'</div></a>';
+	        		 }
+	        	 }       
+	         $('.page1').html(list1);
+	         
+	        
+	         
+		},
+		error : function(request, status, errorData) {
+	         alert("error code : " + request.status + "\n"
+	               + "message : " + request.responseText
+	               + "\n" + "error : " + errorData);
+	      }
+	   });  
+	
+});
+
+
+function changeList(order)
+{	
+	
+	
+	
+	switch (   index = parseInt ( (index + order) >= 0 ? (index+order) % (parseInt(len/3)+1) : len/3  )  ) {
+	case 0:
+		$('.page1').html(list1);
+		break;
+	case 1:
+		$('.page1').html(list2);
+		break;
+	case 2:
+		$('.page1').html(list3);
+		
+	}
+	
+}
+
+</script>
+
 </head>
 <body>
 
@@ -31,24 +113,22 @@ login_id='${loginUser.member_id}';
 </span>
 </c:if>
 <span  class="sidebox"> 
-      <a href="#top_line" class="move_top_atag">
+      <a href="#header" class="move_top_atag">
       <div class="move_top">↑<br>TOP</div></a>
       <br>
       <div class="shoppinglist">
-      <!-- 최근본 목록 -->
-      
-      
-      <div class="arrow">▲</div>
-      
-      <div class="recent_list">최근 본 상품</div>
-      <div class="sh_list1" style="background-image: url('/farm/resources/images/pineapple.jpg');"></div>
-      <div class="sh1_title">제스프리 <br>썬골드키위</div>
-      <div class="sh_list2" style="background-image: url('/farm/resources/images/pineapple.jpg');"></div>
-      <div class="sh1_title">제스프리 <br>썬골드키위</div>
-      <div class="sh_list3" style="background-image: url('/farm/resources/images/pineapple.jpg');"></div>
-      <div class="sh1_title last">제스프리 <br>썬골드키위</div>
-      <div class="arrow bottom">▼</div>
-      </div><br>
+			<!-- 최근본 목록 -->
+
+			<a href="javascript: changeList(+1);"><div class="arrow">▲</div></a>
+
+			<div class="recent_list">최근 본 상품</div>
+			
+			<div class="page1">
+				
+			</div>
+			<a href="javascript: changeList(-1);"><div class="arrow_bottom">▼</div></a> 
+		</div>
+		<br>
  <c:if test="${ !empty sessionScope.loginUser }">
   <a href="javascript: msgIcon()" class="msgA"><img class="msgIcon" src="/farm/resources/images/messenger_icon_green2.png">
   

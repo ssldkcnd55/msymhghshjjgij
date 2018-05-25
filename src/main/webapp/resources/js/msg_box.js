@@ -5,6 +5,8 @@ var ws_main = null;
 var ws = null;
 var login_id = null;
 
+
+
 function loadListPage()
 {
    $.ajax({
@@ -105,8 +107,8 @@ function loginPage() {
 // 아이콘 따라다니는 코드
 $(function() {
 
-   $(".sidebox").css("top", $(window).height() - 650);
-   $(".msgbox").css("top", $(window).height() - 676);
+   $(".sidebox").css("top", $(window).height() - 700);
+   $(".msgbox").css("top", $(window).height() - 650);
 
    var currentPosition = parseInt($(".sidebox").css("top"));
 
@@ -130,12 +132,8 @@ $(function() {
                            - ($("#footer").height()
                                  + $(".sidebox").height() + 100)
                            + "px");
-               $(".msgbox").css(
-                     "top",
-                     $("body").height()
-                           - ($("#footer").height()
-                                 + $(".msgbox").height() + 100)
-                           + "px");
+               $(".msgbox").css( "top",
+                     $("body").height() - ($("#footer").height() + $(".msgbox").height() + 100) + "px");
             }
          });
 

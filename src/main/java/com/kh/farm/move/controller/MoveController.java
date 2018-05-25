@@ -12,19 +12,7 @@ import com.kh.farm.member.model.vo.Member;
 public class MoveController {
 	public MoveController() {}
 	
-	@RequestMapping("movceTestGetCookie.do")
-	public String moveTestGetCookie()
-	{
-		return "messenger/test_getCookie";
-	}
-	
-	
-	@RequestMapping("movceTestSetCookie.do")
-	public String moveTestSetCookie()
-	{
-		return "messenger/test_setCookie";
-	}
-	
+
 	@RequestMapping("moveSmartEditor2Skin.do")
 	public String moveSmartEditor2Skin()
 	{

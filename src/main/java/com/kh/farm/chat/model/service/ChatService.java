@@ -3,6 +3,7 @@ package com.kh.farm.chat.model.service;
 import java.util.*;
 
 import com.kh.farm.chat.model.vo.*;
+import com.kh.farm.market.model.vo.Market;
 import com.kh.farm.member.model.vo.*;
 
 public interface ChatService {
@@ -16,4 +17,5 @@ public interface ChatService {
 	int insertChat(Chat chat);
 	List<String> selectChatFriends(String member_id);
 	int selectAlarmCount(String member_id);
+	Market selectRecentViewMarketList(Market m);
 }
