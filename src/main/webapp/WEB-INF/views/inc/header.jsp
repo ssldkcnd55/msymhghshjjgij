@@ -155,7 +155,7 @@
 					<div class="search_box">
 						<input class="search" type="text"> <input type="image"
 							src="/farm/resources/images/search1.png" class="btn_search">
-					</div>
+			  		</div>
 					<div class="cart_count">
 						<div class="inner_cartcount">
 							<a href="/shop/goods/goods_cart.php" class="btn_cart"> <img
