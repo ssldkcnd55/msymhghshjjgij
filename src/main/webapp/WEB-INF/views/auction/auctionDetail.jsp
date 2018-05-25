@@ -5,6 +5,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Farm</title>
+<link href="/farm/resources/css/bottommovemenu.css" rel="stylesheet"
+	type="text/css" />	
 <link href="/farm/resources/css/style.css" rel="stylesheet"
 	type="text/css" />
 <link href="/farm/resources/css/qna.css" rel="stylesheet"
@@ -23,7 +25,17 @@
 <script type="text/javascript"
 	src="/farm/resources/js/jquery-3.3.1.min.js"></script>
 <script type="text/javascript" src="/farm/resources/js/tabMove.js"></script>
-
+<script type="text/javascript">
+$(function(){
+	$('.goods-view-show-option-button').click(function(){
+		if($('#flow-cart2').css('display') == 'none'){
+			$('#flow-cart2').css('display','block');
+		}else{
+			$('#flow-cart2').css('display','none');
+		}
+    });
+});
+</script>
 <script type="text/javascript">
 	/* 삭제 버튼 */
 	function auctionDelete(){
@@ -353,6 +365,28 @@
 		<%@ include file="../messenger/msg_box.jsp"%>
 		<div id="footer">
 			<%@  include file="../inc/foot.jsp"%>
+		</div>
+	</div>
+		<div class="goods-view-flow-cart __active" id="flow-cart">
+		<div class="goods-view-flow-cart-wrapper">
+			<button type="button" id="show-option-button"
+				class="goods-view-show-option-button">
+				<span class="goods-view-show-option-button-value">옵션선택</span>
+			</button>
+
+			<div class="goods-view-flow-cart __active" id="flow-cart2">
+				<div class="goods-view-flow-cart-wrapper">
+					<button type="button" id="show-option-button"
+						class="goods-view-show-option-button __active">
+						<span class="goods-view-show-option-button-value">옵션선택</span>
+					</button>
+					<div id="flow-cart-content"
+						class="goods-view-flow-cart-content __active">
+						<br> <br> <br> <br> <br> <br> <br>
+					</div>
+				</div>
+			</div>
+
 		</div>
 	</div>
 </body>

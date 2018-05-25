@@ -20,23 +20,12 @@
 	type="text/css" />
 <link href="/farm/resources/css/home.css" rel="stylesheet"
 	type="text/css" />
-<link href="/farm/resources/css/bottommovemenu.css" rel="stylesheet"
-	type="text/css" />	
+
 <script type="text/javascript"
 	src="/farm/resources/js/jquery-3.3.1.min.js"></script>
 <script type="text/javascript" src="/farm/resources/js/modernizr.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<script type="text/javascript">
-$(function(){
-	$('.goods-view-show-option-button').click(function(){
-		if($('#flow-cart2').css('display') == 'none'){
-			$('#flow-cart2').css('display','block');
-		}else{
-			$('#flow-cart2').css('display','none');
-		}
-    });
-});
-</script>
+
 </head>
 
 <body>
@@ -304,27 +293,6 @@ $(function(){
 	</div>
 
 
-
-<div class="goods-view-flow-cart __active" id="flow-cart">
-<div class="goods-view-flow-cart-wrapper">
-<button type="button" id="show-option-button" class="goods-view-show-option-button"><span class="goods-view-show-option-button-value">옵션선택</span></button>
-
-<div class="goods-view-flow-cart __active" id="flow-cart2">
-<div class="goods-view-flow-cart-wrapper">
-<button type="button" id="show-option-button" class="goods-view-show-option-button __active"><span class="goods-view-show-option-button-value">옵션선택</span></button>
-<div id="flow-cart-content" class="goods-view-flow-cart-content __active">
-<br>
-<br>
-<br>
-<br>
-<br>
-<br><br>
-</div>
-</div>
-</div>
-
-</div>
-</div>
 </body>
 
 <script type="text/javascript"
