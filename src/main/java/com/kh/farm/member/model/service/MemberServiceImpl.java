@@ -1,5 +1,8 @@
 package com.kh.farm.member.model.service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -43,6 +46,18 @@ public class MemberServiceImpl implements MemberService {
 	public Member selectMember(String member_id2) {
 
 		return memberDao.selectMember(member_id2, sqlSession);
+	}
+
+	@Override
+	public List<Member> selectMemberList(int currentPage) {
+		// TODO Auto-generated method stub
+		return memberDao.selectMemberList(currentPage,sqlSession);
+	}
+
+	@Override
+	public int selectMemberCount() {
+		// TODO Auto-generated method stub
+		return memberDao.selectMemberCount(sqlSession);
 	}
 
 }

@@ -46,5 +46,16 @@ select member_name, member_img from member where member_id=#{member_id2}
 ]]>
 </select>
 
-
+<select id="selectMemberList" parameterType="PageNumber" resultType="Member">
+	<![CDATA[
+	select * from (select rownum rnum, member_id, member_category, member_name, 
+	member_approval,member_withdraw,MEMBER_WARNING_COUNT from member 
+	) where rnum >=#{startRow} and rnum <=#{endRow}
+	
+	]]>
+</select>
+	
+<select id="memberCount" parameterType="int" resultType="int">
+	select count(*) from member
+</select>	
 </mapper>

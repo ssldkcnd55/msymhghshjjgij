@@ -1,10 +1,14 @@
 package com.kh.farm.member.model.dao;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Repository;
 
+import com.kh.farm.common.model.vo.PageNumber;
 import com.kh.farm.member.exception.LoginFailException;
 import com.kh.farm.member.model.vo.Member;
 
@@ -53,5 +57,20 @@ public class MemberDao {
 	public Member selectMember(String member_id2, SqlSessionTemplate sqlSession) {
 		
 		return sqlSession.selectOne("selectMember", member_id2);
+	}
+
+	public List<Member> selectMemberList(int currentPage, SqlSessionTemplate sqlSession) {
+		int startRow =(currentPage-1)*10+1; //1~10, 11~20 계산할 거 ex) 1, 11, 21, 31,)
+		int endRow = startRow+9;
+		PageNumber pnum = new PageNumber();
+		pnum.setStartRow(startRow);
+		pnum.setEndRow(endRow);
+		return sqlSession.selectList("selectMemberList", pnum);
+	}
+
+	public int selectMemberCount(SqlSessionTemplate sqlSession) {
+		// TODO Auto-generated method stub
+		int listCount = sqlSession.selectOne("memberCount");
+		return listCount;
 	}
 }

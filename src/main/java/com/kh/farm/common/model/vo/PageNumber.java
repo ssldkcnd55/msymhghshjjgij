@@ -7,17 +7,19 @@ public class PageNumber implements java.io.Serializable{
 	private int endRow;			
 	private int market_no;
 	private int auction_no;
+	private String member_id;
 	
 	
 	public PageNumber() {}
 
 	
-	public PageNumber(int startRow, int endRow, int market_no,int auction_no) {
+	public PageNumber(int startRow, int endRow, int market_no,int auction_no,String member_id) {
 		super();
 		this.startRow = startRow;
 		this.endRow = endRow;
 		this.market_no = market_no;
 		this.auction_no = auction_no;
+		this.member_id = member_id;
 	}
 
 
@@ -57,7 +59,13 @@ public class PageNumber implements java.io.Serializable{
 	}
 	
 	
+	public String getMember_id() {
+		return member_id;
+	}
 	
+	public void setMember_no(String member_id) {
+		this.member_id = member_id;
+	}
 	
 	
 }
