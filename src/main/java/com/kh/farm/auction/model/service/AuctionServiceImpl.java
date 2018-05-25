@@ -86,4 +86,11 @@ public class AuctionServiceImpl implements AuctionService{
 		return auctionDao.updateauctionQnA_Answer(sqlSession,auctionqna);
 	}
 
+	@Override
+	public ArrayList<Auction> selectHomeAuctionList() {
+		// TODO Auto-generated method stub
+		
+		return auctionDao.selectHomeAuctionList(sqlSession);
+	}
+
 }
