@@ -59,7 +59,9 @@
 	
 		<div id="container">
         	<div class="inner-wrap"> 
-        	<button class="market_write" onclick="marketMake();">장터 등록</button>
+        	<c:if test="${loginUser.member_category eq '1'}">
+        		<button class="market_write" onclick="marketMake();">장터 등록</button>
+        	</c:if>
         	<div class="left_box">
         	
         	<!-- 정렬 메뉴바 -->

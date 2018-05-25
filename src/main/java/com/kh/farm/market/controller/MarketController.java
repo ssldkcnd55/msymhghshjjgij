@@ -213,4 +213,15 @@ public class MarketController {
 		out.flush();
 		out.close();
 	}
+	@RequestMapping("dailyMakeMove.do")
+	public ModelAndView dailyMakeMove(ModelAndView mv, Market market) {
+		mv.addObject("market", market);
+		mv.setViewName("market/marketDailyMake");
+		return mv;
+	}
+	@RequestMapping("marketDailyMake.do")
+	public String marketDailyMake(Daily daily) {
+		int result = marketService.insertMarket_daily(daily);
+		return "forward:/marketDetail.do?market_no="+daily.getMarket_no();
+	}
 }

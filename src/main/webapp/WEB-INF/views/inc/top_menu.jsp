@@ -10,7 +10,7 @@
 	src="/farm/resources/js/jquery-3.3.1.min.js"></script>
 <link href="/farm/resources/css/style.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript">
-    $(function() {
+   /*  $(function() {
       $.ajax({
          url : 'Weather.do',
          type : 'get',
@@ -47,7 +47,7 @@
             $("#w_text").html(img_text);
          }
       });
-   }); 
+   });  */
 </script>
 </head>
 

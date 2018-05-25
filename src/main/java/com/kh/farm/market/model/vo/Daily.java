@@ -13,7 +13,7 @@ public class Daily implements java.io.Serializable{
 	private static final long serialVersionUID = 44444L;
 	
 	private int daily_no;//일지 번호
-	private int sell_no;//판매글 번호
+	private int market_no;//판매글 번호
 	private Date daily_date;//일지 작성일
 	private String daily_title;//일지 제목
 	private String daily_contents;//일지 내용
@@ -22,10 +22,10 @@ public class Daily implements java.io.Serializable{
 	
 	}
 
-	public Daily(int daily_no, int sell_no, Date daily_date, String daily_title, String daily_contents) {
+	public Daily(int daily_no, int market_no, Date daily_date, String daily_title, String daily_contents) {
 		super();
 		this.daily_no = daily_no;
-		this.sell_no = sell_no;
+		this.market_no = market_no;
 		this.daily_date = daily_date;
 		this.daily_title = daily_title;
 		this.daily_contents = daily_contents;
@@ -33,8 +33,16 @@ public class Daily implements java.io.Serializable{
 
 	@Override
 	public String toString() {
-		return "Daily [daily_no=" + daily_no + ", sell_no=" + sell_no + ", daily_date=" + daily_date + ", daily_title="
-				+ daily_title + ", daily_contents=" + daily_contents + "]";
+		return "Daily [daily_no=" + daily_no + ", market_no=" + market_no + ", daily_date=" + daily_date
+				+ ", daily_title=" + daily_title + ", daily_contents=" + daily_contents + "]";
+	}
+
+	public int getMarket_no() {
+		return market_no;
+	}
+
+	public void setMarket_no(int market_no) {
+		this.market_no = market_no;
 	}
 
 	public int getDaily_no() {
@@ -43,14 +51,6 @@ public class Daily implements java.io.Serializable{
 
 	public void setDaily_no(int daily_no) {
 		this.daily_no = daily_no;
-	}
-
-	public int getSell_no() {
-		return sell_no;
-	}
-
-	public void setSell_no(int sell_no) {
-		this.sell_no = sell_no;
 	}
 
 	public Date getDaily_date() {
