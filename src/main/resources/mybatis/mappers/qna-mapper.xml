@@ -35,4 +35,8 @@
 	<select id="mainQnaDetail" parameterType="int" resultType="MainQna">
 	select * from main_qna where main_qna_no = #{main_qna_no}
 	</select>
+	
+	<update id="updateAnswer" parameterType="MainQna" >
+	update main_qna set main_qna_answer =#{main_qna_answer} where main_qna_no= #{main_qna_no}
+	</update>
 </mapper>

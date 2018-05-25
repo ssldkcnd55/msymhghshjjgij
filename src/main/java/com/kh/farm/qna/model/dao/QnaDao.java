@@ -62,4 +62,10 @@ public class QnaDao {
 		return mq;
 	}
 
+	public int updateAnswer(SqlSessionTemplate sqlSession, MainQna mq) {
+		// TODO Auto-generated method stub
+		int result = sqlSession.update("qna.updateAnswer",mq);
+		return result;
+	}
+
 }

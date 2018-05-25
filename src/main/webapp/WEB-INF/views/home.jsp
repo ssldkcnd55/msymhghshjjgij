@@ -8,8 +8,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Farm</title>
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
 <link href="/farm/resources/css/style.css" rel="stylesheet"
 	type="text/css" />
 <link href="/farm/resources/css/flexslider-rtl.css" rel="stylesheet"
@@ -133,16 +132,16 @@
 											<tr>
 
 												<th>상품</th>
-												<th>판매가</th>
+												<th>가격</th>
+												
 											</tr>
 
 											<tr>
 												<td><div class="auction_img"
 														style="background-image: url('/farm/resources/images/고구마.jpg');"></div>
 													<div>유기농 고구마 1kg</div></td>
-												<td>5,700원</td>
-												<td style="color: red; font-weight: bold;">진<br>행<br>중
-												</td>
+												<td>현재가  <span class="currentPrice">5,700</span>원<br><span class="directPrice">즉구가  7,000원</span></td>
+												
 
 											</tr>
 
@@ -184,7 +183,7 @@
 														style="background-image: url('/farm/resources/images/고구마.jpg');"></div>
 													<div>유기농 고구마 1kg</div></td>
 												<td>5,700원</td>
-												<td style="color: red; font-weight: bold;">진<br>행<br>중
+												
 												</td>
 
 											</tr>

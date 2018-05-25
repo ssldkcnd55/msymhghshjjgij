@@ -20,4 +20,6 @@ public interface QnaService {
 
 	MainQna selectMainQnaDetail(int qna_no);
 
+	int updateAnswer(MainQna mq);
+
 }
