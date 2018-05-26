@@ -118,8 +118,23 @@
 		select * from (select rownum rnum,auction_no,member_id,category_no,auction_title,auction_note,
 		 auction_img,auction_startdate,auction_enddate,auction_intro,auction_status,
 		auction_startprice,auction_directprice from auction order by auction_no desc) where rnum>=1 and rnum <=12
-
+S
 	]]>
 	</select>
+	
+	<update id="updateSellerAuctionQnAanswer" parameterType="AuctionQnA" >
+		<![CDATA[
+		update auction_qna set auction_qna_answer=#{auction_qna_answer},auction_qna_answer_date=sysdate
+		where AUCTION_QNA_NO=#{auction_qna_no}
+	]]>
+	</update>
+	
+	
+	<select id="selectseller_QnAanswer"  parameterType="AuctionQnA"  resultType="AuctionQnA" >
+	<![CDATA[
+		select * from auction_qna where auction_qna_no = #{auction_qna_no}
+	]]>
+	</select>
+	
 	
 </mapper>
