@@ -27,6 +27,12 @@
     width: 100%;
 }
 
+.checkedCount, .fullCount
+{
+	display: contents;
+	
+}
+
 
 
 .Notice_table th{

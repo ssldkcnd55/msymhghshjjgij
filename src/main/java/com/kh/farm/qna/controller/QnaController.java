@@ -66,10 +66,11 @@ public class QnaController {
 		out.close();
 	}
 	@RequestMapping("marketQnaDetail.do")
-	public ModelAndView marketQnaDetail(ModelAndView mv,@RequestParam("qna_no") int qna_no) {
+	public ModelAndView marketQnaDetail(ModelAndView mv,@RequestParam("qna_no") int qna_no,@RequestParam(value="member_id", required=false) String member_id) {
 		Market_qna qna = qnaService.selectQna(qna_no);
 		
 		mv.addObject("qna",qna);
+		mv.addObject("member_id", member_id);
 		mv.setViewName("market/marketQnaDetail");
 		return mv;
 	}
@@ -132,7 +133,12 @@ public class QnaController {
 
 		return "forward:/qnaDetail.do?main_qna_no="+qna_no;
 	}
-	
+	@RequestMapping(value="marketQnaAnswer.do", method=RequestMethod.POST )
+	public String marketQnaAnswer(Market_qna mq) {
+		int marketQ = qnaService.updateMarketAnswer(mq); 
+
+		return "forward:/marketQnaDetail.do?qna_no="+mq.getMarket_qna_no();
+	}
 	@RequestMapping(value ="deleteQnaAnswer.do")
 	public String deleteQnaAnswer(@RequestParam("main_qna_no") int qanswer_no) {
 		
@@ -161,10 +167,35 @@ public class QnaController {
 		int qnaUpdate = qnaService.updateMainQna(mq);
 		
 		return "forward:/qnaDetail.do?main_qna_no="+mq.getMain_qna_no();
-				
-			
-		
 	}
 	
-	
+	@RequestMapping(value ="deleteMarketQnaAnswer.do")
+	public String deleteMarketQnaAnswer(Market_qna mq) {
+		
+		int deleteQnaAnswer = qnaService.deleteMarketQnaAnswer(mq.getMarket_qna_no());
+		return "forward:/marketQnaDetail.do?qna_no="+mq.getMarket_qna_no();
+	}
+	@RequestMapping(value="marketQnaUpdateMove.do") 
+	public ModelAndView marketQnaUpdateMove(ModelAndView mv, Market_qna mq) {
+		mv.addObject("qna",mq);
+		mv.setViewName("market/marketQnaUpdate");
+		
+		return mv;
+	}
+	@RequestMapping(value="marketQnaUpdate.do", method=RequestMethod.POST)
+	public String marketQnaUpdate(Market_qna mq) {
+		int qnaUpdate = qnaService.updateMarketQna(mq);
+		
+		return "forward:/marketQnaDetail.do?qna_no="+mq.getMarket_qna_no();
+	}
+	@RequestMapping("marketQnaDelete.do")
+	public String marketQnaDelete(Market_qna mq) {
+		int qnaDelete = qnaService.deleteMarketQna(mq.getMarket_qna_no());
+		return "forward:/marketDetail.do?market_no="+mq.getMarket_no();
+	}
+	@RequestMapping("mainQnaDelete.do")
+	public String mainQnaDelete(MainQna mq) {
+		int qnaDelete = qnaService.deleteMainQna(mq.getMain_qna_no());
+		return "qna/qna";
+	}
 }

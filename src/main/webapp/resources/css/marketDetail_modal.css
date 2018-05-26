@@ -1,0 +1,89 @@
+@charset "UTF-8";
+
+.modal {
+	display: none; /* Hidden by default */
+	position: fixed; /* Stay in place */
+	z-index: 1; /* Sit on top */
+	padding-top: 100px; /* Location of the box */
+	left: 0;
+	top: 0;
+	width: 100%; /* Full width */
+	height: 100%; /* Full height */
+	overflow: auto; /* Enable scroll if needed */
+	background-color: rgb(0, 0, 0); /* Fallback color */
+	background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+	background-color: #fefefe;
+	margin: auto;
+	padding: 15px;
+	border: 1px solid #c3c3c3;
+	width: 368px;
+	height: 258px;
+	margin-top: 6%;
+}
+
+.md_top {
+	border-bottom: 1px solid #BCBCBC;
+	height: 34px;
+}
+
+.md_top_title {
+	font-family: "Apple SD Gothic Neo", '돋움', Dotum, sans-serif;
+	font-size: 12px;
+	color: #666;
+}
+
+.md_mid {
+	background-color: #f5f5f5;
+	height: 203px;
+	margin-top: 18px;
+	
+}
+
+.md_mid_content {
+	text-align: center;
+	padding-top: 43px;
+	font-family: "Apple SD Gothic Neo", '돋움', Dotum, sans-serif;
+	font-size: 12px;
+	color: #333;
+}
+
+.md_mid_box {
+	text-align: center;
+	    padding-top: 36px;
+}
+
+.md_mid_box a {
+	width: 70px;
+	height: 38px;
+	display: inline-block;
+	text-decoration: none;
+	line-height: 38px;
+	border-radius: 4px;
+	    border: 1px solid #dcdcdc;
+}
+
+.md_mid_close_a {
+	background-color: #ee5555;
+}
+
+.md_mid_basket_a {
+	background-color: #fff;
+}
+
+.md_mid_close {
+	font-family: "Apple SD Gothic Neo", '돋움', Dotum, sans-serif;
+	font-size: 12px;
+	font-weight: bold;
+	color: #fff;
+}
+
+.md_mid_basket {
+	font-family: "Apple SD Gothic Neo", '돋움', Dotum, sans-serif;
+	font-size: 12px;
+	font-weight: bold;
+	color: #333;
+}

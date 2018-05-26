@@ -14,7 +14,7 @@ public class Payment implements java.io.Serializable {
 
 	private int buy_no; // 구매 번호
 	private int group_no;//그룹 번호
-	private int sell_no; // 판매글 번호
+	private int market_no; // 판매글 번호
 	private String member_id; // 구매자 아이디
 	private Date buy_date; // 구매 일자
 	private int buy_amount; // 구매량
@@ -26,12 +26,12 @@ public class Payment implements java.io.Serializable {
 	public Payment() {
 	}
 
-	public Payment(int buy_no, int group_no, int sell_no, String member_id, Date buy_date, int buy_amount,
+	public Payment(int buy_no, int group_no, int market_no, String member_id, Date buy_date, int buy_amount,
 			String buy_addr, String buy_tel, String buy_name, String buy_status) {
 		super();
 		this.buy_no = buy_no;
 		this.group_no = group_no;
-		this.sell_no = sell_no;
+		this.market_no = market_no;
 		this.member_id = member_id;
 		this.buy_date = buy_date;
 		this.buy_amount = buy_amount;
@@ -43,7 +43,7 @@ public class Payment implements java.io.Serializable {
 
 	@Override
 	public String toString() {
-		return "Payment [buy_no=" + buy_no + ", group_no=" + group_no + ", sell_no=" + sell_no + ", member_id="
+		return "Payment [buy_no=" + buy_no + ", group_no=" + group_no + ", market_no=" + market_no + ", member_id="
 				+ member_id + ", buy_date=" + buy_date + ", buy_amount=" + buy_amount + ", buy_addr=" + buy_addr
 				+ ", buy_tel=" + buy_tel + ", buy_name=" + buy_name + ", buy_status=" + buy_status + "]";
 	}
@@ -64,12 +64,12 @@ public class Payment implements java.io.Serializable {
 		this.group_no = group_no;
 	}
 
-	public int getSell_no() {
-		return sell_no;
+	public int getMarket_no() {
+		return market_no;
 	}
 
-	public void setSell_no(int sell_no) {
-		this.sell_no = sell_no;
+	public void setMarket_no(int market_no) {
+		this.market_no = market_no;
 	}
 
 	public String getMember_id() {

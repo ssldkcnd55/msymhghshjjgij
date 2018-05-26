@@ -42,4 +42,6 @@ public interface AuctionService {
 	int updateAuctionQnA(AuctionQnA auctionqna);
 
 	int updateauctionQnA_Answer(AuctionQnA auctionqna);
+
+	ArrayList<Auction> selectHomeAuctionList();
 }

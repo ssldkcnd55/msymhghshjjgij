@@ -66,4 +66,29 @@ public class QnaServiceImpl implements QnaService{
 		// TODO Auto-generated method stub
 		return qnaDao.updateMainQna(sqlSession,mq);
 	}
+	@Override
+	public int updateMarketAnswer(Market_qna mq) {
+		// TODO Auto-generated method stub
+		return qnaDao.updateMarketAnswer(sqlSession,mq);
+	}
+	@Override
+	public int deleteMarketQnaAnswer(int qanswer_no) {
+		// TODO Auto-generated method stub
+		return qnaDao.deleteMarketQnaAnswer(sqlSession,qanswer_no);
+	}
+	@Override
+	public int updateMarketQna(Market_qna mq) {
+		// TODO Auto-generated method stub
+		return qnaDao.updateMarketQna(sqlSession,mq);
+	}
+	@Override
+	public int deleteMarketQna(int market_qna_no) {
+		// TODO Auto-generated method stub
+		return qnaDao.deleteMarketQna(sqlSession,market_qna_no);
+	}
+	@Override
+	public int deleteMainQna(int main_qna_no) {
+		// TODO Auto-generated method stub
+		return qnaDao.deleteMainQna(sqlSession,main_qna_no);
+	}
 }

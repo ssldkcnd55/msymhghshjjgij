@@ -4,6 +4,47 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="shoppingBasket">
 
+	<select id="selectShoppingBasket" parameterType="String" resultType="ShowBasket">
+		<![CDATA[ 
+		select mk.market_no, mk.MARKET_IMG, mk.MARKET_TITLE, mk.MARKET_PRICE, sb.BUY_AMOUNT
+from market mk, shop_basket sb
+where mk.MARKET_NO=sb.MARKET_NO and sb.MEMBER_ID= #{member_id}
+	]]>
+	</select>
 	
+	<select id="selectBasketCount" parameterType="String" resultType="int">
+	<![CDATA[ 
+	select count(*) from shop_basket where MEMBER_ID= #{member_id}
+		]]>
+	</select>
+	
+	<delete id="deleteSoppingBasket" parameterType="hashmap">
+	
+	delete from SHOP_BASKET where member_id = #{member_id} and market_no in 
 
+	
+	<foreach collection="noList" index="index" item="item" open="(" close=")" separator="," >
+			#{item}
+	</foreach>
+	</delete>
+	
+	
+	<select id="selectBuyAmount" parameterType="Payment" resultType="int">
+	
+	<![CDATA[
+	select count(BUY_AMOUNT) from SHOP_BASKET where MEMBER_ID = #{member_id} and MARKET_NO = #{market_no} 
+	]]>
+	</select>
+	
+	<insert id="insertShoppingBasket" parameterType="Payment">
+	<![CDATA[
+	insert into SHOP_BASKET values(#{member_id},#{market_no},#{buy_amount})
+	]]>
+	</insert>
+	<update id="updateShoppingBasket" parameterType="Payment">
+	<![CDATA[
+	update SHOP_BASKET set BUY_AMOUNT = #{buy_amount} where  member_id=#{member_id} and market_no = #{market_no}
+	]]>
+	</update>
+	
 </mapper>
