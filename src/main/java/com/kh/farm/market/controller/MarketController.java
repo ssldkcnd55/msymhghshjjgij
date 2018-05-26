@@ -10,6 +10,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -25,6 +26,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.kh.farm.auction.model.vo.Auction;
 import com.kh.farm.market.model.service.MarketService;
 import com.kh.farm.market.model.vo.*;
 import com.kh.farm.payment.model.vo.*;
@@ -236,4 +238,58 @@ public class MarketController {
 		int result = marketService.insertMarket_daily(daily);
 		return "forward:/marketDetail.do?market_no="+daily.getMarket_no();
 	}
+	
+	@RequestMapping("homeNewMarketList.do")
+	public void homeNewMarketList(HttpServletResponse response) throws IOException{
+		
+		ArrayList<Market> list= marketService.selectHomeNewMarketList();
+		JSONArray jarr = new JSONArray();
+		
+		for(Market m : list) {
+			//추출한 user를 json 객체에 담기
+			JSONObject jmarket = new JSONObject();
+			jmarket.put("market_title", m.getMarket_title());
+			jmarket.put("market_img",m.getMarket_img());
+			jmarket.put("market_price", m.getMarket_price());
+			jmarket.put("market_no", m.getMarket_no());
+			jarr.add(jmarket);
+			
+		}
+		//전송용 최종 json 객체 선언
+		JSONObject sendJson = new JSONObject();
+		sendJson.put("list", jarr);
+		response.setContentType("application/json; charset=utf-8");
+		PrintWriter out = response.getWriter();
+		out.append(sendJson.toJSONString());
+		out.flush();
+		out.close();
+	}
+	
+	@RequestMapping("homePopularMarketList.do")
+	public void homePopularMarketList(HttpServletResponse response) throws IOException {
+		ArrayList<Market> list= marketService.selectHomePopularMarketList();
+		JSONArray jarr = new JSONArray();
+		
+		for(Market m : list) {
+			//추출한 user를 json 객체에 담기
+			JSONObject jmarket = new JSONObject();
+			jmarket.put("market_title", m.getMarket_title());
+			jmarket.put("market_img",m.getMarket_img());
+			jmarket.put("market_price", m.getMarket_price());
+			jmarket.put("market_no", m.getMarket_no());
+			jarr.add(jmarket);
+			
+		}
+		//전송용 최종 json 객체 선언
+		JSONObject sendJson = new JSONObject();
+		sendJson.put("list", jarr);
+		response.setContentType("application/json; charset=utf-8");
+		PrintWriter out = response.getWriter();
+		out.append(sendJson.toJSONString());
+		out.flush();
+		out.close();
+		
+	}
+		
+	
 }
