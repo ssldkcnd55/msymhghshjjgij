@@ -76,4 +76,13 @@ public class MarketDao {
 		return sqlSession.insert("market.insertMarketDaily",daily);
 	}
 
+	public Review selectReviewDetail(SqlSessionTemplate sqlSession, int review_no) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("market.reviewDetail", review_no);
+	}
+
+	public Daily selectDailyDetail(SqlSessionTemplate sqlSession, int daily_no) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("market.dailyDetail", daily_no);
+	}
 }

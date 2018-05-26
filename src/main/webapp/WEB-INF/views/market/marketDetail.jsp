@@ -219,8 +219,8 @@ function reviewPage(page){
 			
 			 
 			for(var i in jsonObj.list){
-				outValues += "<tr id='hover'><td>"+jsonObj.list[i].review_no+"</td>"
-				+"<td id='QnA_td'><a href='#'>"+jsonObj.list[i].review_title+"</a></td>"
+				outValues += "<tr id='hover'><td>"+jsonObj.list[i].rnum+"</td>"
+				+"<td id='QnA_td'><a href='reviewDeatil.do?review_no="+jsonObj.list[i].review_no+"'>"+jsonObj.list[i].review_title+"</a></td>"
 				+"<td>"+jsonObj.list[i].member_id+"</td><td>"+jsonObj.list[i].review_date+"</td></tr>";
 			}
 			$(".review_table").html(outValues);	
@@ -284,16 +284,16 @@ function dailyPage(){
 						+"<td class='history_right_table_td2' align='left' valign='top'>"
 						+"<span class='history_right_table_span1'>"+jsonObj.list[i].daily_date+"</span>"
 						+"</td></tr><tr><td align='left' class='hi_title'>"+jsonObj.list[i].daily_title+"</td></tr>"
-						+"<tr><td align='left' class='hi_content_right'><div>"+jsonObj.list[i].daily_contents
-						+"<span class='more'>...더보기</span></div></td></tr></tbody></table></td></tr>";
+						+"<tr><td align='left' class='hi_content_right'><a class='aTag' href='marketDailyDetail.do?daily_no="+jsonObj.list[i].daily_no+"'><div>"+jsonObj.list[i].daily_contents
+						+"<span class='more'>...더보기</span></div></a></td></tr></tbody></table></td></tr>";
 				}else{
-					outValues += "<tr></td><td valign='top' class='history_right' align='right'>"
+					outValues += "<tr><td valign='top' class='history_right' align='right'>"
 						+"<table class='history_right_table' cellspacing='0' cellpadding='0'>"
 						+"<tbody><tr><td align='right' class='hi_date' valign='top'><span class='history_right_table_span1'>"+jsonObj.list[i].daily_date+"</span></td>"
 						+"<td rowspan='3' class='history_right_table_td1' ></td>"
 						+"</tr><tr><td align='right' class='hi_title'>"+jsonObj.list[i].daily_title+"</td></tr>"
-						+"<tr><td align='right' class='hi_content_right'><div style='float:right;'>"+jsonObj.list[i].daily_contents
-						+"<span class='more'>...더보기</span></div></td></tr></tbody></table></td><td class='space_right2'></tr>";
+						+"<tr><td align='right' class='hi_content_right'><a class='aTag' href='marketDailyDetail.do?daily_no="+jsonObj.list[i].daily_no+"'><div style='float:right;'>"+jsonObj.list[i].daily_contents
+						+"<span class='more'>...더보기</span></div></a></td></tr></tbody></table></td><td class='space_right2'></tr>";
 				}
 			}
 

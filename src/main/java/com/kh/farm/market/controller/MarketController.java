@@ -57,6 +57,7 @@ public class MarketController {
 	@RequestMapping(value="marketDetail.do")
 	public ModelAndView marketDetail(ModelAndView mv, Market mk) {
 		Market market = marketService.selectMarketInfo(mk.getMarket_no());
+		market.setMarket_intro(market.getMarket_intro().replaceAll("\"", "'"));
 		mv.setViewName("market/marketDetail");
 		mv.addObject("market",market);
 		return mv;
@@ -106,6 +107,7 @@ public class MarketController {
 		
 		for(Review rv : reviewList) {
 			JSONObject jsq = new JSONObject();
+			jsq.put("rnum",rv.getRnum());
 			jsq.put("review_no",rv.getReview_no());
 			jsq.put("review_title", rv.getReview_title());
 			jsq.put("member_id", rv.getMember_id());
@@ -124,6 +126,14 @@ public class MarketController {
 		out.append(sendJson.toJSONString());
 		out.flush();
 		out.close();
+	}
+	@RequestMapping("reviewDeatil.do")
+	public ModelAndView reviewDeatil(ModelAndView mv,@RequestParam() int review_no) {
+		Review review = marketService.selectReviewDetail(review_no);
+		review.setReview_contents(review.getReview_contents().replaceAll("\"", "'"));
+		mv.addObject("review", review);
+		mv.setViewName("market/marketReviewDetail");
+		return mv;
 	}
 	@RequestMapping(value="insertMarketMake.do",method=RequestMethod.POST)
 	public String insertMarket(Market market,HttpServletRequest request,
@@ -209,6 +219,19 @@ public class MarketController {
 		ArrayList<Daily> dailyList = marketService.selectDailyList(market);
 		
 		for (Daily sq : dailyList) {
+			int a = 0;
+			int b = 0;
+			while(a != -1) {
+				a = sq.getDaily_contents().indexOf("<");
+				if(a!=-1) {
+					b = sq.getDaily_contents().indexOf(">");
+					if(b!=-1) {
+						String first = sq.getDaily_contents().substring(0, a);
+						String second = sq.getDaily_contents().substring(b+1);
+						sq.setDaily_contents(first+second);
+					}
+				}
+			}
 			JSONObject jsq = new JSONObject();
 			jsq.put("daily_no", sq.getDaily_no());
 			jsq.put("daily_title", sq.getDaily_title());
@@ -235,5 +258,12 @@ public class MarketController {
 	public String marketDailyMake(Daily daily) {
 		int result = marketService.insertMarket_daily(daily);
 		return "forward:/marketDetail.do?market_no="+daily.getMarket_no();
+	}
+	@RequestMapping("marketDailyDetail.do")
+	public ModelAndView marketDailyDetail(ModelAndView mv,@RequestParam("daily_no")int daily_no ) {
+		Daily daily = marketService.selectDailyDetail(daily_no);
+		mv.addObject("daily",daily);
+		mv.setViewName("market/marketDailyDetail");
+		return mv;
 	}
 }

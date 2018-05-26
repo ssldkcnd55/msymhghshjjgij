@@ -68,7 +68,7 @@ public class QnaController {
 	@RequestMapping("marketQnaDetail.do")
 	public ModelAndView marketQnaDetail(ModelAndView mv,@RequestParam("qna_no") int qna_no,@RequestParam(value="member_id", required=false) String member_id) {
 		Market_qna qna = qnaService.selectQna(qna_no);
-		
+		qna.setMarket_qna_contents(qna.getMarket_qna_contents().replace("\"", "'"));
 		mv.addObject("qna",qna);
 		mv.addObject("member_id", member_id);
 		mv.setViewName("market/marketQnaDetail");
@@ -118,6 +118,7 @@ public class QnaController {
 	@RequestMapping(value="qnaDetail.do")
 	public ModelAndView qnaDetail(ModelAndView mv,@RequestParam("main_qna_no") int qna_no) {
 		MainQna mq = qnaService.selectMainQnaDetail(qna_no);
+		mq.setMain_qna_contents(mq.getMain_qna_contents().replace("\"", "'"));
 		mv.addObject("main_qna",mq);
 		mv.setViewName("qna/qnaDetail");
 		return mv;

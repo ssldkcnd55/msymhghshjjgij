@@ -34,6 +34,9 @@
 	 select count(*) from review where market_no = #{market_no}
 	 ]]>
 	</select>
+	<select id="reviewDetail" parameterType="int" resultType="Review">
+		select * from review where review_no = #{review_no}
+	</select>
 
 <insert id="insertMarket" parameterType="Market" flushCache="true" useGeneratedKeys="true">
 	<![CDATA[
@@ -67,4 +70,7 @@
 		)
 	]]>
 	</insert>
+	<select id="dailyDetail" parameterType="int" resultType="Daily">
+		select * from daily where daily_no = #{daily_no}
+	</select>
 </mapper>

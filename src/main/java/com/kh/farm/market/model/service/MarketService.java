@@ -26,4 +26,8 @@ public interface MarketService {
 
 	int insertMarket_daily(Daily daily);
 
+	Review selectReviewDetail(int review_no);
+
+	Daily selectDailyDetail(int daily_no);
+
 }
