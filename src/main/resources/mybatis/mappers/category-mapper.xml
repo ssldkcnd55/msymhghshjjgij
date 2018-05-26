@@ -21,6 +21,12 @@
 	]]>
 </select>
 
+<select id="selectCategory_name" parameterType="category" resultType="category">
+	<![CDATA[
+		select * from category where category_name = #{category_name}
+	]]>
+</select>
+
 <delete id="deleteCategory_main" parameterType="category">
 	<![CDATA[
 		delete from category where category_main=#{category_main}

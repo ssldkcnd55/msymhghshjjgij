@@ -136,4 +136,30 @@ public class CategoryController {
 		return "에러페이지";
 		}
 	}
+	
+	//ajax 연습ㅂ
+	/*@RequestMapping(value="addCategory_name2.do", method=RequestMethod.POST)
+	public void addCategory_name2(Category category,HttpServletResponse response) throws IOException{
+		
+		int result = categoryService.addCategory_name(category);
+		if(result > 0) {
+			Category resultCategory = categoryService.selectCategory_name(category);
+			
+			if(resultCategory != null) {
+				JSONObject json = new JSONObject();
+				
+				json.put("category_no", resultCategory.getCategory_no());
+				json.put("category_main", resultCategory.getCategory_main());
+				json.put("category_name", resultCategory.getCategory_name());
+				
+				System.out.println(json.toJSONString());
+				response.setContentType("application/json; charset=utf-8;");
+				PrintWriter out = response.getWriter();
+				out.print(json.toJSONString());
+				out.flush();
+				out.close();
+			}
+		}
+		
+	}*/
 }

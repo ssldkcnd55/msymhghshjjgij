@@ -31,6 +31,79 @@ $(function(){
 			+"<th width='10%'>탈퇴여부</th><th width='20%'>경고횟수</th></tr>";
 			
 			for(var i in jsonObj.list){
+				switch(jsonObj.list[i].member_category){
+				case '0' : outValues += "<tr id='hover'><td>"+jsonObj.list[i].rnum+"</td>"
+				+"<td id='Notice_td'><a href='/farm/memberDetail.do?member_id="+jsonObj.list[i].member_id+"'>"+jsonObj.list[i].member_id+"</a></td>"
+				+"<td>"+jsonObj.list[i].member_name+"</td><td>농업인"+jsonObj.list[i].member_category+"</td>"
+				+"<td>"+jsonObj.list[i].member_approval+"</td><td>"+jsonObj.list[i].member_withdraw+"</td>"
+				+"<td>"+jsonObj.list[i].member_warning_count+"</td>"
+				+"</tr>";break;
+				case '1' : outValues += "<tr id='hover'><td>"+jsonObj.list[i].rnum+"</td>"
+				+"<td id='Notice_td'><a href='/farm/memberDetail.do?member_id="+jsonObj.list[i].member_id+"'>"+jsonObj.list[i].member_id+"</a></td>"
+				+"<td>"+jsonObj.list[i].member_name+"</td><td>일반회원"+jsonObj.list[i].member_category+"</td>"
+				+"<td>"+jsonObj.list[i].member_approval+"</td><td>"+jsonObj.list[i].member_withdraw+"</td>"
+				+"<td>"+jsonObj.list[i].member_warning_count+"</td>"
+				+"</tr>";break;
+				case '2' : outValues += "<tr id='hover'><td>"+jsonObj.list[i].rnum+"</td>"
+				+"<td id='Notice_td'><a href='/farm/memberDetail.do?member_id="+jsonObj.list[i].member_id+"'>"+jsonObj.list[i].member_id+"</a></td>"
+				+"<td>"+jsonObj.list[i].member_name+"</td><td>관리자"+jsonObj.list[i].member_category+"</td>"
+				+"<td>"+jsonObj.list[i].member_approval+"</td><td>"+jsonObj.list[i].member_withdraw+"</td>"
+				+"<td>"+jsonObj.list[i].member_warning_count+"</td>"
+				+"</tr>";break;	
+				}
+			}
+			$(".Notice_table").html(outValues);	
+			
+			var startPage= jsonObj.list[0].startPage;
+			var endPage = jsonObj.list[0].endPage;
+			var maxPage = jsonObj.list[0].maxPage;
+			var currentPage = jsonObj.list[0].currentPage;
+			
+			var values ="";
+			if(startPage>5){
+				values+= "<a href='javascript:noticePage("+(startPage-1)+")'>&laquo;</a>" 
+			}else{
+				values+="<a>&laquo;</a>";	
+			}
+			for(var i=startPage;i<=endPage;i++  ){
+				if(i==currentPage){
+					values+= "<a class='active'>"+i+"</a>";
+				}else{
+					values+= "<a href='javascript:noticePage("+i+");'>"+i+"</a>";
+				}
+			}
+			if(endPage<maxPage){
+				values+="<a href='javascript:noticePage("+(endPage+1)+")'>&raquo;</a>";
+				
+			}else{
+				values+="<a>&raquo;</a>";
+			}
+			$(".pagination").html(values);
+			
+		},error: function(request,status,errorData){
+	        alert("error code : " + request.status + "\nmessage" + 
+	                request.responseText + "\nerror" + errorData);
+	       }
+	});
+});
+function noticePage(page){
+	$.ajax({
+		url:"memberList.do",
+		type:"post",
+		data:{
+			page:page
+		},
+		dataType: "JSON",
+		success: function(data){
+			console.log(data);
+			var objStr = JSON.stringify(data);
+			var jsonObj = JSON.parse(objStr);
+			
+			var outValues = "<tr><th width='12%'>번호</th><th width='25%'>id</th><th width='13%'>이름</th>"
+				+"<th width='10%'>분류</th><th width='10%'>승인상태</th>"
+				+"<th width='10%'>탈퇴여부</th><th width='20%'>경고횟수</th></tr>";
+			
+			for(var i in jsonObj.list){
 				outValues += "<tr id='hover'><td>"+jsonObj.list[i].rnum+"</td>"
 				+"<td id='Notice_td'><a href='/farm/memberDetail.do?member_id="+jsonObj.list[i].member_id+"'>"+jsonObj.list[i].member_id+"</a></td>"
 				+"<td>"+jsonObj.list[i].member_name+"</td><td>"+jsonObj.list[i].member_category+"</td>"
@@ -71,66 +144,12 @@ $(function(){
 	                request.responseText + "\nerror" + errorData);
 	       }
 	});
-});
-function noticePage(page){
-	$.ajax({
-		url:"noticeList.do",
-		type:"post",
-		data:{
-			page:page
-		},
-		dataType: "JSON",
-		success: function(data){
-			console.log(data);
-			var objStr = JSON.stringify(data);
-			var jsonObj = JSON.parse(objStr);
-			
-			var outValues = "<tr><th width='12%'>번호</th><th width='50%'>제목</th><th width='13%'>작성자</th><th width='15%'>날짜</th></tr>";
-			
-			for(var i in jsonObj.list){
-				outValues += "<tr id='hover'><td>"+jsonObj.list[i].rnum+"</td>"
-				+"<td id='Notice_td'><a href='/farm/marketNoticeDetail.do?notice_no="+jsonObj.list[i].notice_no+"'>"+jsonObj.list[i].notice_title+"</a></td>"
-				+"<td>운영자</td><td>"+jsonObj.list[i].notice_date+"</td></tr>";
-			}
-			$(".Notice_table").html(outValues);	
-			
-			var startPage= jsonObj.list[0].startPage;
-			var endPage = jsonObj.list[0].endPage;
-			var maxPage = jsonObj.list[0].maxPage;
-			var currentPage = jsonObj.list[0].currentPage;
-			
-			var values ="";
-			if(startPage>5){
-				values+= "<a href='javascript:noticePage("+(startPage-1)+")'>&laquo;</a>" 
-			}else{
-				values+="<a>&laquo;</a>";	
-			}
-			for(var i=startPage;i<=endPage;i++  ){
-				if(i==currentPage){
-					values+= "<a class='active'>"+i+"</a>";
-				}else{
-					values+= "<a href='javascript:noticePage("+i+");'>"+i+"</a>";
-				}
-			}
-			if(endPage<maxPage){
-				values+="<a href='javascript:noticePage("+(endPage+1)+")'>&raquo;</a>";
-				
-			}else{
-				values+="<a>&raquo;</a>";
-			}
-			$(".pagination").html(values);
-			
-		},error: function(request,status,errorData){
-	        alert("error code : " + request.status + "\nmessage" + 
-	                request.responseText + "\nerror" + errorData);
-	       }
-	});
 }
 </script>
 <link rel="stylesheet" type="text/css" href="/farm/resources/css/style.css" />
 <link rel="stylesheet" type="text/css" href="/farm/resources/css/notice.css" />
 <meta charset="UTF-8">
-<title>Farm 공지사항</title>
+<title>회원관리</title>
 </head>
 <body>
 

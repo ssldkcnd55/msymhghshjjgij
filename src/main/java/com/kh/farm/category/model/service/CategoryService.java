@@ -20,4 +20,8 @@ public interface CategoryService {
 	int addCategory_main(String category_main);
 
 	int addCategory_name(Category category);
+
+	Category selectCategory_name(Category category);
+
+	
 }
