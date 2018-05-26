@@ -28,10 +28,13 @@ function selectDelete()
 function controlCount(market_no, operator) {
 	var mcount = Number($('#' + market_no + '_count').val());
 	var op = Number(operator);
-	if (mcount + op < 0)
-		$('#' + market_no + '_count').val(0);
-	else
+	if (mcount + op < 1){
+		deleteConfirmBasket(market_no)
+		//$('#' + market_no + '_count').val(1);
+		}
+	else{
 		$('#' + market_no + '_count').val(mcount + op);
+		}
 	setPrice();
 }
 function numberWithComma(a) {// 숫자 천단위 콤마

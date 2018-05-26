@@ -54,7 +54,7 @@
                   <td>
                   <div class="amount_box" >
                      <a href="javascript: controlCount(${basket.market_no},+1);"><div class="operator">+</div></a>
-                     <input type="number" id="${basket.market_no}_count" class="count" value="${basket.buy_amount }" min="0">
+                     <input type="number" id="${basket.market_no}_count" class="count" value="${basket.buy_amount }" min="1">
                     <a href="javascript: controlCount(${basket.market_no},-1);"><div class="operator">-</div></a>
                  </div>
                   </td>

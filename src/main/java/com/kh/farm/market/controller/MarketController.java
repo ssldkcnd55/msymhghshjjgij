@@ -41,7 +41,6 @@ public class MarketController {
 	{
 		mv.setViewName("payment/payment");
 		mv.addObject("payment",pm);
-		System.out.println(pm);
 		return mv;
 	}
 
