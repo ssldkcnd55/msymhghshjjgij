@@ -74,7 +74,8 @@ $(function(){
 	         
 		},
 		error : function(request, status, errorData) {
-	         alert("error code : " + request.status + "\n"
+			console.log("msg_box.jsp/ onload")
+	         console.log("error code : " + request.status + "\n"
 	               + "message : " + request.responseText
 	               + "\n" + "error : " + errorData);
 	      }

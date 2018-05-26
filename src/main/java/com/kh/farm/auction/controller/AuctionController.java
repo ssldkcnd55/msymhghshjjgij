@@ -304,7 +304,7 @@ public class AuctionController {
 		return "redirect:/moveauctionQnADetail.do?auction_qna_no="+auctionqna.getAuction_qna_no();
 		
 	}
-	
+	//경매 판매자 QnA 답변 등록
 	@RequestMapping(value="updateauctionQnA_Answer.do" ,method=RequestMethod.POST)
 	public String insertauctionQnA_Answer(AuctionQnA auctionqna) {
 		System.out.println("답글내용 : "+auctionqna.getAuction_qna_answer()+" / "+"댓글 시간 : "+auctionqna.getAuction_qna_answer_date());
@@ -340,5 +340,26 @@ public class AuctionController {
 		out.close();
 	}
 	
+	/*경매 판매자 QnA답변 수정*/
+	@RequestMapping(value="seller_QnAanswer_Modify.do")
+	public void seller_QnAanswer_Modify(HttpServletResponse response,
+			@RequestParam(value="auction_qna_no")int auction_qna_no)throws IOException{
+		int seller_QnAanswer_Modify = auctionService.updateSellerAuctionQnAanswer(auction_qna_no);
+		System.out.println("seller_QnAanswer_Modify : "+seller_QnAanswer_Modify);
+		AuctionQnA result = auctionService.selectseller_QnAanswer(auction_qna_no);
+	
+			 JSONObject json = new JSONObject();
+			 json.put("auction_qna_answer", result.getAuction_qna_answer());
+			 json.put("auction_qna_answer_date", result.getAuction_qna_answer_date().toString());
+			 System.out.println(json.toJSONString());
+		
+        response.setContentType("application/json; charset=utf-8;");
+        PrintWriter out = response.getWriter();
+        out.print(json.toJSONString());
+        out.flush();
+        out.close();
+
+		
+	}
 	
 }

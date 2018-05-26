@@ -19,6 +19,8 @@ public interface ShoppingBasketService {
 
 	void updateShoppingBasket(Payment pm);
 
+	void updateBasketAmount(ShoppingBasket sb);
+
 	
 
 	
