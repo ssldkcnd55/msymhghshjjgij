@@ -1,4 +1,20 @@
 @charset "UTF-8";
+.QnA_comment_title{
+	width:95%;
+	height:auto;
+	border: 3px solid #808080;
+	margin-bottom:30px;
+	font-size:15pt;
+	padding:5px 20px 20px 20px;
+}
+
+.QnA_comment_write{
+	width:100%;
+	height:auto;
+	border-top: 1px solid #c0c0c0;
+	
+}
+
 
 .commont_modify2{
 	padding-top:15px;
@@ -9,12 +25,13 @@
 }
 
 .commont_modify2 td:nth-child(1){
-	padding-left:45px;
+	padding-left:10px;
+	padding-right:30px;
 	width:15%;
 }
 
 .commont_modify2 td:nth-child(2){
-	width:65%;
+	width:60%;
 }
 
 .commont_modify2 td:nth-child(3){

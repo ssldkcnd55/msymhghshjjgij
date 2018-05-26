@@ -34,6 +34,9 @@
 		location.href = "qnaUpdateMove.do?main_qna_title=${main_qna.main_qna_title}"+
 				"&main_qna_contents=${main_qna.main_qna_contents}&main_qna_no=${main_qna.main_qna_no}";
 	}
+	function deleteQna(){
+		location.href = "mainQnaDelete.do?main_qna_no=${main_qna.main_qna_no}";
+	}
 </script>
 </head>
 <body>
@@ -60,7 +63,7 @@
 						<div class="QnA_modify">
 							<button onclick="move_QnA_modify();">수정</button>
 							&nbsp;
-							<button>삭제</button>
+							<button onclick="deleteQna();">삭제</button>
 						</div>
 						<div class="QnA_note">
 							<p>${main_qna.main_qna_contents }</p>

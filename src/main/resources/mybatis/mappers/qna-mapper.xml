@@ -37,12 +37,16 @@
 	</select>
 	
 	<update id="updateAnswer" parameterType="MainQna" >
-	update main_qna set main_qna_answer =#{main_qna_answer} where main_qna_no= #{main_qna_no}
+	<![CDATA[
+	update main_qna set main_qna_answer =#{main_qna_answer},main_qna_answer_date = sysdate where main_qna_no= #{main_qna_no}
+	]]>  
 	</update>
 	
-	<delete id="deleteQnaAnswer" parameterType="int" flushCache="true">
-	delete from main_qna where main_qna_no = #{qanswer_no}
-	</delete>
+	<update id="deleteQnaAnswer" parameterType="int" >
+	<![CDATA[
+		update main_qna set main_qna_answer = null,main_qna_answer_date = null where main_qna_no= #{qanswer_no}
+	]]>  
+	</update>
 	
 	<insert id="insertMainQna" parameterType="MainQna" flushCache="true" useGeneratedKeys="true" >
 	
@@ -54,6 +58,29 @@
 	
 	
 	<update id="updateMainQna" parameterType="MainQna">
+	<![CDATA[
 	update main_qna set main_qna_title =#{main_qna_title}, main_qna_contents =#{main_qna_contents} where main_qna_no = #{main_qna_no}
+	]]>
 	</update>
+	<update id="updateMarketAnswer" parameterType="Market_qna" >
+	<![CDATA[
+		update market_qna set market_qna_answer =#{market_qna_answer}, market_qna_answer_date = sysdate where market_qna_no= #{market_qna_no}
+	]]> 
+	</update>
+	<update id="deleteMarketQnaAnswer" parameterType="int" >
+	<![CDATA[
+		update market_qna set market_qna_answer = null,market_qna_answer_date = null where market_qna_no= #{qanswer_no}
+	]]>
+	</update>
+	<update id="updateMarketQna" parameterType="Market_qna">
+	<![CDATA[
+		update market_qna set market_qna_title = #{market_qna_title}, market_qna_contents = #{market_qna_contents} where market_qna_no = #{market_qna_no}
+	]]>
+	</update>
+	<delete id="deleteMarketQna" parameterType="int">
+		delete from market_qna where market_qna_no = #{market_qna_no}
+	</delete>
+	<delete id="deleteMainQna" parameterType="int">
+		delete from main_qna where main_qna_no = #{main_qna_no}
+	</delete>
 </mapper>

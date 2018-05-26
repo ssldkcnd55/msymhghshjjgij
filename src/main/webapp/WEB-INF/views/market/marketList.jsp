@@ -60,7 +60,7 @@
 	
 		<div id="container">
         	<div class="inner-wrap"> 
-        	<c:if test="${loginUser.member_category eq '1'}">
+        	<c:if test="${loginUser.member_category eq '0'}">
         		<button class="market_write" onclick="marketMake();">장터 등록</button>
         	</c:if>
         	<div class="left_box">

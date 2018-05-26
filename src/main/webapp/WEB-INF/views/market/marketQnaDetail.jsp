@@ -15,21 +15,27 @@
 
 <script type="text/javascript">
 /* 댓글 수정 */
-	 function comment_modify(num){
-		$(".galcomUpdate"+i).after(
-				
-				);
-		
+	 function comment_modify() {
+		$(".QnA_comment").html("<form action='/farm/marketQnaAnswer.do' method='post'><input type='hidden' value='${qna.market_qna_no }'"+
+					"name='market_qna_no'><input type='hidden' value='${member_id }' name='member_id'><div class='QnA_comment_top_writer'>"+
+					"<textarea class='answerArea' name='market_qna_answer'>${qna.market_qna_answer}</textarea>"+
+					"<input type='submit' class='answerBtn' value='작성'></div></form>");
 		
 	}
 	
+	function comment_delete(){
+		location.href ="deleteMarketQnaAnswer.do?market_qna_no=+${qna.market_qna_no}&member_id=${member_id}";
+	}
+
 	/* QnA수정 버튼 */
-	function move_QnA_modify(){
-		location.href="/farm/moveQnA_write.do";
+	function move_QnA_modify() {
+		location.href = "marketQnaUpdateMove.do?market_qna_title=${qna.market_qna_title}"+
+				"&market_qna_contents=${qna.market_qna_contents}&market_qna_no=${qna.market_qna_no}"+
+				"&member_id=${member_id}";
 	}
-	
-	
-	
+	function deleteQna(){
+		location.href = "marketQnaDelete.do?market_qna_no=${qna.market_qna_no}&market_no=${qna.market_no}";
+	}
 </script>
 
 
@@ -54,11 +60,12 @@
 								<td>${qna.market_qna_question_date }</td>
 							</tr>
 						</table>
-						<div class="QnA_modify">
-							<button onclick="move_QnA_modify();">수정</button>
-							&nbsp;
-							<button>삭제</button>
-						</div>
+						<c:if test="${loginUser.member_id eq qna.member_id}">
+							<div class="QnA_modify">
+								<button onclick="move_QnA_modify();">수정</button>&nbsp;
+								<button onclick="deleteQna();">삭제</button>
+							</div>
+						</c:if>
 						<div class="QnA_note">
 							<p>${qna.market_qna_contents }</p>
 						</div>
@@ -67,26 +74,46 @@
 					<!-- QnA_full  -->
 
 
-					<div class="QnA_comment_title">
-						<h3>답변</h3>
-					</div>
-					<div class="QnA_comment">
-						<div class="QnA_comment_top_writer">
-							<div class="QnA_comment_writer">
-								<img alt="" src="/Farm/img/user.png">&nbsp; 
-								<span>운영자</span>&nbsp;
-								<span>${qna.market_qna_answer_date}</span>&nbsp; 
-								<span  onclick="comment_modify">수정</span>&nbsp;
-								<span onclick="comment_delete">삭제</span>&nbsp;
+					<c:if test="${empty qna.market_qna_answer}">
+						<c:if test="${loginUser.member_id eq member_id}">
+							<div class="QnA_comment_title">
+								<h3>답변</h3>
 							</div>
-							<p>
-							${qna.market_qna_answer }
-							</p>
+							<div class="QnA_comment">
 
+								<form action="/farm/marketQnaAnswer.do" method="post">
+									<input type="hidden" value="${qna.market_qna_no }" name="market_qna_no">
+									<input type="hidden" value="${member_id }" name="member_id">
+									<div class="QnA_comment_top_writer">
+										<textarea class="answerArea" name="market_qna_answer"></textarea>
+										<input type="submit" class="answerBtn" value="작성">
+
+									</div>
+								</form>
+							</div>
+						</c:if>
+					</c:if>
+					<c:if test="${!empty qna.market_qna_answer}">
+
+						<div class="QnA_comment_title">
+							<h3>답변</h3>
 						</div>
-						
-						
-					</div>
+						<div class="QnA_comment">
+							<div class="QnA_comment_top_writer">
+								<div class="QnA_comment_writer">
+									<img alt="" src="/Farm/img/user.png">&nbsp; <span>${member_id }</span>&nbsp;
+									<!-- 아이디 -->
+									<span>${qna.market_qna_answer_date }</span>&nbsp;
+									<!-- 작성일 -->
+									<c:if test="${loginUser.member_id eq member_id}">
+										<span onclick="comment_modify();">수정</span>&nbsp; <span
+											onclick="comment_delete();">삭제</span>&nbsp;
+											</c:if>
+								</div>
+								<p>${qna.market_qna_answer}</p>
+							</div>
+						</div>
+					</c:if>
 
 
 				</div>
