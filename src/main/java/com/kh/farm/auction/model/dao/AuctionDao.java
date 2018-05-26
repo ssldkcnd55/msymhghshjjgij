@@ -94,4 +94,14 @@ public class AuctionDao {
 		return sqlSession.update("auction.updateauctionQnA_Answer",auctionqna);
 	}
 
+
+	public ArrayList<Auction> selectHomeAuctionList(SqlSessionTemplate sqlSession) {
+		// TODO Auto-generated method stub
+		List<Auction> list = sqlSession.selectList("auction.selectHomeAuctionList");
+		return (ArrayList<Auction>)list;
+	}
+
+
+	
+
 }

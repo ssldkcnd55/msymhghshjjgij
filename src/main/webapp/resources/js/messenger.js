@@ -96,8 +96,7 @@ function searchMember() {
 						for ( var i in c.ml) {
 
 							var searchedMember = "<table class='searchedMember'><tr><td rowspan='2'><img src='/farm/resources/upload/memberUpload/"
-									+ decodeURIComponent((c.ml[i].member_img)
-											.replace(/\+/g, '%20'))
+									+ decodeURIComponent((c.ml[i].member_img).replace(/\+/g, '%20'))
 									+ "'></td><td class='searchMemberNametd'><span class='searchMemberName'>"
 									+ decodeURIComponent((c.ml[i].member_name)
 											.replace(/\+/g, '%20'))

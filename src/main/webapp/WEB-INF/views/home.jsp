@@ -26,7 +26,63 @@
 	src="/farm/resources/js/jquery-3.3.1.min.js"></script>
 <script type="text/javascript" src="/farm/resources/js/modernizr.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
+<script>
+$(function(){
+	$.ajax({
+		url:"homeAuctionList.do",
+		type:"post",
+	dataType: "JSON",
+	success: function(obj){
+		var objStr = JSON.stringify(obj);
+		var jsonObj = JSON.parse(objStr);
+		var count=1;
+		var outValues1 ="<div class='item active' align='center'><table class='auction_table'>"
+		+"<tr><th>상품</th><th>가격</th></tr>";
+		
+		var outValues2 ="<div class='item' align='center'><table class='auction_table'>"
+			+"<tr><th>상품</th><th>가격</th></tr>";
+			
+		var outValues3 ="<div class='item' align='center'><table class='auction_table'>"
+				+"<tr><th>상품</th><th>가격</th></tr>";
+		
+		for(var i in jsonObj.list){
+			if(i<4){
+				outValues1 += "<tr><td><div class='auction_img' style='background-image: url(\"/farm/resources/images/"+jsonObj.list[i].auction_img+"\");'></div>"
+				+"<div>"+jsonObj.list[i].auction_title+"</div></td><td>현재가  <span class='currentPrice'>"+jsonObj.list[i].auction_startprice+"</span>원<br><span class='directPrice'>즉구가 "+
+				jsonObj.list[i].auction_directprice+"원</span></td></tr>";
+			}else if(i<8){
+				outValues2 += "<tr><td><div class='auction_img' style='background-image: url(\"/farm/resources/images/"+jsonObj.list[i].auction_img+"\");'></div>"
+				+"<div>"+jsonObj.list[i].auction_title+"</div></td><td>현재가  <span class='currentPrice'>"+jsonObj.list[i].auction_startprice+"</span>원<br><span class='directPrice'>즉구가 "+
+				jsonObj.list[i].auction_directprice+"원</span></td></tr>";
+			}else if (i<12){
+				outValues3 += "<tr><td><div class='auction_img' style='background-image: url(\"/farm/resources/images/"+jsonObj.list[i].auction_img+"\");'></div>"
+				+"<div>"+jsonObj.list[i].auction_title+"</div></td><td>현재가  <span class='currentPrice'>"+jsonObj.list[i].auction_startprice+"</span>원<br><span class='directPrice'>즉구가 "+
+				jsonObj.list[i].auction_directprice+"원</span></td></tr>";
+			}
+			count++;
+		
+		}
+		
+		outValues1 += "</table></div>";
+		outValues2 += "</table></div>";
+		outValues3 += "</table></div>";
+		if(count == 1){
+			$(".carousel-inner").html("등록된 경매가 없습니다.");
+		}else if(count < 6){
+			$(".carousel-inner").html(outValues1);
+		}else if(count <10){
+			$(".carousel-inner").html(outValues1+outValues2);
+		}else{
+			$(".carousel-inner").html(outValues1+outValues2+outValues3);
+		}
+		
+	},error: function(request,status,errorData){
+        alert("error code : " + request.status + "\nmessage" + 
+                request.responseText + "\nerror" + errorData);
+       }
+	});
+});
+</script>
 </head>
 
 <body>
@@ -129,8 +185,7 @@
 
 								<!-- Wrapper for slides -->
 								<div class="carousel-inner">
-								
-									<div class="item active" align="center">
+									<!-- <div class="item active" align="center">
 										<table class="auction_table">
 											<tr>
 
@@ -257,7 +312,7 @@
 
 
 										</table>
-									</div>
+									</div> -->
 								</div>
 
 								<!-- Left and right controls -->
