@@ -99,4 +99,14 @@ public class ShoppingBasketController {
 		json.put("bl", jarr);
 		return json.toJSONString();
 	}
+	
+	@RequestMapping(value="updateBasketAmount.do",method=RequestMethod.POST)
+	public void updateBasketAmount(HttpSession session,ShoppingBasket sb,HttpServletResponse response) throws IOException
+	{
+		sb.setMember_id( ((Member)session.getAttribute("loginUser")).getMember_id());
+		shoppingBasketService.updateBasketAmount(sb);
+		PrintWriter out = response.getWriter();
+		out.flush();
+		out.close();
+	}
 }

@@ -48,7 +48,7 @@
                </tr>
                <c:forEach var="basket" items="${basketList}">
                 <tr class="hover">
-                  <td><input type="checkbox" name="checkItem" value="${basket.market_no}"></td>
+                  <td><input class="checkItem" type="checkbox" name="checkItem" value="${basket.market_no}"></td>
                   <td><center><a href="marketDetail.do?market_no=${basket.market_no}"><div class="images" style="background-image: url('/farm/resources/upload/marketUpload/${basket.market_img}');"></div></a></center></td>
                   <td id="Notice_td"><a href="marketDetail.do?market_no=${basket.market_no}">${basket.market_title }</a></td>
                   <td>
@@ -106,7 +106,7 @@
            <br><br><br><br><br><br><br>
         <div class="twobuttons">
         <a href="marketList.do"><div class="tbutton more">장터 더보기</div></a>
-        <a href="#"><div class="tbutton payment">주문결제</div></a>    
+        <a href="javascript: clickPayment()"><div class="tbutton payment">주문결제</div></a>    
         </div>
          </div>
        

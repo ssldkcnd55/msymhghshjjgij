@@ -86,7 +86,8 @@ function loadListPage()
 
       },
       error : function(request, status, errorData) {
-         alert("error code : " + request.status + "\n"
+    	  console.log("msg_box.js / loadListPage()");
+         console.log("error code : " + request.status + "\n"
                + "message : " + request.responseText
                + "\n" + "error : " + errorData);
       }

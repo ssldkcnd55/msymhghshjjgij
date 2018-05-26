@@ -42,6 +42,11 @@ public class ShoppingBasketDao {
 		return sqlSession.update("shoppingBasket.updateShoppingBasket", pm);
 	}
 
+	public int updateBasketAmount(SqlSessionTemplate sqlSession, ShoppingBasket sb) {
+		
+		return sqlSession.update("shoppingBasket.updateBasketAmount", sb);
+	}
+
 	
 
 }

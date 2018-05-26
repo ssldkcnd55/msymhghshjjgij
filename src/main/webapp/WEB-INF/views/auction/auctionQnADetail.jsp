@@ -16,18 +16,64 @@
 
 
 <script type="text/javascript">
-/* 댓글 수정 */
+	/*  댓글 수정 
 	 function comment_modify(num){
 		$(".galcomUpdate"+i).after(
 				
 				);
-		
-		
-	}
+	} */
 	
 	/* QnA수정 버튼 */
 	function moveAuctionQnAModify(){
 		location.href="/farm/moveAuctionQnAModify.do?auction_qna_no=${auctionqna.auction_qna_no}";
+	}
+	
+	
+	function auction_comment(){
+		$(".QnA_comment_title").remove(); 
+		$(".remove").append(
+				"<div class='QnA_comment_title'><div class='more'>"+
+				"<table class='QnA_MODIFY2'><tr><td style='width:90%'>답글</td><td style='width:5%'><button onclick='seller_QnAanswer_Modify();'>수정</button></td><td style='width:5%'><button>삭제</button></td></tr></table>"+
+				"<div class='QnA_comment_write'>"+
+				"<table class='commont_modify3'><tr>"+
+				"<td>${loginUser.member_id}</td></tr>"+
+				"<tr><td>${auctionqna.auction_qna_answer}</td></tr>"+
+				"</tr></table></form></div></div></div>"
+		);
+	}
+	
+	/* 수정 버튼 누르면 수정할수 있게 열림 */
+	function seller_QnAanswer_Modify(){
+		$('.more').remove();
+		$(".QnA_comment_title").append(
+				"<table class='QnA_MODIFY2'><tr><td style='width:90%'>답글</td><td style='width:5%'><button onclick='seller_QnAanswer_Modify();'>수정</button></td><td style='width:5%'><button>삭제</button></td></tr></table>"+
+				"<div class='QnA_comment_write'>"+
+				"<table class='commont_modify2'><tr>"+
+				"<td>${loginUser.member_id}</td>"+
+				"<td><textarea rows='5' cols='85' name='auction_qna_answer'>${auctionqna.auction_qna_answer}</textarea></td>"+
+				"<td><input type='button' value='확인' onclick='qna_answer();' class='commont_modify2_button' /></td>"+
+				"</tr></table></form></div></div>"
+		);
+	}
+	
+	/* 판매자 QnA 답글 수정 버튼 */
+	function qna_answer(){
+		$.ajax({
+			url:"seller_QnAanswer_Modify.do",
+			data:{auction_qna_no:${auctionqna.auction_qna_no},
+				auction_qna_answer:${auctionqna.auction_qna_answer}
+			},
+			 datatype:"json",
+			 succes:function(data){
+				 var jsonStr = JSON.stringify(data);
+		         var json = JSON.parse(jsonStr);
+		         $(".commont_modify3").html(
+		        		"<td>${loginUser.member_id}</td><td>json.auction_qna_answer_date</td></tr>"+
+		 				"<tr><td>json.auction_qna_answer</td></tr>"+
+		 				"</tr></table></form></div></div>" 
+		         );
+			 }
+		});
 	}
 </script>
 </head>
@@ -62,28 +108,28 @@
 						<br> <br>
 					</div>
 					<!-- QnA_full  -->
-
-
+					
+					<div class="remove">
 					<div class="QnA_comment_title">
-						<h3>댓글</h3>
+						<p>답글</p>
+					<div class="QnA_comment_write">
+					<form action="updateauctionQnA_Answer.do" method="post">
+					<input type="hidden" name="auction_qna_no" value="${auctionqna.auction_qna_no}">
+					<table class="commont_modify2">
+						<tr>
+							<td>${loginUser.member_id}</td>
+							<td><textarea rows="5" cols="85" name="auction_qna_answer"></textarea></td>
+							<td><input type="submit" value="등록" onclick="auction_comment();"
+								class="commont_modify2_button" /></td>
+
+						</tr>
+					</table>
+					</form>
 					</div>
-					<div class="QnA_comment">
-
-						<div class="QnA_comment_top_writer">
-							<div class="QnA_comment_writer">
-								<img alt="" src="/Farm/img/user.png">&nbsp; 
-								<span>아이디</span>&nbsp;
-								<span>2018-05-14</span>&nbsp; 
-								<span  onclick="comment_modify">수정</span>&nbsp;
-								<span onclick="comment_delete">삭제</span>&nbsp;
-							</div>
-							<p>
-							안녕하세요. 사랑하는 고객님, 마켓컬리 대표 김슬아입니다. 마켓컬리와 함께 따뜻한 연말 보내시길
-							바랍니다. 오늘은 마켓컬리의 환불 정책과, 이와 관련한 후기게시판의 용도에 대해서 설명 드리고자 합니다.
-							</p>
-
-						</div>
-						
+					
+					</div><!-- remove -->
+					</div><!-- QnA_comment_title -->
+					<%-- <div class="QnA_comment">
 						<div class="QnA_comment_top_writer">
 							<div class="QnA_comment_writer">
 								<img alt="" src="/Farm/img/user.png">&nbsp; 
@@ -107,7 +153,7 @@
 							</table>
 							</form>
 						</div>
-					</div>
+					</div> --%>
 
 
 				</div>

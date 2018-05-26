@@ -102,6 +102,16 @@ public class AuctionDao {
 	}
 
 
+	public int updateSellerAuctionQnAanswer(SqlSessionTemplate sqlSession, int auction_qna_no) {
+		return sqlSession.update("auction.updateSellerAuctionQnAanswer",auction_qna_no);
+	}
+
+
+	public AuctionQnA selectseller_QnAanswer(SqlSessionTemplate sqlSession, int auction_qna_no) {
+		return sqlSession.selectOne("auction.selectseller_QnAanswer",auction_qna_no);
+	}
+
+
 	
 
 }

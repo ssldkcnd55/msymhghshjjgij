@@ -2,6 +2,23 @@
  * 
  */
 var delete_no=[];
+
+
+function clickPayment()
+{	var buy_no=[];
+	$('[name=checkItem]').each(function() {
+		if ($(this).is(":checked") == true) {
+			buy_no.push($(this).val()); 
+		}
+	});
+	//console.log(buy_no.toString() )
+	
+	if(buy_no.length>0)
+	{
+	location.href= "makePayment.do?buy_no="+buy_no.toString();
+	}
+}
+
 function deleteConfirmBasket(market_no)
 {
 //confirm("해당 상품을 장바구니에서 삭제 하시겠습니까?");
@@ -33,7 +50,21 @@ function controlCount(market_no, operator) {
 		//$('#' + market_no + '_count').val(1);
 		}
 	else{
-		$('#' + market_no + '_count').val(mcount + op);
+		$.ajax({
+			url:"updateBasketAmount.do",
+			type:"post",
+			data:{
+				'market_no':market_no,
+				'buy_amount':mcount+op },
+			success:function(data){
+				$('#' + market_no + '_count').val(mcount + op);
+			},
+			error:function(){
+				console.log("ShoppingBasket.js / controlCount()");
+			}
+	
+		});
+		
 		}
 	setPrice();
 }
@@ -132,7 +163,8 @@ function deleteBasket()
 			
 		},
 		error: function(request,status,errorData){
-            alert("error code : " + request.status + "\nmessage" + 
+			console.log("ShoppingBasket.js / deleteBasket();")
+            console.log("error code : " + request.status + "\nmessage" + 
                     request.responseText + "\nerror" + errorData);
            }
 	});
