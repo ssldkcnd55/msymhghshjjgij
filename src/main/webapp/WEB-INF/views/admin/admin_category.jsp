@@ -27,7 +27,7 @@
        	
 		<!--  -->
 			<h2>카테고리 관리</h2>
-			<div class="category_top" >
+			<div class="category_top">
 				<button class="big_add" onclick="add_category_big()">대분류 추가</button>
 			</div>
 			
@@ -61,7 +61,7 @@
 	$.ajax({
 		url:"category_big.do" ,
 		type: "post",
-		dateType: "json",
+		dataType: "json",
 		success: function(obj){
 			console.log(obj);
 			var jsonStr = JSON.stringify(obj);
@@ -75,10 +75,11 @@
 				+'<div class="panel" id="'+json.big[i].category_main+'1" name="'+json.big[i].category_main+'"></div>'
 			}
 			$('.category_list').append(category_big);
+			//소분류 출력
 			$.ajax({
 				url:"category_name.do" ,
 				type: "post",
-				dateType: "json",
+				dataType: "json",
 				success: function(obj){
 					console.log(obj);
 					var jsonStr = JSON.stringify(obj);
@@ -151,12 +152,28 @@
 		console.log($(str).closest('div').attr('name'));
 		var main = $(str).closest('div').attr('name');
 		var input = prompt('소분류 카테고리의 이름을 적으세요.');
+		
+		/* $.ajax({
+			url:"addCategory_name2.do",
+			data:{category_name:input,category_main:main},
+			type:"post",
+			datatype:"json",
+			succes:function(data){
+				 var jsonStr = JSON.stringify(data);
+				var json = JSON.parse(jsonStr);
+				alert("성공!");
+				$("#test").html("<h1>"+json.category_name+"</h1>");
+			}
+		}); */
+		
+		
+		
 		if(input == null) {
 			return false;
 		}else{
 			location.href='addCategory_name.do?category_name='+input+"&category_main="+main;
 		
-		}
+		} 
 	}
 	/* 리스트 열림 */
 	function toggleList() {

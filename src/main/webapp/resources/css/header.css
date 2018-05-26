@@ -6,7 +6,7 @@ html, body { margin:0; padding:0; width:100%;}
 
 img{border:0}
 #header{    position: relative;}
-#top_line {width:100%; height:10px; background-color:#462114;}
+/* #top_line {width:100%; height:10px; background-color:#462114;} */
 #wrap{width:100%; position: relative;}
 
 .userMenu{

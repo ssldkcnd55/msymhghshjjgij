@@ -183,6 +183,10 @@ public class MemberController {
 			json.put("member_approval", m.getMember_approval());
 			json.put("member_withdraw", m.getMember_withdraw());
 			json.put("member_warning_count", m.getMember_warning_count());
+			json.put("startPage", startPage);
+			json.put("endPage", endPage);
+			json.put("maxPage", maxPage);
+			json.put("currentPage",currentPage);
 			jarr.add(json);
 		}
 		
