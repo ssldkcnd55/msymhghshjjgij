@@ -233,7 +233,7 @@ public class AuctionController {
 		/*System.out.println("Auction_no : "+auctionqna.getAuction_no()+" / "+"tilte : "+auctionqna.getAuction_qna_title()+"member_id : "+auctionqna.getMember_id()
 		+" / "+"note : "+auctionqna.getAuction_qna_contents()+" / "+"qna_no : "+auctionqna.getAuction_qna_no());*/
 		int insertAuctionQnAMake = auctionService.insertAuctionQnAMake(auctionqna);
-		System.out.println("insertAuctionQnAMake : "+insertAuctionQnAMake );
+		/*System.out.println("insertAuctionQnAMake : "+insertAuctionQnAMake );*/
 		return "redirect:/AuctionDetail.do?auction_no="+at_no;
 	}
 	
@@ -246,7 +246,7 @@ public class AuctionController {
 		/*System.out.println("list : "+list.toString());*/
 		int limitPage = 10;
 		int listCount = auctionService.selectAuctionQnACount(auction);
-		System.out.println("listCount : "+listCount);
+		/*System.out.println("listCount : "+listCount);*/
 		int maxPage=(int)((double)listCount/limitPage+0.9); //ex) 41개면 '5'페이지나와야되는데 '5'를 계산해줌
 		int startPage=((int)((double)currentPage/5+0.8)-1)*5+1;
 		int endPage=startPage+5-1;
@@ -306,9 +306,10 @@ public class AuctionController {
 	}
 	//경매 판매자 QnA 답변 등록
 	@RequestMapping(value="updateauctionQnA_Answer.do" ,method=RequestMethod.POST)
-	public String insertauctionQnA_Answer(AuctionQnA auctionqna) {
+	public String updateauctionQnA_Answer(AuctionQnA auctionqna) {
 		System.out.println("답글내용 : "+auctionqna.getAuction_qna_answer()+" / "+"댓글 시간 : "+auctionqna.getAuction_qna_answer_date());
 		int updateauctionQnA_Answer = auctionService.updateauctionQnA_Answer(auctionqna);
+		
 		System.out.println("updateauctionQnA_Answer :"+updateauctionQnA_Answer);
 		return "redirect:/moveauctionQnADetail.do?auction_qna_no="+auctionqna.getAuction_qna_no();
 		
@@ -341,7 +342,7 @@ public class AuctionController {
 	}
 	
 	/*경매 판매자 QnA답변 수정*/
-	@RequestMapping(value="seller_QnAanswer_Modify.do")
+	@RequestMapping(value="seller_QnAanswer_Modify.do",method=RequestMethod.POST)
 	public void seller_QnAanswer_Modify(HttpServletResponse response,
 			@RequestParam(value="auction_qna_no")int auction_qna_no)throws IOException{
 		int seller_QnAanswer_Modify = auctionService.updateSellerAuctionQnAanswer(auction_qna_no);
