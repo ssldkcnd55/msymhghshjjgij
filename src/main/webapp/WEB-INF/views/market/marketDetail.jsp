@@ -31,25 +31,24 @@ $(function(){
 ///최근 본 상품 쿠키 (현준)///
  $(function(){
 
-	
 		var time = new Date();
 		time.setDate(time.getDate() + 7);
 		var oldtime = new Date();
 		oldtime.setDate(oldtime.getDate() - 7);
 		var decodedCookie = decodeURIComponent(document.cookie);
 		var ca = decodedCookie.split(';');
-
-		if (document.cookie.indexOf(  ${market.market_no} + "="+ ${market.market_no} + "a") == -1) {
+		var market_no= $('#market_no').val();
+		if (document.cookie.indexOf(  market_no + "="+ market_no + "a") == -1) {
 			//없음
 			if (ca.length > 8) {
 				document.cookie = ca[0] + "; expires=" + oldtime;
 			}
 		} else {
 			//있음
-			document.cookie = ${market.market_no} + "=" + ${market.market_no}+ "a; expires=" + oldtime;
+			document.cookie = market_no + "=" + market_no+ "a; expires=" + oldtime;
 		}
 
-		document.cookie = ${market.market_no} + "=" + ${market.market_no}+ "a; expires=" + time;
+		document.cookie = market_no + "=" + market_no+ "a; expires=" + time;
 
 }); 
 ///쿠키 끝///
@@ -528,6 +527,7 @@ function dailyPage(){
 									</div>
 								</div>
 							</div>
+							<input type="hidden" id="market_no" value="${market.market_no }">
 						</div><!-- 장바구니 모달 끝 -->
 						
 						<br> <br> <br> <br>
