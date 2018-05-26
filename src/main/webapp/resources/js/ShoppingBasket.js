@@ -33,7 +33,21 @@ function controlCount(market_no, operator) {
 		//$('#' + market_no + '_count').val(1);
 		}
 	else{
-		$('#' + market_no + '_count').val(mcount + op);
+		$.ajax({
+			url:"updateBasketAmount.do",
+			type:"post",
+			data:{
+				'market_no':market_no,
+				'buy_amount':mcount+op },
+			success:function(data){
+				$('#' + market_no + '_count').val(mcount + op);
+			},
+			error:function(){
+				
+			}
+	
+		});
+		
 		}
 	setPrice();
 }
