@@ -4,6 +4,27 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="payment">
 
+
+	<select id="selectPaymentInfo" parameterType="hashmap" resultType="ShowBasket">
+			<![CDATA[
+	select mk.market_no, mb.MEMBER_NAME, mk.MARKET_IMG, mk.MARKET_TITLE, mk.MARKET_NOTE, mk.MARKET_PRICE,sb.BUY_AMOUNT
+  from SHOP_BASKET sb, market mk, member mb
+  where mb.member_id=mk.member_id and mk.market_no=sb.MARKET_NO
+  and sb.member_id = #{member_id}
+  and sb.market_no in 	]]>
+		<foreach collection="buyList" index="index" item="item" open="(" close=")" separator="," >
+		#{item}
+		</foreach>
+		
+	</select>
+	
+	<select id="selectPaymentInfoOne" parameterType="ShoppingBasket"  resultType="ShowBasket">
+	<![CDATA[
+	select mk.market_no, mb.MEMBER_NAME, mk.MARKET_IMG, mk.MARKET_TITLE, mk.MARKET_NOTE, mk.MARKET_PRICE
+  from market mk, member mb
+  where mb.member_id=mk.member_id and mk.market_no= #{market_no}
+	]]>
+	</select>
 	
 
 </mapper>

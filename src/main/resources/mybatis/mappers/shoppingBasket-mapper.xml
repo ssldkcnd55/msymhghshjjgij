@@ -22,7 +22,6 @@ where mk.MARKET_NO=sb.MARKET_NO and sb.MEMBER_ID= #{member_id}
 	
 	delete from SHOP_BASKET where member_id = #{member_id} and market_no in 
 
-	
 	<foreach collection="noList" index="index" item="item" open="(" close=")" separator="," >
 			#{item}
 	</foreach>
@@ -42,6 +41,11 @@ where mk.MARKET_NO=sb.MARKET_NO and sb.MEMBER_ID= #{member_id}
 	]]>
 	</insert>
 	<update id="updateShoppingBasket" parameterType="Payment">
+	<![CDATA[
+	update SHOP_BASKET set BUY_AMOUNT = #{buy_amount} where  member_id=#{member_id} and market_no = #{market_no}
+	]]>
+	</update>
+	<update id="updateBasketAmount" parameterType="ShoppingBasket">
 	<![CDATA[
 	update SHOP_BASKET set BUY_AMOUNT = #{buy_amount} where  member_id=#{member_id} and market_no = #{market_no}
 	]]>

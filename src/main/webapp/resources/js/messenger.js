@@ -23,8 +23,7 @@ $(function() {
 function insertChat(my_id, your_id) {// 대화상대 추가
 
 	if (my_id != your_id) {
-		$
-				.ajax({
+		$.ajax({
 					url : "insertChat.do",
 					type : "post",
 					dataType : "json",
@@ -60,7 +59,8 @@ function insertChat(my_id, your_id) {// 대화상대 추가
 
 					},
 					error : function(request, status, errorData) {
-						alert("error code : " + request.status + "\n"
+						console.log("messenger.js / insertChat()")
+						console.log("error code : " + request.status + "\n"
 								+ "message : " + request.responseText + "\n"
 								+ "error : " + errorData);
 					}
@@ -131,7 +131,8 @@ function searchMember() {
 
 				},
 				error : function(request, status, errorData) {
-					alert("error code : " + request.status + "\n"
+					console.log("messenger.js / searchMember()")
+					console.log("error code : " + request.status + "\n"
 							+ "message : " + request.responseText + "\n"
 							+ "error : " + errorData);
 				}
@@ -189,7 +190,8 @@ function back_chat_list() {
 					}
 				},
 				error : function(request, status, errorData) {
-					alert("error code : " + request.status + "\n"
+					console.log("messenger.js/ back_chat_list()");
+					console.log("error code : " + request.status + "\n"
 							+ "message : " + request.responseText + "\n"
 							+ "error : " + errorData);
 				}
@@ -484,7 +486,8 @@ function move_msg_table(chat_no, my_id, your_id) {
 
 				},
 				error : function(request, status, errorData) {
-					alert("error code : " + request.status + "\n"
+					console.log("messenger.js / move_msg_table");
+					console.log("error code : " + request.status + "\n"
 							+ "message : " + request.responseText + "\n"
 							+ "error : " + errorData);
 				}

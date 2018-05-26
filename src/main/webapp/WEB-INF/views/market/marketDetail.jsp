@@ -68,7 +68,8 @@ function addBasket()
 			$('#myModal').css("display","block");
 		},
 		error: function(request,status,errorData){
-            alert("error code : " + request.status + "\nmessage" + 
+			console.log("marketDetail.jsp / addBasket();")
+			console.log("error code : " + request.status + "\nmessage" + 
                     request.responseText + "\nerror" + errorData);
            }
 	});

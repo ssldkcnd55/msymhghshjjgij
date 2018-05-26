@@ -29,22 +29,13 @@ import com.kh.farm.market.model.service.MarketService;
 import com.kh.farm.market.model.vo.*;
 import com.kh.farm.payment.model.vo.*;
 import com.kh.farm.qna.model.vo.Market_qna;
+import com.kh.farm.shoppingBasket.model.vo.*;
 
 @Controller
 public class MarketController {
 @Autowired private MarketService marketService;
 	
 
-
-@RequestMapping(value="marketBuy.do", method=RequestMethod.POST )
-	public ModelAndView marketBuy( ModelAndView mv, Payment pm)
-	{
-		mv.setViewName("payment/payment");
-		mv.addObject("payment",pm);
-		return mv;
-	}
-
-	
 	@RequestMapping(value="marketList.do")
 	public ModelAndView marketList(ModelAndView mv) {
 		int page = 1;

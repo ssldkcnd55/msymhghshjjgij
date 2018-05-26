@@ -45,6 +45,10 @@ public class ShoppingBasketServiceImpl implements ShoppingBasketService{
 		
 		int result= shoppingBasketDao.updateShoppingBasket(sqlSession,pm);
 	}
+	@Override
+	public void updateBasketAmount(ShoppingBasket sb) {
+		int result = shoppingBasketDao.updateBasketAmount(sqlSession,sb);
+	}
 	
 	
 }

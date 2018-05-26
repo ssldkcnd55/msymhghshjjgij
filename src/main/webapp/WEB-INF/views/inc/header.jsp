@@ -23,8 +23,8 @@ function getBasketCount(member_id)
 			$('#cart_item_count').text(data);
 			
 		},error: function(request,status,errorData){
-			
-             alert("error code : " + request.status + "\nmessage" + 
+			console.log("header.jsp/getBasketCount");
+             console.log("error code : " + request.status + "\nmessage" + 
                     request.responseText + "\nerror" + errorData); 
            }
 	});
