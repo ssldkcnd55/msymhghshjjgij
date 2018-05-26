@@ -92,5 +92,16 @@ public class AuctionServiceImpl implements AuctionService{
 		
 		return auctionDao.selectHomeAuctionList(sqlSession);
 	}
+	
+	@Override
+	public int updateSellerAuctionQnAanswer(int auction_qna_no) {
+		return auctionDao.updateSellerAuctionQnAanswer(sqlSession,auction_qna_no);
+	}
 
+	@Override
+	public AuctionQnA selectseller_QnAanswer(int auction_qna_no) {
+		return auctionDao.selectseller_QnAanswer(sqlSession,auction_qna_no);
+	}
+	
+	
 }
