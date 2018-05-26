@@ -70,7 +70,7 @@ public class QnaDao {
 
 	public int deleteQnaAnswer(SqlSessionTemplate sqlSession, int qanswer_no) {
 		
-		int result = sqlSession.delete("qna.deleteQnaAnswer",qanswer_no);
+		int result = sqlSession.update("qna.deleteQnaAnswer",qanswer_no);
 		return result;
 	}
 
@@ -86,6 +86,31 @@ public class QnaDao {
 		// TODO Auto-generated method stub
 		int result = sqlSession.update("qna.updateMainQna",mq);
 		return result;
+	}
+
+	public int updateMarketAnswer(SqlSessionTemplate sqlSession, Market_qna mq) {
+		// TODO Auto-generated method stub
+		return sqlSession.update("qna.updateMarketAnswer",mq);
+	}
+
+	public int deleteMarketQnaAnswer(SqlSessionTemplate sqlSession, int qanswer_no) {
+		// TODO Auto-generated method stub
+		return sqlSession.update("qna.deleteMarketQnaAnswer",qanswer_no);
+	}
+
+	public int updateMarketQna(SqlSessionTemplate sqlSession, Market_qna mq) {
+		// TODO Auto-generated method stub
+		return sqlSession.update("qna.updateMarketQna",mq);
+	}
+
+	public int deleteMarketQna(SqlSessionTemplate sqlSession, int market_qna_no) {
+		// TODO Auto-generated method stub
+		return sqlSession.delete("qna.deleteMarketQna",market_qna_no);
+	}
+
+	public int deleteMainQna(SqlSessionTemplate sqlSession, int main_qna_no) {
+		// TODO Auto-generated method stub
+		return sqlSession.delete("qna.deleteMainQna",main_qna_no);
 	}
 
 }

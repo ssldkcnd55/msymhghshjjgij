@@ -28,4 +28,14 @@ public interface QnaService {
 
 	int updateMainQna(MainQna mq);
 
+	int updateMarketAnswer(Market_qna mq);
+
+	int deleteMarketQnaAnswer(int qanswer_no);
+
+	int updateMarketQna(Market_qna mq);
+
+	int deleteMarketQna(int market_qna_no);
+
+	int deleteMainQna(int main_qna_no);
+
 }
