@@ -6,18 +6,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link href="/farm/resources/css/bottommovemenu.css" rel="stylesheet"
-	type="text/css" />
-<link href="/farm/resources/css/style.css" rel="stylesheet"
-	type="text/css" />
-<link href="/farm/resources/css/qna.css" rel="stylesheet"
-	type="text/css" />
-<link href="/farm/resources/css/dailyList.css" rel="stylesheet"
-	type="text/css" />
-<link href="/farm/resources/css/marketDetail.css" rel="stylesheet"
-	type="text/css" />
-<link href="/farm/resources/css/marketDetail_modal.css" rel="stylesheet"
-	type="text/css" />
+<link href="/farm/resources/css/bottommovemenu.css" rel="stylesheet" type="text/css" />
+<link href="/farm/resources/css/style.css" rel="stylesheet" type="text/css" />
+<link href="/farm/resources/css/qna.css" rel="stylesheet" type="text/css" />
+<link href="/farm/resources/css/dailyList.css" rel="stylesheet" type="text/css" />
+<link href="/farm/resources/css/marketDetail.css" rel="stylesheet" type="text/css" />
+<link href="/farm/resources/css/marketDetail_modal.css" rel="stylesheet" type="text/css" />
 <script src="/farm/resources/js/jquery-3.3.1.min.js"></script>
 <script type="text/javascript" src="/farm/resources/js/tabMove.js"></script>
 <script type="text/javascript">
@@ -509,7 +503,7 @@ function dailyPage(){
 						class="goods-view-flow-cart-content __active">
 
 
-						<c:if test="${(not empty sessionScope.loginUser) && loginUser.member_category==1  }">
+						<c:if test="${not empty sessionScope.loginUser  }">
 							<form action="marketBuy.do" method="post">
 								<input type="hidden" name="market_no"
 									value="${market.market_no }"> <input type="hidden"
@@ -520,9 +514,8 @@ function dailyPage(){
 							</form>
 
 						</c:if>
+						<!-- 장바구니 모달창 -->
 						<div id="myModal" class="modal">
-
-							<!-- Modal content -->
 							<div class="modal-content">
 								<div class="md_top">
 									<span class="md_top_title"><strong>장바구니 담기</strong></span>
@@ -535,8 +528,8 @@ function dailyPage(){
 									</div>
 								</div>
 							</div>
-
-						</div>
+						</div><!-- 장바구니 모달 끝 -->
+						
 						<br> <br> <br> <br>
 					</div>
 				</div>

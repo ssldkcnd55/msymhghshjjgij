@@ -63,6 +63,7 @@
 	text-decoration: none;
 	line-height: 38px;
 	border-radius: 4px;
+	    border: 1px solid #dcdcdc;
 }
 
 .md_mid_close_a {
