@@ -1,10 +1,13 @@
 package com.kh.farm.payment.controller;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.*;
 
-
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,6 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.farm.member.model.vo.*;
 import com.kh.farm.payment.model.service.PaymentService;
+import com.kh.farm.payment.model.vo.Payment;
 import com.kh.farm.shoppingBasket.model.vo.*;
 
 @Controller
@@ -55,6 +59,16 @@ public class PaymentController {
 		mv.addObject("sbl",sbl);
 		mv.setViewName("payment/payment");
 		return mv;
+	}
+	
+	@RequestMapping(value="insertFirstPayment.do",method=RequestMethod.POST)
+	public void insertFirstPayment(Payment pm,HttpServletResponse response) throws IOException
+	{
+		int group_no = paymentService.insertFirstPayment(pm);
+		PrintWriter out = response.getWriter();
+		out.append( String.valueOf( group_no));
+		out.flush();
+		out.close();
 	}
 
 

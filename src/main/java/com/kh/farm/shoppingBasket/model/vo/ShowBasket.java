@@ -12,6 +12,7 @@ public class ShowBasket implements java.io.Serializable{
 	
 	private int market_no;//마켓번호
 	private String member_name;//판매자 이름
+	private String member_id;//판매자 아이디
 	private String market_img;//마켓 이미지
 	private String market_title;//마켓 타이틀
 	private String market_note;//상품 소개
@@ -23,30 +24,27 @@ public class ShowBasket implements java.io.Serializable{
 	
 	}
 
-	
 
-	public ShowBasket(int market_no, String member_name, String market_img, String market_title, String market_note,
-			int market_price, int buy_amount) {
+	public ShowBasket(int market_no, String member_name, String member_id, String market_img, String market_title,
+			String market_note, int market_price, int buy_amount) {
 		super();
 		this.market_no = market_no;
 		this.member_name = member_name;
+		this.member_id = member_id;
 		this.market_img = market_img;
 		this.market_title = market_title;
 		this.market_note = market_note;
 		this.market_price = market_price;
 		this.buy_amount = buy_amount;
 	}
-	
-
 
 
 	@Override
 	public String toString() {
-		return "ShowBasket [market_no=" + market_no + ", member_name=" + member_name + ", market_img=" + market_img
-				+ ", market_title=" + market_title + ", market_note=" + market_note + ", market_price=" + market_price
-				+ ", buy_amount=" + buy_amount + "]";
+		return "ShowBasket [market_no=" + market_no + ", member_name=" + member_name + ", member_id=" + member_id
+				+ ", market_img=" + market_img + ", market_title=" + market_title + ", market_note=" + market_note
+				+ ", market_price=" + market_price + ", buy_amount=" + buy_amount + "]";
 	}
-
 
 
 	public int getMarket_no() {
@@ -56,6 +54,26 @@ public class ShowBasket implements java.io.Serializable{
 
 	public void setMarket_no(int market_no) {
 		this.market_no = market_no;
+	}
+
+
+	public String getMember_name() {
+		return member_name;
+	}
+
+
+	public void setMember_name(String member_name) {
+		this.member_name = member_name;
+	}
+
+
+	public String getMember_id() {
+		return member_id;
+	}
+
+
+	public void setMember_id(String member_id) {
+		this.member_id = member_id;
 	}
 
 
@@ -79,6 +97,16 @@ public class ShowBasket implements java.io.Serializable{
 	}
 
 
+	public String getMarket_note() {
+		return market_note;
+	}
+
+
+	public void setMarket_note(String market_note) {
+		this.market_note = market_note;
+	}
+
+
 	public int getMarket_price() {
 		return market_price;
 	}
@@ -98,28 +126,8 @@ public class ShowBasket implements java.io.Serializable{
 		this.buy_amount = buy_amount;
 	}
 
+	
 
-
-	public String getMember_name() {
-		return member_name;
-	}
-
-
-
-	public void setMember_name(String member_name) {
-		this.member_name = member_name;
-	}
-
-
-
-	public String getMarket_note() {
-		return market_note;
-	}
-
-
-
-	public void setMarket_note(String market_note) {
-		this.market_note = market_note;
-	}
+	
 	
 }
