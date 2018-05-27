@@ -16,12 +16,13 @@
 
 <script type="text/javascript">
 
-	/* function submitContents(){
+	/*  function submitContents(){
 		var true = confirm("정말로 수정하시겠습니까?");
 		if(true == true){
 			
-		} */
-	}
+		} 
+	} */
+	
 </script>
 </head>
 <body>

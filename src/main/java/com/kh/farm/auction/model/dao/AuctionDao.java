@@ -113,6 +113,12 @@ public class AuctionDao {
 	}
 
 
+	public int delete_auction_qna_answer(SqlSessionTemplate sqlSession, int auction_qna_no) {
+		// TODO Auto-generated method stub
+		return sqlSession.update("auction.delete_auction_qna_answer", auction_qna_no);
+	}
+
+
 	
 
 }
