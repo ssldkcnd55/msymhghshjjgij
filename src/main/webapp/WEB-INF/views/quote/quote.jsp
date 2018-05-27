@@ -1,113 +1,617 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="UTF-8">
 <script src="/farm/resources/js/jquery-3.3.1.min.js"></script>
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/series-label.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+<script src="https://code.highcharts.com/modules/export-data.js"></script>
 <title>Insert title here</title>
+<link rel="stylesheet" type="text/css"
+	href="/farm/resources/css/style.css" />
 <script type="text/javascript">
+	/*품목 셀렉트박스 생성  */
 	$(function() {
-		$("#button").click(
+		$('#h1').change(
 				function() {
+					var changevalue = $("#h1").val();
 
-					$.ajax({
-						url : '/farm/QuoteApi.do',
-						type : 'post',
-						dataType : 'json',
-						data : {
+					/*식량작물 : 품목값  */
+					var json = [ {
+						"name" : "쌀",
+						"value" : "111"
+					}, {
+						"name" : "찹쌀",
+						"value" : "112"
+					}, {
+						"name" : "콩",
+						"value" : "141"
+					}, {
+						"name" : "팥",
+						"value" : "142"
+					}, {
+						"name" : "녹두",
+						"value" : "143"
+					} ]
+					/* 채소류 : 품목값  */
+					var json2 = [ {
+						"name" : "배추",
+						"value" : "211"
+					}, {
+						"name" : "양배추",
+						"value" : "212"
+					}, {
+						"name" : "시금치",
+						"value" : "213"
+					}, {
+						"name" : "상추",
+						"value" : "214"
+					}, {
+						"name" : "얼갈이배추",
+						"value" : "215"
+					} ]
+					/* 특용작물: 품목값   */
+					var json3 = [ {
+						"name" : "참깨",
+						"value" : "312"
+					}, {
+						"name" : "땅콩",
+						"value" : "314"
+					}, {
+						"name" : "느타리버섯",
+						"value" : "315"
+					}, {
+						"name" : "팽이버섯",
+						"value" : "316"
+					}, {
+						"name" : "새송이버섯",
+						"value" : "317"
+					} ]
+					/* 과일류: 품목값   */
+					var json4 = [ {
+						"name" : "사과",
+						"value" : "211"
+					}, {
+						"name" : "양배추",
+						"value" : "212"
+					}, {
+						"name" : "시금치",
+						"value" : "213"
+					}, {
+						"name" : "상추",
+						"value" : "214"
+					}, {
+						"name" : "얼갈이배추",
+						"value" : "215"
+					} ]
+					/*품목 셀렉트박스에 뿌려줄값  */
+					var html = "";
+					html += "<option>품목선택</option>";
+					/*식용작물 품목  */
+					if (changevalue == "100") {
 
-							productclscode : "01",
-							startdate : "2018-05-08",
-							endday : "2018-05-19",
-							itemcategorycode : "200",
-							itemcode : "212",
-							kindcode : "00",
-							productrankcode : "05",
-							countrycode : "1101",
-							convert : "N"
-
-						},
-
-						success : function(data) {
-
-							var jsonStr = JSON.stringify(data);
-							var jsonData = JSON.parse(jsonStr);
-							var myitem = jsonData.data.item
-							console.log(myitem);
-
-							var result = [];
-
-							var html1 = "";
-							var html2 = "";
-							var html3 = "";
-							var html4 = "";
-							
-							
-							$.each(myitem, function(index, item) {
-								
-								if ($.inArray(item.regday, result) == -1) {
-									result.push(item.regday);
-									html1 += "<th>" + item.regday + "</th>"
-								}
-								if (item.countyname == "평균") {
-								if ($.inArray(item.countyname, result) == -1) {
-									result.push(item.countyname);									
-										html2 += "<td>" + item.countyname
-												+ "</td>"	
-								}
-								html2 += "<td>" + item.price + "</td>"
-								}
-								if (item.countyname == "평년") {
-									if ($.inArray(item.countyname, result) == -1) {
-										result.push(item.countyname);									
-											html3 += "<td>" + item.countyname
-													+ "</td>"	
-									}
-									html3 += "<td>" + item.price + "</td>"
-									}
-								if (item.countyname == "서울" && item.marketname =="경동") {
-									if ($.inArray(item.countyname, result) == -1) {
-										result.push(item.countyname);									
-											html4 += "<td>" + item.countyname
-													+ "</td>"
-									}																	
-									html4 += "<td>" + item.price + "</td>"
-								}
-								
-							});
-							$("#tr").append(html1);
-							$("#tr2").append(html2);
-							$("#tr3").append(html3);
-							$("#tr4").append(html4);
-
-						},
-						error : function(request, status, errorData) {
-							alert("error code : " + request.status + "\n"
-									+ "message : " + request.responseText
-									+ "\n" + "error : " + errorData);
+						for ( var i in json) {
+							html += "<option value="+json[i].value+">"
+									+ json[i].name + "</option>";
 						}
-					});
+
+					}
+					/*채소류 품목  */
+					if (changevalue == "200") {
+
+						for ( var i in json2) {
+							html += "<option value="+json2[i].value+">"
+									+ json2[i].name + "</option>";
+						}
+
+					}
+					/*특용작물 품목  */
+					if (changevalue == "300") {
+
+						for ( var i in json3) {
+							html += "<option value="+json3[i].value+">"
+									+ json3[i].name + "</option>";
+						}
+
+					}
+					/*과일류  품목*/
+					if (changevalue == "400") {
+
+						for ( var i in json4) {
+							html += "<option value="+json4[i].value+">"
+									+ json4[i].name + "</option>";
+						}
+
+					}
+
+					$('#h2').html(html);
+				});
+		/*품종 셀렉트박스 생성  */
+		$('#h2').change(
+				function() {
+					var html2 = "";
+					var value = $("#h2").val();
+					var json3 = [ {
+						"name" : "일반계",
+						"value" : "01"
+					}, {
+						"name" : "햇일반계",
+						"value" : "05"
+					} ];
+					html2 += "<option>품종선택</option>";
+					if (value == "111") {
+
+						for ( var i in json3) {
+							html2 += "<option value="+json3[i].value+">"
+									+ json3[i].name + "</option>";
+						}
+					}
+					$("#h3").html(html2);
+				});
+		/*등급 셀렉트박스 생성 */
+		$('#h3').change(
+				function() {
+					var html3 = "";
+					var value2 = $("#h3").val();
+					var json4 = [ {
+						"name" : "상품",
+						"value" : "04"
+					}, {
+						"name" : "중품",
+						"value" : "05"
+					} ];
+					html3 += "<option>등급선택</option>";
+					if (value2 == "01" || value2 == "05") {
+						for ( var i in json4) {
+							html3 += "<option value="+json4[i].value+">"
+									+ json4[i].name + "</option>";
+						}
+					}
+					$("#h4").html(html3);
 				});
 
 	});
+
+	function selectbox() {
+
+		$
+				.ajax({
+					url : '/farm/QuoteApi.do',
+					type : 'post',
+					dataType : 'json',
+					data : {
+						startday : $("#start").val(),
+						endday : $("#end").val(),
+						itemcategorycode : $("#h1").val(),
+						itemcode : $("#h2").val(),
+						kindcode : $("#h3").val(),
+						productrankcode : $("#h4").val(),
+						countycode : $("#h0").val()
+
+					},
+					success : function(data) {
+						$("#p1").remove();
+						$("#p2").remove();
+						/*시세 정보 테이블에 뿌리기 */
+						var jsonStr = JSON.stringify(data);
+						var jsonData = JSON.parse(jsonStr);
+						var myitem = jsonData.data.item
+						console.log(myitem);
+
+						var result = [];
+						/*날짜 */
+						var html = "";
+						/*평균*/
+						var html2 = "";
+						/*평년 */
+						var html3 = "";
+						/*서울 / 경동  */
+						var html4 = "";
+						/*서울 / 영등포  */
+						var html5 = "";
+						/*서울 / 복조리  */
+						var html6 = "";
+
+						html += "<th colspan='2'>구분</th>";
+
+						/*테이블 생성   */
+						$
+								.each(
+										myitem,
+										function(index, item) {
+
+											if ($.inArray(item.regday, result) == -1) {
+												result.push(item.regday);
+
+												html += "<th>" + item.regday
+														+ "</th>";
+
+											}
+											if (item.countyname == "평균") {
+												if ($.inArray(item.countyname,
+														result) == -1) {
+													result
+															.push(item.countyname);
+
+													html2 += "<td colspan='2' text-align='center'>"
+															+ item.countyname
+															+ "</td>";
+
+												}
+												html2 += "<td>" + item.price
+														+ "</td>";
+											}
+
+											/* 지역 / 서울  */
+											if (item.countyname == "서울") {
+												if (item.marketname == "경동") {
+													if ($.inArray(
+															item.countyname,
+															result) == -1) {
+														result
+																.push(item.countyname);
+
+														html4 += "<td rowspan ='8'>"
+																+ item.countyname
+																+ "</td>";
+
+													}
+													if ($.inArray(
+															item.marketname,
+															result) == -1) {
+														result
+																.push(item.marketname);
+
+														html4 += "<td>"
+																+ item.marketname
+																+ "</td>";
+
+													}
+													html4 += "<td>"
+															+ item.price
+															+ "</td>";
+												}
+												if (item.marketname == "영등포") {
+													if ($.inArray(
+															item.countyname,
+															result) == -1) {
+														result
+																.push(item.countyname);
+
+														html5 += "<td>"
+																+ item.countyname
+																+ "</td>";
+
+													}
+													if ($.inArray(
+															item.marketname,
+															result) == -1) {
+														result
+																.push(item.marketname);
+
+														html5 += "<td>"
+																+ item.marketname
+																+ "</td>";
+
+													}
+													html5 += "<td>"
+															+ item.price
+															+ "</td>";
+												}
+												if (item.marketname == "복조리") {
+													if ($.inArray(
+															item.countyname,
+															result) == -1) {
+														result
+																.push(item.countyname);
+
+														html6 += "<td>"
+																+ item.countyname
+																+ "</td>";
+
+													}
+													if ($.inArray(
+															item.marketname,
+															result) == -1) {
+														result
+																.push(item.marketname);
+
+														html6 += "<td>"
+																+ item.marketname
+																+ "</td>";
+
+													}
+													html6 += "<td>"
+															+ item.price
+															+ "</td>";
+												}
+
+											}
+											Highcharts
+													.chart(
+															'g',
+															{
+
+																title : {
+																	text : 'Solar Employment Growth by Sector, 2010-2016'
+																},
+
+																subtitle : {
+																	text : 'Source: thesolarfoundation.com'
+																},
+
+																yAxis : {
+																	title : {
+																		text : 'Number of Employees'
+																	}
+																},
+																legend : {
+																	layout : 'vertical',
+																	align : 'right',
+																	verticalAlign : 'middle'
+																},
+
+																plotOptions : {
+																	series : {
+																		label : {
+																			connectorAllowed : false
+																		},
+																		pointStart : 2010
+																	}
+																},
+
+																series : [
+																		{
+																			name : 'Installation',
+																			data : [
+																					43934,
+																					52503,
+																					57177,
+																					69658,
+																					97031,
+																					119931,
+																					137133,
+																					154175 ]
+																		},
+																		{
+																			name : 'Manufacturing',
+																			data : [
+																					24916,
+																					24064,
+																					29742,
+																					29851,
+																					32490,
+																					30282,
+																					38121,
+																					40434 ]
+																		},
+																		{
+																			name : 'Sales & Distribution',
+																			data : [
+																					11744,
+																					17722,
+																					16005,
+																					19771,
+																					20185,
+																					24377,
+																					32147,
+																					39387 ]
+																		},
+																		{
+																			name : 'Project Development',
+																			data : [
+																					null,
+																					null,
+																					7988,
+																					12169,
+																					15112,
+																					22452,
+																					34400,
+																					34227 ]
+																		},
+																		{
+																			name : 'Other',
+																			data : [
+																					12908,
+																					5948,
+																					8105,
+																					11248,
+																					8989,
+																					11816,
+																					18274,
+																					18111 ]
+																		} ],
+
+																responsive : {
+																	rules : [ {
+																		condition : {
+																			maxWidth : 500
+																		},
+																		chartOptions : {
+																			legend : {
+																				layout : 'horizontal',
+																				align : 'center',
+																				verticalAlign : 'bottom'
+																			}
+																		}
+																	} ]
+																}
+
+															});
+
+										});
+
+						$(".tr").append(html);
+						$(".tr2").append(html2);
+						$(".tr4").append(html4);
+						$(".tr5").append(html5);
+						$(".tr6").append(html6);
+
+					},
+
+					error : function(request, status, errorData) {
+						alert("error code : " + request.status + "\n"
+								+ "message : " + request.responseText + "\n"
+								+ "error : " + errorData);
+					}
+				});
+
+	}
 </script>
+<style type="text/css">
+.j_title {
+	style ="font-weight: 500;
+	color: #383838;
+	"
+}
+
+.j_title::after {
+	content: '';
+	display: inline-block;
+	width: 6px;
+	height: 6px;
+	margin-left: 5px;
+	background: #f1473a;
+	border-radius: 100%;
+}
+
+.j_name_content_box {
+	padding: 40px;
+	border: 1px solid #ddd;
+}
+
+.graph_box {
+	padding: 40px;
+	border: 1px solid #ddd;
+}
+</style>
 </head>
 <body>
-	<button id="button">작동</button>
-	<div id="list">
-		<table style="border: 1px solid">
-			<tr id="tr">
-			<th>날짜</th>
-			</tr>
-			<tr id="tr2">
-			</tr>
-			<tr id="tr3">
-			</tr>
-			</tr>
-			<tr id="tr4">
-			</tr>
-		</table>
+	<div id="wrap">
+		<div id="header">
+			<%@  include file="../inc/header.jsp"%>
+		</div>
+
+		<!-- account-wrap -->
+
+
+		<div id="container">
+			<div class="inner-wrap">
+				<br> <br> <br>
+
+				<!--기간 시작-->
+				<div class="period_box" style="padding: 40px;">
+					<h3 class="j_title">기간</h3>
+					<form style="padding: 4px; margin: 20px 0px;">
+						<span style="color: #555;">시작날</span> <input type="date"
+							id="start" name="firstname" style="margin-right: 40px;"><span
+							style="color: #555;">종료날</span> <input id="end" type="date"
+							name="lastname">
+					</form>
+
+
+					<table style="width: 100%;">
+						<tbody>
+							<tr>
+								<td style="width: 16.6667%;">
+
+									<p style="text-align: left; color: #555;">지역</p>
+								</td>
+								<td style="width: 16.6667%;">
+
+									<p style="text-align: left; color: #555;">부류</p>
+								</td>
+								<td style="width: 16.6667%;">
+
+									<p style="text-align: left; color: #555;">품목</p>
+								</td>
+								<td style="width: 16.6667%;">
+
+									<p style="text-align: left; color: #555;">품종</p>
+								</td>
+								<td style="width: 16.6667%;">
+
+									<p style="text-align: left; color: #555;">등급</p>
+								</td>
+								<td style="width: 16.6667%;"></td>
+							</tr>
+						</tbody>
+						<tbody>
+							<tr>
+								<td style="width: 16.6667%;"><select id="h0"
+									style="display: inline-block; margin: auto; text-align: center;">
+										<option>지역선택</option>
+										<option value="1101">서울</option>
+										<option value="2300">인천</option>
+										<option value="2100">부산</option>
+										<option value="2200">대구</option>
+										<option value="2401">광주</option>
+										<option value="2501">대전</option>
+										<option value="3111">수원</option>
+								</select></td>
+
+								<td style="width: 16.6667%;"><select id="h1">
+										<option>부류선택</option>
+										<option value="100">식량작물</option>
+										<option value="200">채소류</option>
+										<option value="300">특용작물</option>
+										<option value="400">과일류</option>
+								</select></td>
+								<td style="width: 16.6667%;"><select id="h2">
+										<option>품목선택</option>
+								</select></td>
+								<td style="width: 16.6667%;"><select id="h3">
+										<option>품종선택</option>
+								</select></td>
+								<td style="width: 16.6667%;"><select id="h4">
+										<option>등급선택</option>
+								</select></td>
+								<td style="width: 16.6667%;">
+
+									<button onclick="selectbox()">조회하기</button>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<!--기간 끝-->
+				<hr style="border-color: #ddd; width: 100%;">
+				<!--명칭 시작-->
+				<div class="name_box" style="padding: 20px;">
+					<h3 class="j_title">가격정보</h3>
+					<div class="j_name_content_box">
+						<p id="p1" style="margin: auto;">조회된 데이터가 없습니다</p>
+						<table style="margin: auto;">
+							<tr class="tr"></tr>
+							<tr class="tr2"></tr>
+							<tr class="tr4"></tr>
+							<tr class="tr5"></tr>
+							<tr class="tr6"></tr>
+						</table>
+					</div>
+				</div>
+				<!--명칭끝-->
+				<hr style="border-color: #ddd; width: 100%;">
+				<!--조건 시작-->
+				<div class="condition_box" style="padding: 40px;">
+					<h3 class="j_title">그래프</h3>
+					<div class="graph_box">
+						<p id="p2" style="margin: auto;">조회된 데이터가 없습니다</p>
+						<div id="g" style="margin: auto;"></div>
+					</div>
+				</div>
+				1
+				<!--조건 끝 -->
+			</div>
+		</div>
+		<!-- 내용 끝  -->
+		<%@ include file="../messenger/msg_box.jsp"%>
+		<div id="footer">
+			<%@  include file="../inc/foot.jsp"%>
+		</div>
 	</div>
 </body>
 </html>
