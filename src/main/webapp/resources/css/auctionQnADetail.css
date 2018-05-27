@@ -96,6 +96,11 @@
     float:right;
 }
 
+.QnA_MODIFY2 button:nth-child(1) a{
+	text-decoration:none;
+	color:#c0c0c0;
+}
+
 .commont_modify3{
 	margin:10px 0px 0px 10px;
 }

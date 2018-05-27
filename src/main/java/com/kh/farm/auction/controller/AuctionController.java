@@ -343,11 +343,14 @@ public class AuctionController {
 	
 	/*경매 판매자 QnA답변 수정*/
 	@RequestMapping(value="seller_QnAanswer_Modify.do",method=RequestMethod.POST)
-	public void seller_QnAanswer_Modify(HttpServletResponse response,
+	public void seller_QnAanswer_Modify(HttpServletResponse response,AuctionQnA auctionqna,
 			@RequestParam(value="auction_qna_no")int auction_qna_no)throws IOException{
-		int seller_QnAanswer_Modify = auctionService.updateSellerAuctionQnAanswer(auction_qna_no);
+		System.out.println("111");
+		System.out.println("auction_qna_no : "+auction_qna_no+" / "+"답변 : "+auctionqna.getAuction_qna_answer());
+		int seller_QnAanswer_Modify = auctionService.updateSellerAuctionQnAanswer(auctionqna);
 		System.out.println("seller_QnAanswer_Modify : "+seller_QnAanswer_Modify);
 		AuctionQnA result = auctionService.selectseller_QnAanswer(auction_qna_no);
+		System.out.println("restult : "+result.getAuction_no()+" / "+result.getAuction_qna_answer());
 	
 			 JSONObject json = new JSONObject();
 			 json.put("auction_qna_answer", result.getAuction_qna_answer());

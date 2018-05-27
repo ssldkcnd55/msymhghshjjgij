@@ -103,8 +103,8 @@ public class AuctionDao {
 
 
 	//경매 QnA 답글 수정
-	public int updateSellerAuctionQnAanswer(SqlSessionTemplate sqlSession, int auction_qna_no) {
-		return sqlSession.update("auction.updateSellerAuctionQnAanswer",auction_qna_no);
+	public int updateSellerAuctionQnAanswer(SqlSessionTemplate sqlSession, AuctionQnA auctionqna) {
+		return sqlSession.update("auction.updateSellerAuctionQnAanswer",auctionqna);
 	}
 
 

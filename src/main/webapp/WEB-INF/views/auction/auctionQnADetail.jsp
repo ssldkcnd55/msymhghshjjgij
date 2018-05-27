@@ -31,27 +31,32 @@
 	
 	/* 수정 버튼 누르면 수정할수 있게 열림 */
 	function seller_QnAanswer_Modify(){
-		$(".QnA_comment_title2").html(
+		$(".remove").html(
+				"<div class='QnA_comment_title2'>"+
 				"<table class='QnA_MODIFY2'><tr><td style='width:90%'>답글</td><td style='width:5%'><button onclick='seller_QnAanswer_Modify();'>수정</button></td><td style='width:5%'><button>삭제</button></td></tr></table>"+
 				"<div class='QnA_comment_write'>"+
 				"<table class='commont_modify2'><tr>"+
 				"<td>${loginUser.member_name}</td>"+
 				"<td><textarea rows='5' cols='85' name='auction_qna_answer'>${auctionqna.auction_qna_answer}</textarea></td>"+
 				"<td><input type='button' value='확인' onclick='qna_answer();' class='commont_modify2_button' /></td>"+
-				"</tr></table></form></div></div>"
+				"</tr></table></form></div></div></div>"
 		);
 	}
 	
-	 /* 판매자 QnA 답글 수정 버튼  */
+	 /*  판매자 QnA 답글 수정 버튼   */
 	function qna_answer(){
+		 var auction_qna_answer ="${auctionqna.auction_qna_answer}";
 		$.ajax({
 			url:"seller_QnAanswer_Modify.do",
+			type:"post",
 			data:{
 				auction_qna_no:${auctionqna.auction_qna_no},
-				auction_qna_answer:${auctionqna.auction_qna_answer}
+				auction_qna_answer:auction_qna_answer
 			},
-			 datatype:"json",
+			
+			 datatype:"JSON",
 			 succes:function(data){
+				console.log(data);
 				 var jsonStr = JSON.stringify(data);
 		         var json = JSON.parse(jsonStr);
 		         $(".commont_modify3").html(
@@ -97,8 +102,9 @@
 					<!-- QnA_full  -->
 
 					<!-- QnA 답글 -->
-					<form action="updateauctionQnA_Answer.do" method="post" onsubmit="return seller_QnAanswer_Modify();">
 						<div class="remove">
+							<form action="updateauctionQnA_Answer.do" method="post" onsubmit="return seller_QnAanswer_Modify();">
+						
 							<c:choose>
 								<c:when test="${empty auctionqna.auction_qna_answer}">
 									<div class="QnA_comment_title">
@@ -126,8 +132,8 @@
 											<table class='QnA_MODIFY2'>
 												<tr>
 													<td style='width: 90%'>답글</td>
-													<td style='width: 5%'><button
-															><a href="javascript:seller_QnAanswer_Modify();">수정</a></button></td>
+													<td style='width: 5%'>
+														<button><a href="javascript:seller_QnAanswer_Modify();">수정</a></button></td>
 													<td style='width: 5%'><button>삭제</button></td>
 												</tr>
 											</table>
@@ -147,9 +153,9 @@
 									</div>
 								</c:otherwise>
 							</c:choose>
-
+							</form>
 						</div><!-- 전체 remove -->
-					</form>
+					
 	<%-- <div class="QnA_comment">
 						<div class="QnA_comment_top_writer">
 							<div class="QnA_comment_writer">
