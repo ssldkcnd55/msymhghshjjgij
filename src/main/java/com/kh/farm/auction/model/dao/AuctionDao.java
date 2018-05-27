@@ -103,13 +103,19 @@ public class AuctionDao {
 
 
 	//경매 QnA 답글 수정
-	public int updateSellerAuctionQnAanswer(SqlSessionTemplate sqlSession, int auction_qna_no) {
-		return sqlSession.update("auction.updateSellerAuctionQnAanswer",auction_qna_no);
+	public int updateSellerAuctionQnAanswer(SqlSessionTemplate sqlSession, AuctionQnA auctionqna) {
+		return sqlSession.update("auction.updateSellerAuctionQnAanswer",auctionqna);
 	}
 
 
 	public AuctionQnA selectseller_QnAanswer(SqlSessionTemplate sqlSession, int auction_qna_no) {
 		return sqlSession.selectOne("auction.selectseller_QnAanswer",auction_qna_no);
+	}
+
+
+	public int delete_auction_qna_answer(SqlSessionTemplate sqlSession, int auction_qna_no) {
+		// TODO Auto-generated method stub
+		return sqlSession.update("auction.delete_auction_qna_answer", auction_qna_no);
 	}
 
 

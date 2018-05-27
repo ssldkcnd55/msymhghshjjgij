@@ -122,7 +122,7 @@
 	</select>
 	
 	<update id="updateSellerAuctionQnAanswer" parameterType="AuctionQnA" >
-		<![CDATA[
+	<![CDATA[
 		update auction_qna set auction_qna_answer=#{auction_qna_answer},auction_qna_answer_date=sysdate
 		where AUCTION_QNA_NO=#{auction_qna_no}
 	]]>
@@ -135,5 +135,10 @@
 	]]>
 	</select>
 	
-	
+	<update id="delete_auction_qna_answer" parameterType="AuctionQnA">
+	<![CDATA[
+		update auction_qna set auction_qna_answer=null,auction_qna_answer_date=null
+		where AUCTION_QNA_NO=#{auction_qna_no}
+	]]>
+	</update>
 </mapper>

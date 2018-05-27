@@ -31,38 +31,68 @@
 	
 	/* 수정 버튼 누르면 수정할수 있게 열림 */
 	function seller_QnAanswer_Modify(){
-		$(".QnA_comment_title2").html(
-				"<table class='QnA_MODIFY2'><tr><td style='width:90%'>답글</td><td style='width:5%'><button onclick='seller_QnAanswer_Modify();'>수정</button></td><td style='width:5%'><button>삭제</button></td></tr></table>"+
+		$(".remove").html(
+				"<div class='QnA_comment_title2'>"+
+				"<table class='QnA_MODIFY2'><tr><td style='width:90%'>답글</td>"+
+				"<td style='width:5%'><button onclick='seller_QnAanswer_Modify();'>수정</button></td>"+
+				"<td style='width:5%'><button onclick='seller_QnAanswer_del();'>삭제</button></td></tr></table>"+
 				"<div class='QnA_comment_write'>"+
 				"<table class='commont_modify2'><tr>"+
 				"<td>${loginUser.member_name}</td>"+
-				"<td><textarea rows='5' cols='85' name='auction_qna_answer'>${auctionqna.auction_qna_answer}</textarea></td>"+
-				"<td><input type='button' value='확인' onclick='qna_answer();' class='commont_modify2_button' /></td>"+
-				"</tr></table></form></div></div>"
+				"<td><textarea rows='5' cols='85' name='auction_qna_answer' id='qna_answer'>"+
+				"${auctionqna.auction_qna_answer}</textarea></td>"+
+				"<td><input type='button' value='확인' onclick='qna_answer_submit();' class='commont_modify2_button' /></td>"+
+				"</tr></table></form></div></div></div>"
 		);
 	}
 	
-	 /* 판매자 QnA 답글 수정 버튼  */
-	function qna_answer(){
+	 /*  판매자 QnA 답글 수정 버튼   */
+	function qna_answer_submit(){
+		/*  var auction_qna_answer ="${auctionqna.auction_qna_answer}"; 
+		이러면 수정하려는 내용은 못가져오고 디테일로 뿌릴때 가져온 기존 답글 내용만 가져오게됩니다
+		그래서 수정전의 내용을 가지고 update문으로 가니까 update가 안된다고 생각한것입니다*/
+		var answer = $('#qna_answer').val(); //textarea에 id값을 줘서 입력한 값을 가져옵니다
+		//alert(answer);
 		$.ajax({
 			url:"seller_QnAanswer_Modify.do",
+			type:"post",
 			data:{
 				auction_qna_no:${auctionqna.auction_qna_no},
-				auction_qna_answer:${auctionqna.auction_qna_answer}
+				auction_qna_answer:answer
 			},
+			
 			 datatype:"json",
-			 succes:function(data){
-				 var jsonStr = JSON.stringify(data);
+			 success:function(json){
+				console.log(json);
+				
+				 var jsonStr = JSON.stringify(json);
 		         var json = JSON.parse(jsonStr);
-		         $(".commont_modify3").html(
-		        		"<td>${loginUser.member_id}</td><td>json.auction_qna_answer_date</td></tr>"+
-		 				"<tr><td>json.auction_qna_answer</td></tr>"+
-		 				"</tr></table></form></div></div>" 
-		         );
+		        
+		        $('.QnA_comment_write').html(
+		        "<table class='comment_modify3'id='comment_table'>"
+					+"<tr>"
+						+"<td>${loginUser.member_name}</td>"
+						+"<td>"+json.auction_qna_answer_date+"</td>"
+					+"</tr>"
+					+"<tr>"
+						+"<td>"+json.auction_qna_answer+"</td>"
+					+"</tr>"
+				+"</table>"
+				); 
 			 }
 		});
 	} 
+	 
+	 //답글 삭제
+	 function seller_QnAanswer_del(){
+		 if (confirm("정말 삭제하시겠습니까??") == true){    //확인
+			    location.href ="/farm/delete_auction_qna_answer.do?auction_qna_no=${auctionqna.auction_qna_no}";
+			}else{   //취소
+			    return;
+			}
+	 } 
 </script>
+
 </head>
 <body>
 	<div id="top_line"></div>
@@ -73,9 +103,9 @@
 		<div id="container">
 			<div class="inner-wrap">
 				<div class="board-wrap">
-
+					
 					<div class="QnA_title">질문</div>
-
+					
 					<div class="QnA_full">
 						<table class="QnA_table">
 							<tr>
@@ -97,8 +127,9 @@
 					<!-- QnA_full  -->
 
 					<!-- QnA 답글 -->
-					<form action="updateauctionQnA_Answer.do" method="post" onsubmit="return seller_QnAanswer_Modify();">
 						<div class="remove">
+							<!-- <form action="updateauctionQnA_Answer.do" method="post" onsubmit="return seller_QnAanswer_Modify();"> -->
+							<form action="updateauctionQnA_Answer.do" method="post">
 							<c:choose>
 								<c:when test="${empty auctionqna.auction_qna_answer}">
 									<div class="QnA_comment_title">
@@ -118,6 +149,7 @@
 											</table>
 										</div>
 									</div><!-- QnA_comment_title -->
+									</form>
 								</c:when>
 								
 								<c:otherwise>
@@ -126,20 +158,20 @@
 											<table class='QnA_MODIFY2'>
 												<tr>
 													<td style='width: 90%'>답글</td>
-													<td style='width: 5%'><button
-															><a href="javascript:seller_QnAanswer_Modify();">수정</a></button></td>
-													<td style='width: 5%'><button>삭제</button></td>
+													<td style='width: 5%'>
+														<button onclick="seller_QnAanswer_Modify();">수정</button></td>
+													<td style='width: 5%'><button onclick="seller_QnAanswer_del();">삭제</button></td>
 												</tr>
 											</table>
 											<div class='QnA_comment_write'>
-												<table class='commont_modify3'>
-													<tr>
+												<table class='comment_modify3'id='comment_table'>
+													 <tr>
 														<td>${loginUser.member_name}</td>
+														<%-- <td>${auctionqna.auction_qna_answer_date}</td> --%>
 													</tr>
 													<tr>
 														<td>${auctionqna.auction_qna_answer}</td>
 													</tr>
-													
 												</table>
 					
 											</div>
@@ -147,9 +179,9 @@
 									</div>
 								</c:otherwise>
 							</c:choose>
-
+							<!-- </form> -->
 						</div><!-- 전체 remove -->
-					</form>
+					
 	<%-- <div class="QnA_comment">
 						<div class="QnA_comment_top_writer">
 							<div class="QnA_comment_writer">

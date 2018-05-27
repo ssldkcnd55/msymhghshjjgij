@@ -6,6 +6,7 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.net.URLEncoder;
 import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.Timestamp;
@@ -25,6 +26,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -343,24 +345,39 @@ public class AuctionController {
 	
 	/*경매 판매자 QnA답변 수정*/
 	@RequestMapping(value="seller_QnAanswer_Modify.do",method=RequestMethod.POST)
-	public void seller_QnAanswer_Modify(HttpServletResponse response,
+	@ResponseBody
+	public void seller_QnAanswer_Modify(HttpServletResponse response,AuctionQnA auctionqna,
 			@RequestParam(value="auction_qna_no")int auction_qna_no)throws IOException{
-		int seller_QnAanswer_Modify = auctionService.updateSellerAuctionQnAanswer(auction_qna_no);
+		System.out.println("Qna 답변 수정 실행!!!!!");
+		System.out.println("auction_qna_no : "+auction_qna_no+" / "+"답변 : "+auctionqna.getAuction_qna_answer());
+		int seller_QnAanswer_Modify = auctionService.updateSellerAuctionQnAanswer(auctionqna);
 		System.out.println("seller_QnAanswer_Modify : "+seller_QnAanswer_Modify);
 		AuctionQnA result = auctionService.selectseller_QnAanswer(auction_qna_no);
-	
+		System.out.println("restult : "+result.getAuction_no()+" / "+result.getAuction_qna_answer());
+			
+			 response.setContentType("application/json; charset=utf-8;");
 			 JSONObject json = new JSONObject();
-			 json.put("auction_qna_answer", result.getAuction_qna_answer());
+			 String answer = result.getAuction_qna_answer();
+			 json.put("auction_qna_answer", answer);
 			 json.put("auction_qna_answer_date", result.getAuction_qna_answer_date().toString());
 			 System.out.println(json.toJSONString());
 		
-        response.setContentType("application/json; charset=utf-8;");
+        
+       
         PrintWriter out = response.getWriter();
         out.print(json.toJSONString());
         out.flush();
         out.close();
-
+        //return json.toJSONString();
 		
+	}
+	
+	//경매 답글 삭제
+	@RequestMapping(value="delete_auction_qna_answer.do")
+	public String delete_auction_qna_answer(@RequestParam(value="auction_qna_no") int auction_qna_no) {
+		int result = auctionService.delete_auction_qna_answer(auction_qna_no);
+		
+		return "redirect:/moveauctionQnADetail.do?auction_qna_no="+auction_qna_no;
 	}
 	
 }

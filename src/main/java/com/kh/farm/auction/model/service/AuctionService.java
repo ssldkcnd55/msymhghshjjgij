@@ -45,7 +45,9 @@ public interface AuctionService {
 
 	ArrayList<Auction> selectHomeAuctionList();
 
-	int updateSellerAuctionQnAanswer(int auction_qna_no);
+	int updateSellerAuctionQnAanswer(AuctionQnA auctionqna);
 
 	AuctionQnA selectseller_QnAanswer(int auction_qna_no);
+
+	int delete_auction_qna_answer(int auction_qna_no);
 }
