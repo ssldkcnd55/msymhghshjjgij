@@ -61,4 +61,23 @@ public class MarketServiceImpl implements MarketService{
 		// TODO Auto-generated method stub
 		return marketDao.insertMarket_daily(sqlSession,daily);
 	}
+	@Override
+	public ArrayList<Market> selectHomeNewMarketList() {
+		// TODO Auto-generated method stub
+		return marketDao.selectHomeNewMarketList(sqlSession);
+	}
+	@Override
+	public ArrayList<Market> selectHomePopularMarketList() {
+		// TODO Auto-generated method stub
+		return marketDao.selectHomePopularMarketList(sqlSession);
+	}
+	public Review selectReviewDetail(int review_no) {
+		// TODO Auto-generated method stub
+		return marketDao.selectReviewDetail(sqlSession,review_no);
+	}
+	@Override
+	public Daily selectDailyDetail(int daily_no) {
+		// TODO Auto-generated method stub
+		return marketDao.selectDailyDetail(sqlSession,daily_no);
+	}
 }

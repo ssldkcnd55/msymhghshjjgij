@@ -76,4 +76,25 @@ public class MarketDao {
 		return sqlSession.insert("market.insertMarketDaily",daily);
 	}
 
+	public ArrayList<Market> selectHomeNewMarketList(SqlSessionTemplate sqlSession) {
+		// TODO Auto-generated method stub
+		List<Market> list =sqlSession.selectList("market.selectHomeNewMarketList");
+		return (ArrayList<Market>)list;
+	}
+
+	public ArrayList<Market> selectHomePopularMarketList(SqlSessionTemplate sqlSession) {
+		// TODO Auto-generated method stub
+		List<Market> list = sqlSession.selectList("market.selectHomePopularMarketList");
+		return (ArrayList<Market>)list;
+	}
+
+	public Review selectReviewDetail(SqlSessionTemplate sqlSession, int review_no) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("market.reviewDetail", review_no);
+	}
+
+	public Daily selectDailyDetail(SqlSessionTemplate sqlSession, int daily_no) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("market.dailyDetail", daily_no);
+	}
 }

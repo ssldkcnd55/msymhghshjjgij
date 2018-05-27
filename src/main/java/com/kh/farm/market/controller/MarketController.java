@@ -10,6 +10,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -25,6 +26,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.kh.farm.auction.model.vo.Auction;
 import com.kh.farm.market.model.service.MarketService;
 import com.kh.farm.market.model.vo.*;
 import com.kh.farm.payment.model.vo.*;
@@ -48,6 +50,7 @@ public class MarketController {
 	@RequestMapping(value="marketDetail.do")
 	public ModelAndView marketDetail(ModelAndView mv, Market mk) {
 		Market market = marketService.selectMarketInfo(mk.getMarket_no());
+		market.setMarket_intro(market.getMarket_intro().replaceAll("\"", "'"));
 		mv.setViewName("market/marketDetail");
 		mv.addObject("market",market);
 		return mv;
@@ -97,6 +100,7 @@ public class MarketController {
 		
 		for(Review rv : reviewList) {
 			JSONObject jsq = new JSONObject();
+			jsq.put("rnum",rv.getRnum());
 			jsq.put("review_no",rv.getReview_no());
 			jsq.put("review_title", rv.getReview_title());
 			jsq.put("member_id", rv.getMember_id());
@@ -115,6 +119,14 @@ public class MarketController {
 		out.append(sendJson.toJSONString());
 		out.flush();
 		out.close();
+	}
+	@RequestMapping("reviewDeatil.do")
+	public ModelAndView reviewDeatil(ModelAndView mv,@RequestParam() int review_no) {
+		Review review = marketService.selectReviewDetail(review_no);
+		review.setReview_contents(review.getReview_contents().replaceAll("\"", "'"));
+		mv.addObject("review", review);
+		mv.setViewName("market/marketReviewDetail");
+		return mv;
 	}
 	@RequestMapping(value="insertMarketMake.do",method=RequestMethod.POST)
 	public String insertMarket(Market market,HttpServletRequest request,
@@ -200,6 +212,19 @@ public class MarketController {
 		ArrayList<Daily> dailyList = marketService.selectDailyList(market);
 		
 		for (Daily sq : dailyList) {
+			int a = 0;
+			int b = 0;
+			while(a != -1) {
+				a = sq.getDaily_contents().indexOf("<");
+				if(a!=-1) {
+					b = sq.getDaily_contents().indexOf(">");
+					if(b!=-1) {
+						String first = sq.getDaily_contents().substring(0, a);
+						String second = sq.getDaily_contents().substring(b+1);
+						sq.setDaily_contents(first+second);
+					}
+				}
+			}
 			JSONObject jsq = new JSONObject();
 			jsq.put("daily_no", sq.getDaily_no());
 			jsq.put("daily_title", sq.getDaily_title());
@@ -226,5 +251,66 @@ public class MarketController {
 	public String marketDailyMake(Daily daily) {
 		int result = marketService.insertMarket_daily(daily);
 		return "forward:/marketDetail.do?market_no="+daily.getMarket_no();
+	}
+	
+	@RequestMapping("homeNewMarketList.do")
+	public void homeNewMarketList(HttpServletResponse response) throws IOException{
+		
+		ArrayList<Market> list= marketService.selectHomeNewMarketList();
+		JSONArray jarr = new JSONArray();
+		
+		for(Market m : list) {
+			//추출한 user를 json 객체에 담기
+			JSONObject jmarket = new JSONObject();
+			jmarket.put("market_title", m.getMarket_title());
+			jmarket.put("market_img",m.getMarket_img());
+			jmarket.put("market_price", m.getMarket_price());
+			jmarket.put("market_no", m.getMarket_no());
+			jarr.add(jmarket);
+			
+		}
+		//전송용 최종 json 객체 선언
+		JSONObject sendJson = new JSONObject();
+		sendJson.put("list", jarr);
+		response.setContentType("application/json; charset=utf-8");
+		PrintWriter out = response.getWriter();
+		out.append(sendJson.toJSONString());
+		out.flush();
+		out.close();
+	}
+	
+	@RequestMapping("homePopularMarketList.do")
+	public void homePopularMarketList(HttpServletResponse response) throws IOException {
+		ArrayList<Market> list= marketService.selectHomePopularMarketList();
+		JSONArray jarr = new JSONArray();
+		
+		for(Market m : list) {
+			//추출한 user를 json 객체에 담기
+			JSONObject jmarket = new JSONObject();
+			jmarket.put("market_title", m.getMarket_title());
+			jmarket.put("market_img",m.getMarket_img());
+			jmarket.put("market_price", m.getMarket_price());
+			jmarket.put("market_no", m.getMarket_no());
+			jarr.add(jmarket);
+			
+		}
+		//전송용 최종 json 객체 선언
+		JSONObject sendJson = new JSONObject();
+		sendJson.put("list", jarr);
+		response.setContentType("application/json; charset=utf-8");
+		PrintWriter out = response.getWriter();
+		out.append(sendJson.toJSONString());
+		out.flush();
+		out.close();
+		
+	}
+		
+	
+	@RequestMapping("marketDailyDetail.do")
+	public ModelAndView marketDailyDetail(ModelAndView mv,@RequestParam("daily_no")int daily_no ) {
+		Daily daily = marketService.selectDailyDetail(daily_no);
+		mv.addObject("daily",daily);
+		mv.setViewName("market/marketDailyDetail");
+		return mv;
 	}
 }

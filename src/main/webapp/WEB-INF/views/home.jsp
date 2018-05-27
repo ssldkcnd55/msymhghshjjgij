@@ -28,6 +28,7 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script>
 $(function(){
+	/* 홈에 경매리스트 */
 	$.ajax({
 		url:"homeAuctionList.do",
 		type:"post",
@@ -47,17 +48,17 @@ $(function(){
 		
 		for(var i in jsonObj.list){
 			if(i<4){
-				outValues1 += "<tr><td><div class='auction_img' style='background-image: url(\"/farm/resources/images/"+jsonObj.list[i].auction_img+"\");'></div>"
+				outValues1 += "<tr><td><a class='aTag1' href='AuctionDetail.do?auction_no="+jsonObj.list[i].auction_no+"'><div><div class='auction_img' style='background-image: url(\"/farm/resources/upload/auctionUpload/"+jsonObj.list[i].auction_img+"\");'></div>"
 				+"<div>"+jsonObj.list[i].auction_title+"</div></td><td>현재가  <span class='currentPrice'>"+jsonObj.list[i].auction_startprice+"</span>원<br><span class='directPrice'>즉구가 "+
-				jsonObj.list[i].auction_directprice+"원</span></td></tr>";
+				jsonObj.list[i].auction_directprice+"원</span></div></a></td></tr>";
 			}else if(i<8){
-				outValues2 += "<tr><td><div class='auction_img' style='background-image: url(\"/farm/resources/images/"+jsonObj.list[i].auction_img+"\");'></div>"
+				outValues2 += "<tr><td><a class='aTag1' href='AuctionDetail.do?auction_no="+jsonObj.list[i].auction_no+"'><div><div class='auction_img' style='background-image: url(\"/farm/resources/upload/auctionUpload/"+jsonObj.list[i].auction_img+"\");'></div>"
 				+"<div>"+jsonObj.list[i].auction_title+"</div></td><td>현재가  <span class='currentPrice'>"+jsonObj.list[i].auction_startprice+"</span>원<br><span class='directPrice'>즉구가 "+
-				jsonObj.list[i].auction_directprice+"원</span></td></tr>";
+				jsonObj.list[i].auction_directprice+"원</span></div></a></td></tr>";
 			}else if (i<12){
-				outValues3 += "<tr><td><div class='auction_img' style='background-image: url(\"/farm/resources/images/"+jsonObj.list[i].auction_img+"\");'></div>"
+				outValues3 += "<tr><td><a class='aTag1' href='AuctionDetail.do?auction_no="+jsonObj.list[i].auction_no+"'><div><div class='auction_img' style='background-image: url(\"/farm/resources/upload/auctionUpload/"+jsonObj.list[i].auction_img+"\");'></div>"
 				+"<div>"+jsonObj.list[i].auction_title+"</div></td><td>현재가  <span class='currentPrice'>"+jsonObj.list[i].auction_startprice+"</span>원<br><span class='directPrice'>즉구가 "+
-				jsonObj.list[i].auction_directprice+"원</span></td></tr>";
+				jsonObj.list[i].auction_directprice+"원</span></div></a></td></tr>";
 			}
 			count++;
 		
@@ -81,6 +82,81 @@ $(function(){
                 request.responseText + "\nerror" + errorData);
        }
 	});
+	
+	
+	/* 홈에 신상품  리스트*/
+	$.ajax({
+		url:"homeNewMarketList.do",
+		type:"post",
+	dataType: "JSON",
+	success: function(obj){
+		var objStr = JSON.stringify(obj);
+		var jsonObj = JSON.parse(objStr);
+		var outValues1 ="<div class='big_title'><h2 >신상품</h2></div><div class='box_border'>";
+		var outValues2 ="<div class='big_title'><a href='marketList.do'><div class='seeMore'>더보기 ></div></a></div><div class='box_border1'>";
+		
+		
+		outValues1 +="<a href='marketDetail.do?market_no="+jsonObj.list[0].market_no+"'><div class='box' style='background-image: url(\"/farm/resources/upload/marketUpload/"+jsonObj.list[0].market_img+"\");'></div>"+
+			"<div class='box_nametag'><div class='box_title'>"+jsonObj.list[0].market_title+"</div>"+
+		"<div class='box_price'>"+jsonObj.list[0].market_price+"원</div></div></a></div>";
+		
+		outValues2 +="<a href='marketDetail.do?market_no="+jsonObj.list[1].market_no+"'><div class='box' style='background-image: url(\"/farm/resources/upload/marketUpload/"+jsonObj.list[1].market_img+"\");'></div>"+
+			"<div class='box_nametag'><div class='box_title'>"+jsonObj.list[1].market_title+"</div>"+
+		"<div class='box_price'>"+jsonObj.list[1].market_price+"원</div></div></a></div>";
+		
+		
+		$(".bigbox1").html(outValues1);
+		$(".bigbox2").html(outValues2);
+		
+		$(function() {
+			$('.flexslider').flexslider({
+				animation : Modernizr.touch ? "slide" : "fade"
+			});
+
+			$(".tab_content").hide();
+			$(".tab_content:first").show();
+
+			$("ul.tabs li").click(function() {
+				$("ul.tabs li").removeClass("active").css("color", "#333");
+				//$(this).addClass("active").css({"color": "darkred","font-weight": "bolder"});
+				$(this).addClass("active").css("color", "darkred");
+				$(".tab_content").hide()
+				var activeTab = $(this).attr("rel");
+				$("#" + activeTab).fadeIn()
+			});
+		});
+		
+	},error: function(request,status,errorData){
+        alert("error code : " + request.status + "\nmessage" + 
+                request.responseText + "\nerror" + errorData);
+       }
+	});
+	
+	
+	/* 홈에 메인사진(인기 리스트) */
+	$.ajax({
+		url:"homePopularMarketList.do",
+		type:"post",
+	dataType: "JSON",
+	success: function(obj){
+		var objStr = JSON.stringify(obj);
+		var jsonObj = JSON.parse(objStr);
+		var outValues ="";
+		
+		for(var i in jsonObj.list){
+			outValues += "<li><a href='marketDetail.do?market_no="+jsonObj.list[i].market_no+"'><img src='/farm/resources/upload/marketUpload/"+jsonObj.list[i].market_img+"'/><div class='pretty'>"+
+			"<div class='pmarketTitle'>"+jsonObj.list[i].market_title+"<div class='nmarketPrice'>"+jsonObj.list[i].market_price+"</div></div>"+
+			"</div></a></li>";
+		}
+		
+		$(".slides").html(outValues);
+		
+	},error: function(request,status,errorData){
+        alert("error code : " + request.status + "\nmessage" + 
+                request.responseText + "\nerror" + errorData);
+       }
+	});
+	
 });
 </script>
 </head>
@@ -96,12 +172,21 @@ $(function(){
 				<div class="main_visual">
 					<div class="flexslider" style="direction: rtl; border: none;">
 						<ul class="slides">
-							<li><img src="/farm/resources/images/banana.jpg" /></li>
+							<!-- <li><img src="/farm/resources/images/banana.jpg" />
+							<div class="pretty">
+							<div class="pmarketTitle">
+					[영미네 농장] 신선한 바나나 한송이
+					<div class="nmarketPrice">8,700원</div></div>
+					</div></li>
+							
 							<li><img src="/farm/resources/images/apple.jpg" /></li>
 							<li><img src="/farm/resources/images/blueberry.jpg" /></li>
-							<li><img src="/farm/resources/images/jamong.jpg" /></li>
+							<li><img src="/farm/resources/images/jamong.jpg" /></li> -->
 						</ul>
+						
 					</div>
+					
+					
 				</div>
 				<div class="tab_main">
 					<ul class="tabs">
@@ -137,11 +222,12 @@ $(function(){
 				</div>
 
 
-				<div class="bigbox">
-					<div class="big_title">
-						<h2>인기상품</h2>
+				<div class="bigbox1">
+					<!-- <div class="big_title">
+						<h2 >신상품</h2>
+						
 					</div>
-
+				
 					<div class="box_border">
 						<div class="box"
 							style="background-image: url('/farm/resources/images/1481854976669l0.jpg');"></div>
@@ -151,13 +237,15 @@ $(function(){
 
 							<div class="box_price">10,500원</div>
 						</div>
-					</div>
+					</div> -->
 				</div>
 
 
-				<div class="bigbox">
-					<div class="big_title"></div>
-					<div class="box_border">
+				<div class="bigbox2">
+					<!-- <div class="big_title">
+					<a href="marketList.do"><div class="seeMore">더보기 ></div></a>
+					</div>
+					<div class="box_border1">
 						<div class="box"
 							style="background-image: url('/farm/resources/images/1483669170519l0.jpg');"></div>
 						<div class="box_nametag">
@@ -165,12 +253,14 @@ $(function(){
 
 							<div class="box_price">10,500원</div>
 						</div>
-					</div>
+					</div> -->
 				</div>
 
-				<div class="bigbox2">
+				<div class="bigbox3">
 					<div class="big_title2">
+					<a href="AuctionList_controller.do"><div class="seeMore">더보기 ></div></a>
 						<h2>경매</h2>
+						
 					</div>
 					<div class="box_border2">
 						<div class="box2">
@@ -356,22 +446,6 @@ $(function(){
 	src="/farm/resources/js/jquery.flexslider.js"></script>
 
 <script>
-	$(function() {
-		$('.flexslider').flexslider({
-			animation : Modernizr.touch ? "slide" : "fade"
-		});
-
-		$(".tab_content").hide();
-		$(".tab_content:first").show();
-
-		$("ul.tabs li").click(function() {
-			$("ul.tabs li").removeClass("active").css("color", "#333");
-			//$(this).addClass("active").css({"color": "darkred","font-weight": "bolder"});
-			$(this).addClass("active").css("color", "darkred");
-			$(".tab_content").hide()
-			var activeTab = $(this).attr("rel");
-			$("#" + activeTab).fadeIn()
-		});
-	});
+	
 </script>
 </html>

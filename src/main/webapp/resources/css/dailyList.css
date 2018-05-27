@@ -8,6 +8,13 @@
    border-collapse: collapse;
 
 }
+.aTag{
+	text-decoration: none;
+	color:black;
+}
+.aTag:hover{
+	text-decoration: underline;
+}
 .dailyMakeBtn{
 	background: #512772;
 	width:100px;

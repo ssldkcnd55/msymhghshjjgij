@@ -26,4 +26,13 @@ public interface MarketService {
 
 	int insertMarket_daily(Daily daily);
 
+	ArrayList<Market> selectHomeNewMarketList();
+
+	ArrayList<Market> selectHomePopularMarketList();
+
+
+	Review selectReviewDetail(int review_no);
+
+	Daily selectDailyDetail(int daily_no);
+
 }

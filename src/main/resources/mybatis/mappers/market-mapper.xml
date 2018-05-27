@@ -34,6 +34,9 @@
 	 select count(*) from review where market_no = #{market_no}
 	 ]]>
 	</select>
+	<select id="reviewDetail" parameterType="int" resultType="Review">
+		select * from review where review_no = #{review_no}
+	</select>
 
 <insert id="insertMarket" parameterType="Market" flushCache="true" useGeneratedKeys="true">
 	<![CDATA[
@@ -67,4 +70,23 @@
 		)
 	]]>
 	</insert>
+	
+	<select id="selectHomeNewMarketList" resultType="market">
+	<![CDATA[
+		select * from(select rownum rnum,market_no,category_no,member_id,
+		market_title,market_note,market_img,market_releasedate,market_amount,
+		market_intro,market_complete,market_price from market order by market_no desc) market where rnum>=1 and rnum<=2 
+	]]>
+	</select>
+	
+	<select id="selectHomePopularMarketList" resultType="market">
+	<![CDATA[
+		select * from market where market_no in ((select market_no from(select market_no,rownum rnum from(select count(*), market_no from buy 
+		group by market_no order by count(*) desc))where rnum>=1 and rnum<=4))
+	]]>
+	</select>
+	
+	<select id="dailyDetail" parameterType="int" resultType="Daily">
+		select * from daily where daily_no = #{daily_no}
+	</select>
 </mapper>

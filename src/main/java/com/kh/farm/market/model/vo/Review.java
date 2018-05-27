@@ -18,13 +18,14 @@ public class Review implements java.io.Serializable{
 	private Date review_date;//리뷰 작성일
 	private String review_title;//리뷰 제목
 	private String review_contents;//리뷰 내용
-	
+	private int rnum;
 	public Review() {
 	
 	}
 
+
 	public Review(int review_no, String member_id, int market_no, Date review_date, String review_title,
-			String review_contents) {
+			String review_contents, int rnum) {
 		super();
 		this.review_no = review_no;
 		this.member_id = member_id;
@@ -32,7 +33,19 @@ public class Review implements java.io.Serializable{
 		this.review_date = review_date;
 		this.review_title = review_title;
 		this.review_contents = review_contents;
+		this.rnum = rnum;
 	}
+
+
+	public int getRnum() {
+		return rnum;
+	}
+
+
+	public void setRnum(int rnum) {
+		this.rnum = rnum;
+	}
+
 
 	@Override
 	public String toString() {
