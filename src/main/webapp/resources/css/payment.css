@@ -11,6 +11,11 @@
    float:left;
 } */
 /* 테이블 */
+
+.goods_img{
+	width: 117px;
+	height: 119px;
+}
 .pay_top_table {
 	border-collapse:collapse;
    width: 100%;

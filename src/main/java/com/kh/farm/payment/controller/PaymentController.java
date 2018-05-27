@@ -34,8 +34,7 @@ public class PaymentController {
 		dm.put("buyList", buyNoList);
 		
 		ArrayList<ShowBasket> sbl = (ArrayList<ShowBasket>)paymentService.selectPaymentInfo(dm);
-		
-		
+	
 		
 		mv.addObject("sbl",sbl);
 		mv.setViewName("payment/payment");

@@ -22,12 +22,15 @@ public class Payment implements java.io.Serializable {
 	private String buy_tel; // 배송지 전화번호
 	private String buy_name; // 구매자 이름
 	private String buy_status; // 거래 상태
-
+	private String buy_request; // 배송 요청 사항
+	
+	
 	public Payment() {
 	}
 
+
 	public Payment(int buy_no, int group_no, int market_no, String member_id, Date buy_date, int buy_amount,
-			String buy_addr, String buy_tel, String buy_name, String buy_status) {
+			String buy_addr, String buy_tel, String buy_name, String buy_status, String buy_request) {
 		super();
 		this.buy_no = buy_no;
 		this.group_no = group_no;
@@ -39,95 +42,129 @@ public class Payment implements java.io.Serializable {
 		this.buy_tel = buy_tel;
 		this.buy_name = buy_name;
 		this.buy_status = buy_status;
+		this.buy_request = buy_request;
 	}
+
 
 	@Override
 	public String toString() {
 		return "Payment [buy_no=" + buy_no + ", group_no=" + group_no + ", market_no=" + market_no + ", member_id="
 				+ member_id + ", buy_date=" + buy_date + ", buy_amount=" + buy_amount + ", buy_addr=" + buy_addr
-				+ ", buy_tel=" + buy_tel + ", buy_name=" + buy_name + ", buy_status=" + buy_status + "]";
+				+ ", buy_tel=" + buy_tel + ", buy_name=" + buy_name + ", buy_status=" + buy_status + ", buy_request="
+				+ buy_request + "]";
 	}
+
 
 	public int getBuy_no() {
 		return buy_no;
 	}
 
+
 	public void setBuy_no(int buy_no) {
 		this.buy_no = buy_no;
 	}
+
 
 	public int getGroup_no() {
 		return group_no;
 	}
 
+
 	public void setGroup_no(int group_no) {
 		this.group_no = group_no;
 	}
+
 
 	public int getMarket_no() {
 		return market_no;
 	}
 
+
 	public void setMarket_no(int market_no) {
 		this.market_no = market_no;
 	}
+
 
 	public String getMember_id() {
 		return member_id;
 	}
 
+
 	public void setMember_id(String member_id) {
 		this.member_id = member_id;
 	}
+
 
 	public Date getBuy_date() {
 		return buy_date;
 	}
 
+
 	public void setBuy_date(Date buy_date) {
 		this.buy_date = buy_date;
 	}
+
 
 	public int getBuy_amount() {
 		return buy_amount;
 	}
 
+
 	public void setBuy_amount(int buy_amount) {
 		this.buy_amount = buy_amount;
 	}
+
 
 	public String getBuy_addr() {
 		return buy_addr;
 	}
 
+
 	public void setBuy_addr(String buy_addr) {
 		this.buy_addr = buy_addr;
 	}
+
 
 	public String getBuy_tel() {
 		return buy_tel;
 	}
 
+
 	public void setBuy_tel(String buy_tel) {
 		this.buy_tel = buy_tel;
 	}
+
 
 	public String getBuy_name() {
 		return buy_name;
 	}
 
+
 	public void setBuy_name(String buy_name) {
 		this.buy_name = buy_name;
 	}
+
 
 	public String getBuy_status() {
 		return buy_status;
 	}
 
+
 	public void setBuy_status(String buy_status) {
 		this.buy_status = buy_status;
 	}
 
+
+	public String getBuy_request() {
+		return buy_request;
+	}
+
+
+	public void setBuy_request(String buy_request) {
+		this.buy_request = buy_request;
+	}
+
+	
 	
 
 }
