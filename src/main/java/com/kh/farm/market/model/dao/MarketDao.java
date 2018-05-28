@@ -1,6 +1,7 @@
 package com.kh.farm.market.model.dao;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import org.eclipse.jdt.internal.compiler.flow.InsideSubRoutineFlowContext;
@@ -12,6 +13,7 @@ import com.kh.farm.market.model.vo.Daily;
 import com.kh.farm.market.model.vo.Market;
 import com.kh.farm.market.model.vo.Reply;
 import com.kh.farm.market.model.vo.Review;
+import com.kh.farm.market.model.vo.UnderReply;
 import com.kh.farm.qna.model.vo.Market_qna;
 
 @Repository
@@ -99,9 +101,27 @@ public class MarketDao {
 		return sqlSession.selectOne("market.dailyDetail", daily_no);
 	}
 
-	public ArrayList<Reply> selectReviewReply(SqlSessionTemplate sqlSession, int review_no) {
+	public ArrayList<Reply> selectReviewReply(SqlSessionTemplate sqlSession, int review_no,int currentPage) {
 		// TODO Auto-generated method stub
-		List<Reply> list = sqlSession.selectList("market.reviewReply", review_no);
+		int startRow = (currentPage-1)*10+1; 
+		int endRow = startRow+9;
+		PageNumber pnum = new PageNumber();
+		pnum.setStartRow(startRow);
+		pnum.setEndRow(endRow);
+		pnum.setReview_no(review_no);
+		List<Reply> list = sqlSession.selectList("market.reviewReply", pnum);
 		return (ArrayList<Reply>)list;
+	}
+
+	public int selectReviewReplyCount(SqlSessionTemplate sqlSession, int review_no) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("market.reviewReplyCount", review_no);
+	}
+
+	public ArrayList<UnderReply> selectReviewUnderReply(SqlSessionTemplate sqlSession,
+			HashMap<String, ArrayList<Integer>> map) {
+		// TODO Auto-generated method stub
+		List<UnderReply> list = sqlSession.selectList("market.reviewUnderReply", map);
+		return (ArrayList<UnderReply>)list;
 	}
 }

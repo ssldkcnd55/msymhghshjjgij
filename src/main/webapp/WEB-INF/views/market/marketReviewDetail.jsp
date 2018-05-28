@@ -56,6 +56,15 @@
 						+"<span>"+jsonObj.list[i].reply_date+"</span>&nbsp;<span onclick='comment_modify();'>수정</span>&nbsp;"
 						+"<span onclick='comment_delete();'>삭제</span>&nbsp;</div><p>"+jsonObj.list[i].reply_contents+"</p>"
 						+"</div>";
+						for(var j in jsonObj.list2){
+							if(jsonObj.list[i].reply_no == jsonObj.list2[j].reply_no){
+								outValues+="<div class='QnA_comment_top_writer' style='width:930px;padding-left:30px;'><div class='QnA_comment_writer'>"
+									+"<img alt='' src='/Farm/img/user.png'>&nbsp; <span>└"+jsonObj.list2[j].member_id+"</span>&nbsp;"
+									+"<span>"+jsonObj.list2[j].under_reply_date+"</span>&nbsp;<span onclick='comment_modify();'>수정</span>&nbsp;"
+									+"<span onclick='comment_delete();'>삭제</span>&nbsp;</div><p>"+jsonObj.list2[j].under_reply_content+"</p>"
+									+"</div>";
+							}
+						}
 				}
 				<c:if test="${!empty loginUser}">
 					outValues+="<form action='/farm/marketReviewReply.do' method='post'>"
@@ -64,8 +73,33 @@
 						+"<div class='QnA_comment_top_writer'><textarea class='answerArea' name='review_contents'></textarea>"
 						+"<input type='submit' class='answerBtn' value='작성'></div></form>";
 				</c:if>
+				var startPage= jsonObj.list[0].startPage;
+				var endPage = jsonObj.list[0].endPage;
+				var maxPage = jsonObj.list[0].maxPage;
+				var currentPage = jsonObj.list[0].currentPage;
 				
+				var values ="<div class='pagination'>";
+				if(startPage>5){
+					values+= "<a href='javascript:qnaPage("+(startPage-1)+")'>&laquo;</a>" 
+				}else{
+					values+="<a>&laquo;</a>";	
+				}
+				for(var i=startPage;i<=endPage;i++  ){
+					if(i==currentPage){
+						values+= "<a class='active'>"+i+"</a>";
+					}else{
+						values+= "<a href='javascript:qnaPage("+i+");'>"+i+"</a>";
+					}
+				}
+				if(endPage<maxPage){
+					values+="<a href='javascript:qnaPage("+(endPage+1)+")'>&raquo;</a>";
+					
+				}else{
+					values+="<a>&raquo;</a>";
+				}
+				values+="</div>"
 				$(".board-wrap").append(outValues);
+				$(".board-wrap").append(values);
 			},error: function(request,status,errorData){
 				alert("error code : " + request.status + "\nmessage" + 
 						request.responseText + "\nerror" + errorData);

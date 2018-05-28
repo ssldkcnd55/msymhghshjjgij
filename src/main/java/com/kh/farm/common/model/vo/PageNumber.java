@@ -8,19 +8,69 @@ public class PageNumber implements java.io.Serializable{
 	private int market_no;
 	private int auction_no;
 	private String member_id;
-	
+	private int review_no;
+	private int daily_no;
 	
 	public PageNumber() {}
 
 	
-	public PageNumber(int startRow, int endRow, int market_no,int auction_no,String member_id) {
+	
+
+
+	public PageNumber(int startRow, int endRow, int market_no, int auction_no, String member_id, int review_no,
+			int daily_no) {
 		super();
 		this.startRow = startRow;
 		this.endRow = endRow;
 		this.market_no = market_no;
 		this.auction_no = auction_no;
 		this.member_id = member_id;
+		this.review_no = review_no;
+		this.daily_no = daily_no;
 	}
+
+
+
+
+
+	public int getReview_no() {
+		return review_no;
+	}
+
+
+
+
+
+	public void setReview_no(int review_no) {
+		this.review_no = review_no;
+	}
+
+
+
+
+
+	public int getDaily_no() {
+		return daily_no;
+	}
+
+
+
+
+
+	public void setDaily_no(int daily_no) {
+		this.daily_no = daily_no;
+	}
+
+
+
+
+
+	public void setMember_id(String member_id) {
+		this.member_id = member_id;
+	}
+
+
+
 
 
 	public int getMarket_no() {

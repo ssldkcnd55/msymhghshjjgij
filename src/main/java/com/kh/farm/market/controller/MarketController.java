@@ -8,6 +8,7 @@ import java.io.PrintWriter;
 import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.ServletRequest;
@@ -307,29 +308,57 @@ public class MarketController {
 	
 	
 	@RequestMapping("marketDailyDetail.do")
-	public ModelAndView marketDailyDetail(ModelAndView mv,@RequestParam("daily_no")int daily_no ) {
+	public ModelAndView marketDailyDetail(ModelAndView mv,@RequestParam("daily_no")int daily_no) {
 		Daily daily = marketService.selectDailyDetail(daily_no);
 		mv.addObject("daily",daily);
 		mv.setViewName("market/marketDailyDetail");
 		return mv;
 	}
 	@RequestMapping(value="ajaxReviewReply.do",method=RequestMethod.POST)
-	public void ajaxReviewReply(@RequestParam("review_no")int review_no,HttpServletResponse response) throws IOException{
-		ArrayList<Reply> list = marketService.selectReviewReply(review_no);
+	public void ajaxReviewReply(@RequestParam("review_no")int review_no,HttpServletResponse response,@RequestParam("page") int currentPage ) throws IOException{
+		ArrayList<Reply> list = marketService.selectReviewReply(review_no,currentPage);
 		JSONArray jarr = new JSONArray();
-		
+		JSONArray jarr2 = new JSONArray();
+		int limit = 10;
+		int listCount = marketService.selectReviewReplyCount(review_no);
+		System.out.println(listCount);
+		int maxPage=(int)((double)listCount/limit+0.9); //ex) 41개면 '5'페이지나와야되는데 '5'를 계산해줌
+		int startPage=((int)((double)currentPage/5+0.8)-1)*5+1;
+		int endPage=startPage+5-1;
+		if(maxPage<endPage) {
+			endPage = maxPage;
+		}
+		ArrayList<Integer> replyNumber = new ArrayList<Integer>();
 		for(Reply r : list) {
 			//추출한 user를 json 객체에 담기
+			replyNumber.add(r.getReply_no());
 			JSONObject jReply = new JSONObject();
 			jReply.put("reply_no", r.getReply_no());
 			jReply.put("reply_contents",r.getReply_contents());
 			jReply.put("reply_date", r.getReply_date().toString());
 			jReply.put("member_id", r.getMember_id());
+			jReply.put("startPage", startPage);
+			jReply.put("endPage", endPage);
+			jReply.put("maxPage", maxPage);
+			jReply.put("currentPage",currentPage);
 			jarr.add(jReply);
+		}
+		HashMap<String,ArrayList<Integer>> map = new HashMap<String,ArrayList<Integer>>();
+		map.put("underReplyList", replyNumber);
+		ArrayList<UnderReply> underList = marketService.selectReviewUnderReply(map);
+		for(UnderReply ur : underList) {
+			JSONObject jReply = new JSONObject();
+			jReply.put("under_reply_no", ur.getUnder_reply_no());
+			jReply.put("reply_no", ur.getReply_no());
+			jReply.put("member_id", ur.getMember_id());
+			jReply.put("under_reply_content", ur.getUnder_reply_content());
+			jReply.put("under_reply_date", ur.getUnder_reply_date().toString());
+			jarr2.add(jReply);
 		}
 		//전송용 최종 json 객체 선언
 		JSONObject sendJson = new JSONObject();
 		sendJson.put("list", jarr);
+		sendJson.put("list2", jarr2);
 		response.setContentType("application/json; charset=utf-8");
 		PrintWriter out = response.getWriter();
 		out.append(sendJson.toJSONString());

@@ -14,7 +14,6 @@ import com.kh.farm.notice.model.vo.Notice;
 @Controller
 public class MoveController {
 	public MoveController() {}
-	
 
 	@RequestMapping("moveSmartEditor2Skin.do")
 	public String moveSmartEditor2Skin()

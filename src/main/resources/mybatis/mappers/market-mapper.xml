@@ -90,7 +90,21 @@
 		select * from daily where daily_no = #{daily_no}
 	</select>
 	
-	<select id="reviewReply" parameterType="int" resultType="Reply">
-		select * from reply where review_no = #{review_no}
+	<select id="reviewReply" parameterType="PageNumber" resultType="Reply"><!-- 여기 page처리해야됨!  -->
+	<![CDATA[
+		select * from(select rownum rnum,reply_no,reply_contents,reply_date,member_id from
+		(select reply_no,reply_contents,reply_date,member_id from (select * from reply where review_no = #{review_no} )order by reply_no desc))
+		where rnum >=#{startRow} and rnum <= #{endRow}
+	]]>
+	</select>
+	<select id="reviewReplyCount" parameterType="int" resultType="int">
+		select count(*) from reply where review_no = #{review_no}
+	</select>
+	<select id="reviewUnderReply" parameterType="hashmap" resultType="UnderReply">
+		select * from under_reply where reply_no in
+		<foreach collection="underReplyList" index="index" item="item" open="(" close=")" separator="," >
+			#{item}
+		</foreach>
+		order by under_reply_date
 	</select>
 </mapper>

@@ -1,11 +1,13 @@
 package com.kh.farm.market.model.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import com.kh.farm.market.model.vo.Daily;
 import com.kh.farm.market.model.vo.Market;
 import com.kh.farm.market.model.vo.Reply;
 import com.kh.farm.market.model.vo.Review;
+import com.kh.farm.market.model.vo.UnderReply;
 import com.kh.farm.qna.model.vo.Market_qna;
 
 public interface MarketService {
@@ -36,6 +38,10 @@ public interface MarketService {
 
 	Daily selectDailyDetail(int daily_no);
 
-	ArrayList<Reply> selectReviewReply(int review_no);
+	ArrayList<Reply> selectReviewReply(int review_no,int currentPage);
+
+	int selectReviewReplyCount(int review_no);
+
+	ArrayList<UnderReply> selectReviewUnderReply(HashMap<String, ArrayList<Integer>> map);
 
 }

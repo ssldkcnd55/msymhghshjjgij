@@ -1,6 +1,7 @@
 package com.kh.farm.market.model.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,7 @@ import com.kh.farm.market.model.vo.Daily;
 import com.kh.farm.market.model.vo.Market;
 import com.kh.farm.market.model.vo.Reply;
 import com.kh.farm.market.model.vo.Review;
+import com.kh.farm.market.model.vo.UnderReply;
 import com.kh.farm.qna.model.vo.Market_qna;
 
 @Service
@@ -82,8 +84,18 @@ public class MarketServiceImpl implements MarketService{
 		return marketDao.selectDailyDetail(sqlSession,daily_no);
 	}
 	@Override
-	public ArrayList<Reply> selectReviewReply(int review_no) {
+	public ArrayList<Reply> selectReviewReply(int review_no,int currentPage) {
 		// TODO Auto-generated method stub
-		return marketDao.selectReviewReply(sqlSession,review_no);
+		return marketDao.selectReviewReply(sqlSession,review_no,currentPage);
+	}
+	@Override
+	public int selectReviewReplyCount(int review_no) {
+		// TODO Auto-generated method stub
+		return marketDao.selectReviewReplyCount(sqlSession,review_no);
+	}
+	@Override
+	public ArrayList<UnderReply> selectReviewUnderReply(HashMap<String, ArrayList<Integer>> map) {
+		// TODO Auto-generated method stub
+		return marketDao.selectReviewUnderReply(sqlSession,map);
 	}
 }
