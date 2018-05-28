@@ -24,8 +24,18 @@ public class PaymentDao {
 
 	public int insertFirstPayment(SqlSessionTemplate sqlSession, Payment pm) {
 		sqlSession.insert("payment.insertFirstPayment", pm);
-		System.out.println("dao: "+pm.getGroup_no());
+
 		return pm.getGroup_no();
+	}
+
+	public int insertNewPayment(SqlSessionTemplate sqlSession, Payment pm) {
+	
+		return sqlSession.insert("payment.insertNewPayment", pm);
+	}
+
+	public int deleteFirstPayment(SqlSessionTemplate sqlSession, int group_no) {
+		
+		return sqlSession.delete("payment.deleteFirstPayment",group_no);
 	}
 
 }

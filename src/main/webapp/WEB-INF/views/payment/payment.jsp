@@ -108,7 +108,7 @@ var product_buy_amount=[];
                </tr>
                <tr>
                	  <td class="info_head">연락처</td>
-                  <td><input type="text" id="user_phone" name="user_phone"value="${loginUser.member_tel }"> </td>
+                  <td><input type="text" autocomplete="tel" id="user_phone" name="user_phone"value="${loginUser.member_tel }"> </td>
                   <td class="relief_number"><input type="checkbox"  name="relief_number" value="delivery_username_phone"/>안심번호 사용 <span class="info_relief" onmouseleave="removeInfoRelief()" onmouseover="printInfoRelief()">?
                   <div class="InfoReliefDiv">
             <h5>안심번호 서비스 안내</h5>
@@ -130,7 +130,7 @@ var product_buy_amount=[];
                   <td colspan="2">
                   	<select id="request">
                   	<option selected="selected" >배송시 요청사항 선택</option>
-                  	<option >부재시 셩비실에 맡겨주세요.</option>
+                  	<option >부재시 경비실에 맡겨주세요.</option>
                   	<option>부재시 휴대폰으로 연락바랍니다.</option>
                   	<option>집 앞에 놓아주세요.</option>
                   	<option>집 앞에 놓아주세요.</option>
@@ -148,7 +148,7 @@ var product_buy_amount=[];
                </tr>
                <tr>
                	  <td class="info_head">연락처</td>
-                  <td><input type="text" id="new_user_phone" name="user_phone" value=""> </td>
+                  <td><input type="text" autocomplete="tel" id="new_user_phone" name="user_phone" value=""> </td>
                   <td class="relief_number"><input type="checkbox"  name="relief_number" value="delivery_username_phone"/>안심번호 사용 <span class="info_relief" onmouseleave="removeInfoRelief()" onmouseover="printInfoRelief()">?
                   <div class="InfoReliefDiv">
             <h5>안심번호 서비스 안내</h5>
@@ -171,7 +171,7 @@ var product_buy_amount=[];
                   <td colspan="2">
                   	<select id="new_request">
                   	<option selected="selected" >배송시 요청사항 선택</option>
-                  	<option >부재시 셩비실에 맡겨주세요.</option>
+                  	<option >부재시 경비실에 맡겨주세요.</option>
                   	<option>부재시 휴대폰으로 연락바랍니다.</option>
                   	<option>집 앞에 놓아주세요.</option>
                   	<option>집 앞에 놓아주세요.</option>
@@ -217,7 +217,8 @@ var product_buy_amount=[];
              <br>
           
           <div>
-          <input type="button" onclick="payment()" value="결제하기" class="buy"/>
+          <input type="button" onclick="payment()" value="결제하기" class="buy"/> 
+         <!--  <input type="button" onclick="test()" value="결제하기" class="buy"/> -->
           </div>
           </div>
          </div>          

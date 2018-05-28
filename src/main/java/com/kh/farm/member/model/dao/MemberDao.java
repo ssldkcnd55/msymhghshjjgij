@@ -73,4 +73,14 @@ public class MemberDao {
 		int listCount = sqlSession.selectOne("memberCount");
 		return listCount;
 	}
+
+	public int change_app(SqlSessionTemplate sqlSession, String member_id) {
+		// TODO Auto-generated method stub
+		return sqlSession.update("change_approval", member_id);
+	}
+
+	public int change_with(SqlSessionTemplate sqlSession, String member_id) {
+		// TODO Auto-generated method stub
+		return sqlSession.update("change_withdraw", member_id);
+	}
 }
