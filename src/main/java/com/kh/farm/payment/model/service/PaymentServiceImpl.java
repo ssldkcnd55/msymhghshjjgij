@@ -31,4 +31,15 @@ public class PaymentServiceImpl implements PaymentService{
 		
 		return paymentDao.insertFirstPayment(sqlSession,pm);
 	}
+	@Override
+	public int insertNewPayment(Payment pm) {
+		
+		return paymentDao.insertNewPayment(sqlSession,pm);
+	}
+	@Override
+	public int deleteFirstPayment(int group_no) {
+		
+		return paymentDao.deleteFirstPayment(sqlSession,group_no);
+	}
+	
 }
