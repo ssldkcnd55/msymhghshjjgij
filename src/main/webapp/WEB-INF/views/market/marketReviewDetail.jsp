@@ -36,7 +36,45 @@
 		location.href = "marketReviewDelete.do?market_qna_no=${qna.market_qna_no}&market_no=${qna.market_no}";
 	}
 </script>
+<script>
+	$(function(){
+		$.ajax({
+			url: "ajaxReviewReply.do",
+			type: "post",
+			data : {page : 1,
+				review_no: ${review.review_no}
+			},
+			dataType: "JSON",
+			success: function(obj){
+				var objStr = JSON.stringify(obj);
+				var jsonObj = JSON.parse(objStr);
+				//문자열 변수 준비
+				var outValues = "<div class='QnA_comment_title'><h3>댓글</h3></div><div class='QnA_comment'>";
+				for(var i in jsonObj.list){
+					outValues+="<div class='QnA_comment_top_writer'><div class='QnA_comment_writer'>"
+						+"<img alt='' src='/Farm/img/user.png'>&nbsp; <span>"+jsonObj.list[i].member_id+"</span>&nbsp;"
+						+"<span>"+jsonObj.list[i].reply_date+"</span>&nbsp;<span onclick='comment_modify();'>수정</span>&nbsp;"
+						+"<span onclick='comment_delete();'>삭제</span>&nbsp;</div><p>"+jsonObj.list[i].reply_contents+"</p>"
+						+"</div>";
+				}
+				<c:if test="${!empty loginUser}">
+					outValues+="<form action='/farm/marketReviewReply.do' method='post'>"
+						+"<input type='hidden' value='${review.review_no }' name='review_no'>"
+						+"<input type='hidden' value='${loginUser.member_id }' name='member_id'>"
+						+"<div class='QnA_comment_top_writer'><textarea class='answerArea' name='review_contents'></textarea>"
+						+"<input type='submit' class='answerBtn' value='작성'></div></form>";
+				</c:if>
+				
+				$(".board-wrap").append(outValues);
+			},error: function(request,status,errorData){
+				alert("error code : " + request.status + "\nmessage" + 
+						request.responseText + "\nerror" + errorData);
+			}
+		});
+	});
 
+
+</script>
 
 </head>
 <body>
@@ -72,49 +110,6 @@
 					</div>
 					<!-- QnA_full  -->
 					
-
-					<%-- <c:if test="${empty review.market_qna_answer}">
-						<c:if test="${loginUser.member_id eq member_id}">
-							<div class="QnA_comment_title">
-								<h3>답변</h3>
-							</div>
-							<div class="QnA_comment">
-
-								<form action="/farm/marketQnaAnswer.do" method="post">
-									<input type="hidden" value="${qna.market_qna_no }" name="market_qna_no">
-									<input type="hidden" value="${member_id }" name="member_id">
-									<div class="QnA_comment_top_writer">
-										<textarea class="answerArea" name="market_qna_answer"></textarea>
-										<input type="submit" class="answerBtn" value="작성">
-
-									</div>
-								</form>
-							</div>
-						</c:if>
-					</c:if>
-					<c:if test="${!empty qna.market_qna_answer}">
-
-						<div class="QnA_comment_title">
-							<h3>답변</h3>
-						</div>
-						<div class="QnA_comment">
-							<div class="QnA_comment_top_writer">
-								<div class="QnA_comment_writer">
-									<img alt="" src="/Farm/img/user.png">&nbsp; <span>${member_id }</span>&nbsp;
-									<!-- 아이디 -->
-									<span>${qna.market_qna_answer_date }</span>&nbsp;
-									<!-- 작성일 -->
-									<c:if test="${loginUser.member_id eq member_id}">
-										<span onclick="comment_modify();">수정</span>&nbsp; <span
-											onclick="comment_delete();">삭제</span>&nbsp;
-											</c:if>
-								</div>
-								<p>${qna.market_qna_answer}</p>
-							</div>
-						</div>
-					</c:if> --%>
-
-
 				</div>
 				<!-- board-wrap -->
 			</div>

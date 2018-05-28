@@ -89,4 +89,8 @@
 	<select id="dailyDetail" parameterType="int" resultType="Daily">
 		select * from daily where daily_no = #{daily_no}
 	</select>
+	
+	<select id="reviewReply" parameterType="int" resultType="Reply">
+		select * from reply where review_no = #{review_no}
+	</select>
 </mapper>

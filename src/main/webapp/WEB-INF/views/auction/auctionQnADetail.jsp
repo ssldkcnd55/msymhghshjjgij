@@ -31,6 +31,7 @@
 	
 	/* 수정 버튼 누르면 수정할수 있게 열림 */
 	function seller_QnAanswer_Modify(){
+		var answer = $('#qna_answer_td').text();
 		$(".remove").html(
 				"<div class='QnA_comment_title2'>"+
 				"<table class='QnA_MODIFY2'><tr><td style='width:90%'>답글</td>"+
@@ -39,8 +40,8 @@
 				"<div class='QnA_comment_write'>"+
 				"<table class='commont_modify2'><tr>"+
 				"<td>${loginUser.member_name}</td>"+
-				"<td><textarea rows='5' cols='85' name='auction_qna_answer' id='qna_answer'>"+
-				"${auctionqna.auction_qna_answer}</textarea></td>"+
+				"<td><textarea rows='5' cols='85' name='auction_qna_answer' id='qna_answer'>"
+				+answer+"</textarea></td>"+
 				"<td><input type='button' value='확인' onclick='qna_answer_submit();' class='commont_modify2_button' /></td>"+
 				"</tr></table></form></div></div></div>"
 		);
@@ -52,7 +53,6 @@
 		이러면 수정하려는 내용은 못가져오고 디테일로 뿌릴때 가져온 기존 답글 내용만 가져오게됩니다
 		그래서 수정전의 내용을 가지고 update문으로 가니까 update가 안된다고 생각한것입니다*/
 		var answer = $('#qna_answer').val(); //textarea에 id값을 줘서 입력한 값을 가져옵니다
-		//alert(answer);
 		$.ajax({
 			url:"seller_QnAanswer_Modify.do",
 			type:"post",
@@ -72,10 +72,10 @@
 		        "<table class='comment_modify3'id='comment_table'>"
 					+"<tr>"
 						+"<td>${loginUser.member_name}</td>"
-						+"<td>"+json.auction_qna_answer_date+"</td>"
+						+"<td style='padding-left;'>"+json.auction_qna_answer_date+"</td>"
 					+"</tr>"
 					+"<tr>"
-						+"<td>"+json.auction_qna_answer+"</td>"
+						+"<td colspan='2' id='qna_answer_td'>"+json.auction_qna_answer+"</td>"
 					+"</tr>"
 				+"</table>"
 				); 
@@ -159,7 +159,7 @@
 												<tr>
 													<td style='width: 90%'>답글</td>
 													<td style='width: 5%'>
-														<button onclick="seller_QnAanswer_Modify();">수정</button></td>
+														<button onclick="seller_QnAanswer_Modify(this);">수정</button></td>
 													<td style='width: 5%'><button onclick="seller_QnAanswer_del();">삭제</button></td>
 												</tr>
 											</table>
@@ -167,10 +167,10 @@
 												<table class='comment_modify3'id='comment_table'>
 													 <tr>
 														<td>${loginUser.member_name}</td>
-														<%-- <td>${auctionqna.auction_qna_answer_date}</td> --%>
+														<%-- <td>${auctionqna.auction_qna_answer_date}</td>  --%>
 													</tr>
 													<tr>
-														<td>${auctionqna.auction_qna_answer}</td>
+														<td colspan="2" id="qna_answer_td">${auctionqna.auction_qna_answer}</td>
 													</tr>
 												</table>
 					

@@ -10,6 +10,7 @@ import com.kh.farm.common.model.vo.*;
 import com.kh.farm.market.model.dao.MarketDao;
 import com.kh.farm.market.model.vo.Daily;
 import com.kh.farm.market.model.vo.Market;
+import com.kh.farm.market.model.vo.Reply;
 import com.kh.farm.market.model.vo.Review;
 import com.kh.farm.qna.model.vo.Market_qna;
 
@@ -79,5 +80,10 @@ public class MarketServiceImpl implements MarketService{
 	public Daily selectDailyDetail(int daily_no) {
 		// TODO Auto-generated method stub
 		return marketDao.selectDailyDetail(sqlSession,daily_no);
+	}
+	@Override
+	public ArrayList<Reply> selectReviewReply(int review_no) {
+		// TODO Auto-generated method stub
+		return marketDao.selectReviewReply(sqlSession,review_no);
 	}
 }

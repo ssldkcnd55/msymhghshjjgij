@@ -367,6 +367,7 @@ $(function(){
 			<%@  include file="../inc/foot.jsp"%>
 		</div>
 	</div>
+	
 		<div class="goods-view-flow-cart __active" id="flow-cart">
 		<div class="goods-view-flow-cart-wrapper">
 			<button type="button" id="show-option-button"
@@ -382,6 +383,27 @@ $(function(){
 					</button>
 					<div id="flow-cart-content"
 						class="goods-view-flow-cart-content __active">
+						<div class="">
+							<table>
+								<tr>
+									<td>경매 제목</td>
+								</tr>
+								<tr>
+									<td>시작일</td>
+									<td>2018-09-10</td>
+								</tr>
+								<tr>
+									<td>마감일</td>
+									<td>2018-10-10</td>
+								</tr>
+								<tr>
+									<td>즉시 구매 가격 :</td>
+									<td>5000</td>
+								</tr>
+							</table>
+						</div>
+						<div></div>
+						<div></div>
 						<br> <br> <br> <br> <br> <br> <br>
 					</div>
 				</div>

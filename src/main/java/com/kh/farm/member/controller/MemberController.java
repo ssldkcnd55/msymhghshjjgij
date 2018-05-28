@@ -199,4 +199,44 @@ public class MemberController {
 		out.close();
 	}
 	
+	@RequestMapping(value="change_app.do")
+	@ResponseBody
+	public void change_app(HttpServletResponse response,@RequestParam("member_id") String member_id,Member member) throws IOException{
+		System.out.println("승인변경 메소드 실행!!!");
+		System.out.println("member_id : " + member_id);
+		int result = memberService.change_app(member_id);
+		String member_id2 = member_id; 
+		System.out.println(member_id2);
+		member = memberService.selectMember(member_id2);
+		response.setContentType("application/json; charset=utf-8;");
+		JSONObject json = new JSONObject();
+		json.put("member_id", member.getMember_id());
+		json.put("member_approval", member.getMember_approval());
+		System.out.println(json.toJSONString());
+		
+		  PrintWriter out = response.getWriter();
+	        out.print(json.toJSONString());
+	        out.flush();
+	        out.close();
+	}
+	@RequestMapping(value="change_withdraw.do")
+	@ResponseBody
+	public void change_with(HttpServletResponse response,@RequestParam("member_id") String member_id,Member member) throws IOException{
+		System.out.println("탈퇴변경 메소드 실행!!!");
+		System.out.println("member_id : " + member_id);
+		int result = memberService.change_with(member_id);
+		String member_id2 = member_id; 
+		System.out.println(member_id2);
+		member = memberService.selectMember(member_id2);
+		response.setContentType("application/json; charset=utf-8;");
+		JSONObject json = new JSONObject();
+		json.put("member_id", member.getMember_id());
+		json.put("member_withdraw", member.getMember_withdraw());
+		System.out.println(json.toJSONString());
+		
+		  PrintWriter out = response.getWriter();
+	        out.print(json.toJSONString());
+	        out.flush();
+	        out.close();
+	}
 }
