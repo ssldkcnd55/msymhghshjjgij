@@ -304,7 +304,7 @@ public class MarketController {
 		out.close();
 		
 	}
-		
+	
 	
 	@RequestMapping("marketDailyDetail.do")
 	public ModelAndView marketDailyDetail(ModelAndView mv,@RequestParam("daily_no")int daily_no ) {
@@ -312,5 +312,28 @@ public class MarketController {
 		mv.addObject("daily",daily);
 		mv.setViewName("market/marketDailyDetail");
 		return mv;
+	}
+	@RequestMapping(value="ajaxReviewReply.do",method=RequestMethod.POST)
+	public void ajaxReviewReply(@RequestParam("review_no")int review_no,HttpServletResponse response) throws IOException{
+		ArrayList<Reply> list = marketService.selectReviewReply(review_no);
+		JSONArray jarr = new JSONArray();
+		
+		for(Reply r : list) {
+			//추출한 user를 json 객체에 담기
+			JSONObject jReply = new JSONObject();
+			jReply.put("reply_no", r.getReply_no());
+			jReply.put("reply_contents",r.getReply_contents());
+			jReply.put("reply_date", r.getReply_date().toString());
+			jReply.put("member_id", r.getMember_id());
+			jarr.add(jReply);
+		}
+		//전송용 최종 json 객체 선언
+		JSONObject sendJson = new JSONObject();
+		sendJson.put("list", jarr);
+		response.setContentType("application/json; charset=utf-8");
+		PrintWriter out = response.getWriter();
+		out.append(sendJson.toJSONString());
+		out.flush();
+		out.close();
 	}
 }

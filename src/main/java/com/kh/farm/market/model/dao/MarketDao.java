@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import com.kh.farm.common.model.vo.PageNumber;
 import com.kh.farm.market.model.vo.Daily;
 import com.kh.farm.market.model.vo.Market;
+import com.kh.farm.market.model.vo.Reply;
 import com.kh.farm.market.model.vo.Review;
 import com.kh.farm.qna.model.vo.Market_qna;
 
@@ -96,5 +97,11 @@ public class MarketDao {
 	public Daily selectDailyDetail(SqlSessionTemplate sqlSession, int daily_no) {
 		// TODO Auto-generated method stub
 		return sqlSession.selectOne("market.dailyDetail", daily_no);
+	}
+
+	public ArrayList<Reply> selectReviewReply(SqlSessionTemplate sqlSession, int review_no) {
+		// TODO Auto-generated method stub
+		List<Reply> list = sqlSession.selectList("market.reviewReply", review_no);
+		return (ArrayList<Reply>)list;
 	}
 }
