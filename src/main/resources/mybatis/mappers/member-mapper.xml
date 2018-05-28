@@ -42,7 +42,7 @@
 
 <select id="selectMember" parameterType="string" resultType="Member">
 <![CDATA[
-select member_name, member_img from member where member_id=#{member_id2}
+	select member_name, member_img, member_approval, member_id, member_withdraw, MEMBER_WARNING_COUNT from member where member_id=#{member_id2}
 ]]>
 </select>
 
@@ -57,5 +57,17 @@ select member_name, member_img from member where member_id=#{member_id2}
 	
 <select id="memberCount" parameterType="int" resultType="int">
 	select count(*) from member
-</select>	
+</select>
+
+<update id="change_approval" parameterType="member" flushCache="true">
+	<![CDATA[
+			update member set member_approval = case when member_approval = 'Y' then 'N' else 'Y' end where member_id = #{member_id}
+		]]>
+</update>
+
+<update id="change_withdraw" parameterType="member" flushCache="true">
+	<![CDATA[
+			update member set member_withdraw = case when member_withdraw = 'Y' then 'N' else 'Y' end where member_id = #{member_id}
+		]]>
+</update>	
 </mapper>

@@ -1,4 +1,16 @@
 @charset "UTF-8";
+
+.QnA_comment_title{
+	width:95%;
+	height:auto;
+	border: 2px solid #e4dcbc;
+	margin-bottom:30px;
+	font-size:15pt;
+	padding:5px 20px 20px 20px;
+}
+
+
+
 .QnA_comment_title2{
 	width:95%;
 	height:auto;

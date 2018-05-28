@@ -21,4 +21,8 @@ public interface MemberService {
 	List<Member> selectMemberList(int currentPage);
 
 	int selectMemberCount();
+
+	int change_app(String member_id);
+
+	int change_with(String member_id);
 }

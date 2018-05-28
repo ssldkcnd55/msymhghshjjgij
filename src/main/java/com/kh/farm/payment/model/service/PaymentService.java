@@ -14,4 +14,8 @@ public interface PaymentService {
 
 	int insertFirstPayment(Payment pm);
 
+	int insertNewPayment(Payment pm);
+
+	int deleteFirstPayment(int group_no);
+
 }

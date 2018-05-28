@@ -2,6 +2,7 @@
  * 
  */
 
+
 function printInfoRelief() {
 	$('.InfoReliefDiv').css("display", "block");
 }
@@ -16,6 +17,55 @@ function findAddr() {
 		}
 	}).open();
 }
+
+function test(){
+	var name;
+	var tel;
+	var addr;
+	var request;
+	if ($('[name=delivery]:checked').val() == "original_delivery") {
+		name=$('#user_name').val();
+		tel=$('#user_phone').val();
+		addr=$('#user_addr').val();
+		if ($('#request').val() == '직접 입력'){
+		request=$('#dir_req input').val();}
+		else{
+		request=$('#request').val();}
+			
+	} else {
+		name=$('#new_user_name').val();
+		tel=$('#new_user_phone').val();
+		addr=$('#new_user_addr').val()+" "+$('#new_user_addr_detail').val();
+		if ($('#new_request').val() == '직접 입력'){
+			request=$('#new_dir_req input').val();}
+			else{
+			request=$('#new_request').val();}
+	}
+	var objList=[];
+	for(var i=0; i < product_market_no.length; i++)
+		{
+		var obj = new Object();
+		obj={"group_no":0, "market_no":product_market_no[i],"member_id":my_id,"buy_amount":product_buy_amount[i],"buy_addr": addr,"buy_tel":tel,"buy_name":name,"buy_request":request};
+		objList.push( JSON.stringify(obj) );
+		
+		}
+	
+	
+	$.ajax({
+			url:"testPayment.do",
+			type : "post",
+			data:{"objList":objList},			
+			success:function(data){
+				alert(data);
+			},
+			error:function(){
+				alert("error");
+			}
+	});
+	
+}
+
+
 
 $(function() {
 	
@@ -94,6 +144,9 @@ function payment() {
 			request=$('#new_request').val();}
 	}
 	
+	
+	
+	
 	//group_no를 얻기위해 첫번째 상품만 가 등록한다.
 	//이후 결제가 완료되면 해당 group_no로 다른 상품도 등록
 	//만약 결제가 실패하면 등록했던 첫번째 상품 삭제
@@ -106,7 +159,7 @@ function payment() {
 			buy_amount : product_buy_amount[0]
 		},
 		success:function(data){
-			console.log(data);
+			var group_no = data;
 			
 			var IMP = window.IMP;
 			IMP.init('imp31374305');
@@ -129,7 +182,44 @@ function payment() {
 					msg += '결제 금액 : ' + rsp.paid_amount;
 					msg += '카드 승인번호 : ' + rsp.apply_num;
 					console.log(msg);
+					////////////////////본 결제
+					var objList=[];
+					for(var i=0; i < product_market_no.length; i++)
+						{
+						var obj = new Object();
+						obj={"group_no":group_no, "market_no":product_market_no[i],"member_id":my_id,"buy_amount":product_buy_amount[i],"buy_addr": addr,"buy_tel":tel,"buy_name":name,"buy_request":request};
+						objList.push( JSON.stringify(obj) );
+						
+						}
+					
+					$.ajax({
+							url:"insertNewPayment.do",
+							type : "post",
+							data:{"objList":objList},			
+							success:function(data){
+								
+							},
+							error:function(){
+								console.log("payment.js/ payment() /  insertFirstPayment.do ajax / insertNewPayment.do ajax ");
+							}
+					});
+					////////////////////본결제 끝
+					
 				} else {
+					//예비 데이터 삭제 컨트롤 실행
+					$.ajax({
+						url:"deleteFirstPayment.do",
+						type : "post",
+						data:{"group_no":group_no},			
+						success:function(){
+							console.log("payment.js/ payment() / deleteFirstPayment.do success ");
+						},
+						error:function(){
+							console.log("payment.js/ payment() /  insertFirstPayment.do ajax / deleteFirstPayment.do ajax ");
+						}
+						
+					});
+					
 					var msg = '결제에 실패하였습니다.';
 					msg += '에러내용 : ' + rsp.error_msg;
 					console.log(msg);
@@ -139,7 +229,7 @@ function payment() {
 		},
 		error:function(data)
 		{
-			console.log("payment.js / insertFirstPayment ajax");
+			console.log("payment.js / payment() /  insertFirstPayment ajax");
 		}
 	});
 	
