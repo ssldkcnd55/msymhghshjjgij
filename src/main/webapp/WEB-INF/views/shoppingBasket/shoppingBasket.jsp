@@ -49,8 +49,8 @@
                <c:forEach var="basket" items="${basketList}">
                 <tr class="hover">
                   <td><input class="checkItem" type="checkbox" name="checkItem" value="${basket.market_no}"></td>
-                  <td><center><a href="marketDetail.do?market_no=${basket.market_no}"><div class="images" style="background-image: url('/farm/resources/upload/marketUpload/${basket.market_img}');"></div></a></center></td>
-                  <td id="Notice_td"><a href="marketDetail.do?market_no=${basket.market_no}">${basket.market_title }</a></td>
+                  <td><center><a href="marketDetail.do?market_no=${basket.market_no}" target="_blank"><div class="images" style="background-image: url('/farm/resources/upload/marketUpload/${basket.market_img}');"></div></a></center></td>
+                  <td id="Notice_td"><a href="marketDetail.do?market_no=${basket.market_no}" target="_blank">${basket.market_title }</a></td>
                   <td>
                   <div class="amount_box" >
                      <a href="javascript: controlCount(${basket.market_no},+1);"><div class="operator">+</div></a>

@@ -7,7 +7,7 @@
 
 	<select id="selectPaymentInfo" parameterType="hashmap" resultType="ShowBasket">
 			<![CDATA[
-	select mk.market_no, mb.MEMBER_NAME, mk.MARKET_IMG, mk.MARKET_TITLE, mk.MARKET_NOTE, mk.MARKET_PRICE,sb.BUY_AMOUNT
+	select mk.market_no, mb.MEMBER_NAME,mb.member_id, mk.MARKET_IMG, mk.MARKET_TITLE, mk.MARKET_NOTE, mk.MARKET_PRICE,sb.BUY_AMOUNT
   from SHOP_BASKET sb, market mk, member mb
   where mb.member_id=mk.member_id and mk.market_no=sb.MARKET_NO
   and sb.member_id = #{member_id}
@@ -20,11 +20,26 @@
 	
 	<select id="selectPaymentInfoOne" parameterType="ShoppingBasket"  resultType="ShowBasket">
 	<![CDATA[
-	select mk.market_no, mb.MEMBER_NAME, mk.MARKET_IMG, mk.MARKET_TITLE, mk.MARKET_NOTE, mk.MARKET_PRICE
+	select mk.market_no, mb.MEMBER_NAME,mb.member_id, mk.MARKET_IMG, mk.MARKET_TITLE, mk.MARKET_NOTE, mk.MARKET_PRICE
   from market mk, member mb
   where mb.member_id=mk.member_id and mk.market_no= #{market_no}
 	]]>
 	</select>
 	
+	<insert id="insertFirstPayment" keyProperty="group_no" parameterType="Payment">
+	
+	 <selectKey resultType="int" keyProperty="group_no"  statementType="STATEMENT" order="BEFORE" >
+	 select (case when max(group_no) is null then 0 else max(group_no) end)+1  as "group_no"  from buy
+	</selectKey>
+	
+	<![CDATA[
+	insert into BUY(BUY_NO,GROUP_NO,MEMBER_ID  ) values(
+	(select (case when max(BUY_NO) is null then 0 else max(BUY_NO) end)+1  as "buy_no"  from BUY),
+	#{group_no},#{member_id}  
+	)
+	]]>
+	
+	
+	</insert>
 
 </mapper>

@@ -34,11 +34,14 @@ function closeModal()
 
 function selectDelete()
 {
+	var delCount=0;
 	$('[name=checkItem]').each(function() {
 		if ($(this).is(":checked") == true) {
-			delete_no.push($(this).val()); 
+			delete_no.push($(this).val());
+			delCount++;
 		}
 	});
+	if(delCount>0)
 	$('#myModal').css("display","block");
 }	
 
