@@ -60,4 +60,16 @@ public class MemberServiceImpl implements MemberService {
 		return memberDao.selectMemberCount(sqlSession);
 	}
 
+	@Override
+	public int change_app(String member_id) {
+		// TODO Auto-generated method stub
+		return memberDao.change_app(sqlSession,member_id);
+	}
+
+	@Override
+	public int change_with(String member_id) {
+		// TODO Auto-generated method stub
+		return memberDao.change_with(sqlSession,member_id);
+	}
+
 }
