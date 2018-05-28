@@ -83,4 +83,13 @@ public class MemberDao {
 		// TODO Auto-generated method stub
 		return sqlSession.update("change_withdraw", member_id);
 	}
+	
+	public String nowPwdCheck(String member_id,SqlSessionTemplate sqlSession) {
+		return sqlSession.selectOne("nowPwdCheck",member_id);
+	}
+
+	public int updateAddr(Member member, SqlSessionTemplate sqlSession) {
+		// TODO Auto-generated method stub
+		return sqlSession.update("updateAddr", member);
+	}
 }

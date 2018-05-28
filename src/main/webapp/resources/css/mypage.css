@@ -101,6 +101,15 @@ margin: 0px;
 .update_table tr td:nth-child(2){
    border-bottom: 1px solid #dcdcdc;
 }
+.update_table tr:last-child td{
+	  border-bottom:none; 
+}
 .update_table tr:nth-child(1) {
    border-top: none;
+}
+.memberBtn{
+	background: pink;
+    border: none;
+    width: 150px;
+    height: 30px;
 }

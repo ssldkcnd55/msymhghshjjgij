@@ -72,4 +72,16 @@ public class MemberServiceImpl implements MemberService {
 		return memberDao.change_with(sqlSession,member_id);
 	}
 
+	
+	@Override
+	public String nowPwdCheck(String member_id) {
+		// TODO Auto-generated method stub
+		return memberDao.nowPwdCheck(member_id, sqlSession);
+	}
+
+	@Override
+	public int updateAddr(Member member) {
+		// TODO Auto-generated method stub
+		return memberDao.updateAddr(member,sqlSession);
+	}
 }

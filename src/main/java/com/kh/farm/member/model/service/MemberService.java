@@ -25,4 +25,8 @@ public interface MemberService {
 	int change_app(String member_id);
 
 	int change_with(String member_id);
+	
+	String nowPwdCheck(String member_id);
+	
+	int updateAddr(Member member);
 }

@@ -70,4 +70,11 @@
 			update member set member_withdraw = case when member_withdraw = 'Y' then 'N' else 'Y' end where member_id = #{member_id}
 		]]>
 </update>	
+<select id="nowPwdCheck" parameterType="string" resultType="string" >
+	select MEMBER_PWD from member where MEMBER_ID=#{member_id}
+</select>
+<update id="updateAddr" parameterType="member">
+	update member set member_addr=#{member_addr} where member_id=#{member_id} 
+</update>
+
 </mapper>

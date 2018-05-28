@@ -12,6 +12,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.xml.ws.Response;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -238,5 +239,63 @@ public class MemberController {
 	        out.print(json.toJSONString());
 	        out.flush();
 	        out.close();
+	}
+	
+	@RequestMapping("nowPwdCheck.do")
+	public void nowPwdCheck(@RequestParam("MEMBER_ID") String member_id, @RequestParam("MEMBER_PWD") String member_pwd,
+			HttpServletResponse response) {
+		String dbpwd = memberService.nowPwdCheck(member_id);
+		String pwd = member_pwd;
+		String result = "";
+
+		if (pwdEncoder.matches(pwd, dbpwd)) {
+			result = "ok";
+		} else {
+			result = "no";
+		}
+
+		PrintWriter out = null;
+		try {
+			out = response.getWriter();
+			out.print(result);
+			out.flush();
+			out.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	}
+
+	@RequestMapping("customerMod.do")
+	public void customerMod(HttpServletResponse response,Member member,@RequestParam("MEMBER_ID") String member_id, @RequestParam("MEMBER_PWD") String member_pwd,@RequestParam("MEMBER_ADDR") String member_addr) throws IOException {
+
+		System.out.println("333"+member_id);
+		int updatePwd = 0;
+		int updateAddr = 0;
+
+		if (member_pwd != null) {
+			member.setMember_pwd(pwdEncoder.encode(member_pwd));
+			member.setMember_id(member_id);
+			updatePwd = memberService.updatePwd(member);
+		}
+
+		if (member_addr != null) {
+			member.setMember_addr(member_addr);
+			member.setMember_id(member_id);
+			System.out.println("444"+member.getMember_addr());
+			updateAddr = memberService.updateAddr(member);
+		}
+
+		PrintWriter out=response.getWriter();
+		if (member.getMember_pwd() != null || member.getMember_addr() != null) {
+			out.print("o");
+			out.flush();
+			out.close();
+		} else {
+			out.print("x");
+			out.flush();
+			out.close();
+		}
 	}
 }
