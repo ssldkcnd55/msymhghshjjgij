@@ -15,10 +15,11 @@
 	type="text/css" />
 <link href="/farm/resources/css/marketDetail.css" rel="stylesheet"
 	type="text/css" />
-<link href="/farm/resources/css/payList.css" rel="stylesheet"
-	type="text/css" />
 <link href="/farm/resources/css/auctionDetail.css" rel="stylesheet"
 	type="text/css" />
+<link href="/farm/resources/css/payList.css" rel="stylesheet"
+	type="text/css" />
+
 <!-- <link href="/farm/resources/css/QnA_Detail.css" rel="stylesheet"
 	type="text/css" /> -->
 
@@ -372,7 +373,7 @@ $(function(){
 		<div class="goods-view-flow-cart-wrapper">
 			<button type="button" id="show-option-button"
 				class="goods-view-show-option-button">
-				<span class="goods-view-show-option-button-value">옵션선택</span>
+				<span class="goods-view-show-option-button-value">입찰</span>
 			</button>
 
 			<div class="goods-view-flow-cart __active" id="flow-cart2">
@@ -383,29 +384,61 @@ $(function(){
 					</button>
 					<div id="flow-cart-content"
 						class="goods-view-flow-cart-content __active">
-						<div class="">
-							<table>
+						
+						<div class="auction_cart_info_div">
+							<table class="auction_cart_info_table">
 								<tr>
-									<td>경매 제목</td>
+									<td colspan="2" class="1">${auction.auction_title }</td>
 								</tr>
 								<tr>
-									<td>시작일</td>
-									<td>2018-09-10</td>
+									<td class="2">시작일</td>
+									<td>:  </td>
+									<td>${auction.auction_startdate }</td>
 								</tr>
 								<tr>
-									<td>마감일</td>
-									<td>2018-10-10</td>
+									<td class="2">마감일</td>
+									<td>:  </td>
+									<td>${auction.auction_enddate}</td>
 								</tr>
 								<tr>
-									<td>즉시 구매 가격 :</td>
-									<td>5000</td>
-								</tr>
+									<td class="2">즉시 구매 가격</td>
+									<td>:  </td>
+									<td>${auction.auction_directprice}</td>
+								</tr >
 							</table>
 						</div>
-						<div></div>
-						<div></div>
-						<br> <br> <br> <br> <br> <br> <br>
+						<div class="auction_cart_center_div">
+							<table>
+								<tr>
+									<td>현재 가격</td>
+									<td>:  </td>
+									<td>2000</td>
+								</tr>
+								<tr>
+									<td>입찰가격</td>
+									<td>:  </td>
+									<td><input type="text" placeholder="ex) 1000" style="height:20px;"
+									name="auction_history_price"/></td>
+								</tr>
+
+							</table>
+
+						</div>
+						
+						<div class="auction_cart_right_div">
+							<table>
+								<tr>
+									<td><button class="auction_bidding">입찰</button></td>
+									<td><button class="auction_buy">즉시구매</button></td>
+								</tr>
+					
+							</table>
+						</div>
+						
+					
 					</div>
+					
+					<br><br><br><br>
 				</div>
 			</div>
 
