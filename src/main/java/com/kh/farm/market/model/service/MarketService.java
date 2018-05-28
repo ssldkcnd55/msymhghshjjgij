@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import com.kh.farm.market.model.vo.Daily;
 import com.kh.farm.market.model.vo.Market;
+import com.kh.farm.market.model.vo.Reply;
 import com.kh.farm.market.model.vo.Review;
 import com.kh.farm.qna.model.vo.Market_qna;
 
@@ -34,5 +35,7 @@ public interface MarketService {
 	Review selectReviewDetail(int review_no);
 
 	Daily selectDailyDetail(int daily_no);
+
+	ArrayList<Reply> selectReviewReply(int review_no);
 
 }
