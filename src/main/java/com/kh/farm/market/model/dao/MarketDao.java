@@ -103,9 +103,7 @@ public class MarketDao {
 		return sqlSession.selectOne("market.dailyDetail", daily_no);
 	}
 
-<<<<<<< HEAD
 	
-=======
 	public ArrayList<Reply> selectReviewReply(SqlSessionTemplate sqlSession, int review_no,int currentPage) {
 		// TODO Auto-generated method stub
 		int startRow = (currentPage-1)*10+1; 
@@ -182,5 +180,4 @@ public class MarketDao {
 		// TODO Auto-generated method stub
 		return sqlSession.update("market.updateReplyNull", reply);
 	}
->>>>>>> branch 'master' of https://github.com/ssldkcnd55/msymhghshjjgij
 }

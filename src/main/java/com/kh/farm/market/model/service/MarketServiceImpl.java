@@ -84,7 +84,6 @@ public class MarketServiceImpl implements MarketService{
 		// TODO Auto-generated method stub
 		return marketDao.selectDailyDetail(sqlSession,daily_no);
 	}
-<<<<<<< HEAD
 	
 	/*@Override
 	public Market selectSearchList(String search) {
@@ -98,7 +97,6 @@ public class MarketServiceImpl implements MarketService{
 		return null;
 	}
 	
-=======
 	@Override
 	public ArrayList<Reply> selectReviewReply(int review_no,int currentPage) {
 		// TODO Auto-generated method stub
@@ -154,5 +152,4 @@ public class MarketServiceImpl implements MarketService{
 		// TODO Auto-generated method stub
 		return marketDao.updateReplyNull(sqlSession,reply);
 	}
->>>>>>> branch 'master' of https://github.com/ssldkcnd55/msymhghshjjgij
 }

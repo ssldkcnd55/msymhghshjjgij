@@ -6,20 +6,13 @@
 
 
 <select id="marketList" parameterType="pageNumber" resultType="market">
-
-<![CDATA[
-
+	<![CDATA[
 		select * from 
-		
 			(select rownum rnum, market_no,
 			market_title,market_releasedate,market_note,market_img,
 			member_id from (select * from market order by 
 			market_no desc)) where rnum >= #{startRow} and rnum <= #{endRow}
-		]]>	
-	<if test="search != null">
-				 and market_title like '%'||#{search}||'%'
-	</if>
-	
+	]]>
 </select>
 	
 	<select id="marketInfo" parameterType="int" resultType="market">
@@ -97,9 +90,6 @@
 		select * from daily where daily_no = #{daily_no}
 	</select>
 	
-
-	
-
 	<select id="reviewReply" parameterType="PageNumber" resultType="Reply"><!-- 여기 page처리해야됨!  -->
 	<![CDATA[
 		select * from(select rownum rnum,reply_no,reply_contents,reply_date,member_id from
@@ -166,5 +156,4 @@
 	<update id="updateReplyNull" parameterType="Reply">
 		update reply set reply_contents = null where reply_no = #{reply_no}
 	</update>
-
 </mapper>

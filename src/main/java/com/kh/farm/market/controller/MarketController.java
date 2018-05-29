@@ -323,7 +323,6 @@ public class MarketController {
 		mv.setViewName("market/marketDailyDetail");
 		return mv;
 	}
-<<<<<<< HEAD
 	
 	@RequestMapping("moveSearchList.do")
 	public ModelAndView marketSearchList(ModelAndView mv,@RequestParam(value="search",required=false) String search) {
@@ -333,7 +332,6 @@ public class MarketController {
 		return mv;
 	}
 	
-=======
 	@RequestMapping(value="ajaxReviewReply.do",method=RequestMethod.POST)
 	public void ajaxReviewReply(@RequestParam("review_no")int review_no,HttpServletResponse response,@RequestParam("page") int currentPage ) throws IOException{
 		ArrayList<Reply> list = marketService.selectReviewReply(review_no,currentPage);
@@ -481,5 +479,4 @@ public class MarketController {
 			return "forward:/reviewDeatil.do?daily_no="+daily_no;
 		}
 	}
->>>>>>> branch 'master' of https://github.com/ssldkcnd55/msymhghshjjgij
 }

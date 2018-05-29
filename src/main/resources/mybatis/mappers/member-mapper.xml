@@ -23,7 +23,7 @@
 </select>
 <insert parameterType="Member" id="insertMember" useGeneratedKeys="true" statementType="PREPARED" flushCache="true">
 		<![CDATA[ insert into member values (
-					#{member_id}, #{member_pwd}, #{member_category}, #{member_name}, 
+					#{member_id}, #{member_pwd}, 0, #{member_name}, 
 					#{member_addr}, #{member_tel}, 'Y', #{member_img},'N',0) ]]>
 </insert>
 

@@ -8,42 +8,32 @@ public class PageNumber implements java.io.Serializable{
 	private int market_no;
 	private int auction_no;
 	private String member_id;
-<<<<<<< HEAD
 	private String search;
 	
 	
 
 
-=======
 	private int review_no;
 	private int daily_no;
 	private String keyword;
->>>>>>> branch 'master' of https://github.com/ssldkcnd55/msymhghshjjgij
 	public PageNumber() {}
 
 	
-<<<<<<< HEAD
-	public PageNumber(int startRow, int endRow, int market_no,int auction_no,String member_id,String search) {
-=======
 	
 
 
 	public PageNumber(int startRow, int endRow, int market_no, int auction_no, String member_id, int review_no,
 			int daily_no,String keyword) {
->>>>>>> branch 'master' of https://github.com/ssldkcnd55/msymhghshjjgij
 		super();
 		this.startRow = startRow;
 		this.endRow = endRow;
 		this.market_no = market_no;
 		this.auction_no = auction_no;
 		this.member_id = member_id;
-<<<<<<< HEAD
 		this.search = search;
-=======
 		this.review_no = review_no;
 		this.daily_no = daily_no;
 		this.keyword = keyword;
->>>>>>> branch 'master' of https://github.com/ssldkcnd55/msymhghshjjgij
 	}
 
 
@@ -134,7 +124,6 @@ public class PageNumber implements java.io.Serializable{
 		this.member_id = member_id;
 	}
 	
-<<<<<<< HEAD
 	public String getSearch() {
 		return search;
 	}
@@ -142,10 +131,9 @@ public class PageNumber implements java.io.Serializable{
 
 	public void setSearch(String search) {
 		this.search = search;
-=======
+	}
 	public String getKeyword() {
 		return keyword;
->>>>>>> branch 'master' of https://github.com/ssldkcnd55/msymhghshjjgij
 	}
 	
 	public void setKeyword(String keyword) {

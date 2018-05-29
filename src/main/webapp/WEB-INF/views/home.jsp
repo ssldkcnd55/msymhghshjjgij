@@ -306,11 +306,7 @@
 				<!-- #container -->
 
 
-<<<<<<< HEAD
-=======
 			
->>>>>>> branch 'master' of https://github.com/ssldkcnd55/msymhghshjjgij
-
 
 
 				<div class="bigbox1">

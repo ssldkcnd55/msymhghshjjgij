@@ -40,9 +40,7 @@ public interface MarketService {
 
 	Daily selectDailyDetail(int daily_no);
 
-<<<<<<< HEAD
 	Market selectSearchList(String search);
-=======
 	ArrayList<Reply> selectReviewReply(int review_no,int currentPage);
 
 	int selectReviewReplyCount(int review_no);
@@ -65,6 +63,5 @@ public interface MarketService {
 
 	int updateReplyNull(Reply reply);
 
->>>>>>> branch 'master' of https://github.com/ssldkcnd55/msymhghshjjgij
 
 }
