@@ -9,6 +9,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.kh.farm.common.model.vo.PageNumber;
+import com.kh.farm.market.exception.DeleteFailException;
 import com.kh.farm.market.model.vo.Daily;
 import com.kh.farm.market.model.vo.Market;
 import com.kh.farm.market.model.vo.Reply;
@@ -156,5 +157,25 @@ public class MarketDao {
 	public int insertUnderReply(SqlSessionTemplate sqlSession, UnderReply reply) {
 		// TODO Auto-generated method stub
 		return sqlSession.insert("market.insertUnderReply", reply);
+	}
+
+	public int deleteReply(SqlSessionTemplate sqlSession, Reply reply) throws DeleteFailException{
+		// TODO Auto-generated method stub
+		int deleteReply = sqlSession.delete("market.deleteReply", reply);
+		if(deleteReply > 0 ) {
+			return deleteReply;
+		}else {
+			throw new DeleteFailException("답글이 있는 댓글은 삭제되지않습니다.");
+		}
+	}
+
+	public int deleteUnderReply(SqlSessionTemplate sqlSession, UnderReply reply) {
+		// TODO Auto-generated method stub
+		return sqlSession.delete("market.deleteUnderReply", reply);
+	}
+
+	public int updateReplyNull(SqlSessionTemplate sqlSession, Reply reply) {
+		// TODO Auto-generated method stub
+		return sqlSession.update("market.updateReplyNull", reply);
 	}
 }

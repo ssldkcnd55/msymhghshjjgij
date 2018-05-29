@@ -28,6 +28,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.farm.auction.model.vo.Auction;
+import com.kh.farm.market.exception.DeleteFailException;
 import com.kh.farm.market.model.service.MarketService;
 import com.kh.farm.market.model.vo.*;
 import com.kh.farm.payment.model.vo.*;
@@ -435,5 +436,30 @@ public class MarketController {
 	public String marketDetailUnderReplyInsert(UnderReply reply,@RequestParam("daily_no")int daily_no) {
 		int insertReviewReply = marketService.insertUnderReply(reply);
 		return "forward:/marketDailyDetail.do?daily_no="+daily_no;
+	}
+	@RequestMapping("marketReplyDelete.do")
+	public String marketReplyDelete(Reply reply) {
+		try {
+			int deleteReply = marketService.deleteReply(reply);
+		} catch (DeleteFailException e) {
+			System.out.println("Exception발생");
+			int replyNullUpdate = marketService.updateReplyNull(reply);
+		}
+		System.out.println("리뷰번호 : "+reply.getReview_no());
+		if(reply.getReview_no() != 0) {
+			return "forward:/marketDailyDetail.do?review_no="+reply.getReview_no();
+		}else {
+			return "forward:/reviewDeatil.do?daily_no="+reply.getDaily_no();
+		}
+	}
+	@RequestMapping("marketUnderReplyDelete.do")
+	public String marketUnderReplyDelete(UnderReply reply,@RequestParam(value="review_no",required=false) int review_no,
+			@RequestParam(value="daily_no",required=false) int daily_no) {
+		int deleteUnderReply = marketService.deleteUnderReply(reply);
+		if(review_no != 0) {
+			return "forward:/marketDailyDetail.do?review_no="+review_no;
+		}else {
+			return "forward:/reviewDeatil.do?daily_no="+daily_no;
+		}
 	}
 }

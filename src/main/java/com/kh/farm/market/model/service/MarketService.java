@@ -3,6 +3,7 @@ package com.kh.farm.market.model.service;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import com.kh.farm.market.exception.DeleteFailException;
 import com.kh.farm.market.model.vo.Daily;
 import com.kh.farm.market.model.vo.Market;
 import com.kh.farm.market.model.vo.Reply;
@@ -53,6 +54,12 @@ public interface MarketService {
 	int insertReply(Reply reply);
 
 	int insertUnderReply(UnderReply reply);
+
+	int deleteReply(Reply reply) throws DeleteFailException;
+
+	int deleteUnderReply(UnderReply reply);
+
+	int updateReplyNull(Reply reply);
 
 
 }

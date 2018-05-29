@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.kh.farm.common.model.vo.*;
+import com.kh.farm.market.exception.DeleteFailException;
 import com.kh.farm.market.model.dao.MarketDao;
 import com.kh.farm.market.model.vo.Daily;
 import com.kh.farm.market.model.vo.Market;
@@ -122,5 +123,20 @@ public class MarketServiceImpl implements MarketService{
 	public int insertUnderReply(UnderReply reply) {
 		// TODO Auto-generated method stub
 		return marketDao.insertUnderReply(sqlSession,reply);
+	}
+	@Override
+	public int deleteReply(Reply reply) throws DeleteFailException{
+		// TODO Auto-generated method stub
+		return marketDao.deleteReply(sqlSession,reply);
+	}
+	@Override
+	public int deleteUnderReply(UnderReply reply) {
+		// TODO Auto-generated method stub
+		return marketDao.deleteUnderReply(sqlSession,reply);
+	}
+	@Override
+	public int updateReplyNull(Reply reply) {
+		// TODO Auto-generated method stub
+		return marketDao.updateReplyNull(sqlSession,reply);
 	}
 }
