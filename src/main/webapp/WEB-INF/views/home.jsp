@@ -30,7 +30,6 @@
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script>
-
 	$(function() {
 		/* 홈에 경매리스트 */
 		$
@@ -307,11 +306,11 @@
 				<!-- #container -->
 
 
-			</div>
 
 
-			<div class="bigbox1">
-				<!-- <div class="big_title">
+
+				<div class="bigbox1">
+					<!-- <div class="big_title">
 						<h2 >신상품</h2>
 						
 					</div>
@@ -326,11 +325,11 @@
 							<div class="box_price">10,500원</div>
 						</div>
 					</div> -->
-			</div>
+				</div>
 
 
-			<div class="bigbox2">
-				<!-- <div class="big_title">
+				<div class="bigbox2">
+					<!-- <div class="big_title">
 					<a href="marketList.do"><div class="seeMore">더보기 ></div></a>
 					</div>
 					<div class="box_border1">
@@ -342,30 +341,30 @@
 							<div class="box_price">10,500원</div>
 						</div>
 					</div> -->
-			</div>
-
-			<div class="bigbox3">
-				<div class="big_title2">
-					<a href="AuctionList_controller.do"><div class="seeMore">더보기
-							></div></a>
-					<h2>경매</h2>
-
 				</div>
-				<div class="box_border2">
-					<div class="box2">
 
-						<div id="myCarousel" class="carousel slide" data-ride="carousel">
-							<!-- Indicators -->
-							<ol class="carousel-indicators">
-								<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-								<li data-target="#myCarousel" data-slide-to="1"></li>
-								<li data-target="#myCarousel" data-slide-to="2"></li>
-							</ol>
+				<div class="bigbox3">
+					<div class="big_title2">
+						<a href="AuctionList_controller.do"><div class="seeMore">더보기
+								></div></a>
+						<h2>경매</h2>
+
+					</div>
+					<div class="box_border2">
+						<div class="box2">
+
+							<div id="myCarousel" class="carousel slide" data-ride="carousel">
+								<!-- Indicators -->
+								<ol class="carousel-indicators">
+									<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+									<li data-target="#myCarousel" data-slide-to="1"></li>
+									<li data-target="#myCarousel" data-slide-to="2"></li>
+								</ol>
 
 
-							<!-- Wrapper for slides -->
-							<div class="carousel-inner">
-								<!-- <div class="item active" align="center">
+								<!-- Wrapper for slides -->
+								<div class="carousel-inner">
+									<!-- <div class="item active" align="center">
 										<table class="auction_table">
 											<tr>
 
@@ -493,22 +492,22 @@
 
 										</table>
 									</div> -->
-							</div>
+								</div>
 
-							<!-- Left and right controls -->
-							<a class="left carousel-control" href="#myCarousel"
-								data-slide="prev"> <span
-								class="glyphicon glyphicon-chevron-left"></span> <span
-								class="sr-only">Previous</span>
-							</a> <a class="right carousel-control" href="#myCarousel"
-								data-slide="next"> <span
-								class="glyphicon glyphicon-chevron-right"></span> <span
-								class="sr-only">Next</span>
-							</a>
+								<!-- Left and right controls -->
+								<a class="left carousel-control" href="#myCarousel"
+									data-slide="prev"> <span
+									class="glyphicon glyphicon-chevron-left"></span> <span
+									class="sr-only">Previous</span>
+								</a> <a class="right carousel-control" href="#myCarousel"
+									data-slide="next"> <span
+									class="glyphicon glyphicon-chevron-right"></span> <span
+									class="sr-only">Next</span>
+								</a>
+							</div>
 						</div>
 					</div>
 				</div>
-
 
 			</div>
 
