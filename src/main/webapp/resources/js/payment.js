@@ -18,11 +18,13 @@ function findAddr() {
 	}).open();
 }
 
-function test(){
+/*function test(){
 	var name;
 	var tel;
 	var addr;
 	var request;
+
+	
 	if ($('[name=delivery]:checked').val() == "original_delivery") {
 		name=$('#user_name').val();
 		tel=$('#user_phone').val();
@@ -63,7 +65,7 @@ function test(){
 			}
 	});
 	
-}
+}*/
 
 
 
@@ -122,6 +124,7 @@ function payment() {
 	var tel;
 	var addr;
 	var request;
+	
 	if ($('.product_title').length > 1) {
 		product_name += "외 " + ($('.product_title').length - 1) + "종";		
 	}
@@ -136,7 +139,27 @@ function payment() {
 			
 	} else {
 		name=$('#new_user_name').val();
+		if(name=='')
+			{
+			alert('이름을 입력하세요.');
+			return;
+			}
 		tel=$('#new_user_phone').val();
+		if(tel=='')
+			{
+			alert('연락처를 입력하세요.');
+			return;
+			}
+		if($('#new_user_addr').val()=='')
+			{
+			alert('주소를 입력하세요.');
+			return;
+			}
+		if($('#new_user_addr_detail').val()=='')
+			{
+			alert('상세주소를 입력하세요.')
+			return;
+			}
 		addr=$('#new_user_addr').val()+" "+$('#new_user_addr_detail').val();
 		if ($('#new_request').val() == '직접 입력'){
 			request=$('#new_dir_req input').val();}

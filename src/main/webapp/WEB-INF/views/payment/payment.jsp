@@ -53,10 +53,10 @@ var product_buy_amount=[];
                 <c:forEach var="item" items="${sbl}" varStatus="status">
                   <tr>
                    <td><span><img class="goods_img" src="/farm/resources/upload/marketUpload/${item.market_img }"></span></td>
-                   <td><a href="marketDetail.do?market_no=${item.market_no}" target="_blank"><div>
-                     <strong class="product_title">${item.market_title }</strong>    
-                     <p>${item.market_note}</p>            
-                   </div></a></td>
+                   <td><a href="marketDetail.do?market_no=${item.market_no}" target="_blank">
+                     <div class="product_title"><strong>${item.market_title }</strong></div>    
+                     <div class="product_note">${item.market_note}</div>            
+                   </a></td>
                    <td><strong>${item.member_name}</strong>
                    <p>${item.member_id}</p></td>
 				   <td><fmt:formatNumber value="${item.market_price}" pattern="#,###"></fmt:formatNumber>원</td>
