@@ -216,11 +216,12 @@ img{border:0}
    
 }
 .input_text {
-   width: 247px; height: 11px;
-   margin-top:40px ;
+   width: 230px; height: 20px;
+   margin-top:7px ;
+   margin-left: 4px;
    border: 0;
    line-height: 21px;
-   font-weight: bold;
+   /* font-weight: bold; */
    font-size: 12pt;
    outline: none;
 }

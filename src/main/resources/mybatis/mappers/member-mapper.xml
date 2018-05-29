@@ -58,6 +58,26 @@
 <select id="memberCount" parameterType="int" resultType="int">
 	select count(*) from member
 </select>
+<select id="FarmerCount" parameterType="int" resultType="int">
+	<![CDATA[
+	select count(*) from member where member_category = 0
+	]]>
+</select>
+<select id="CommonCount" parameterType="int" resultType="int">
+	<![CDATA[
+	select count(*) from member where member_category = 1
+	]]>
+</select>
+<select id="ApprovalCount" parameterType="int" resultType="int">
+	<![CDATA[
+	select count(*) from member where member_approval = 'N'
+	]]>
+</select>
+<select id="WithdrawCount" parameterType="int" resultType="int">
+	<![CDATA[
+	select count(*) from member where member_withdraw = 'Y'
+	]]>
+</select>
 
 <update id="change_approval" parameterType="member" flushCache="true">
 	<![CDATA[
@@ -77,4 +97,48 @@
 	update member set member_addr=#{member_addr} where member_id=#{member_id} 
 </update>
 
+<select id="selectFarmer" parameterType="PageNumber" resultType="Member">
+	<![CDATA[
+	select * from (select rownum rnum, member_id, member_category, member_name, 
+	member_approval,member_withdraw,MEMBER_WARNING_COUNT from member 
+	) where rnum >=#{startRow} and rnum <=#{endRow} and member_category=0
+	
+	]]>
+</select>
+
+<select id="selectCommon" parameterType="PageNumber" resultType="Member">
+	<![CDATA[
+	select * from (select rownum rnum, member_id, member_category, member_name, 
+	member_approval,member_withdraw,MEMBER_WARNING_COUNT from member 
+	) where rnum >=#{startRow} and rnum <=#{endRow} and member_category=1
+	
+	]]>
+</select>
+
+<select id="selectApproval" parameterType="PageNumber" resultType="Member">
+	<![CDATA[
+	select * from (select rownum rnum, member_id, member_category, member_name, 
+	member_approval,member_withdraw,MEMBER_WARNING_COUNT from member 
+	) where rnum >=#{startRow} and rnum <=#{endRow} and member_approval='N'
+	
+	]]>
+</select>
+
+<select id="selectWithdraw" parameterType="PageNumber" resultType="Member">
+	<![CDATA[
+	select * from (select rownum rnum, member_id, member_category, member_name, 
+	member_approval,member_withdraw,MEMBER_WARNING_COUNT from member 
+	) where rnum >=#{startRow} and rnum <=#{endRow} and member_withdraw='Y'
+	
+	]]>
+</select>
+
+<select id="selectWarning" parameterType="PageNumber" resultType="Member">
+	<![CDATA[
+	select * from (select rownum rnum, member_id, member_category, member_name, 
+	member_approval,member_withdraw,MEMBER_WARNING_COUNT from member 
+	) where rnum >=#{startRow} and rnum <=#{endRow} order by member_warning_count desc
+	
+	]]>
+</select>
 </mapper>

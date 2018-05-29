@@ -29,4 +29,8 @@ public interface MemberService {
 	String nowPwdCheck(String member_id);
 	
 	int updateAddr(Member member);
+
+	List<Member> selectChangeList(int currentPage, int type);
+
+	int selectChangeMemberCount(int type);
 }

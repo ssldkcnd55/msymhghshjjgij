@@ -1,0 +1,178 @@
+@charset "UTF-8";
+
+/* 공지사항 게시판 */
+
+
+.board-wrap{
+   width:960px;
+   margin:20px auto 0;
+   position:relative;
+   
+}
+
+/* QnA_title */
+.Member_title{
+   padding: 15px;
+   font-size:14pt;
+   font-family:  "굴림", gulim, arial, helvetica, sans-serif;
+   float:left;
+}
+
+
+
+/* 상단 select_box */
+.select_box{
+   float:right;
+   padding: 15px;
+}
+.select{
+   height:40px;
+}
+/*검색창 select_box  */
+.select2{
+	height:35px;
+}
+/* table */
+.Member_table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+th{
+   padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+    border-top: 3px solid #ECE6CE;
+    height:60px;
+    text-align:center;
+    font-size:12pt;
+}
+
+td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+    height:60px;
+    text-align:center;
+    font-size:12pt;
+}
+
+tr:hover {background-color:#f5f5f5;}
+
+#Notice_td{
+   text-align:left;
+}
+
+
+/* 페이징 */
+/* .pagination {
+    display: inline-block;
+    align:center;
+    padding-top:40px;
+}
+
+.pagination a { 
+    color: black;
+    float: left;
+    padding: 10px 20px;
+    text-decoration: none;
+    font-size:12pt;
+}
+
+.pagination a.active {
+    background-color: #ECE6CE;
+    color: white;
+    border-radius: 5px;
+}
+
+.pagination a:hover:not(.active) {
+    background-color: #cfc085;
+    border-radius: 5px;
+}
+
+검색
+.search_box{
+   float:right;
+   padding-top:5px;
+   padding-right:10px;
+   
+}
+.green_window {
+   display: inline-block;
+   width: 250px; height: 34px;
+   border: 3px solid #ECE6CE;
+   background: white;
+   margin-top:40px;
+   
+}
+.input_text {
+   width: 247px; height: 11px;
+   margin-top:40px ;
+   border: 0;
+   line-height: 21px;
+   font-weight: bold;
+   font-size: 12pt;
+   outline: none;
+}
+.sch_smit {
+   width: 54px; height: 40px;
+   margin-top:40px ; border: 0;
+   vertical-align: top;
+   background: #ECE6CE;
+   color: white;
+   font-weight: bold;
+   border-radius: 1px;
+   cursor: pointer;
+}
+.sch_smit:hover {
+   background: #cfc085;
+} */
+/* 체크박스관련 */
+.TriSea-technologies-Switch > input[type="checkbox"] {
+    display: none;   
+}
+
+.TriSea-technologies-Switch > label {
+    cursor: pointer;
+    height: 0px;
+    position: relative; 
+    width: 40px;  
+}
+
+.TriSea-technologies-Switch > label::before {
+    background: rgb(0, 0, 0);
+    box-shadow: inset 0px 0px 10px rgba(0, 0, 0, 0.5);
+    border-radius: 8px;
+    content: '';
+    height: 16px;
+    margin-top: -8px;
+    position:absolute;
+    opacity: 0.3;
+    transition: all 0.4s ease-in-out;
+    width: 40px;
+}
+.TriSea-technologies-Switch > label::after {
+    background: rgb(255, 255, 255);
+    border-radius: 16px;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);
+    content: '';
+    height: 24px;
+    left: -4px;
+    margin-top: -8px;
+    position: absolute;
+    top: -4px;
+    transition: all 0.3s ease-in-out;
+    width: 24px;
+}
+.TriSea-technologies-Switch > input[type="checkbox"]:checked + label::before {
+    background: inherit;
+    opacity: 0.5;
+}
+.TriSea-technologies-Switch > input[type="checkbox"]:checked + label::after {
+    background: inherit;
+    left: 20px;
+}
+/* 하단영역 */
+#bottom{
+   margin-bottom:40px;
+}
