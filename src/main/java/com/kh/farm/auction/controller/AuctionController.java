@@ -389,7 +389,6 @@ public class AuctionController {
 		
 		ArrayList<AuctionHistory> AuctionList = auctionService.selectAuctionHistory(currentPage);
 		int limitPage = 10;
-		System.out.println("111");
 		int listCount = auctionService.selectAuctionHistoryCount();
 		
 		int maxPage=(int)((double)listCount/limitPage+0.9); //ex) 41개면 '5'페이지나와야되는데 '5'를 계산해줌

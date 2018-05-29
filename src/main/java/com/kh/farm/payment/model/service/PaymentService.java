@@ -17,5 +17,9 @@ public interface PaymentService {
 	int insertNewPayment(Payment pm);
 
 	int deleteFirstPayment(int group_no);
+	
+	ArrayList<Payment> selectPaymentHistory(int currentPage);
+
+	int selectPaymentHistoryCount();
 
 }

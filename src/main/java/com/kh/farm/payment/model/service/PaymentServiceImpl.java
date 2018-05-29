@@ -41,5 +41,15 @@ public class PaymentServiceImpl implements PaymentService{
 		
 		return paymentDao.deleteFirstPayment(sqlSession,group_no);
 	}
+	@Override
+	public ArrayList<Payment> selectPaymentHistory(int currentPage) {
+		// TODO Auto-generated method stub
+		return paymentDao.selectPaymentHistory(sqlSession,currentPage);
+	}
+	@Override
+	public int selectPaymentHistoryCount() {
+		// TODO Auto-generated method stub
+		return paymentDao.selectPaymentHistoryCount(sqlSession);
+	}
 	
 }

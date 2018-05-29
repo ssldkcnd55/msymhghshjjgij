@@ -12,6 +12,7 @@ public class Payment implements java.io.Serializable {
 	 */
 	private static final long serialVersionUID = 4444L;
 
+	private int rnum;
 	private int buy_no; // 구매 번호
 	private int group_no;//그룹 번호
 	private int market_no; // 판매글 번호
@@ -32,10 +33,11 @@ public class Payment implements java.io.Serializable {
 	}
 
 
-	public Payment(int buy_no, int group_no, int market_no, int auction_no, String member_id, Date buy_date,
+	public Payment(int rnum, int buy_no, int group_no, int market_no, int auction_no, String member_id, Date buy_date,
 			int buy_amount, String buy_addr, String buy_tel, String buy_name, String buy_status, String buy_request,
 			String buy_transport_name, String buy_transport_no) {
 		super();
+		this.rnum = rnum;
 		this.buy_no = buy_no;
 		this.group_no = group_no;
 		this.market_no = market_no;
@@ -55,11 +57,20 @@ public class Payment implements java.io.Serializable {
 
 	@Override
 	public String toString() {
-		return "Payment [buy_no=" + buy_no + ", group_no=" + group_no + ", market_no=" + market_no + ", auction_no="
+		return "Payment [rnum=" +rnum + ", buy_no=" + buy_no + ", group_no=" + group_no + ", market_no=" + market_no + ", auction_no="
 				+ auction_no + ", member_id=" + member_id + ", buy_date=" + buy_date + ", buy_amount=" + buy_amount
 				+ ", buy_addr=" + buy_addr + ", buy_tel=" + buy_tel + ", buy_name=" + buy_name + ", buy_status="
 				+ buy_status + ", buy_request=" + buy_request + ", buy_transport_name=" + buy_transport_name
 				+ ", buy_transport_no=" + buy_transport_no + "]";
+	}
+
+	public int getRnum() {
+		return rnum;
+	}
+
+
+	public void setRnum(int rnum) {
+		this.rnum = rnum;
 	}
 
 
