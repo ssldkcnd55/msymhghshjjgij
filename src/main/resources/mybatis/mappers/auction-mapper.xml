@@ -151,7 +151,7 @@
 		where AUCTION_QNA_NO=#{auction_qna_no}
 	]]>
 	</update>
-<<<<<<< HEAD
+
 	
 	<select id="selectcheckAuction_history_price"  parameterType="int"  resultType="AuctionHistory" >
 	<![CDATA[
@@ -175,18 +175,16 @@
 	</select> -->
 	
 	
-	
-=======
-
 	<select id="selectAuctionHistory" parameterType="PageNumber" resultType="auction">
 	<![CDATA[
 	select * from (select rownum rnum, AUCTION_HISTORY_NO, AUCTION_NO, MEMBER_ID,AUCTION_HISTORY_PRICE,AUCTION_HISTORY_DATE from AUCTION_HISTORY 
 	order by AUCTION_NO desc) where rnum >=#{startRow} and rnum <=#{endRow}
 	]]>
 	</select>
+	
 	<select id="selectAuctionHistoryCount" parameterType="int" resultType="int">
 		select
 		count(*) from auction_history
 	</select>
->>>>>>> branch 'master' of https://github.com/ssldkcnd55/msymhghshjjgij.git
+
 </mapper>
