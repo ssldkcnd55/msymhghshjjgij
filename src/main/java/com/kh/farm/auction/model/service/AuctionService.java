@@ -53,8 +53,21 @@ public interface AuctionService {
 
 	int delete_auction_qna_answer(int auction_qna_no);
 	
+
+
+	int insertAuctionBidding(AuctionHistory auctionhistory);
+
+	AuctionHistory selectcheckAuction_history_price(int auction_no);
+
+	
+
+	
+
+	/*ArrayList<AuctionHistory> selectAuctionBiddingList(int auction_no);*/
+
 	ArrayList<AuctionHistory> selectAuctionHistory(int currentPage);
 
 	int selectAuctionHistoryCount();
 	
+
 }

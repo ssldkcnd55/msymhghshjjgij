@@ -152,14 +152,39 @@
 	]]>
 	</update>
 
+	
+	<select id="selectcheckAuction_history_price"  parameterType="int"  resultType="AuctionHistory" >
+	<![CDATA[
+		select max(auction_history_price) as "auction_history_price" from auction_history where auction_no = #{auction_no}
+	]]>
+	</select>
+	
+	
+	<insert id="insertAuctionBidding" parameterType="AuctionHistory" flushCache="true" useGeneratedKeys="true">
+	<![CDATA[
+		insert into auction_history values((select max(auction_history_no) from auction_history)+1,
+		#{auction_no},#{member_id},#{auction_history_price},sysdate)
+	]]>
+	</insert>
+	
+	
+	<!-- <select id="selectAuctionBiddingList"  parameterType="AuctionHistory"  resultType="AuctionHistory" >
+	<![CDATA[
+		select * from auction_history where auction_no = #{auction_no}
+	]]>
+	</select> -->
+	
+	
 	<select id="selectAuctionHistory" parameterType="PageNumber" resultType="auction">
 	<![CDATA[
 	select * from (select rownum rnum, AUCTION_HISTORY_NO, AUCTION_NO, MEMBER_ID,AUCTION_HISTORY_PRICE,AUCTION_HISTORY_DATE from AUCTION_HISTORY 
 	order by AUCTION_NO desc) where rnum >=#{startRow} and rnum <=#{endRow}
 	]]>
 	</select>
+	
 	<select id="selectAuctionHistoryCount" parameterType="int" resultType="int">
 		select
 		count(*) from auction_history
 	</select>
+
 </mapper>

@@ -16,12 +16,6 @@
 
 
 <script type="text/javascript">
-	/*  댓글 수정 
-	 function comment_modify(num){
-		$(".galcomUpdate"+i).after(
-				
-				);
-	} */
 	
 	/* QnA수정 버튼 */
 	function moveAuctionQnAModify(){

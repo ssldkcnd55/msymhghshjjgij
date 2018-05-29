@@ -116,7 +116,6 @@ public class AuctionDao {
 
 
 	public int delete_auction_qna_answer(SqlSessionTemplate sqlSession, int auction_qna_no) {
-		// TODO Auto-generated method stub
 		return sqlSession.update("auction.delete_auction_qna_answer", auction_qna_no);
 	}
 
@@ -131,11 +130,33 @@ public class AuctionDao {
 		return (ArrayList)ac;
 	}
 
+
+	public AuctionHistory selectcheckAuction_history_price(SqlSessionTemplate sqlSession, int auction_no) {
+		return sqlSession.selectOne("auction.selectcheckAuction_history_price", auction_no);
+	}
+	
+	public int insertAuctionBidding(SqlSessionTemplate sqlSession, AuctionHistory auctionhistory) {
+		return sqlSession.insert("auction.insertAuctionBidding", auctionhistory);
+	}
+
+
+	
+
+
+	/*public ArrayList<AuctionHistory> selectAuctionBiddingList(SqlSessionTemplate sqlSession, int auction_no) {
+		List<AuctionHistory> selectAuctionBiddingList = sqlSession.selectList("auction.selectAuctionBiddingList",auction_no);
+		return (ArrayList<AuctionHistory>)selectAuctionBiddingList;
+	}
+*/
+
+
+
 	public int selectAuctionHistoryCount(SqlSessionTemplate sqlSession) {
 		// TODO Auto-generated method stub
 		int listCount = sqlSession.selectOne("auction.selectAuctionHistoryCount");
 		return listCount;
 	}
+
 	
 
 }

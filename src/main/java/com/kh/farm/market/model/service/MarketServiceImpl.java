@@ -98,4 +98,29 @@ public class MarketServiceImpl implements MarketService{
 		// TODO Auto-generated method stub
 		return marketDao.selectReviewUnderReply(sqlSession,map);
 	}
+	@Override
+	public ArrayList<Reply> selectDailyReply(int daily_no, int currentPage) {
+		// TODO Auto-generated method stub
+		return marketDao.selectDailyReply(sqlSession,daily_no,currentPage);
+	}
+	@Override
+	public int selectDailyReplyCount(int daily_no) {
+		// TODO Auto-generated method stub
+		return marketDao.selectDailyReplyCount(sqlSession,daily_no);
+	}
+	@Override
+	public ArrayList<UnderReply> selectDailyUnderReply(HashMap<String, ArrayList<Integer>> map) {
+		// TODO Auto-generated method stub
+		return marketDao.selectDailyUnderReply(sqlSession,map);
+	}
+	@Override
+	public int insertReply(Reply reply) {
+		// TODO Auto-generated method stub
+		return marketDao.insertReviewReply(sqlSession,reply);
+	}
+	@Override
+	public int insertUnderReply(UnderReply reply) {
+		// TODO Auto-generated method stub
+		return marketDao.insertUnderReply(sqlSession,reply);
+	}
 }

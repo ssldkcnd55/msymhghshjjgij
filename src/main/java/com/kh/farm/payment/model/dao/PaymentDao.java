@@ -6,6 +6,8 @@ import java.util.*;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
+import com.kh.farm.auction.model.vo.AuctionHistory;
+import com.kh.farm.common.model.vo.PageNumber;
 import com.kh.farm.payment.model.vo.Payment;
 import com.kh.farm.shoppingBasket.model.vo.*;
 
@@ -38,4 +40,20 @@ public class PaymentDao {
 		return sqlSession.delete("payment.deleteFirstPayment",group_no);
 	}
 
+	public ArrayList<Payment> selectPaymentHistory(SqlSessionTemplate sqlSession, int currentPage) {
+		// TODO Auto-generated method stub
+		int startRow =(currentPage-1)*10+1; //1~10, 11~20 계산할 거 ex) 1, 11, 21, 31,)
+		int endRow = startRow+9;
+		PageNumber pnum = new PageNumber();
+		pnum.setStartRow(startRow);
+		pnum.setEndRow(endRow);
+		List<Payment> ac = sqlSession.selectList("payment.selectPaymentHistory",pnum);
+		return (ArrayList)ac;
+	}
+
+	public int selectPaymentHistoryCount(SqlSessionTemplate sqlSession) {
+		// TODO Auto-generated method stub
+		int listCount = sqlSession.selectOne("payment.selectPaymentHistoryCount");
+		return listCount;
+	}
 }
