@@ -45,9 +45,10 @@ public class MemberController {
 
 	@RequestMapping(value = "signUp.do", method = RequestMethod.POST)
 	public String signUp(Member member, HttpServletRequest request,
-			@RequestParam(name = "upfile", required = false) MultipartFile file) {
+			@RequestParam(name = "upfile", required = false) MultipartFile file,@RequestParam("category") String category) {
 		String path = request.getSession().getServletContext().getRealPath("resources/upload/memberUpload");
 		member.setMember_pwd(pwdEncoder.encode(member.getMember_pwd()));
+		member.setMember_category(category);
 		try {
 			file.transferTo(new File(path + "\\" + file.getOriginalFilename()));
 

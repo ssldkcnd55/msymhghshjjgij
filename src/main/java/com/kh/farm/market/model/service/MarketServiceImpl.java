@@ -19,8 +19,8 @@ public class MarketServiceImpl implements MarketService{
 	@Autowired
 	private SqlSessionTemplate sqlSession;
 	@Override
-	public ArrayList<Market> selectMarketList(int page) {
-		return marketDao.marketList(page,sqlSession);
+	public ArrayList<Market> selectMarketList(int page,String search) {
+		return marketDao.marketList(page,sqlSession,search);
 	}
 	@Override
 	public Market selectMarketInfo(int market_no) {
@@ -80,4 +80,17 @@ public class MarketServiceImpl implements MarketService{
 		// TODO Auto-generated method stub
 		return marketDao.selectDailyDetail(sqlSession,daily_no);
 	}
+	
+	/*@Override
+	public Market selectSearchList(String search) {
+		// TODO Auto-generated method stub
+		return marketDao.selectMarketSearchList(sqlSession,search);
+	}*/
+	
+	@Override
+	public Market selectSearchList(String search) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
 }

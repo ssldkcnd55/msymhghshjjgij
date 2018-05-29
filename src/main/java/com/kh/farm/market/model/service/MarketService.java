@@ -9,8 +9,9 @@ import com.kh.farm.qna.model.vo.Market_qna;
 
 public interface MarketService {
 
-	ArrayList<Market> selectMarketList(int page);
-
+	ArrayList<Market> selectMarketList(int page,String search);
+	
+	
 	Market selectMarketInfo(int market_no);
 
 	ArrayList<Review> selectReviewList(Market mk, int currentPage);
@@ -34,5 +35,7 @@ public interface MarketService {
 	Review selectReviewDetail(int review_no);
 
 	Daily selectDailyDetail(int daily_no);
+
+	Market selectSearchList(String search);
 
 }

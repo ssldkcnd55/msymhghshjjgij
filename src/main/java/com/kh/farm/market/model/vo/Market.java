@@ -13,7 +13,6 @@ public class Market implements java.io.Serializable{
 	private static final long serialVersionUID = 7777L;
 	
 	private int market_no;// 판매글 번호
-	
 	private int category_no;//카테고리 번호
 	private String member_id;//판매글 작성자 아이디
 	private String market_title;//판매글 제목
@@ -24,12 +23,15 @@ public class Market implements java.io.Serializable{
 	private String market_intro;//판매글 소개
 	private String market_complete;//판매글 상태
 	private int market_price;//판매 가격 
+	private String search;//검색
+	
 	
 	public Market() {}
 
 	public Market(int market_no, int category_no, String member_id, String market_title, String market_note,
 			String market_img, Date market_releasedate, int market_amount, String market_intro, String market_complete,
-			int market_price) {
+			int market_price,String search) {
+		
 		super();
 		this.market_no = market_no;
 		this.category_no = category_no;
@@ -42,6 +44,7 @@ public class Market implements java.io.Serializable{
 		this.market_intro = market_intro;
 		this.market_complete = market_complete;
 		this.market_price = market_price;
+		this.search =search;
 	}
 
 	@Override
@@ -139,4 +142,13 @@ public class Market implements java.io.Serializable{
 	public void setMarket_price(int market_price) {
 		this.market_price = market_price;
 	}
+	
+	public String getSearch() {
+		return search;
+	}
+
+	public void setSearch(String search) {
+		this.search = search;
+	}
+
 }

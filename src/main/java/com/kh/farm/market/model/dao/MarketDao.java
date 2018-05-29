@@ -16,10 +16,11 @@ import com.kh.farm.qna.model.vo.Market_qna;
 @Repository
 public class MarketDao {
 
-	public ArrayList<Market> marketList(int page,SqlSessionTemplate sqlSession) {
+	public ArrayList<Market> marketList(int page,SqlSessionTemplate sqlSession,String search) {
 		PageNumber pn = new PageNumber();
 		pn.setStartRow(page * 9 -8);
 		pn.setEndRow(pn.getStartRow() + 8);
+		pn.setSearch(search);
 		List<Market> list = sqlSession.selectList("market.marketList",pn);
 		return (ArrayList)list;
 	}
@@ -97,4 +98,6 @@ public class MarketDao {
 		// TODO Auto-generated method stub
 		return sqlSession.selectOne("market.dailyDetail", daily_no);
 	}
+
+	
 }
