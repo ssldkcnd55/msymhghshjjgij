@@ -163,5 +163,25 @@ public class MemberDao {
 		return listCount;
 	}
 
+	public List<Member> selectMemberName(SqlSessionTemplate sqlSession, String keyword, int currentPage) {
+		int startRow =(currentPage-1)*10+1; //1~10, 11~20 계산할 거 ex) 1, 11, 21, 31,)
+		int endRow = startRow+9;
+		PageNumber pnum = new PageNumber();
+		pnum.setStartRow(startRow);
+		pnum.setEndRow(endRow);
+		pnum.setKeyword(keyword);
+		return sqlSession.selectList("selectMemberName", pnum);
+	}
+
+	public List<Member> selectMemberId(SqlSessionTemplate sqlSession, String keyword, int currentPage) {
+		int startRow =(currentPage-1)*10+1; //1~10, 11~20 계산할 거 ex) 1, 11, 21, 31,)
+		int endRow = startRow+9;
+		PageNumber pnum = new PageNumber();
+		pnum.setStartRow(startRow);
+		pnum.setEndRow(endRow);
+		pnum.setKeyword(keyword);
+		return sqlSession.selectList("selectMemberId", pnum);
+	}
+
 	
 }

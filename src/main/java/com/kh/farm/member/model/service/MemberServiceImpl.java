@@ -110,4 +110,14 @@ public class MemberServiceImpl implements MemberService {
 		default: return memberDao.selectWarningCount(sqlSession);
 		}
 	}
+
+	@Override
+	public List<Member> selectSearchMember(String keyword, int type,int currentPage) {
+		
+		switch(type) {
+		case 1: return memberDao.selectMemberName(sqlSession,keyword,currentPage);
+		default : return memberDao.selectMemberId(sqlSession,keyword,currentPage);
+		}
+		
+	}
 }
