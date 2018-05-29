@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.farm.member.model.vo.Member;
 import com.kh.farm.notice.model.vo.Notice;
@@ -97,6 +98,20 @@ public class MoveController {
 	@RequestMapping("moveCustomerMypage.do")
 	public String moveCustomerMypage() {
 		return "member/customerMy/customerMypage";
+	}
+	
+	@RequestMapping("moveSelectSignUp.do")
+	public ModelAndView moveSelectSignUp(ModelAndView mv, @RequestParam(value="category", required=false) String category) {
+		mv.addObject("category" , category);
+		mv.setViewName("member/signUp");
+		System.out.println(category);
+		return mv;
+		
+	}
+	@RequestMapping("moveSignUp2.do")
+	public String moveSignUp2() {
+		return "member/selectSignUp";
+		
 	}
 	@RequestMapping("moveNotice.do")
 	public String moveNotice() {

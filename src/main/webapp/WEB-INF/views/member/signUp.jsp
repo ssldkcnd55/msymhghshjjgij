@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -43,7 +44,7 @@
 							</div>
 							<div>
 								<div style="text-align: center;">
-
+									<input type="hidden" name="category" value="${category }" >
 									<img src="/farm/resources/images/default_user.png"
 										id="profile" style="text-align: center" alt="이미지를 선택해주세요"></img><br>
 									<input type="file" id="file-1" class="inputfile inputfile-1"
@@ -121,6 +122,12 @@
 										<input type="button" class="btn btn-info" id="addrbtn"
 											name="addrbtn" value="주소검색" onclick="addrSearch();" required>
 									</div>
+									
+									<c:if test="${category =='0'}">
+									<label for="file">사업자 등록증</label><br> <input type="file" id="file"
+									class="form-control" name="member_businessFile" >
+									</c:if>
+									
 								</div>
 
 

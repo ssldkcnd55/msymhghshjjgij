@@ -19,8 +19,9 @@ import javax.servlet.http.HttpSession;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.config.annotation.web.configurers.ExpressionUrlAuthorizationConfigurer.MvcMatchersAuthorizedUrl;
 import org.springframework.stereotype.Controller;
-
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -41,11 +42,14 @@ public class MarketController {
 	
 
 	@RequestMapping(value="marketList.do")
-	public ModelAndView marketList(ModelAndView mv) {
+	public ModelAndView marketList(ModelAndView mv,@RequestParam(value="search",required=false) String search) {
 		int page = 1;
-		ArrayList<Market> list = marketService.selectMarketList(page);
+		ArrayList<Market> list = marketService.selectMarketList(page,search);
 		mv.setViewName("market/marketList");
 		mv.addObject("list",list);
+		mv.addObject("search",search);
+		System.out.println(search);
+		
 		return mv;
 	}
 	
@@ -58,9 +62,10 @@ public class MarketController {
 		return mv;
 		
 	}
+	
 	@RequestMapping(value="ajaxMoreMarket.do", method=RequestMethod.POST)
-	public void moreMarketList(HttpServletResponse response,@RequestParam("page") int page) throws IOException{
-		List<Market> list = marketService.selectMarketList(page);
+	public void moreMarketList(HttpServletResponse response,@RequestParam("page") int page,@RequestParam(value="search",required=false) String search) throws IOException{
+		List<Market> list = marketService.selectMarketList(page,search);
 		JSONArray jarr = new JSONArray();
 		
 		//list를 jarr로 복사하기
@@ -71,6 +76,7 @@ public class MarketController {
 			jmarket.put("market_no", m.getMarket_no());
 			jmarket.put("market_note", m.getMarket_note());
 			jmarket.put("market_img", m.getMarket_img());
+			jmarket.put("search", m.getSearch());
 			
 			jarr.add(jmarket);
 		}
@@ -122,6 +128,7 @@ public class MarketController {
 		out.flush();
 		out.close();
 	}
+	
 	@RequestMapping("reviewDeatil.do")
 	public ModelAndView reviewDeatil(ModelAndView mv,@RequestParam() int review_no) {
 		Review review = marketService.selectReviewDetail(review_no);
@@ -129,6 +136,7 @@ public class MarketController {
 		mv.addObject("review", review);
 		mv.setViewName("market/marketReviewDetail");
 		return mv;
+		
 	}
 	@RequestMapping(value="insertMarketMake.do",method=RequestMethod.POST)
 	public String insertMarket(Market market,HttpServletRequest request,
@@ -315,6 +323,15 @@ public class MarketController {
 		mv.setViewName("market/marketDailyDetail");
 		return mv;
 	}
+	
+	@RequestMapping("moveSearchList.do")
+	public ModelAndView marketSearchList(ModelAndView mv,@RequestParam(value="search",required=false) String search) {
+		Market market = marketService.selectSearchList(search);
+		mv.addObject("market_search", mv);
+		mv.setViewName("market/marketList");
+		return mv;
+	}
+	
 	@RequestMapping(value="ajaxReviewReply.do",method=RequestMethod.POST)
 	public void ajaxReviewReply(@RequestParam("review_no")int review_no,HttpServletResponse response,@RequestParam("page") int currentPage ) throws IOException{
 		ArrayList<Reply> list = marketService.selectReviewReply(review_no,currentPage);

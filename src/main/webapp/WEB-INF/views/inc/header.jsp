@@ -69,6 +69,13 @@ function getBasketCount(member_id)
 					}
 				});
 	}); */
+
+	
+	/*검색기능*/
+
+	function moveSearchList(){
+		location.href = "marketList.do?search="+$("#search").val();
+	}
 </script>
 </head>
 
@@ -78,7 +85,7 @@ function getBasketCount(member_id)
             <div class="userMenu">
                <ul class="list_menu">
                <c:if test="${empty sessionScope.loginUser }">
-                  <li class="menu1 none_sub"><a href="moveSignUp.do" class="link_menu">회원가입</a></li>
+                  <li class="menu1 none_sub"><a href="moveSignUp2.do" class="link_menu">회원가입</a></li>
                   <li class="menu1 none_sub"><a href="moveLogin.do" class="link_menu">로그인</a></li>
                </c:if>
                <c:if test="${! empty sessionScope.loginUser }">
@@ -110,9 +117,9 @@ function getBasketCount(member_id)
                      <li><a href="moveJob.do">구인구직</a></li>
                   </ul>
                   <div class="search_box">
-                     <input class="search" type="text"> <input type="image"
+                     <input class="search" type="text" name="search" id="search" placeholder="장터 검색"> <input type="image"
                         src="/farm/resources/images/search1.png"
-                        class="btn_search">
+                        class="btn_search" onclick="moveSearchList();">
                   </div>
                   <c:if test="${ not empty sessionScope.loginUser}">
                   <div class="cart_count">

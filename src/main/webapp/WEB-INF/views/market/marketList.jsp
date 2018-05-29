@@ -16,7 +16,7 @@
 </script>
 <script type="text/javascript">
 	function marketMake(){
-		location.href="/farm/moveMarketMake.do";
+		location.href="/farm/moveSignUp";
 	}
 </script>
 <script>
@@ -26,7 +26,10 @@
 			$.ajax({
 				url: "ajaxMoreMarket.do",
 				type: "post",
-				data : {page : count},
+				data : {page : count
+					<c:if test="${search != null}">
+				,search : "${search}"
+					</c:if>},
 				dataType: "JSON",
 				success: function(obj){
 					var objStr = JSON.stringify(obj);
@@ -78,17 +81,17 @@
         	<!-- 카테고리 메뉴바 -->
         	<div class="category_menu" >
         	<h4>카테고리</h4>
-        	<input type="checkbox" > 카테고리1<br><br>
-        	<input type="checkbox" > 카테고리2<br><br>
-        	<input type="checkbox" > 카테고리3<br><br>
+        	<input type="radio" > 카테고리1<br><br>
+        	<input type="radio" > 카테고리2<br><br>
+        	<input type="radio" > 카테고리3<br><br>
         	<hr style="color:#bdbdbd">
         	
         	<h4>카테고리</h4>
-        	<input type="checkbox" > 카테고리1<br><br>
-        	<input type="checkbox" > 카테고리2<br><br>
-        	<input type="checkbox" > 카테고리3<br><br>
-        	<input type="checkbox" > 카테고리4<br><br>
-        	<input type="checkbox" > 카테고리5<br><br>
+        	<input type="radio" > 카테고리1<br><br>
+        	<input type="radio" > 카테고리2<br><br>
+        	<input type="radio" > 카테고리3<br><br>
+        	<input type="radio" > 카테고리4<br><br>
+        	<input type="radio" > 카테고리5<br><br>
         	
         	</div>
         	
