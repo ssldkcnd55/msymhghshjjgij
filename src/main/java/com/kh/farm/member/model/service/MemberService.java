@@ -33,4 +33,6 @@ public interface MemberService {
 	List<Member> selectChangeList(int currentPage, int type);
 
 	int selectChangeMemberCount(int type);
+
+	List<Member> selectSearchMember(String keyword, int type, int currentPage);
 }

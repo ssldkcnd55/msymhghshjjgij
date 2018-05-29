@@ -397,6 +397,65 @@ function memberChangePage(page,type){
 	       }
 	});
 }
+
+//검색메소드
+function search_member(){
+	alert($('#search_filter').val());
+	alert($('#search').val());
+	var keyword = $('#search').val();
+	var type = $('#search_filter').val();
+	$.ajax({
+		url:"searchMember.do",
+		type:"post",
+		data:{
+			keyword:keyword,type:type,page:1
+		},
+		dataType: "JSON",
+		success: function(data){
+			
+			console.log(data);
+			var objStr = JSON.stringify(data);
+			var jsonObj = JSON.parse(objStr);
+			
+			var outValues = "<tr><th width='12%'>번호</th><th width='25%'>ID</th><th width='13%'>이름</th>"
+				+"<th width='10%'>분류</th><th width='10%'>승인상태</th>"
+				+"<th width='10%'>탈퇴여부</th><th width='20%'>경고횟수</th></tr>";
+				
+				for(var i in jsonObj.list){
+					var member_id = jsonObj.list[i].member_id;
+					var regExp = /[\{\}\[\]\/?.,;:|\)*~`!^\-_+<>@\#$%&\\\=\(\'\"]/gi;
+					var m = member_id.replace(regExp,"");
+					
+					switch(jsonObj.list[i].member_category){
+					
+					case '0' : outValues += "<tr id='hover'><td>"+jsonObj.list[i].rnum+"</td>"
+					+"<td id='Notice_td'><a href='/farm/memberDetail.do?member_id="+jsonObj.list[i].member_id+"'>"+jsonObj.list[i].member_id+"</a></td>"
+					+"<td>"+jsonObj.list[i].member_name+"</td><td>농업인</td>"
+					+"<td><button onclick='change_app( \""+ jsonObj.list[i].member_id +"\" );' id='btnapp_"+ m +"'>"+jsonObj.list[i].member_approval+"</button></td>"
+					+"<td><button onclick='change_withdraw(\""+ jsonObj.list[i].member_id +"\")' id='btnwith_" + m +"'>"+jsonObj.list[i].member_withdraw+"</button></td>"
+					+"<td>"+jsonObj.list[i].member_warning_count+"</td>"
+					+"</tr>";break;
+					case '1' : outValues += "<tr id='hover'><td>"+jsonObj.list[i].rnum+"</td>"
+					+"<td id='Notice_td'><a href='/farm/memberDetail.do?member_id="+jsonObj.list[i].member_id+"'>"+jsonObj.list[i].member_id+"</a></td>"
+					+"<td>"+jsonObj.list[i].member_name+"</td><td>일반회원</td>"
+					+"<td><button onclick='change_app( \""+ jsonObj.list[i].member_id +"\" );' id='btnapp_"+ m +"'>"+jsonObj.list[i].member_approval+"</button></td>"
+					+"<td><button onclick='change_withdraw(\""+ jsonObj.list[i].member_id +"\")' id='btnwith_" + m +"'>"+jsonObj.list[i].member_withdraw+"</button></td>"
+					+"<td>"+jsonObj.list[i].member_warning_count+"</td>"
+					+"</tr>";break;
+					case '2' : outValues += "<tr id='hover'><td>"+jsonObj.list[i].rnum+"</td>"
+					+"<td id='Notice_td'><a href='/farm/memberDetail.do?member_id="+jsonObj.list[i].member_id+"'>"+jsonObj.list[i].member_id+"</a></td>"
+					+"<td>"+jsonObj.list[i].member_name+"</td><td>관리자</td>"
+					+"<td><button onclick='change_app( \""+ jsonObj.list[i].member_id +"\" );' id='btnapp_"+ m +"'>"+jsonObj.list[i].member_approval+"</button></td>"
+					+"<td><button onclick='change_withdraw(\""+ jsonObj.list[i].member_id +"\")' id='btnwith_" + m +"'>"+jsonObj.list[i].member_withdraw+"</button></td>"
+					+"<td>"+jsonObj.list[i].member_warning_count+"</td>"
+					+"</tr>";break;
+					}
+				}
+				$(".Member_table").html(outValues);	
+			
+		}
+	});
+}
 </script>
 <link rel="stylesheet" type="text/css" href="/farm/resources/css/style.css" />
 <link rel="stylesheet" type="text/css" href="/farm/resources/css/admin_member.css" />
@@ -439,18 +498,18 @@ function memberChangePage(page,type){
                </div>
 				
                <!-- 검색 -->
-               <form action="searchMember.do" method="post">
+               <!-- <form action="search_member();" method="post"> -->
                <div class="search_box">
-               		<select class="select2">
-               			<option name="search_filter" value="1">이름</option>
-               			<option name="search_filter" value="2">ID</option>
+               		<select class="select2" id="search_filter">
+               			<option value="1">이름</option>
+               			<option value="2">ID</option>
               		 </select>
                <span class='green_window'> 
-                  <input type='text'class='input_text' name='search'/>
+                  <input type='text'class='input_text' id='search'/>
                </span>
-               <button type='submit' class='sch_smit'>검색</button>
+               <button type='submit' class='sch_smit' onclick="search_member();">검색</button>
                </div>
-               </form>
+               <!-- </form> -->
             </div>
 
          </div>
