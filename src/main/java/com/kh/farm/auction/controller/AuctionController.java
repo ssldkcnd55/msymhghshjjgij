@@ -32,6 +32,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.farm.auction.model.service.AuctionService;
 import com.kh.farm.auction.model.vo.Auction;
+import com.kh.farm.auction.model.vo.AuctionHistory;
 import com.kh.farm.auction.model.vo.AuctionQnA;
 import com.kh.farm.market.model.vo.Market;
 import com.kh.farm.market.model.vo.Review;
@@ -376,8 +377,47 @@ public class AuctionController {
 	@RequestMapping(value="delete_auction_qna_answer.do")
 	public String delete_auction_qna_answer(@RequestParam(value="auction_qna_no") int auction_qna_no) {
 		int result = auctionService.delete_auction_qna_answer(auction_qna_no);
-		
 		return "redirect:/moveauctionQnADetail.do?auction_qna_no="+auction_qna_no;
+	}
+	
+	
+	/*경매 입찰 가격 비교*/
+	@RequestMapping(value="checkAuction_history_price.do",method=RequestMethod.POST)
+	public void checkAuction_history_price(HttpServletResponse response,@RequestParam(value="auction_no") int auction_no) 
+	throws IOException{
+		System.out.println(auction_no);
+		AuctionHistory checkauctionhistoryprice = auctionService.selectcheckAuction_history_price(auction_no);
+		System.out.println("checkauctionhistoryprice111 : "+checkauctionhistoryprice.getAuction_history_price());
+		
+		/*mv.addObject("checkprice", checkauctionhistoryprice);
+		mv.setViewName("auction/auctionDetail");
+		return mv;*/
+		
+		 response.setContentType("application/json; charset=utf-8;");
+        JSONObject json = new JSONObject();
+        int price = checkauctionhistoryprice.getAuction_history_price();
+        System.out.println("price : "+price);
+        json.put("price", price);
+        
+        System.out.println(json.toJSONString());
+    
+      PrintWriter out = response.getWriter();
+      out.print(json.toJSONString());
+      out.flush();
+      out.close();
+		
+	}
+	
+	
+	//경매 입찰 등록 
+	@RequestMapping(value="insertAuctionBidding.do")
+	public String insertAuctionBidding(AuctionHistory auctionhistory) {
+		System.out.println("111");
+		int makeauctionhistory = auctionService.insertAuctionBidding(auctionhistory);
+		System.out.println("makeauctionhistory : "+makeauctionhistory);
+		/*ArrayList<AuctionHistory> selectAuctionBiddingList = auctionService.selectAuctionBiddingList(auctionhistory.getAuction_no());*/
+		return "redirect:/AuctionDetail.do?auction_no="+auctionhistory.getAuction_no();
+		
 	}
 	
 }

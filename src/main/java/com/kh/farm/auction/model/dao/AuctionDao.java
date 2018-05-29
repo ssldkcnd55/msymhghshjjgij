@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.kh.farm.auction.model.vo.Auction;
+import com.kh.farm.auction.model.vo.AuctionHistory;
 import com.kh.farm.auction.model.vo.AuctionQnA;
 import com.kh.farm.common.model.vo.PageNumber;
 import com.kh.farm.member.model.vo.Member;
@@ -114,9 +115,27 @@ public class AuctionDao {
 
 
 	public int delete_auction_qna_answer(SqlSessionTemplate sqlSession, int auction_qna_no) {
-		// TODO Auto-generated method stub
 		return sqlSession.update("auction.delete_auction_qna_answer", auction_qna_no);
 	}
+
+
+	public AuctionHistory selectcheckAuction_history_price(SqlSessionTemplate sqlSession, int auction_no) {
+		return sqlSession.selectOne("auction.selectcheckAuction_history_price", auction_no);
+	}
+	
+	public int insertAuctionBidding(SqlSessionTemplate sqlSession, AuctionHistory auctionhistory) {
+		return sqlSession.insert("auction.insertAuctionBidding", auctionhistory);
+	}
+
+
+	
+
+
+	/*public ArrayList<AuctionHistory> selectAuctionBiddingList(SqlSessionTemplate sqlSession, int auction_no) {
+		List<AuctionHistory> selectAuctionBiddingList = sqlSession.selectList("auction.selectAuctionBiddingList",auction_no);
+		return (ArrayList<AuctionHistory>)selectAuctionBiddingList;
+	}
+*/
 
 
 	

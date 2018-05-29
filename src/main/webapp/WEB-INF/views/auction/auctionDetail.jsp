@@ -112,6 +112,62 @@ $(function(){
 		});
 	}
 	
+	   
+	
+	function checkAuction_bidding(){
+		 var checkAuction_bidding;
+		 var bidding_price = $("#biddingprice").val();
+	     var no = $("#no").val();
+		alert(no);
+		alert(bidding_price);
+		$.ajax({
+			url:"checkAuction_history_price.do",
+			type:"post",
+			data:{
+				auction_no:no
+			},
+			 datatype:"json",
+			 success:function(json){
+					alert(json.toString());
+					 var jsonStr = JSON.stringify(json);
+			         var json = JSON.parse(jsonStr);
+			         
+			       	 if(json.price <= bidding_price){
+			       		 alert("1");
+			        	checkAuction_bidding = confirm("정말로 입찰 하시겠습니까?");
+				        	if(checkAuction_bidding == true){
+				        		  return checkAuction_bidding;
+							}
+				      
+				        
+			      	  }else{
+			      		 alert("1");
+			      		checkAuction_bidding = confirm(json.price+"원 보다 높은 가격을 입력해주세요."); 
+			      		if(checkAuction_bidding == true){
+							return(false);
+						}
+			      		return(false);
+			      	  }
+				 }
+		});
+	}
+		
+		/* location.href="/farm/checkAuction_history_price.do?auction_no=${auction.auction_no}";
+		console.log( ${checkprice.auction_history_price});
+		if( ${checkprice.auction_history_price} != null){
+			var price =${checkprice.auction_history_price};
+			var auction_price = prompt(price+'원보다 더 큰 값을 입력해 주세요', '');
+			return(auction_price);
+		}else{
+			var checkAuction_bidding = confirm("정말로 입찰 하시겠습니까?");
+			if(checkAuction_bidding == true){
+				return(true);
+			}else{
+				return(false);
+			}
+		}	
+		return(true); 
+	}*/
 	
 </script>
 </head>
@@ -380,11 +436,14 @@ $(function(){
 				<div class="goods-view-flow-cart-wrapper">
 					<button type="button" id="show-option-button"
 						class="goods-view-show-option-button __active">
-						<span class="goods-view-show-option-button-value">옵션선택</span>
+						<span class="goods-view-show-option-button-value">입찰</span>
 					</button>
+					
 					<div id="flow-cart-content"
 						class="goods-view-flow-cart-content __active">
-						
+						<form action="/farm/insertAuctionBidding.do" onsubmit="return checkAuction_bidding()"  method="post">
+						<input type="hidden" name="auction_no" value="${auction.auction_no}" id="no">
+						<input type="hidden" name="member_id" value="${loginUser.member_id}">
 						<div class="auction_cart_info_div">
 							<table class="auction_cart_info_table">
 								<tr>
@@ -407,6 +466,7 @@ $(function(){
 								</tr >
 							</table>
 						</div>
+						
 						<div class="auction_cart_center_div">
 							<table>
 								<tr>
@@ -417,8 +477,8 @@ $(function(){
 								<tr>
 									<td>입찰가격</td>
 									<td>:  </td>
-									<td><input type="text" placeholder="ex) 1000" style="height:20px;"
-									name="auction_history_price"/></td>
+									<td><input type="number" placeholder="ex) 1000" style="height:20px;"
+									name="auction_history_price" id="biddingprice"/></td>
 								</tr>
 
 							</table>
@@ -428,13 +488,13 @@ $(function(){
 						<div class="auction_cart_right_div">
 							<table>
 								<tr>
-									<td><button class="auction_bidding">입찰</button></td>
+									<td><input  type="submit" class="auction_bidding" value="입찰" /></td>
 									<td><button class="auction_buy">즉시구매</button></td>
 								</tr>
 					
 							</table>
 						</div>
-						
+						</form>
 					
 					</div>
 					

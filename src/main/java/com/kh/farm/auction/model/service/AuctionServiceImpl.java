@@ -105,9 +105,21 @@ public class AuctionServiceImpl implements AuctionService{
 
 	@Override
 	public int delete_auction_qna_answer(int auction_qna_no) {
-		// TODO Auto-generated method stub
 		return auctionDao.delete_auction_qna_answer(sqlSession,auction_qna_no);
 	}
 	
+	@Override
+	public AuctionHistory selectcheckAuction_history_price(int auction_no) {
+		return auctionDao.selectcheckAuction_history_price(sqlSession,auction_no);
+	}
 	
+	@Override
+	public int insertAuctionBidding(AuctionHistory auctionhistory) {
+		return auctionDao.insertAuctionBidding(sqlSession,auctionhistory);
+	}
+	
+	/*@Override
+	public ArrayList<AuctionHistory> selectAuctionBiddingList(int auction_no) {
+		return auctionDao.selectAuctionBiddingList(sqlSession,auction_no);
+	}*/
 }

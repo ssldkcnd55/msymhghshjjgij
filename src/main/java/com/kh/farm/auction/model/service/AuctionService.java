@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.kh.farm.auction.model.vo.Auction;
+import com.kh.farm.auction.model.vo.AuctionHistory;
 import com.kh.farm.auction.model.vo.AuctionQnA;
 import com.kh.farm.member.model.vo.Member;
 
@@ -50,4 +51,15 @@ public interface AuctionService {
 	AuctionQnA selectseller_QnAanswer(int auction_qna_no);
 
 	int delete_auction_qna_answer(int auction_qna_no);
+	
+
+	int insertAuctionBidding(AuctionHistory auctionhistory);
+
+	AuctionHistory selectcheckAuction_history_price(int auction_no);
+
+	
+
+	
+
+	/*ArrayList<AuctionHistory> selectAuctionBiddingList(int auction_no);*/
 }
