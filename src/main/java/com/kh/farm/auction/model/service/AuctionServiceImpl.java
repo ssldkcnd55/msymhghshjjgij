@@ -108,6 +108,18 @@ public class AuctionServiceImpl implements AuctionService{
 		// TODO Auto-generated method stub
 		return auctionDao.delete_auction_qna_answer(sqlSession,auction_qna_no);
 	}
+
+	@Override
+	public ArrayList<AuctionHistory> selectAuctionHistory(int currentPage) {
+		// TODO Auto-generated method stub
+		return auctionDao.selectAuctionHistory(sqlSession,currentPage);
+	}
+
+	@Override
+	public int selectAuctionHistoryCount() {
+		// TODO Auto-generated method stub
+		return auctionDao.selectAuctionHistoryCount(sqlSession);
+	}
 	
 	
 }

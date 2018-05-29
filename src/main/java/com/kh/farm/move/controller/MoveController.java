@@ -15,6 +15,11 @@ import com.kh.farm.notice.model.vo.Notice;
 public class MoveController {
 	public MoveController() {}
 	
+	@RequestMapping("auctionHistory.do")
+	public String auctionHistory() {
+		return "member/customerMy/auction_History";
+	}
+	
 	@RequestMapping("moveMemberInfo.do")
 	public String moveMemberInfo() {
 		return "member/customerMy/member_Info";

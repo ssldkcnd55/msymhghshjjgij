@@ -10,9 +10,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.kh.farm.auction.model.vo.Auction;
+import com.kh.farm.auction.model.vo.AuctionHistory;
 import com.kh.farm.auction.model.vo.AuctionQnA;
 import com.kh.farm.common.model.vo.PageNumber;
 import com.kh.farm.member.model.vo.Member;
+import com.kh.farm.notice.model.vo.Notice;
 
 @Repository
 public class AuctionDao {
@@ -118,7 +120,22 @@ public class AuctionDao {
 		return sqlSession.update("auction.delete_auction_qna_answer", auction_qna_no);
 	}
 
+	public ArrayList<AuctionHistory> selectAuctionHistory(SqlSessionTemplate sqlSession, int currentPage) {
+		// TODO Auto-generated method stub
+		int startRow =(currentPage-1)*10+1; //1~10, 11~20 계산할 거 ex) 1, 11, 21, 31,)
+		int endRow = startRow+9;
+		PageNumber pnum = new PageNumber();
+		pnum.setStartRow(startRow);
+		pnum.setEndRow(endRow);
+		List<AuctionHistory> ac = sqlSession.selectList("auction.selectAuctionHistory",pnum);
+		return (ArrayList)ac;
+	}
 
+	public int selectAuctionHistoryCount(SqlSessionTemplate sqlSession) {
+		// TODO Auto-generated method stub
+		int listCount = sqlSession.selectOne("auction.selectAuctionHistoryCount");
+		return listCount;
+	}
 	
 
 }

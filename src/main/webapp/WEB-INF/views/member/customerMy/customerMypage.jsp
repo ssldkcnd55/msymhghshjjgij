@@ -10,7 +10,6 @@
 <title>Farm</title>
 <script type="text/javascript">
 $(function(){
-	
 	$('div .tabs .tab').click(function(){
 		var before=$('.active').attr("id");
 		var check=$(this).attr("id");
@@ -49,7 +48,7 @@ $(function(){
         <div class="info_box">
         <iframe id="cusmyframe_1" src="moveMemberInfo.do">
         </iframe>
-        <iframe id="cusmyframe_2" src="moveMemberInfo.do" hidden="true"> 
+        <iframe id="cusmyframe_2" src="auctionHistory.do" hidden="true"> 
         </iframe>
         <iframe id="cusmyframe_3" src="moveMemberInfo.do" hidden="true"> 
         </iframe>
