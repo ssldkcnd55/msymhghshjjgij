@@ -307,7 +307,7 @@
 				<!-- #container -->
 
 
-			</div>
+			
 
 
 			<div class="bigbox1">
@@ -508,7 +508,7 @@
 						</div>
 					</div>
 				</div>
-
+</div>
 
 			</div>
 
