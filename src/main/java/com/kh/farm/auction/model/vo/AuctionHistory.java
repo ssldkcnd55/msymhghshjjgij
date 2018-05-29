@@ -12,6 +12,7 @@ public class AuctionHistory implements java.io.Serializable{
 	 */
 	private static final long serialVersionUID = 11111L;
 	
+	private int rnum;
 	private int auction_history_no;//입찰 번호
 	private int auction_no;//경매 번호
 	private String member_id;//입찰자 아이디
@@ -20,9 +21,10 @@ public class AuctionHistory implements java.io.Serializable{
 		
 	public AuctionHistory() {}
 
-	public AuctionHistory(int auction_history_no, int auction_no, String member_id, int auction_history_price,
+	public AuctionHistory(int rnum,int auction_history_no, int auction_no, String member_id, int auction_history_price,
 			Date auction_history_date) {
 		super();
+		this.rnum = rnum;
 		this.auction_history_no = auction_history_no;
 		this.auction_no = auction_no;
 		this.member_id = member_id;
@@ -32,9 +34,17 @@ public class AuctionHistory implements java.io.Serializable{
 
 	@Override
 	public String toString() {
-		return "AuctionHistory [auction_history_no=" + auction_history_no + ", auction_no=" + auction_no
+		return "AuctionHistory [rnum=" + rnum + ", auction_history_no=" + auction_history_no + ", auction_no=" + auction_no
 				+ ", member_id=" + member_id + ", auction_history_price=" + auction_history_price
 				+ ", auction_history_date=" + auction_history_date + "]";
+	}
+	
+	public int getRnum() {
+		return rnum;
+	}
+
+	public void setRnum(int rnum) {
+		this.rnum = rnum;
 	}
 
 	public int getAuction_history_no() {

@@ -8,6 +8,7 @@ import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -268,7 +269,8 @@ public class MemberController {
 	}
 
 	@RequestMapping("customerMod.do")
-	public void customerMod(HttpServletResponse response,Member member,@RequestParam("MEMBER_ID") String member_id, @RequestParam("MEMBER_PWD") String member_pwd,@RequestParam("MEMBER_ADDR") String member_addr) throws IOException {
+	public void customerMod(HttpServletResponse response,Member member,@RequestParam("MEMBER_ID") String member_id, 
+			@RequestParam("MEMBER_PWD") String member_pwd,@RequestParam("MEMBER_ADDR") String member_addr) throws IOException {
 
 		System.out.println("333"+member_id);
 		int updatePwd = 0;
@@ -298,4 +300,54 @@ public class MemberController {
 			out.close();
 		}
 	}
+	
+	@RequestMapping("changeList.do")
+	@ResponseBody
+	public void changeList(HttpServletResponse response,@RequestParam("page") int currentPage,@RequestParam("type") int type) throws IOException{
+		JSONArray jarr =new JSONArray();
+		List<Member> changeList = memberService.selectChangeList(currentPage,type);
+		int limitPage = 10;
+		int listCount = memberService.selectChangeMemberCount(type);
+		
+		int maxPage=(int)((double)listCount/limitPage+0.9); //ex) 41개면 '5'페이지나와야되는데 '5'를 계산해줌
+		int startPage=((int)((double)currentPage/5+0.8)-1)*5+1;
+		int endPage=startPage+5-1;
+		
+		if(maxPage<endPage) {
+			endPage = maxPage;
+		}
+		for (Member m : changeList) {
+			JSONObject json = new JSONObject();
+			json.put("rnum", m.getRnum());
+			json.put("member_id", m.getMember_id());
+			json.put("member_category", m.getMember_category());
+			json.put("member_name", m.getMember_name());
+			json.put("member_approval", m.getMember_approval());
+			json.put("member_withdraw", m.getMember_withdraw());
+			json.put("member_warning_count", m.getMember_warning_count());
+			json.put("startPage", startPage);
+			json.put("endPage", endPage);
+			json.put("maxPage", maxPage);
+			json.put("currentPage",currentPage);
+			json.put("type", type);
+			jarr.add(json);
+		}
+		
+		JSONObject sendJson = new JSONObject();
+		sendJson.put("list", jarr);
+		response.setContentType("application/json; charset=utf-8");
+		PrintWriter out = response.getWriter();
+		out.append(sendJson.toJSONString());
+		out.flush();
+		out.close();
+	}
+	
+	//회원검색
+	@RequestMapping("searchMember.do")
+	public Member searchMember(Member member, @RequestParam(value="search_filter") int type) {
+		System.out.println(member.toString());
+		
+		return null;
+	}
 }
+

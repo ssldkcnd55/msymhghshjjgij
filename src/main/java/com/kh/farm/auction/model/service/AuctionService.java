@@ -6,8 +6,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.kh.farm.auction.model.vo.Auction;
+import com.kh.farm.auction.model.vo.AuctionHistory;
 import com.kh.farm.auction.model.vo.AuctionQnA;
 import com.kh.farm.member.model.vo.Member;
+import com.kh.farm.notice.model.vo.Notice;
 
 public interface AuctionService {
 	
@@ -50,4 +52,9 @@ public interface AuctionService {
 	AuctionQnA selectseller_QnAanswer(int auction_qna_no);
 
 	int delete_auction_qna_answer(int auction_qna_no);
+	
+	ArrayList<AuctionHistory> selectAuctionHistory(int currentPage);
+
+	int selectAuctionHistoryCount();
+	
 }

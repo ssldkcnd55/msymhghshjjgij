@@ -32,10 +32,12 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.farm.auction.model.service.AuctionService;
 import com.kh.farm.auction.model.vo.Auction;
+import com.kh.farm.auction.model.vo.AuctionHistory;
 import com.kh.farm.auction.model.vo.AuctionQnA;
 import com.kh.farm.market.model.vo.Market;
 import com.kh.farm.market.model.vo.Review;
 import com.kh.farm.member.model.vo.Member;
+import com.kh.farm.notice.model.vo.Notice;
 
 import net.sf.json.JSONArray;
 
@@ -380,4 +382,44 @@ public class AuctionController {
 		return "redirect:/moveauctionQnADetail.do?auction_qna_no="+auction_qna_no;
 	}
 	
+	@RequestMapping("auction_history_list.do")
+	public void selectAuctionHistory(HttpServletResponse response,@RequestParam("page") int currentPage) throws IOException{
+		
+		JSONArray jarr =new JSONArray();
+		
+		ArrayList<AuctionHistory> AuctionList = auctionService.selectAuctionHistory(currentPage);
+		int limitPage = 10;
+		int listCount = auctionService.selectAuctionHistoryCount();
+		
+		int maxPage=(int)((double)listCount/limitPage+0.9); //ex) 41개면 '5'페이지나와야되는데 '5'를 계산해줌
+		int startPage=((int)((double)currentPage/5+0.8)-1)*5+1;
+		int endPage=startPage+5-1;
+		
+		if(maxPage<endPage) {
+			endPage = maxPage;
+		}
+		for (AuctionHistory ac : AuctionList) {
+			JSONObject json = new JSONObject();
+			json.put("rnum", ac.getRnum());
+			json.put("auction_history_no", ac.getAuction_history_no());
+			json.put("auction_no", ac.getAuction_no());
+			json.put("member_id", ac.getMember_id());
+			json.put("auction_history_price", ac.getAuction_history_price());
+			json.put("auction_history_date", ac.getAuction_history_date().toString());
+			json.put("startPage", startPage);
+			json.put("endPage", endPage);
+			json.put("maxPage", maxPage);
+			json.put("currentPage",currentPage);
+			jarr.add(json);
+		}
+		
+		JSONObject sendJson = new JSONObject();
+		sendJson.put("list", jarr);
+		response.setContentType("application/json; charset=utf-8");
+		PrintWriter out = response.getWriter();
+		out.append(sendJson.toJSONString());
+		out.flush();
+		out.close();
+		
+	}
 }
