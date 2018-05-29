@@ -427,39 +427,61 @@ public class MarketController {
 		int insertReviewReply = marketService.insertReply(reply);
 		return "forward:/marketDailyDetail.do?daily_no="+reply.getDaily_no();
 	}
+	@RequestMapping(value="marketReviewReplyUpdate.do",method=RequestMethod.POST)
+	public String marketReviewReplyUpdate(Reply reply) {
+		int updateReviewReply = marketService.updateReviewReply(reply);
+		return "forward:/reviewDeatil.do?daily_no="+reply.getReview_no();
+	}
+	@RequestMapping(value="marketDailyReplyUpdate.do",method=RequestMethod.POST)
+	public String marketDailyReplyUpdate(Reply reply) {
+		int updateDailyReply = marketService.updateDailyReply(reply);
+		return "forward:/marketDailyDetail.do?daily_no="+reply.getDaily_no();
+	}
+	
+	@RequestMapping(value="marketReviewUnderReplyUpdate.do",method=RequestMethod.POST)
+	public String marketReviewUnderReplyUpdate(UnderReply reply,@RequestParam("review_no")int review_no) {
+		int updateReviewUnderReply = marketService.updateReviewUnderReply(reply);
+		return "forward:/reviewDeatil.do?daily_no="+review_no;
+	}
+	@RequestMapping(value="marketDailyUnderReplyUpdate.do",method=RequestMethod.POST)
+	public String marketDailyUnderReplyUpdate(UnderReply reply,@RequestParam("daily_no")int daily_no) {
+		int updateDailyUnderReply = marketService.updateReviewUnderReply(reply);
+		return "forward:/marketDailyDetail.do?daily_no="+daily_no;
+	}
+	
 	@RequestMapping(value="marketReviewUnderReply.do",method=RequestMethod.POST)
 	public String marketReviewUnderReplyInsert(UnderReply reply,@RequestParam("review_no")int review_no) {
 		int insertReviewReply = marketService.insertUnderReply(reply);
 		return "forward:/reviewDeatil.do?review_no="+review_no;
 	}
-	@RequestMapping(value="marketDetailUnderReply.do",method=RequestMethod.POST)
-	public String marketDetailUnderReplyInsert(UnderReply reply,@RequestParam("daily_no")int daily_no) {
+	@RequestMapping(value="marketDailyUnderReply.do",method=RequestMethod.POST)
+	public String marketDailyUnderReplyInsert(UnderReply reply,@RequestParam("daily_no")int daily_no) {
 		int insertReviewReply = marketService.insertUnderReply(reply);
 		return "forward:/marketDailyDetail.do?daily_no="+daily_no;
 	}
+	
 	@RequestMapping("marketReplyDelete.do")
 	public String marketReplyDelete(Reply reply) {
 		try {
 			int deleteReply = marketService.deleteReply(reply);
 		} catch (DeleteFailException e) {
-			System.out.println("Exception발생");
 			int replyNullUpdate = marketService.updateReplyNull(reply);
 		}
 		System.out.println("리뷰번호 : "+reply.getReview_no());
 		if(reply.getReview_no() != 0) {
-			return "forward:/marketDailyDetail.do?review_no="+reply.getReview_no();
+			return "forward:/reviewDeatil.do?review_no="+reply.getReview_no();
 		}else {
-			return "forward:/reviewDeatil.do?daily_no="+reply.getDaily_no();
+			return "forward:/marketDailyDetail.do?daily_no="+reply.getDaily_no();
 		}
 	}
 	@RequestMapping("marketUnderReplyDelete.do")
-	public String marketUnderReplyDelete(UnderReply reply,@RequestParam(value="review_no",required=false) int review_no,
-			@RequestParam(value="daily_no",required=false) int daily_no) {
+	public String marketUnderReplyDelete(UnderReply reply,@RequestParam("no") int no,
+			@RequestParam("type") int type) {
 		int deleteUnderReply = marketService.deleteUnderReply(reply);
-		if(review_no != 0) {
-			return "forward:/marketDailyDetail.do?review_no="+review_no;
+		if(type == 0) {
+			return "forward:/marketDailyDetail.do?daily_no="+no;
 		}else {
-			return "forward:/reviewDeatil.do?daily_no="+daily_no;
+			return "forward:/reviewDeatil.do?review_no="+no;
 		}
 	}
 }

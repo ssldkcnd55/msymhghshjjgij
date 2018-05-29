@@ -139,4 +139,19 @@ public class MarketServiceImpl implements MarketService{
 		// TODO Auto-generated method stub
 		return marketDao.updateReplyNull(sqlSession,reply);
 	}
+	@Override
+	public int updateReviewReply(Reply reply) {
+		// TODO Auto-generated method stub
+		return marketDao.updateReviewReply(sqlSession,reply);
+	}
+	@Override
+	public int updateDailyReply(Reply reply) {
+		// TODO Auto-generated method stub
+		return marketDao.updateDailyReply(sqlSession,reply);
+	}
+	@Override
+	public int updateReviewUnderReply(UnderReply reply) {
+		// TODO Auto-generated method stub
+		return marketDao.updateUnderReply(sqlSession,reply);
+	}
 }

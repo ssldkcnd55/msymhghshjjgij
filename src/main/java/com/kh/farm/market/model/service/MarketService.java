@@ -61,5 +61,11 @@ public interface MarketService {
 
 	int updateReplyNull(Reply reply);
 
+	int updateReviewReply(Reply reply);
+
+	int updateDailyReply(Reply reply);
+
+	int updateReviewUnderReply(UnderReply reply);
+
 
 }

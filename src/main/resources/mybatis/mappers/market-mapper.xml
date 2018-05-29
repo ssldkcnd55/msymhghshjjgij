@@ -156,4 +156,10 @@
 	<update id="updateReplyNull" parameterType="Reply">
 		update reply set reply_contents = null where reply_no = #{reply_no}
 	</update>
+	<update id="updateReply" parameterType="Reply">
+		update reply set reply_contents = #{reply_contents} where reply_no = #{reply_no}
+	</update>
+	<update id="updateUnderReply" parameterType="Reply">
+		update under_reply set under_reply_content = #{under_reply_content} where under_reply_no = #{under_reply_no}
+	</update>
 </mapper>

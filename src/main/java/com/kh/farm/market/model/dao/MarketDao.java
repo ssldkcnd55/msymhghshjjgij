@@ -161,12 +161,13 @@ public class MarketDao {
 
 	public int deleteReply(SqlSessionTemplate sqlSession, Reply reply) throws DeleteFailException{
 		// TODO Auto-generated method stub
-		int deleteReply = sqlSession.delete("market.deleteReply", reply);
-		if(deleteReply > 0 ) {
-			return deleteReply;
-		}else {
+		int deleteReply = 0;
+		try {
+			deleteReply = sqlSession.delete("market.deleteReply", reply);
+		}catch(Exception e) {
 			throw new DeleteFailException("답글이 있는 댓글은 삭제되지않습니다.");
 		}
+		return deleteReply;
 	}
 
 	public int deleteUnderReply(SqlSessionTemplate sqlSession, UnderReply reply) {
@@ -177,5 +178,20 @@ public class MarketDao {
 	public int updateReplyNull(SqlSessionTemplate sqlSession, Reply reply) {
 		// TODO Auto-generated method stub
 		return sqlSession.update("market.updateReplyNull", reply);
+	}
+
+	public int updateDailyReply(SqlSessionTemplate sqlSession, Reply reply) {
+		// TODO Auto-generated method stub
+		return sqlSession.update("market.updateReply",reply);
+	}
+
+	public int updateReviewReply(SqlSessionTemplate sqlSession, Reply reply) {
+		// TODO Auto-generated method stub
+		return sqlSession.update("market.updateReply",reply);
+	}
+
+	public int updateUnderReply(SqlSessionTemplate sqlSession, UnderReply reply) {
+		// TODO Auto-generated method stub
+		return sqlSession.update("market.updateUnderReply",reply);
 	}
 }
