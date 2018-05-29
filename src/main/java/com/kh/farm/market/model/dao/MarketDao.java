@@ -1,6 +1,7 @@
 package com.kh.farm.market.model.dao;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import org.eclipse.jdt.internal.compiler.flow.InsideSubRoutineFlowContext;
@@ -8,9 +9,12 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.kh.farm.common.model.vo.PageNumber;
+import com.kh.farm.market.exception.DeleteFailException;
 import com.kh.farm.market.model.vo.Daily;
 import com.kh.farm.market.model.vo.Market;
+import com.kh.farm.market.model.vo.Reply;
 import com.kh.farm.market.model.vo.Review;
+import com.kh.farm.market.model.vo.UnderReply;
 import com.kh.farm.qna.model.vo.Market_qna;
 
 @Repository
@@ -99,5 +103,84 @@ public class MarketDao {
 		return sqlSession.selectOne("market.dailyDetail", daily_no);
 	}
 
+<<<<<<< HEAD
 	
+=======
+	public ArrayList<Reply> selectReviewReply(SqlSessionTemplate sqlSession, int review_no,int currentPage) {
+		// TODO Auto-generated method stub
+		int startRow = (currentPage-1)*10+1; 
+		int endRow = startRow+9;
+		PageNumber pnum = new PageNumber();
+		pnum.setStartRow(startRow);
+		pnum.setEndRow(endRow);
+		pnum.setReview_no(review_no);
+		List<Reply> list = sqlSession.selectList("market.reviewReply", pnum);
+		return (ArrayList<Reply>)list;
+	}
+
+	public int selectReviewReplyCount(SqlSessionTemplate sqlSession, int review_no) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("market.reviewReplyCount", review_no);
+	}
+
+	public ArrayList<UnderReply> selectReviewUnderReply(SqlSessionTemplate sqlSession,
+			HashMap<String, ArrayList<Integer>> map) {
+		// TODO Auto-generated method stub
+		List<UnderReply> list = sqlSession.selectList("market.reviewUnderReply", map);
+		return (ArrayList<UnderReply>)list;
+	}
+
+	public ArrayList<Reply> selectDailyReply(SqlSessionTemplate sqlSession, int daily_no, int currentPage) {
+		int startRow = (currentPage-1)*10+1; 
+		int endRow = startRow+9;
+		PageNumber pnum = new PageNumber();
+		pnum.setStartRow(startRow);
+		pnum.setEndRow(endRow);
+		pnum.setDaily_no(daily_no);
+		List<Reply> list = sqlSession.selectList("market.dailyReply", pnum);
+		return (ArrayList<Reply>)list;
+	}
+
+	public int selectDailyReplyCount(SqlSessionTemplate sqlSession, int daily_no) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("market.dailyReplyCount", daily_no);
+	}
+
+	public ArrayList<UnderReply> selectDailyUnderReply(SqlSessionTemplate sqlSession,
+			HashMap<String, ArrayList<Integer>> map) {
+		// TODO Auto-generated method stub
+		List<UnderReply> list = sqlSession.selectList("market.dailyUnderReply", map);
+		return (ArrayList<UnderReply>)list;
+	}
+
+	public int insertReviewReply(SqlSessionTemplate sqlSession, Reply reply) {
+		// TODO Auto-generated method stub
+		return sqlSession.insert("market.insertReviewReply", reply);
+	}
+
+	public int insertUnderReply(SqlSessionTemplate sqlSession, UnderReply reply) {
+		// TODO Auto-generated method stub
+		return sqlSession.insert("market.insertUnderReply", reply);
+	}
+
+	public int deleteReply(SqlSessionTemplate sqlSession, Reply reply) throws DeleteFailException{
+		// TODO Auto-generated method stub
+		int deleteReply = sqlSession.delete("market.deleteReply", reply);
+		if(deleteReply > 0 ) {
+			return deleteReply;
+		}else {
+			throw new DeleteFailException("답글이 있는 댓글은 삭제되지않습니다.");
+		}
+	}
+
+	public int deleteUnderReply(SqlSessionTemplate sqlSession, UnderReply reply) {
+		// TODO Auto-generated method stub
+		return sqlSession.delete("market.deleteUnderReply", reply);
+	}
+
+	public int updateReplyNull(SqlSessionTemplate sqlSession, Reply reply) {
+		// TODO Auto-generated method stub
+		return sqlSession.update("market.updateReplyNull", reply);
+	}
+>>>>>>> branch 'master' of https://github.com/ssldkcnd55/msymhghshjjgij
 }

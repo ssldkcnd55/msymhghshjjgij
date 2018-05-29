@@ -1,16 +1,20 @@
 package com.kh.farm.market.model.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.kh.farm.common.model.vo.*;
+import com.kh.farm.market.exception.DeleteFailException;
 import com.kh.farm.market.model.dao.MarketDao;
 import com.kh.farm.market.model.vo.Daily;
 import com.kh.farm.market.model.vo.Market;
+import com.kh.farm.market.model.vo.Reply;
 import com.kh.farm.market.model.vo.Review;
+import com.kh.farm.market.model.vo.UnderReply;
 import com.kh.farm.qna.model.vo.Market_qna;
 
 @Service
@@ -80,6 +84,7 @@ public class MarketServiceImpl implements MarketService{
 		// TODO Auto-generated method stub
 		return marketDao.selectDailyDetail(sqlSession,daily_no);
 	}
+<<<<<<< HEAD
 	
 	/*@Override
 	public Market selectSearchList(String search) {
@@ -93,4 +98,61 @@ public class MarketServiceImpl implements MarketService{
 		return null;
 	}
 	
+=======
+	@Override
+	public ArrayList<Reply> selectReviewReply(int review_no,int currentPage) {
+		// TODO Auto-generated method stub
+		return marketDao.selectReviewReply(sqlSession,review_no,currentPage);
+	}
+	@Override
+	public int selectReviewReplyCount(int review_no) {
+		// TODO Auto-generated method stub
+		return marketDao.selectReviewReplyCount(sqlSession,review_no);
+	}
+	@Override
+	public ArrayList<UnderReply> selectReviewUnderReply(HashMap<String, ArrayList<Integer>> map) {
+		// TODO Auto-generated method stub
+		return marketDao.selectReviewUnderReply(sqlSession,map);
+	}
+	@Override
+	public ArrayList<Reply> selectDailyReply(int daily_no, int currentPage) {
+		// TODO Auto-generated method stub
+		return marketDao.selectDailyReply(sqlSession,daily_no,currentPage);
+	}
+	@Override
+	public int selectDailyReplyCount(int daily_no) {
+		// TODO Auto-generated method stub
+		return marketDao.selectDailyReplyCount(sqlSession,daily_no);
+	}
+	@Override
+	public ArrayList<UnderReply> selectDailyUnderReply(HashMap<String, ArrayList<Integer>> map) {
+		// TODO Auto-generated method stub
+		return marketDao.selectDailyUnderReply(sqlSession,map);
+	}
+	@Override
+	public int insertReply(Reply reply) {
+		// TODO Auto-generated method stub
+		return marketDao.insertReviewReply(sqlSession,reply);
+	}
+	@Override
+	public int insertUnderReply(UnderReply reply) {
+		// TODO Auto-generated method stub
+		return marketDao.insertUnderReply(sqlSession,reply);
+	}
+	@Override
+	public int deleteReply(Reply reply) throws DeleteFailException{
+		// TODO Auto-generated method stub
+		return marketDao.deleteReply(sqlSession,reply);
+	}
+	@Override
+	public int deleteUnderReply(UnderReply reply) {
+		// TODO Auto-generated method stub
+		return marketDao.deleteUnderReply(sqlSession,reply);
+	}
+	@Override
+	public int updateReplyNull(Reply reply) {
+		// TODO Auto-generated method stub
+		return marketDao.updateReplyNull(sqlSession,reply);
+	}
+>>>>>>> branch 'master' of https://github.com/ssldkcnd55/msymhghshjjgij
 }

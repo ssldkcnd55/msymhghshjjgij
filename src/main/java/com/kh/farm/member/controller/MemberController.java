@@ -7,11 +7,14 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.xml.ws.Response;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -200,4 +203,189 @@ public class MemberController {
 		out.close();
 	}
 	
+	@RequestMapping(value="change_app.do")
+	@ResponseBody
+	public void change_app(HttpServletResponse response,@RequestParam("member_id") String member_id,Member member) throws IOException{
+		System.out.println("승인변경 메소드 실행!!!");
+		System.out.println("member_id : " + member_id);
+		int result = memberService.change_app(member_id);
+		String member_id2 = member_id; 
+		System.out.println(member_id2);
+		member = memberService.selectMember(member_id2);
+		response.setContentType("application/json; charset=utf-8;");
+		JSONObject json = new JSONObject();
+		json.put("member_id", member.getMember_id());
+		json.put("member_approval", member.getMember_approval());
+		System.out.println(json.toJSONString());
+		
+		  PrintWriter out = response.getWriter();
+	        out.print(json.toJSONString());
+	        out.flush();
+	        out.close();
+	}
+	@RequestMapping(value="change_withdraw.do")
+	@ResponseBody
+	public void change_with(HttpServletResponse response,@RequestParam("member_id") String member_id,Member member) throws IOException{
+		System.out.println("탈퇴변경 메소드 실행!!!");
+		System.out.println("member_id : " + member_id);
+		int result = memberService.change_with(member_id);
+		String member_id2 = member_id; 
+		System.out.println(member_id2);
+		member = memberService.selectMember(member_id2);
+		response.setContentType("application/json; charset=utf-8;");
+		JSONObject json = new JSONObject();
+		json.put("member_id", member.getMember_id());
+		json.put("member_withdraw", member.getMember_withdraw());
+		System.out.println(json.toJSONString());
+		
+		  PrintWriter out = response.getWriter();
+	        out.print(json.toJSONString());
+	        out.flush();
+	        out.close();
+	}
+	
+	@RequestMapping("nowPwdCheck.do")
+	public void nowPwdCheck(@RequestParam("MEMBER_ID") String member_id, @RequestParam("MEMBER_PWD") String member_pwd,
+			HttpServletResponse response) {
+		String dbpwd = memberService.nowPwdCheck(member_id);
+		String pwd = member_pwd;
+		String result = "";
+
+		if (pwdEncoder.matches(pwd, dbpwd)) {
+			result = "ok";
+		} else {
+			result = "no";
+		}
+
+		PrintWriter out = null;
+		try {
+			out = response.getWriter();
+			out.print(result);
+			out.flush();
+			out.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	}
+
+	@RequestMapping("customerMod.do")
+	public void customerMod(HttpServletResponse response,Member member,@RequestParam("MEMBER_ID") String member_id, 
+			@RequestParam("MEMBER_PWD") String member_pwd,@RequestParam("MEMBER_ADDR") String member_addr) throws IOException {
+
+		System.out.println("333"+member_id);
+		int updatePwd = 0;
+		int updateAddr = 0;
+
+		if (member_pwd != null) {
+			member.setMember_pwd(pwdEncoder.encode(member_pwd));
+			member.setMember_id(member_id);
+			updatePwd = memberService.updatePwd(member);
+		}
+
+		if (member_addr != null) {
+			member.setMember_addr(member_addr);
+			member.setMember_id(member_id);
+			System.out.println("444"+member.getMember_addr());
+			updateAddr = memberService.updateAddr(member);
+		}
+
+		PrintWriter out=response.getWriter();
+		if (member.getMember_pwd() != null || member.getMember_addr() != null) {
+			out.print("o");
+			out.flush();
+			out.close();
+		} else {
+			out.print("x");
+			out.flush();
+			out.close();
+		}
+	}
+	
+	@RequestMapping("changeList.do")
+	@ResponseBody
+	public void changeList(HttpServletResponse response,@RequestParam("page") int currentPage,@RequestParam("type") int type) throws IOException{
+		JSONArray jarr =new JSONArray();
+		List<Member> changeList = memberService.selectChangeList(currentPage,type);
+		int limitPage = 10;
+		int listCount = memberService.selectChangeMemberCount(type);
+		
+		int maxPage=(int)((double)listCount/limitPage+0.9); //ex) 41개면 '5'페이지나와야되는데 '5'를 계산해줌
+		int startPage=((int)((double)currentPage/5+0.8)-1)*5+1;
+		int endPage=startPage+5-1;
+		
+		if(maxPage<endPage) {
+			endPage = maxPage;
+		}
+		for (Member m : changeList) {
+			JSONObject json = new JSONObject();
+			json.put("rnum", m.getRnum());
+			json.put("member_id", m.getMember_id());
+			json.put("member_category", m.getMember_category());
+			json.put("member_name", m.getMember_name());
+			json.put("member_approval", m.getMember_approval());
+			json.put("member_withdraw", m.getMember_withdraw());
+			json.put("member_warning_count", m.getMember_warning_count());
+			json.put("startPage", startPage);
+			json.put("endPage", endPage);
+			json.put("maxPage", maxPage);
+			json.put("currentPage",currentPage);
+			json.put("type", type);
+			jarr.add(json);
+		}
+		
+		JSONObject sendJson = new JSONObject();
+		sendJson.put("list", jarr);
+		response.setContentType("application/json; charset=utf-8");
+		PrintWriter out = response.getWriter();
+		out.append(sendJson.toJSONString());
+		out.flush();
+		out.close();
+	}
+	
+	//회원검색
+	@RequestMapping("searchMember.do")
+	@ResponseBody
+	public void searchMember(HttpServletResponse response,@RequestParam("keyword") String keyword,
+			@RequestParam("type") int type,@RequestParam("page") int currentPage) throws IOException{
+		System.out.println("회원검색 메소드 실행!!!");
+		JSONArray jarr =new JSONArray();
+		List<Member> memberList = memberService.selectSearchMember(keyword,type,currentPage);
+		int limitPage = 10;
+		int listCount = memberService.selectMemberCount();
+		
+		int maxPage=(int)((double)listCount/limitPage+0.9); //ex) 41개면 '5'페이지나와야되는데 '5'를 계산해줌
+		int startPage=((int)((double)currentPage/5+0.8)-1)*5+1;
+		int endPage=startPage+5-1;
+		
+		if(maxPage<endPage) {
+			endPage = maxPage;
+		}
+		for (Member m : memberList) {
+			JSONObject json = new JSONObject();
+			json.put("rnum", m.getRnum());
+			json.put("member_id", m.getMember_id());
+			json.put("member_category", m.getMember_category());
+			json.put("member_name", m.getMember_name());
+			json.put("member_approval", m.getMember_approval());
+			json.put("member_withdraw", m.getMember_withdraw());
+			json.put("member_warning_count", m.getMember_warning_count());
+			json.put("startPage", startPage);
+			json.put("endPage", endPage);
+			json.put("maxPage", maxPage);
+			json.put("currentPage",currentPage);
+			json.put("type", type);
+			jarr.add(json);
+		}
+		
+		JSONObject sendJson = new JSONObject();
+		sendJson.put("list", jarr);
+		response.setContentType("application/json; charset=utf-8");
+		PrintWriter out = response.getWriter();
+		out.append(sendJson.toJSONString());
+		out.flush();
+		out.close();
+	}
 }
+

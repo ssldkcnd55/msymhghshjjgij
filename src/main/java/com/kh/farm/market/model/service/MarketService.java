@@ -1,10 +1,14 @@
 package com.kh.farm.market.model.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
+import com.kh.farm.market.exception.DeleteFailException;
 import com.kh.farm.market.model.vo.Daily;
 import com.kh.farm.market.model.vo.Market;
+import com.kh.farm.market.model.vo.Reply;
 import com.kh.farm.market.model.vo.Review;
+import com.kh.farm.market.model.vo.UnderReply;
 import com.kh.farm.qna.model.vo.Market_qna;
 
 public interface MarketService {
@@ -36,6 +40,31 @@ public interface MarketService {
 
 	Daily selectDailyDetail(int daily_no);
 
+<<<<<<< HEAD
 	Market selectSearchList(String search);
+=======
+	ArrayList<Reply> selectReviewReply(int review_no,int currentPage);
+
+	int selectReviewReplyCount(int review_no);
+
+	ArrayList<UnderReply> selectReviewUnderReply(HashMap<String, ArrayList<Integer>> map);
+
+	ArrayList<Reply> selectDailyReply(int daily_no, int currentPage);
+
+	int selectDailyReplyCount(int daily_no);
+
+	ArrayList<UnderReply> selectDailyUnderReply(HashMap<String, ArrayList<Integer>> map);
+
+	int insertReply(Reply reply);
+
+	int insertUnderReply(UnderReply reply);
+
+	int deleteReply(Reply reply) throws DeleteFailException;
+
+	int deleteUnderReply(UnderReply reply);
+
+	int updateReplyNull(Reply reply);
+
+>>>>>>> branch 'master' of https://github.com/ssldkcnd55/msymhghshjjgij
 
 }

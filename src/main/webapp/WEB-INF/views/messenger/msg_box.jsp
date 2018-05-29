@@ -29,15 +29,28 @@ var len=0;
 var index=0;
 $(function(){
 	
-	/* var decodedCookie = decodeURIComponent(document.cookie);
-	var ca = decodedCookie.split(';');
-	var marketNoArray=[];
+	var decodedCookie = decodeURIComponent(document.cookie);
+
+	var temp = decodedCookie.split(';');
+
+	var ca=[];
+	for(var i=0;i<temp.length;i++)
+		{
+			if(  temp[i].indexOf('farm_cookie_') != -1)
+				{
+				ca.push( temp[i] );
+				}
+		}
+	var marketNoArray = [];
 	for (var i = ca.length - 1; i >= 0; i--) {
 		marketNoArray[i]=	ca[i].substring(ca[i].indexOf("=") + 1, ca[i].length-1);
 	}
-	var marketNo= { 'marketNo': marketNoArray }; */
 	
-	/* $.ajax({
+
+	
+	var marketNo= { 'marketNo': marketNoArray }; 
+	
+	  $.ajax({
 		url:"recentViewList.do",
 		type:"post",
 		data: marketNo,
@@ -79,7 +92,7 @@ $(function(){
 	               + "message : " + request.responseText
 	               + "\n" + "error : " + errorData);
 	      }
-	   });  */ 
+	   });   
 	
 });
 

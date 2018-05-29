@@ -1,7 +1,6 @@
 @charset "UTF-8";
 /* 결제 페이지 */
 
-
 /* .wrapper {
    width: 930px;
    height: auto;
@@ -11,165 +10,401 @@
    float:left;
 } */
 /* 테이블 */
+.goods_img {
+	width: 117px;
+	height: 119px;
+}
+
 .pay_top_table {
-	border-collapse:collapse;
-   width: 100%;
-   padding-top: 10px;
-   border-bottom: 1px solid black;
-   font-size:10pt;
+	border-collapse: collapse;
+	width: 100%;
+	padding-top: 10px;
+	border-bottom: 1px solid black;
+	font-size: 10pt;
 }
-.pay_top_table td{
-	padding-top: 20px;
-	padding-bottom: 20px;
+
+.pay_top_table td {
+	padding: 30px 3px 30px 3px;
+	max-height: 163px;
 }
-.pay_top_table th{
+.pay_top_table td:nth-child(3),
+.pay_top_table td:nth-child(4),
+.pay_top_table td:nth-child(5),
+.pay_top_table td:nth-child(6),
+.pay_top_table td:nth-child(7)
+{
+	white-space: nowrap;
+}
+.pay_top_table td a {
+	text-decoration: none;
+	color: black;
+	max-width: 300px;
+    max-height: 72px;
+    display: inline-block;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.pay_top_table th {
 	padding-top: 30px;
 	padding-bottom: 30px;
+}
+.infoTable td:nth-child(2) , .newInfo td:nth-child(2){
+    padding: 0px 0px 0px 10px;
+    margin: 0;
+    border: 0;
+   
+}
+
+.infoTable td:nth-child(2), .infoTable td:nth-child(3), .infoTable input, .infoTable select,  
+.newInfo td:nth-child(2), .newInfo td:nth-child(3), .newInfo input, .newInfo select
+{ background-color: #fafafa;
+	
+}
+/* .pay_top_table tr td:nth-child(2){
+	max-width:340px;
+	
+	
+}.pay_top_table tr th:nth-child(2){
+	max-width:340px;
+
+}
+.pay_top_table tr td:nth-child(3){
+	max-width:130px;
+
+}
+.pay_top_table tr th:nth-child(3){
+	max-width:130px;
+
+} */
+.pay_top_table tr th:nth-child(1) {
+	width: 168px;
+}
+/* .pay_top_table tr th:nth-child(2){
+	width:340px;
+	
+}
+.pay_top_table tr td:nth-child(2){
+	width:340px;
+	
+} */
+.pay_top_table tr th:nth-child(3) {
+	width: 133px;
+}
+
+.pay_top_table tr th:nth-child(4) {
+	width: 100px;
+}
+
+.pay_top_table tr th:nth-child(5) {
+	width: 50px;
+}
+
+.pay_top_table tr th:nth-child(6) {
+	width: 75px;
+}
+
+.pay_top_table tr th:nth-child(7) {
+	width: 100px;
 }
 /* 상품정보 */
 /* .pay_top_table tr th:nth-child(1) {
 	padding:100px;
 } */
-.product_title{
-	float:right;
-	margin-right:70px;
+.product_title {
+	max-width: 298px;
+	max-height: 18px;
+    display: inline-block;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
 }
-.pay_top_table tr td{
-   text-align:center;
-   border-top:1px solid black;
+.product_note{
+	max-width: 298px;
+    max-height: 72px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: flex;
+}
+
+.pay_top_table tr td {
+	text-align: center;
+	border-top: 1px solid black;
 }
 
 .pay_top_table tr {
-   border-top:1px solid black;
+	border-top: 1px solid black;
 }
 
 .product {
-   width: 940px;
-   height: auto;
-   background: white;
-   padding: 20px 0px;
+	width: 940px;
+	height: auto;
+	background: white;
+	padding: 20px 0px;
 }
 
-.top_delivery_checkout{
-   overflow: hidden;
-   
+.top_delivery_checkout {
+	overflow: hidden;
 }
+
 .delivery {
-   width: 600px;
-	border:1px solid gray;
-   background: white;
-   margin-top: 5px; 
-   float: left;
-   margin-bottom: 10px;
-    height: 450px;
+	width: 600px;
+	border: 1px solid gray;
+	background: white;
+	margin-top: 5px;
+	float: left;
+	margin-bottom: 10px;
+	height: 450px;
 }
 
 .delivery_title {
-   font-size: 15pt;
-   margin-left: 25px;
-   float: left;
+	font-size: 15pt;
+	margin-left: 25px;
+	float: left;
 }
 
 .delivery_choice {
-   width: 150px;
-   font-size: 12pt;
-   margin-left: -480px;
+	width: 150px;
+	font-size: 12pt;
+	margin-left: -480px;
 }
 
 .delivery_choice_radio {
-   width: 500px;
-   margin-left: 40px;
-   margin-top: -22px;
-   float: left;
+	width: 500px;
+	margin-left: 40px;
+	margin-top: -22px;
+	float: left;
 }
 
 .delivery_choice_radio hr {
-   color: #d0d0d0;
-   margin-left: -18px;
-   opacity: 0.6;
+	color: #d0d0d0;
+	margin-left: -18px;
+	opacity: 0.6;
 }
 
 .delivery_username {
-   width: 100%;
-   height: auto;
-   padding-left: 30px;
-   float:left;
-   
-}
-.delivery_table{
-   float:left;
-   
-}
-.delivery_table td{
-   width:100px;
+	width: 100%;
+	height: auto;
+	padding-left: 30px;
+	float: left;
 }
 
-.table input{
-   border:none;
-   font-size:12pt;
-   width:100px;
+.delivery_table {
+	float: left;
+	width: 505px;
 }
+
+.delivery_table td {
+	
+}
+
+.table input {
+	border: none;
+	font-size: 12pt;
+	width: 100px;
+}
+
 .table .messagebox {
-   height: 35px;
-   width: 470px;
-   border:1px solid #c0c0c0;
-}
-.table tr{
-   height:30px;
-}
-.table tr td:nth-child(2){
-   width:300px;   
-} 
-.table tr td:nth-child(2) > input{
-   width:30px;
-}
-.table_colspan input{
-   width:500px;
-   height:50px;
+	height: 35px;
+	width: 470px;
+	border: 1px solid #c0c0c0;
 }
 
-.delivery_warning{
-   width:600px;
-   float:left;
-   margin-top:25px;
-   text-align: left;
+.table tr {
+	height: 30px;
 }
 
-.delivery_warning p{
-   color:#838383;
-   font-size: 10pt;
-   font-weight: bold;
+.table tr td:nth-child(2) {
+	/* width:300px;    */
+	
+}
+
+.table tr td:nth-child(2)>input {
+	/*  width:30px; */
+	
+}
+
+.table_colspan input {
+	width: 397px;
+	/* height:50px; */
+	wid
+}
+
+.delivery_warning {
+	width: 600px;
+	float: left;
+	margin-top: 25px;
+	text-align: left;
+}
+
+.delivery_warning p {
+	color: #838383;
+	font-size: 10pt;
+	font-weight: bold;
 }
 
 .checkout {
-   width: 290px;
-   height: 450px;
-   background: white;
-   margin-top: 5px;
-   margin-left:20px;
-   border: 1px solid gray;
-   float: left;
-   padding-left:30px;
+	width: 290px;
+	height: 450px;
+	background: white;
+	margin-top: 5px;
+	margin-left: 20px;
+	border: 1px solid gray;
+	float: left;
+	padding-left: 30px;
 }
 
-.checkout hr{
-   color: #d0d0d0;
-   margin-left: 20px;
-   margin-right: 20px;
-   opacity: 0.6;
-   
+.checkout hr {
+	color: #d0d0d0;
+	margin-left: 20px;
+	margin-right: 20px;
+	opacity: 0.6;
 }
 
 .price {
-   font-size: 30pt;
+	font-size: 30pt;
 }
 
-.buy{
-   width:270px;
-   height:60px;
-   font-size:20pt;
-   font-weight: bold;
-   color:#ffffff;
-   background:#c8b771;
-   border:none;
+.buy {
+	width: 270px;
+	height: 60px;
+	font-size: 20pt;
+	font-weight: bold;
+	color: #ffffff;
+	background: #512772;
+	border: none;
 }
+/* --- */
+.infoTable {
+	width: 505px;
+	height: 200px;
+}
+.infoTable input, .newInfo input, .infoTable select, .newInfo select{
+	/* border: 1px solid #ddd; */
+	border: 0;
+}
+.newInfo{
+	width: 505px;
+	height: 200px;
+}
+.relief_number {
+	    font-size: 12px;
+    color: #666666;
+}
+.relief_number input{
+	vertical-align: middle;
+
+}
+
+.info_head {
+	width:78px;
+	padding: 5px 10px 5px 10px;
+	color: #666;
+    font-weight: bold;
+    background-color: #f5f5f5;
+        text-align: left;
+        font-size: 12px;
+    font-family: '돋움',dotum,sans-serif;
+}
+
+.infoTable select {
+	/* height: 21px;
+	border: 1px solid #ddd; */
+}
+.newInfo select{
+	/* height: 21px;
+	border: 1px solid #ddd; */
+}
+
+.messagebox, .messagebox input{
+	width: 397px;
+	display: inline-block;
+}
+
+.findAddr{
+	background: white;
+    padding-left: 2px;
+    padding-right: 2px;
+    border-top-width: 1px;
+    border-right-width: 1px;
+    border-bottom-width: 1px;
+    border-left-width: 1px;
+    font-weight: normal;
+    font-size: 12px;
+    font-family: '돋움',dotum,sans-serif;
+    line-height: 1.5;
+    color: #666;
+        cursor: pointer;
+}
+
+.info_relief{
+	 /* position:inherit;  */
+	width: 18px;
+    height: 18px;
+    background-color: #f5f5f5;
+    display: inline-block;
+    line-height: 18px;
+    text-align: center;
+    border-radius: 9px;
+    font-weight: 700;
+    color: #929292;
+        
+}
+
+
+.InfoReliefDiv{
+	z-index:2;
+	position:absolute;
+	top:600px;
+	display:none;
+	width: 255px;
+	height: 263px;
+	padding: 19px 20px 17px 19px;
+	border: 1px solid gray ;
+	font-weight: normal;
+    font-size: 12px;
+    font-family: '돋움',dotum,sans-serif;
+    line-height: 1.5;
+    border-collapse: collapse;
+    background-color: #fff;
+    text-align: left;
+}
+
+.InfoReliefDiv h5{
+	margin: 0;
+    padding: 0;
+	    font-size: 11px;
+    color: #666666;
+    font-weight: bold;
+}
+.InfoReliefDiv .text{
+	margin: 7px 0px 0px 0px;
+    font-size: 11px;
+    color: #666666;
+    line-height: 14px;
+    
+}
+.InfoReliefDiv ul
+{
+padding: 0;
+margin-top: 16px;	
+}
+.InfoReliefDiv ul li
+{    display: list-item;
+	    list-style: none;
+   padding-left: 6px;
+    margin-top: 6px;
+    font-size: 11px;
+    color: #999999;
+    line-height: 14px;
+        background: url('/farm/resources/images/privatecall_dot.gif') no-repeat;
+    background-position: 0px 4px;
+
+}
+
+.detailAddr{
+	width: 100px;	
+}
+
+
+

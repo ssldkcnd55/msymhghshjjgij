@@ -60,4 +60,64 @@ public class MemberServiceImpl implements MemberService {
 		return memberDao.selectMemberCount(sqlSession);
 	}
 
+	@Override
+	public int change_app(String member_id) {
+		// TODO Auto-generated method stub
+		return memberDao.change_app(sqlSession,member_id);
+	}
+
+	@Override
+	public int change_with(String member_id) {
+		// TODO Auto-generated method stub
+		return memberDao.change_with(sqlSession,member_id);
+	}
+
+	
+	@Override
+	public String nowPwdCheck(String member_id) {
+		// TODO Auto-generated method stub
+		return memberDao.nowPwdCheck(member_id, sqlSession);
+	}
+
+	@Override
+	public int updateAddr(Member member) {
+		// TODO Auto-generated method stub
+		return memberDao.updateAddr(member,sqlSession);
+	}
+
+	@Override
+	public List<Member> selectChangeList(int currentPage, int type) {
+		// TODO Auto-generated method stub
+		
+		switch(type) {
+		case 1: return memberDao.selectMemberList(currentPage, sqlSession);
+		case 2: return memberDao.selectFarmer(sqlSession,currentPage);
+		case 3: return memberDao.selectCommon(sqlSession,currentPage);
+		case 4: return memberDao.selectApproval(sqlSession,currentPage);
+		case 5: return memberDao.selectWithdraw(sqlSession,currentPage);
+		default: return memberDao.selectWarning(sqlSession,currentPage);
+		}
+	}
+
+	@Override
+	public int selectChangeMemberCount(int type) {
+		
+		switch(type) {
+		case 2: return memberDao.selectFarmerCount(sqlSession);
+		case 3: return memberDao.selectCommonCount(sqlSession);
+		case 4: return memberDao.selectApprovalCount(sqlSession);
+		case 5: return memberDao.selectWithdrawCount(sqlSession);
+		default: return memberDao.selectWarningCount(sqlSession);
+		}
+	}
+
+	@Override
+	public List<Member> selectSearchMember(String keyword, int type,int currentPage) {
+		
+		switch(type) {
+		case 1: return memberDao.selectMemberName(sqlSession,keyword,currentPage);
+		default : return memberDao.selectMemberId(sqlSession,keyword,currentPage);
+		}
+		
+	}
 }

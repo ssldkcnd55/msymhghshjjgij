@@ -158,7 +158,7 @@
 			data:{category_name:input,category_main:main},
 			type:"post",
 			datatype:"json",
-			succes:function(data){
+			success:function(data){
 				 var jsonStr = JSON.stringify(data);
 				var json = JSON.parse(jsonStr);
 				alert("성공!");

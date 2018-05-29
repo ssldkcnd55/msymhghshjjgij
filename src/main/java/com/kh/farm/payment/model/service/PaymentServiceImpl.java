@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.kh.farm.payment.model.dao.PaymentDao;
+import com.kh.farm.payment.model.vo.Payment;
 import com.kh.farm.shoppingBasket.model.vo.*;
 
 @Service
@@ -25,4 +26,30 @@ public class PaymentServiceImpl implements PaymentService{
 	
 		return paymentDao.selectPaymentInfo(sqlSession,sb);
 	}
+	@Override
+	public int insertFirstPayment(Payment pm) {
+		
+		return paymentDao.insertFirstPayment(sqlSession,pm);
+	}
+	@Override
+	public int insertNewPayment(Payment pm) {
+		
+		return paymentDao.insertNewPayment(sqlSession,pm);
+	}
+	@Override
+	public int deleteFirstPayment(int group_no) {
+		
+		return paymentDao.deleteFirstPayment(sqlSession,group_no);
+	}
+	@Override
+	public ArrayList<Payment> selectPaymentHistory(int currentPage) {
+		// TODO Auto-generated method stub
+		return paymentDao.selectPaymentHistory(sqlSession,currentPage);
+	}
+	@Override
+	public int selectPaymentHistoryCount() {
+		// TODO Auto-generated method stub
+		return paymentDao.selectPaymentHistoryCount(sqlSession);
+	}
+	
 }

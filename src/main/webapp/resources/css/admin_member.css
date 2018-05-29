@@ -11,7 +11,7 @@
 }
 
 /* QnA_title */
-.Notice_title{
+.Member_title{
    padding: 15px;
    font-size:14pt;
    font-family:  "굴림", gulim, arial, helvetica, sans-serif;
@@ -28,10 +28,12 @@
 .select{
    height:40px;
 }
-
-
+/*검색창 select_box  */
+.select2{
+	height:35px;
+}
 /* table */
-.Notice_table {
+.Member_table {
     border-collapse: collapse;
     width: 100%;
 }

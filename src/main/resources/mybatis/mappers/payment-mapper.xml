@@ -7,7 +7,7 @@
 
 	<select id="selectPaymentInfo" parameterType="hashmap" resultType="ShowBasket">
 			<![CDATA[
-	select mk.market_no, mb.MEMBER_NAME, mk.MARKET_IMG, mk.MARKET_TITLE, mk.MARKET_NOTE, mk.MARKET_PRICE,sb.BUY_AMOUNT
+	select mk.market_no, mb.MEMBER_NAME,mb.member_id, mk.MARKET_IMG, mk.MARKET_TITLE, mk.MARKET_NOTE, mk.MARKET_PRICE,sb.BUY_AMOUNT
   from SHOP_BASKET sb, market mk, member mb
   where mb.member_id=mk.member_id and mk.market_no=sb.MARKET_NO
   and sb.member_id = #{member_id}
@@ -20,11 +20,58 @@
 	
 	<select id="selectPaymentInfoOne" parameterType="ShoppingBasket"  resultType="ShowBasket">
 	<![CDATA[
-	select mk.market_no, mb.MEMBER_NAME, mk.MARKET_IMG, mk.MARKET_TITLE, mk.MARKET_NOTE, mk.MARKET_PRICE
+	select mk.market_no, mb.MEMBER_NAME,mb.member_id, mk.MARKET_IMG, mk.MARKET_TITLE, mk.MARKET_NOTE, mk.MARKET_PRICE
   from market mk, member mb
   where mb.member_id=mk.member_id and mk.market_no= #{market_no}
 	]]>
 	</select>
 	
+	<insert id="insertFirstPayment" keyProperty="group_no" parameterType="Payment">
+	
+	 <selectKey resultType="int" keyProperty="group_no"  statementType="STATEMENT" order="BEFORE" >
+	 select (case when max(group_no) is null then 0 else max(group_no) end)+1  as "group_no"  from buy
+	</selectKey>
+	
+	<![CDATA[
+	insert into BUY(BUY_NO,GROUP_NO,MEMBER_ID, BUY_STATUS ) values(
+	(select (case when max(BUY_NO) is null then 0 else max(BUY_NO) end)+1  as "buy_no"  from BUY),
+	#{group_no},#{member_id}  ,'0'
+	)
+	]]>
+	
+	</insert>
+	
+	<insert id="insertNewPayment" parameterType="Payment">
+	
+	
+	insert into BUY values(
+	(select (case when max(BUY_NO) is null then 0 else max(BUY_NO) end)+1  as "buy_no"  from BUY),
+	#{group_no}, 
+	
+	<if test="market_no != 0">#{market_no},</if>
+	<if test="market_no == 0">null,</if>
+	<if test="auction_no != 0">#{auction_no},</if>	
+	<if test="auction_no == 0">null,</if>	
+	#{member_id}, sysdate, #{buy_amount}, #{buy_addr}, #{buy_tel}, #{buy_name}, '1', #{buy_request}, null,null)
 
+	</insert>
+	
+	<delete id="deleteFirstPayment" parameterType="int">
+	<![CDATA[
+	delete from BUY where group_no = #{group_no} and BUY_DATE is null and BUY_AMOUNT is null and BUY_ADDR is null and BUY_TEL is null and
+	BUY_NAME is null and  BUY_STATUS = '0' and BUY_REQUEST is null
+	]]>
+	
+	</delete>
+	
+	<select id="selectPaymentHistory" parameterType="PageNumber" resultType="payment">
+	<![CDATA[
+	select * from (select rownum rnum, BUY_NO, GROUP_NO, MARKET_NO, AUCTION_NO, MEMBER_ID, BUY_DATE, BUY_AMOUNT, BUY_ADDR, BUY_TEL, BUY_NAME, BUY_STATUS, BUY_REQUEST, BUY_TRANSPORT_NAME, BUY_TRANSPORT_NO from BUY 
+	order by BUY_NO desc) where rnum >=#{startRow} and rnum <=#{endRow}
+	]]>
+	</select>
+	<select id="selectPaymentHistoryCount" parameterType="int" resultType="int">
+		select
+		count(*) from buy
+	</select>
 </mapper>

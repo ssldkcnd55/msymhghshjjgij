@@ -94,14 +94,44 @@ public class AuctionServiceImpl implements AuctionService{
 	}
 	
 	@Override
-	public int updateSellerAuctionQnAanswer(int auction_qna_no) {
-		return auctionDao.updateSellerAuctionQnAanswer(sqlSession,auction_qna_no);
+	public int updateSellerAuctionQnAanswer(AuctionQnA auctionqna) {
+		return auctionDao.updateSellerAuctionQnAanswer(sqlSession,auctionqna);
 	}
 
 	@Override
 	public AuctionQnA selectseller_QnAanswer(int auction_qna_no) {
 		return auctionDao.selectseller_QnAanswer(sqlSession,auction_qna_no);
 	}
+
+	@Override
+	public int delete_auction_qna_answer(int auction_qna_no) {
+		return auctionDao.delete_auction_qna_answer(sqlSession,auction_qna_no);
+	}
+
+	@Override
+	public ArrayList<AuctionHistory> selectAuctionHistory(int currentPage) {
+		// TODO Auto-generated method stub
+		return auctionDao.selectAuctionHistory(sqlSession,currentPage);
+	}
+
+	@Override
+	public int selectAuctionHistoryCount() {
+		// TODO Auto-generated method stub
+		return auctionDao.selectAuctionHistoryCount(sqlSession);
+	}
 	
+	@Override
+	public AuctionHistory selectcheckAuction_history_price(int auction_no) {
+		return auctionDao.selectcheckAuction_history_price(sqlSession,auction_no);
+	}
 	
+	@Override
+	public int insertAuctionBidding(AuctionHistory auctionhistory) {
+		return auctionDao.insertAuctionBidding(sqlSession,auctionhistory);
+	}
+	
+	/*@Override
+	public ArrayList<AuctionHistory> selectAuctionBiddingList(int auction_no) {
+		return auctionDao.selectAuctionBiddingList(sqlSession,auction_no);
+	}*/
 }

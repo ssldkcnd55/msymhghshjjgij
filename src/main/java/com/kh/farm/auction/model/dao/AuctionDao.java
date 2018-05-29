@@ -10,9 +10,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.kh.farm.auction.model.vo.Auction;
+import com.kh.farm.auction.model.vo.AuctionHistory;
 import com.kh.farm.auction.model.vo.AuctionQnA;
 import com.kh.farm.common.model.vo.PageNumber;
 import com.kh.farm.member.model.vo.Member;
+import com.kh.farm.notice.model.vo.Notice;
 
 @Repository
 public class AuctionDao {
@@ -89,7 +91,7 @@ public class AuctionDao {
 		return sqlSession.update("auction.updateAuctionQnA",auctionqna);
 	}
 
-
+	//경매 QnA 답글 등록
 	public int updateauctionQnA_Answer(SqlSessionTemplate sqlSession, AuctionQnA auctionqna) {
 		return sqlSession.update("auction.updateauctionQnA_Answer",auctionqna);
 	}
@@ -102,8 +104,9 @@ public class AuctionDao {
 	}
 
 
-	public int updateSellerAuctionQnAanswer(SqlSessionTemplate sqlSession, int auction_qna_no) {
-		return sqlSession.update("auction.updateSellerAuctionQnAanswer",auction_qna_no);
+	//경매 QnA 답글 수정
+	public int updateSellerAuctionQnAanswer(SqlSessionTemplate sqlSession, AuctionQnA auctionqna) {
+		return sqlSession.update("auction.updateSellerAuctionQnAanswer",auctionqna);
 	}
 
 
@@ -111,6 +114,48 @@ public class AuctionDao {
 		return sqlSession.selectOne("auction.selectseller_QnAanswer",auction_qna_no);
 	}
 
+
+	public int delete_auction_qna_answer(SqlSessionTemplate sqlSession, int auction_qna_no) {
+		return sqlSession.update("auction.delete_auction_qna_answer", auction_qna_no);
+	}
+
+	public ArrayList<AuctionHistory> selectAuctionHistory(SqlSessionTemplate sqlSession, int currentPage) {
+		// TODO Auto-generated method stub
+		int startRow =(currentPage-1)*10+1; //1~10, 11~20 계산할 거 ex) 1, 11, 21, 31,)
+		int endRow = startRow+9;
+		PageNumber pnum = new PageNumber();
+		pnum.setStartRow(startRow);
+		pnum.setEndRow(endRow);
+		List<AuctionHistory> ac = sqlSession.selectList("auction.selectAuctionHistory",pnum);
+		return (ArrayList)ac;
+	}
+
+
+	public AuctionHistory selectcheckAuction_history_price(SqlSessionTemplate sqlSession, int auction_no) {
+		return sqlSession.selectOne("auction.selectcheckAuction_history_price", auction_no);
+	}
+	
+	public int insertAuctionBidding(SqlSessionTemplate sqlSession, AuctionHistory auctionhistory) {
+		return sqlSession.insert("auction.insertAuctionBidding", auctionhistory);
+	}
+
+
+	
+
+
+	/*public ArrayList<AuctionHistory> selectAuctionBiddingList(SqlSessionTemplate sqlSession, int auction_no) {
+		List<AuctionHistory> selectAuctionBiddingList = sqlSession.selectList("auction.selectAuctionBiddingList",auction_no);
+		return (ArrayList<AuctionHistory>)selectAuctionBiddingList;
+	}
+*/
+
+
+
+	public int selectAuctionHistoryCount(SqlSessionTemplate sqlSession) {
+		// TODO Auto-generated method stub
+		int listCount = sqlSession.selectOne("auction.selectAuctionHistoryCount");
+		return listCount;
+	}
 
 	
 

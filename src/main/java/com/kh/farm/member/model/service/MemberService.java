@@ -21,4 +21,18 @@ public interface MemberService {
 	List<Member> selectMemberList(int currentPage);
 
 	int selectMemberCount();
+
+	int change_app(String member_id);
+
+	int change_with(String member_id);
+	
+	String nowPwdCheck(String member_id);
+	
+	int updateAddr(Member member);
+
+	List<Member> selectChangeList(int currentPage, int type);
+
+	int selectChangeMemberCount(int type);
+
+	List<Member> selectSearchMember(String keyword, int type, int currentPage);
 }

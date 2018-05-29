@@ -36,19 +36,28 @@ $(function(){
 		var oldtime = new Date();
 		oldtime.setDate(oldtime.getDate() - 7);
 		var decodedCookie = decodeURIComponent(document.cookie);
-		var ca = decodedCookie.split(';');
+		var temp = decodedCookie.split(';');
+		var ca=[];
+		for(var i=0;i<temp.length;i++)
+			{
+				if(  temp[i].indexOf('farm_cookie_') != -1)
+					{
+					ca.push( temp[i] );
+					}
+			}
 		var market_no= $('#market_no').val();
-		if (document.cookie.indexOf(  market_no + "="+ market_no + "a") == -1) {
+			
+		if (document.cookie.indexOf(  'farm_cookie_'+market_no + "="+ market_no + "a") == -1) {
 			//없음
 			if (ca.length > 8) {
 				document.cookie = ca[0] + "; expires=" + oldtime;
 			}
 		} else {
 			//있음
-			document.cookie = market_no + "=" + market_no+ "a; expires=" + oldtime;
+			document.cookie = 'farm_cookie_'+market_no + "=" + market_no+ "a; expires=" + oldtime;
 		}
 
-		document.cookie = market_no + "=" + market_no+ "a; expires=" + time;
+		document.cookie = 'farm_cookie_'+ market_no + "=" + market_no+ "a; expires=" + time;
 
 }); 
 ///쿠키 끝///

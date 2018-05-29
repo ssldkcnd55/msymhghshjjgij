@@ -30,22 +30,33 @@ public class QuoteController {
 	@ResponseBody
 	public void QuoteApi(HttpServletResponse response, HttpServletRequest request)
 			throws ServletException, IOException {
-		System.out.println("矫技api立加");
+		
+		System.out.println("矫技api立加己傍");
 
-		String productclscode = request.getParameter("productclscode");
-		String stardate = request.getParameter("startdate");
+		/*String productclscode = request.getParameter("productclscode");*/
+		String stardate = request.getParameter("startday");
 		String endday = request.getParameter("endday");
 		String itemcategorycode = request.getParameter("itemcategorycode");
 		String itemcode = request.getParameter("itemcode");
 		String kindcode = request.getParameter("kindcode");
 		String productrankcode = request.getParameter("productrankcode");
-		String countrycode = request.getParameter("countrycode");
-		String convert = request.getParameter("convert");
+		String countrycode = request.getParameter("countycode");
+		/*String convert = request.getParameter("convert");*/
+
+		/*System.out.println(productclscode);*/
+		System.out.println(stardate);
+		System.out.println(endday);
+		System.out.println(itemcategorycode);
+		System.out.println(itemcode);
+		System.out.println(kindcode);
+		System.out.println(productrankcode);
+		System.out.println(countrycode);
+		/*System.out.println(convert);*/
 
 		String addr = "http://www.kamis.or.kr/service/price/xml.do?action=periodProductList";
 		String parameter = "";
 
-		parameter = parameter + "&" + "p_productclscode=" + productclscode;
+		parameter = parameter + "&" + "p_productclscode=01";
 		parameter = parameter + "&" + "p_startday=" + stardate;
 		parameter = parameter + "&" + "p_endday=" + endday;
 		parameter = parameter + "&" + "p_itemcategorycode=" + itemcategorycode;
@@ -53,7 +64,7 @@ public class QuoteController {
 		parameter = parameter + "&" + "p_kindcode=" + kindcode;
 		parameter = parameter + "&" + "p_productrankcode=" + productrankcode;
 		parameter = parameter + "&" + "p_countrycode=" + countrycode;
-		parameter = parameter + "&" + "p_convert_kg_yn=" + convert;
+		parameter = parameter + "&" + "p_convert_kg_yn=";/* + convert;*/
 		parameter = parameter + "&" + "p_cert_key=111";
 		parameter = parameter + "&" + "p_cert_id=222";
 		parameter = parameter + "&" + "p_returntype=json";
@@ -69,10 +80,10 @@ public class QuoteController {
 		in.close();
 		bos.close();
 
-		System.out.println(in);
+		
 		String str = bos.toString("utf-8");
 
-		System.out.println(str);
+		
 
 		JSONObject json = new JSONObject();
 		json.put("data", str);

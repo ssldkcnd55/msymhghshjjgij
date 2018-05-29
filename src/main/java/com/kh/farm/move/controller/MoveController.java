@@ -16,10 +16,23 @@ import com.kh.farm.notice.model.vo.Notice;
 public class MoveController {
 	public MoveController() {}
 	
+	@RequestMapping("paymentHistory.do")
+	public String buyHistory() {
+		return "member/customerMy/payment_History";
+	}
+	
+	@RequestMapping("auctionHistory.do")
+	public String auctionHistory() {
+		return "member/customerMy/auction_History";
+	}
+	
+	@RequestMapping("moveMemberInfo.do")
+	public String moveMemberInfo() {
+		return "member/customerMy/member_Info";
+	}
 
 	@RequestMapping("moveSmartEditor2Skin.do")
-	public String moveSmartEditor2Skin()
-	{
+	public String moveSmartEditor2Skin() {
 		return "naver/SmartEditor2Skin";
 	}
 	@RequestMapping("moveHome.do")
@@ -84,7 +97,7 @@ public class MoveController {
 	}
 	@RequestMapping("moveCustomerMypage.do")
 	public String moveCustomerMypage() {
-		return "member/customerMypage";
+		return "member/customerMy/customerMypage";
 	}
 	
 	@RequestMapping("moveSelectSignUp.do")
