@@ -68,13 +68,13 @@ $(function(){
 		outValues2 += "</table></div>";
 		outValues3 += "</table></div>";
 		if(count == 1){
-			$(".carousel-inner").html("등록된 경매가 없습니다.");
+			$(".carousel-inner.auction").html("등록된 경매가 없습니다.");
 		}else if(count < 6){
-			$(".carousel-inner").html(outValues1);
+			$(".carousel-inner.auction").html(outValues1);
 		}else if(count <10){
-			$(".carousel-inner").html(outValues1+outValues2);
+			$(".carousel-inner.auction").html(outValues1+outValues2);
 		}else{
-			$(".carousel-inner").html(outValues1+outValues2+outValues3);
+			$(".carousel-inner.auction").html(outValues1+outValues2+outValues3);
 		}
 		
 	},error: function(request,status,errorData){
@@ -274,7 +274,7 @@ $(function(){
 								</ol>
 
 								<!-- Wrapper for slides -->
-								<div class="carousel-inner">
+								<div class="carousel-inner auction">
 									<!-- <div class="item active" align="center">
 										<table class="auction_table">
 											<tr>

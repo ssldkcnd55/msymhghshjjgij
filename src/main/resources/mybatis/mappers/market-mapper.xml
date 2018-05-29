@@ -107,4 +107,44 @@
 		</foreach>
 		order by under_reply_date
 	</select>
+	
+	
+	<select id="dailyReply" parameterType="PageNumber" resultType="Reply"><!-- 여기 page처리해야됨!  -->
+	<![CDATA[
+		select * from(select rownum rnum,reply_no,reply_contents,reply_date,member_id from
+		(select reply_no,reply_contents,reply_date,member_id from (select * from reply where daily_no = #{daily_no} )order by reply_no desc))
+		where rnum >=#{startRow} and rnum <= #{endRow}
+	]]>
+	</select>
+	<select id="dailyReplyCount" parameterType="int" resultType="int">
+		select count(*) from reply where daily_no = #{daily_no}
+	</select>
+	<select id="dailyUnderReply" parameterType="hashmap" resultType="UnderReply">
+		select * from under_reply where reply_no in
+		<foreach collection="underReplyList" index="index" item="item" open="(" close=")" separator="," >
+			#{item}
+		</foreach>
+		order by under_reply_date
+	</select>
+	
+	<insert id="insertReviewReply" parameterType="reply" flushCache="true" useGeneratedKeys="true">
+	<![CDATA[
+		insert into reply values((select max(reply_no)+1 from reply)
+	]]>
+		<if test="review_no != null and review_no != ''">
+			,#{review_no},null
+		</if>
+		<if test="daily_no != null and daily_no != ''">
+			,null,#{daily_no}
+		</if>
+	<![CDATA[
+		,#{member_id},#{reply_contents},sysdate)
+	]]>
+	</insert>
+	<insert id="insertUnderReply" parameterType="UnderReply" flushCache="true" useGeneratedKeys="true">
+	<![CDATA[
+		insert into under_reply values((select max(under_reply_no)+1 from under_reply),#{reply_no}
+		,#{member_id},#{under_reply_content},sysdate)
+	]]>
+	</insert>
 </mapper>

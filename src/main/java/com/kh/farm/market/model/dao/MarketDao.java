@@ -124,4 +124,37 @@ public class MarketDao {
 		List<UnderReply> list = sqlSession.selectList("market.reviewUnderReply", map);
 		return (ArrayList<UnderReply>)list;
 	}
+
+	public ArrayList<Reply> selectDailyReply(SqlSessionTemplate sqlSession, int daily_no, int currentPage) {
+		int startRow = (currentPage-1)*10+1; 
+		int endRow = startRow+9;
+		PageNumber pnum = new PageNumber();
+		pnum.setStartRow(startRow);
+		pnum.setEndRow(endRow);
+		pnum.setDaily_no(daily_no);
+		List<Reply> list = sqlSession.selectList("market.dailyReply", pnum);
+		return (ArrayList<Reply>)list;
+	}
+
+	public int selectDailyReplyCount(SqlSessionTemplate sqlSession, int daily_no) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("market.dailyReplyCount", daily_no);
+	}
+
+	public ArrayList<UnderReply> selectDailyUnderReply(SqlSessionTemplate sqlSession,
+			HashMap<String, ArrayList<Integer>> map) {
+		// TODO Auto-generated method stub
+		List<UnderReply> list = sqlSession.selectList("market.dailyUnderReply", map);
+		return (ArrayList<UnderReply>)list;
+	}
+
+	public int insertReviewReply(SqlSessionTemplate sqlSession, Reply reply) {
+		// TODO Auto-generated method stub
+		return sqlSession.insert("market.insertReviewReply", reply);
+	}
+
+	public int insertUnderReply(SqlSessionTemplate sqlSession, UnderReply reply) {
+		// TODO Auto-generated method stub
+		return sqlSession.insert("market.insertUnderReply", reply);
+	}
 }
