@@ -14,6 +14,11 @@ import com.kh.farm.notice.model.vo.Notice;
 @Controller
 public class MoveController {
 	public MoveController() {}
+	
+	@RequestMapping("moveMemberInfo.do")
+	public String moveMemberInfo() {
+		return "member/customerMy/member_Info";
+	}
 
 	@RequestMapping("moveSmartEditor2Skin.do")
 	public String moveSmartEditor2Skin()
@@ -82,7 +87,7 @@ public class MoveController {
 	}
 	@RequestMapping("moveCustomerMypage.do")
 	public String moveCustomerMypage() {
-		return "member/customerMypage";
+		return "member/customerMy/customerMypage";
 	}
 	@RequestMapping("moveNotice.do")
 	public String moveNotice() {

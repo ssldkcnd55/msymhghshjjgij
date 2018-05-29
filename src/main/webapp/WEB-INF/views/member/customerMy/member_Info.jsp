@@ -5,11 +5,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link href="/farm/resources/css/style.css" rel="stylesheet" type="text/css" />
-<link href="/farm/resources/css/mypage.css" rel="stylesheet" type="text/css" />
+<link href="/farm/resources/css/customerMy/memberinfo.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="/farm/resources/js/jquery-3.3.1.min.js"></script>
-<script type="text/javascript" src="/farm/resources/js/tabMove.js"></script>
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+
 <script type="text/javascript">
 	function juso() {
 		new daum.Postcode({
@@ -98,33 +97,15 @@ var addr="";
 	
 </script>
 <meta charset="UTF-8">
-<title>Farm</title>
+<title>title</title>
 </head>
 <body>
-<div id="top_line"></div>
-   <div id="wrap">
-      <div id="header">
-         <%@ include file="../inc/header.jsp" %>
-      </div>
-       <div id="container">
-         <div class="inner-wrap">
-         
-         <div class="tabs">
-         <div class="tab first">회원정보</div>
-         <div class="tab">경매내역</div>
-         <div class="tab">판매내역</div>
-         <div class="tab">QnA</div>
-         <div class="tab">구인구직</div>
-         <div class="tab last">판매이력</div>
-         </div>
-         
-        <div class="info_box">
-         
-         <div class="Info show">
-         <div class="Info_title">회원정보</div>
+ <div class="Info show">
+
+         <div class="Info_title" >회원정보</div>
          <hr class="hr">
          <br>
-         <div class="Info_content">
+         <div class="Info_content"  >
          <table class="update_table">
 								<tr>
 									<td>아이디</td>
@@ -172,15 +153,5 @@ var addr="";
          </div>
          
          </div>
-         <!-- <hr class="hr1"> -->      
-        </div>
-         
-         </div>         
-        </div>      
-         <%@ include file="../messenger/msg_box.jsp"%>
-        <div id="footer">
-         <%@  include file="../inc/foot.jsp"%>
-      </div>
-      </div>
 </body>
 </html>
