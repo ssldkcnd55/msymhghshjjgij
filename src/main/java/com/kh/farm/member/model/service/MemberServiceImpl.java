@@ -84,4 +84,30 @@ public class MemberServiceImpl implements MemberService {
 		// TODO Auto-generated method stub
 		return memberDao.updateAddr(member,sqlSession);
 	}
+
+	@Override
+	public List<Member> selectChangeList(int currentPage, int type) {
+		// TODO Auto-generated method stub
+		
+		switch(type) {
+		case 1: return memberDao.selectMemberList(currentPage, sqlSession);
+		case 2: return memberDao.selectFarmer(sqlSession,currentPage);
+		case 3: return memberDao.selectCommon(sqlSession,currentPage);
+		case 4: return memberDao.selectApproval(sqlSession,currentPage);
+		case 5: return memberDao.selectWithdraw(sqlSession,currentPage);
+		default: return memberDao.selectWarning(sqlSession,currentPage);
+		}
+	}
+
+	@Override
+	public int selectChangeMemberCount(int type) {
+		
+		switch(type) {
+		case 2: return memberDao.selectFarmerCount(sqlSession);
+		case 3: return memberDao.selectCommonCount(sqlSession);
+		case 4: return memberDao.selectApprovalCount(sqlSession);
+		case 5: return memberDao.selectWithdrawCount(sqlSession);
+		default: return memberDao.selectWarningCount(sqlSession);
+		}
+	}
 }

@@ -92,4 +92,76 @@ public class MemberDao {
 		// TODO Auto-generated method stub
 		return sqlSession.update("updateAddr", member);
 	}
+
+	public List<Member> selectFarmer(SqlSessionTemplate sqlSession, int currentPage) {
+		int startRow =(currentPage-1)*10+1; //1~10, 11~20 계산할 거 ex) 1, 11, 21, 31,)
+		int endRow = startRow+9;
+		PageNumber pnum = new PageNumber();
+		pnum.setStartRow(startRow);
+		pnum.setEndRow(endRow);
+		return sqlSession.selectList("selectFarmer", pnum);
+	}
+
+	public List<Member> selectCommon(SqlSessionTemplate sqlSession, int currentPage) {
+		int startRow =(currentPage-1)*10+1; //1~10, 11~20 계산할 거 ex) 1, 11, 21, 31,)
+		int endRow = startRow+9;
+		PageNumber pnum = new PageNumber();
+		pnum.setStartRow(startRow);
+		pnum.setEndRow(endRow);
+		return sqlSession.selectList("selectCommon", pnum);
+	}
+
+	public List<Member> selectApproval(SqlSessionTemplate sqlSession, int currentPage) {
+		int startRow =(currentPage-1)*10+1; //1~10, 11~20 계산할 거 ex) 1, 11, 21, 31,)
+		int endRow = startRow+9;
+		PageNumber pnum = new PageNumber();
+		pnum.setStartRow(startRow);
+		pnum.setEndRow(endRow);
+		return sqlSession.selectList("selectApproval", pnum);
+	}
+
+	public List<Member> selectWithdraw(SqlSessionTemplate sqlSession, int currentPage) {
+		int startRow =(currentPage-1)*10+1; //1~10, 11~20 계산할 거 ex) 1, 11, 21, 31,)
+		int endRow = startRow+9;
+		PageNumber pnum = new PageNumber();
+		pnum.setStartRow(startRow);
+		pnum.setEndRow(endRow);
+		return sqlSession.selectList("selectWithdraw", pnum);
+	}
+
+	public List<Member> selectWarning(SqlSessionTemplate sqlSession, int currentPage) {
+		int startRow =(currentPage-1)*10+1; //1~10, 11~20 계산할 거 ex) 1, 11, 21, 31,)
+		int endRow = startRow+9;
+		PageNumber pnum = new PageNumber();
+		pnum.setStartRow(startRow);
+		pnum.setEndRow(endRow);
+		return sqlSession.selectList("selectWarning", pnum);
+	}
+
+	public int selectFarmerCount(SqlSessionTemplate sqlSession) {
+		int listCount = sqlSession.selectOne("FarmerCount");
+		return listCount;
+	}
+
+	public int selectCommonCount(SqlSessionTemplate sqlSession) {
+		int listCount = sqlSession.selectOne("CommonCount");
+		return listCount;
+	}
+
+	public int selectApprovalCount(SqlSessionTemplate sqlSession) {
+		int listCount = sqlSession.selectOne("ApprovalCount");
+		return listCount;
+	}
+
+	public int selectWithdrawCount(SqlSessionTemplate sqlSession) {
+		int listCount = sqlSession.selectOne("WithdrawCount");
+		return listCount;
+	}
+
+	public int selectWarningCount(SqlSessionTemplate sqlSession) {
+		int listCount = sqlSession.selectOne("memberCount");
+		return listCount;
+	}
+
+	
 }

@@ -1,0 +1,43 @@
+@charset "UTF-8";
+
+
+.tabs{
+   border-bottom: 1px solid #462114;
+   overflow: hidden;
+}
+
+.tab{
+   width:130px;
+   height: 40px;
+   border: 1px solid #462114;
+   border-bottom:none; 
+   margin-left: 5px;
+   float: left;
+   text-align: center;
+   color: #462114;
+   line-height: 35px;
+   font-weight: bold;
+   
+}
+
+.active a{	
+	color: white;
+	text-decoration: none;
+}
+a{
+	color: #462114;
+	text-decoration: none;
+	display:block;
+}
+
+.active{
+   background: #462114;
+   color: white;
+}
+
+iframe{
+	width:960px;
+	height:1000px;
+	border:0px;
+	z-index: 100;
+}

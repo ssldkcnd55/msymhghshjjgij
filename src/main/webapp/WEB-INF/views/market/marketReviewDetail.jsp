@@ -15,25 +15,57 @@
 
 <script type="text/javascript">
 /* 댓글 수정 */
-	 function comment_modify() {
-		$(".QnA_comment").html("<form action='/farm/marketQnaAnswer.do' method='post'><input type='hidden' value='${qna.market_qna_no }'"+
-					"name='market_qna_no'><input type='hidden' value='${member_id }' name='member_id'><div class='QnA_comment_top_writer'>"+
-					"<textarea class='answerArea' name='market_qna_answer'>${qna.market_qna_answer}</textarea>"+
-					"<input type='submit' class='answerBtn' value='작성'></div></form>");
+	 function comment_modify(a,contents) {
+		$(".p"+a).html("<form action='/farm/marketReviewReply.do' method='post'>"
+				+"<input type='hidden' value='${review.review_no }' name='review_no'>"
+				+"<input type='hidden' value='${loginUser.member_id }' name='member_id'>"
+				+"<div class='QnA_comment_top_writer'><textarea class='answerArea' name='reply_contents'>"+contents+"</textarea>"
+				+"<input type='submit' class='answerBtn' value='작성'><button onclick='replyUpdateCancle("+a+",\""+contents+"\")' type='button'>X</button></div></form>");
 	}
-	
+	 function replyUpdateCancle(a,contents){
+			$(".p"+a).html(contents);
+	}
+	 
+	 
+	 function under_comment_modify(a,contents) {
+			$(".pu"+a).html("<form action='/farm/marketReviewUnderReply.do' method='post'>"
+					+"<input type='hidden' value='${reply.reply_no }' name='reply_no'>"
+					+"<input type='hidden' value='${loginUser.member_id }' name='member_id'>"
+					+"<div class='QnA_comment_top_writer'><textarea class='answerArea' name='reply_contents'>"+contents+"</textarea>"
+					+"<input type='submit' class='answerBtn' value='작성'><button onclick='under_replyUpdateCancle("+a+",\""+contents+"\")' type='button'>X</button></div></form>");
+	}
+	function under_replyUpdateCancle(a,contents){
+				$(".pu"+a).html(contents);
+	}
+	 /* 
 	function comment_delete(){
-		location.href ="deleteMarketQnaAnswer.do?market_qna_no=+${qna.market_qna_no}&member_id=${member_id}";
-	}
+		location.href ="deleteMarketReviewReply.do?reply_no=${reply.reply_no}&member_id=${member_id}";
+	} */
 
 	/* QnA수정 버튼 */
+	var check = 0;
 	function move_review_modify() {
-		location.href = "marketReviewUpdateMove.do?market_qna_title=${qna.market_qna_title}"+
-				"&market_qna_contents=${qna.market_qna_contents}&market_qna_no=${qna.market_qna_no}"+
+		location.href = "marketReviewUpdateMove.do?review_title=${review.review_title}"+
+				"&review_contents=${review.review_contents}&review_no=${review.review_no}"+
 				"&member_id=${member_id}";
 	}
 	function deleteReview(){
-		location.href = "marketReviewDelete.do?market_qna_no=${qna.market_qna_no}&market_no=${qna.market_no}";
+		location.href = "marketReviewDelete.do?review_no=${review.review_no}&market_no=${review.market_no}";
+	}
+	function underReplyWrite(a,reply_no){
+		if(check==0){
+		$('.QnA_comment_top_writer.a'+a).append("<div class='underReplyWrite'><form action='/farm/marketReviewUnderReply.do' method='post'>"
+			+"<input type='hidden' value='"+reply_no+"' name='reply_no'>"
+			+"<input type='hidden' value='${review.review_no}' name='review_no'>"
+			+"<input type='hidden' value='${loginUser.member_id }' name='member_id'>"
+			+"<div class='QnA_comment_top_writer'><textarea class='answerArea' name='under_reply_content'></textarea>"
+			+"<input type='submit' class='answerBtn' value='작성'><button onclick='underReplyWriteCancle()' type='button'>X</button><br><br></div></form></div>");
+		}
+		check = 1;
+	}
+	function underReplyWriteCancle(){
+		check = 0;
+		$('.underReplyWrite').remove();
 	}
 </script>
 <script>
@@ -48,21 +80,29 @@
 			success: function(obj){
 				var objStr = JSON.stringify(obj);
 				var jsonObj = JSON.parse(objStr);
+				var loginMember_id = "${loginUser.member_id}";
 				//문자열 변수 준비
 				var outValues = "<div class='QnA_comment_title'><h3>댓글</h3></div><div class='QnA_comment'>";
 				for(var i in jsonObj.list){
-					outValues+="<div class='QnA_comment_top_writer'><div class='QnA_comment_writer'>"
+					outValues+="<div class='QnA_comment_top_writer a"+i+"'><div class='QnA_comment_writer'>"
 						+"<img alt='' src='/Farm/img/user.png'>&nbsp; <span>"+jsonObj.list[i].member_id+"</span>&nbsp;"
-						+"<span>"+jsonObj.list[i].reply_date+"</span>&nbsp;<span onclick='comment_modify();'>수정</span>&nbsp;"
-						+"<span onclick='comment_delete();'>삭제</span>&nbsp;</div><p>"+jsonObj.list[i].reply_contents+"</p>"
-						+"</div>";
+						+"<span>"+jsonObj.list[i].reply_date+"</span>&nbsp;";
+					<c:if test="${!empty loginUser}">
+						outValues+="<div class='underReply' onclick='underReplyWrite("+i+","+jsonObj.list[i].reply_no+")'>┗답글</div>";
+					</c:if> 
+					if(loginMember_id == jsonObj.list[i].member_id){
+						outValues+="<span class='modifiedSpan' onclick='comment_modify("+i+",\""+jsonObj.list[i].reply_contents+"\");'>수정</span>&nbsp;<span class='deleteSpan' onclick='comment_delete();'>삭제</span>&nbsp;"
+					}
+					outValues+="</div><p class='p"+i+"'>"+jsonObj.list[i].reply_contents+"</p></div>";
 						for(var j in jsonObj.list2){
 							if(jsonObj.list[i].reply_no == jsonObj.list2[j].reply_no){
 								outValues+="<div class='QnA_comment_top_writer' style='width:930px;padding-left:30px;'><div class='QnA_comment_writer'>"
 									+"<img alt='' src='/Farm/img/user.png'>&nbsp; <span>└"+jsonObj.list2[j].member_id+"</span>&nbsp;"
-									+"<span>"+jsonObj.list2[j].under_reply_date+"</span>&nbsp;<span onclick='comment_modify();'>수정</span>&nbsp;"
-									+"<span onclick='comment_delete();'>삭제</span>&nbsp;</div><p>"+jsonObj.list2[j].under_reply_content+"</p>"
-									+"</div>";
+									+"<span>"+jsonObj.list2[j].under_reply_date+"</span>&nbsp;";
+								if(loginMember_id == jsonObj.list2[j].member_id){
+									outValues+="<span onclick='under_comment_modify("+i+""+j+",\""+jsonObj.list2[j].under_reply_content+"\");'>수정</span>&nbsp;<span onclick='comment_delete();'>삭제</span>&nbsp;";
+								}
+								outValues+="</div><p class='pu"+i+""+j+"'>"+jsonObj.list2[j].under_reply_content+"</p></div>";
 							}
 						}
 				}
@@ -70,7 +110,7 @@
 					outValues+="<form action='/farm/marketReviewReply.do' method='post'>"
 						+"<input type='hidden' value='${review.review_no }' name='review_no'>"
 						+"<input type='hidden' value='${loginUser.member_id }' name='member_id'>"
-						+"<div class='QnA_comment_top_writer'><textarea class='answerArea' name='review_contents'></textarea>"
+						+"<div class='QnA_comment_top_writer'><textarea class='answerArea' name='reply_contents'></textarea>"
 						+"<input type='submit' class='answerBtn' value='작성'></div></form>";
 				</c:if>
 				var startPage= jsonObj.list[0].startPage;

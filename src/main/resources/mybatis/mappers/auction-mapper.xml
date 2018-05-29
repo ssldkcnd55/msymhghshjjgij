@@ -4,7 +4,7 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="auction">
 
-<resultMap type="Auction" id="resultAuction">
+	<resultMap type="Auction" id="resultAuction">
 		<id column="auction_no" property="auction_no" />
 		<result column="member_id" property="member_id" />
 		<result column="category_no" property="category_no" />
@@ -17,17 +17,19 @@
 		<result column="auction_status" property="auction_status" />
 		<result column="auction_startprice" property="auction_startprice" />
 		<result column="auction_directprice" property="auction_directprice" />
-		
+
 	</resultMap>
 
-	<insert id="insertAuctionMake" parameterType="auction" flushCache="true" useGeneratedKeys="true">
+	<insert id="insertAuctionMake" parameterType="auction"
+		flushCache="true" useGeneratedKeys="true">
 	<![CDATA[
 		insert into auction values((select max(auction_no) from auction)+1,#{member_id},1,#{auction_title},#{auction_note},#{auction_img},
 		#{auction_startdate},#{auction_enddate},#{auction_intro},'0',#{auction_startprice},#{auction_directprice})
 	]]>
 	</insert>
-	
-	<select id="selectAuctionList" parameterType="pageNumber"  resultType="auction">
+
+	<select id="selectAuctionList" parameterType="pageNumber"
+		resultType="auction">
 	<![CDATA[
 		select * from 
 			(select rownum rnum, auction_no,
@@ -36,26 +38,28 @@
 			auction_no desc)) where rnum >= #{startRow} and rnum <= #{endRow}
 	]]>
 	</select>
-	
-	<select id="selectAuctionDetail" parameterType="auction" flushCache="true" resultType="auction">
+
+	<select id="selectAuctionDetail" parameterType="auction"
+		flushCache="true" resultType="auction">
 	<![CDATA[
 		select * from auction where auction_no=#{auction_no}
 	]]>
 	</select>
-	
-	
+
+
 	<delete id="deleteAuction" parameterType="auction">
 	<![CDATA[
 		delete from auction where auction_no=#{auction_no}
 	]]>
 	</delete>
-	
-	<select id="selectmodifyAuction" parameterType="auction" flushCache="true" resultType="auction">
+
+	<select id="selectmodifyAuction" parameterType="auction"
+		flushCache="true" resultType="auction">
 	<![CDATA[
 		select * from auction where auction_no=#{auction_no}
 	]]>
 	</select>
-	
+
 	<update id="updateAuctionMake">
 	<![CDATA[
 		update auction set auction_title=#{auction_title},auction_note=#{auction_note},auction_img=#{auction_img},
@@ -63,56 +67,61 @@
 		where auction_no = #{auction_no}
 	]]>
 	</update>
-	
-	<insert id="insertAuctionQnAMake" parameterType="auctionqna" flushCache="true" useGeneratedKeys="true">
+
+	<insert id="insertAuctionQnAMake" parameterType="auctionqna"
+		flushCache="true" useGeneratedKeys="true">
 	<![CDATA[
 		insert into auction_qna values((select max(auction_qna_no) from auction_qna)+1,#{auction_no},#{member_id},sysdate,null,
 		null,#{auction_qna_title},#{auction_qna_contents},'1')
 	]]>
 	</insert>
-	
-	<select id="selectAuctionQnAList" parameterType="pageNumber" resultType="AuctionQnA">
+
+	<select id="selectAuctionQnAList" parameterType="pageNumber"
+		resultType="AuctionQnA">
 	<![CDATA[
 		select * from (select rownum rnum, auction_qna_no,auction_qna_title,member_id,auction_qna_question_date from auction_qna where auction_no =#{auction_no}
 		order by auction_qna_no desc) where rnum>= #{startRow} and rnum <=#{endRow}
 	]]>
 	</select>
-	
-	
-	<select id="selectAuctionQnACount" parameterType="int" resultType="int">
+
+
+	<select id="selectAuctionQnACount" parameterType="int"
+		resultType="int">
 	<![CDATA[
 		select count(*) from auction_qna where auction_no = #{auction_no}
 	]]>
 	</select>
-	
-	
-	<select id="selectAuctionQnADetail" parameterType="AuctionQnA" resultType="AuctionQnA">
+
+
+	<select id="selectAuctionQnADetail" parameterType="AuctionQnA"
+		resultType="AuctionQnA">
 	<![CDATA[
 		select * from auction_qna where auction_qna_no = #{auction_qna_no}
 	]]>
 	</select>
-	
-	
-	<select id="selectshowAuctionQnAModify" parameterType="AuctionQnA" resultType="AuctionQnA">
+
+
+	<select id="selectshowAuctionQnAModify" parameterType="AuctionQnA"
+		resultType="AuctionQnA">
 	<![CDATA[
 		select * from auction_qna where auction_qna_no = #{auction_qna_no}
 	]]>
 	</select>
-	
-	<update id="updateAuctionQnA" parameterType="AuctionQnA" >
+
+	<update id="updateAuctionQnA" parameterType="AuctionQnA">
 		<![CDATA[
 		update auction_qna set AUCTION_QNA_TITLE=#{auction_qna_title},AUCTION_QNA_CONTENTS=#{auction_qna_contents}
 		where AUCTION_QNA_NO=#{auction_qna_no}
 	]]>
 	</update>
-	
+
 	<update id="updateauctionQnA_Answer" parameterType="AuctionQnA">
 	<![CDATA[
 		update auction_qna set auction_qna_answer=#{auction_qna_answer},auction_qna_answer_date=sysdate
 		where AUCTION_QNA_NO=#{auction_qna_no}
 	]]>
 	</update>
-	
+
 	<select id="selectHomeAuctionList" resultType="Auction">
 	<![CDATA[
 		select * from (select rownum rnum,auction_no,member_id,category_no,auction_title,auction_note,
@@ -120,27 +129,29 @@
 		auction_startprice,auction_directprice from auction order by auction_no desc) where rnum>=1 and rnum <=12
 	]]>
 	</select>
-	
-	<update id="updateSellerAuctionQnAanswer" parameterType="AuctionQnA" >
+
+	<update id="updateSellerAuctionQnAanswer" parameterType="AuctionQnA">
 	<![CDATA[
 		update auction_qna set auction_qna_answer=#{auction_qna_answer},auction_qna_answer_date=sysdate
 		where AUCTION_QNA_NO=#{auction_qna_no}
 	]]>
 	</update>
-	
-	
-	<select id="selectseller_QnAanswer"  parameterType="AuctionQnA"  resultType="AuctionQnA" >
+
+
+	<select id="selectseller_QnAanswer" parameterType="AuctionQnA"
+		resultType="AuctionQnA">
 	<![CDATA[
 		select * from auction_qna where auction_qna_no = #{auction_qna_no}
 	]]>
 	</select>
-	
+
 	<update id="delete_auction_qna_answer" parameterType="AuctionQnA">
 	<![CDATA[
 		update auction_qna set auction_qna_answer=null,auction_qna_answer_date=null
 		where AUCTION_QNA_NO=#{auction_qna_no}
 	]]>
 	</update>
+<<<<<<< HEAD
 	
 	<select id="selectcheckAuction_history_price"  parameterType="int"  resultType="AuctionHistory" >
 	<![CDATA[
@@ -165,4 +176,17 @@
 	
 	
 	
+=======
+
+	<select id="selectAuctionHistory" parameterType="PageNumber" resultType="auction">
+	<![CDATA[
+	select * from (select rownum rnum, AUCTION_HISTORY_NO, AUCTION_NO, MEMBER_ID,AUCTION_HISTORY_PRICE,AUCTION_HISTORY_DATE from AUCTION_HISTORY 
+	order by AUCTION_NO desc) where rnum >=#{startRow} and rnum <=#{endRow}
+	]]>
+	</select>
+	<select id="selectAuctionHistoryCount" parameterType="int" resultType="int">
+		select
+		count(*) from auction_history
+	</select>
+>>>>>>> branch 'master' of https://github.com/ssldkcnd55/msymhghshjjgij.git
 </mapper>

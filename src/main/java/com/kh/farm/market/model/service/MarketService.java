@@ -44,4 +44,15 @@ public interface MarketService {
 
 	ArrayList<UnderReply> selectReviewUnderReply(HashMap<String, ArrayList<Integer>> map);
 
+	ArrayList<Reply> selectDailyReply(int daily_no, int currentPage);
+
+	int selectDailyReplyCount(int daily_no);
+
+	ArrayList<UnderReply> selectDailyUnderReply(HashMap<String, ArrayList<Integer>> map);
+
+	int insertReply(Reply reply);
+
+	int insertUnderReply(UnderReply reply);
+
+
 }

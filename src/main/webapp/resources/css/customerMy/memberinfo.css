@@ -1,31 +1,5 @@
 @charset "UTF-8";
 
-
-.tabs{
-   border-bottom: 1px solid #462114;
-   overflow: hidden;
-}
-
-.tab{
-   width:130px;
-   height: 40px;
-   border: 1px solid #462114;
-   border-bottom:none; 
-   margin-left: 5px;
-   float: left;
-   text-align: center;
-   color: #462114;
-   line-height: 35px;
-   font-weight: bold;
-   
-}
-
-.tab.first{
-   background: #462114;
-   color: white;
-   margin-left:0px;
-}
-
 .Info{
    float: left;
    width: 900px;

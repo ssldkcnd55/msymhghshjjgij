@@ -9,6 +9,7 @@ import com.kh.farm.auction.model.vo.Auction;
 import com.kh.farm.auction.model.vo.AuctionHistory;
 import com.kh.farm.auction.model.vo.AuctionQnA;
 import com.kh.farm.member.model.vo.Member;
+import com.kh.farm.notice.model.vo.Notice;
 
 public interface AuctionService {
 	
@@ -53,6 +54,7 @@ public interface AuctionService {
 	int delete_auction_qna_answer(int auction_qna_no);
 	
 
+
 	int insertAuctionBidding(AuctionHistory auctionhistory);
 
 	AuctionHistory selectcheckAuction_history_price(int auction_no);
@@ -62,4 +64,10 @@ public interface AuctionService {
 	
 
 	/*ArrayList<AuctionHistory> selectAuctionBiddingList(int auction_no);*/
+
+	ArrayList<AuctionHistory> selectAuctionHistory(int currentPage);
+
+	int selectAuctionHistoryCount();
+	
+
 }
