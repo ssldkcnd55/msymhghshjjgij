@@ -13,7 +13,7 @@ import com.kh.farm.qna.model.vo.Market_qna;
 
 public interface MarketService {
 
-	ArrayList<Market> selectMarketList(int page,String search);
+	ArrayList<Market> selectMarketList(int page,String search,String ctype);
 	
 	
 	Market selectMarketInfo(int market_no);

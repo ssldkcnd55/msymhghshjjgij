@@ -6,13 +6,23 @@
 
 
 <select id="marketList" parameterType="pageNumber" resultType="market">
-	<![CDATA[
+	<![CDATA[	
 		select * from 
 			(select rownum rnum, market_no,
 			market_title,market_releasedate,market_note,market_img,
-			member_id from (select * from market order by 
+			member_id from (select * from market 
+			]]>
+
+	<if test="search != null">
+		where market_title like '%'||#{search}||'%'
+	</if>
+	<![CDATA[
+			 order by 
 			market_no desc)) where rnum >= #{startRow} and rnum <= #{endRow}
+		
 	]]>
+			
+	
 </select>
 	
 	<select id="marketInfo" parameterType="int" resultType="market">

@@ -18,6 +18,33 @@
 	function marketMake(){
 		location.href="/farm/moveSignUp";
 	}
+	
+	$(function(){
+		$("input[name='rCategory']").click(function(){
+			
+			if($(this).val() == "1"){
+			
+				$.ajax({
+					url: "marketList.do",
+					type: "post",
+					data : {"ctype" : "1"},
+					dataType: "JSON",
+					success: function(obj){
+						
+					},error: function(request,status,errorData){
+						alert("error code : " + request.status + "\nmessage" + 
+								request.responseText + "\nerror" + errorData);
+					}
+				});
+			}else if($(this).val() == "2"){
+			
+			}else if($(this).val() == "3"){
+				
+			}
+			
+			
+		});
+	});
 </script>
 <script>
 
@@ -49,6 +76,9 @@
 				}
 			});
 		}
+		
+		
+		
 </script>
 </head>
 <body>
@@ -81,9 +111,9 @@
         	<!-- 카테고리 메뉴바 -->
         	<div class="category_menu" >
         	<h4>카테고리</h4>
-        	<input type="radio" > 카테고리1<br><br>
-        	<input type="radio" > 카테고리2<br><br>
-        	<input type="radio" > 카테고리3<br><br>
+        	<input type="radio" name="rCategory" id="categoryID1"  value="1" > 카테고리1<br><br>
+        	<input type="radio" name="rCategory" id="categoryID2" value="2"> 카테고리2<br><br>
+        	<input type="radio" name="rCategory" id="categoryID3"  value="3"> 카테고리3<br><br>
         	<hr style="color:#bdbdbd">
         	
         	<h4>카테고리</h4>
