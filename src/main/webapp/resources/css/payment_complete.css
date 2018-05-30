@@ -1,0 +1,38 @@
+@charset "UTF-8";
+
+.con_title {
+	width: 928px;
+	height: 80px;
+	border: 2px solid #4a2419;
+	padding: 15px;
+	margin: 0px;
+	font-size: 18pt;
+	color: #4a2419;
+	font-weight: bold;
+	font-family: "굴림", gulim, arial, helvetica, sans-serif;
+	float: left;
+	margin-bottom: 100px;
+}
+
+.titleP {
+	margin-top: 25px;
+	margin-left: 40px;
+}
+
+.con_head {
+	padding-top: 30px; 
+	margin-bottom: 30px;
+	clear : both;
+	text-align: center;
+	border-top: 1px solid #bdbdbd;
+	font-size: 24pt;
+	clear: both;
+}
+
+.con_table{
+	border-top: 1px solid #bdbdbd;
+	border-bottom:1px solid #bdbdbd;
+	width: 100%;	
+}
+
+
