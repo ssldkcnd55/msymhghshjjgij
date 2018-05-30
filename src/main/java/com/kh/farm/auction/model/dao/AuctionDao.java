@@ -160,6 +160,8 @@ public class AuctionDao {
 		return sqlSession.insert("auction.selectAuctionBiddingCount", auction_no);
 	}
 
+
+
 	
 
 }

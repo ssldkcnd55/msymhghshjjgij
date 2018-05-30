@@ -17,20 +17,29 @@ public class Daily implements java.io.Serializable{
 	private Date daily_date;//일지 작성일
 	private String daily_title;//일지 제목
 	private String daily_contents;//일지 내용
-
+	private String member_id;
+	
 	public Daily() {
 	
 	}
-
-	public Daily(int daily_no, int market_no, Date daily_date, String daily_title, String daily_contents) {
+	public Daily(int daily_no, int market_no, Date daily_date, String daily_title, String daily_contents,
+			String member_id) {
 		super();
 		this.daily_no = daily_no;
 		this.market_no = market_no;
 		this.daily_date = daily_date;
 		this.daily_title = daily_title;
 		this.daily_contents = daily_contents;
+		this.member_id = member_id;
 	}
 
+
+	public String getMember_id() {
+		return member_id;
+	}
+	public void setMember_id(String member_id) {
+		this.member_id = member_id;
+	}
 	@Override
 	public String toString() {
 		return "Daily [daily_no=" + daily_no + ", market_no=" + market_no + ", daily_date=" + daily_date

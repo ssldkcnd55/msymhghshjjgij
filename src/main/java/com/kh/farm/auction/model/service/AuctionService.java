@@ -70,6 +70,8 @@ public interface AuctionService {
 
 	/*경매 입찰내역 List count*/
 	int selectAuctionBiddingCount(int auction_no);
+
+
 	
 
 }

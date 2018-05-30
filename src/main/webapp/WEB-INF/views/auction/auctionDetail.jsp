@@ -113,44 +113,92 @@ $(function(){
 	}
 	
 	   
-	
-	function checkAuction_bidding(){
-		 var checkAuction_bidding;
-		 var bidding_price = $("#biddingprice").val();
-	     var no = $("#no").val();
-		/* alert(no);
-		alert(bidding_price); */
-		$.ajax({
-			url:"checkAuction_history_price.do",
-			type:"post",
-			data:{
-				auction_no:no
-			},
-			 datatype:"json",
-			 success:function(json){
-					alert(json.toString());
-					 var jsonStr = JSON.stringify(json);
-			         var json = JSON.parse(jsonStr);
-			         
-			       	 if(json.price <= bidding_price){
-			       		/*  alert("1"); */
-			        	checkAuction_bidding = confirm("정말로 입찰 하시겠습니까?");
-				        	if(checkAuction_bidding == true){
-				        		  return checkAuction_bidding;
+	/* 경매 입찰 등록 */
+	/* $(function(){
+		$('input#submit').click(function(event){
+			var price = $('#biddingprice').val();
+			var no = ${auction.auction_no};
+			alert(price+", " + no);
+			
+			$.ajax({
+				url:"checkAuction_history_price.do",
+				type:"post",
+				data:{
+					auction_no:no
+				},
+				dataType: "JSON",
+				success: function(data){
+					console.log(data);
+					var objStr = JSON.stringify(data);
+					var jsonObj = JSON.parse(objStr);	
+					
+					if(jsonObj.startprice >= price) {
+						alert("경매 시작가보다 높은 금액을 입력해 주세요.");
+						return false;
+					}else if(jsonObj.directprice <= price){
+						alert("즉시 구매가 보다 높은 금액을 입력하셨습니다.");
+						return false;
+					}else if(jsonObj.price >= price) {
+						alert("현재 최고 입찰가보다 높은 금액을 입력해 주세요.")
+						return false;
+					}else {
+						var con_test = confirm("정말 입찰하시겠습니까?")
+						if(con_test == true) {
+							$('#bidsubmit').submit();
+							} else {
+							return false;
 							}
-				        
-			      	  }else{
-			      		/*  alert("2"); */
-			      		checkAuction_bidding = confirm(json.price+"원 보다 높은 가격을 입력해주세요."); 
-			      		if(checkAuction_bidding == true){
-							return(false);
-						}
-			      		return(false);
-			      	  }
-				 }
-		});
-	}
-		
+					}
+						
+				}
+			})
+		}); 
+	}); */
+		 
+	
+	
+	
+		function bidcheck(){
+			var price = $('#biddingprice').val();
+			var no = ${auction.auction_no};
+			alert(price+", " + no);
+			var result = true;
+			$.ajax({
+				url:"checkAuction_history_price.do",
+				type:"post",
+				data:{
+					auction_no:no
+				},
+				async: false,
+				dataType: "JSON",
+				success: function(data){
+					console.log(data);
+					var objStr = JSON.stringify(data);
+					var jsonObj = JSON.parse(objStr);	
+					
+					if(jsonObj.startprice >= price) {
+						alert("경매 시작가보다 높은 금액을 입력해 주세요.");
+						result= false;
+					}else if(jsonObj.directprice <= price){
+						alert("즉시 구매가 보다 높은 금액을 입력하셨습니다.");
+						result= false;
+					}else if(jsonObj.price >= price) {
+						alert("현재 최고 입찰가보다 높은 금액을 입력해 주세요.")
+						result= false;
+					}else {
+						var con_test = confirm("정말 입찰하시겠습니까?")
+						if(con_test == true) {
+							return true;
+							} else {
+							result= false;
+							}
+					}
+				}
+			});
+			return result;
+		}
+	
+	
 	
 	//경매 입찰 List (입찰내역)
 	function auction_biddingList(no){
@@ -465,7 +513,8 @@ $(function(){
 					
 					<div id="flow-cart-content"
 						class="goods-view-flow-cart-content __active">
-						<form action="/farm/insertAuctionBidding.do" onsubmit="return checkAuction_bidding()"  method="post">
+						<!-- <form action="/farm/insertAuctionBidding.do" onsubmit="return checkAuction_bidding()"  method="post"> -->
+						<form action="/farm/insertAuctionBidding.do" name="bidding" id="bidsubmit" method="post" onsubmit="return bidcheck();">
 						<input type="hidden" name="auction_no" value="${auction.auction_no}" id="no">
 						<input type="hidden" name="member_id" value="${loginUser.member_id}">
 						<div class="auction_cart_info_div">
@@ -494,9 +543,14 @@ $(function(){
 						<div class="auction_cart_center_div">
 							<table>
 								<tr>
-									<td>현재 가격</td>
+									<td>경매시작값</td>
 									<td>:  </td>
-									<td>2000</td>
+									<td>${auction.auction_startprice}</td>
+								</tr>
+								<tr>
+									<td>최고가격</td>
+									<td>:  </td>
+									<td>1000</td>
 								</tr>
 								<tr>
 									<td>입찰가격</td>
@@ -512,7 +566,7 @@ $(function(){
 						<div class="auction_cart_right_div">
 							<table>
 								<tr>
-									<td><input  type="submit" class="auction_bidding" value="입찰" /></td>
+									<td><input type="submit" id="submit" class="auction_bidding" value="입찰" /></td>
 									<td><button class="auction_buy">즉시구매</button></td>
 								</tr>
 					
