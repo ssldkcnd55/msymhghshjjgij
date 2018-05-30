@@ -20,11 +20,12 @@ import com.kh.farm.qna.model.vo.Market_qna;
 @Repository
 public class MarketDao {
 
-	public ArrayList<Market> marketList(int page,SqlSessionTemplate sqlSession,String search) {
+	public ArrayList<Market> marketList(int page,SqlSessionTemplate sqlSession,String search,String ctype) {
 		PageNumber pn = new PageNumber();
 		pn.setStartRow(page * 9 -8);
 		pn.setEndRow(pn.getStartRow() + 8);
 		pn.setSearch(search);
+		pn.setCtype(ctype);
 		List<Market> list = sqlSession.selectList("market.marketList",pn);
 		return (ArrayList)list;
 	}

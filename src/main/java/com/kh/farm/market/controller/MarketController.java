@@ -42,13 +42,13 @@ public class MarketController {
 	
 
 	@RequestMapping(value="marketList.do")
-	public ModelAndView marketList(ModelAndView mv,@RequestParam(value="search",required=false) String search) {
+	public ModelAndView marketList(ModelAndView mv,@RequestParam(value="search",required=false) String search,@RequestParam(value="ctype",required=false) String ctype) {
 		int page = 1;
-		ArrayList<Market> list = marketService.selectMarketList(page,search);
+		ArrayList<Market> list = marketService.selectMarketList(page,search,ctype);
 		mv.setViewName("market/marketList");
 		mv.addObject("list",list);
 		mv.addObject("search",search);
-		System.out.println(search);
+		mv.addObject("ctype",ctype);
 		
 		return mv;
 	}
@@ -64,8 +64,8 @@ public class MarketController {
 	}
 	
 	@RequestMapping(value="ajaxMoreMarket.do", method=RequestMethod.POST)
-	public void moreMarketList(HttpServletResponse response,@RequestParam("page") int page,@RequestParam(value="search",required=false) String search) throws IOException{
-		List<Market> list = marketService.selectMarketList(page,search);
+	public void moreMarketList(HttpServletResponse response,@RequestParam("page") int page,@RequestParam(value="search",required=false) String search,@RequestParam(value="ctype",required=false) String ctype) throws IOException{
+		List<Market> list = marketService.selectMarketList(page,search,ctype);
 		JSONArray jarr = new JSONArray();
 		
 		//list를 jarr로 복사하기
