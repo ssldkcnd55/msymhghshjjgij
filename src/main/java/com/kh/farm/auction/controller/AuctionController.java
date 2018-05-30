@@ -471,7 +471,7 @@ public class AuctionController {
 	public void auction_biddingList(HttpServletResponse response,@RequestParam(value="auction_no") int auction_no) 
 	throws IOException{
 		JSONArray jarr =new JSONArray();
-		ArrayList<AuctionHistory> selectAuctionBiddingList = auctionService.selectAuctionBiddingList(auction_no);
+		 ArrayList<AuctionHistory> selectAuctionBiddingList = auctionService.selectAuctionBiddingList(auction_no);
 		 int selectAuctionBiddingCount = auctionService.selectAuctionBiddingCount(auction_no);
 		 System.out.println("selectAuctionBiddingCount : "+selectAuctionBiddingCount);
 		 

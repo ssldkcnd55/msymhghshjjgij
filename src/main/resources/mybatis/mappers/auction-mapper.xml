@@ -173,7 +173,7 @@
 	
 	<select id="selectAuctionBiddingList"  parameterType="int"  resultType="AuctionHistory" >
 	<![CDATA[
-		select * from auction_history where auction_no = #{auction_no} order by auction_history_no desc
+		select * from auction_history where auction_no = #{auction_no} order by auction_history_price desc
 	]]>
 	</select> 
 	
@@ -192,9 +192,9 @@
 	</select>
 	
 	
-	<select id="selectAuctionBiddingCount" parameterType="int" resultType="AuctionHistory">
+	<select id="selectAuctionBiddingCount" parameterType="int" resultType="int">
 	<![CDATA[
-		select count(*) as "rnum" from auction_history where auction_no = #{auction_no}
+		select count(*) from auction_history where auction_no = #{auction_no}
 	]]>
 	</select>
 	

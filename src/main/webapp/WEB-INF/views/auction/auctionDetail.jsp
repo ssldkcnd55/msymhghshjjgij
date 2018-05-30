@@ -113,7 +113,7 @@ $(function(){
 	}
 	
 	   
-	/* 경매 입찰 등록 */
+	
 	/* $(function(){
 		$('input#submit').click(function(event){
 			var price = $('#biddingprice').val();
@@ -157,7 +157,7 @@ $(function(){
 		 
 	
 	
-	
+	/* 경매 입찰 등록 */
 		function bidcheck(){
 			var price = $('#biddingprice').val();
 			var no = ${auction.auction_no};
@@ -172,7 +172,7 @@ $(function(){
 				async: false,
 				dataType: "JSON",
 				success: function(data){
-					console.log(data);
+					/* console.log(data); */
 					var objStr = JSON.stringify(data);
 					var jsonObj = JSON.parse(objStr);	
 					
@@ -193,6 +193,14 @@ $(function(){
 							result= false;
 							}
 					}
+					/* var outValues3 = $(".topprice").html();
+		        	outValues +=
+		        		"<td>최고가격</td>"+
+						"<td>:  </td>"+
+						"<td>"+jsonObj.price+"</td>"
+		        	
+		        $(".topprice").html(outValues3); */
+					
 				}
 			});
 			return result;
@@ -203,7 +211,7 @@ $(function(){
 	//경매 입찰 List (입찰내역)
 	function auction_biddingList(no){
 		var auction_no = no.id;
-		alert(auction_no);
+		
 		$.ajax({
 			url:"auction_biddingList.do",
 			type:"post",
@@ -212,19 +220,20 @@ $(function(){
 			},
 			dataType: "JSON",
 		    success:function(data){
-					alert(data.toString());
+					/* alert(data.toString()); */
 					var objStr = JSON.stringify(data);
 			        var json = JSON.parse(objStr);
 			        
 			        var biddingcount = json.list[0].biddingcount;
-			        var outValues = "";
+			       /*  alert("count : "+biddingcount); */
+			        var outValues = $(".bidding_info").html();
 			        	outValues +=
 			        		"<span class='s1'>입찰 수 : </span> <span>"+biddingcount+"</span> <span class='s1'>남은시간 : </span>"+
 						    "<span>4일 13시간 5분</span> <span class='s1'>경매 기간 : </span><span>5일</span>"
 			        	
-			        $(".bidding_info").html();
+			        $(".bidding_info").html(outValues);
 			       	
-			        var outValues2="";
+			        var outValues2=$(".bidding_table").html();
 			        for(var i in json.list){
 			        	outValues2 +=
 			        		"<tr>"+
@@ -233,7 +242,7 @@ $(function(){
 							"<td>"+json.list[i].auction_history_date+"</td>"+
 							"</tr>"
 			        }
-			        $(".bidding_table").html();
+			        $(".bidding_table").html(outValues2);
 			 }
 			 
 		});
@@ -330,7 +339,9 @@ $(function(){
 					<div class="auction_history_box">
 
 						<div class="bidding_top">
-							<h2 class="history_title">입찰 내역</h2>
+							<div style="width:100%; margin-left:45%;">
+							<h2 class="">입찰 내역</h2>
+							</div>
 
 							<!-- 경매정보 -->
 							<div class="bidding_info">
@@ -547,10 +558,10 @@ $(function(){
 									<td>:  </td>
 									<td>${auction.auction_startprice}</td>
 								</tr>
-								<tr>
+								<tr class="topprice">
 									<td>최고가격</td>
 									<td>:  </td>
-									<td>1000</td>
+									<td>1000</td> 
 								</tr>
 								<tr>
 									<td>입찰가격</td>
