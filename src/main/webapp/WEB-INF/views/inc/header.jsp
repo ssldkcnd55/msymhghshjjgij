@@ -113,7 +113,7 @@ function getBasketCount(member_id)
                   <ul class="tab_menu">
                      <li><a href="marketList.do">장터</a></li>
                      <li><a href="AuctionList_controller.do">경매</a></li>
-                     <li><a href="#">시세</a></li>
+                     <li><a href="moveQuote.do">시세</a></li>
                      <li><a href="moveJob.do">구인구직</a></li>
                   </ul>
                   <div class="search_box">

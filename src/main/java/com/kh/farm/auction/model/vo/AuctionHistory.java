@@ -18,11 +18,15 @@ public class AuctionHistory implements java.io.Serializable{
 	private String member_id;//입찰자 아이디
 	private int auction_history_price;//입찰가
 	private Date auction_history_date;//입찰 시간
-		
+	private int auction_startprice;// 경매 시작가
+	private int auction_startprice2;// 경매 시작가2
+	private int auction_directprice;	
 	public AuctionHistory() {}
 
-	public AuctionHistory(int rnum,int auction_history_no, int auction_no, String member_id, int auction_history_price,
-			Date auction_history_date) {
+	
+
+	public AuctionHistory(int rnum, int auction_history_no, int auction_no, String member_id, int auction_history_price,
+			Date auction_history_date, int auction_startprice, int auction_startprice2,int auction_directprice) {
 		super();
 		this.rnum = rnum;
 		this.auction_history_no = auction_history_no;
@@ -30,15 +34,24 @@ public class AuctionHistory implements java.io.Serializable{
 		this.member_id = member_id;
 		this.auction_history_price = auction_history_price;
 		this.auction_history_date = auction_history_date;
+		this.auction_startprice = auction_startprice;
+		this.auction_startprice2 = auction_startprice2;
+		this.auction_directprice = auction_directprice;
 	}
 
+
+	
+	
 	@Override
 	public String toString() {
-		return "AuctionHistory [rnum=" + rnum + ", auction_history_no=" + auction_history_no + ", auction_no=" + auction_no
-				+ ", member_id=" + member_id + ", auction_history_price=" + auction_history_price
-				+ ", auction_history_date=" + auction_history_date + "]";
+		return "AuctionHistory [rnum=" + rnum + ", auction_history_no=" + auction_history_no + ", auction_no="
+				+ auction_no + ", member_id=" + member_id + ", auction_history_price=" + auction_history_price
+				+ ", auction_history_date=" + auction_history_date + ", auction_startprice=" + auction_startprice
+				+ ", auction_startprice2=" + auction_startprice2 + ", auction_directprice=" + auction_directprice + "]";
 	}
-	
+
+
+
 	public int getRnum() {
 		return rnum;
 	}
@@ -86,8 +99,33 @@ public class AuctionHistory implements java.io.Serializable{
 	public void setAuction_history_date(Date auction_history_date) {
 		this.auction_history_date = auction_history_date;
 	}
+
+
+
+	public int getAuction_startprice() {
+		return auction_startprice;
+	}
+
+
+	public void setAuction_startprice(int auction_startprice) {
+		this.auction_startprice = auction_startprice;
+	}
+
+	public int getAuction_startprice2() {
+		return auction_startprice2;
+	}
+
+	public void setAuction_startprice2(int auction_startprice2) {
+		this.auction_startprice2 = auction_startprice2;
+	}
 	
+	public int getAuction_directprice() {
+		return auction_directprice;
+	}
 	
+	public void setAuction_directprice(int auction_directprice ) {
+		this.auction_directprice = auction_directprice;
+	}
 	
 		
 }

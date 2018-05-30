@@ -15,8 +15,8 @@ public class MessageController {
 	public String test() {
 		RestTemplate rest = new RestTemplate();
 		JSONObject jsonl = new JSONObject();
-		jsonl.put("web_url", "http://localhost:5559/test/home.do");
-		jsonl.put("mobile_web_url", "http://localhost:5559/test/home.do");
+		jsonl.put("web_url", "http://localhost:7777/farm/home.do");
+		jsonl.put("mobile_web_url", "http://localhost:7777/farm/home.do");
 		JSONObject jsonc = new JSONObject();
 		jsonc.put("title", "제목");
 		jsonc.put("description", "내용");

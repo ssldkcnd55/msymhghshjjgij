@@ -130,8 +130,16 @@ public class AuctionServiceImpl implements AuctionService{
 		return auctionDao.insertAuctionBidding(sqlSession,auctionhistory);
 	}
 	
-	/*@Override
+	@Override
 	public ArrayList<AuctionHistory> selectAuctionBiddingList(int auction_no) {
 		return auctionDao.selectAuctionBiddingList(sqlSession,auction_no);
-	}*/
+	}
+	
+	@Override
+	public int selectAuctionBiddingCount(int auction_no) {
+		return auctionDao.selectAuctionBiddingCount(sqlSession,auction_no);
+	}
+	
+	
+	
 }

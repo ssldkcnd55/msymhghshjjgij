@@ -49,7 +49,7 @@ $(function(){
 
 	
 	var marketNo= { 'marketNo': marketNoArray }; 
-	
+	if(marketNo.marketNo.length>0){
 	  $.ajax({
 		url:"recentViewList.do",
 		type:"post",
@@ -93,7 +93,7 @@ $(function(){
 	               + "\n" + "error : " + errorData);
 	      }
 	   });   
-	
+	}
 });
 
 

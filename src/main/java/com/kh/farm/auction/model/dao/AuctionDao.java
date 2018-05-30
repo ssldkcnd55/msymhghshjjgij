@@ -140,22 +140,27 @@ public class AuctionDao {
 	}
 
 
-	
-
-
-	/*public ArrayList<AuctionHistory> selectAuctionBiddingList(SqlSessionTemplate sqlSession, int auction_no) {
+	/*경매 입찰내역 List*/
+	public ArrayList<AuctionHistory> selectAuctionBiddingList(SqlSessionTemplate sqlSession, int auction_no) {
 		List<AuctionHistory> selectAuctionBiddingList = sqlSession.selectList("auction.selectAuctionBiddingList",auction_no);
 		return (ArrayList<AuctionHistory>)selectAuctionBiddingList;
 	}
-*/
 
 
 
+	/*한결*/
 	public int selectAuctionHistoryCount(SqlSessionTemplate sqlSession) {
 		// TODO Auto-generated method stub
 		int listCount = sqlSession.selectOne("auction.selectAuctionHistoryCount");
 		return listCount;
 	}
+
+
+	public int selectAuctionBiddingCount(SqlSessionTemplate sqlSession, int auction_no) {
+		return sqlSession.insert("auction.selectAuctionBiddingCount", auction_no);
+	}
+
+
 
 	
 

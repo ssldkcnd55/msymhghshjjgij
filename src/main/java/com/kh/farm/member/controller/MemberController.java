@@ -349,12 +349,12 @@ public class MemberController {
 	@ResponseBody
 	public void searchMember(HttpServletResponse response,@RequestParam("keyword") String keyword,
 			@RequestParam("type") int type,@RequestParam("page") int currentPage) throws IOException{
-		System.out.println("회원검색 메소드 실행!!!");
+		System.out.println("회원검색 메소드 실행!!! keyword :" + keyword);
 		JSONArray jarr =new JSONArray();
 		List<Member> memberList = memberService.selectSearchMember(keyword,type,currentPage);
 		int limitPage = 10;
 		int listCount = memberService.selectMemberCount();
-		
+		System.out.println("시바");
 		int maxPage=(int)((double)listCount/limitPage+0.9); //ex) 41개면 '5'페이지나와야되는데 '5'를 계산해줌
 		int startPage=((int)((double)currentPage/5+0.8)-1)*5+1;
 		int endPage=startPage+5-1;
@@ -380,6 +380,7 @@ public class MemberController {
 		}
 		
 		JSONObject sendJson = new JSONObject();
+		System.out.println("시바2");
 		sendJson.put("list", jarr);
 		response.setContentType("application/json; charset=utf-8");
 		PrintWriter out = response.getWriter();
