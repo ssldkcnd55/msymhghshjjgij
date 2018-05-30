@@ -391,16 +391,18 @@ public class AuctionController {
 		//가격 MAX 값 가져옴
 		System.out.println("경매입찰 가격 비교 메서드 auction_no :" + auction_no);
 		AuctionHistory checkauctionhistoryprice = auctionService.selectcheckAuction_history_price(auction_no);
-		
-		System.out.println("checkauctionhistoryprice : "+checkauctionhistoryprice.getAuction_startprice());
-		 response.setContentType("application/json; charset=utf-8;");
+		System.out.println("되나요요요"+ checkauctionhistoryprice.getAuction_history_price());
+		response.setContentType("application/json; charset=utf-8;");
         JSONObject json = new JSONObject();
         int price = checkauctionhistoryprice.getAuction_history_price();
         int startprice =checkauctionhistoryprice.getAuction_startprice();
+        int directprice = checkauctionhistoryprice.getAuction_directprice();
+        System.out.println("pirce : " + price + "startprice : " + startprice + "directprice : " + directprice);
        /* int startprice_range =checkauctionhistoryprice.getAuction_startprice2();*/
         
         json.put("price", price);//max값
         json.put("startprice", startprice);//경매 시작값
+        json.put("directprice", directprice);//즉시구매가
         /*json.put("startprice_range", startprice_range);//맨처음 경매 시작값보다 1000원 높게 입찰해야함
 */       
         System.out.println(json.toJSONString());

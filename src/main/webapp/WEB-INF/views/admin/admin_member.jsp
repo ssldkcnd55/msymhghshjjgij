@@ -401,8 +401,8 @@ function memberChangePage(page,type){
 //검색메소드
 function search_member(){
 	alert($('#search_filter').val());
-	alert($('#search').val());
-	var keyword = $('#search').val();
+	alert($('#search_keyword').val());
+	var keyword = $('#search_keyword').val();
 	var type = $('#search_filter').val();
 	$.ajax({
 		url:"searchMember.do",
@@ -414,6 +414,7 @@ function search_member(){
 		success: function(data){
 			
 			console.log(data);
+			console.log("검색실행");
 			var objStr = JSON.stringify(data);
 			var jsonObj = JSON.parse(objStr);
 			
@@ -505,7 +506,7 @@ function search_member(){
                			<option value="2">ID</option>
               		 </select>
                <span class='green_window'> 
-                  <input type='text'class='input_text' id='search'/>
+                  <input type='text' class='input_text' id='search_keyword'/>
                </span>
                <button type='submit' class='sch_smit' onclick="search_member();">검색</button>
                </div>
