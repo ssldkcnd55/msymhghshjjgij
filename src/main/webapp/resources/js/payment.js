@@ -18,56 +18,6 @@ function findAddr() {
 	}).open();
 }
 
-/*function test(){
-	var name;
-	var tel;
-	var addr;
-	var request;
-
-	
-	if ($('[name=delivery]:checked').val() == "original_delivery") {
-		name=$('#user_name').val();
-		tel=$('#user_phone').val();
-		addr=$('#user_addr').val();
-		if ($('#request').val() == '직접 입력'){
-		request=$('#dir_req input').val();}
-		else{
-		request=$('#request').val();}
-			
-	} else {
-		name=$('#new_user_name').val();
-		tel=$('#new_user_phone').val();
-		addr=$('#new_user_addr').val()+" "+$('#new_user_addr_detail').val();
-		if ($('#new_request').val() == '직접 입력'){
-			request=$('#new_dir_req input').val();}
-			else{
-			request=$('#new_request').val();}
-	}
-	var objList=[];
-	for(var i=0; i < product_market_no.length; i++)
-		{
-		var obj = new Object();
-		obj={"group_no":0, "market_no":product_market_no[i],"member_id":my_id,"buy_amount":product_buy_amount[i],"buy_addr": addr,"buy_tel":tel,"buy_name":name,"buy_request":request};
-		objList.push( JSON.stringify(obj) );
-		
-		}
-	
-	
-	$.ajax({
-			url:"testPayment.do",
-			type : "post",
-			data:{"objList":objList},			
-			success:function(data){
-				alert(data);
-			},
-			error:function(){
-				alert("error");
-			}
-	});
-	
-}*/
-
-
 
 $(function() {
 	
@@ -199,6 +149,7 @@ function payment() {
 				buyer_addr : addr,
 			}, function(rsp) {
 				if (rsp.success) {
+				
 					var msg = '결제가 완료되었습니다.';
 					msg += '고유ID : ' + rsp.imp_uid;
 					msg += '상점 거래ID : ' + rsp.merchant_uid;
@@ -220,6 +171,17 @@ function payment() {
 							type : "post",
 							data:{"objList":objList},			
 							success:function(data){
+								console.log(group_no);
+								////
+								//rsp.paid_amount 결제금액
+								//rsp.status 결제상태
+								//rsp.name 상품명
+								//rsp.buyer_name 구매자명
+								//rsp.buyer_email 구매자 이메일
+								//rsp.buyer_tel 구매자 전화번호
+								//rsp.buyer_addr 구매자 주소
+								//rsp.paid_at 결제 승인 시각
+								//// payment_complete 페이지연결해야함
 								
 							},
 							error:function(){

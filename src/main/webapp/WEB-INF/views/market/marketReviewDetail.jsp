@@ -46,9 +46,7 @@
 	/* QnA수정 버튼 */
 	
 	function move_review_modify() {
-		location.href = "marketReviewUpdateMove.do?review_title=${review.review_title}"+
-				"&review_contents=${review.review_contents}&review_no=${review.review_no}"+
-				"&member_id=${member_id}";
+		location.href = "marketReviewUpdateMove.do?review_no=${review.review_no}";
 	}
 	function deleteReview(){
 		location.href = "marketReviewDelete.do?review_no=${review.review_no}&market_no=${review.market_no}";
@@ -132,13 +130,18 @@
 						+"<input type='hidden' value='${review.review_no }' name='review_no'>"
 						+"<input type='hidden' value='${loginUser.member_id }' name='member_id'>"
 						+"<div class='QnA_comment_top_writer'><textarea required class='answerArea' name='reply_contents'></textarea>"
-						+"<input type='submit' class='answerBtn' value='작성'></div></form>";
+						+"<input type='submit' class='answerBtn' value='작성'></div></form></div>";
 				</c:if>
-				var startPage= jsonObj.list[0].startPage;
-				var endPage = jsonObj.list[0].endPage;
-				var maxPage = jsonObj.list[0].maxPage;
-				var currentPage = jsonObj.list[0].currentPage;
-				
+				var startPage= 1;
+				var endPage = 1;
+				var maxPage = 1;
+				var currentPage = 1;
+				if(Object.keys(jsonObj.list).length > 0){
+					var startPage= jsonObj.list[0].startPage;
+					var endPage = jsonObj.list[0].endPage;
+					var maxPage = jsonObj.list[0].maxPage;
+					var currentPage = jsonObj.list[0].currentPage;
+				}
 				var values ="<div class='pagination'>";
 				if(startPage>5){
 					values+= "<a href='javascript:qnaPage("+(startPage-1)+")'>&laquo;</a>" 

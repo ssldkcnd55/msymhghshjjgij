@@ -87,7 +87,8 @@
 	</select>
 	
 	<select id="dailyDetail" parameterType="int" resultType="Daily">
-		select * from daily where daily_no = #{daily_no}
+		select daily.daily_no,daily.market_no,daily.daily_contents,daily.daily_date,daily.daily_title,market.member_id from daily
+		LEFT JOIN market ON daily.market_no = market.market_no where daily_no = #{daily_no}
 	</select>
 	
 	<select id="reviewReply" parameterType="PageNumber" resultType="Reply"><!-- 여기 page처리해야됨!  -->
@@ -162,4 +163,17 @@
 	<update id="updateUnderReply" parameterType="Reply">
 		update under_reply set under_reply_content = #{under_reply_content} where under_reply_no = #{under_reply_no}
 	</update>
+	
+	<update id="updateReview" parameterType="Review">
+		update review set review_title = #{review_title}, review_contents = #{review_contents} where review_no = #{review_no}
+	</update>
+	<update id="updateDaily" parameterType="Daily">
+		update daily set daily_title = #{daily_title}, daily_contents = #{daily_contents} where daily_no = #{daily_no}
+	</update>
+	<delete id="deleteDaily" parameterType="Daily">
+		delete from daily where daily_no = #{daily_no}
+	</delete>
+	<delete id="deleteReview" parameterType="Review">
+		delete from review where review_no = #{review_no}
+	</delete>
 </mapper>

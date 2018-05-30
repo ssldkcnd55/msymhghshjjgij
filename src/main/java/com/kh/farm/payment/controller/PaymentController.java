@@ -49,7 +49,6 @@ public class PaymentController {
 		Payment pm = new Payment();
 		
 		pm.setGroup_no(Integer.parseInt((String) job.get("group_no")));
-		pm.setGroup_no(10);
 		if(job.containsKey("market_no"))
 			pm.setMarket_no(Integer.parseInt((String) job.get("market_no")));
 		else if(job.containsKey("auction_no"))

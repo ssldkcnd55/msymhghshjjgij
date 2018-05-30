@@ -363,20 +363,27 @@ public class MarketController {
 		}
 		HashMap<String,ArrayList<Integer>> map = new HashMap<String,ArrayList<Integer>>();
 		map.put("underReplyList", replyNumber);
-		ArrayList<UnderReply> underList = marketService.selectReviewUnderReply(map);
-		for(UnderReply ur : underList) {
-			JSONObject jReply = new JSONObject();
-			jReply.put("under_reply_no", ur.getUnder_reply_no());
-			jReply.put("reply_no", ur.getReply_no());
-			jReply.put("member_id", ur.getMember_id());
-			jReply.put("under_reply_content", ur.getUnder_reply_content());
-			jReply.put("under_reply_date", ur.getUnder_reply_date().toString());
-			jarr2.add(jReply);
-		}
-		//전송용 최종 json 객체 선언
 		JSONObject sendJson = new JSONObject();
+		try {
+			ArrayList<UnderReply> underList = marketService.selectReviewUnderReply(map);
+			for(UnderReply ur : underList) {
+				JSONObject jReply = new JSONObject();
+				jReply.put("under_reply_no", ur.getUnder_reply_no());
+				jReply.put("reply_no", ur.getReply_no());
+				jReply.put("member_id", ur.getMember_id());
+				jReply.put("under_reply_content", ur.getUnder_reply_content());
+				jReply.put("under_reply_date", ur.getUnder_reply_date().toString());
+				jarr2.add(jReply);
+			}
+			sendJson.put("list2", jarr2);
+		}catch(DeleteFailException e) {
+			
+		}
+		
+		//전송용 최종 json 객체 선언
+		
 		sendJson.put("list", jarr);
-		sendJson.put("list2", jarr2);
+		
 		response.setContentType("application/json; charset=utf-8");
 		PrintWriter out = response.getWriter();
 		out.append(sendJson.toJSONString());
@@ -414,20 +421,26 @@ public class MarketController {
 		}
 		HashMap<String,ArrayList<Integer>> map = new HashMap<String,ArrayList<Integer>>();
 		map.put("underReplyList", replyNumber);
-		ArrayList<UnderReply> underList = marketService.selectDailyUnderReply(map);
-		for(UnderReply ur : underList) {
-			JSONObject jReply = new JSONObject();
-			jReply.put("under_reply_no", ur.getUnder_reply_no());
-			jReply.put("reply_no", ur.getReply_no());
-			jReply.put("member_id", ur.getMember_id());
-			jReply.put("under_reply_content", ur.getUnder_reply_content());
-			jReply.put("under_reply_date", ur.getUnder_reply_date().toString());
-			jarr2.add(jReply);
+		JSONObject sendJson = new JSONObject();
+		try {
+			ArrayList<UnderReply> underList = marketService.selectDailyUnderReply(map);
+			for(UnderReply ur : underList) {
+				JSONObject jReply = new JSONObject();
+				jReply.put("under_reply_no", ur.getUnder_reply_no());
+				jReply.put("reply_no", ur.getReply_no());
+				jReply.put("member_id", ur.getMember_id());
+				jReply.put("under_reply_content", ur.getUnder_reply_content());
+				jReply.put("under_reply_date", ur.getUnder_reply_date().toString());
+				jarr2.add(jReply);
+			}
+			sendJson.put("list2", jarr2);
+		}catch(DeleteFailException e) {
+			
 		}
 		//전송용 최종 json 객체 선언
-		JSONObject sendJson = new JSONObject();
+		
 		sendJson.put("list", jarr);
-		sendJson.put("list2", jarr2);
+		
 		response.setContentType("application/json; charset=utf-8");
 		PrintWriter out = response.getWriter();
 		out.append(sendJson.toJSONString());
@@ -500,5 +513,39 @@ public class MarketController {
 		}else {
 			return "forward:/reviewDeatil.do?review_no="+no;
 		}
+	}
+	@RequestMapping("marketDailyUpdateMove.do")
+	public ModelAndView marketDailyUpdateMove(ModelAndView mv,@RequestParam("daily_no")int daily_no) {
+		Daily daily = marketService.selectDailyDetail(daily_no);
+		mv.addObject("daily", daily);
+		mv.setViewName("market/marketDailyUpdate");
+		return mv;
+	}
+	@RequestMapping("marketReviewUpdateMove.do")
+	public ModelAndView marketReviewUpdateMove(ModelAndView mv,@RequestParam("review_no")int review_no) {
+		Review review = marketService.selectReviewDetail(review_no);
+		mv.addObject("review", review);
+		mv.setViewName("market/marketReviewUpdate");
+		return mv;
+	}
+	@RequestMapping(value="marketDailyUpdate.do",method=RequestMethod.POST)
+	public String marketDailyUpdate(Daily daily) {
+		int updateDaily = marketService.updateDaily(daily);
+		return "forward:/marketDailyDetail.do?daily_no="+daily.getDaily_no();
+	}
+	@RequestMapping(value="marketReviewUpdate.do",method=RequestMethod.POST)
+	public String marketDailyUpdate(Review review) {
+		int updateReview = marketService.updateReview(review);
+		return "forward:/reviewDeatil.do?review_no="+review.getReview_no();
+	}
+	@RequestMapping("marketDailyDelete.do")
+	public String marketDailyDelete(Daily daily) {
+		int deleteDaily = marketService.deleteDaily(daily);
+		return "forward:/marketDetail.do?market_no="+daily.getMarket_no();
+	}
+	@RequestMapping("marketReviewDelete.do")
+	public String marketDailyDelete(Review review) {
+		int deleteReview = marketService.deleteReview(review);
+		return "forward:/marketDetail.do?market_no="+review.getMarket_no();
 	}
 }
