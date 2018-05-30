@@ -113,41 +113,50 @@ $(function(){
 	}
 	
 	   
-	
+	/* 경매 입찰 등록 */
 	function checkAuction_bidding(){
-		 var checkAuction_bidding;
+		 var checkAuction_bidding = null;
 		 var bidding_price = $("#biddingprice").val();
 	     var no = $("#no").val();
-		/* alert(no);
-		alert(bidding_price); */
+		 alert(no);
+		alert(bidding_price); 
+		
 		$.ajax({
 			url:"checkAuction_history_price.do",
 			type:"post",
 			data:{
 				auction_no:no
 			},
-			 datatype:"json",
+			 datatype:"JSON",
 			 success:function(json){
-					alert(json.toString());
+					 alert(json.toString());
 					 var jsonStr = JSON.stringify(json);
 			         var json = JSON.parse(jsonStr);
 			         
-			       	 if(json.price <= bidding_price){
-			       		/*  alert("1"); */
-			        	checkAuction_bidding = confirm("정말로 입찰 하시겠습니까?");
-				        	if(checkAuction_bidding == true){
-				        		  return checkAuction_bidding;
-							}
-				        
-			      	  }else{
-			      		/*  alert("2"); */
-			      		checkAuction_bidding = confirm(json.price+"원 보다 높은 가격을 입력해주세요."); 
-			      		if(checkAuction_bidding == true){
-							return(false);
-						}
-			      		return(false);
+			         if(json.startprice > bidding_price){/* 입찰가격이 경매 시작가격보다 작을때 */
+			        	alert("경매 시작 가격 보다 높은 가격을 적어주세요.");
+			        	 return(false);
+			         }else{
+					       	 if(json.price <= bidding_price){/* max값이 경매 입력값보다 작으면 경매 입찰 가능 */
+					       		  alert("입찰 가능 "); 
+					        	checkAuction_bidding = confirm("정말로 입찰 하시겠습니까?");
+						        	if(checkAuction_bidding == true){
+						        		alert("입찰이 완료되었습니다.")
+						        		  return checkAuction_bidding;
+									}
+					       		 
+			        	}else{/* max값 > 경매 입력값 : 불가능 */
+			      		 alert(" 입찰 불가능 "); 
+			      		 alert(json.price+"원 보다 높은 가격을 입력해주세요."); 
+			      		 return(false);
 			      	  }
-				 }
+			        	 
+			         }
+				        	
+			      },error: function(request,status,errorData){
+			            alert("error code : " + request.status + "\nmessage" + 
+			                    request.responseText + "\nerror" + errorData);
+			    }
 		});
 	}
 		
@@ -494,9 +503,14 @@ $(function(){
 						<div class="auction_cart_center_div">
 							<table>
 								<tr>
-									<td>현재 가격</td>
+									<td>경매시작값</td>
 									<td>:  </td>
-									<td>2000</td>
+									<td>${auction.auction_startprice}</td>
+								</tr>
+								<tr>
+									<td>최고가격</td>
+									<td>:  </td>
+									<td>1000</td>
 								</tr>
 								<tr>
 									<td>입찰가격</td>

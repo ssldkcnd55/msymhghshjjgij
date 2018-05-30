@@ -139,4 +139,7 @@ public class AuctionServiceImpl implements AuctionService{
 	public int selectAuctionBiddingCount(int auction_no) {
 		return auctionDao.selectAuctionBiddingCount(sqlSession,auction_no);
 	}
+	
+	
+	
 }

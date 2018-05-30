@@ -155,7 +155,10 @@
 	
 	<select id="selectcheckAuction_history_price"  parameterType="int"  resultType="AuctionHistory" >
 	<![CDATA[
-		select max(auction_history_price) as "auction_history_price" from auction_history where auction_no = #{auction_no}
+		select max(ah.auction_history_price) as "auction_history_price",a.auction_startprice
+		from auction_history ah, auction a
+		where ah.auction_no = a.auction_no
+		and ah.auction_no =#{auction_no} GROUP BY auction_startprice
 	]]>
 	</select>
 	
@@ -194,6 +197,9 @@
 		select count(*) as "rnum" from auction_history where auction_no = #{auction_no}
 	]]>
 	</select>
+	
+	
+	
 	
 
 </mapper>

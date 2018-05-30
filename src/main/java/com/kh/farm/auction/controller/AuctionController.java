@@ -18,7 +18,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.apache.catalina.Session;
+/*import org.apache.catalina.Session;*/
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -385,22 +385,30 @@ public class AuctionController {
 	
 	/*경매 입찰 가격 비교*/
 	@RequestMapping(value="checkAuction_history_price.do",method=RequestMethod.POST)
+	@ResponseBody
 	public void checkAuction_history_price(HttpServletResponse response,@RequestParam(value="auction_no") int auction_no) 
 	throws IOException{
+		//가격 MAX 값 가져옴
+		System.out.println("경매입찰 가격 비교 메서드 auction_no :" + auction_no);
 		AuctionHistory checkauctionhistoryprice = auctionService.selectcheckAuction_history_price(auction_no);
 		
+		System.out.println("checkauctionhistoryprice : "+checkauctionhistoryprice.getAuction_startprice());
 		 response.setContentType("application/json; charset=utf-8;");
         JSONObject json = new JSONObject();
         int price = checkauctionhistoryprice.getAuction_history_price();
-       
-        json.put("price", price);
+        int startprice =checkauctionhistoryprice.getAuction_startprice();
+       /* int startprice_range =checkauctionhistoryprice.getAuction_startprice2();*/
         
+        json.put("price", price);//max값
+        json.put("startprice", startprice);//경매 시작값
+        /*json.put("startprice_range", startprice_range);//맨처음 경매 시작값보다 1000원 높게 입찰해야함
+*/       
         System.out.println(json.toJSONString());
     
-      PrintWriter out = response.getWriter();
-      out.print(json.toJSONString());
-      out.flush();
-      out.close();
+	      PrintWriter out = response.getWriter();
+	      out.print(json.toJSONString());
+	      out.flush();
+	      out.close();
 	}
 	
 	
