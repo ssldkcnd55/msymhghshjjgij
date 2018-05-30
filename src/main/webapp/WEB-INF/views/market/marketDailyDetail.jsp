@@ -33,14 +33,12 @@
 	} */
 
 	/* QnA수정 버튼 */
-	/* function move_daily_modify() {
-		location.href = "marketDailyUpdateMove.do?daily_title=${daily.daily_title}"+
-				"&daily_contents=${daily.daily_contents}&daily_no=${daily.daily_no}"+
-				"&member_id=${member_id}";
+	function move_daily_modify() {
+		location.href = "marketDailyUpdateMove.do?daily_no=${daily.daily_no}";
 	}
 	function deleteDaily(){
-		location.href = "marketDailyDelete.do?market_qna_no=${qna.market_qna_no}&market_no=${qna.market_no}";
-	} */
+		location.href = "marketDailyDelete.do?daily_no=${daily.daily_no}&market_no=${market_no}";
+	}
 	
 	function underReplyWrite(a,reply_no){
 		if(check==0){
@@ -134,10 +132,16 @@
 						+"<div class='QnA_comment_top_writer'><textarea required class='answerArea' name='reply_contents'></textarea>"
 						+"<input type='submit' class='answerBtn' value='작성'></div></form>";
 				</c:if>
-				var startPage= jsonObj.list[0].startPage;
-				var endPage = jsonObj.list[0].endPage;
-				var maxPage = jsonObj.list[0].maxPage;
-				var currentPage = jsonObj.list[0].currentPage;
+				var startPage= 1;
+				var endPage = 1;
+				var maxPage = 1;
+				var currentPage = 1;
+				if(Object.keys(jsonObj.list).length > 0){
+					var startPage= jsonObj.list[0].startPage;
+					var endPage = jsonObj.list[0].endPage;
+					var maxPage = jsonObj.list[0].maxPage;
+					var currentPage = jsonObj.list[0].currentPage;
+				}
 				
 				var values ="<div class='pagination'>";
 				if(startPage>5){
@@ -193,12 +197,12 @@
 								<td>${daily.daily_date }</td>
 							</tr>
 						</table>
-						<%-- <c:if test="${loginUser.member_id eq daily.member_id}">
+						<c:if test="${loginUser.member_id eq daily.member_id}">
 							<div class="QnA_modify">
 								<button onclick="move_daily_modify();">수정</button>&nbsp;
 								<button onclick="deleteDaily();">삭제</button>
 							</div>
-						</c:if> --%>
+						</c:if>
 						<div class="QnA_note">
 							<p>${daily.daily_contents }</p>
 						</div>

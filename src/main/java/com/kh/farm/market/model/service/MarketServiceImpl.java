@@ -108,7 +108,7 @@ public class MarketServiceImpl implements MarketService{
 		return marketDao.selectReviewReplyCount(sqlSession,review_no);
 	}
 	@Override
-	public ArrayList<UnderReply> selectReviewUnderReply(HashMap<String, ArrayList<Integer>> map) {
+	public ArrayList<UnderReply> selectReviewUnderReply(HashMap<String, ArrayList<Integer>> map) throws DeleteFailException{
 		// TODO Auto-generated method stub
 		return marketDao.selectReviewUnderReply(sqlSession,map);
 	}
@@ -123,7 +123,7 @@ public class MarketServiceImpl implements MarketService{
 		return marketDao.selectDailyReplyCount(sqlSession,daily_no);
 	}
 	@Override
-	public ArrayList<UnderReply> selectDailyUnderReply(HashMap<String, ArrayList<Integer>> map) {
+	public ArrayList<UnderReply> selectDailyUnderReply(HashMap<String, ArrayList<Integer>> map) throws DeleteFailException{
 		// TODO Auto-generated method stub
 		return marketDao.selectDailyUnderReply(sqlSession,map);
 	}
@@ -166,5 +166,25 @@ public class MarketServiceImpl implements MarketService{
 	public int updateReviewUnderReply(UnderReply reply) {
 		// TODO Auto-generated method stub
 		return marketDao.updateUnderReply(sqlSession,reply);
+	}
+	@Override
+	public int updateDaily(Daily daily) {
+		// TODO Auto-generated method stub
+		return marketDao.updateDaily(sqlSession,daily);
+	}
+	@Override
+	public int updateReview(Review review) {
+		// TODO Auto-generated method stub
+		return marketDao.updateReview(sqlSession,review);
+	}
+	@Override
+	public int deleteReview(Review review) {
+		// TODO Auto-generated method stub
+		return marketDao.deleteReview(sqlSession,review);
+	}
+	@Override
+	public int deleteDaily(Daily daily) {
+		// TODO Auto-generated method stub
+		return marketDao.deleteDaily(sqlSession,daily);
 	}
 }
