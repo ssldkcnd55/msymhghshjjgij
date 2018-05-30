@@ -44,9 +44,9 @@
 									+ jsonObj.list[i].buy_request + "</td>"
 									+ "<td>"
 									+ jsonObj.list[i].buy_transport_name
-									+ "</td>" + "<td>"
+									+ "</td>" + "<td><a href='moveDelivery_Number.do?code="+jsonObj.list[i].buy_transport_name+"&name="+jsonObj.list[i].buy_transport_no+"'>"
 									+ jsonObj.list[i].buy_transport_no
-									+ "</td>" + "</tr>";
+									+ "</a></td>" + "</tr>";
 						}
 						$(".payment_table").html(outValues);
 
