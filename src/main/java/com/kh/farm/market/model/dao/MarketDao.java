@@ -123,9 +123,14 @@ public class MarketDao {
 	}
 
 	public ArrayList<UnderReply> selectReviewUnderReply(SqlSessionTemplate sqlSession,
-			HashMap<String, ArrayList<Integer>> map) {
+			HashMap<String, ArrayList<Integer>> map) throws DeleteFailException{
 		// TODO Auto-generated method stub
-		List<UnderReply> list = sqlSession.selectList("market.reviewUnderReply", map);
+		List<UnderReply> list = new ArrayList<UnderReply>();
+		try {
+			list = sqlSession.selectList("market.reviewUnderReply", map);
+		}catch(Exception e) {
+			throw new DeleteFailException("댓글이 존재하지않습니다.");
+		}
 		return (ArrayList<UnderReply>)list;
 	}
 
@@ -146,9 +151,14 @@ public class MarketDao {
 	}
 
 	public ArrayList<UnderReply> selectDailyUnderReply(SqlSessionTemplate sqlSession,
-			HashMap<String, ArrayList<Integer>> map) {
+			HashMap<String, ArrayList<Integer>> map) throws DeleteFailException{
 		// TODO Auto-generated method stub
-		List<UnderReply> list = sqlSession.selectList("market.dailyUnderReply", map);
+		List<UnderReply> list = new ArrayList<UnderReply>();
+		try {
+			list = sqlSession.selectList("market.dailyUnderReply", map);
+		}catch(Exception e) {
+			throw new DeleteFailException("댓글이 존재하지않습니다.");
+		}
 		return (ArrayList<UnderReply>)list;
 	}
 
@@ -164,12 +174,13 @@ public class MarketDao {
 
 	public int deleteReply(SqlSessionTemplate sqlSession, Reply reply) throws DeleteFailException{
 		// TODO Auto-generated method stub
-		int deleteReply = sqlSession.delete("market.deleteReply", reply);
-		if(deleteReply > 0 ) {
-			return deleteReply;
-		}else {
+		int deleteReply = 0;
+		try {
+			deleteReply = sqlSession.delete("market.deleteReply", reply);
+		}catch(Exception e) {
 			throw new DeleteFailException("답글이 있는 댓글은 삭제되지않습니다.");
 		}
+		return deleteReply;
 	}
 
 	public int deleteUnderReply(SqlSessionTemplate sqlSession, UnderReply reply) {
@@ -180,5 +191,40 @@ public class MarketDao {
 	public int updateReplyNull(SqlSessionTemplate sqlSession, Reply reply) {
 		// TODO Auto-generated method stub
 		return sqlSession.update("market.updateReplyNull", reply);
+	}
+
+	public int updateDailyReply(SqlSessionTemplate sqlSession, Reply reply) {
+		// TODO Auto-generated method stub
+		return sqlSession.update("market.updateReply",reply);
+	}
+
+	public int updateReviewReply(SqlSessionTemplate sqlSession, Reply reply) {
+		// TODO Auto-generated method stub
+		return sqlSession.update("market.updateReply",reply);
+	}
+
+	public int updateUnderReply(SqlSessionTemplate sqlSession, UnderReply reply) {
+		// TODO Auto-generated method stub
+		return sqlSession.update("market.updateUnderReply",reply);
+	}
+
+	public int updateReview(SqlSessionTemplate sqlSession, Review review) {
+		// TODO Auto-generated method stub
+		return sqlSession.update("market.updateReview",review);
+	}
+
+	public int updateDaily(SqlSessionTemplate sqlSession, Daily daily) {
+		// TODO Auto-generated method stub
+		return sqlSession.update("market.updateDaily",daily);
+	}
+
+	public int deleteReview(SqlSessionTemplate sqlSession, Review review) {
+		// TODO Auto-generated method stub
+		return sqlSession.delete("market.deleteReview",review);
+	}
+
+	public int deleteDaily(SqlSessionTemplate sqlSession, Daily daily) {
+		// TODO Auto-generated method stub
+		return sqlSession.delete("market.deleteDaily",daily);
 	}
 }

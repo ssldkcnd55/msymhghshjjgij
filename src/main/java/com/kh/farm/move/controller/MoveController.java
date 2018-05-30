@@ -16,6 +16,12 @@ import com.kh.farm.notice.model.vo.Notice;
 public class MoveController {
 	public MoveController() {}
 	
+	@RequestMapping("movePaymentComplete.do")
+	public String movePaymentComplete()
+	{
+		return "payment/payment_complete";
+	}
+	
 	@RequestMapping("paymentHistory.do")
 	public String buyHistory() {
 		return "member/customerMy/payment_History";

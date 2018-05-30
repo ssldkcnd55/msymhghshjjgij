@@ -53,21 +53,25 @@ public interface AuctionService {
 
 	int delete_auction_qna_answer(int auction_qna_no);
 	
-
-
 	int insertAuctionBidding(AuctionHistory auctionhistory);
 
 	AuctionHistory selectcheckAuction_history_price(int auction_no);
 
 	
-
-	
-
-	/*ArrayList<AuctionHistory> selectAuctionBiddingList(int auction_no);*/
-
+	/*한결*/
 	ArrayList<AuctionHistory> selectAuctionHistory(int currentPage);
 
 	int selectAuctionHistoryCount();
+	/*한결*/
+	
+	
+	/*경매 입찰내역 List*/
+	ArrayList<AuctionHistory> selectAuctionBiddingList(int auction_no);
+
+	/*경매 입찰내역 List count*/
+	int selectAuctionBiddingCount(int auction_no);
+
+
 	
 
 }

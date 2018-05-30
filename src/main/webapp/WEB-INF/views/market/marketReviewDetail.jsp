@@ -16,11 +16,12 @@
 <script type="text/javascript">
 /* 댓글 수정 */
 	 var check = 0;
-	 function comment_modify(a,contents) {
+	 function comment_modify(a,contents,reply_no) {
 		 if(check==0){
-		$(".p"+a).html("<form action='/farm/marketReviewReply.do' method='post'>"
+		$(".p"+a).html("<form action='/farm/marketReviewReplyUpdate.do' method='post'>"
 				+"<input type='hidden' value='${review.review_no }' name='review_no'>"
 				+"<input type='hidden' value='${loginUser.member_id }' name='member_id'>"
+				+"<input type='hidden' value='"+reply_no+"' name='reply_no'>"
 				+"<div class='QnA_comment_top_writer'><textarea class='answerArea' name='reply_contents'>"+contents+"</textarea>"
 				+"<input type='submit' class='answerBtn' value='작성'><button onclick='replyUpdateCancle("+a+",\""+contents+"\")' type='button'>X</button></div></form>");
 		 }
@@ -45,9 +46,7 @@
 	/* QnA수정 버튼 */
 	
 	function move_review_modify() {
-		location.href = "marketReviewUpdateMove.do?review_title=${review.review_title}"+
-				"&review_contents=${review.review_contents}&review_no=${review.review_no}"+
-				"&member_id=${member_id}";
+		location.href = "marketReviewUpdateMove.do?review_no=${review.review_no}";
 	}
 	function deleteReview(){
 		location.href = "marketReviewDelete.do?review_no=${review.review_no}&market_no=${review.market_no}";
@@ -56,7 +55,7 @@
 		location.href="marketReplyDelete.do?reply_no="+reply_no+"&review_no=${review.review_no}";
 	}
 	function deleteUnderReply(reply_no){
-		location.href="marketUnderReplyDelete.do?under_reply_no="+reply_no+"&review_no=${review.review_no}";
+		location.href="marketUnderReplyDelete.do?under_reply_no="+reply_no+"&no=${review.review_no}&type=1";
 	}
 	function underReplyWrite(a,reply_no){
 		if(check==0){
@@ -73,11 +72,13 @@
 		check = 0;
 		$('.underReplyWrite').remove();
 	}
-	function under_comment_modify(a,contents,reply_no) {
-		$(".pu"+a).html("<form action='/farm/marketReviewUnderReply.do' method='post'>"
+	function under_comment_modify(a,contents,reply_no,under_reply_no) {
+		$(".pu"+a).html("<form action='/farm/marketReviewUnderReplyUpdate.do' method='post'>"
 				+"<input type='hidden' value='"+reply_no+"' name='reply_no'>"
+				+"<input type='hidden' value='${review.review_no}' name='review_no'>"
+				+"<input type='hidden' value='"+under_reply_no+"' name='under_reply_no'>"
 				+"<input type='hidden' value='${loginUser.member_id }' name='member_id'>"
-				+"<div class='QnA_comment_top_writer'><textarea required class='answerArea' name='reply_contents'>"+contents+"</textarea>"
+				+"<div class='QnA_comment_top_writer'><textarea required class='answerArea' name='under_reply_content'>"+contents+"</textarea>"
 				+"<input type='submit' class='answerBtn' value='작성'><button onclick='under_replyUpdateCancle(\""+a+"\",\""+contents+"\")' type='button'>X</button></div></form>");
 	}
 </script>
@@ -103,17 +104,22 @@
 					<c:if test="${!empty loginUser}">
 						outValues+="<div class='underReply' onclick='underReplyWrite("+i+","+jsonObj.list[i].reply_no+")'>┗답글</div>";
 					</c:if> 
-					if(loginMember_id == jsonObj.list[i].member_id){
-						outValues+="<span class='modifiedSpan' onclick='comment_modify("+i+",\""+jsonObj.list[i].reply_contents+"\");'>수정</span>&nbsp;<span class='deleteSpan' onclick='deleteReply("+jsonObj.list[i].reply_no+");'>삭제</span>&nbsp;"
+					
+					if(jsonObj.list[i].reply_contents != null){
+						if(loginMember_id == jsonObj.list[i].member_id){
+							outValues+="<span class='modifiedSpan' onclick='comment_modify("+i+",\""+jsonObj.list[i].reply_contents+"\","+jsonObj.list[i].reply_no+");'>수정</span>&nbsp;<span class='deleteSpan' onclick='deleteReply("+jsonObj.list[i].reply_no+");'>삭제</span>&nbsp;"
+						}
+						outValues+="</div><p class='p"+i+"'>"+jsonObj.list[i].reply_contents+"</p></div>";
+					}else{
+						outValues+="</div><p class='p"+i+"' style='color:#bdbdbd;'>삭제된 댓글입니다.</p></div>";
 					}
-					outValues+="</div><p class='p"+i+"'>"+jsonObj.list[i].reply_contents+"</p></div>";
-						for(var j in jsonObj.list2){
+					for(var j in jsonObj.list2){
 							if(jsonObj.list[i].reply_no == jsonObj.list2[j].reply_no){
 								outValues+="<div class='QnA_comment_top_writer' style='width:930px;padding-left:30px;'><div class='QnA_comment_writer'>"
 									+"<img alt='' src='/Farm/img/user.png'>&nbsp; <span>└"+jsonObj.list2[j].member_id+"</span>&nbsp;"
 									+"<span>"+jsonObj.list2[j].under_reply_date+"</span>&nbsp;";
 								if(loginMember_id == jsonObj.list2[j].member_id){
-									outValues+="<span onclick='under_comment_modify("+i+""+j+",\""+jsonObj.list2[j].under_reply_content+"\","+jsonObj.list2[j].reply_no+");'>수정</span>&nbsp;<span onclick='deleteUnderReply("+jsonObj.list2[j].under_reply_no+");'>삭제</span>&nbsp;";
+									outValues+="<span onclick='under_comment_modify(\""+i+""+j+"\",\""+jsonObj.list2[j].under_reply_content+"\","+jsonObj.list2[j].reply_no+","+jsonObj.list2[j].under_reply_no+");'>수정</span>&nbsp;<span onclick='deleteUnderReply("+jsonObj.list2[j].under_reply_no+");'>삭제</span>&nbsp;";
 								}
 								outValues+="</div><p class='pu"+i+""+j+"'>"+jsonObj.list2[j].under_reply_content+"</p></div>";
 							}
@@ -124,13 +130,18 @@
 						+"<input type='hidden' value='${review.review_no }' name='review_no'>"
 						+"<input type='hidden' value='${loginUser.member_id }' name='member_id'>"
 						+"<div class='QnA_comment_top_writer'><textarea required class='answerArea' name='reply_contents'></textarea>"
-						+"<input type='submit' class='answerBtn' value='작성'></div></form>";
+						+"<input type='submit' class='answerBtn' value='작성'></div></form></div>";
 				</c:if>
-				var startPage= jsonObj.list[0].startPage;
-				var endPage = jsonObj.list[0].endPage;
-				var maxPage = jsonObj.list[0].maxPage;
-				var currentPage = jsonObj.list[0].currentPage;
-				
+				var startPage= 1;
+				var endPage = 1;
+				var maxPage = 1;
+				var currentPage = 1;
+				if(Object.keys(jsonObj.list).length > 0){
+					var startPage= jsonObj.list[0].startPage;
+					var endPage = jsonObj.list[0].endPage;
+					var maxPage = jsonObj.list[0].maxPage;
+					var currentPage = jsonObj.list[0].currentPage;
+				}
 				var values ="<div class='pagination'>";
 				if(startPage>5){
 					values+= "<a href='javascript:qnaPage("+(startPage-1)+")'>&laquo;</a>" 

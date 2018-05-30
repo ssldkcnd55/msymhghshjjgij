@@ -45,13 +45,13 @@ public interface MarketService {
 
 	int selectReviewReplyCount(int review_no);
 
-	ArrayList<UnderReply> selectReviewUnderReply(HashMap<String, ArrayList<Integer>> map);
+	ArrayList<UnderReply> selectReviewUnderReply(HashMap<String, ArrayList<Integer>> map) throws DeleteFailException;
 
 	ArrayList<Reply> selectDailyReply(int daily_no, int currentPage);
 
 	int selectDailyReplyCount(int daily_no);
 
-	ArrayList<UnderReply> selectDailyUnderReply(HashMap<String, ArrayList<Integer>> map);
+	ArrayList<UnderReply> selectDailyUnderReply(HashMap<String, ArrayList<Integer>> map) throws DeleteFailException;
 
 	int insertReply(Reply reply);
 
@@ -62,6 +62,24 @@ public interface MarketService {
 	int deleteUnderReply(UnderReply reply);
 
 	int updateReplyNull(Reply reply);
+
+	int updateReviewReply(Reply reply);
+
+	int updateDailyReply(Reply reply);
+
+	int updateReviewUnderReply(UnderReply reply);
+
+
+	int updateDaily(Daily daily);
+
+
+	int updateReview(Review review);
+
+
+	int deleteReview(Review review);
+
+
+	int deleteDaily(Daily daily);
 
 
 }

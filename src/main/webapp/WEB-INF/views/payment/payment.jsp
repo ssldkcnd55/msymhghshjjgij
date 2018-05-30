@@ -21,6 +21,16 @@ var delivery_price=0;
 var my_id='${loginUser.member_id}';
 var product_market_no=[];
 var product_buy_amount=[];
+var member_addr = '${loginUser.member_addr}';
+console.log(member_addr);
+if(member_addr.indexOf('@') != -1)
+	{
+	member_addr= member_addr.replace('@','');
+	}
+	
+	$('.user_addr').val(member_addr);
+	console.log(member_addr);
+	
 </script>
 
 
@@ -123,7 +133,12 @@ var product_buy_amount=[];
                </tr>
                <tr>
                   <td class="info_head">주소</td>
-                  <td colspan="2" class="table_colspan"><input type="text" id="user_addr" name="useradd" value="${loginUser.member_addr }"></td>
+                  
+                  
+                  	<c:set var="before_Addr" value="${loginUser.member_addr}" />
+                  
+                  
+                  <td colspan="2" class="table_colspan"><input type="text" id="user_addr" name="useradd"value="${fn:replace(before_Addr,'@','') }" /></td>
                </tr>
                <tr>
                   <td class="info_head">배송 메시지</td>

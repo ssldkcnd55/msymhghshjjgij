@@ -155,7 +155,10 @@
 	
 	<select id="selectcheckAuction_history_price"  parameterType="int"  resultType="AuctionHistory" >
 	<![CDATA[
-		select max(auction_history_price) as "auction_history_price" from auction_history where auction_no = #{auction_no}
+		select max(ah.auction_history_price) as "auction_history_price",a.auction_startprice,a.AUCTION_DIRECTPRICE
+		from auction_history ah, auction a
+		where ah.auction_no = a.auction_no
+		and ah.auction_no = #{auction_no} GROUP BY auction_startprice, a.AUCTION_DIRECTPRICE
 	]]>
 	</select>
 	
@@ -168,13 +171,13 @@
 	</insert>
 	
 	
-	<!-- <select id="selectAuctionBiddingList"  parameterType="AuctionHistory"  resultType="AuctionHistory" >
+	<select id="selectAuctionBiddingList"  parameterType="int"  resultType="AuctionHistory" >
 	<![CDATA[
-		select * from auction_history where auction_no = #{auction_no}
+		select * from auction_history where auction_no = #{auction_no} order by auction_history_price desc
 	]]>
-	</select> -->
+	</select> 
 	
-	
+	<!-- 한결 -->
 	<select id="selectAuctionHistory" parameterType="PageNumber" resultType="auction">
 	<![CDATA[
 	select * from (select rownum rnum, AUCTION_HISTORY_NO, AUCTION_NO, MEMBER_ID,AUCTION_HISTORY_PRICE,AUCTION_HISTORY_DATE from AUCTION_HISTORY 
@@ -182,9 +185,21 @@
 	]]>
 	</select>
 	
+	<!-- 한결 -->
 	<select id="selectAuctionHistoryCount" parameterType="int" resultType="int">
 		select
 		count(*) from auction_history
 	</select>
+	
+	
+	<select id="selectAuctionBiddingCount" parameterType="int" resultType="int">
+	<![CDATA[
+		select count(*) from auction_history where auction_no = #{auction_no}
+	]]>
+	</select>
+	
+	
+	
+	
 
 </mapper>

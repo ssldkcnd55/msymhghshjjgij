@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>	
 <!DOCTYPE html>
 <html>
 <head>
@@ -52,9 +53,15 @@ function deleteNotice(){
 								<td>${notice.notice_date}</td>
 							</tr>
 						</table>
+						
 						<div class="Notice_modify">
-							<button onclick="moveUpdateNotice();">수정</button>&nbsp;
-							<button onclick="deleteNotice();">삭제</button>
+						<c:choose>
+							<c:when test="${loginUser.member_category == 2}">
+								<button onclick="moveUpdateNotice();">수정</button>&nbsp;
+								<button onclick="deleteNotice();">삭제</button>
+							</c:when>
+							<c:otherwise/>
+						</c:choose>	
 						</div>
 						<div class="Notice_note">
 							${notice.notice_contents}
