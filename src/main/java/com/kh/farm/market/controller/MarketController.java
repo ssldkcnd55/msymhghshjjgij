@@ -19,8 +19,9 @@ import javax.servlet.http.HttpSession;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.config.annotation.web.configurers.ExpressionUrlAuthorizationConfigurer.MvcMatchersAuthorizedUrl;
 import org.springframework.stereotype.Controller;
-
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -28,6 +29,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.farm.auction.model.vo.Auction;
+import com.kh.farm.market.exception.DeleteFailException;
 import com.kh.farm.market.model.service.MarketService;
 import com.kh.farm.market.model.vo.*;
 import com.kh.farm.payment.model.vo.*;
@@ -40,11 +42,14 @@ public class MarketController {
 	
 
 	@RequestMapping(value="marketList.do")
-	public ModelAndView marketList(ModelAndView mv) {
+	public ModelAndView marketList(ModelAndView mv,@RequestParam(value="search",required=false) String search) {
 		int page = 1;
-		ArrayList<Market> list = marketService.selectMarketList(page);
+		ArrayList<Market> list = marketService.selectMarketList(page,search);
 		mv.setViewName("market/marketList");
 		mv.addObject("list",list);
+		mv.addObject("search",search);
+		System.out.println(search);
+		
 		return mv;
 	}
 	
@@ -57,9 +62,10 @@ public class MarketController {
 		return mv;
 		
 	}
+	
 	@RequestMapping(value="ajaxMoreMarket.do", method=RequestMethod.POST)
-	public void moreMarketList(HttpServletResponse response,@RequestParam("page") int page) throws IOException{
-		List<Market> list = marketService.selectMarketList(page);
+	public void moreMarketList(HttpServletResponse response,@RequestParam("page") int page,@RequestParam(value="search",required=false) String search) throws IOException{
+		List<Market> list = marketService.selectMarketList(page,search);
 		JSONArray jarr = new JSONArray();
 		
 		//list를 jarr로 복사하기
@@ -70,6 +76,7 @@ public class MarketController {
 			jmarket.put("market_no", m.getMarket_no());
 			jmarket.put("market_note", m.getMarket_note());
 			jmarket.put("market_img", m.getMarket_img());
+			jmarket.put("search", m.getSearch());
 			
 			jarr.add(jmarket);
 		}
@@ -121,6 +128,7 @@ public class MarketController {
 		out.flush();
 		out.close();
 	}
+	
 	@RequestMapping("reviewDeatil.do")
 	public ModelAndView reviewDeatil(ModelAndView mv,@RequestParam() int review_no) {
 		Review review = marketService.selectReviewDetail(review_no);
@@ -128,6 +136,7 @@ public class MarketController {
 		mv.addObject("review", review);
 		mv.setViewName("market/marketReviewDetail");
 		return mv;
+		
 	}
 	@RequestMapping(value="insertMarketMake.do",method=RequestMethod.POST)
 	public String insertMarket(Market market,HttpServletRequest request,
@@ -314,6 +323,15 @@ public class MarketController {
 		mv.setViewName("market/marketDailyDetail");
 		return mv;
 	}
+	
+	@RequestMapping("moveSearchList.do")
+	public ModelAndView marketSearchList(ModelAndView mv,@RequestParam(value="search",required=false) String search) {
+		Market market = marketService.selectSearchList(search);
+		mv.addObject("market_search", mv);
+		mv.setViewName("market/marketList");
+		return mv;
+	}
+	
 	@RequestMapping(value="ajaxReviewReply.do",method=RequestMethod.POST)
 	public void ajaxReviewReply(@RequestParam("review_no")int review_no,HttpServletResponse response,@RequestParam("page") int currentPage ) throws IOException{
 		ArrayList<Reply> list = marketService.selectReviewReply(review_no,currentPage);
@@ -426,14 +444,61 @@ public class MarketController {
 		int insertReviewReply = marketService.insertReply(reply);
 		return "forward:/marketDailyDetail.do?daily_no="+reply.getDaily_no();
 	}
+	@RequestMapping(value="marketReviewReplyUpdate.do",method=RequestMethod.POST)
+	public String marketReviewReplyUpdate(Reply reply) {
+		int updateReviewReply = marketService.updateReviewReply(reply);
+		return "forward:/reviewDeatil.do?daily_no="+reply.getReview_no();
+	}
+	@RequestMapping(value="marketDailyReplyUpdate.do",method=RequestMethod.POST)
+	public String marketDailyReplyUpdate(Reply reply) {
+		int updateDailyReply = marketService.updateDailyReply(reply);
+		return "forward:/marketDailyDetail.do?daily_no="+reply.getDaily_no();
+	}
+	
+	@RequestMapping(value="marketReviewUnderReplyUpdate.do",method=RequestMethod.POST)
+	public String marketReviewUnderReplyUpdate(UnderReply reply,@RequestParam("review_no")int review_no) {
+		int updateReviewUnderReply = marketService.updateReviewUnderReply(reply);
+		return "forward:/reviewDeatil.do?daily_no="+review_no;
+	}
+	@RequestMapping(value="marketDailyUnderReplyUpdate.do",method=RequestMethod.POST)
+	public String marketDailyUnderReplyUpdate(UnderReply reply,@RequestParam("daily_no")int daily_no) {
+		int updateDailyUnderReply = marketService.updateReviewUnderReply(reply);
+		return "forward:/marketDailyDetail.do?daily_no="+daily_no;
+	}
+	
 	@RequestMapping(value="marketReviewUnderReply.do",method=RequestMethod.POST)
 	public String marketReviewUnderReplyInsert(UnderReply reply,@RequestParam("review_no")int review_no) {
 		int insertReviewReply = marketService.insertUnderReply(reply);
 		return "forward:/reviewDeatil.do?review_no="+review_no;
 	}
-	@RequestMapping(value="marketDetailUnderReply.do",method=RequestMethod.POST)
-	public String marketDetailUnderReplyInsert(UnderReply reply,@RequestParam("daily_no")int daily_no) {
+	@RequestMapping(value="marketDailyUnderReply.do",method=RequestMethod.POST)
+	public String marketDailyUnderReplyInsert(UnderReply reply,@RequestParam("daily_no")int daily_no) {
 		int insertReviewReply = marketService.insertUnderReply(reply);
 		return "forward:/marketDailyDetail.do?daily_no="+daily_no;
+	}
+	
+	@RequestMapping("marketReplyDelete.do")
+	public String marketReplyDelete(Reply reply) {
+		try {
+			int deleteReply = marketService.deleteReply(reply);
+		} catch (DeleteFailException e) {
+			int replyNullUpdate = marketService.updateReplyNull(reply);
+		}
+		System.out.println("리뷰번호 : "+reply.getReview_no());
+		if(reply.getReview_no() != 0) {
+			return "forward:/reviewDeatil.do?review_no="+reply.getReview_no();
+		}else {
+			return "forward:/marketDailyDetail.do?daily_no="+reply.getDaily_no();
+		}
+	}
+	@RequestMapping("marketUnderReplyDelete.do")
+	public String marketUnderReplyDelete(UnderReply reply,@RequestParam("no") int no,
+			@RequestParam("type") int type) {
+		int deleteUnderReply = marketService.deleteUnderReply(reply);
+		if(type == 0) {
+			return "forward:/marketDailyDetail.do?daily_no="+no;
+		}else {
+			return "forward:/reviewDeatil.do?review_no="+no;
+		}
 	}
 }

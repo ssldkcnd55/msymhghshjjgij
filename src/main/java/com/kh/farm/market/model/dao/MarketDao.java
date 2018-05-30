@@ -9,6 +9,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.kh.farm.common.model.vo.PageNumber;
+import com.kh.farm.market.exception.DeleteFailException;
 import com.kh.farm.market.model.vo.Daily;
 import com.kh.farm.market.model.vo.Market;
 import com.kh.farm.market.model.vo.Reply;
@@ -19,10 +20,11 @@ import com.kh.farm.qna.model.vo.Market_qna;
 @Repository
 public class MarketDao {
 
-	public ArrayList<Market> marketList(int page,SqlSessionTemplate sqlSession) {
+	public ArrayList<Market> marketList(int page,SqlSessionTemplate sqlSession,String search) {
 		PageNumber pn = new PageNumber();
 		pn.setStartRow(page * 9 -8);
 		pn.setEndRow(pn.getStartRow() + 8);
+		pn.setSearch(search);
 		List<Market> list = sqlSession.selectList("market.marketList",pn);
 		return (ArrayList)list;
 	}
@@ -101,6 +103,7 @@ public class MarketDao {
 		return sqlSession.selectOne("market.dailyDetail", daily_no);
 	}
 
+	
 	public ArrayList<Reply> selectReviewReply(SqlSessionTemplate sqlSession, int review_no,int currentPage) {
 		// TODO Auto-generated method stub
 		int startRow = (currentPage-1)*10+1; 
@@ -156,5 +159,41 @@ public class MarketDao {
 	public int insertUnderReply(SqlSessionTemplate sqlSession, UnderReply reply) {
 		// TODO Auto-generated method stub
 		return sqlSession.insert("market.insertUnderReply", reply);
+	}
+
+	public int deleteReply(SqlSessionTemplate sqlSession, Reply reply) throws DeleteFailException{
+		// TODO Auto-generated method stub
+		int deleteReply = 0;
+		try {
+			deleteReply = sqlSession.delete("market.deleteReply", reply);
+		}catch(Exception e) {
+			throw new DeleteFailException("답글이 있는 댓글은 삭제되지않습니다.");
+		}
+		return deleteReply;
+	}
+
+	public int deleteUnderReply(SqlSessionTemplate sqlSession, UnderReply reply) {
+		// TODO Auto-generated method stub
+		return sqlSession.delete("market.deleteUnderReply", reply);
+	}
+
+	public int updateReplyNull(SqlSessionTemplate sqlSession, Reply reply) {
+		// TODO Auto-generated method stub
+		return sqlSession.update("market.updateReplyNull", reply);
+	}
+
+	public int updateDailyReply(SqlSessionTemplate sqlSession, Reply reply) {
+		// TODO Auto-generated method stub
+		return sqlSession.update("market.updateReply",reply);
+	}
+
+	public int updateReviewReply(SqlSessionTemplate sqlSession, Reply reply) {
+		// TODO Auto-generated method stub
+		return sqlSession.update("market.updateReply",reply);
+	}
+
+	public int updateUnderReply(SqlSessionTemplate sqlSession, UnderReply reply) {
+		// TODO Auto-generated method stub
+		return sqlSession.update("market.updateUnderReply",reply);
 	}
 }

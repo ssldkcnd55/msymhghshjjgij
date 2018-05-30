@@ -3,6 +3,7 @@ package com.kh.farm.market.model.service;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import com.kh.farm.market.exception.DeleteFailException;
 import com.kh.farm.market.model.vo.Daily;
 import com.kh.farm.market.model.vo.Market;
 import com.kh.farm.market.model.vo.Reply;
@@ -12,8 +13,9 @@ import com.kh.farm.qna.model.vo.Market_qna;
 
 public interface MarketService {
 
-	ArrayList<Market> selectMarketList(int page);
-
+	ArrayList<Market> selectMarketList(int page,String search);
+	
+	
 	Market selectMarketInfo(int market_no);
 
 	ArrayList<Review> selectReviewList(Market mk, int currentPage);
@@ -38,6 +40,7 @@ public interface MarketService {
 
 	Daily selectDailyDetail(int daily_no);
 
+	Market selectSearchList(String search);
 	ArrayList<Reply> selectReviewReply(int review_no,int currentPage);
 
 	int selectReviewReplyCount(int review_no);
@@ -53,6 +56,18 @@ public interface MarketService {
 	int insertReply(Reply reply);
 
 	int insertUnderReply(UnderReply reply);
+
+	int deleteReply(Reply reply) throws DeleteFailException;
+
+	int deleteUnderReply(UnderReply reply);
+
+	int updateReplyNull(Reply reply);
+
+	int updateReviewReply(Reply reply);
+
+	int updateDailyReply(Reply reply);
+
+	int updateReviewUnderReply(UnderReply reply);
 
 
 }

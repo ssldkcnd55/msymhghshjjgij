@@ -54,7 +54,22 @@
 	
 	]]>
 </select>
-	
+
+<select id="selectMemberName" parameterType="PageNumber" resultType="Member">
+	<![CDATA[
+	select * from (select rownum rnum, member_id, member_category, member_name, 
+	member_approval,member_withdraw,MEMBER_WARNING_COUNT from member 
+	)where rnum >=#{startRow} and rnum <=#{endRow} and member_name like '%'||#{keyword}||'%'
+	]]>
+</select>	
+
+<select id="selectMemberId" parameterType="PageNumber" resultType="Member">
+	<![CDATA[
+	select * from (select rownum rnum, member_id, member_category, member_name, 
+	member_approval,member_withdraw,MEMBER_WARNING_COUNT from member 
+	)where rnum >=#{startRow} and rnum <=#{endRow} and member_id like '%'||#{keyword}||'%'
+	]]>
+</select>	
 <select id="memberCount" parameterType="int" resultType="int">
 	select count(*) from member
 </select>

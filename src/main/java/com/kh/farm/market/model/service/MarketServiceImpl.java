@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.kh.farm.common.model.vo.*;
+import com.kh.farm.market.exception.DeleteFailException;
 import com.kh.farm.market.model.dao.MarketDao;
 import com.kh.farm.market.model.vo.Daily;
 import com.kh.farm.market.model.vo.Market;
@@ -22,8 +23,8 @@ public class MarketServiceImpl implements MarketService{
 	@Autowired
 	private SqlSessionTemplate sqlSession;
 	@Override
-	public ArrayList<Market> selectMarketList(int page) {
-		return marketDao.marketList(page,sqlSession);
+	public ArrayList<Market> selectMarketList(int page,String search) {
+		return marketDao.marketList(page,sqlSession,search);
 	}
 	@Override
 	public Market selectMarketInfo(int market_no) {
@@ -83,6 +84,19 @@ public class MarketServiceImpl implements MarketService{
 		// TODO Auto-generated method stub
 		return marketDao.selectDailyDetail(sqlSession,daily_no);
 	}
+	
+	/*@Override
+	public Market selectSearchList(String search) {
+		// TODO Auto-generated method stub
+		return marketDao.selectMarketSearchList(sqlSession,search);
+	}*/
+	
+	@Override
+	public Market selectSearchList(String search) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
 	@Override
 	public ArrayList<Reply> selectReviewReply(int review_no,int currentPage) {
 		// TODO Auto-generated method stub
@@ -122,5 +136,35 @@ public class MarketServiceImpl implements MarketService{
 	public int insertUnderReply(UnderReply reply) {
 		// TODO Auto-generated method stub
 		return marketDao.insertUnderReply(sqlSession,reply);
+	}
+	@Override
+	public int deleteReply(Reply reply) throws DeleteFailException{
+		// TODO Auto-generated method stub
+		return marketDao.deleteReply(sqlSession,reply);
+	}
+	@Override
+	public int deleteUnderReply(UnderReply reply) {
+		// TODO Auto-generated method stub
+		return marketDao.deleteUnderReply(sqlSession,reply);
+	}
+	@Override
+	public int updateReplyNull(Reply reply) {
+		// TODO Auto-generated method stub
+		return marketDao.updateReplyNull(sqlSession,reply);
+	}
+	@Override
+	public int updateReviewReply(Reply reply) {
+		// TODO Auto-generated method stub
+		return marketDao.updateReviewReply(sqlSession,reply);
+	}
+	@Override
+	public int updateDailyReply(Reply reply) {
+		// TODO Auto-generated method stub
+		return marketDao.updateDailyReply(sqlSession,reply);
+	}
+	@Override
+	public int updateReviewUnderReply(UnderReply reply) {
+		// TODO Auto-generated method stub
+		return marketDao.updateUnderReply(sqlSession,reply);
 	}
 }

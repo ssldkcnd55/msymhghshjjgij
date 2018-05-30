@@ -1,0 +1,163 @@
+@charset "UTF-8";
+
+.signUp{
+	width:200px;
+	height:200px;
+	margin: 0 auto;
+ 	text-align: center;
+	float: left;
+ 	padding: 15px;
+ 	font-weight: bold;
+ 	margin-top: 20px;
+ 	cursor: pointer;
+ 	border: 1px solid #dcdcdc;
+ 	
+}
+.signUp.cus{
+
+	margin-right: 5px;
+	
+}
+.title{
+	margin-top:5px; 
+	color: gray;
+	
+}
+.signUp:hover{
+	border: 2px solid #512772;
+}
+.btn{
+	border: 1px solid #bdbdbd; 
+	display: inline-block;
+	font-weight: bold;
+	padding: 10px;
+	padding-left:15px;
+	padding-right:15px;
+	border-radius: 5px;
+	font-size: 11pt;
+		cursor: pointer;
+}
+
+.btn.cancel{
+	
+}
+.btn.ok{
+	color:white;
+	background-color:#3071a9; 
+}
+.btn.cancel:hover{
+	background-color: #dcdcdc;
+}
+.btn.ok:hover{
+	background-color: #77aad9;
+}
+.btn_box{
+	text-align: center;
+	overflow: hidden;
+	margin:0 auto;
+	margin-top: 15px;
+	
+}
+.titleImg{
+	width: 100px;
+	height:100px;
+	margin:0 auto;
+	margin-top:30px;
+	background-size: cover;
+}
+.titleImg.titleImg{
+	height: 90px;
+}
+
+.select_box{
+	
+	overflow:hidden;
+	text-align: center;
+	margin-left: 130px;
+	
+}
+.conH2{
+	
+}
+.ag1{
+	padding-left: 10px;
+	width:700px;
+	height: 150px;
+	margin-bottom: 20px;
+	margin-left:10px;
+	border: 1px solid #dcdcdc;
+	color: gray;
+}
+.contxt1{
+	 margin-top: 20px;
+	 text-align:  left;
+	 margin-left: 330px;
+	 
+}
+.leaf{
+	background-size: cover;
+	width: 30px;
+	height: 30px;
+	float: left;
+}
+.comment{
+	text-align: left;
+	margin-left :140px;
+	color: gray;
+	font-size: 10pt;
+}
+.selectTitle{
+	
+	text-align: center;
+	font-size: 18pt;
+    margin-bottom: 13px;
+    font-weight: bold;
+    padding: 0px;
+  
+}
+.menu{
+padding:10px 0 5px 15px;
+color: gray;
+font-weight: bold;	
+border-bottom: 1px solid #dcdcdc;
+margin-right:15px;
+margin-left:15px;
+font-size: 11pt;
+
+}
+.left_menu{
+	border: 1px solid #dcdcdc;
+	float:  left;
+	margin-left: 40px;
+	margin-top:30px;
+	width: 150px;
+	height: 300px;
+}
+.conH2{
+	text-align: center;
+	margin-top: 100px;
+}
+
+.legend{
+	color:#393939;
+	text-align: left;
+	margin: 40px 0px 20px 130px;
+	font-weight: bold;
+	font-size: 13.5pt;
+}
+.legend.pr{
+	margin-top: 80px;
+}
+.agreement01{
+	text-align: center;
+}
+.agreement2{
+	margin-left: 630px;
+	
+}
+.agreement{
+	font-size: 10pt;
+	margin-bottom: 20px;
+	
+	
+}

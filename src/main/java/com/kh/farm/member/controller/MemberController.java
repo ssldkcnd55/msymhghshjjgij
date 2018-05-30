@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 
@@ -47,9 +48,10 @@ public class MemberController {
 
 	@RequestMapping(value = "signUp.do", method = RequestMethod.POST)
 	public String signUp(Member member, HttpServletRequest request,
-			@RequestParam(name = "upfile", required = false) MultipartFile file) {
+			@RequestParam(name = "upfile", required = false) MultipartFile file,@RequestParam("category") String category) {
 		String path = request.getSession().getServletContext().getRealPath("resources/upload/memberUpload");
 		member.setMember_pwd(pwdEncoder.encode(member.getMember_pwd()));
+		member.setMember_category(category);
 		try {
 			file.transferTo(new File(path + "\\" + file.getOriginalFilename()));
 
@@ -344,10 +346,46 @@ public class MemberController {
 	
 	//회원검색
 	@RequestMapping("searchMember.do")
-	public Member searchMember(Member member, @RequestParam(value="search_filter") int type) {
-		System.out.println(member.toString());
+	@ResponseBody
+	public void searchMember(HttpServletResponse response,@RequestParam("keyword") String keyword,
+			@RequestParam("type") int type,@RequestParam("page") int currentPage) throws IOException{
+		System.out.println("회원검색 메소드 실행!!!");
+		JSONArray jarr =new JSONArray();
+		List<Member> memberList = memberService.selectSearchMember(keyword,type,currentPage);
+		int limitPage = 10;
+		int listCount = memberService.selectMemberCount();
 		
-		return null;
+		int maxPage=(int)((double)listCount/limitPage+0.9); //ex) 41개면 '5'페이지나와야되는데 '5'를 계산해줌
+		int startPage=((int)((double)currentPage/5+0.8)-1)*5+1;
+		int endPage=startPage+5-1;
+		
+		if(maxPage<endPage) {
+			endPage = maxPage;
+		}
+		for (Member m : memberList) {
+			JSONObject json = new JSONObject();
+			json.put("rnum", m.getRnum());
+			json.put("member_id", m.getMember_id());
+			json.put("member_category", m.getMember_category());
+			json.put("member_name", m.getMember_name());
+			json.put("member_approval", m.getMember_approval());
+			json.put("member_withdraw", m.getMember_withdraw());
+			json.put("member_warning_count", m.getMember_warning_count());
+			json.put("startPage", startPage);
+			json.put("endPage", endPage);
+			json.put("maxPage", maxPage);
+			json.put("currentPage",currentPage);
+			json.put("type", type);
+			jarr.add(json);
+		}
+		
+		JSONObject sendJson = new JSONObject();
+		sendJson.put("list", jarr);
+		response.setContentType("application/json; charset=utf-8");
+		PrintWriter out = response.getWriter();
+		out.append(sendJson.toJSONString());
+		out.flush();
+		out.close();
 	}
 }
 

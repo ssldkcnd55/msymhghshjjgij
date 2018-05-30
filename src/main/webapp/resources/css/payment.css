@@ -27,17 +27,40 @@
 	padding: 30px 3px 30px 3px;
 	max-height: 163px;
 }
-
+.pay_top_table td:nth-child(3),
+.pay_top_table td:nth-child(4),
+.pay_top_table td:nth-child(5),
+.pay_top_table td:nth-child(6),
+.pay_top_table td:nth-child(7)
+{
+	white-space: nowrap;
+}
 .pay_top_table td a {
 	text-decoration: none;
 	color: black;
+	max-width: 300px;
+    max-height: 72px;
+    display: inline-block;
+    text-align: center;
+    vertical-align: middle;
 }
 
 .pay_top_table th {
 	padding-top: 30px;
 	padding-bottom: 30px;
 }
+.infoTable td:nth-child(2) , .newInfo td:nth-child(2){
+    padding: 0px 0px 0px 10px;
+    margin: 0;
+    border: 0;
+   
+}
 
+.infoTable td:nth-child(2), .infoTable td:nth-child(3), .infoTable input, .infoTable select,  
+.newInfo td:nth-child(2), .newInfo td:nth-child(3), .newInfo input, .newInfo select
+{ background-color: #fafafa;
+	
+}
 /* .pay_top_table tr td:nth-child(2){
 	max-width:340px;
 	
@@ -89,8 +112,19 @@
 	padding:100px;
 } */
 .product_title {
-	float: right;
-	margin-right: 70px;
+	max-width: 298px;
+	max-height: 18px;
+    display: inline-block;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+.product_note{
+	max-width: 298px;
+    max-height: 72px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: flex;
 }
 
 .pay_top_table tr td {
@@ -237,7 +271,7 @@
 	font-size: 20pt;
 	font-weight: bold;
 	color: #ffffff;
-	background: #c8b771;
+	background: #512772;
 	border: none;
 }
 /* --- */
@@ -245,8 +279,9 @@
 	width: 505px;
 	height: 200px;
 }
-.infoTable input, .newInfo input{
-	border: 1px solid #ddd;
+.infoTable input, .newInfo input, .infoTable select, .newInfo select{
+	/* border: 1px solid #ddd; */
+	border: 0;
 }
 .newInfo{
 	width: 505px;
@@ -273,12 +308,12 @@
 }
 
 .infoTable select {
-	height: 21px;
-	border: 1px solid #ddd;
+	/* height: 21px;
+	border: 1px solid #ddd; */
 }
 .newInfo select{
-	height: 21px;
-	border: 1px solid #ddd;
+	/* height: 21px;
+	border: 1px solid #ddd; */
 }
 
 .messagebox, .messagebox input{
@@ -303,6 +338,7 @@
 }
 
 .info_relief{
+	 /* position:inherit;  */
 	width: 18px;
     height: 18px;
     background-color: #f5f5f5;
@@ -319,7 +355,7 @@
 .InfoReliefDiv{
 	z-index:2;
 	position:absolute;
-	top:988px;
+	top:600px;
 	display:none;
 	width: 255px;
 	height: 263px;
