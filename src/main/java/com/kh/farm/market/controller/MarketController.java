@@ -42,13 +42,14 @@ public class MarketController {
 	
 
 	@RequestMapping(value="marketList.do")
-	public ModelAndView marketList(ModelAndView mv,@RequestParam(value="search",required=false) String search,@RequestParam(value="ctype",required=false) String ctype) {
+	public ModelAndView marketList(ModelAndView mv,@RequestParam(value="search",required=false) String search) {
 		int page = 1;
-		ArrayList<Market> list = marketService.selectMarketList(page,search,ctype);
+		String ctype = null;
+		String cname = null;
+		ArrayList<Market> list = marketService.selectMarketList(page,search,ctype,cname);
 		mv.setViewName("market/marketList");
 		mv.addObject("list",list);
 		mv.addObject("search",search);
-		mv.addObject("ctype",ctype);
 		
 		return mv;
 	}
@@ -64,10 +65,11 @@ public class MarketController {
 	}
 	
 	@RequestMapping(value="ajaxMoreMarket.do", method=RequestMethod.POST)
-	public void moreMarketList(HttpServletResponse response,@RequestParam("page") int page,@RequestParam(value="search",required=false) String search,@RequestParam(value="ctype",required=false) String ctype) throws IOException{
-		List<Market> list = marketService.selectMarketList(page,search,ctype);
+	public void moreMarketList(HttpServletResponse response,@RequestParam("page") int page,@RequestParam(value="search",required=false) String search,
+			@RequestParam(value="ctype",required=false) String ctype,@RequestParam(value="cname",required=false) String cname) throws IOException{
+		List<Market> list = marketService.selectMarketList(page,search,ctype,cname);
 		JSONArray jarr = new JSONArray();
-		
+		JSONArray jarr2 = new JSONArray();
 		//list를 jarr로 복사하기
 		for(Market m : list) {
 			//추출한 user를 json 객체에 담기
@@ -83,6 +85,18 @@ public class MarketController {
 		//전송용 최종 json 객체 선언
 		JSONObject sendJson = new JSONObject();
 		sendJson.put("list", jarr);
+		List<Category> list2 = new ArrayList<Category>();
+		if(ctype != null) {
+			list2 = marketService.selectCategory(ctype);
+			for(Category c : list2) {
+				JSONObject jmarket = new JSONObject();
+				jmarket.put("category_no", c.getCategory_no());
+				jmarket.put("category_name", c.getCategory_name());
+				jmarket.put("category_main", c.getCategory_main());
+				jarr2.add(jmarket);
+			}
+			sendJson.put("list2", jarr2);
+		}
 		response.setContentType("application/json; charset=utf-8");
 		PrintWriter out = response.getWriter();
 		out.append(sendJson.toJSONString());

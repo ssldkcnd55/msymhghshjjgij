@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.kh.farm.common.model.vo.*;
 import com.kh.farm.market.exception.DeleteFailException;
 import com.kh.farm.market.model.dao.MarketDao;
+import com.kh.farm.market.model.vo.Category;
 import com.kh.farm.market.model.vo.Daily;
 import com.kh.farm.market.model.vo.Market;
 import com.kh.farm.market.model.vo.Reply;
@@ -23,8 +24,8 @@ public class MarketServiceImpl implements MarketService{
 	@Autowired
 	private SqlSessionTemplate sqlSession;
 	@Override
-	public ArrayList<Market> selectMarketList(int page,String search,String ctype) {
-		return marketDao.marketList(page,sqlSession,search,ctype);
+	public ArrayList<Market> selectMarketList(int page,String search,String ctype,String cname) {
+		return marketDao.marketList(page,sqlSession,search,ctype,cname);
 	}
 	@Override
 	public Market selectMarketInfo(int market_no) {
@@ -186,5 +187,10 @@ public class MarketServiceImpl implements MarketService{
 	public int deleteDaily(Daily daily) {
 		// TODO Auto-generated method stub
 		return marketDao.deleteDaily(sqlSession,daily);
+	}
+	@Override
+	public ArrayList<Category> selectCategory(String ctype) {
+		// TODO Auto-generated method stub
+		return marketDao.selectCategory(sqlSession,ctype);
 	}
 }
