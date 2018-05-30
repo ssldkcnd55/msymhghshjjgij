@@ -9,6 +9,7 @@
 <link href="/farm/resources/css/style.css" rel="stylesheet" type="text/css" />
 <link href="/farm/resources/css/login.css" rel="stylesheet" type="text/css">
 
+<script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.2.js" charset="utf-8"></script>
 <script type="text/javascript" src="/farm/resources/js/jquery-3.3.1.min.js"></script>
 <script>
 
@@ -48,10 +49,9 @@ $(function(){
 				<input type="submit" name="login_btn" id="login_btn"
 					class="btn btn-primary" value="로그인">
 
-				<div class="social-account-big-wrap">
-					<a href="#"><img src="/farm/resources/images/naver_login.PNG"
-						style="width: 220px;"></a>
-				</div>
+				<div id="naver_id_login" style="text-align:center"><a href="${url}">
+				<img width="223" src="https://developers.naver.com/doc/review_201802/CK_bEFnWMeEBjXpQ5o8N_20180202_7aot50.png"/></a></div>
+				
 				<div class="find_div">
 					<a href="/farm/moveFindId.do">아이디 찾기</a>&nbsp;&nbsp;<a>|</a>&nbsp;&nbsp;<a href="/farm/moveFindPwd.do">비밀번호 찾기</a>
 				</div>
