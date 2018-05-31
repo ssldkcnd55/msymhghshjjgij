@@ -178,11 +178,11 @@ function reportReview() {
 }
 
 function report_submit() {
-	var report_contents = $('#report_content').val();
+	var report_contents = $('#report_contents').val();
 	var review_no = ${review.review_no};
 	var id = '${loginUser.member_id}';
 	var report_category = $('#report_category').val();
-	alert(report_content+','+review_no+','+id+','+report_category);
+	alert(report_contents+','+review_no+','+id+','+report_category);
 	
 	$.ajax({
 		url: "report.do",
@@ -192,7 +192,15 @@ function report_submit() {
 		},
 		dataType: "JSON",
 		success: function(obj){
+			var objStr = JSON.stringify(obj);
+            var jsonObj = JSON.parse(objStr);
+            if(jsonObj.result == 200){
 			alert("신고 완료!");
+			location.href = "#close";
+            }else{
+            	alert("신고 실패! 관리자에게 문의해주세요.")
+            	location.href = "#close";
+            }
 		}
 	});
 }

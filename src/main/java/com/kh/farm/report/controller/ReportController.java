@@ -22,7 +22,7 @@ public class ReportController {
 	@RequestMapping("report.do")
 	@ResponseBody
 	public void report(HttpServletResponse response,Report report) throws IOException{
-		System.out.println("리포트 입력 메서드 실행!!!");
+		System.out.println("리포트 입력 메서드 실행!!!"+report.toString());
 		response.setContentType("application/json; charset=utf-8");
 		int result = reportService.insertReport(report);
 		
@@ -33,7 +33,13 @@ public class ReportController {
 			out.print(json.toJSONString());
 			out.flush();
 			out.close();
+		}else {
+		JSONObject json = new JSONObject();
+		json.put("result", 200);
+		PrintWriter out = response.getWriter();
+		out.print(json.toJSONString());
+		out.flush();
+		out.close();
 		}
-		
 	}
 }
