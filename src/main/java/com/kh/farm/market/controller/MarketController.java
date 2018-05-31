@@ -46,6 +46,7 @@ public class MarketController {
 		int page = 1;
 		String ctype = null;
 		String cname = null;
+		System.out.println(search);
 		ArrayList<Market> list = marketService.selectMarketList(page,search,ctype,cname);
 		mv.setViewName("market/marketList");
 		mv.addObject("list",list);

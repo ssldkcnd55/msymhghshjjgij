@@ -5,9 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Farm</title>
-<link href="/farm/resources/css/reset.css" rel="stylesheet" type="text/css">
 <link href="/farm/resources/css/style.css" rel="stylesheet" type="text/css">
-<link href="/farm/resources/css/boot.css" rel="stylesheet"  type="text/css">
 <link href="/farm/resources/css/join.css" rel="stylesheet" type="text/css">
 </head>
 <body>
@@ -22,9 +20,7 @@
 			<div class="join_form join_form2" style="padding:20px 40px;"> <!--div구역내에 mainform을 담았음  -->
 				<form id="mainform" method="post" action="/farm/moveupdatePwd.do">
 					<div>
-						<h2 class="h2">
-								FIND PWD
-						</h2>
+						<h2 class="h2">비밀번호 찾기</h2>
 						<h3 class="h3">가입하셨던 이메일 계정을 입력하시면,<br>비밀번호를 새로 만들 수 있는 링크로 이동됩니다.</h3>
 						<div class="pwd_box">
 								<div class="form-group"> <!--이름 label 및 이름 입력란 -->
@@ -51,7 +47,7 @@
 							</div><br><br>
 								<div class="form-group text-center"><!--아이디 찾기 버튼 및 아이디 찾기 취소 버튼  -->
 									
-									<div class="searchBtn"><input type="submit"  id="searchPwd" name="searchPwd" value="아이디 찾기"/></div>
+									<div class="searchBtn"><input type="submit"  class="searchPwd" name="searchPwd" value="비밀번호 찾기"/></div>
 									<input type="button" class="loginBtn" value="로그인">
 								</div>
 						</div>
