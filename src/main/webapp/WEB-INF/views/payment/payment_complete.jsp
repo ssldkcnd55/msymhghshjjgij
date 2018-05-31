@@ -30,9 +30,13 @@
 				<!-- inner-wrap -->
 				 <div class="con_title"><p class="titleP">주문/결제 완료</p></div>
 				
-					<div class="con_head">구매하신 상품의 <font style="color:#512772;">주문/결제가</font> 완료되었습니다.</div>
+					<div class="con_head">구매하신 상품의 <font style="color:#512772; font-weight: 900;">주문/결제가</font> 완료되었습니다.</div>
 					<div>
 					<table class="con_table">
+					<tr>
+					<td>주문번호</td>
+					<td>123456</td>
+					</tr>
 					<tr>
 					<td>상품명</td>
 					<td>사과</td>
