@@ -202,9 +202,9 @@
 	<update id="updateAuctionStatus" parameterType="int">
 	<![CDATA[
 		update auction set auction_status =
-  		case when sysdate BETWEEN auction_startdate and auction_enddate then '1'
-  		when auction_startdate > sysdate then '0'
- 		else '2'
+  		case when sysdate BETWEEN auction_startdate and auction_enddate then 1
+  		when auction_startdate > sysdate then 0
+ 		else 2
  		end 
 	]]>
 	</update>
@@ -212,11 +212,11 @@
 	<select id="selectauction_timeRemaining" parameterType="int" resultType="auction">
 	<![CDATA[
 		select auction_no,sysdate ,AUCTION_STARTDATE, auction_enddate, auction_status, 
-		trunc (TO_DATE (auction_enddate, 'YYYY/MM/DD HH24:MI:SS') - TO_DATE (AUCTION_STARTDATE, 'YYYY/MM/DD HH24:MI:SS'), 0) day, 
-		trunc ((TO_DATE (auction_enddate, 'YYYY/MM/DD HH24:MI:SS') - TO_DATE (AUCTION_STARTDATE, 'YYYY/MM/DD HH24:MI:SS'))*24, 0) - trunc (TO_DATE (auction_enddate, 'YYYY/MM/DD HH24:MI:SS')
-		- TO_DATE (AUCTION_STARTDATE, 'YYYY/MM/DD HH24:MI:SS'), 0) * 24 hour,
-		round (MOD ((TO_DATE (auction_enddate, 'YYYY/MM/DD HH24:MI:SS') - TO_DATE (AUCTION_STARTDATE, 'YYYY/MM/DD HH24:MI:SS'))*24*60, 60)) minute 
-		from auction where auction_no = #{auction_no};
+		to_char	(trunc (TO_DATE (auction_enddate, 'YYYY/MM/DD HH24:MI:SS') - TO_DATE (AUCTION_STARTDATE, 'YYYY/MM/DD HH24:MI:SS'), 0)) as "day", 
+		to_char(	trunc ((TO_DATE (auction_enddate, 'YYYY/MM/DD HH24:MI:SS') - TO_DATE (AUCTION_STARTDATE, 'YYYY/MM/DD HH24:MI:SS'))*24, 0) - trunc (TO_DATE (auction_enddate, 'YYYY/MM/DD HH24:MI:SS')
+		- TO_DATE (AUCTION_STARTDATE, 'YYYY/MM/DD HH24:MI:SS'), 0) * 24 ) as "hour",
+		to_char( round (MOD ((TO_DATE (auction_enddate, 'YYYY/MM/DD HH24:MI:SS') - TO_DATE (AUCTION_STARTDATE, 'YYYY/MM/DD HH24:MI:SS'))*24*60, 60))) as "minute" 
+		from auction where auction_no = #{auction_no}
 	]]>
 	</select>
 	
