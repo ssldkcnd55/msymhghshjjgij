@@ -140,6 +140,11 @@ public class AuctionServiceImpl implements AuctionService{
 		return auctionDao.selectAuctionBiddingCount(sqlSession,auction_no);
 	}
 	
+	@Override
+	public int updateAuctionStatus() {
+		return auctionDao.updateAuctionStatus(sqlSession);
+
+	}
 	
 	
 }

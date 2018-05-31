@@ -12,6 +12,20 @@
 	type="text/css" />
 <script type="text/javascript">
 
+//경매 상태 update
+$(function(){
+	$.ajax({
+		url : "auction_updateStatus.do",
+		type : 'get',
+		 success : function(obj) {
+			 console.log(obj.toString()); 
+			 var objStr = JSON.stringify(obj);
+	         var jsonObj = JSON.parse(objStr);
+			 alert("경매 상태"+jsonObj.auction_status);
+		 }
+	});
+});
+
 function getBasketCount(member_id)
 {
 	$.ajax({

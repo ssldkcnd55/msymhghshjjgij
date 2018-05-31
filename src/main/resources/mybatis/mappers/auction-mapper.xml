@@ -162,7 +162,7 @@
 	]]>
 	</select>
 	
-	
+	<!-- 경매 입찰 등록 -->
 	<insert id="insertAuctionBidding" parameterType="AuctionHistory" flushCache="true" useGeneratedKeys="true">
 	<![CDATA[
 		insert into auction_history values((select max(auction_history_no) from auction_history)+1,
@@ -197,6 +197,17 @@
 		select count(*) from auction_history where auction_no = #{auction_no}
 	]]>
 	</select>
+	
+	
+	<update id="updateAuctionStatus" parameterType="int">
+	<![CDATA[
+		update auction set auction_status =
+  		case when sysdate BETWEEN auction_startdate and auction_enddate then '1'
+  		when auction_startdate > sysdate then '0'
+ 		else '2'
+ 		end 
+	]]>
+	</update>
 	
 	
 	

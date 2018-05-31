@@ -161,6 +161,12 @@ public class AuctionDao {
 	}
 
 
+	public int updateAuctionStatus(SqlSessionTemplate sqlSession) {
+		return sqlSession.insert("auction.updateAuctionStatus");
+
+	}
+
+
 
 	
 
