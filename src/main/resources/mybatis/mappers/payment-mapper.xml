@@ -74,4 +74,12 @@
 		select
 		count(*) from buy
 	</select>
+	
+	<delete id="deleteShoppingBasket" parameterType="payment" >
+		<![CDATA[
+		delete from SHOP_BASKET where MEMBER_ID = #{member_id} and MARKET_NO = #{market_no} and BUY_AMOUNT = #{buy_amount}
+		]]>
+	</delete>
+	
+	
 </mapper>

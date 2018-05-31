@@ -46,6 +46,7 @@ public class MarketController {
 		int page = 1;
 		String ctype = null;
 		String cname = null;
+		System.out.println(search);
 		ArrayList<Market> list = marketService.selectMarketList(page,search,ctype,cname);
 		mv.setViewName("market/marketList");
 		mv.addObject("list",list);
@@ -79,6 +80,7 @@ public class MarketController {
 			jmarket.put("market_note", m.getMarket_note());
 			jmarket.put("market_img", m.getMarket_img());
 			jmarket.put("search", m.getSearch());
+			jmarket.put("market_price", m.getMarket_price());
 			
 			jarr.add(jmarket);
 		}

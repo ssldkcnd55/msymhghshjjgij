@@ -27,7 +27,6 @@
 		count = 1;
 		cname = $(value).val();
 		ctype = null;
-		alert(cname);
 		$.ajax({
 			url: "ajaxMoreMarket.do",
 			type: "post",
@@ -43,7 +42,7 @@
 					outValues += "<a href='marketDetail.do?market_no=" + jsonObj.list[i].market_no + "'>" +
 					"<div class='market'><div class='img_box' style='background-image:url(\"/farm/resources/upload/marketUpload/"+ jsonObj.list[i].market_img+"\"); background-size: cover;'>"+
 					"</div><div class='title_box'><p class='title'>"+jsonObj.list[i].market_title +
-					"</p><p class='content'>"+jsonObj.list[i].market_note+"</p></div></div></a>";
+					"</p><p class='content'>"+jsonObj.list[i].market_note+"</p><p class='content price'>"+jsonObj.list[i].market_price+"원</p></div></div></a>";
 				}
 				$(".market_box").html(outValues);
 			},error: function(request,status,errorData){
@@ -58,7 +57,6 @@
 			count = 1;
 			ctype = $(this).val();
 			cname = null;
-			alert(ctype);
 			$.ajax({
 				url: "ajaxMoreMarket.do",
 				type: "post",
@@ -74,7 +72,7 @@
 						outValues += "<a href='marketDetail.do?market_no=" + jsonObj.list[i].market_no + "'>" +
 						"<div class='market'><div class='img_box' style='background-image:url(\"/farm/resources/upload/marketUpload/"+ jsonObj.list[i].market_img+"\"); background-size: cover;'>"+
 						"</div><div class='title_box'><p class='title'>"+jsonObj.list[i].market_title +
-						"</p><p class='content'>"+jsonObj.list[i].market_note+"</p></div></div></a>";
+						"</p><p class='content'>"+jsonObj.list[i].market_note+"</p><p class='content price'>"+jsonObj.list[i].market_price+"원</p></div></div></a>";
 					}
 					$(".market_box").html(outValues);
 					for(var i in jsonObj.list2){
@@ -114,7 +112,7 @@
 						outValues += "<a href='marketDetail.do?market_no=" + jsonObj.list[i].market_no + "'>" +
 								"<div class='market'><div class='img_box' style='background-image:url(\"/farm/resources/upload/marketUpload/"+ jsonObj.list[i].market_img+"\"); background-size: cover;'>"+
 								"</div><div class='title_box'><p class='title'>"+jsonObj.list[i].market_title +
-								"</p><p class='content'>"+jsonObj.list[i].market_note+"</p></div></div></a>";
+								"</p><p class='content'>"+jsonObj.list[i].market_note+"</p><p class='content price'>"+jsonObj.list[i].market_price+"원</p></div></div></a>";
 					}
 					$(".market_box").html(outValues);
 				},error: function(request,status,errorData){
@@ -148,9 +146,9 @@
 					<!-- 정렬 메뉴바 -->
 					<div class="sort">
 						<h4>정렬</h4>
-						<input type="checkbox"> 최신순<br>
-						<br> <input type="checkbox"> 마감임박순<br>
-						<br> <input type="checkbox"> 가격순<br>
+						<input type="radio" name="sortRadio" > 최신순<br>
+						<br> <input type="radio" name="sortRadio"> 마감임박순<br>
+						<br> <input type="radio" name="sortRadio"> 가격순<br>
 
 					</div>
 
@@ -191,6 +189,7 @@
 									<div class="title_box">
 										<p class="title">${m.market_title }</p>
 										<p class="content">${m.market_note }</p>
+										<p class='content'>${m.market_price }원</p>
 									</div>
 								</div>
 							</a>

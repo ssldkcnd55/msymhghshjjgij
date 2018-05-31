@@ -161,6 +161,18 @@ public class AuctionDao {
 	}
 
 
+	public int updateAuctionStatus(SqlSessionTemplate sqlSession) {
+		return sqlSession.update("auction.updateAuctionStatus");
+
+	}
+
+
+	public Auction selectauction_timeRemaining(SqlSessionTemplate sqlSession, int auction_no) {
+		return sqlSession.selectOne("auction.selectauction_timeRemaining", auction_no);
+
+	}
+
+
 
 	
 

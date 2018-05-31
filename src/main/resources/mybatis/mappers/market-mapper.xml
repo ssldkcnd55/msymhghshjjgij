@@ -10,7 +10,7 @@
 		select * from 
 			(select rownum rnum, market_no,
 			market_title,market_releasedate,market_note,market_img,
-			member_id from (select * from market 
+			member_id,market_price from (select * from market 
 			]]>
 		<if test="search != null">
 		<![CDATA[

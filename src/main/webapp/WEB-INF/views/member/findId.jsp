@@ -7,9 +7,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Farm</title>
-<link href="/farm/resources/css/reset.css" rel="stylesheet" type="text/css">
+<!-- <link href="/farm/resources/css/reset.css" rel="stylesheet" type="text/css"> -->
 <link href="/farm/resources/css/style.css" rel="stylesheet" type="text/css">
-<link href="/farm/resources/css/boot.css"  rel="stylesheet" type="text/css">
 <link href="/farm/resources/css/join.css" rel="stylesheet" type="text/css">
 <script type="text/javascript" src="/farm/resources/js/jquery-3.3.1.min.js"></script>
 <script>
@@ -47,13 +46,13 @@ var memberId='<c:out value="${MemberIdFind.member_id}"/>';
 			<div class="join_form join_form2" style="padding:20px 40px;"> <!--div구역내에 mainform을 담았음  -->
 				<form id="mainform" method="post" action="/farm/findId.do">
 					<div>
-						<h2 align="center" style="color:#777;margin-bottom:20px;">
-								ID 찾기
+						<h2 align="center" style="color:#512772;margin-bottom:20px;">
+								아이디 찾기
 						</h2>
 						<h3 class="h3">작물팜은 이메일을 아이디로 사용합니다.<br>소유하고 계신 계정을 입력해보세요.<br>가입여부를 확인해드립니다.</h3>
-						<div>
-								<div class="form-group"> <!--이름 label 및 이름 입력란 -->
-									<label for="userName">이름</label> <input type="text"
+						<div class="tag_box">
+								<div class="form-group name"> <!--이름 label 및 이름 입력란 -->
+									<label for="userName" class="userName">이름</label> <input type="text"
 										class="form-control" id="userName" name="member_name" placeholder="이름을 입력해주세요.">
 								</div>
 								
@@ -72,7 +71,7 @@ var memberId='<c:out value="${MemberIdFind.member_id}"/>';
 					<script
 						src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 					<!-- Include all compiled plugins (below), or include individual files as needed -->
-					<script src="/classKing/js/bootstrap.min.js"></script>
+					<!-- <script src="/classKing/js/bootstrap.min.js"></script> -->
 					</form>
 			</div>
  			 </div>

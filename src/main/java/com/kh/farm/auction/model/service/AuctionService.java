@@ -71,6 +71,10 @@ public interface AuctionService {
 	/*경매 입찰내역 List count*/
 	int selectAuctionBiddingCount(int auction_no);
 
+	int updateAuctionStatus();
+
+	Auction selectauction_timeRemaining(int auction_no);
+
 
 	
 

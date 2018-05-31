@@ -24,6 +24,9 @@ public class Auction implements java.io.Serializable {
 	private String auction_status;// 경매 상태
 	private int auction_startprice;// 경매 시작가
 	private int auction_directprice;// 즉시 구매가
+	private int day;//일
+	private int hour;//시간
+	private int minute;//분
 	
 	
 	public Auction() {
@@ -33,7 +36,7 @@ public class Auction implements java.io.Serializable {
 
 	public Auction(int auction_no, String member_id, String category_no, String auction_title, String auction_note,
 			String auction_img, Date auction_startdate, Date auction_enddate, String auction_intro,
-			String auction_status, int auction_startprice, int auction_directprice) {
+			String auction_status, int auction_startprice, int auction_directprice, int day, int hour, int minute) {
 		super();
 		this.auction_no = auction_no;
 		this.member_id = member_id;
@@ -47,6 +50,9 @@ public class Auction implements java.io.Serializable {
 		this.auction_status = auction_status;
 		this.auction_startprice = auction_startprice;
 		this.auction_directprice = auction_directprice;
+		this.day = day;
+		this.hour = hour;
+		this.minute = minute;
 	}
 
 
@@ -157,5 +163,36 @@ public class Auction implements java.io.Serializable {
 		this.auction_directprice = auction_directprice;
 	}
 
+
+	public int getDay() {
+		return day;
+	}
+
+
+	public void setDay(int day) {
+		this.day = day;
+	}
+
+
+	public int getHour() {
+		return hour;
+	}
+
+
+	public void setHour(int hour) {
+		this.hour = hour;
+	}
+
+
+	public int getMinute() {
+		return minute;
+	}
+
+
+	public void setMinute(int minute) {
+		this.minute = minute;
+	}
+
+	
 	
 }

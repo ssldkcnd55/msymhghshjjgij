@@ -22,4 +22,6 @@ public interface PaymentService {
 
 	int selectPaymentHistoryCount();
 
+	int deleteShoppingBasket(Payment pm);
+
 }
