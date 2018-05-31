@@ -78,9 +78,6 @@ function getBasketCount(member_id)
         	moveSearchList();
 	    }
 	}
-
-
-	
 	function moveSearchList(){
 		location.href = "marketList.do?search="+$("#search").val();
 	}
@@ -113,7 +110,7 @@ function getBasketCount(member_id)
                      src="https://res.kurly.com/pc/img/1801/img_delivery.gif"></a>
                </div>
                <h1 class="h1">
-                  <a href="moveHome.do"><img src="/farm/resources/images/kurly_logo_5.png"></a>
+                  <a href="moveHome.do"><img src="/farm/resources/images/Farmlogo.png"></a>
                </h1>
             </div>
             <div class="tabMenu">
