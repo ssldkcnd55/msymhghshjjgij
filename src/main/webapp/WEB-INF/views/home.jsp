@@ -230,10 +230,10 @@
 
 						for (var i = 1; i < 35; i++) {
 							if (i == 1) {
-								html1 = "<div class='item active' align='center'><table class='table'><th class='td'>품명</th><th class='td'>종류</th><th class='td'>가격</th>";
+								html1 = "<div class='item active' align='center'><table class='table'><th class='th'>품명</th><th class='th'>종류</th><th class='th'>가격</th>";
 
 							} else {
-								html1 = "<div class='item' align='center'><table class='table'><th class='td'>품명</th><th class='td'>종류</th><th class='td'>가격</th>";
+								html1 = "<div class='item' align='center'><table class='table'><th class='th'>품명</th><th class='th'>종류</th><th class='th'>가격</th>";
 							}
 							$.each(myitem, function(index, item) {
 
@@ -263,7 +263,7 @@
 	}
 </script>
 <style type="text/css">
-.table {
+/* .table {
 	margin-top: 50px;
 	border: 1px solid #444444;
 	border-collapse: collapse;
@@ -273,7 +273,21 @@
 .td {
 	border: 1px solid #444444;
 	padding: 4px;
+	color: #222;
+	border: solid 1px #c7c7c7;
+	text-align: center;
 }
+
+.th {
+	color: #222;
+	background: #f7f7f7;
+	border: solid 1px #c7c7c7;
+	border-bottom: solid 1px #555;
+	font-size: 1.15em;
+	text-align: center;
+	padding: 4px;
+} */
+
 </style>
 </head>
 
@@ -308,7 +322,7 @@
 					<ul class="tabs">
 						<li class="active" rel="tab1">공지사항</li>
 						<li rel="tab2">구매랭킹</li>
-						<li rel="tab3">공지사항</li>
+						<li rel="tab3">시세정보</li>
 					</ul>
 					<div class="tab_container">
 						<div id="tab1" class="tab_content">
@@ -326,14 +340,15 @@
 							for 2D fighting with gruesome combat.</div>
 						<!-- #tab2 -->
 						<div id="tab3" class="tab_content">
-							<button style="margin-left: 205px;">상세정보</button>
-							<div id="myCarousel" class="carousel slide" data-ride="carousel">
+							<button class="button">상세정보</button>
+							<div id="myCarousel" class="carousel slide quote"
+								data-ride="carousel">
 								<!-- Indicators -->
-								<ol class="carousel-indicators">
+								<!-- <ol class="carousel-indicators">
 									<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
 									<li data-target="#myCarousel" data-slide-to="1"></li>
 									<li data-target="#myCarousel" data-slide-to="2"></li>
-								</ol>
+								</ol> -->
 
 								<!-- Wrapper for slides -->
 								<div class="carousel-inner quote"></div>
