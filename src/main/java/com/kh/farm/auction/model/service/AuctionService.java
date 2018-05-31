@@ -73,6 +73,8 @@ public interface AuctionService {
 
 	int updateAuctionStatus();
 
+	Auction selectauction_timeRemaining(int auction_no);
+
 
 	
 

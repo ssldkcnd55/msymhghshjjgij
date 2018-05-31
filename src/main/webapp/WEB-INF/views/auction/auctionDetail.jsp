@@ -248,7 +248,31 @@ $(function(){
 		});
 			 
 	}
-		
+	var aTime;
+	aTime = setTimeout(function(){auctionTime()}, 1000);
+	//경매 남은 시간
+	$(function auctionTime(){
+		$.ajax({
+			url: "auction_timeRemaining.do",
+			data:{
+				auction_no:${auction.auction_no}
+			},
+			type:"post",
+			success : function(obj){
+				alert("남은 시간 체크");
+				 console.log(obj.toString());
+				 var objStr = JSON.stringify(obj);
+		         var jsonObj = JSON.parse(objStr);
+		         var outValues = $(".time").html();
+		         
+		         
+		         outValues+=
+		        	 jsonObj.auctiontime.day+"일&nbsp;"+jsonObj.auctiontime.hour+"시간 &nbsp;"+
+		        	 jsonObj.auctiontime.day+"분 &nbsp;"
+		         $(".time").html(outValues);
+			}
+		});
+	});
 	
 </script>
 </head>
@@ -263,8 +287,10 @@ $(function(){
 		<div id="container">
 			<div class="inner-wrap">
 				<div class="title_box">
-					<span class="title">${auction.auction_title }</span> &nbsp; <span
-						class="release_date">경매 시작일</span>&nbsp;<span class="date">${auction.auction_startdate}</span>
+					<span class="title">${auction.auction_title }</span> &nbsp; 
+					<span class="release_date">경매 시작일</span>&nbsp;<span class="date">${auction.auction_startdate}</span>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
+					&nbsp; &nbsp; &nbsp; &nbsp; 
+					 <span class="time"><!-- 남은시간 : --> </span>&nbsp;  
 						<span><button class="modify" onclick="auctionModify();">수정</button></span>
 						<span><button class="delete" onclick="auctionDelete();">삭제</button></span>
 				</div>

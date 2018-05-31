@@ -146,5 +146,10 @@ public class AuctionServiceImpl implements AuctionService{
 
 	}
 	
+	@Override
+	public Auction selectauction_timeRemaining(int auction_no) {
+		return auctionDao.selectauction_timeRemaining(sqlSession,auction_no);
+	}
+	
 	
 }

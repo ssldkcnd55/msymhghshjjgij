@@ -209,6 +209,16 @@
 	]]>
 	</update>
 	
+	<select id="selectauction_timeRemaining" parameterType="int" resultType="auction">
+	<![CDATA[
+		select auction_no,sysdate ,AUCTION_STARTDATE, auction_enddate, auction_status, 
+		trunc (TO_DATE (auction_enddate, 'YYYY/MM/DD HH24:MI:SS') - TO_DATE (AUCTION_STARTDATE, 'YYYY/MM/DD HH24:MI:SS'), 0) day, 
+		trunc ((TO_DATE (auction_enddate, 'YYYY/MM/DD HH24:MI:SS') - TO_DATE (AUCTION_STARTDATE, 'YYYY/MM/DD HH24:MI:SS'))*24, 0) - trunc (TO_DATE (auction_enddate, 'YYYY/MM/DD HH24:MI:SS')
+		- TO_DATE (AUCTION_STARTDATE, 'YYYY/MM/DD HH24:MI:SS'), 0) * 24 hour,
+		round (MOD ((TO_DATE (auction_enddate, 'YYYY/MM/DD HH24:MI:SS') - TO_DATE (AUCTION_STARTDATE, 'YYYY/MM/DD HH24:MI:SS'))*24*60, 60)) minute 
+		from auction where auction_no = #{auction_no};
+	]]>
+	</select>
 	
 	
 	
