@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import com.kh.farm.market.exception.DeleteFailException;
+import com.kh.farm.market.model.vo.Category;
 import com.kh.farm.market.model.vo.Daily;
 import com.kh.farm.market.model.vo.Market;
 import com.kh.farm.market.model.vo.Reply;
@@ -13,7 +14,7 @@ import com.kh.farm.qna.model.vo.Market_qna;
 
 public interface MarketService {
 
-	ArrayList<Market> selectMarketList(int page,String search,String ctype);
+	ArrayList<Market> selectMarketList(int page,String search,String ctype,String cname);
 	
 	
 	Market selectMarketInfo(int market_no);
@@ -80,6 +81,9 @@ public interface MarketService {
 
 
 	int deleteDaily(Daily daily);
+
+
+	ArrayList<Category> selectCategory(String ctype);
 
 
 }

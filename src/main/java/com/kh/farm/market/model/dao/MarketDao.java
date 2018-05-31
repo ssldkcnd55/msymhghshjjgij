@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.farm.common.model.vo.PageNumber;
 import com.kh.farm.market.exception.DeleteFailException;
+import com.kh.farm.market.model.vo.Category;
 import com.kh.farm.market.model.vo.Daily;
 import com.kh.farm.market.model.vo.Market;
 import com.kh.farm.market.model.vo.Reply;
@@ -20,12 +21,15 @@ import com.kh.farm.qna.model.vo.Market_qna;
 @Repository
 public class MarketDao {
 
-	public ArrayList<Market> marketList(int page,SqlSessionTemplate sqlSession,String search,String ctype) {
+	public ArrayList<Market> marketList(int page,SqlSessionTemplate sqlSession,String search,String ctype,String cname) {
 		PageNumber pn = new PageNumber();
 		pn.setStartRow(page * 9 -8);
 		pn.setEndRow(pn.getStartRow() + 8);
 		pn.setSearch(search);
-		pn.setCtype(ctype);
+		if(ctype != null && ctype != "")
+			pn.setCtype(ctype);
+		if(cname != null && cname != "")
+			pn.setCname(cname);
 		List<Market> list = sqlSession.selectList("market.marketList",pn);
 		return (ArrayList)list;
 	}
@@ -226,5 +230,11 @@ public class MarketDao {
 	public int deleteDaily(SqlSessionTemplate sqlSession, Daily daily) {
 		// TODO Auto-generated method stub
 		return sqlSession.delete("market.deleteDaily",daily);
+	}
+
+	public ArrayList<Category> selectCategory(SqlSessionTemplate sqlSession, String ctype) {
+		// TODO Auto-generated method stub
+		List<Category> list = sqlSession.selectList("market.selectCategory",ctype);
+		return (ArrayList<Category>)list;
 	}
 }

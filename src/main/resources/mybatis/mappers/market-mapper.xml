@@ -17,13 +17,26 @@
 		where market_title like '%'||#{search}||'%'
 	</if>
 	
+		<if test="search != null">
+		<![CDATA[
+			WHERE market_title like '%'||#{search}||'%'
+		]]>
+		</if>
+		<if test="ctype != null">
+		<![CDATA[
+			WHERE category_no in ((SELECT category_no FROM category WHERE category_main like #{ctype} ))
+		]]>
+		</if>
+		<if test="cname != null">
+		<![CDATA[
+			WHERE category_no in ((SELECT category_no FROM category WHERE category_name like #{cname} ))
+		]]>
+		</if>
 	<![CDATA[
-			 order by 
-			market_no desc)) where rnum >= #{startRow} and rnum <= #{endRow}
+		order by 
+		market_no desc)) where rnum >= #{startRow} and rnum <= #{endRow}
 		
 	]]>
-			
-	
 </select>
 	
 	<select id="marketInfo" parameterType="int" resultType="market">
@@ -187,4 +200,9 @@
 	<delete id="deleteReview" parameterType="Review">
 		delete from review where review_no = #{review_no}
 	</delete>
+	<select id="selectCategory" parameterType="string" resultType="Category2">
+	<![CDATA[
+		select * from category where category_main like #{ctype}
+	]]>
+	</select>
 </mapper>
