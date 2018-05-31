@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE mapper PUBLIC
+"-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="report">
+
+	<resultMap type="Report" id="resultReport">
+		<id column="report_no" property="report_no" />
+		<result column="member_id" property="member_id" />
+		<result column="review_no" property="review_no" />
+		<result column="report_date" property="report_date" />
+		<result column="report_status" property="report_status" />
+		<result column="report_contents" property="report_contents" />
+		<result column="report_category" property="report_category" />
+
+	</resultMap>
+
+	<insert id="insertReport" parameterType="Report" flushCache="true" useGeneratedKeys="true">
+		<![CDATA[
+			insert into report values((select max(report_no) from report)+1, #{review_no}, #{member_id}, sysdate, '0', #{report_contents}, #{report_category})
+		]]>
+	</insert>
+	
+	
+	
+	
+
+</mapper>

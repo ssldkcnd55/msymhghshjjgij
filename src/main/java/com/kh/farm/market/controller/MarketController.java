@@ -25,6 +25,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -39,7 +40,6 @@ import com.kh.farm.shoppingBasket.model.vo.*;
 @Controller
 public class MarketController {
 @Autowired private MarketService marketService;
-	
 
 	@RequestMapping(value="marketList.do")
 	public ModelAndView marketList(ModelAndView mv,@RequestParam(value="search",required=false) String search) {
@@ -562,4 +562,6 @@ public class MarketController {
 		int deleteReview = marketService.deleteReview(review);
 		return "forward:/marketDetail.do?market_no="+review.getMarket_no();
 	}
+	
+	
 }

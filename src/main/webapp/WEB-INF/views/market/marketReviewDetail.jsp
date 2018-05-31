@@ -172,6 +172,30 @@
 	});
 
 
+function reportReview() {
+	
+	location.href = "#open";
+}
+
+function report_submit() {
+	var report_contents = $('#report_content').val();
+	var review_no = ${review.review_no};
+	var id = '${loginUser.member_id}';
+	var report_category = $('#report_category').val();
+	alert(report_content+','+review_no+','+id+','+report_category);
+	
+	$.ajax({
+		url: "report.do",
+		type: "post",
+		data : {report_contents: report_contents, member_id: id, report_category: report_category,
+			review_no: ${review.review_no}
+		},
+		dataType: "JSON",
+		success: function(obj){
+			alert("신고 완료!");
+		}
+	});
+}
 </script>
 
 </head>
@@ -199,6 +223,28 @@
 							<div class="QnA_modify">
 								<button onclick="move_review_modify();">수정</button>&nbsp;
 								<button onclick="deleteReview();">삭제</button>
+								<button onclick="reportReview();">신고</button>
+								
+								<!--신고 모달창  -->
+    					<div class="white_content" id="open">
+        					<div>
+            					<h1>신고하기</h1>
+            					<select id="report_category">
+            							<option value="불량/욕설">불량/욕설</option>
+            							<option value="허위사실">허위사실</option>
+            					</select>
+            						<div>
+            							
+            							<textarea id="report_contents" class="report_textarea" rows="10" cols="95">신고내용</textarea>
+            						</div>
+            						<div>
+            							<button onclick="report_submit();">제출</button>&nbsp;<button onclick="window.location.href='#close'">취소</button>
+            						</div>
+        					</div>
+    					</div>
+								<!-- 신고 모달창 끝 -->
+								
+								
 							</div>
 						</c:if>
 						<div class="QnA_note">
@@ -212,6 +258,7 @@
 				<!-- board-wrap -->
 			</div>
 			<!-- inner-wrap -->
+			</div> 
 			<!-- container끝 -->
 
 			<div id="footer">

@@ -27,7 +27,7 @@
 		 <typeAlias type="com.kh.farm.shoppingBasket.model.vo.ShowBasket" alias="ShowBasket" /> 
 		 <typeAlias type="com.kh.farm.category.model.vo.Category" alias="Category" /> 
 		 <typeAlias type="com.kh.farm.common.model.vo.PageNumber" alias="PageNumber" />  
-
+		 <typeAlias type="com.kh.farm.report.model.vo.Report" alias="Report"/>	
 
 	</typeAliases>
 
@@ -42,5 +42,6 @@
 		<mapper resource="mybatis/mappers/qna-mapper.xml" />
 		<mapper resource="mybatis/mappers/shoppingBasket-mapper.xml" />
 		<mapper resource="mybatis/mappers/category-mapper.xml" />
+		<mapper resource="mybatis/mappers/report-mapper.xml" />
 	</mappers>
 </configuration>
