@@ -12,11 +12,6 @@
 			market_title,market_releasedate,market_note,market_img,
 			member_id from (select * from market 
 			]]>
-
-	<if test="search != null">
-		where market_title like '%'||#{search}||'%'
-	</if>
-	
 		<if test="search != null">
 		<![CDATA[
 			WHERE market_title like '%'||#{search}||'%'

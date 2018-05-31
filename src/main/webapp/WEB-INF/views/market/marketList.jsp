@@ -27,7 +27,6 @@
 		count = 1;
 		cname = $(value).val();
 		ctype = null;
-		alert(cname);
 		$.ajax({
 			url: "ajaxMoreMarket.do",
 			type: "post",
@@ -58,7 +57,6 @@
 			count = 1;
 			ctype = $(this).val();
 			cname = null;
-			alert(ctype);
 			$.ajax({
 				url: "ajaxMoreMarket.do",
 				type: "post",
