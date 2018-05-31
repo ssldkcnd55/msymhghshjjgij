@@ -149,13 +149,10 @@ function payment() {
 				buyer_addr : addr,
 			}, function(rsp) {
 				if (rsp.success) {
-				
-					var msg = '결제가 완료되었습니다.';
-					msg += '고유ID : ' + rsp.imp_uid;
-					msg += '상점 거래ID : ' + rsp.merchant_uid;
-					msg += '결제 금액 : ' + rsp.paid_amount;
-					msg += '카드 승인번호 : ' + rsp.apply_num;
-					console.log(msg);
+					console.log("카드 결제 완료");
+			
+					
+					
 					////////////////////본 결제
 					var objList=[];
 					for(var i=0; i < product_market_no.length; i++)
@@ -171,18 +168,20 @@ function payment() {
 							type : "post",
 							data:{"objList":objList},			
 							success:function(data){
-								console.log(group_no);
-								////
-								//rsp.paid_amount 결제금액
-								//rsp.status 결제상태
-								//rsp.name 상품명
-								//rsp.buyer_name 구매자명
-								//rsp.buyer_email 구매자 이메일
-								//rsp.buyer_tel 구매자 전화번호
-								//rsp.buyer_addr 구매자 주소
-								//rsp.paid_at 결제 승인 시각
-								//// payment_complete 페이지연결해야함
 								
+								
+								var code= '<form id="completeSubmit" action="movePaymentComplete.do" method="post">';
+								code += '<input name="group_no" value="'+group_no+'" type="hidden" />';
+								code += '<input name="name" value="'+rsp.name+'" type="hidden" />';
+								code += '<input name="paid_amount" value="'+rsp.paid_amount+'" type="hidden" />';
+								code += '<input name="buyer_name" value="'+rsp.buyer_name+'" type="hidden" />';
+								code += '<input name="buyer_email" value="'+rsp.buyer_email+'" type="hidden" />';
+								code += '<input name="buyer_tel" value="'+rsp.buyer_tel+'" type="hidden" />';
+								code += '<input name="buyer_addr" value="'+rsp.buyer_addr+'" type="hidden" />';
+								code += '</form>';
+								
+								$('.inner-wrap').append(code);
+								$('#completeSubmit').submit();
 							},
 							error:function(){
 								console.log("payment.js/ payment() /  insertFirstPayment.do ajax / insertNewPayment.do ajax ");

@@ -52,8 +52,13 @@ public class PaymentDao {
 	}
 
 	public int selectPaymentHistoryCount(SqlSessionTemplate sqlSession) {
-		// TODO Auto-generated method stub
+		
 		int listCount = sqlSession.selectOne("payment.selectPaymentHistoryCount");
 		return listCount;
+	}
+
+	public int deleteShoppingBasket(SqlSessionTemplate sqlSession, Payment pm) {
+		
+		return sqlSession.delete("payment.deleteShoppingBasket", pm);
 	}
 }

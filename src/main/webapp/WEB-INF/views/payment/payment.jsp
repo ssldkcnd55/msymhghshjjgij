@@ -69,10 +69,10 @@ if(member_addr.indexOf('@') != -1)
                    </a></td>
                    <td><strong>${item.member_name}</strong>
                    <p>${item.member_id}</p></td>
-				   <td><fmt:formatNumber value="${item.market_price}" pattern="#,###"></fmt:formatNumber>원</td>
+				   <td><fmt:formatNumber value="${item.market_price}" pattern="#,###"/>원</td>
                    <td>${item.buy_amount }개</td>
                    <td>2,500원</td>
-                   <td><fmt:formatNumber value="${item.buy_amount * item.market_price }" pattern="#,###"></fmt:formatNumber>원</td>           
+                   <td><fmt:formatNumber value="${item.buy_amount * item.market_price }" pattern="#,###"/>원</td>           
                 </tr>
                 <script type="text/javascript">
                order_price+=${item.buy_amount * item.market_price };
@@ -148,7 +148,7 @@ if(member_addr.indexOf('@') != -1)
                   	<option >부재시 경비실에 맡겨주세요.</option>
                   	<option>부재시 휴대폰으로 연락바랍니다.</option>
                   	<option>집 앞에 놓아주세요.</option>
-                  	<option>집 앞에 놓아주세요.</option>
+       
                   	<option>직접 입력</option>
                   	</select>                 
                   </td>
@@ -189,7 +189,7 @@ if(member_addr.indexOf('@') != -1)
                   	<option >부재시 경비실에 맡겨주세요.</option>
                   	<option>부재시 휴대폰으로 연락바랍니다.</option>
                   	<option>집 앞에 놓아주세요.</option>
-                  	<option>집 앞에 놓아주세요.</option>
+              
                   	<option>직접 입력</option>
                   	</select>                 
                   </td>
@@ -206,7 +206,12 @@ if(member_addr.indexOf('@') != -1)
             
             
 
+<!--  -->
+<form action="" method="post">
+<input name="" value="" type="hidden" />
 
+</form>
+<!--  -->
          </div>
                <!-- 배달지 -->
           
@@ -224,7 +229,7 @@ if(member_addr.indexOf('@') != -1)
                 </tr>
                <tr>
                   <th style="text-align:left;">배송비</th>
-                   <td style="text-align:right;width:30%;" id="delivery_price">(+)${fn:length(sbl) * 2500 }원</td>
+                   <td style="text-align:right;width:30%; white-space: nowrap;" id="delivery_price">(+) <fmt:formatNumber value="${fn:length(sbl) * 2500 }" pattern="#,###"/>원</td>
                </tr>   
                          
              </table>
@@ -233,7 +238,7 @@ if(member_addr.indexOf('@') != -1)
           
           <div>
           <input type="button" onclick="payment()" value="결제하기" class="buy"/> 
-         <!--  <input type="button" onclick="test()" value="결제하기" class="buy"/> -->
+        
           </div>
           </div>
          </div>          
@@ -248,7 +253,7 @@ if(member_addr.indexOf('@') != -1)
 
 <!--          </div> -->
       </div>
-      <%-- <%@ include file="../messenger/msg_box.jsp"%> --%>
+       <%@ include file="../messenger/msg_box.jsp"%>
       <div id="footer">
          <%@  include file="../inc/foot.jsp"%>
       </div>
