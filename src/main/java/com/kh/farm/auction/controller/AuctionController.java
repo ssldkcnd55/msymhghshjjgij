@@ -499,6 +499,24 @@ public class AuctionController {
         out.close();
 		}
 	
+	/*경매 상태 3초마다 update*/
+	@RequestMapping(value="auction_updateStatus.do")
+	@ResponseBody
+	public void auction_updateStatus(HttpServletResponse response)throws IOException{
+		int auctionStatus = auctionService.updateAuctionStatus();
+		/*System.out.println("auctionStatus : "+auctionStatus);*/
+		
+	         JSONObject json = new JSONObject();
+	        
+	         json.put("auction_status",auctionStatus);
+	        /* System.out.println(json.toJSONString());*/
+	         response.setContentType("application/json; charset=utf-8;");
+		      PrintWriter out = response.getWriter();
+		      out.print(json.toJSONString());
+		      out.flush();
+		      out.close();
+		
+	}
 	
 	
 	

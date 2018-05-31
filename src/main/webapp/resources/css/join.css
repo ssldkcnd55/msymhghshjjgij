@@ -14,11 +14,29 @@ body {
 	width: 100%;
 }
 #searchId{
-	background: #82736e;
+	background: #512772;
+	color: white;
 	border:none;
+	cursor: pointer;
 }
 
+.loginBtn{
+	background: #512772;
+	color: white;
+	border:none;
+	cursor: pointer;
+}
 
+.searchPwd{
+	background: #512772;
+	color: white;
+	border: none;
+	cursor: pointer;
+	border-radius: 3px;
+	width: 120px;
+	height: 30px;
+	
+}
 #userId { /*ID LABEL 서식  */
 	width: 350px;
 	float: left;
@@ -30,7 +48,7 @@ body {
 }
 
 .h2{
-	color:#777;margin-bottom:20px;
+	color:#521772;margin-bottom:20px;
 	text-align:center;	
 	margin-left: 40px;
 }
@@ -41,11 +59,16 @@ body {
 }
 .searchBtn{
 	background: #f2f2f2;
-	
+	display: inline-block;
 }
 
 .loginBtn{
-	
+	background:white;
+color: #521772;
+border: 1px solid #521772;
+cursor: pointer;
+height: 30px;
+border-radius: 3px;
 }
 #userEmail { /*ID LABEL 서식  */
 	width: 350px;
@@ -75,7 +98,6 @@ body {
 	color: gray;
 	font-weight: normal;
 	font-family: Roboto, 'Noto Sans KR', sans-serif;
-	margin-left: 40px;
 }
 
 .confirmPwd { /*비밀번호의 불일치 여부를 확인하기위한 p태그 */
@@ -88,8 +110,29 @@ body {
 	border: none;
 }
 #cancelBt{
-	background:#f77734;
-	border:none;
+	background:white;
+color: #521772;
+border: 1px solid #521772;
+cursor: pointer;
+}
+#cancelBt:hover{
+	background: #e2d2f0;
+	
+}
+.loginBtn:hover{
+	background: #e2d2f0;
+}
+
+.searchPwd:hover{
+	background: #f5f1fa;
+	color:#512772;
+	border: 1px solid #512772;
+}
+#searchId:hover{
+	background: #f5f1fa;
+	color:#512772;
+	border: 1px solid #512772;
+	
 }
 #dupliBt { /*아이디 중복검사 버튼  */
 	float: left;
@@ -125,10 +168,47 @@ body {
 	height: 130px;
 	margin: 10px 0px;
 }
-
+.userName{
+	margin-right: 13px;
+}
 .join_form2 {
 	width: 500px;
 	background: #fff;
 	margin: 0 auto;
 	height: 520px;	
+}
+
+.form-group{
+	text-align: center;
+	color: gray;
+	
+}
+.form-group.name{
+	margin-top: 40px;
+}	
+
+.tag_box{
+	border: 1px solid #dcdcdc;
+	padding-top : 0px;
+	padding-bottom : 20px;
+	height: 200px;
+}
+.form-group.text-center{
+	margin: 0 auto;
+	
+}
+
+.form-control{
+	border: 1px solid #bdbdbd;
+	 border-radius: 3px; 
+	text-shadow: none;
+	padding: 5px;
+	margin:5px;
+}
+
+.btn{
+	width: 50px;
+	height: 30px;
+	border-radius: 3px;
+	
 }

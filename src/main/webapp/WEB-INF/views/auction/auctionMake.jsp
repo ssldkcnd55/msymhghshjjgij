@@ -34,6 +34,7 @@
 			reader.readAsDataURL(html.files[0]);
 		}
 	}
+	
 
 	/* 경매등록 버튼 */
 	function submitContents(){
