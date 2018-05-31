@@ -16,6 +16,7 @@
 	<if test="search != null">
 		where market_title like '%'||#{search}||'%'
 	</if>
+	
 	<![CDATA[
 			 order by 
 			market_no desc)) where rnum >= #{startRow} and rnum <= #{endRow}

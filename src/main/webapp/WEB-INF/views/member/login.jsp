@@ -35,7 +35,7 @@ $(function(){
 
 		<div id="container">
         	<div class="inner-wrap">
-       			<h2>로그인</h2>
+       			<h2 class="logintitle">로그인</h2>
 		<form action="/farm/login.do" method="post">
 			<div class="login_div" >
 				<div>
