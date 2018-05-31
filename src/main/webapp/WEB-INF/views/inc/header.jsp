@@ -12,6 +12,24 @@
 	type="text/css" />
 <script type="text/javascript">
 
+//경매 상태 update(0:경매 등록은 하였으나 경매 준비 / 1:경매중 / 2: 경매 끝) 3초마다 상태 update 실행중
+ var upadte;
+ update = setInterval(function(){auction_update()}, 3000);
+function auction_update(){
+
+	$.ajax({
+		url : "auction_updateStatus.do",
+		type : 'get',
+		 success : function(obj) {
+			 /* console.log(obj.toString());  */
+			 var objStr = JSON.stringify(obj);
+	         var jsonObj = JSON.parse(objStr);
+			/*  alert("경매 상태"+jsonObj.auction_status); */
+		 }
+	});
+	}
+
+
 function getBasketCount(member_id)
 {
 	$.ajax({
@@ -73,6 +91,14 @@ function getBasketCount(member_id)
 	
 	/*검색기능*/
 
+	function enterkey() {
+        if (window.event.keyCode == 13) {
+        	moveSearchList();
+	    }
+	}
+
+
+	
 	function moveSearchList(){
 		location.href = "marketList.do?search="+$("#search").val();
 	}
@@ -117,7 +143,7 @@ function getBasketCount(member_id)
                      <li><a href="moveJob.do">구인구직</a></li>
                   </ul>
                   <div class="search_box">
-                     <input class="search" type="text" name="search" id="search" placeholder="장터 검색"> <input type="image"
+                     <input class="search" type="text" name="search" onkeyup="enterkey();" id="search" placeholder="장터 검색"> <input type="image"
                         src="/farm/resources/images/search1.png"
                         class="btn_search" onclick="moveSearchList();">
                   </div>

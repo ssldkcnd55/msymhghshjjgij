@@ -16,6 +16,17 @@ import com.kh.farm.notice.model.vo.Notice;
 public class MoveController {
 	public MoveController() {}
 	
+	@RequestMapping("moveDelivery_Number.do")
+	public String movedelivery_Number() {
+		return "delivery/delivery_Number";
+	}
+	
+	@RequestMapping("movePaymentComplete.do")
+	public String movePaymentComplete()
+	{
+		return "payment/payment_complete";
+	}
+	
 	@RequestMapping("paymentHistory.do")
 	public String buyHistory() {
 		return "member/customerMy/payment_History";

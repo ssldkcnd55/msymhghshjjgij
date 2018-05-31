@@ -155,14 +155,14 @@
 	
 	<select id="selectcheckAuction_history_price"  parameterType="int"  resultType="AuctionHistory" >
 	<![CDATA[
-		select max(ah.auction_history_price) as "auction_history_price",a.auction_startprice
+		select max(ah.auction_history_price) as "auction_history_price",a.auction_startprice,a.AUCTION_DIRECTPRICE
 		from auction_history ah, auction a
 		where ah.auction_no = a.auction_no
-		and ah.auction_no =#{auction_no} GROUP BY auction_startprice
+		and ah.auction_no = #{auction_no} GROUP BY auction_startprice, a.AUCTION_DIRECTPRICE
 	]]>
 	</select>
 	
-	
+	<!-- 경매 입찰 등록 -->
 	<insert id="insertAuctionBidding" parameterType="AuctionHistory" flushCache="true" useGeneratedKeys="true">
 	<![CDATA[
 		insert into auction_history values((select max(auction_history_no) from auction_history)+1,
@@ -173,7 +173,7 @@
 	
 	<select id="selectAuctionBiddingList"  parameterType="int"  resultType="AuctionHistory" >
 	<![CDATA[
-		select * from auction_history where auction_no = #{auction_no} order by auction_history_no desc
+		select * from auction_history where auction_no = #{auction_no} order by auction_history_price desc
 	]]>
 	</select> 
 	
@@ -192,11 +192,22 @@
 	</select>
 	
 	
-	<select id="selectAuctionBiddingCount" parameterType="int" resultType="AuctionHistory">
+	<select id="selectAuctionBiddingCount" parameterType="int" resultType="int">
 	<![CDATA[
-		select count(*) as "rnum" from auction_history where auction_no = #{auction_no}
+		select count(*) from auction_history where auction_no = #{auction_no}
 	]]>
 	</select>
+	
+	
+	<update id="updateAuctionStatus" parameterType="int">
+	<![CDATA[
+		update auction set auction_status =
+  		case when sysdate BETWEEN auction_startdate and auction_enddate then '1'
+  		when auction_startdate > sysdate then '0'
+ 		else '2'
+ 		end 
+	]]>
+	</update>
 	
 	
 	

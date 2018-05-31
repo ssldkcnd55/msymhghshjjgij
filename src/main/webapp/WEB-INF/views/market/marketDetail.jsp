@@ -11,6 +11,7 @@
 <link href="/farm/resources/css/qna.css" rel="stylesheet" type="text/css" />
 <link href="/farm/resources/css/dailyList.css" rel="stylesheet" type="text/css" />
 <link href="/farm/resources/css/marketDetail.css" rel="stylesheet" type="text/css" />
+<link href="/farm/resources/css/auctionDetail.css" rel="stylesheet" type="text/css" />
 <link href="/farm/resources/css/marketDetail_modal.css" rel="stylesheet" type="text/css" />
 <script src="/farm/resources/js/jquery-3.3.1.min.js"></script>
 <script type="text/javascript" src="/farm/resources/js/tabMove.js"></script>
@@ -27,7 +28,7 @@ $(function(){
 
 </script>
 <script type="text/javascript">
-
+var change = 0;
 ///최근 본 상품 쿠키 (현준)///
  $(function(){
 
@@ -230,7 +231,7 @@ function reviewPage(page){
 			 
 			for(var i in jsonObj.list){
 				outValues += "<tr id='hover'><td>"+jsonObj.list[i].rnum+"</td>"
-				+"<td id='QnA_td'><a href='reviewDeatil.do?review_no="+jsonObj.list[i].review_no+"'>"+jsonObj.list[i].review_title+"</a></td>"
+				+"<td id='QnA_td'><a href='reviewDeatil.do?review_no="+jsonObj.list[i].review_no+"&market_no=${market.market_no}'>"+jsonObj.list[i].review_title+"</a></td>"
 				+"<td>"+jsonObj.list[i].member_id+"</td><td>"+jsonObj.list[i].review_date+"</td></tr>";
 			}
 			$(".review_table").html(outValues);	
@@ -294,7 +295,7 @@ function dailyPage(){
 						+"<td class='history_right_table_td2' align='left' valign='top'>"
 						+"<span class='history_right_table_span1'>"+jsonObj.list[i].daily_date+"</span>"
 						+"</td></tr><tr><td align='left' class='hi_title'>"+jsonObj.list[i].daily_title+"</td></tr>"
-						+"<tr><td align='left' class='hi_content_right'><a class='aTag' href='marketDailyDetail.do?daily_no="+jsonObj.list[i].daily_no+"'><div>"+jsonObj.list[i].daily_contents
+						+"<tr><td align='left' class='hi_content_right'><a class='aTag' href='marketDailyDetail.do?daily_no="+jsonObj.list[i].daily_no+"&market_no=${market.market_no}'><div>"+jsonObj.list[i].daily_contents
 						+"<span class='more'>...더보기</span></div></a></td></tr></tbody></table></td></tr>";
 				}else{
 					outValues += "<tr><td valign='top' class='history_right' align='right'>"
@@ -302,7 +303,7 @@ function dailyPage(){
 						+"<tbody><tr><td align='right' class='hi_date' valign='top'><span class='history_right_table_span1'>"+jsonObj.list[i].daily_date+"</span></td>"
 						+"<td rowspan='3' class='history_right_table_td1' ></td>"
 						+"</tr><tr><td align='right' class='hi_title'>"+jsonObj.list[i].daily_title+"</td></tr>"
-						+"<tr><td align='right' class='hi_content_right'><a class='aTag' href='marketDailyDetail.do?daily_no="+jsonObj.list[i].daily_no+"'><div style='float:right;'>"+jsonObj.list[i].daily_contents
+						+"<tr><td align='right' class='hi_content_right'><a class='aTag' href='marketDailyDetail.do?daily_no="+jsonObj.list[i].daily_no+"&market_no=${market.market_no}'><div style='float:right;'>"+jsonObj.list[i].daily_contents
 						+"<span class='more'>...더보기</span></div></a></td></tr></tbody></table></td><td class='space_right2'></tr>";
 				}
 			}
@@ -319,6 +320,10 @@ function dailyPage(){
 	});
 }
 
+function changeprice(){
+	 change = ${market.market_price} * $("input[name='buy_amount']").val();
+	 $(".mkPrice").html(change+"원");
+}
 </script>
 <title>Farm</title>
 </head>
@@ -401,7 +406,8 @@ function dailyPage(){
 				<ul class="tabs">
 					<li class="tab-link current" data-tab="tab-1"><div
 							class="menu introduce">소개</div></li>
-					<li class="tab-link" data-tab="tab-2"><div class="menu daily"
+					<li class="tab-
+					link" data-tab="tab-2"><div class="menu daily"
 							onclick="dailyPage();">일지</div></li>
 					<li class="tab-link" data-tab="tab-3"><div
 							class="menu question" onclick="qnaPage(1);">문의</div></li>
@@ -508,7 +514,7 @@ function dailyPage(){
 						class="goods-view-show-option-button __active">
 						<span class="goods-view-show-option-button-value">옵션선택</span>
 					</button>
-					<div id="flow-cart-content"
+					<div id="market-flow-cart-content"
 						class="goods-view-flow-cart-content __active">
 
 
@@ -517,12 +523,42 @@ function dailyPage(){
 								<input type="hidden" name="market_no"
 									value="${market.market_no }"> <input type="hidden"
 									name="member_id" value="${sessionScope.loginUser.member_id}">
-								<input type="number" name="buy_amount" min="1" value="1">
-								<input type="submit" value="구매하기"> <input type="button"
-									value="장바구니" onclick="addBasket()">
+									<!-- <div class="market_title"></div> -->
+									<table class="tb">
+									<tr>
+										<td>${market.market_title}</td>
+										<td><input type="number" name="buy_amount" min="1" value="1" class="amount_text" 
+										oninput="changeprice();"></td>
+										<td>${market.market_price }원</td>
+									</tr>
+									
+								<%-- 	<tr>
+										<td>출하 예정일</td>
+										<td>  </td>
+										<td>${market.market_releasedate}</td>
+									</tr>
+									 --%>
+									
+									<tr>
+										<td></td>
+										<td>  </td>
+										<td>총 상품 금액 : <span class="mkPrice">${market.market_price }원</span></td>
+									</tr>
+									
+									</table>
+							
+								
+								<div class="market_cart_right_div">
+								<input type="submit" value="구매하기" class="market_buy"> <input type="button"
+									value="장바구니" onclick="addBasket()" class="market_basket">
+									</div>
 							</form>
 
 						</c:if>
+						<c:if test="${empty sessionScope.loginUser  }">
+						<div class="loginmessage">로그인이 필요한 서비스 입니다.</div>
+						</c:if>
+						
 						<!-- 장바구니 모달창 -->
 						<div id="myModal" class="modal">
 							<div class="modal-content">

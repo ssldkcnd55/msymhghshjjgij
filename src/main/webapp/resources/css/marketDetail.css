@@ -185,3 +185,77 @@ ul.tabs li{
 		width: 800px;
 		height: 200px;
 		}
+		
+.amount_text{
+	width: 40px;
+padding-left: 5px;
+}
+
+.market_title{
+	margin: 0;
+	border-bottom: 1px solid #dcdcdc;
+}
+
+.tb{
+	float: left;
+    width: 500px;
+  
+}
+
+
+.tb tr:nth-child(1) td{
+	font-size: 10pt;
+	border-bottom: 1px solid #dcdcdc;
+}
+.tb td:nth-child(3){
+	width: 200px;
+}
+
+
+.market_cart_right_div{
+    display: inline-block;
+    width: 300px;
+    overflow: hidden;
+    
+
+    }
+    
+    #market-flow-cart-content{
+    
+    vertical-align:bottom;
+    margin: 0;
+     border: 1px solid #dcdcdc;
+    padding: 15px;
+    color: #5a5a5a;
+    background: #f6f6f6;
+    height: 80px;
+    }
+    
+    .market_buy{
+    background:#512772; 
+    color: white;
+    border:none;
+    width: 100px;
+    height: 40px;
+    margin-left: 50px;
+    
+    }
+    .market_basket{
+    color: #512772;
+    background: white;
+    border : 1px solid #512772;
+	 width: 100px;
+    height: 40px;
+    margin-top: 20px;
+    }
+    .mkPrice{
+    color: #512772;
+    font-size: 14pt;
+    font-weight:bold;
+    }
+    
+    .loginmessage{
+    text-align: center;
+    color: #6a6a6a;
+   
+    }

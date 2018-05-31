@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.farm.common.model.vo.PageNumber;
 import com.kh.farm.market.exception.DeleteFailException;
+import com.kh.farm.market.model.vo.Category;
 import com.kh.farm.market.model.vo.Daily;
 import com.kh.farm.market.model.vo.Market;
 import com.kh.farm.market.model.vo.Reply;
@@ -20,11 +21,15 @@ import com.kh.farm.qna.model.vo.Market_qna;
 @Repository
 public class MarketDao {
 
-	public ArrayList<Market> marketList(int page,SqlSessionTemplate sqlSession,String search) {
+	public ArrayList<Market> marketList(int page,SqlSessionTemplate sqlSession,String search,String ctype,String cname) {
 		PageNumber pn = new PageNumber();
 		pn.setStartRow(page * 9 -8);
 		pn.setEndRow(pn.getStartRow() + 8);
 		pn.setSearch(search);
+		if(ctype != null && ctype != "")
+			pn.setCtype(ctype);
+		if(cname != null && cname != "")
+			pn.setCname(cname);
 		List<Market> list = sqlSession.selectList("market.marketList",pn);
 		return (ArrayList)list;
 	}
@@ -122,9 +127,14 @@ public class MarketDao {
 	}
 
 	public ArrayList<UnderReply> selectReviewUnderReply(SqlSessionTemplate sqlSession,
-			HashMap<String, ArrayList<Integer>> map) {
+			HashMap<String, ArrayList<Integer>> map) throws DeleteFailException{
 		// TODO Auto-generated method stub
-		List<UnderReply> list = sqlSession.selectList("market.reviewUnderReply", map);
+		List<UnderReply> list = new ArrayList<UnderReply>();
+		try {
+			list = sqlSession.selectList("market.reviewUnderReply", map);
+		}catch(Exception e) {
+			throw new DeleteFailException("댓글이 존재하지않습니다.");
+		}
 		return (ArrayList<UnderReply>)list;
 	}
 
@@ -145,9 +155,14 @@ public class MarketDao {
 	}
 
 	public ArrayList<UnderReply> selectDailyUnderReply(SqlSessionTemplate sqlSession,
-			HashMap<String, ArrayList<Integer>> map) {
+			HashMap<String, ArrayList<Integer>> map) throws DeleteFailException{
 		// TODO Auto-generated method stub
-		List<UnderReply> list = sqlSession.selectList("market.dailyUnderReply", map);
+		List<UnderReply> list = new ArrayList<UnderReply>();
+		try {
+			list = sqlSession.selectList("market.dailyUnderReply", map);
+		}catch(Exception e) {
+			throw new DeleteFailException("댓글이 존재하지않습니다.");
+		}
 		return (ArrayList<UnderReply>)list;
 	}
 
@@ -195,5 +210,31 @@ public class MarketDao {
 	public int updateUnderReply(SqlSessionTemplate sqlSession, UnderReply reply) {
 		// TODO Auto-generated method stub
 		return sqlSession.update("market.updateUnderReply",reply);
+	}
+
+	public int updateReview(SqlSessionTemplate sqlSession, Review review) {
+		// TODO Auto-generated method stub
+		return sqlSession.update("market.updateReview",review);
+	}
+
+	public int updateDaily(SqlSessionTemplate sqlSession, Daily daily) {
+		// TODO Auto-generated method stub
+		return sqlSession.update("market.updateDaily",daily);
+	}
+
+	public int deleteReview(SqlSessionTemplate sqlSession, Review review) {
+		// TODO Auto-generated method stub
+		return sqlSession.delete("market.deleteReview",review);
+	}
+
+	public int deleteDaily(SqlSessionTemplate sqlSession, Daily daily) {
+		// TODO Auto-generated method stub
+		return sqlSession.delete("market.deleteDaily",daily);
+	}
+
+	public ArrayList<Category> selectCategory(SqlSessionTemplate sqlSession, String ctype) {
+		// TODO Auto-generated method stub
+		List<Category> list = sqlSession.selectList("market.selectCategory",ctype);
+		return (ArrayList<Category>)list;
 	}
 }
