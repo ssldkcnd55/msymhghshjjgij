@@ -73,6 +73,14 @@ function getBasketCount(member_id)
 	
 	/*검색기능*/
 
+	function enterkey() {
+        if (window.event.keyCode == 13) {
+        	moveSearchList();
+	    }
+	}
+
+
+	
 	function moveSearchList(){
 		location.href = "marketList.do?search="+$("#search").val();
 	}
@@ -117,7 +125,7 @@ function getBasketCount(member_id)
                      <li><a href="moveJob.do">구인구직</a></li>
                   </ul>
                   <div class="search_box">
-                     <input class="search" type="text" name="search" id="search" placeholder="장터 검색"> <input type="image"
+                     <input class="search" type="text" name="search" onkeyup="enterkey();" id="search" placeholder="장터 검색"> <input type="image"
                         src="/farm/resources/images/search1.png"
                         class="btn_search" onclick="moveSearchList();">
                   </div>
