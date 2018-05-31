@@ -20,9 +20,9 @@ where mk.MARKET_NO=sb.MARKET_NO and sb.MEMBER_ID= #{member_id}
 	
 	<delete id="deleteSoppingBasket" parameterType="hashmap">
 	
-	delete from SHOP_BASKET where member_id = #{member_id} and market_no in 
+	delete from SHOP_BASKET where member_id = #{member_id} 
 
-	<foreach collection="noList" index="index" item="item" open="(" close=")" separator="," >
+	<foreach collection="noList" index="index" item="item" open="and market_no in (" close=")" separator="," >
 			#{item}
 	</foreach>
 	</delete>

@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.maven.model.Model;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -22,7 +23,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.kh.farm.auction.model.vo.AuctionHistory;
 import com.kh.farm.member.model.vo.*;
 import com.kh.farm.payment.model.service.PaymentService;
-import com.kh.farm.payment.model.vo.Payment;
+import com.kh.farm.payment.model.vo.*;
 import com.kh.farm.shoppingBasket.model.vo.*;
 
 @Controller
@@ -61,7 +62,9 @@ public class PaymentController {
 		pm.setBuy_request((String)job.get("buy_request"));
 		
 		paymentService.insertNewPayment(pm);
-		
+		////장바구니 삭제////
+		paymentService.deleteShoppingBasket(pm);
+		/////////////////
 		}
 		JSONObject job = (JSONObject)jparser.parse(objList.get(0));
 		int result = paymentService.deleteFirstPayment(Integer.parseInt((String) job.get("group_no")));
@@ -166,6 +169,13 @@ public class PaymentController {
 		out.close();
 		
 	}
-
-
+	
+	@RequestMapping(value="movePaymentComplete.do", method=RequestMethod.POST)
+	public ModelAndView movePaymentComplete(ModelAndView mv,PaymentComplete pc)
+	{	
+		
+		mv.addObject("pc", pc);
+		mv.setViewName("payment/payment_complete");
+		return mv;
+	}
 }
