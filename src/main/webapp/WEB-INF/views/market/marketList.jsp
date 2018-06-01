@@ -18,6 +18,8 @@
 	var count = 1;
 	var ctype = null;
 	var cname = null;
+	var sort = "market_no";
+	
 </script>
 <script type="text/javascript">
 	function marketMake(){
@@ -31,6 +33,7 @@
 			url: "ajaxMoreMarket.do",
 			type: "post",
 			data : {cname : cname,
+				sort :sort,
 				page : count},
 			dataType: "JSON",
 			success: function(data){
@@ -61,6 +64,7 @@
 				url: "ajaxMoreMarket.do",
 				type: "post",
 				data : {ctype : ctype,
+					sort :sort,
 					page : count},
 				dataType: "JSON",
 				success: function(data){
@@ -88,6 +92,37 @@
 			
 		});
 			
+		$("input[name='sortRadio']").click(function(){
+			count = 1;
+			sort = $(this).val();
+			
+			$.ajax({
+				url: "ajaxMoreMarket.do",
+				type: "post",
+				data : {sort : sort,
+					page : count,
+					ctype : ctype,
+					cname : cname},
+				dataType: "JSON",
+				success: function(data){
+					var objStr = JSON.stringify(data);
+					var jsonObj = JSON.parse(objStr);
+					var outValues = "";
+					for(var i in jsonObj.list){
+						outValues += "<a href='marketDetail.do?market_no=" + jsonObj.list[i].market_no + "'>" +
+						"<div class='market'><div class='img_box' style='background-image:url(\"/farm/resources/upload/marketUpload/"+ jsonObj.list[i].market_img+"\"); background-size: cover;'>"+
+						"</div><div class='title_box'><p class='title'>"+jsonObj.list[i].market_title +
+						"</p><p class='content'>"+jsonObj.list[i].market_note+"</p><p class='content price'>"+jsonObj.list[i].market_price+"원</p></div></div></a>";
+					}
+					$(".market_box").html(outValues);
+				},error: function(request,status,errorData){
+					console.log("error code : " + request.status + "\nmessage" + 
+							request.responseText + "\nerror" + errorData);
+				}
+			});
+		});
+		
+		
 	});
 </script>
 <script>
@@ -146,9 +181,9 @@
 					<!-- 정렬 메뉴바 -->
 					<div class="sort">
 						<h4>정렬</h4>
-						<input type="radio" name="sortRadio" > 최신순<br>
-						<br> <input type="radio" name="sortRadio"> 마감임박순<br>
-						<br> <input type="radio" name="sortRadio"> 가격순<br>
+						<input type="radio" name="sortRadio" checked="checked" value="market_no"> 최신순<br>
+						<br> <input type="radio" name="sortRadio" value="buy"> 인기순 <br>
+						<br> <input type="radio" name="sortRadio" value="market_price"> 가격순<br>
 
 					</div>
 
@@ -157,7 +192,8 @@
 					<div class="category_menu">
 						<h4>대분류</h4>
 						<div class="MainCategory">
-							<input type="radio" name="MainCategory" value="채소류">채소류<br>
+						<input type="radio" name="MainCategory" checked="checked" value=""> 전체보기 <br><br>
+							<input type="radio" name="MainCategory" value="채소류"> 채소류<br>
 							<br> <input type="radio" name="MainCategory" value="과일류">
 							과일류<br>
 							<br> <input type="radio" name="MainCategory" value="곡식류">

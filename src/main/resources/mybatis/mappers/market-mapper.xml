@@ -27,11 +27,21 @@
 			WHERE category_no in ((SELECT category_no FROM category WHERE category_name like #{cname} ))
 		]]>
 		</if>
-	<![CDATA[
-		order by 
-		market_no desc)) where rnum >= #{startRow} and rnum <= #{endRow}
+		<if test="sort == 'market_no'">
+		<![CDATA[		
+			order by 
+			market_no desc)) where rnum >= #{startRow} and rnum <= #{endRow}		
+		]]>
+		</if>
 		
-	]]>
+		<if test="sort == 'market_price'">
+		<![CDATA[		
+			order by
+			market_price asc)) where rnum >= #{startRow} and rnum <= #{endRow}
+		]]>
+		</if>
+	
+	
 </select>
 	
 	<select id="marketInfo" parameterType="int" resultType="market">
