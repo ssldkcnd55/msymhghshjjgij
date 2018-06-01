@@ -231,7 +231,9 @@ public class MoveController {
 		return "inc/header";
 	}
 	
-	
-	
+	@RequestMapping("moveAdminReport.do")
+	public String moveAdminReport() {
+		return "admin/admin_report";
+	}
 }
 
