@@ -264,7 +264,7 @@ $(function(){
 		aTime =window.setTimeout(function(){auctionTime()},1000);
 	
 	function auctionTime(){
-		 alert("${auction.auction_no}"); 
+		/*  alert("${auction.auction_no}");  */
 		$.ajax({
 			url: "auction_timeRemaining.do",
 			data:{
@@ -272,12 +272,13 @@ $(function(){
 			},
 			type:"post",
 			success:function(obj){
-				/*  alert("남은 시간 체크");
-				 console.log(obj); */
+				/*  alert("남은 시간 체크"); */
+				 
 				 var objStr = JSON.stringify(obj);
 		         var jsonObj = JSON.parse(objStr);
 		         
-		         var today = jsonObj.today;
+		          
+		        /*  var today = jsonObj.today;
 		         alert("today :"+today);
 		         var startdate = jsonObj.auction_startdate;
 		         alert("startdate :"+startdate);
@@ -303,22 +304,30 @@ $(function(){
 		         sec ="초.";
 		         min ="분, ";
 		         hr ="시간, ";
-		         dy="일,";
+		         dy="일,"; */ 
 		         
 		       var outValues = $("#time").html(); 
+		        var outValues2 = $("#a").html(); 
 		       if(jsonObj.status == 1){
-		         outValues+="남은시간 : "+
-		         dayRound+dy+hoursRound+hr+minutesRound+min+secondsRound+sec;
-		         
+		          outValues+=
+		         /* dayRound+dy+hoursRound+hr+minutesRound+min+secondsRound+sec; */ 
 
-		        	 /* jsonObj.day+"일&nbsp;"+jsonObj.hour+"시간 &nbsp;"+
-		        	 jsonObj.min+"분 &nbsp;";  */
+		        	  jsonObj.day+"일&nbsp;"+jsonObj.hour+"시간 &nbsp;"+
+		        	 jsonObj.min+"분 &nbsp;";  
+		        	 
+		          outValues2 += 
+		        	  jsonObj.day+"일&nbsp;"+jsonObj.hour+"시간 &nbsp;"+
+			        	 jsonObj.min+"분 &nbsp;";  
+			        	 
 		       }else if(jsonObj.status == 0){
 		    	   outValues+="경매 준비중";
+		    	   outValues2+="경매 준비중";
 		       }else if(jsonObj.status == 2){
 		    	   outValues+=  "경매 마감";
+		    	   outValues2+=  "경매 마감";
 		       }
 		         $("#time").html(outValues);  
+		         $("#a").html(outValues2); 
 		         
 			},error: function(request,status,errorData){
 	            alert("error code : " + request.status + "\nmessage" + 
@@ -342,8 +351,8 @@ $(function(){
 				<div class="title_box">
 					<span class="title">${auction.auction_title }</span> &nbsp; 
 					<span class="release_date">경매 시작일</span>&nbsp;<span class="date">${auction.auction_startdate}</span>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
-					&nbsp; &nbsp; &nbsp; 
-					  <span id="time"> </span>&nbsp; 
+					&nbsp; &nbsp;  <span>남은시간 : </span>
+					  <span id="time"></span>&nbsp; 
 						<span><button class="modify" onclick="auctionModify();">수정</button></span>
 						<span><button class="delete" onclick="auctionDelete();">삭제</button></span>
 				</div>
@@ -567,14 +576,18 @@ $(function(){
 						</div>
 						
 						<div class="auction_cart_right_div">
-							<table>
-								<tr>
-									<td><input type="submit" id="submit" class="auction_bidding" value="입찰" /></td>
-									<td><button class="auction_buy">즉시구매</button></td>
-								</tr>
-					
-							</table>
-						</div>
+								<table>
+									<tr>
+									<td id="a"></td>
+									</tr>
+									<tr>
+										<td><input type="submit" id="submit"
+											class="auction_bidding" value="입찰" /></td>
+										<td><button class="auction_buy">즉시구매</button></td>
+									</tr>
+
+								</table>
+							</div>
 						</form>
 					
 					</div>

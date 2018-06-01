@@ -531,9 +531,9 @@ public class AuctionController {
 		
 		JSONObject json = new JSONObject();
 		//json.put("auctiontime",auctiontime);
-		/*json.put("day", auctiontime.getDay());
+		json.put("day", auctiontime.getDay());
 		json.put("hour", auctiontime.getHour());
-		json.put("min", auctiontime.getMinute());*/
+		json.put("min", auctiontime.getMinute());
 		json.put("today", auctiontime.getToday());
 		json.put("status", auctiontime.getAuction_status());
 		json.put("auction_startdate", auctiontime.getAuction_startdate());
