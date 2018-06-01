@@ -12,43 +12,43 @@ public class CategoryDao {
 
 	public List<Category> selectCategory(SqlSessionTemplate sqlSession) {
 		
-		return sqlSession.selectList("selectCategory");
+		return sqlSession.selectList("category.selectCategory");
 	}
 
 	public List<Category> selectCategory_main(SqlSessionTemplate sqlSession) {
 		// TODO Auto-generated method stub
-		return sqlSession.selectList("selectCategory_main");
+		return sqlSession.selectList("category.selectCategory_main");
 	}
 
 
 	public List<Category> selectCategory_name(SqlSessionTemplate sqlSession) {
 		// TODO Auto-generated method stub
-		return sqlSession.selectList("selectCategory");
+		return sqlSession.selectList("category.selectCategory");
 	}
 
 	public int deleteCategory_main(SqlSessionTemplate sqlSession, String category_main) {
 		// TODO Auto-generated method stub
-		return sqlSession.delete("deleteCategory_main", category_main);
+		return sqlSession.delete("category.deleteCategory_main", category_main);
 	}
 
 	public int deleteCategory_name(SqlSessionTemplate sqlSession, int category_no) {
 		// TODO Auto-generated method stub
-		return sqlSession.delete("deleteCategory_name", category_no);
+		return sqlSession.delete("category.deleteCategory_name", category_no);
 	}
 
 	public int addCategory_main(SqlSessionTemplate sqlSession, String category_main) {
 		// TODO Auto-generated method stub
-		return sqlSession.insert("addCategory_main", category_main);
+		return sqlSession.insert("category.addCategory_main", category_main);
 	}
 
 	public int addCategory_name(SqlSessionTemplate sqlSession, Category category) {
 		// TODO Auto-generated method stub
-		return sqlSession.insert("addCategory_name", category);
+		return sqlSession.insert("category.addCategory_name", category);
 	}
 
 	public Category selectCategory_name(SqlSessionTemplate sqlSession, Category category) {
 		// TODO Auto-generated method stub
-		return sqlSession.selectOne("selectCategory_name", category);
+		return sqlSession.selectOne("category.selectCategory_name", category);
 	}
 
 	
