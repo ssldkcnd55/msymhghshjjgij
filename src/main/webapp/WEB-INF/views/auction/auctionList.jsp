@@ -41,7 +41,8 @@
 					outValues += 
 					"<a href='AuctionDetail.do?auction_no="+jsonObj.list[i].auction_no +"'>"+
 	       			"<div class='market'><div class='img_box' style='background-image: url(\"/farm/resources/upload/auctionUpload/"+jsonObj.list[i].auction_img+"\"); background-size: cover;'></div>"+
-	       			"<div class='title_box'><p class='title' style='text-align:center;'>"+jsonObj.list[i].auction_title+"</p> <p class='content' style='text-align:center;'>"+jsonObj.list[i].auction_note+"</p></div></div></a>"   
+	       			"<div class='title_box'><p class='title' style='text-align:center;'>"+jsonObj.list[i].auction_title+"</p> <p class='content' style='text-align:center;'>"+jsonObj.list[i].auction_note+"</p></div> "+
+	       			"</div></a>"   
 	       			
 				}
 				$(".auction_box").html(outValues);
@@ -103,7 +104,8 @@
         	<c:forEach items="${list}" var="list" varStatus="status">
         	<a href="AuctionDetail.do?auction_no=${list.auction_no }">
        			<div class="market"><div class="img_box" style="background-image: url('/farm/resources/upload/auctionUpload/${list.auction_img}'); background-size: cover;" ></div>
-       			<div class="title_box"><p class="title" style="text-align:center;">${list.auction_title}</p> <p class="content" style="text-align:center;">${list.auction_note}</p></div></div>   
+       			<div class="title_box"><p class="title" style="text-align:center;">${list.auction_title}</p> <p class="content" style="text-align:center;">${list.auction_note}</p></div>
+       			</div>   
        		</a>
        		</c:forEach>    
       	    </div>

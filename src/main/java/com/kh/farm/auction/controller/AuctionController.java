@@ -50,6 +50,8 @@ public class AuctionController {
 	@RequestMapping(value="insertAuctionMake.do", method=RequestMethod.POST)
 	public String insertAuctionMake(Auction auction,HttpServletResponse response,HttpServletRequest request,
 			@RequestParam(name = "upfile", required = false) MultipartFile file){
+		System.out.println("111111 시작 호호호ㅗㅎ");
+		System.out.println(auction);
 		String path = request.getSession().getServletContext().getRealPath("resources/upload/auctionUpload");
 		
 		try {
@@ -92,7 +94,8 @@ public class AuctionController {
 		}
 		
 		int insertAuctionMake =  auctionService.insertAuctionMake(auction);
-		/*System.out.println("insertAuctionMake : "+insertAuctionMake);*/
+	
+		System.out.println("insertAuctionMake : "+insertAuctionMake);
 		
 		//mv.addObject("auction", insertAuctionMake);
 		/*mv.setViewName("/farm/AuctionList_controller.do");*/
@@ -522,16 +525,19 @@ public class AuctionController {
 	@RequestMapping(value="auction_timeRemaining.do",method=RequestMethod.POST)
 	public void auction_timeRemaining(HttpServletResponse response,@RequestParam(value="auction_no") int auction_no)
 			throws IOException{
-		
+		System.out.println("111");
 		Auction auctiontime =auctionService.selectauction_timeRemaining(auction_no);
 		System.out.println("auctiontime : "+auctiontime +" / "+"day : "+auctiontime.getDay()+" / "+"hour : "+auctiontime.getHour());
 		
 		JSONObject json = new JSONObject();
 		//json.put("auctiontime",auctiontime);
-		json.put("day", auctiontime.getDay());
+		/*json.put("day", auctiontime.getDay());
 		json.put("hour", auctiontime.getHour());
-		json.put("min", auctiontime.getMinute());
+		json.put("min", auctiontime.getMinute());*/
+		json.put("today", auctiontime.getToday());
 		json.put("status", auctiontime.getAuction_status());
+		json.put("auction_startdate", auctiontime.getAuction_startdate());
+		json.put("auction_enddate", auctiontime.getAuction_enddate());
 		 System.out.println(json.toJSONString());
         
 		 response.setContentType("application/json; charset=utf-8;");

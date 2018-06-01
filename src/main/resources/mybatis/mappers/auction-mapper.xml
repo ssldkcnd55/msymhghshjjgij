@@ -24,7 +24,7 @@
 		flushCache="true" useGeneratedKeys="true">
 	<![CDATA[
 		insert into auction values((select max(auction_no) from auction)+1,#{member_id},1,#{auction_title},#{auction_note},#{auction_img},
-		#{auction_startdate},#{auction_enddate},#{auction_intro},'0',#{auction_startprice},#{auction_directprice})
+		#{auction_startdate},#{auction_enddate},'#{auction_intro}','0',#{auction_startprice},#{auction_directprice})
 	]]>
 	</insert>
 
@@ -211,11 +211,7 @@
 	
 	<select id="selectauction_timeRemaining" parameterType="int" resultType="auction">
 	<![CDATA[
-		select auction_no,sysdate ,AUCTION_STARTDATE, auction_enddate, auction_status, 
-		to_char	(trunc (TO_DATE (auction_enddate, 'YYYY/MM/DD HH24:MI:SS') - TO_DATE (AUCTION_STARTDATE, 'YYYY/MM/DD HH24:MI:SS'), 0)) as "day", 
-		to_char(	trunc ((TO_DATE (auction_enddate, 'YYYY/MM/DD HH24:MI:SS') - TO_DATE (AUCTION_STARTDATE, 'YYYY/MM/DD HH24:MI:SS'))*24, 0) - trunc (TO_DATE (auction_enddate, 'YYYY/MM/DD HH24:MI:SS')
-		- TO_DATE (AUCTION_STARTDATE, 'YYYY/MM/DD HH24:MI:SS'), 0) * 24 ) as "hour",
-		to_char( round (MOD ((TO_DATE (auction_enddate, 'YYYY/MM/DD HH24:MI:SS') - TO_DATE (AUCTION_STARTDATE, 'YYYY/MM/DD HH24:MI:SS'))*24*60, 60))) as "minute" 
+		 select auction_no,sysdate as "today" ,AUCTION_STARTDATE, auction_enddate, auction_status
 		from auction where auction_no = #{auction_no}
 	]]>
 	</select>

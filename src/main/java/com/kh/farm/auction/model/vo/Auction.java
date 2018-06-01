@@ -27,16 +27,20 @@ public class Auction implements java.io.Serializable {
 	private String day;//일
 	private String hour;//시간
 	private String minute;//분
+	private String today;
 	
 	
 	public Auction() {
 	
 	}
 
+	
+
+	
 	public Auction(int auction_no, String member_id, String category_no, String auction_title, String auction_note,
 			String auction_img, String auction_startdate, String auction_enddate, String auction_intro,
 			String auction_status, int auction_startprice, int auction_directprice, String day, String hour,
-			String minute) {
+			String minute, String today) {
 		super();
 		this.auction_no = auction_no;
 		this.member_id = member_id;
@@ -53,9 +57,10 @@ public class Auction implements java.io.Serializable {
 		this.day = day;
 		this.hour = hour;
 		this.minute = minute;
+		this.today = today;
 	}
 
-	
+
 	@Override
 	public String toString() {
 		return "Auction [auction_no=" + auction_no + ", member_id=" + member_id + ", category_no=" + category_no
@@ -63,7 +68,7 @@ public class Auction implements java.io.Serializable {
 				+ ", auction_startdate=" + auction_startdate + ", auction_enddate=" + auction_enddate
 				+ ", auction_intro=" + auction_intro + ", auction_status=" + auction_status + ", auction_startprice="
 				+ auction_startprice + ", auction_directprice=" + auction_directprice + ", day=" + day + ", hour="
-				+ hour + ", minute=" + minute + "]";
+				+ hour + ", minute=" + minute + ", today=" + today + "]";
 	}
 
 	public int getAuction_no() {
@@ -203,6 +208,20 @@ public class Auction implements java.io.Serializable {
 
 	public void setMinute(String minute) {
 		this.minute = minute;
+	}
+
+
+
+
+	public String getToday() {
+		return today;
+	}
+
+
+
+
+	public void setToday(String today) {
+		this.today = today;
 	}
 
 

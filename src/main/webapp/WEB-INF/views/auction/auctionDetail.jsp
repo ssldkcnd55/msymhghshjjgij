@@ -193,13 +193,13 @@ $(function(){
 							result= false;
 							}
 					}
-					/* var outValues3 = $(".topprice").html();
-		        	outValues +=
+					 var outValues3 = $("#topprice").html();
+					 outValues3 +=
 		        		"<td>최고가격</td>"+
 						"<td>:  </td>"+
 						"<td>"+jsonObj.price+"</td>"
 		        	
-		        $(".topprice").html(outValues3); */
+		        $("#topprice").html(outValues3); 
 					
 				}
 			});
@@ -251,14 +251,20 @@ $(function(){
 	
 	//경매 남은 시간
 	var aTime;
-	$(function(){
-		/* aTime = setTimeout(function(){auctionTime();}, 1000); */
-		aTime = setTimeout("auctionTime();", 1000); 
-	});
+	/* $(function(){
+		/* aTime = setTimeout(function(){auctionTime();}, 1000); 
+		aTime = setInterval(() => {
+			
+		}, milliseconds);("auctionTime();", 1000); 
+	}); */
 	
+	/* aTime = setInterval(function(){auctionTime()},1000); */
+	
+	/* var number =1000/60/60/24; */
+		aTime =window.setTimeout(function(){auctionTime()},1000);
 	
 	function auctionTime(){
-		/* alert("${auction.auction_no}"); */
+		 alert("${auction.auction_no}"); 
 		$.ajax({
 			url: "auction_timeRemaining.do",
 			data:{
@@ -271,20 +277,56 @@ $(function(){
 				 var objStr = JSON.stringify(obj);
 		         var jsonObj = JSON.parse(objStr);
 		         
-		        var outValues = $("#time").html(); 
+		         var today = jsonObj.today;
+		         alert("today :"+today);
+		         var startdate = jsonObj.auction_startdate;
+		         alert("startdate :"+startdate);
+		         var enddate = jsonObj.auction_enddate;
+		         alert("enddate :"+enddate);
+		         
+		         var day =(enddate - today)/1000/60/60/24);
+		         alert("day : "+day);
+		         
+		         var dayRound = Math.floor(day);
+		         alert("dayRound : "+dayRound);
+		         
+		         var hours =((enddate - today)/1000/60/60) - (24*dayRound);
+		         var hoursRound = Math.floor(hours);
+		         
+		         var minutes = ((enddate - today)/1000/60) - (24 * 60 * daysRound) - (60 * hoursRound);
+		         var minutesRound = Math.floor(minutes);
+		         
+		         var seconds = ((enddate - today)/1000) - (24*60*60*daysRound) -  (60*60*hoursRound)
+		         - (60*minutesRound);
+		         var secondsRound = Math.round(seconds);
+		         
+		         sec ="초.";
+		         min ="분, ";
+		         hr ="시간, ";
+		         dy="일,";
+		         
+		       var outValues = $("#time").html(); 
 		       if(jsonObj.status == 1){
 		         outValues+="남은시간 : "+
-		        	 jsonObj.day+"일&nbsp;"+jsonObj.hour+"시간 &nbsp;"+
-		        	 jsonObj.min+"분 &nbsp;"; 
+		         dayRound+dy+hoursRound+hr+minutesRound+min+secondsRound+sec;
+		         
+
+		        	 /* jsonObj.day+"일&nbsp;"+jsonObj.hour+"시간 &nbsp;"+
+		        	 jsonObj.min+"분 &nbsp;";  */
+		       }else if(jsonObj.status == 0){
+		    	   outValues+="경매 준비중";
+		       }else if(jsonObj.status == 2){
+		    	   outValues+=  "경매 마감";
 		       }
-		         $("#time").html(outValues); 
+		         $("#time").html(outValues);  
+		         
 			},error: function(request,status,errorData){
 	            alert("error code : " + request.status + "\nmessage" + 
 	                    request.responseText + "\nerror" + errorData);
 	           }
 		});
 	}
-	
+
 </script>
 </head>
 <body>
@@ -313,7 +355,7 @@ $(function(){
 					<div
 						style="border-bottom: 1px solid #bdbdbd; padding-bottom: 20px;">
 						<span class="title">${auction.auction_title }</span> &nbsp; <span
-							class="release_date">경매 시작일</span>&nbsp;<span class="date">${auction.auction_startdate}</span>
+							class="release_date">경매 마감일</span>&nbsp;<span class="date">${auction.auction_enddate}</span>
 					</div>
 				</div>
 				<div class="note">
@@ -508,10 +550,10 @@ $(function(){
 									<td>:  </td>
 									<td>${auction.auction_startprice}</td>
 								</tr>
-								<tr class="topprice">
-									<td>최고가격</td>
+								<tr id="topprice">
+									<!-- <td>최고가격</td>
 									<td>:  </td>
-									<td>1000</td> 
+									<td ></td>  -->
 								</tr>
 								<tr>
 									<td>입찰가격</td>
