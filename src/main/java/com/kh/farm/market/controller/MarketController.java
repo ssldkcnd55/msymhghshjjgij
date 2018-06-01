@@ -46,8 +46,9 @@ public class MarketController {
 		int page = 1;
 		String ctype = null;
 		String cname = null;
+		String sort = "market_no";
 		System.out.println(search);
-		ArrayList<Market> list = marketService.selectMarketList(page,search,ctype,cname);
+		ArrayList<Market> list = marketService.selectMarketList(page,search,ctype,cname,sort);
 		mv.setViewName("market/marketList");
 		mv.addObject("list",list);
 		mv.addObject("search",search);
@@ -67,8 +68,9 @@ public class MarketController {
 	
 	@RequestMapping(value="ajaxMoreMarket.do", method=RequestMethod.POST)
 	public void moreMarketList(HttpServletResponse response,@RequestParam("page") int page,@RequestParam(value="search",required=false) String search,
-			@RequestParam(value="ctype",required=false) String ctype,@RequestParam(value="cname",required=false) String cname) throws IOException{
-		List<Market> list = marketService.selectMarketList(page,search,ctype,cname);
+			@RequestParam(value="ctype",required=false) String ctype,@RequestParam(value="cname",required=false) String cname,
+			@RequestParam(value="sort",required=false) String sort) throws IOException{
+		List<Market> list = marketService.selectMarketList(page,search,ctype,cname,sort);
 		JSONArray jarr = new JSONArray();
 		JSONArray jarr2 = new JSONArray();
 		//list를 jarr로 복사하기
@@ -81,6 +83,7 @@ public class MarketController {
 			jmarket.put("market_img", m.getMarket_img());
 			jmarket.put("search", m.getSearch());
 			jmarket.put("market_price", m.getMarket_price());
+			jmarket.put("sort", sort);
 			
 			jarr.add(jmarket);
 		}

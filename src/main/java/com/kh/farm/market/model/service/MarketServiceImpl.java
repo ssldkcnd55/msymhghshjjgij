@@ -24,8 +24,8 @@ public class MarketServiceImpl implements MarketService{
 	@Autowired
 	private SqlSessionTemplate sqlSession;
 	@Override
-	public ArrayList<Market> selectMarketList(int page,String search,String ctype,String cname) {
-		return marketDao.marketList(page,sqlSession,search,ctype,cname);
+	public ArrayList<Market> selectMarketList(int page,String search,String ctype,String cname,String sort) {
+		return marketDao.marketList(page,sqlSession,search,ctype,cname,sort);
 	}
 	@Override
 	public Market selectMarketInfo(int market_no) {
