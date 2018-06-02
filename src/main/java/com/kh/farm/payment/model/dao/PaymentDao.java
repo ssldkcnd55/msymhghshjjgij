@@ -32,7 +32,8 @@ public class PaymentDao {
 
 	public int insertNewPayment(SqlSessionTemplate sqlSession, Payment pm) {
 	
-		return sqlSession.insert("payment.insertNewPayment", pm);
+		sqlSession.insert("payment.insertNewPayment", pm);
+		return pm.getBuy_no();
 	}
 
 	public int deleteFirstPayment(SqlSessionTemplate sqlSession, int group_no) {
@@ -60,5 +61,15 @@ public class PaymentDao {
 	public int deleteShoppingBasket(SqlSessionTemplate sqlSession, Payment pm) {
 		
 		return sqlSession.delete("payment.deleteShoppingBasket", pm);
+	}
+
+	public List<Integer> selectChatNo(SqlSessionTemplate sqlSession, Map map) {
+
+		return sqlSession.selectList("payment.selectChatNo", map);
+	}
+
+	public int selectChatNo(SqlSessionTemplate sqlSession, String your_id) {
+	
+		return sqlSession.selectOne("payment.selectOneChatNo",your_id);
 	}
 }

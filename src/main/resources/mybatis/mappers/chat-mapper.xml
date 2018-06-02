@@ -48,9 +48,9 @@ order by chhis.chat_history_date desc
 	]]>
 	</update>
 	
-	<insert id="insertChatHistory" parameterType="ChatHistory">
+	<insert id="insertChatHistory" parameterType="ChatHistory" flushCache="true"  >
 	<![CDATA[
-		insert into CHAT_HISTORY values( (select (case when max(chat_index) is null then 0 else max(chat_index) end)+1 from CHAT_HISTORY),#{chat_no},#{member_id},#{chat_history_contents},sysdate, #{chat_history_alarm}   )
+		insert into CHAT_HISTORY values( (select (case when max(chat_index) is null then 1 else max(chat_index)+1 end) from CHAT_HISTORY),#{chat_no},#{member_id},#{chat_history_contents},sysdate, #{chat_history_alarm}   )
 	]]>
 
 	</insert>
