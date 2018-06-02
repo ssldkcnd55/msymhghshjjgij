@@ -16,6 +16,7 @@ public class PageNumber implements java.io.Serializable{
 	private int review_no;
 	private int daily_no;
 	private String keyword;
+	private int select;
 	public PageNumber() {}
 
 	
@@ -24,7 +25,7 @@ public class PageNumber implements java.io.Serializable{
 
 	
 	public PageNumber(int startRow, int endRow, int market_no, int auction_no, String member_id, String search,
-			String ctype, String cname, int review_no, int daily_no, String keyword,String sort) {
+			String ctype, String cname, int review_no, int daily_no, String keyword,String sort,int select) {
 		super();
 		this.startRow = startRow;
 		this.endRow = endRow;
@@ -38,6 +39,7 @@ public class PageNumber implements java.io.Serializable{
 		this.daily_no = daily_no;
 		this.keyword = keyword;
 		this.sort= sort;
+		this.select=select;
 	}
 
 
@@ -196,6 +198,24 @@ public class PageNumber implements java.io.Serializable{
 	public void setCtype(String ctype) {
 		this.ctype = ctype;
 	}
+
+
+
+	public int getSelect() {
+		return select;
+	}
+
+
+
+	public void setSelect(int select) {
+		this.select = select;
+	}
+
 	
+
+
+
+
+
 	
 }

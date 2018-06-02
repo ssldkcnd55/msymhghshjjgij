@@ -222,7 +222,36 @@
 	]]>
 	</select>
 	
+		
+	<select id="selectAuction_searchTitle" parameterType="PageNumber" resultType="AuctionQnA" >
+	<![CDATA[
+		select * from (select rownum rnum, member_id,auction_qna_no, auction_qna_title, auction_qna_question_date
+		from auction_qna where auction_no = #{auction_no}) where rnum >=#{startRow} and rnum <=#{endRow} and auction_qna_title like '%'||#{keyword}||'%'
+		order by auction_qna_no DESC
+	]]>
+	</select>
 	
+	<select id="selectAuction_searchMember_id" parameterType="PageNumber" resultType="AuctionQnA" >
+	<![CDATA[
+		select * from (select rownum rnum, member_id,auction_qna_no, auction_qna_title, auction_qna_question_date
+		from auction_qna where auction_no = #{auction_no}) where rnum >=#{startRow} and rnum <=#{endRow} and member_id like '%'||#{keyword}||'%'
+		order by auction_qna_no DESC
+	]]>
+	</select>
+		
+		
+	
+	<select id="selectAuction_searchCount" parameterType="int" resultType="int" >
+	<![CDATA[
+		select * from auction_qna where auction_no = #{auction_no}
+	]]>
+	</select>
+	
+	<select id="selectauction_startdateCheck" parameterType="String" resultType="String" >
+	<![CDATA[
+		select to_char(sysdate, 'YYYY-MM-DD') as "sysdate" from DUAL
+	]]>
+	</select>
 	
 
 </mapper>

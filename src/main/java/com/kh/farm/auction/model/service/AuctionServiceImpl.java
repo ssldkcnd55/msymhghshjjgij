@@ -1,6 +1,7 @@
 package com.kh.farm.auction.model.service;
 
 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -150,6 +151,32 @@ public class AuctionServiceImpl implements AuctionService{
 	public Auction selectauction_timeRemaining(int auction_no) {
 		return auctionDao.selectauction_timeRemaining(sqlSession,auction_no);
 	}
+	
+	@Override
+	public List<AuctionQnA> selectAuction_search(String keyword, int select, int currentPage, int auction_no) {
+		
+		switch(select) {
+		case 1:
+			return auctionDao.selectAuction_searchTitle(sqlSession,keyword,currentPage,auction_no);
+		default :
+			return auctionDao.selectAuction_searchMember_id(sqlSession,keyword,currentPage,auction_no);
+
+		}
+		
+	}
+	
+	@Override
+	public int selectAuction_searchCount(int auction_no) {
+		return auctionDao.selectAuction_searchCount(sqlSession,auction_no);
+
+	}
+	
+	@Override
+	public String selectauction_startdateCheck() {
+		return auctionDao.selectauction_startdateCheck(sqlSession);
+	}
+	
+	
 	
 	
 }

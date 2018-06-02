@@ -1,6 +1,7 @@
 package com.kh.farm.auction.model.dao;
 
 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -171,6 +172,49 @@ public class AuctionDao {
 		return sqlSession.selectOne("auction.selectauction_timeRemaining", auction_no);
 
 	}
+
+
+	public List<AuctionQnA> selectAuction_searchTitle(SqlSessionTemplate sqlSession, String keyword, int currentPage,
+			int auction_no) {
+		int startRow =(currentPage-1)*10+1; //1~10, 11~20 계산할 거 ex) 1, 11, 21, 31,)
+		int endRow = startRow+9;
+		PageNumber pnum = new PageNumber();
+		pnum.setStartRow(startRow);
+		pnum.setEndRow(endRow);
+		pnum.setKeyword(keyword);
+		pnum.setAuction_no(auction_no);
+		return sqlSession.selectList("auction.selectAuction_searchTitle",pnum);
+	}
+	
+	public List<AuctionQnA> selectAuction_searchMember_id(SqlSessionTemplate sqlSession, String keyword, int currentPage,
+			int auction_no) {
+		int startRow =(currentPage-1)*10+1; //1~10, 11~20 계산할 거 ex) 1, 11, 21, 31,)
+		int endRow = startRow+9;
+		PageNumber pnum = new PageNumber();
+		pnum.setStartRow(startRow);
+		pnum.setEndRow(endRow);
+		pnum.setKeyword(keyword);
+		pnum.setAuction_no(auction_no);
+		return sqlSession.selectList("auction.selectAuction_searchMember_id",pnum);
+	}
+
+
+	public int selectAuction_searchCount(SqlSessionTemplate sqlSession, int auction_no) {
+		return sqlSession.selectOne("auction.selectAuction_searchCount",auction_no);
+
+	}
+
+
+	public String selectauction_startdateCheck(SqlSessionTemplate sqlSession) {
+		return sqlSession.selectOne("auction.selectauction_startdateCheck");
+
+	}
+
+
+	
+
+
+	
 
 
 

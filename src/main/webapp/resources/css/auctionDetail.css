@@ -176,3 +176,14 @@
 	font-weight: bold;
 	
 }
+
+.auction_select_box{
+	margin-top:40px;
+	float:left;
+	margin-right:10px;
+  
+}
+.auction_select{
+   margin-top:25;
+   height:40px;
+}

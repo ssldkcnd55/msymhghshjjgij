@@ -2,6 +2,7 @@ package com.kh.farm.auction.model.service;
 
 
 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -74,6 +75,14 @@ public interface AuctionService {
 	int updateAuctionStatus();
 
 	Auction selectauction_timeRemaining(int auction_no);
+
+	List<AuctionQnA> selectAuction_search(String keyword, int select, int currentPage, int auction_no);
+
+	int selectAuction_searchCount(int auction_no);
+
+	String selectauction_startdateCheck();
+
+	
 
 
 	
