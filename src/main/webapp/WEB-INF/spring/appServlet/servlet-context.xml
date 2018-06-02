@@ -59,7 +59,7 @@ xmlns:websocket="http://www.springframework.org/schema/websocket"
 		</beans:bean> -->
 
 
-<beans:bean id="ChatHandler" class="com.kh.farm.chat.handler.ChatHandler"/>
+<beans:bean id="ChatHandler" class="com.kh.farm.chat.handler.ChatHandler"/> 
 
 <websocket:handlers>
 

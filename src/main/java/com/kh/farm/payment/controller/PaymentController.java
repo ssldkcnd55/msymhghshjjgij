@@ -18,6 +18,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.farm.auction.model.vo.AuctionHistory;
@@ -28,54 +29,97 @@ import com.kh.farm.shoppingBasket.model.vo.*;
 
 @Controller
 public class PaymentController {
-@Autowired private PaymentService paymentService;
-	
-	@RequestMapping(value="deleteFirstPayment.do", method=RequestMethod.POST)
-	public void deleteFirstPayment (HttpServletResponse response, @RequestParam(value="group_no") int group_no) throws IOException
-	{	
+	@Autowired
+	private PaymentService paymentService;
+
+	@RequestMapping(value = "deleteFirstPayment.do", method = RequestMethod.POST)
+	public void deleteFirstPayment(HttpServletResponse response, @RequestParam(value = "group_no") int group_no)
+			throws IOException {
 		int result = paymentService.deleteFirstPayment(group_no);
 		PrintWriter out = response.getWriter();
 		out.flush();
 		out.close();
 	}
 
+	@RequestMapping(value = "paymentTest.do", method = RequestMethod.POST)
+	public void paymentTest(@RequestParam(value = "objList") String list,
+			@RequestParam(value = "sellerInfo") String sellerInfo, HttpServletResponse response)
+			throws IOException, ParseException {
 
-	@RequestMapping(value="insertNewPayment.do",method=RequestMethod.POST)
-	public void insertNewPayment( @RequestParam(value = "objList[]") List<String> objList ,HttpServletResponse response) throws Exception
-	{	
 		
 		JSONParser jparser = new JSONParser();
-		for(String s:objList) {
-		JSONObject job = (JSONObject)jparser.parse(s);
-		Payment pm = new Payment();
-		
-		pm.setGroup_no(Integer.parseInt((String) job.get("group_no")));
-		if(job.containsKey("market_no"))
-			pm.setMarket_no(Integer.parseInt((String) job.get("market_no")));
-		else if(job.containsKey("auction_no"))
-			pm.setAuction_no(Integer.parseInt((String) job.get("auction_no")));
-		pm.setMember_id((String)job.get("member_id"));
-		pm.setBuy_amount(Integer.parseInt((String) job.get("buy_amount")));
-		pm.setBuy_addr((String)job.get("buy_addr"));
-		pm.setBuy_tel((String)job.get("buy_tel"));
-		pm.setBuy_name((String)job.get("buy_name"));
-		pm.setBuy_request((String)job.get("buy_request"));
-		
-		paymentService.insertNewPayment(pm);
-		////장바구니 삭제////
-		paymentService.deleteShoppingBasket(pm);
-		/////////////////
+		JSONArray jarr = (JSONArray) jparser.parse(list);
+
+		JSONArray jarr_sel = (JSONArray) jparser.parse(sellerInfo);
+		JSONArray rt_jarr = new JSONArray();
+		for (int i = 0; i < jarr_sel.size(); i++) {
+			JSONObject obj = (JSONObject) jparser.parse((String) jarr_sel.get(i));
+	
+			int chat_no = paymentService.selectChatNo((String) obj.get("your_id"));
+			obj.put("chat_no", chat_no);
+			rt_jarr.add(obj);
+			
 		}
-		JSONObject job = (JSONObject)jparser.parse(objList.get(0));
-		int result = paymentService.deleteFirstPayment(Integer.parseInt((String) job.get("group_no")));
+		JSONObject retn_obj = new JSONObject();
+		retn_obj.put("rl", rt_jarr);
 		PrintWriter out = response.getWriter();
+		out.println(retn_obj.toJSONString());
 		out.flush();
 		out.close();
 	}
-	
+
+	@RequestMapping(value = "insertNewPayment.do", method = RequestMethod.POST)
+	public void insertNewPayment(@RequestParam(value = "objList") String list,
+			@RequestParam(value = "sellerInfo") String sellerInfo, HttpServletResponse response) throws Exception {
+
+		JSONParser jparser = new JSONParser();
+		JSONArray jarr = (JSONArray) jparser.parse(list);
+		JSONArray sel_jarr = (JSONArray) jparser.parse(sellerInfo);
+		JSONArray retn_jarr = new JSONArray();
+		int group_no = 0;
+		for (int i = 0; i < jarr.size(); i++) {
+
+			Payment pm = new Payment();
+			JSONObject job = (JSONObject) jparser.parse((String) jarr.get(i));
+
+			pm.setGroup_no(Integer.parseInt((String) job.get("group_no")));
+			if (job.containsKey("market_no"))
+				pm.setMarket_no(Integer.parseInt((String) job.get("market_no")));
+			else if (job.containsKey("auction_no"))
+				pm.setAuction_no(Integer.parseInt((String) job.get("auction_no")));
+			pm.setMember_id((String) job.get("member_id"));
+			pm.setBuy_amount(Integer.parseInt((String) job.get("buy_amount")));
+			pm.setBuy_addr((String) job.get("buy_addr"));
+			pm.setBuy_tel((String) job.get("buy_tel"));
+			pm.setBuy_name((String) job.get("buy_name"));
+			pm.setBuy_request((String) job.get("buy_request"));
+			group_no = pm.getGroup_no();
+			int buy_no = paymentService.insertNewPayment(pm);
+			
+			//// 장바구니 삭제////
+			paymentService.deleteShoppingBasket(pm);
+			/////////////////
+			JSONObject obj = (JSONObject) jparser.parse((String) sel_jarr.get(i));
+			obj.put("buy_no", buy_no);
+			int chat_no = paymentService.selectChatNo((String) obj.get("your_id"));
+			obj.put("chat_no", chat_no);
+			retn_jarr.add(obj);
+			
+		}
+		
+		int result = paymentService.deleteFirstPayment(group_no);
+		
+		JSONObject retn_obj = new JSONObject();
+		retn_obj.put("rl", retn_jarr);
+
+		PrintWriter out = response.getWriter();
+		out.println(retn_obj.toJSONString());
+		out.flush();
+		out.close();
+	}
+
 	@RequestMapping("makePayment.do")
-	public ModelAndView makePayment(@RequestParam("buy_no") String buy_no,ModelAndView mv,HttpSession session)
-	{	
+	public ModelAndView makePayment(@RequestParam("buy_no") String buy_no, ModelAndView mv, HttpSession session) {
 		String member_id = ((Member) session.getAttribute("loginUser")).getMember_id();
 		StringTokenizer st = new StringTokenizer(buy_no, ",");
 		List<String> buyNoList = new ArrayList<String>();
@@ -85,55 +129,52 @@ public class PaymentController {
 		Map dm = new HashMap();
 		dm.put("member_id", member_id);
 		dm.put("buyList", buyNoList);
-		
-		ArrayList<ShowBasket> sbl = (ArrayList<ShowBasket>)paymentService.selectPaymentInfo(dm);
-	
-		
-		mv.addObject("sbl",sbl);
+
+		ArrayList<ShowBasket> sbl = (ArrayList<ShowBasket>) paymentService.selectPaymentInfo(dm);
+
+		mv.addObject("sbl", sbl);
 		mv.setViewName("payment/payment");
 		return mv;
 	}
 
-	@RequestMapping(value="marketBuy.do" )
-	public ModelAndView marketBuy( ModelAndView mv, ShoppingBasket sb,HttpSession session)
-	{	
-		
-		sb.setMember_id( ((Member) session.getAttribute("loginUser")).getMember_id());
+	@RequestMapping(value = "marketBuy.do")
+	public ModelAndView marketBuy(ModelAndView mv, ShoppingBasket sb, HttpSession session) {
+
+		sb.setMember_id(((Member) session.getAttribute("loginUser")).getMember_id());
 		ArrayList<ShowBasket> sbl = new ArrayList<ShowBasket>();
-		sbl.add( paymentService.selectPaymentInfo(sb) );
+		sbl.add(paymentService.selectPaymentInfo(sb));
 		sbl.get(0).setBuy_amount(sb.getBuy_amount());
-	
-		
-		
-		mv.addObject("sbl",sbl);
+
+		mv.addObject("sbl", sbl);
 		mv.setViewName("payment/payment");
 		return mv;
 	}
-	
-	@RequestMapping(value="insertFirstPayment.do",method=RequestMethod.POST)
-	public void insertFirstPayment(Payment pm,HttpServletResponse response) throws IOException
-	{
+
+	@RequestMapping(value = "insertFirstPayment.do", method = RequestMethod.POST)
+	public void insertFirstPayment(Payment pm, HttpServletResponse response) throws IOException {
 		int group_no = paymentService.insertFirstPayment(pm);
+
 		PrintWriter out = response.getWriter();
-		out.append( String.valueOf( group_no));
+		out.append(String.valueOf(group_no));
 		out.flush();
 		out.close();
 	}
-	
+
 	@RequestMapping("payment_history_list.do")
-	public void selectPaymentHistory(HttpServletResponse response,@RequestParam("page") int currentPage) throws IOException{
-		
-		JSONArray jarr =new JSONArray();
-		
+	public void selectPaymentHistory(HttpServletResponse response, @RequestParam("page") int currentPage)
+			throws IOException {
+
+		JSONArray jarr = new JSONArray();
+
 		ArrayList<Payment> AuctionList = paymentService.selectPaymentHistory(currentPage);
 		int limitPage = 10;
 		int listCount = paymentService.selectPaymentHistoryCount();
-		
-		int maxPage=(int)((double)listCount/limitPage+0.9); //ex) 41개면 '5'페이지나와야되는데 '5'를 계산해줌
-		int startPage=((int)((double)currentPage/5+0.8)-1)*5+1;
-		int endPage=startPage+5-1;
-		
-		if(maxPage<endPage) {
+
+		int maxPage = (int) ((double) listCount / limitPage + 0.9); // ex) 41개면 '5'페이지나와야되는데 '5'를 계산해줌
+		int startPage = ((int) ((double) currentPage / 5 + 0.8) - 1) * 5 + 1;
+		int endPage = startPage + 5 - 1;
+
+		if (maxPage < endPage) {
 			endPage = maxPage;
 		}
 		for (Payment ac : AuctionList) {
@@ -156,10 +197,10 @@ public class PaymentController {
 			json.put("startPage", startPage);
 			json.put("endPage", endPage);
 			json.put("maxPage", maxPage);
-			json.put("currentPage",currentPage);
+			json.put("currentPage", currentPage);
 			jarr.add(json);
 		}
-		
+
 		JSONObject sendJson = new JSONObject();
 		sendJson.put("list", jarr);
 		response.setContentType("application/json; charset=utf-8");
@@ -167,13 +208,12 @@ public class PaymentController {
 		out.append(sendJson.toJSONString());
 		out.flush();
 		out.close();
-		
+
 	}
-	
-	@RequestMapping(value="movePaymentComplete.do", method=RequestMethod.POST)
-	public ModelAndView movePaymentComplete(ModelAndView mv,PaymentComplete pc)
-	{	
-		
+
+	@RequestMapping(value = "movePaymentComplete.do", method = RequestMethod.POST)
+	public ModelAndView movePaymentComplete(ModelAndView mv, PaymentComplete pc) {
+
 		mv.addObject("pc", pc);
 		mv.setViewName("payment/payment_complete");
 		return mv;

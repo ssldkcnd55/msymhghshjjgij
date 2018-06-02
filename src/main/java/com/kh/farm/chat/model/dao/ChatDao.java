@@ -27,7 +27,7 @@ public class ChatDao {
 	}
 
 	public int insertChatHistory(SqlSessionTemplate sqlSession, ChatHistory chatHistory) {
-		
+
 		return sqlSession.insert("chat.insertChatHistory", chatHistory);
 	}
 
