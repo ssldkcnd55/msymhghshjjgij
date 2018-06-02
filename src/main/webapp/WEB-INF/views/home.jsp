@@ -227,8 +227,9 @@
 						var myitem = jsonData.price
 						console.log(myitem);
 						var html1 = "";
-
-						for (var i = 1; i < 35; i++) {
+					
+					
+						for (var i = 1; i < 10; i++) {
 							if (i == 1) {
 								html1 = "<div class='item active' align='center'><table class='table'><th class='th'>품명</th><th class='th'>종류</th><th class='th'>가격</th>";
 
@@ -261,6 +262,10 @@
 					}
 				});
 	}
+	function movequote() {
+		location.href = "/farm/moveQuote.do";
+
+	}
 </script>
 <style type="text/css">
 /* .table {
@@ -287,7 +292,6 @@
 	text-align: center;
 	padding: 4px;
 } */
-
 </style>
 </head>
 
@@ -340,7 +344,7 @@
 							for 2D fighting with gruesome combat.</div>
 						<!-- #tab2 -->
 						<div id="tab3" class="tab_content">
-							<button class="button">상세정보</button>
+							<button class="button" onclick="movequote()">상세정보</button>
 							<div id="myCarousel" class="carousel slide quote"
 								data-ride="carousel">
 								<!-- Indicators -->

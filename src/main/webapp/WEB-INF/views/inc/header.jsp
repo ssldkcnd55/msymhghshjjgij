@@ -14,7 +14,7 @@
 
 //경매 상태 update(0:경매 등록은 하였으나 경매 준비 / 1:경매중 / 2: 경매 끝) 3초마다 상태 update 실행중
  var upadte;
- update = setInterval(function(){auction_update()}, 3000);
+  update = setInterval(function(){auction_update()}, 3000); 
 function auction_update(){
 
 	$.ajax({
@@ -128,7 +128,7 @@ function getBasketCount(member_id)
                      src="https://res.kurly.com/pc/img/1801/img_delivery.gif"></a>
                </div>
                <h1 class="h1">
-                  <a href="moveHome.do"><img src="/farm/resources/images/Farmlogo.png"></a>
+                  <a href="moveHome.do"><img src="/farm/resources/images/Farmlogo.png" style="width:150px;height:auto;"></a>
                </h1>
             </div>
             <div class="tabMenu">

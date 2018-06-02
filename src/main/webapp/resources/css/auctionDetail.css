@@ -124,7 +124,7 @@
 	width:28%;
 	float:right;
 	height:auto;
-	padding-top:36px;
+	/* padding-top:36px; */
 	
 }
 
@@ -170,4 +170,9 @@
     overflow: visible;
     border-radius: 5px;
     float:right;
+}
+
+.time{
+	font-weight: bold;
+	
 }

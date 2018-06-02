@@ -18,25 +18,29 @@ public class Auction implements java.io.Serializable {
 	private String auction_title;// 경매 제목
 	private String auction_note;// 경매 노트
 	private String auction_img;// 경매 이미지
-	private Date auction_startdate;// 경매 시작 시간
-	private Date auction_enddate;// 경매 종료 시간
+	private String auction_startdate;// 경매 시작 시간
+	private String auction_enddate;// 경매 종료 시간
 	private String auction_intro;// 경매 소개
 	private String auction_status;// 경매 상태
 	private int auction_startprice;// 경매 시작가
 	private int auction_directprice;// 즉시 구매가
-	private int day;//일
-	private int hour;//시간
-	private int minute;//분
+	private String day;//일
+	private String hour;//시간
+	private String minute;//분
+	private String today;
 	
 	
 	public Auction() {
 	
 	}
 
+	
 
+	
 	public Auction(int auction_no, String member_id, String category_no, String auction_title, String auction_note,
-			String auction_img, Date auction_startdate, Date auction_enddate, String auction_intro,
-			String auction_status, int auction_startprice, int auction_directprice, int day, int hour, int minute) {
+			String auction_img, String auction_startdate, String auction_enddate, String auction_intro,
+			String auction_status, int auction_startprice, int auction_directprice, String day, String hour,
+			String minute, String today) {
 		super();
 		this.auction_no = auction_no;
 		this.member_id = member_id;
@@ -53,16 +57,18 @@ public class Auction implements java.io.Serializable {
 		this.day = day;
 		this.hour = hour;
 		this.minute = minute;
+		this.today = today;
 	}
 
 
 	@Override
 	public String toString() {
-		return "Auction [auction_no=" + auction_no + ", member_id=" + member_id + ", auction_title=" + auction_title
-				+ ", auction_note=" + auction_note + ", auction_img=" + auction_img + ", auction_startdate="
-				+ auction_startdate + ", auction_enddate=" + auction_enddate + ", auction_intro=" + auction_intro
-				+ ", auction_status=" + auction_status + ", auction_startprice=" + auction_startprice
-				+ ", auction_directprice=" + auction_directprice + "]";
+		return "Auction [auction_no=" + auction_no + ", member_id=" + member_id + ", category_no=" + category_no
+				+ ", auction_title=" + auction_title + ", auction_note=" + auction_note + ", auction_img=" + auction_img
+				+ ", auction_startdate=" + auction_startdate + ", auction_enddate=" + auction_enddate
+				+ ", auction_intro=" + auction_intro + ", auction_status=" + auction_status + ", auction_startprice="
+				+ auction_startprice + ", auction_directprice=" + auction_directprice + ", day=" + day + ", hour="
+				+ hour + ", minute=" + minute + ", today=" + today + "]";
 	}
 
 	public int getAuction_no() {
@@ -115,19 +121,21 @@ public class Auction implements java.io.Serializable {
 		this.auction_img = auction_img;
 	}
 
-	public Date getAuction_startdate() {
+	
+
+	public String getAuction_startdate() {
 		return auction_startdate;
 	}
 
-	public void setAuction_startdate(Date auction_startdate) {
+	public void setAuction_startdate(String auction_startdate) {
 		this.auction_startdate = auction_startdate;
 	}
 
-	public Date getAuction_enddate() {
+	public String getAuction_enddate() {
 		return auction_enddate;
 	}
 
-	public void setAuction_enddate(Date auction_enddate) {
+	public void setAuction_enddate(String auction_enddate) {
 		this.auction_enddate = auction_enddate;
 	}
 
@@ -164,35 +172,58 @@ public class Auction implements java.io.Serializable {
 	}
 
 
-	public int getDay() {
+
+
+
+	public String getDay() {
 		return day;
 	}
 
 
-	public void setDay(int day) {
+
+
+
+	public void setDay(String day) {
 		this.day = day;
 	}
 
 
-	public int getHour() {
+
+
+
+	public String getHour() {
 		return hour;
 	}
 
 
-	public void setHour(int hour) {
+	public void setHour(String hour) {
 		this.hour = hour;
 	}
 
 
-	public int getMinute() {
+	public String getMinute() {
 		return minute;
 	}
 
 
-	public void setMinute(int minute) {
+	public void setMinute(String minute) {
 		this.minute = minute;
 	}
 
-	
+
+
+
+	public String getToday() {
+		return today;
+	}
+
+
+
+
+	public void setToday(String today) {
+		this.today = today;
+	}
+
+
 	
 }

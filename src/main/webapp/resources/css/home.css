@@ -70,7 +70,7 @@ ul.tabs li.active {
 }
 
 .table {
-	margin-top: 50px;
+	margin-top: 15px;
 	border: 1px solid #444444;
 	border-collapse: collapse;
 	width: 90%;
@@ -99,5 +99,5 @@ ul.tabs li.active {
 	color: #f1473a;
 	border: 1px solid #f1473a;
 	padding: 6px 6px 6px;
-	margin-left: 205px;
+	margin-left: 218px;
 }

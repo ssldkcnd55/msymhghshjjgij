@@ -88,7 +88,7 @@
 												onchange="getThumbnailPrivew(this,$('#cma_image'))"
 												style="margin-left: 2px;"  /> <br /> <br />
 											<div id="cma_image" style="margin-left:200px;">
-												<img src="/farm/resources/upload/auctionUpload/${auction.auction_img}"></div>
+												<%-- <img src="/farm/resources/upload/auctionUpload/${auction.auction_img}"> --%></div>
 										</div>
 									</td>
 							</tr>

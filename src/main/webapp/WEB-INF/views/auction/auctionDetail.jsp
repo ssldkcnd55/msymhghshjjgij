@@ -193,13 +193,13 @@ $(function(){
 							result= false;
 							}
 					}
-					/* var outValues3 = $(".topprice").html();
-		        	outValues +=
+					 var outValues3 = $("#topprice").html();
+					 outValues3 +=
 		        		"<td>최고가격</td>"+
 						"<td>:  </td>"+
 						"<td>"+jsonObj.price+"</td>"
 		        	
-		        $(".topprice").html(outValues3); */
+		        $("#topprice").html(outValues3); 
 					
 				}
 			});
@@ -248,32 +248,94 @@ $(function(){
 		});
 			 
 	}
-	var aTime;
-	aTime = setTimeout(function(){auctionTime()}, 1000);
+	
 	//경매 남은 시간
-	$(function auctionTime(){
+	var aTime;
+	/* $(function(){
+		/* aTime = setTimeout(function(){auctionTime();}, 1000); 
+		aTime = setInterval(() => {
+			
+		}, milliseconds);("auctionTime();", 1000); 
+	}); */
+	
+	/* aTime = setInterval(function(){auctionTime()},1000); */
+	
+	/* var number =1000/60/60/24; */
+		aTime =window.setTimeout(function(){auctionTime()},1000);
+	
+	function auctionTime(){
+		/*  alert("${auction.auction_no}");  */
 		$.ajax({
 			url: "auction_timeRemaining.do",
 			data:{
-				auction_no:${auction.auction_no}
+				auction_no:'${auction.auction_no}'
 			},
 			type:"post",
-			success : function(obj){
-				alert("남은 시간 체크");
-				 console.log(obj.toString());
+			success:function(obj){
+				/*  alert("남은 시간 체크"); */
+				 
 				 var objStr = JSON.stringify(obj);
 		         var jsonObj = JSON.parse(objStr);
-		         var outValues = $(".time").html();
 		         
+		          
+		        /*  var today = jsonObj.today;
+		         alert("today :"+today);
+		         var startdate = jsonObj.auction_startdate;
+		         alert("startdate :"+startdate);
+		         var enddate = jsonObj.auction_enddate;
+		         alert("enddate :"+enddate);
 		         
-		         outValues+=
-		        	 jsonObj.auctiontime.day+"일&nbsp;"+jsonObj.auctiontime.hour+"시간 &nbsp;"+
-		        	 jsonObj.auctiontime.day+"분 &nbsp;"
-		         $(".time").html(outValues);
-			}
+		         var day =(enddate - today)/1000/60/60/24);
+		         alert("day : "+day);
+		         
+		         var dayRound = Math.floor(day);
+		         alert("dayRound : "+dayRound);
+		         
+		         var hours =((enddate - today)/1000/60/60) - (24*dayRound);
+		         var hoursRound = Math.floor(hours);
+		         
+		         var minutes = ((enddate - today)/1000/60) - (24 * 60 * daysRound) - (60 * hoursRound);
+		         var minutesRound = Math.floor(minutes);
+		         
+		         var seconds = ((enddate - today)/1000) - (24*60*60*daysRound) -  (60*60*hoursRound)
+		         - (60*minutesRound);
+		         var secondsRound = Math.round(seconds);
+		         
+		         sec ="초.";
+		         min ="분, ";
+		         hr ="시간, ";
+		         dy="일,"; */ 
+		         
+		       var outValues = $("#time").html(); 
+		        var outValues2 = $("#a").html(); 
+		       if(jsonObj.status == 1){
+		          outValues+=
+		         /* dayRound+dy+hoursRound+hr+minutesRound+min+secondsRound+sec; */ 
+
+		        	  jsonObj.day+"일&nbsp;"+jsonObj.hour+"시간 &nbsp;"+
+		        	 jsonObj.min+"분 &nbsp;";  
+		        	 
+		          outValues2 += 
+		        	  jsonObj.day+"일&nbsp;"+jsonObj.hour+"시간 &nbsp;"+
+			        	 jsonObj.min+"분 &nbsp;";  
+			        	 
+		       }else if(jsonObj.status == 0){
+		    	   outValues+="경매 준비중";
+		    	   outValues2+="경매 준비중";
+		       }else if(jsonObj.status == 2){
+		    	   outValues+=  "경매 마감";
+		    	   outValues2+=  "경매 마감";
+		       }
+		         $("#time").html(outValues);  
+		         $("#a").html(outValues2); 
+		         
+			},error: function(request,status,errorData){
+	            alert("error code : " + request.status + "\nmessage" + 
+	                    request.responseText + "\nerror" + errorData);
+	           }
 		});
-	});
-	
+	}
+
 </script>
 </head>
 <body>
@@ -289,8 +351,8 @@ $(function(){
 				<div class="title_box">
 					<span class="title">${auction.auction_title }</span> &nbsp; 
 					<span class="release_date">경매 시작일</span>&nbsp;<span class="date">${auction.auction_startdate}</span>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
-					&nbsp; &nbsp; &nbsp; &nbsp; 
-					 <span class="time"><!-- 남은시간 : --> </span>&nbsp;  
+					&nbsp; &nbsp;  <span>남은시간 : </span>
+					  <span id="time"></span>&nbsp; 
 						<span><button class="modify" onclick="auctionModify();">수정</button></span>
 						<span><button class="delete" onclick="auctionDelete();">삭제</button></span>
 				</div>
@@ -302,7 +364,7 @@ $(function(){
 					<div
 						style="border-bottom: 1px solid #bdbdbd; padding-bottom: 20px;">
 						<span class="title">${auction.auction_title }</span> &nbsp; <span
-							class="release_date">경매 시작일</span>&nbsp;<span class="date">${auction.auction_startdate}</span>
+							class="release_date">경매 마감일</span>&nbsp;<span class="date">${auction.auction_enddate}</span>
 					</div>
 				</div>
 				<div class="note">
@@ -497,10 +559,10 @@ $(function(){
 									<td>:  </td>
 									<td>${auction.auction_startprice}</td>
 								</tr>
-								<tr class="topprice">
-									<td>최고가격</td>
+								<tr id="topprice">
+									<!-- <td>최고가격</td>
 									<td>:  </td>
-									<td>1000</td> 
+									<td ></td>  -->
 								</tr>
 								<tr>
 									<td>입찰가격</td>
@@ -514,14 +576,18 @@ $(function(){
 						</div>
 						
 						<div class="auction_cart_right_div">
-							<table>
-								<tr>
-									<td><input type="submit" id="submit" class="auction_bidding" value="입찰" /></td>
-									<td><button class="auction_buy">즉시구매</button></td>
-								</tr>
-					
-							</table>
-						</div>
+								<table>
+									<tr>
+									<td id="a"></td>
+									</tr>
+									<tr>
+										<td><input type="submit" id="submit"
+											class="auction_bidding" value="입찰" /></td>
+										<td><button class="auction_buy">즉시구매</button></td>
+									</tr>
+
+								</table>
+							</div>
 						</form>
 					
 					</div>
