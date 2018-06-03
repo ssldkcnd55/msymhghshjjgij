@@ -21,6 +21,16 @@
 			select * from member where member_id=#{member_id}
 		]]>
 </select>
+
+<select id="selectMemberList" parameterType="PageNumber" resultType="Member">
+	<![CDATA[
+	select * from (select rownum rnum, member_id, member_category, member_name, 
+	member_approval,member_withdraw,MEMBER_WARNING_COUNT from member 
+	) where rnum >=#{startRow} and rnum <=#{endRow}
+	
+	]]>
+</select>
+
 <insert parameterType="Member" id="insertMember" useGeneratedKeys="true" statementType="PREPARED" flushCache="true">
 		<![CDATA[ insert into member values (
 					#{member_id}, #{member_pwd}, 0, #{member_name}, 
@@ -46,14 +56,6 @@
 ]]>
 </select>
 
-<select id="selectMemberList" parameterType="PageNumber" resultType="Member">
-	<![CDATA[
-	select * from (select rownum rnum, member_id, member_category, member_name, 
-	member_approval,member_withdraw,MEMBER_WARNING_COUNT from member 
-	) where rnum >=#{startRow} and rnum <=#{endRow}
-	
-	]]>
-</select>
 
 <select id="selectMemberName" parameterType="PageNumber" resultType="Member">
 	<![CDATA[
