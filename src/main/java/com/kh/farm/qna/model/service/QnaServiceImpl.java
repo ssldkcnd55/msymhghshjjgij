@@ -91,4 +91,14 @@ public class QnaServiceImpl implements QnaService{
 		// TODO Auto-generated method stub
 		return qnaDao.deleteMainQna(sqlSession,main_qna_no);
 	}
+	@Override
+	public ArrayList<Market_qna> selectCusQnaList(int currentPage) {
+		// TODO Auto-generated method stub
+		return qnaDao.selectCusQnaList(sqlSession,currentPage);
+	}
+	@Override
+	public int selectCusQnaListCount() {
+		// TODO Auto-generated method stub
+		return qnaDao.selectCusQnaListCount(sqlSession);
+	}
 }

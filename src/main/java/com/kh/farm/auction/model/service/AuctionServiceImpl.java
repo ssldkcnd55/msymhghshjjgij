@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import com.kh.farm.auction.model.dao.AuctionDao;
 import com.kh.farm.auction.model.vo.*;
 import com.kh.farm.member.model.vo.Member;
+import com.kh.farm.qna.model.vo.Market_qna;
 
 @Service
 public class AuctionServiceImpl implements AuctionService{
@@ -176,6 +177,16 @@ public class AuctionServiceImpl implements AuctionService{
 		return auctionDao.selectauction_startdateCheck(sqlSession);
 	}
 	
+	@Override
+	public ArrayList<AuctionQnA> selectAuctionCusQnaList(int currentPage) {
+		// TODO Auto-generated method stub
+		return auctionDao.selectAuctionCusQnaList(sqlSession,currentPage);
+	}
+	@Override
+	public int selectAuctionCusQnaListCount() {
+		// TODO Auto-generated method stub
+		return auctionDao.selectAuctionCusQnaListCount(sqlSession);
+	}
 	
 	
 	

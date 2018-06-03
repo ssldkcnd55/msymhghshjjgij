@@ -253,5 +253,16 @@
 	]]>
 	</select>
 	
+	<select id="selectAuctionCusQnaList" parameterType="PageNumber" resultType="AuctionQnA">
+	<![CDATA[
+	select * from (select rownum rnum, auction_qna_no,auction_qna_title,member_id,auction_qna_question_date 
+	from auction_qna order by auction_qna_no desc) where rnum>= #{startRow} and rnum <=#{endRow}
+	]]>
+	</select>
+	
+	<select id="selectAuctionCusQnaListCount" parameterType="int" resultType="int">
+		select
+		count(*) from auction_qna
+	</select>
 
 </mapper>

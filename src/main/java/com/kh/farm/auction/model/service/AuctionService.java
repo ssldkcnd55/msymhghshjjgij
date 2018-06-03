@@ -11,6 +11,7 @@ import com.kh.farm.auction.model.vo.AuctionHistory;
 import com.kh.farm.auction.model.vo.AuctionQnA;
 import com.kh.farm.member.model.vo.Member;
 import com.kh.farm.notice.model.vo.Notice;
+import com.kh.farm.qna.model.vo.Market_qna;
 
 public interface AuctionService {
 	
@@ -82,7 +83,9 @@ public interface AuctionService {
 
 	String selectauction_startdateCheck();
 
-	
+	ArrayList<AuctionQnA> selectAuctionCusQnaList(int currentPage);
+
+	int selectAuctionCusQnaListCount();
 
 
 	

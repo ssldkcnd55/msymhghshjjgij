@@ -16,9 +16,27 @@ import com.kh.farm.auction.model.vo.AuctionQnA;
 import com.kh.farm.common.model.vo.PageNumber;
 import com.kh.farm.member.model.vo.Member;
 import com.kh.farm.notice.model.vo.Notice;
+import com.kh.farm.qna.model.vo.Market_qna;
 
 @Repository
 public class AuctionDao {
+	
+	public ArrayList<AuctionQnA> selectAuctionCusQnaList(SqlSessionTemplate sqlSession, int currentPage) {
+		// TODO Auto-generated method stub
+		int startRow =(currentPage-1)*10+1; //1~10, 11~20 계산할 거 ex) 1, 11, 21, 31,)
+		int endRow = startRow+9;
+		PageNumber pnum = new PageNumber();
+		pnum.setStartRow(startRow);
+		pnum.setEndRow(endRow);
+		List<AuctionQnA> ac = sqlSession.selectList("auction.selectAuctionCusQnaList",pnum);
+		return (ArrayList)ac;
+	}
+
+	public int selectAuctionCusQnaListCount(SqlSessionTemplate sqlSession) {
+		// TODO Auto-generated method stub
+		int listCount = sqlSession.selectOne("auction.selectAuctionCusQnaListCount");
+		return listCount;
+	}
 	
 	public int insertAuctionMake(Auction auction,SqlSessionTemplate sqlSession) {
 		return sqlSession.insert("auction.insertAuctionMake", auction);

@@ -25,6 +25,46 @@ import com.kh.farm.qna.model.vo.Market_qna;
 @Controller
 public class QnaController {
 	@Autowired private QnaService qnaService;
+	
+	@RequestMapping("cus_qna_list.do")
+	public void selectCusQnaList(HttpServletResponse response,@RequestParam("page") int currentPage) throws IOException{
+		
+		JSONArray jarr =new JSONArray();
+		
+		ArrayList<Market_qna> QnaList = qnaService.selectCusQnaList(currentPage);
+		int limitPage = 10;
+		int listCount = qnaService.selectCusQnaListCount();
+		
+		int maxPage=(int)((double)listCount/limitPage+0.9); //ex) 41개면 '5'페이지나와야되는데 '5'를 계산해줌
+		int startPage=((int)((double)currentPage/5+0.8)-1)*5+1;
+		int endPage=startPage+5-1;
+		
+		if(maxPage<endPage) {
+			endPage = maxPage;
+		}
+		for (Market_qna sq : QnaList) {
+			JSONObject json = new JSONObject();
+			json.put("rnum", sq.getRnum());
+			json.put("market_qna_no", sq.getMarket_qna_no());
+			json.put("member_id", sq.getMember_id());
+			json.put("market_qna_question_date", sq.getMarket_qna_question_date().toString());
+			json.put("market_qna_title", sq.getMarket_qna_title());
+			json.put("startPage", startPage);
+			json.put("endPage", endPage);
+			json.put("maxPage", maxPage);
+			json.put("currentPage",currentPage);
+			jarr.add(json);
+		}
+		
+		JSONObject sendJson = new JSONObject();
+		sendJson.put("list", jarr);
+		response.setContentType("application/json; charset=utf-8");
+		PrintWriter out = response.getWriter();
+		out.append(sendJson.toJSONString());
+		out.flush();
+		out.close();
+		
+	}
 
 	@RequestMapping(value="qnaList.do")
 	public void qnaList(Market mk, HttpServletResponse response,@RequestParam("page") int currentPage) throws IOException{

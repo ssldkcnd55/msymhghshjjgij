@@ -46,6 +46,45 @@ public class AuctionController {
 
 	@Autowired private AuctionService auctionService;
 	
+	@RequestMapping(value="cus_auction_qna_list.do")
+	public void selectAuctionCusQnaList(HttpServletResponse response,@RequestParam("page") int currentPage) 
+		throws IOException{
+		JSONArray jarr = new JSONArray();
+		ArrayList<AuctionQnA> list = auctionService.selectAuctionCusQnaList(currentPage);
+		int limitPage = 10;
+		int listCount = auctionService.selectAuctionCusQnaListCount();
+		
+		int maxPage=(int)((double)listCount/limitPage+0.9); //ex) 41개면 '5'페이지나와야되는데 '5'를 계산해줌
+		int startPage=((int)((double)currentPage/5+0.8)-1)*5+1;
+		int endPage=startPage+5-1;
+		
+		if(maxPage<endPage) {
+			endPage = maxPage;
+		}
+		
+		for(AuctionQnA aq : list) {
+			System.out.println("dao 2");
+			JSONObject jsq = new JSONObject();
+			jsq.put("rnum", aq.getRnum());
+			jsq.put("auction_qna_no",aq.getAuction_qna_no());
+			jsq.put("auction_qna_title", aq.getAuction_qna_title());
+			jsq.put("member_id", aq.getMember_id());
+			jsq.put("auction_qna_question_date", aq.getAuction_qna_question_date().toString());
+			jsq.put("startPage", startPage);
+			jsq.put("endPage", endPage);
+			jsq.put("maxPage", maxPage);
+			jsq.put("currentPage",currentPage);
+			jarr.add(jsq);
+		}
+			JSONObject sendJson = new JSONObject();
+			sendJson.put("list", jarr);
+			response.setContentType("application/json; charset=utf-8");
+			PrintWriter out = response.getWriter();
+			out.append(sendJson.toJSONString());
+			out.flush();
+			out.close();
+		}
+	
 	/*경매 등록시 DB저장*/
 	@RequestMapping(value="insertAuctionMake.do", method=RequestMethod.POST)
 	public String insertAuctionMake(Auction auction,HttpServletResponse response,HttpServletRequest request,
