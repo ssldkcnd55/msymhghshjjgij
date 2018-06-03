@@ -593,18 +593,18 @@ public class AuctionController {
 			@RequestParam(value="keyword") String keyword, @RequestParam(value="page") int currentPage,
 			@RequestParam(value="select") int select,@RequestParam(value="auction_no") int auction_no) 
 					throws IOException{
-		/*System.out.println("안뇽");*/
+		System.out.println("안뇽");
+		JSONArray jarr =new JSONArray();
 		List<AuctionQnA> auction_QnASearchList = auctionService.selectAuction_search(keyword,select,currentPage,auction_no);
 		System.out.println("auction_QnASearchList : "+auction_QnASearchList);
 		int limitPage = 10;
 		int listCount = auctionService.selectAuction_searchCount(auction_no);
-		/*System.out.println("listCount :"+listCount);*/
+		System.out.println("listCount :"+listCount);
 		
 		int maxPage=(int)((double)listCount/limitPage+0.9); //ex) 41개면 '5'페이지나와야되는데 '5'를 계산해줌
 		int startPage=((int)((double)currentPage/5+0.8)-1)*5+1;
 		int endPage=startPage+5-1;
 		
-		JSONArray jarr =new JSONArray();
 		if(maxPage<endPage) {
 			endPage = maxPage;
 		}
@@ -625,8 +625,9 @@ public class AuctionController {
 		JSONObject sendJson = new JSONObject();
 		sendJson.put("list", jarr);
 		response.setContentType("application/json; charset=utf-8");
+		 System.out.println(sendJson.toJSONString());
 		PrintWriter out = response.getWriter();
-		out.append(sendJson.toJSONString());
+		out.print(sendJson.toJSONString());
 		out.flush();
 		out.close();
 	}
