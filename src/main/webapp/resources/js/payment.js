@@ -3,6 +3,7 @@
  */
 
 
+
 function printInfoRelief() {
 	$('.InfoReliefDiv').css("display", "block");
 }
@@ -69,14 +70,16 @@ function numberWithComma(a) {// 숫자 천단위 콤마
 
 function payment() {
 
-	var product_name = $('.product_title:first').text();
+	
+	
+	var product_name = $('.product_title_strong:first').text();
 	var name;
 	var tel;
 	var addr;
 	var request;
 	
-	if ($('.product_title').length > 1) {
-		product_name += "외 " + ($('.product_title').length - 1) + "종";		
+	if ($('.product_title_strong').length > 1) {
+		product_name += "외 " + ($('.product_title_strong').length - 1) + "종";		
 	}
 	if ($('[name=delivery]:checked').val() == "original_delivery") {
 		name=$('#user_name').val();
@@ -118,7 +121,7 @@ function payment() {
 	}
 	
 	
-	
+	console.log("name:"+product_name);
 	
 	//group_no를 얻기위해 첫번째 상품만 가 등록한다.
 	//이후 결제가 완료되면 해당 group_no로 다른 상품도 등록
@@ -132,8 +135,8 @@ function payment() {
 			buy_amount : product_buy_amount[0]
 		},
 		success:function(data){
+			console.log("name:"+product_name);
 			var group_no = data;
-			
 			var IMP = window.IMP;
 			IMP.init('imp31374305');
 
@@ -142,47 +145,83 @@ function payment() {
 				pay_method : 'card',
 				merchant_uid : 'merchant_' + new Date().getTime(),
 				name : product_name,
-				amount : order_price + delivery_price,
+				amount : /*order_price + delivery_price*/100,
 				buyer_email : my_id,
 				buyer_name : name,
 				buyer_tel : tel,
 				buyer_addr : addr,
 			}, function(rsp) {
 				if (rsp.success) {
-				
-					var msg = '결제가 완료되었습니다.';
-					msg += '고유ID : ' + rsp.imp_uid;
-					msg += '상점 거래ID : ' + rsp.merchant_uid;
-					msg += '결제 금액 : ' + rsp.paid_amount;
-					msg += '카드 승인번호 : ' + rsp.apply_num;
-					console.log(msg);
+	
 					////////////////////본 결제
 					var objList=[];
 					for(var i=0; i < product_market_no.length; i++)
 						{
 						var obj = new Object();
-						obj={"group_no":group_no, "market_no":product_market_no[i],"member_id":my_id,"buy_amount":product_buy_amount[i],"buy_addr": addr,"buy_tel":tel,"buy_name":name,"buy_request":request};
-						objList.push( JSON.stringify(obj) );
-						
+						obj={'group_no':group_no, 'market_no':product_market_no[i],'member_id':my_id,'buy_amount':product_buy_amount[i],'buy_addr': addr,'buy_tel':tel,'buy_name':name,'buy_request':request};
+						objList.push(JSON.stringify(obj) );
 						}
-					
+				
 					$.ajax({
-							url:"insertNewPayment.do",
-							type : "post",
-							data:{"objList":objList},			
-							success:function(data){
-								console.log(group_no);
-								////
-								//rsp.paid_amount 결제금액
-								//rsp.status 결제상태
-								//rsp.name 상품명
-								//rsp.buyer_name 구매자명
-								//rsp.buyer_email 구매자 이메일
-								//rsp.buyer_tel 구매자 전화번호
-								//rsp.buyer_addr 구매자 주소
-								//rsp.paid_at 결제 승인 시각
-								//// payment_complete 페이지연결해야함
-								
+							url: "insertNewPayment.do",
+							type: "post",
+							dataType:"json",
+							data: { "objList" : JSON.stringify(objList), "sellerInfo":JSON.stringify(sellerInfo)},					
+							success: function(resultData) {
+
+								var objStr = JSON.stringify(resultData);
+								var c = JSON.parse(objStr);
+								var ws=[];
+								var msgList=[];
+								for(var i in c.rl)
+									{
+									var msg = '<div class="sell_alarm_head"><img src="/farm/resources/images/sell_icon_white.png" />판매 알림</div>';
+									msg+='<img class="sell_alarm_img" style="width:180px; margin-top:4px;" src="/farm/resources/upload/marketUpload/'+c.rl[i].img+'">';	
+									msg+='<table class="sell_alarm_table"><tr><th colspan="2"><font class="sell_alarm_name">'+c.rl[i].member_name+'</font>님의<br>상품이 판매되었습니다.</th></tr>';
+									msg+='<tr><td>주문번호</td><td>'+c.rl[i].buy_no+'</td></tr>'
+									msg+='<tr><td>상품명</td><td>'+c.rl[i].titme+'</td></tr>';
+									msg+='<tr><td>가격</td><td>'+c.rl[i].price+'원</td></tr>';
+									msg+='<tr><td>수량</td><td>'+c.rl[i].amount+'개</td></tr>';
+									msg+='<tr><td>결제금액</td><td>'+c.rl[i].total+'원</td></tr>';						
+									msg+='</table>';
+									msg+='<table class="sell_alarm_table"><tr><td>구매자</td><td>'+rsp.buyer_name+'</td></tr>';
+									msg+='<tr><td>email</td><td>'+rsp.buyer_email+'</td></tr>';
+									msg+='<tr><td>연락처</td><td>'+rsp.buyer_tel+'</td></tr>';
+									msg+='<tr><td>주소</td><td>'+rsp.buyer_addr+'</td></tr>';
+									msg+='</table>';
+
+									msgList[i]=msg;
+									ws[i] = new WebSocket("ws://127.0.0.1:7777/farm/chat.do?state=mar&your_id=" + c.rl[i].your_id + "&chat_no=" + c.rl[i].chat_no  );
+									}
+							
+								function sendMsg(index)
+								{
+									 if(index >= ws.length){
+										 moveComplePage();
+									 }
+									else
+										{ 
+										ws[index].onopen= function(){ ws[index].send( msgList[index]) };
+										ws[index].onmessage = function(){
+											ws[index].close();
+											sendMsg(index+1);
+										};
+										 } 
+								}
+								sendMsg(0);
+								function moveComplePage(){
+								var code= '<form id="completeSubmit" action="movePaymentComplete.do" method="post">';
+								code += '<input name="group_no" value="'+group_no+'" type="hidden" />';
+								code += '<input name="name" value="'+rsp.name+'" type="hidden" />';
+								code += '<input name="paid_amount" value="'+rsp.paid_amount+'" type="hidden" />';
+								code += '<input name="buyer_name" value="'+rsp.buyer_name+'" type="hidden" />';
+								code += '<input name="buyer_email" value="'+rsp.buyer_email+'" type="hidden" />';
+								code += '<input name="buyer_tel" value="'+rsp.buyer_tel+'" type="hidden" />';
+								code += '<input name="buyer_addr" value="'+rsp.buyer_addr+'" type="hidden" />';
+								code += '</form>';
+								$('.inner-wrap').append(code);
+								$('#completeSubmit').submit();
+								}
 							},
 							error:function(){
 								console.log("payment.js/ payment() /  insertFirstPayment.do ajax / insertNewPayment.do ajax ");

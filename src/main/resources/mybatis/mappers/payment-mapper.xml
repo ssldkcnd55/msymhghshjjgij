@@ -41,11 +41,14 @@
 	
 	</insert>
 	
-	<insert id="insertNewPayment" parameterType="Payment">
+	<insert id="insertNewPayment" parameterType="Payment" keyProperty="buy_no">
 	
+	<selectKey resultType="int" keyProperty="buy_no" statementType="STATEMENT" order="BEFORE" >
+	select (case when max(BUY_NO) is null then 0 else max(BUY_NO) end)+1  as "buy_no"  from BUY
+	</selectKey>
 	
 	insert into BUY values(
-	(select (case when max(BUY_NO) is null then 0 else max(BUY_NO) end)+1  as "buy_no"  from BUY),
+	#{buy_no},
 	#{group_no}, 
 	
 	<if test="market_no != 0">#{market_no},</if>
@@ -74,4 +77,38 @@
 		select
 		count(*) from buy
 	</select>
+	
+	<delete id="deleteShoppingBasket" parameterType="payment" >
+		<![CDATA[
+		delete from SHOP_BASKET where MEMBER_ID = #{member_id} and MARKET_NO = #{market_no} and BUY_AMOUNT = #{buy_amount}
+		]]>
+	</delete>
+	
+	
+	<select id="selectChatNo" parameterType="hashmap" resultType="Integer">
+	
+	select chat_no from chat where (member_id1 = 'system' and member_id2 in
+	
+	
+	<foreach collection="member_id" index="index" item="item" open="(" close=")" separator="," >
+			#{item}
+	</foreach>
+	
+	) or ( member_id1 in
+	
+		<foreach collection="member_id" index="index" item="item" open="(" close=")" separator="," >
+			#{item}
+	</foreach>
+	
+	and member_id2 = 'system')
+	
+	</select>
+	
+	
+	<select id="selectOneChatNo" parameterType="String" resultType="int">
+	<![CDATA[		
+	select chat_no from chat where ( member_id1 = 'system' and member_id2 = #{your_id}  )   or ( member_id1 = #{your_id} and member_id2 = 'system' )
+	]]>
+	</select>
+	
 </mapper>

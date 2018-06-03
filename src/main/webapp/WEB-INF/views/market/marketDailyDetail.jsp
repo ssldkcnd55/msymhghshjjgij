@@ -106,7 +106,9 @@
 					if(jsonObj.list[i].reply_contents != null){
 						
 						if(loginMember_id == jsonObj.list[i].member_id){
-							outValues+="<span class='modifiedSpan' onclick='comment_modify("+i+",\""+jsonObj.list[i].reply_contents+"\","+jsonObj.list[i].reply_no+");'>수정</span>&nbsp;<span class='deleteSpan' onclick='deleteReply("+jsonObj.list[i].reply_no+");'>삭제</span>&nbsp;"
+							outValues+="<span 
+							       +
+							       class='modifiedSpan' onclick='comment_modify("+i+",\""+jsonObj.list[i].reply_contents+"\","+jsonObj.list[i].reply_no+");'>수정</span>&nbsp;<span class='deleteSpan' onclick='deleteReply("+jsonObj.list[i].reply_no+");'>삭제</span>&nbsp;"
 						}
 						outValues+="</div><p class='p"+i+"'>"+jsonObj.list[i].reply_contents+"</p></div>";
 					}else{

@@ -15,6 +15,8 @@
 <link href="/farm/resources/css/marketDetail_modal.css" rel="stylesheet" type="text/css" />
 <script src="/farm/resources/js/jquery-3.3.1.min.js"></script>
 <script type="text/javascript" src="/farm/resources/js/tabMove.js"></script>
+<script type="text/javascript" src="/farm/resources/js/marketDetail.js"></script>
+
 <script type="text/javascript">
 $(function(){
 	$('.goods-view-show-option-button').click(function(){
@@ -31,7 +33,6 @@ $(function(){
 var change = 0;
 ///최근 본 상품 쿠키 (현준)///
  $(function(){
-
 		var time = new Date();
 		time.setDate(time.getDate() + 7);
 		var oldtime = new Date();
@@ -546,8 +547,8 @@ function changeprice(){
 									</tr>
 									
 									</table>
-							
-								
+								<!-- sendMsg -->
+								<%-- <a href="javascript: sendMsgByMarket('${loginUser.member_id }','${market.member_id }')">${loginUser.member_name}</a> --%>
 								<div class="market_cart_right_div">
 								<input type="submit" value="구매하기" class="market_buy"> <input type="button"
 									value="장바구니" onclick="addBasket()" class="market_basket">

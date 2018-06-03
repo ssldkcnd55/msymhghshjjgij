@@ -61,7 +61,7 @@ function loadListPage()
                   .html('<div class="searchNotFoundID">진행중인 대화가 없습니다.</div><div class="searchNotFoundMsg">아이디 또는 이름을 검색하여 대화를 시작하세요.</div></div>');
          }
 
-         // /
+         ///
          
          if (a_count > 0) {
             if ($('.msgAlarm').html() == undefined) {

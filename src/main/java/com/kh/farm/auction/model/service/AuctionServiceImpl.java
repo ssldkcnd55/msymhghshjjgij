@@ -1,6 +1,7 @@
 package com.kh.farm.auction.model.service;
 
 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Service;
 import com.kh.farm.auction.model.dao.AuctionDao;
 import com.kh.farm.auction.model.vo.*;
 import com.kh.farm.member.model.vo.Member;
+import com.kh.farm.qna.model.vo.Market_qna;
 
 @Service
 public class AuctionServiceImpl implements AuctionService{
@@ -138,6 +140,52 @@ public class AuctionServiceImpl implements AuctionService{
 	@Override
 	public int selectAuctionBiddingCount(int auction_no) {
 		return auctionDao.selectAuctionBiddingCount(sqlSession,auction_no);
+	}
+	
+	@Override
+	public int updateAuctionStatus() {
+		return auctionDao.updateAuctionStatus(sqlSession);
+
+	}
+	
+	@Override
+	public Auction selectauction_timeRemaining(int auction_no) {
+		return auctionDao.selectauction_timeRemaining(sqlSession,auction_no);
+	}
+	
+	@Override
+	public List<AuctionQnA> selectAuction_search(String keyword, int select, int currentPage, int auction_no) {
+		
+		switch(select) {
+		case 1:
+			return auctionDao.selectAuction_searchTitle(sqlSession,keyword,currentPage,auction_no);
+		default :
+			return auctionDao.selectAuction_searchMember_id(sqlSession,keyword,currentPage,auction_no);
+
+		}
+		
+	}
+	
+	@Override
+	public int selectAuction_searchCount(int auction_no) {
+		return auctionDao.selectAuction_searchCount(sqlSession,auction_no);
+
+	}
+	
+	@Override
+	public String selectauction_startdateCheck() {
+		return auctionDao.selectauction_startdateCheck(sqlSession);
+	}
+	
+	@Override
+	public ArrayList<AuctionQnA> selectAuctionCusQnaList(int currentPage) {
+		// TODO Auto-generated method stub
+		return auctionDao.selectAuctionCusQnaList(sqlSession,currentPage);
+	}
+	@Override
+	public int selectAuctionCusQnaListCount() {
+		// TODO Auto-generated method stub
+		return auctionDao.selectAuctionCusQnaListCount(sqlSession);
 	}
 	
 	

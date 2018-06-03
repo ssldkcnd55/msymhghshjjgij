@@ -141,6 +141,18 @@
 						"name" : "햇일반계",
 						"value" : "05"
 					} ];
+					var json5 = [ {
+						"name" : "일반계",
+						"value" : "01"
+					} ];
+					var json6 = [ {
+						"name" : "백태",
+						"value" : "01"
+					} ];
+					var json7 = [ {
+						"name" : "적두",
+						"value" : "00"
+					} ];
 					html2 += "<option>품종선택</option>";
 					if (value == "111") {
 
@@ -149,6 +161,28 @@
 									+ json3[i].name + "</option>";
 						}
 					}
+					if (value == "112") {
+
+						for ( var i in json5) {
+							html2 += "<option value="+json5[i].value+">"
+									+ json5[i].name + "</option>";
+						}
+					}
+					if (value == "141") {
+
+						for ( var i in json6) {
+							html2 += "<option value="+json6[i].value+">"
+									+ json6[i].name + "</option>";
+						}
+					}
+					if (value == "142") {
+
+						for ( var i in json7) {
+							html2 += "<option value="+json7[i].value+">"
+									+ json7[i].name + "</option>";
+						}
+					}
+
 					$("#h3").html(html2);
 				});
 		/*등급 셀렉트박스 생성 */
@@ -163,8 +197,9 @@
 						"name" : "중품",
 						"value" : "05"
 					} ];
+
 					html3 += "<option>등급선택</option>";
-					if (value2 == "01" || value2 == "05") {
+					if (value2 == "01" || value2 == "05" || value2 == "00") {
 						for ( var i in json4) {
 							html3 += "<option value="+json4[i].value+">"
 									+ json4[i].name + "</option>";
@@ -176,6 +211,14 @@
 	});
 
 	function selectbox() {
+
+		$(".tr").empty();
+		$(".tr2").empty();
+		$(".tr4").empty();
+		$(".tr5").empty();
+		$(".tr6").empty();
+
+		var h1 = $("#h2 option:selected").text();
 
 		$
 				.ajax({
@@ -223,7 +266,7 @@
 						/*서울 / 복조리  */
 						var html6 = "";
 
-						html += "<th colspan='2' style='border:3px solid #ddd;'>구분</th>";
+						html += "<th class='th' colspan='2'  style='border:3px solid #ddd;'>구분</th>";
 
 						/*테이블 생성   */
 						$
@@ -234,7 +277,7 @@
 											if ($.inArray(item.regday, result) == -1) {
 												result.push(item.regday);
 												c.push(item.regday);
-												html += "<th style='border:3px solid #ddd;'>"
+												html += "<th class='th' style='border:3px solid #ddd;'>"
 														+ item.regday + "</th>";
 
 											}
@@ -244,13 +287,13 @@
 													result
 															.push(item.countyname);
 
-													html2 += "<td colspan='2' style='border:3px solid #ddd; text-align:center;' >"
+													html2 += "<td class='titletd' colspan='2' style='border:3px solid #ddd; text-align:center;' >"
 															+ item.countyname
 															+ "</td>";
 
 												}
 
-												html2 += "<td style='border:3px solid #ddd;'>"
+												html2 += "<td class='td' style='border:3px solid #ddd;'>"
 														+ item.price + "</td>";
 
 											}
@@ -264,7 +307,7 @@
 														result
 																.push(item.countyname);
 
-														html4 += "<td rowspan ='8' style='border:3px solid #ddd;'>"
+														html4 += "<td class='titletd' rowspan ='8' style='border:3px solid #ddd;'>"
 																+ item.countyname
 																+ "</td>";
 
@@ -276,7 +319,7 @@
 																.push(item.marketname);
 														m.push(item.marketname);
 
-														html4 += "<td style='border:3px solid #ddd;'>"
+														html4 += "<td class='titletd' style='border:3px solid #ddd;'>"
 																+ item.marketname
 																+ "</td>";
 														/* price.push(item.price) */
@@ -288,7 +331,7 @@
 																			",",
 																			"")));
 
-													html4 += "<td style='border:3px solid #ddd;'>"
+													html4 += "<td class='td' style='border:3px solid #ddd;'>"
 															+ item.price
 															+ "</td>";
 
@@ -301,7 +344,7 @@
 														result
 																.push(item.countyname);
 
-														html5 += "<td style='border:3px solid #ddd;'>"
+														html5 += "<td class='titletd' style='border:3px solid #ddd;'>"
 																+ item.countyname
 																+ "</td>";
 
@@ -312,14 +355,14 @@
 														result
 																.push(item.marketname);
 														r.push(item.marketname);
-														html5 += "<td style='border:3px solid #ddd;'>"
+														html5 += "<td class='titletd' style='border:3px solid #ddd;'>"
 																+ item.marketname
 																+ "</td>";
 
 													}
 													t.push(parseInt(item.price
 															.replace(",", "")));
-													html5 += "<td style='border:3px solid #ddd;'>"
+													html5 += "<td class='td' style='border:3px solid #ddd;'>"
 															+ item.price
 															+ "</td>";
 												}
@@ -330,7 +373,7 @@
 														result
 																.push(item.countyname);
 
-														html6 += "<td style='border:3px solid #ddd;'>"
+														html6 += "<td class='titletd' style='border:3px solid #ddd;'>"
 																+ item.countyname
 																+ "</td>";
 
@@ -341,14 +384,14 @@
 														result
 																.push(item.marketname);
 														a.push(item.marketname);
-														html6 += "<td style='border:3px solid #ddd;'>"
+														html6 += "<td class='titletd' style='border:3px solid #ddd;'>"
 																+ item.marketname
 																+ "</td>";
 
 													}
 													b.push(parseInt(item.price
 															.replace(",", "")));
-													html6 += "<td style='border:3px solid #ddd;'>"
+													html6 += "<td class='td' style='border:3px solid #ddd;'>"
 															+ item.price
 															+ "</td>";
 												}
@@ -361,15 +404,15 @@
 						Highcharts.chart('g', {
 
 							title : {
-								text : '쌀'
+								text : h1
 							},
 							xAxis : {
 								categories : c
 							},
 
-							yAxis : {
+							/* yAxis : {
 
-							},
+							}, */
 							legend : {
 								layout : 'vertical',
 								align : 'right',
@@ -443,23 +486,84 @@
 
 .j_name_content_box {
 	padding: 40px;
-	border: 1px solid #ddd;
 }
 
 .graph_box {
 	padding: 40px;
-	border: 1px solid #ddd;
 }
 
-table {
+.table {
 	width: 100%;
 	border-top: 1px solid #444444;
 	border-collapse: collapse;
 }
 
-th, td {
-	border-bottom: 1px solid #444444;
+.th {
+	color: #222;
+	background: #f7f7f7;
+	border: solid 1px #c7c7c7;
+	border-bottom: solid 1px #555;
+	font-size: 1.15em;
+	text-align: center;
 	padding: 10px;
+}
+
+.td {
+	color: #222;
+	border: solid 1px #c7c7c7;
+	text-align: center;
+	padding: 10px;
+}
+
+.titletd {
+	background: #fcfcfc;
+	font-weight: bold;
+	font-size: 1.3em;
+	text-align: center;
+	padding: 10px;
+}
+
+.button {
+	/* border: 0;
+	outline: 0; */
+	background-color: white;
+	color: #f1473a;
+	border: 1px solid #f1473a;
+	padding: 6px 6px 6px;
+}
+
+.select {
+	width: 100px;
+	padding: .8em .5em;
+	font-family: "Helvetica", arial, sans-serif;
+	font-size: 12px;
+	background:
+		url(https://farm1.staticflickr.com/379/19928272501_4ef877c265_t.jpg)
+		no-repeat 95% 50%;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+	border: 1px solid #999;
+	border-radius: 0px;
+	display: inline-block;
+	margin: auto;
+	text-align: center;
+}
+
+.inputdate {
+	appearance: none;
+	-webkit-appearance: none;
+	color: #95a5a6;
+	border: 1px solid #ecf0f1;
+	font-family: "Helvetica", arial, sans-serif;
+	font-size: 18px;
+	background:
+		url(https://farm1.staticflickr.com/379/19928272501_4ef877c265_t.jpg)
+		no-repeat 95% 50%;
+	padding: 5px;
+	display: inline-block !important;
+	visibility: visible !important;
+	font-size: 18px;
 }
 </style>
 </head>
@@ -480,10 +584,10 @@ th, td {
 				<div class="period_box" style="padding: 40px;">
 					<h3 class="j_title">기간</h3>
 					<form style="padding: 4px; margin: 20px 0px;">
-						<span style="color: #555;">시작날</span> <input type="date"
-							id="start" name="firstname" style="margin-right: 40px;"><span
-							style="color: #555;">종료날</span> <input id="end" type="date"
-							name="lastname">
+						<span style="color: #555;">시작날 :</span> <input type="date"
+							id="start" name="firstname" style="margin-right: 40px;"
+							class="inputdate"><span style="color: #555;">종료날 :
+						</span> <input id="end" type="date" name="lastname" class="inputdate">
 					</form>
 
 
@@ -515,8 +619,7 @@ th, td {
 						</tbody>
 						<tbody>
 							<tr>
-								<td style="width: 16.6667%;"><select id="h0"
-									style="display: inline-block; margin: auto; text-align: center;">
+								<td style="width: 16.6667%;"><select id="h0" class="select">
 										<option>지역선택</option>
 										<option value="1101">서울</option>
 										<option value="2300">인천</option>
@@ -527,25 +630,25 @@ th, td {
 										<option value="3111">수원</option>
 								</select></td>
 
-								<td style="width: 16.6667%;"><select id="h1">
+								<td style="width: 16.6667%;"><select id="h1" class="select">
 										<option>부류선택</option>
 										<option value="100">식량작물</option>
 										<option value="200">채소류</option>
 										<option value="300">특용작물</option>
 										<option value="400">과일류</option>
 								</select></td>
-								<td style="width: 16.6667%;"><select id="h2">
+								<td style="width: 16.6667%;"><select id="h2" class="select">
 										<option>품목선택</option>
 								</select></td>
-								<td style="width: 16.6667%;"><select id="h3">
+								<td style="width: 16.6667%;"><select id="h3" class="select">
 										<option>품종선택</option>
 								</select></td>
-								<td style="width: 16.6667%;"><select id="h4">
+								<td style="width: 16.6667%;"><select id="h4" class="select">
 										<option>등급선택</option>
 								</select></td>
 								<td style="width: 16.6667%;">
 
-									<button onclick="selectbox()">조회하기</button>
+									<button onclick="selectbox()" class="button">조회하기</button>
 								</td>
 							</tr>
 						</tbody>
@@ -555,10 +658,10 @@ th, td {
 				<hr style="border-color: #ddd; width: 100%;">
 				<!--명칭 시작-->
 				<div class="name_box" style="padding: 20px;">
-					<h3 class="j_title">가격정보</h3>
+					<h3 class="j_title">시세정보</h3>
 					<div class="j_name_content_box">
 						<p id="p1" style="margin: auto;">조회된 데이터가 없습니다</p>
-						<table style="margin: auto;">
+						<table class="table" style="margin: auto;">
 							<tr class="tr"></tr>
 							<tr class="tr2"></tr>
 							<tr class="tr4"></tr>
@@ -571,7 +674,7 @@ th, td {
 				<hr style="border-color: #ddd; width: 100%;">
 				<!--조건 시작-->
 				<div class="condition_box" style="padding: 40px;">
-					<h3 class="j_title">그래프</h3>
+					<h3 class="j_title">시세정보그래프</h3>
 					<div class="graph_box">
 						<p id="p2" style="margin: auto;">조회된 데이터가 없습니다</p>
 						<div id="g" style="margin: auto;"></div>

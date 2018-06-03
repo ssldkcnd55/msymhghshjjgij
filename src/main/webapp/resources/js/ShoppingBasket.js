@@ -121,7 +121,7 @@ function setPrice() {
 }
 function deleteBasket()
 {	
-	
+	alert("d1");
 	$.ajax({
 		url:"deleteSoppingBasket.do",
 		type:"post",

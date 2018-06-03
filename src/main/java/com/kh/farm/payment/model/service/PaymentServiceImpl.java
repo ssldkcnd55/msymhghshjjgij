@@ -43,13 +43,26 @@ public class PaymentServiceImpl implements PaymentService{
 	}
 	@Override
 	public ArrayList<Payment> selectPaymentHistory(int currentPage) {
-		// TODO Auto-generated method stub
 		return paymentDao.selectPaymentHistory(sqlSession,currentPage);
 	}
 	@Override
 	public int selectPaymentHistoryCount() {
-		// TODO Auto-generated method stub
 		return paymentDao.selectPaymentHistoryCount(sqlSession);
+	}
+	@Override
+	public int deleteShoppingBasket(Payment pm) {
+		
+		return paymentDao.deleteShoppingBasket(sqlSession,pm);
+	}
+	@Override
+	public List<Integer> selectChatNo(Map map) {
+	
+		return paymentDao.selectChatNo(sqlSession,map);
+	}
+	@Override
+	public int selectChatNo(String your_id) {
+		
+		return paymentDao.selectChatNo(sqlSession, your_id);
 	}
 	
 }

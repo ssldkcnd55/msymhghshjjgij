@@ -36,18 +36,28 @@ public class ChatInterceptor extends HttpSessionHandshakeInterceptor{
 
 	        // HttpSession 에 저장된 이용자의 아이디를 추출하는 경우
 		 String my_id=((Member)hsr.getSession().getAttribute("loginUser")).getMember_id();
-		 attributes.put("my_id",my_id);
+		 
 		 if(hsr.getParameter("state")!=null && hsr.getParameter("state").equals("login"))
-		 {	
+		 {	 attributes.put("my_id",my_id);
 			 attributes.put("state", "login");
 		 }else if( hsr.getParameter("state")!=null && hsr.getParameter("state").equals("msg"))
 		 {
 			 String your_id=(String)hsr.getParameter("your_id");
 			 String chat_no=(String)hsr.getParameter("chat_no");
+			 attributes.put("my_id",my_id);
 			 attributes.put("chat_room1", chat_no+"_"+my_id);
 			 attributes.put("chat_room2", chat_no+"_"+your_id);
 			 attributes.put("your_id",your_id);
 			 attributes.put("chat_no", chat_no);
+			 attributes.put("state", "msg");
+		 }else if(hsr.getParameter("state")!=null && hsr.getParameter("state").equals("mar")) {
+			 String your_id=(String)hsr.getParameter("your_id");
+			 String chat_no=(String)hsr.getParameter("chat_no");
+			 attributes.put("your_id",your_id);
+			 attributes.put("chat_no", chat_no);
+			 attributes.put("my_id","system");
+			 attributes.put("chat_room1", chat_no+"_"+"system");
+			 attributes.put("chat_room2", chat_no+"_"+your_id);
 			 attributes.put("state", "msg");
 		 }
 	        return super.beforeHandshake(request, response, wsHandler, attributes);

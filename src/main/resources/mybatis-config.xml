@@ -15,19 +15,19 @@
 		 <typeAlias type="com.kh.farm.market.model.vo.Daily" alias="Daily" /> 
 		 <typeAlias type="com.kh.farm.market.model.vo.Market" alias="Market" /> 
 		 <typeAlias type="com.kh.farm.market.model.vo.Reply" alias="Reply" /> 
-		 <typeAlias type="com.kh.farm.market.model.vo.Report" alias="Report" /> 
 		 <typeAlias type="com.kh.farm.market.model.vo.Review" alias="Review" /> 
 		 <typeAlias type="com.kh.farm.market.model.vo.UnderReply" alias="UnderReply" /> 
 		 <typeAlias type="com.kh.farm.member.model.vo.Member" alias="Member" /> 
 		 <typeAlias type="com.kh.farm.notice.model.vo.Notice" alias="Notice" /> 
 		 <typeAlias type="com.kh.farm.payment.model.vo.Payment" alias="Payment" /> 
+		 <typeAlias type="com.kh.farm.payment.model.vo.PaymentComplete" alias="PaymentComplete" /> 
 		 <typeAlias type="com.kh.farm.qna.model.vo.MainQna" alias="MainQna" /> 
 		 <typeAlias type="com.kh.farm.qna.model.vo.Market_qna" alias="Market_qna" /> 
 		 <typeAlias type="com.kh.farm.shoppingBasket.model.vo.ShoppingBasket" alias="ShoppingBasket" /> 
 		 <typeAlias type="com.kh.farm.shoppingBasket.model.vo.ShowBasket" alias="ShowBasket" /> 
 		 <typeAlias type="com.kh.farm.category.model.vo.Category" alias="Category" /> 
 		 <typeAlias type="com.kh.farm.common.model.vo.PageNumber" alias="PageNumber" />  
-
+		 <typeAlias type="com.kh.farm.report.model.vo.Report" alias="Report"/>	
 
 	</typeAliases>
 
@@ -42,5 +42,6 @@
 		<mapper resource="mybatis/mappers/qna-mapper.xml" />
 		<mapper resource="mybatis/mappers/shoppingBasket-mapper.xml" />
 		<mapper resource="mybatis/mappers/category-mapper.xml" />
+		<mapper resource="mybatis/mappers/report-mapper.xml" />
 	</mappers>
 </configuration>

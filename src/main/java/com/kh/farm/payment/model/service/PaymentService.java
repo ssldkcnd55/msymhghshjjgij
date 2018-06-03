@@ -22,4 +22,11 @@ public interface PaymentService {
 
 	int selectPaymentHistoryCount();
 
+	int deleteShoppingBasket(Payment pm);
+
+	List<Integer> selectChatNo(Map map);
+
+	int selectChatNo(String your_id);
+	
+
 }

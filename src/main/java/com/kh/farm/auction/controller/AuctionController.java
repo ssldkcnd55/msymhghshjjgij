@@ -46,10 +46,51 @@ public class AuctionController {
 
 	@Autowired private AuctionService auctionService;
 	
+	@RequestMapping(value="cus_auction_qna_list.do")
+	public void selectAuctionCusQnaList(HttpServletResponse response,@RequestParam("page") int currentPage) 
+		throws IOException{
+		JSONArray jarr = new JSONArray();
+		ArrayList<AuctionQnA> list = auctionService.selectAuctionCusQnaList(currentPage);
+		int limitPage = 10;
+		int listCount = auctionService.selectAuctionCusQnaListCount();
+		
+		int maxPage=(int)((double)listCount/limitPage+0.9); //ex) 41개면 '5'페이지나와야되는데 '5'를 계산해줌
+		int startPage=((int)((double)currentPage/5+0.8)-1)*5+1;
+		int endPage=startPage+5-1;
+		
+		if(maxPage<endPage) {
+			endPage = maxPage;
+		}
+		
+		for(AuctionQnA aq : list) {
+			System.out.println("dao 2");
+			JSONObject jsq = new JSONObject();
+			jsq.put("rnum", aq.getRnum());
+			jsq.put("auction_qna_no",aq.getAuction_qna_no());
+			jsq.put("auction_qna_title", aq.getAuction_qna_title());
+			jsq.put("member_id", aq.getMember_id());
+			jsq.put("auction_qna_question_date", aq.getAuction_qna_question_date().toString());
+			jsq.put("startPage", startPage);
+			jsq.put("endPage", endPage);
+			jsq.put("maxPage", maxPage);
+			jsq.put("currentPage",currentPage);
+			jarr.add(jsq);
+		}
+			JSONObject sendJson = new JSONObject();
+			sendJson.put("list", jarr);
+			response.setContentType("application/json; charset=utf-8");
+			PrintWriter out = response.getWriter();
+			out.append(sendJson.toJSONString());
+			out.flush();
+			out.close();
+		}
+	
 	/*경매 등록시 DB저장*/
 	@RequestMapping(value="insertAuctionMake.do", method=RequestMethod.POST)
 	public String insertAuctionMake(Auction auction,HttpServletResponse response,HttpServletRequest request,
 			@RequestParam(name = "upfile", required = false) MultipartFile file){
+		System.out.println("111111 시작 호호호ㅗㅎ");
+		System.out.println(auction);
 		String path = request.getSession().getServletContext().getRealPath("resources/upload/auctionUpload");
 		
 		try {
@@ -92,11 +133,12 @@ public class AuctionController {
 		}
 		
 		int insertAuctionMake =  auctionService.insertAuctionMake(auction);
-		/*System.out.println("insertAuctionMake : "+insertAuctionMake);*/
+	
+		System.out.println("insertAuctionMake : "+insertAuctionMake);
 		
 		//mv.addObject("auction", insertAuctionMake);
 		/*mv.setViewName("/farm/AuctionList_controller.do");*/
-		return "forward:/AuctionList_controller.do";
+		return "redirect:/AuctionList_controller.do";
 		
 	}
 	
@@ -154,7 +196,7 @@ public class AuctionController {
 	public String deleteAuction(Model model, @RequestParam(value="auction_no") int auction_no) {
 		Auction deleteAuction = auctionService.deleteAuction(auction_no);
 		model.addAttribute("auction", deleteAuction);
-		return "forward:/AuctionList_controller.do";
+		return "redirect:/AuctionList_controller.do";
 	}
 	
 	/*수정버튼 정보들고 수정화면으로 이동*/
@@ -498,6 +540,111 @@ public class AuctionController {
         out.flush();
         out.close();
 		}
+	
+	/*경매 상태 3초마다 update*/
+	@RequestMapping(value="auction_updateStatus.do")
+	@ResponseBody
+	public void auction_updateStatus(HttpServletResponse response)throws IOException{
+		int auctionStatus = auctionService.updateAuctionStatus();
+		/*System.out.println("auctionStatus : "+auctionStatus);*/
+		
+	         JSONObject json = new JSONObject();
+	        
+	         json.put("auction_status",auctionStatus);
+	        /* System.out.println(json.toJSONString());*/
+	         response.setContentType("application/json; charset=utf-8;");
+		      PrintWriter out = response.getWriter();
+		      out.print(json.toJSONString());
+		      out.flush();
+		      out.close();
+		
+	}
+	
+	//경매 남은시간 
+	@RequestMapping(value="auction_timeRemaining.do",method=RequestMethod.POST)
+	public void auction_timeRemaining(HttpServletResponse response,@RequestParam(value="auction_no") int auction_no)
+			throws IOException{
+		/*System.out.println("111");*/
+		Auction auctiontime =auctionService.selectauction_timeRemaining(auction_no);
+		System.out.println("auctiontime : "+auctiontime +" / "+"day : "+auctiontime.getDay()+" / "+"hour : "+auctiontime.getHour());
+		
+		JSONObject json = new JSONObject();
+		//json.put("auctiontime",auctiontime);
+		json.put("day", auctiontime.getDay());
+		json.put("hour", auctiontime.getHour());
+		json.put("min", auctiontime.getMinute());
+		json.put("today", auctiontime.getToday());
+		json.put("status", auctiontime.getAuction_status());
+		json.put("auction_startdate", auctiontime.getAuction_startdate());
+		json.put("auction_enddate", auctiontime.getAuction_enddate());
+		 System.out.println(json.toJSONString());
+        
+		 response.setContentType("application/json; charset=utf-8;");
+	      PrintWriter out = response.getWriter();
+	      out.print(json.toJSONString());
+	      out.flush();
+	      out.close();
+	    
+	}
+	
+	//경매 문의 검색 
+	@RequestMapping(value="auction_search2.do")
+	public void auction_search(HttpServletResponse response,
+			@RequestParam(value="keyword") String keyword, @RequestParam(value="page") int currentPage,
+			@RequestParam(value="select") int select,@RequestParam(value="auction_no") int auction_no) 
+					throws IOException{
+		/*System.out.println("안뇽");*/
+		List<AuctionQnA> auction_QnASearchList = auctionService.selectAuction_search(keyword,select,currentPage,auction_no);
+		System.out.println("auction_QnASearchList : "+auction_QnASearchList);
+		int limitPage = 10;
+		int listCount = auctionService.selectAuction_searchCount(auction_no);
+		/*System.out.println("listCount :"+listCount);*/
+		
+		int maxPage=(int)((double)listCount/limitPage+0.9); //ex) 41개면 '5'페이지나와야되는데 '5'를 계산해줌
+		int startPage=((int)((double)currentPage/5+0.8)-1)*5+1;
+		int endPage=startPage+5-1;
+		
+		JSONArray jarr =new JSONArray();
+		if(maxPage<endPage) {
+			endPage = maxPage;
+		}
+		for (AuctionQnA aq : auction_QnASearchList) {
+			JSONObject json = new JSONObject();
+			json.put("rnum", aq.getRnum());
+			json.put("member_id", aq.getMember_id());
+			json.put("auction_qna_no", aq.getAuction_qna_no());
+			json.put("auction_qna_title", aq.getAuction_qna_title());
+			json.put("auction_qna_question_date", aq.getAuction_qna_question_date());
+			json.put("startPage", startPage);
+			json.put("endPage", endPage);
+			json.put("maxPage", maxPage);
+			json.put("currentPage",currentPage);
+			json.put("select", select);
+			jarr.add(json);
+		}
+		JSONObject sendJson = new JSONObject();
+		sendJson.put("list", jarr);
+		response.setContentType("application/json; charset=utf-8");
+		PrintWriter out = response.getWriter();
+		out.append(sendJson.toJSONString());
+		out.flush();
+		out.close();
+	}
+
+	//경매 Make startDate 체크
+	@RequestMapping(value="auction_startdateCheck.do")
+	public void auction_startdateCheck(HttpServletResponse response) throws IOException {
+		String sysdate2 = auctionService.selectauction_startdateCheck();
+		/*System.out.println(" sysdate2 : "+sysdate2);*/
+		JSONObject json = new JSONObject();
+		json.put("sysdate2",sysdate2);
+		/*System.out.println(json.toJSONString());*/
+		 response.setContentType("application/json; charset=utf-8;");
+	      PrintWriter out = response.getWriter();
+	      out.print(json.toJSONString());
+	      out.flush();
+	      out.close();
+	}
 	
 	
 	

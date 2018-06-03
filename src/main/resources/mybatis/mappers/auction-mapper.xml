@@ -22,9 +22,10 @@
 
 	<insert id="insertAuctionMake" parameterType="auction"
 		flushCache="true" useGeneratedKeys="true">
+	
 	<![CDATA[
-		insert into auction values((select max(auction_no) from auction)+1,#{member_id},1,#{auction_title},#{auction_note},#{auction_img},
-		#{auction_startdate},#{auction_enddate},#{auction_intro},'0',#{auction_startprice},#{auction_directprice})
+		insert into auction values((select max(auction_no) from auction)+1,#{member_id},1,#{auction_title},#{auction_note},#{auction_img},#{auction_intro},
+		'0',#{auction_startprice},#{auction_directprice},to_date(#{auction_startdate},'YY-MM-DD'),to_date(#{auction_enddate},'YY/MM/DD'))
 	]]>
 	</insert>
 
@@ -162,7 +163,7 @@
 	]]>
 	</select>
 	
-	
+	<!-- 경매 입찰 등록 -->
 	<insert id="insertAuctionBidding" parameterType="AuctionHistory" flushCache="true" useGeneratedKeys="true">
 	<![CDATA[
 		insert into auction_history values((select max(auction_history_no) from auction_history)+1,
@@ -199,7 +200,69 @@
 	</select>
 	
 	
+	<update id="updateAuctionStatus" parameterType="int">
+	<![CDATA[
+		update auction set auction_status =
+  		case when sysdate BETWEEN auction_startdate and auction_enddate then 1
+  		when auction_startdate > sysdate then 0
+ 		else 2
+ 		end 
+	]]>
+	</update>
 	
+	<select id="selectauction_timeRemaining" parameterType="int" resultType="auction">
+	<![CDATA[
+		select auction_no,sysdate ,AUCTION_STARTDATE, auction_enddate, auction_status, 
+      to_char   (trunc (TO_DATE (auction_enddate, 'YYYY/MM/DD HH24:MI:SS') - TO_DATE (AUCTION_STARTDATE, 'YYYY/MM/DD HH24:MI:SS'), 0)) as "day", 
+      to_char(   trunc ((TO_DATE (auction_enddate, 'YYYY/MM/DD HH24:MI:SS') - TO_DATE (AUCTION_STARTDATE, 'YYYY/MM/DD HH24:MI:SS'))*24, 0) - trunc (TO_DATE (auction_enddate, 'YYYY/MM/DD HH24:MI:SS')
+      - TO_DATE (AUCTION_STARTDATE, 'YYYY/MM/DD HH24:MI:SS'), 0) * 24 ) as "hour",
+      to_char( round (MOD ((TO_DATE (auction_enddate, 'YYYY/MM/DD HH24:MI:SS') - TO_DATE (AUCTION_STARTDATE, 'YYYY/MM/DD HH24:MI:SS'))*24*60, 60))) as "minute" 
+      from auction where auction_no = #{auction_no}
+
+	]]>
+	</select>
 	
+		
+	<select id="selectAuction_searchTitle" parameterType="PageNumber" resultType="AuctionQnA" >
+	<![CDATA[
+		select * from (select rownum rnum, member_id,auction_qna_no, auction_qna_title, auction_qna_question_date
+		from auction_qna where auction_no = #{auction_no}) where rnum >=#{startRow} and rnum <=#{endRow} and auction_qna_title like '%'||#{keyword}||'%'
+		order by auction_qna_no DESC
+	]]>
+	</select>
+	
+	<select id="selectAuction_searchMember_id" parameterType="PageNumber" resultType="AuctionQnA" >
+	<![CDATA[
+		select * from (select rownum rnum, member_id,auction_qna_no, auction_qna_title, auction_qna_question_date
+		from auction_qna where auction_no = #{auction_no}) where rnum >=#{startRow} and rnum <=#{endRow} and member_id like '%'||#{keyword}||'%'
+		order by auction_qna_no DESC
+	]]>
+	</select>
+		
+		
+	
+	<select id="selectAuction_searchCount" parameterType="int" resultType="int" >
+	<![CDATA[
+		select * from auction_qna where auction_no = #{auction_no}
+	]]>
+	</select>
+	
+	<select id="selectauction_startdateCheck" parameterType="String" resultType="String" >
+	<![CDATA[
+		select to_char(sysdate, 'YYYY-MM-DD') as "sysdate" from DUAL
+	]]>
+	</select>
+	
+	<select id="selectAuctionCusQnaList" parameterType="PageNumber" resultType="AuctionQnA">
+	<![CDATA[
+	select * from (select rownum rnum, auction_qna_no,auction_qna_title,member_id,auction_qna_question_date 
+	from auction_qna order by auction_qna_no desc) where rnum>= #{startRow} and rnum <=#{endRow}
+	]]>
+	</select>
+	
+	<select id="selectAuctionCusQnaListCount" parameterType="int" resultType="int">
+		select
+		count(*) from auction_qna
+	</select>
 
 </mapper>

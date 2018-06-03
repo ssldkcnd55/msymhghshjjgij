@@ -149,7 +149,7 @@ public class ChatContoller {
 			// chat 생성 서비스
 			chat.setChat_no(chatService.insertChat(chat));
 		}
-		System.out.println(chat.getChat_no());
+
 		json.put("chat_no", chat.getChat_no());
 		return json.toJSONString();
 	}

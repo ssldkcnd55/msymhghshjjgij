@@ -12,6 +12,24 @@
 	type="text/css" />
 <script type="text/javascript">
 
+//경매 상태 update(0:경매 등록은 하였으나 경매 준비 / 1:경매중 / 2: 경매 끝) 3초마다 상태 update 실행중
+ var upadte;
+  update = setInterval(function(){auction_update()}, 3000); 
+function auction_update(){
+
+	$.ajax({
+		url : "auction_updateStatus.do",
+		type : 'get',
+		 success : function(obj) {
+			 /* console.log(obj.toString());  */
+			 var objStr = JSON.stringify(obj);
+	         var jsonObj = JSON.parse(objStr);
+			/*  alert("경매 상태"+jsonObj.auction_status); */
+		 }
+	});
+	}
+
+
 function getBasketCount(member_id)
 {
 	$.ajax({
@@ -78,9 +96,6 @@ function getBasketCount(member_id)
         	moveSearchList();
 	    }
 	}
-
-
-	
 	function moveSearchList(){
 		location.href = "marketList.do?search="+$("#search").val();
 	}
@@ -113,7 +128,7 @@ function getBasketCount(member_id)
                      src="https://res.kurly.com/pc/img/1801/img_delivery.gif"></a>
                </div>
                <h1 class="h1">
-                  <a href="moveHome.do"><img src="/farm/resources/images/kurly_logo_5.png"></a>
+                  <a href="moveHome.do"><img src="/farm/resources/images/Farmlogo.png" style="width:150px;height:auto;"></a>
                </h1>
             </div>
             <div class="tabMenu">
