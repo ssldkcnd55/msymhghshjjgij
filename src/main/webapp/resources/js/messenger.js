@@ -32,6 +32,7 @@ function insertChat(my_id, your_id) {// 대화상대 추가
 						'your_id' : your_id
 					},
 					success : function(resultData) {
+
 						var objStr = JSON.stringify(resultData);
 						var c = JSON.parse(objStr);
 						$('.chat_list_table').css('visibility', 'visible');
@@ -300,7 +301,7 @@ function move_msg_table(chat_no, my_id, your_id) {
 							decodeURIComponent((c.name).replace(/\+/g, '%20'))
 									+ '(' + your_id + ')');
 
-					var your_profile = '<tr><th rowspan="2"><img src="/farm/resources/upload/memberUpload/'
+					var your_profile = '<tr><th rowspan="2" class="your_profile_img"><img class="your_profile_image" src="/farm/resources/upload/memberUpload/'
 							+ decodeURIComponent((c.img).replace(/\+/g, '%20'))
 							+ ' "></th><td>'
 							+ decodeURIComponent((c.name).replace(/\+/g, '%20'))
@@ -492,6 +493,7 @@ function move_msg_table(chat_no, my_id, your_id) {
 							+ "error : " + errorData);
 				}
 			});
+}
 	function openChat(chat_no, my_id, your_id, your_profile) {
 		ws = new WebSocket(
 				"ws://127.0.0.1:7777/farm/chat.do?state=msg&your_id=" + your_id
@@ -655,4 +657,3 @@ function move_msg_table(chat_no, my_id, your_id) {
 		};
 	}
 
-}
