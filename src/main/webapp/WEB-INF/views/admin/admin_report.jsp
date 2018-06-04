@@ -49,18 +49,17 @@ a:hover {text-decoration: underline; color: gray;}
 <script>
 $(function(){
 	$.ajax({
-		url:"reportList.do",
-		type:"post",
+		url:'reportList.do',
+		type:'post',
 		data:{page:1
 		},
-		dataType:"json",
+		dataType:'json',
 		success: function(data){
 			console.log(data);
 			var objStr = JSON.stringify(data);
 			var jsonObj = JSON.parse(objStr);
 			
-			var outValues = "";
-			outValues += "<tr><th width='12%'>번호</th><th width='12%'>분류</th><th width='30%'>후기 제목</th>"
+			var outValues = "<tr><th width='12%'>번호</th><th width='12%'>분류</th><th width='30%'>후기 제목</th>"
 							+"<th width='13%'>신고내용</th><th width='15%'>신고날짜</th><th width='15%'>처리 상황</th></tr>";
 			
 		 	for(var i in jsonObj.list){
@@ -68,9 +67,9 @@ $(function(){
 				+"<td id='Notice_td'>"+jsonObj.list[i].report_category+"</td>"
 				+"<td><a href='reviewDeatil.do?review_no="+jsonObj.list[i].review_no+"'>리뷰페이지로<a/></td>"
 				+"<td><a href='#' id='"+jsonObj.list[i].report_contents+"' onclick='viewContents(this);'>신고내용보기</a></td>"
-				+"<td>"+jsonObj.list[i].report_date+"</td><td>"+jasonObj.list[i].report_status+"</td></tr>";
+				+"<td>"+jsonObj.list[i].report_date+"</td><td>"+jsonObj.list[i].report_status+"</td></tr>";
 			} 
-			$("#notice_t").html(outValues);
+			$(".Notice_table").html(outValues);
 			
 			
 			var startPage= jsonObj.list[0].startPage;
@@ -173,8 +172,11 @@ function closemodal() {
 	location.href = "#close";
 }
 
-function viewContents() {
-	var report_no = this.id(); 	
+function viewContents(str) {
+	location.href = "#open";
+	var report_contents = str.id; 
+	$("#report_contents").text(report_contents);
+	
 }
 </script>
 <link rel="stylesheet" type="text/css" href="/farm/resources/css/style.css" />
@@ -204,7 +206,7 @@ function viewContents() {
                </select>
             </div>
 
-            <table class="Notice_table" id="notice_t">
+            <table class="Notice_table">
              
             </table>
 
@@ -217,8 +219,7 @@ function viewContents() {
 				
 				
 				
-				<!-- <div id="testdate" style="width: 40%; height: 350px; border:1px solid black;"></div>
-				<button onclick="testdate();">ㅇㅇ</button> -->
+				
 				
 				
 					<!--신고 모달창  -->
@@ -233,7 +234,7 @@ function viewContents() {
     					</div>
     					
 					<!-- 신고 모달창 끝 -->
-				<button onclick="modal();">dddd</button>
+				<button onclick="modal();" id="btn">dddd</button>
                <!-- 검색 -->
                <div class="search_box">
                <span class='green_window'> 
