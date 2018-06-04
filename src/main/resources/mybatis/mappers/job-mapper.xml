@@ -9,18 +9,25 @@
 		select count(*) from job
 	]]>
 	</select>
-	
+
 	<select id="jobList" parameterType="PageNumber" resultType="Job">
 	<![CDATA[
 		select * from (select rownum rnum, job_no, job_status, job_title, member_id, job_date from job
 		order by job_no desc) where rnum >=#{startRow} and rnum<=#{endRow} 
 	]]>
 	</select>
-	
-	<insert id="insertjob" parameterType="notice" flushCache="true" useGeneratedKeys="true">
+
+	<insert id="insertjob" parameterType="job" flushCache="true"
+		useGeneratedKeys="true">
 	<![CDATA[
-		insert into Job values((select max(Job_no) from Job)+1,#{Job_title},#{Job_contents},sysdate,#{Job_status},#{Job_startdate},#{Job_enddate},#{Job_addr},#{job_tel})
+		insert into Job values((select max(job_no) from Job)+1,#{job_title},#{job_contents},sysdate,#{job_status},#{job_startdate},#{job_enddate},#{job_addr},#{job_tel})
 	]]>
-</insert>
+	</insert>
+
+	<select id="jobDetail" parameterType="job" resultType="job">
+	<![CDATA[
+		select * from job where job_no = #{job_no}
+	]]>
+	</select>
 
 </mapper>

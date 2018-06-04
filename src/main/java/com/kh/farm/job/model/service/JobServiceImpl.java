@@ -11,23 +11,34 @@ import com.kh.farm.job.model.vo.Job;
 import com.kh.farm.notice.model.vo.Notice;
 
 @Service
-public class JobServiceImpl implements JobService{
-@Autowired private JobDao jobDao;
-@Autowired
-private SqlSessionTemplate sqlSession;
-@Override
-public int selectListcount() {
-	// TODO Auto-generated method stub
-	return jobDao.listCount(sqlSession);
-}
-@Override
-public ArrayList<Job> selectJobList(int currentPage) {
-	// TODO Auto-generated method stub
-	return jobDao.selectJobList(currentPage,sqlSession);
-}
-@Override
-public int insertJobMake(Job job) {
-	// TODO Auto-generated method stub
-	return jobDao.insertJobMake(sqlSession,job);
-}
+public class JobServiceImpl implements JobService {
+	@Autowired
+	private JobDao jobDao;
+	@Autowired
+	private SqlSessionTemplate sqlSession;
+
+	@Override
+	public int selectListcount() {
+		// TODO Auto-generated method stub
+		return jobDao.listCount(sqlSession);
+	}
+
+	@Override
+	public ArrayList<Job> selectJobList(int currentPage) {
+		// TODO Auto-generated method stub
+		return jobDao.selectJobList(currentPage, sqlSession);
+	}
+
+	@Override
+	public int insertJobMake(Job job) {
+		// TODO Auto-generated method stub
+		return jobDao.insertJobMake(sqlSession, job);
+	}
+
+	@Override
+	public Job jobDeatil(int job_no) {
+		// TODO Auto-generated method stub
+		return jobDao.jobDeatil(sqlSession, job_no);
+	}
+
 }
