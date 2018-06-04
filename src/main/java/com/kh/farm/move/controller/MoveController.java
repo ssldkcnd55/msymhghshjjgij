@@ -16,6 +16,11 @@ import com.kh.farm.notice.model.vo.Notice;
 public class MoveController {
 	public MoveController() {}
 	
+	@RequestMapping("moveGetCookie.do")
+	public String moveGetCookie() {
+		return "messenger/test_getCookie";
+	}
+	
 	@RequestMapping("moveQna_List.do")
 	public String moveQna_List() {
 		return "member/customerMy/qna_List";
