@@ -8,13 +8,14 @@ html, body {
 label {
 	display: inline-block;
 	margin-bottom: .5rem;
+	text-align: left;
 }
 body {
 	display: table;
 	width: 100%;
 }
 #searchId{
-	background: #7e5957;
+	background: #512772;
 	color: white;
 	border:none;
 	cursor: pointer;
@@ -48,7 +49,7 @@ body {
 }
 
 .h2{
-	color:#525252;margin-bottom:20px;
+	color:#521772;margin-bottom:20px;
 	text-align:center;	
 	margin-left: 40px;
 }
@@ -109,14 +110,11 @@ border-radius: 3px;
 	background: #82736e;
 	border: none;
 }
-#cancelBt{
-	background:white;
-color: #7e5957;
-border: 1px solid #7e5957;
-cursor: pointer;
-}
+
+
+
 #cancelBt:hover{
-	background: #e4dbda;
+	background: #e2d2f0;
 	
 }
 .loginBtn:hover{
@@ -130,8 +128,8 @@ cursor: pointer;
 }
 #searchId:hover{
 	background: #f5f1fa;
-	color:#7e5957;
-	border: 1px solid #7e5957;
+	color:#512772;
+	border: 1px solid #512772;
 	
 }
 #dupliBt { /*아이디 중복검사 버튼  */
@@ -205,10 +203,19 @@ cursor: pointer;
 	padding: 5px;
 	margin:5px;
 }
-
 .btn{
-	width: 50px;
-	height: 30px;
-	border-radius: 3px;
-	
+	width:80px;
+	margin-top: 5px;
+	font-size: 10pt;
+	height: 36px;
+}
+.btn.btn-danger{
+	border: 1px solid #82736e;
+	color: #82736e;
+	cursor: pointer;
+	background: white;
+}
+input[type="text"],input[type="password"],input[type="email"]{
+	padding:7px;
+	font-size: 11pt;
 }
