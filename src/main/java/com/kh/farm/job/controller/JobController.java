@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.farm.job.model.service.JobService;
 import com.kh.farm.job.model.vo.Job;
@@ -22,7 +23,8 @@ import com.kh.farm.job.model.vo.Job;
 @Controller
 public class JobController {
 	@Autowired private JobService jobService;
-
+	
+	//备牢备流 其捞隆 贸府
 	@RequestMapping(value="jobList.do")
 	public void jobList(HttpServletResponse response,HttpServletRequest request)throws IOException {
 		int limitPage =10;
@@ -65,4 +67,14 @@ public class JobController {
 		out.flush();
 		out.close();
 	}
+	//备牢备流 臂 殿废
+	@RequestMapping(value="jobMake.do")
+	public ModelAndView JobMake(ModelAndView mv){
+	
+		return mv;
+	}
+	//备牢备流 焊扁
+	
+	
+	
 }
