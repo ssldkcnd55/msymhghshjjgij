@@ -12,3 +12,9 @@ function sendMsgByMarket (my_id,your_id)
 		ws.send("테스트 메세지입니다4");
 	}
 }	
+
+function viewSelectBox(){
+	var htmlCode = '<div class="viewSelectBox" style="position:absolute;  z-index:10; width:100px; height:80px;"><a href="">상품문의</a><br><a href="">1:1대화</a></div>';
+	$('.market_cart_right_div').append(htmlCode);
+	
+}

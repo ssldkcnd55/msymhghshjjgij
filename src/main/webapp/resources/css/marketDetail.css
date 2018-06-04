@@ -1,9 +1,21 @@
 @charset "UTF-8";
+.viewSelectBox{
+	position:absolute;
+	background-color:white;
+	z-index:100;
+	width:100px;
+	height:80px;
+	border: 1px solid #bdbdbd;
+	top:0;
+	left:0;
+	right:0;
+	bottom: 0;
+}
 .test{
 	width: 900px;
 	text-align: left;
 	padding-left: 15px;
-	border: 1px soljd #bdbdbd;
+	border: 1px solid #bdbdbd;
 }
 .tabs{
 	 float:left;

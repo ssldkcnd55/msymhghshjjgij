@@ -545,10 +545,10 @@ function changeprice(){
 										<td>  </td>
 										<td>총 상품 금액 : <span class="mkPrice">${market.market_price }원</span></td>
 									</tr>
-									
+								<%-- 	<tr><td colspan="3"><a href="javascript: viewSelectBox() ">${market.member_id}</a> </td></tr> --%>
 									</table>
 								<!-- sendMsg -->
-								<%-- <a href="javascript: sendMsgByMarket('${loginUser.member_id }','${market.member_id }')">${loginUser.member_name}</a> --%>
+						
 								<div class="market_cart_right_div">
 								<input type="submit" value="구매하기" class="market_buy"> <input type="button"
 									value="장바구니" onclick="addBasket()" class="market_basket">
