@@ -15,7 +15,6 @@
 		 <typeAlias type="com.kh.farm.market.model.vo.Daily" alias="Daily" /> 
 		 <typeAlias type="com.kh.farm.market.model.vo.Market" alias="Market" /> 
 		 <typeAlias type="com.kh.farm.market.model.vo.Reply" alias="Reply" /> 
-		<!--  <typeAlias type="com.kh.farm.market.model.vo.Report" alias="Report" />  -->
 		 <typeAlias type="com.kh.farm.market.model.vo.Review" alias="Review" /> 
 		 <typeAlias type="com.kh.farm.market.model.vo.UnderReply" alias="UnderReply" /> 
 		 <typeAlias type="com.kh.farm.member.model.vo.Member" alias="Member" /> 

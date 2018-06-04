@@ -16,6 +16,11 @@ import com.kh.farm.notice.model.vo.Notice;
 public class MoveController {
 	public MoveController() {}
 	
+	@RequestMapping("moveQna_List.do")
+	public String moveQna_List() {
+		return "member/customerMy/qna_List";
+	}
+	
 	@RequestMapping("moveDelivery_Number.do")
 	public String movedelivery_Number() {
 		return "delivery/delivery_Number";
@@ -84,7 +89,7 @@ public class MoveController {
 	}
 	@RequestMapping("moveJobDetail.do")
 	public String moveJobDetail() {
-		return "job/jobDetail";
+		return "job/jobDetail2";
 	}
 	@RequestMapping("moveJobMake.do")
 	public String moveJobMake() {
@@ -231,7 +236,9 @@ public class MoveController {
 		return "inc/header";
 	}
 	
-	
-	
+	@RequestMapping("moveAdminReport.do")
+	public String moveAdminReport() {
+		return "admin/admin_report";
+	}
 }
 

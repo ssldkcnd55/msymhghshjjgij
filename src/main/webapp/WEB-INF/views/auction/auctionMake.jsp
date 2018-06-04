@@ -41,7 +41,56 @@
 		location.href="/farm/moveAcutionDetail.do";
 	}
 	
-
+	//경매 등록 전 경매 시작 날짜 체크
+	$(function(){
+		$.ajax({
+			url:"auction_startdateCheck.do",
+			type:"post",
+			dataType: "JSON",
+			success: function(data){
+				/* console.log(data); */
+				var objStr = JSON.stringify(data);
+				var jsonObj = JSON.parse(objStr);	
+				/* alert("확인 sysdate : "+jsonObj.sysdate2); */
+				
+				var outValues ="";
+					outValues +=
+						"<input type='date' name='auction_startdate' class='input_datebox' required "+
+						+"min='"+jsonObj.sysdate2+"'/>";
+				 $("#start_date").html(outValues);
+				
+				}
+			
+			});
+		
+	});
+	
+	/* function auction_startdateCheck(){
+		
+		var startdate = $("#startdate").val();
+		alert("startdate : "+startdate);
+		var result = true;
+		$.ajax({
+			url:"auction_startdateCheck.do",
+			type:"post",
+			dataType: "JSON",
+			success: function(data){
+				console.log(data);
+				var objStr = JSON.stringify(data);
+				var jsonObj = JSON.parse(objStr);	
+				alert("확인 sysdate : "+jsonObj.sysdate2);
+				
+				var outValues ="";
+					outValues +=
+						"<input type='date' name='auction_startdate' class='input_datebox' required "+
+						+"min='"+jsonObj.sysdate2+"'>";
+				 $(".start_date").html(outValues);
+				 return true;
+				}
+			
+			});
+		return result;
+	} */
 
 </script>
 </head>
@@ -54,7 +103,7 @@
 		<div id="container">
 			<div class="inner-wrap">
 				<div class="title1 auctionMake"><p class="titleP">경매 글쓰기</p></div>
-				<form action="insertAuctionMake.do" method="post" enctype="multipart/form-data">
+				<form action="insertAuctionMake.do" method="post" enctype="multipart/form-data" >
 				<input type="hidden" value="${loginUser.member_id}" name="member_id">
 				<div class="main_width">
 					<table class="jung_table">
@@ -88,7 +137,7 @@
 												onchange="getThumbnailPrivew(this,$('#cma_image'))"
 												style="margin-left: 2px;"  /> <br /> <br />
 											<div id="cma_image" style="margin-left:200px;">
-												<img src="/farm/resources/upload/auctionUpload/${auction.auction_img}"></div>
+												<%-- <img src="/farm/resources/upload/auctionUpload/${auction.auction_img}"> --%></div>
 										</div>
 									</td>
 							</tr>
@@ -115,14 +164,15 @@
 
 									<p class="p">경매시작날짜</p>
 								</td>
-								<td class="td4"><input type="date" name="auction_startdate"
-									class="input_datebox" required> <br></td>
+								<td class="td4" > <div id="start_date"></div>
+								<!-- <input type="date" name="auction_startdate" id="startdate" 
+									class="input_datebox" required> -->  <br></td>
 								<td class="td3">
 
 									<p class="p">경매마감날짜</p>
 								</td>
-								<td class="td4"><input type="date" name="auction_enddate"
-									class="input_datebox" required></td>
+								<td class="td4" > <input type="date" name="auction_enddate" 
+									class="input_datebox" required> </td>
 							</tr>
 							<table class="jung_table2">
 								<tbody>
@@ -163,7 +213,7 @@
 					</table> -->
 					<ul style="list-style: none;">
 						<li class="li3" onclick="location.href='/#'">뒤로가기</li>
-						<li class="li4"><input class="li4_input" type="submit" value="경매등록" onclick="submitContents();"></li>
+						<li class="li4"><input class="li4_input" type="submit" value="경매등록" onclick="submitContents();" ></li>
 						<!-- <li class="li4" onclick="location.href='/#'">물품등록</li> -->
 					</ul>
 					<br><br><br><br>

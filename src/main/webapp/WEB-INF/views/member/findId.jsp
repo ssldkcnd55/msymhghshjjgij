@@ -46,7 +46,7 @@ var memberId='<c:out value="${MemberIdFind.member_id}"/>';
 			<div class="join_form join_form2" style="padding:20px 40px;"> <!--div구역내에 mainform을 담았음  -->
 				<form id="mainform" method="post" action="/farm/findId.do">
 					<div>
-						<h2 align="center" style="color:#512772;margin-bottom:20px;">
+						<h2 align="center" style="color:#7e5957;margin-bottom:20px;">
 								아이디 찾기
 						</h2>
 						<h3 class="h3">작물팜은 이메일을 아이디로 사용합니다.<br>소유하고 계신 계정을 입력해보세요.<br>가입여부를 확인해드립니다.</h3>

@@ -21,8 +21,16 @@
 		]]>
 	</insert>
 	
+	<select id="selectReportList" parameterType="PageNumber" resultType="Report">
+	<![CDATA[
+	select * from (select rownum rnum, member_id, report_category, report_date, 
+	report_status,report_contents,report_no,review_no from report 
+	) where rnum >=#{startRow} and rnum <=#{endRow} order by report_no desc
+	]]>
+</select>
 	
+	<select id="reportCount" parameterType="int" resultType="int">
+		select count(*) from report
+	</select>
 	
-	
-
 </mapper>

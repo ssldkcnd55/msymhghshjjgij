@@ -83,4 +83,16 @@
 	<delete id="deleteMainQna" parameterType="int">
 		delete from main_qna where main_qna_no = #{main_qna_no}
 	</delete>
+	<select id="selectCusQnaList" parameterType="PageNumber" resultType="Market_qna">
+	<![CDATA[
+	select * from (select rownum rnum, market_qna_no, market_qna_title, member_id,market_qna_question_date from market_qna
+	order by market_qna_no desc) where rnum >=#{startRow} and rnum <=#{endRow}
+	]]>
+	</select>
+	
+	<select id="selectCusQnaListCount" parameterType="int" resultType="int">
+		select
+		count(*) from market_qna
+	</select>
+	
 </mapper>

@@ -13,6 +13,23 @@ import com.kh.farm.qna.model.vo.Market_qna;
 
 @Repository
 public class QnaDao {
+	
+	public ArrayList<Market_qna> selectCusQnaList(SqlSessionTemplate sqlSession, int currentPage) {
+		// TODO Auto-generated method stub
+		int startRow =(currentPage-1)*10+1; //1~10, 11~20 계산할 거 ex) 1, 11, 21, 31,)
+		int endRow = startRow+9;
+		PageNumber pnum = new PageNumber();
+		pnum.setStartRow(startRow);
+		pnum.setEndRow(endRow);
+		List<Market_qna> ac = sqlSession.selectList("qna.selectCusQnaList",pnum);
+		return (ArrayList)ac;
+	}
+
+	public int selectCusQnaListCount(SqlSessionTemplate sqlSession) {
+		// TODO Auto-generated method stub
+		int listCount = sqlSession.selectOne("qna.selectCusQnaListCount");
+		return listCount;
+	}
 
 	public ArrayList<Market_qna> qnaList(SqlSessionTemplate sqlSession, Market mk,int currentPage) {
 		// TODO Auto-generated method stub

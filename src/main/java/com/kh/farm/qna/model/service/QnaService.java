@@ -37,5 +37,9 @@ public interface QnaService {
 	int deleteMarketQna(int market_qna_no);
 
 	int deleteMainQna(int main_qna_no);
+	
+	ArrayList<Market_qna> selectCusQnaList(int currentPage);
+
+	int selectCusQnaListCount();
 
 }

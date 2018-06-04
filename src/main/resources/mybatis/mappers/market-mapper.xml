@@ -6,11 +6,14 @@
 
 
 <select id="marketList" parameterType="pageNumber" resultType="market">
-	<![CDATA[	
-		select * from 
-			(select rownum rnum, market_no,
-			market_title,market_releasedate,market_note,market_img,
-			member_id,market_price from (select * from market 
+			<![CDATA[	
+			select * from 
+				(select rownum rnum, market_no,
+				market_title,market_releasedate,market_note,market_img,
+				member_id,market_price from (
+				select m.market_no,count(buy_no),m.category_no,m.member_id,m.market_title,m.market_note,m.market_img,m.market_releasedate,m.market_amount,m.market_intro,m.market_complete,m.market_price 
+				FROM market m 
+				LEFT JOIN buy b on b.market_no = m.market_no
 			]]>
 		<if test="search != null">
 		<![CDATA[
@@ -27,6 +30,11 @@
 			WHERE category_no in ((SELECT category_no FROM category WHERE category_name like #{cname} ))
 		]]>
 		</if>
+		<![CDATA[
+			GROUP BY m.market_no,m.category_no,m.member_id,m.market_title,m.market_note,m.market_img,
+			m.market_releasedate,m.market_amount,m.market_intro,m.market_complete,m.market_price 
+		]]>
+		
 		<if test="sort == 'market_no'">
 		<![CDATA[		
 			order by 
@@ -40,8 +48,12 @@
 			market_price asc)) where rnum >= #{startRow} and rnum <= #{endRow}
 		]]>
 		</if>
-	
-	
+		<if test="sort == 'buy'">
+		<![CDATA[		
+			order by
+			count(buy_no) desc)) where rnum >= #{startRow} and rnum <= #{endRow}
+		]]>
+		</if>
 </select>
 	
 	<select id="marketInfo" parameterType="int" resultType="market">

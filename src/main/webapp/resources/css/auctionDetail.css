@@ -124,7 +124,7 @@
 	width:28%;
 	float:right;
 	height:auto;
-	padding-top:36px;
+	/* padding-top:36px; */
 	
 }
 
@@ -175,4 +175,15 @@
 .time{
 	font-weight: bold;
 	
+}
+
+.auction_select_box{
+	margin-top:40px;
+	float:left;
+	margin-right:10px;
+  
+}
+.auction_select{
+   margin-top:25;
+   height:40px;
 }

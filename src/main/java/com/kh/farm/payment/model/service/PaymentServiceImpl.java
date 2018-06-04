@@ -54,5 +54,15 @@ public class PaymentServiceImpl implements PaymentService{
 		
 		return paymentDao.deleteShoppingBasket(sqlSession,pm);
 	}
+	@Override
+	public List<Integer> selectChatNo(Map map) {
+	
+		return paymentDao.selectChatNo(sqlSession,map);
+	}
+	@Override
+	public int selectChatNo(String your_id) {
+		
+		return paymentDao.selectChatNo(sqlSession, your_id);
+	}
 	
 }
