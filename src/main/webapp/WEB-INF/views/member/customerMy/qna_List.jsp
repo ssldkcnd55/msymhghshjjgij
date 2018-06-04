@@ -57,7 +57,7 @@ function market(page){
 		
 			
 		},error: function(request,status,errorData){
-            alert("error code : " + request.status + "\nmessage" + 
+			console.log("error code : " + request.status + "\nmessage" + 
                     request.responseText + "\nerror" + errorData);
            }
 	});
@@ -112,7 +112,7 @@ function marketQnaPage(page){
 		
 			
 		},error: function(request,status,errorData){
-            alert("error code : " + request.status + "\nmessage" + 
+			console.log("error code : " + request.status + "\nmessage" + 
                     request.responseText + "\nerror" + errorData);
            }
 	});
@@ -167,7 +167,7 @@ function main(){
 			$(".pagination").html(values);
 			
 		},error: function(request,status,errorData){
-	        alert("error code : " + request.status + "\nmessage" + 
+			console.log("error code : " + request.status + "\nmessage" + 
 	                request.responseText + "\nerror" + errorData);
 	       }
 	});
@@ -222,7 +222,7 @@ function mainQnaPage(page){
 		
 			
 		},error: function(request,status,errorData){
-	        alert("error code : " + request.status + "\nmessage" + 
+			console.log("error code : " + request.status + "\nmessage" + 
 	                request.responseText + "\nerror" + errorData);
 	       }
 	});
@@ -278,7 +278,7 @@ function auction(){
 		
 			
 		},error: function(request,status,errorData){
-            alert("error code : " + request.status + "\nmessage" + 
+			console.log("error code : " + request.status + "\nmessage" + 
                     request.responseText + "\nerror" + errorData);
            }
 	});
@@ -334,7 +334,7 @@ function auctionQnaPage(page){
 		
 			
 		},error: function(request,status,errorData){
-	        alert("error code : " + request.status + "\nmessage" + 
+			console.log("error code : " + request.status + "\nmessage" + 
 	                request.responseText + "\nerror" + errorData);
 	       }
 	});
