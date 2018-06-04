@@ -211,6 +211,7 @@ public class MemberController {
 		response.setContentType("application/json; charset=utf-8");
 		PrintWriter out = response.getWriter();
 		out.append(sendJson.toJSONString());
+		System.out.println(sendJson.toJSONString());
 		out.flush();
 		out.close();
 	}

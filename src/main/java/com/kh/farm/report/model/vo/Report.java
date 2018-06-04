@@ -15,11 +15,11 @@ public class Report implements java.io.Serializable{
 	private String report_status;
 	private String report_contents;
 	private String report_category;
-	
+	private int rnum;
 	public Report() {}
 
 	public Report(int report_no, int review_no, String member_id, Date report_date, String report_status,
-			String report_contents, String report_category) {
+			String report_contents, String report_category,int rnum) {
 		super();
 		this.report_no = report_no;
 		this.review_no = review_no;
@@ -28,6 +28,15 @@ public class Report implements java.io.Serializable{
 		this.report_status = report_status;
 		this.report_contents = report_contents;
 		this.report_category = report_category;
+		this.rnum = rnum;
+	}
+	
+	public int getRnum() {
+		return rnum;
+	}
+
+	public void setRnum(int rnum) {
+		this.rnum = rnum;
 	}
 
 	public int getReport_no() {

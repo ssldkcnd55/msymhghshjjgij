@@ -8,33 +8,69 @@ a:link {text-decoration: none; color: black;}
 a:visited {text-decoration: none; color: green;}
 a:active {text-decoration: none; color: grey;}
 a:hover {text-decoration: underline; color: gray;}
+.white_content {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0.8);
+    opacity:0;
+    -webkit-transition: opacity 400ms ease-in;
+    -moz-transition: opacity 400ms ease-in;
+    transition: opacity 400ms ease-in;
+    pointer-events: none;
+}
+.white_content:target {
+    opacity:1;
+    pointer-events: auto;
+}
+.white_content > div {
+	position: absolute;
+	top: 25%;
+	left: 25%;
+	width: 50%;
+	height: 42%;
+	padding: 16px;
+	border: 16px solid orange;
+	background-color: white;
+	overflow: auto;	
+}
+
+.report_textarea {
+	width: 90%; 
+	height: 135px; 
+	margin-bottom: 15px;
+	
+}
 </style> 
-<script type="text/javascript" src="/farm/resources/js/date.js"></script>
 <script src="/farm/resources/js/jquery-3.3.1.min.js"></script>
 <!-- Notice.css -->
 <script>
 $(function(){
 	$.ajax({
-		url:"noticeList.do",
+		url:"reportList.do",
 		type:"post",
-		data:{
-			page:1
+		data:{page:1
 		},
-		dataType: "JSON",
+		dataType:"json",
 		success: function(data){
 			console.log(data);
 			var objStr = JSON.stringify(data);
 			var jsonObj = JSON.parse(objStr);
 			
-			var outValues = "<tr><th width='12%'>번호</th><th width='50%'>후기 제목</th>"
-							+"<th width='13%'>신고내용</th><th width='15%'>신고날짜</th></tr>";
+			var outValues = "<tr><th width='12%'>번호</th><th width='12%'>분류</th><th width='30%'>후기 제목</th>"
+							+"<th width='13%'>신고내용</th><th width='15%'>신고날짜</th><th width='15%'>처리 상황</th></tr>";
 			
-			for(var i in jsonObj.list){
+		 	for(var i in jsonObj.list){
 				outValues += "<tr id='hover'><td>"+jsonObj.list[i].rnum+"</td>"
-				+"<td id='Notice_td'><a href='/farm/noticeDetail.do?notice_no="+jsonObj.list[i].notice_no+"'>"+jsonObj.list[i].notice_title+"</a></td>"
-				+"<td>운영자</td><td>"+jsonObj.list[i].notice_date+"</td></tr>";
-			}
-			$(".Notice_table").html(outValues);	
+				+"<td id='Notice_td'>"+jsonObj.list[i].report_category+"</td>"
+				+"<td><a href='reviewDeatil.do?review_no="+jsonObj.list[i].review_no+"'>리뷰페이지로<a/></td>"
+				+"<td><a href='#' id='"+jsonObj.list[i].report_contents+"' onclick='viewContents(this);'>신고내용보기</a></td>"
+				+"<td>"+jsonObj.list[i].report_date+"</td><td>"+jasonObj.list[i].report_status+"</td></tr>";
+			} 
+			$(".Notice_table").html(outValues);
+			
 			
 			var startPage= jsonObj.list[0].startPage;
 			var endPage = jsonObj.list[0].endPage;
@@ -126,19 +162,19 @@ function noticePage(page){
 
 
 <script type="text/javascript">
-function testdate(){
-	/* var d = Date.today().next().thursday();
-	var d2 = Date.today().add(5).days(); */
-	var d1 = Date.parse('07.15.2019');
-	var n = -2;
-	/* var d2 = Date.today().set({ day: 15, hour: 8, minute: 30 }); */
-	var d2 = d1.add(n).hour();
-	
-	alert(d2);	
-}
  
 
+function modal() {
+	location.href = "#open";
+}
 
+function closemodal() {
+	location.href = "#close";
+}
+
+function viewContents() {
+	var report_no = this.id(); 	
+}
 </script>
 <link rel="stylesheet" type="text/css" href="/farm/resources/css/style.css" />
 <link rel="stylesheet" type="text/css" href="/farm/resources/css/notice.css" />
@@ -179,11 +215,24 @@ function testdate(){
                </div>
 				
 				
-				<!--  -->
-				<div id="testdate" style="width: 40%; height: 350px; border:1px solid black;"></div>
-				<button onclick="testdate();">ㅇㅇ</button>
-				<!--  -->
 				
+				<!-- <div id="testdate" style="width: 40%; height: 350px; border:1px solid black;"></div>
+				<button onclick="testdate();">ㅇㅇ</button> -->
+				
+				
+					<!--신고 모달창  -->
+    					<div class="white_content" id="open">
+        					<div>
+            					<h1>신고내용</h1>
+            						<div>
+            							<textarea id="report_contents" class="report_textarea" rows="10" cols="95">신고내용</textarea>
+            						</div>
+            						<button onclick="closemodal();">닫기</button>
+        					</div>
+    					</div>
+    					
+					<!-- 신고 모달창 끝 -->
+				<button onclick="modal();">dddd</button>
                <!-- 검색 -->
                <div class="search_box">
                <span class='green_window'> 

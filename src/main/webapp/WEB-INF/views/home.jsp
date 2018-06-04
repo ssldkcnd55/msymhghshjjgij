@@ -267,32 +267,6 @@
 
 	}
 </script>
-<style type="text/css">
-/* .table {
-	margin-top: 50px;
-	border: 1px solid #444444;
-	border-collapse: collapse;
-	width: 90%;
-}
-
-.td {
-	border: 1px solid #444444;
-	padding: 4px;
-	color: #222;
-	border: solid 1px #c7c7c7;
-	text-align: center;
-}
-
-.th {
-	color: #222;
-	background: #f7f7f7;
-	border: solid 1px #c7c7c7;
-	border-bottom: solid 1px #555;
-	font-size: 1.15em;
-	text-align: center;
-	padding: 4px;
-} */
-</style>
 </head>
 
 <body>
