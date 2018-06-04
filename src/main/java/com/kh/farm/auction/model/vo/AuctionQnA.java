@@ -143,6 +143,17 @@ public class AuctionQnA implements java.io.Serializable{
 		this.rnum = rnum;
 	}
 
+
+
+	@Override
+	public String toString() {
+		return "AuctionQnA [auction_qna_no=" + auction_qna_no + ", auction_no=" + auction_no + ", member_id="
+				+ member_id + ", auction_qna_question_date=" + auction_qna_question_date + ", auction_qna_answer="
+				+ auction_qna_answer + ", auction_qna_answer_date=" + auction_qna_answer_date + ", auction_qna_title="
+				+ auction_qna_title + ", auction_qna_contents=" + auction_qna_contents + ", auction_category="
+				+ auction_category + ", rnum=" + rnum + "]";
+	}
+
 	
 	
 }

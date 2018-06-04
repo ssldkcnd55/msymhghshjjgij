@@ -71,19 +71,12 @@ public class ReportController {
 			json.put("report_no", r.getReport_no());
 			json.put("review_no", r.getReview_no());
 			json.put("member_id", r.getMember_id());
-			json.put("report_date", r.getReport_date());
+			json.put("report_date", r.getReport_date().toString());
 			json.put("startPage", startPage);
 			json.put("endPage", endPage);
 			json.put("maxPage", maxPage);
 			json.put("currentPage",currentPage);
 			json.put("report_status",r.getReport_status());
-			
-			/*if(r.getReport_status().equals('0')) {
-				json.put("report_status", "미처리");
-			}else {
-				json.put("report_status", "처리됨");
-			}*/
-			
 			json.put("report_contents", r.getReport_contents());
 			json.put("report_category", r.getReport_category());
 			jarr.add(json);

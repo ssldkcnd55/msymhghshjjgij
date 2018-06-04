@@ -356,7 +356,7 @@ $(function(){
 			data : {
 				keyword :keyword,
 				select :select,
-				page:page,
+				page:1,
 				auction_no :auction_no
 			},
 			dataType: "JSON",
@@ -410,7 +410,7 @@ $(function(){
 		            alert("error code : " + request.status + "\nmessage" + 
 		                    request.responseText + "\nerror" + errorData);
 		           }
-			
+			 
 		});
 	}
 	

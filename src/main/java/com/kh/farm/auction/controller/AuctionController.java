@@ -18,8 +18,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-/*import org.apache.catalina.Session;*/
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
+/*import org.apache.catalina.Session;*/
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -39,7 +40,7 @@ import com.kh.farm.market.model.vo.Review;
 import com.kh.farm.member.model.vo.Member;
 import com.kh.farm.notice.model.vo.Notice;
 
-import net.sf.json.JSONArray;
+
 
 @Controller
 public class AuctionController {
@@ -586,14 +587,15 @@ public class AuctionController {
 	
 	//경매 문의 검색 
 	@RequestMapping(value="auction_search2.do")
+	@ResponseBody
 	public void auction_search(HttpServletResponse response,
 			@RequestParam(value="keyword") String keyword, @RequestParam(value="page") int currentPage,
 			@RequestParam(value="select") int select,@RequestParam(value="auction_no") int auction_no) 
 					throws IOException{
-		System.out.println("안뇽");
+		System.out.println("옥션 검색 메서드");
 		JSONArray jarr =new JSONArray();
 		List<AuctionQnA> auction_QnASearchList = auctionService.selectAuction_search(keyword,select,currentPage,auction_no);
-		System.out.println("auction_QnASearchList : "+auction_QnASearchList);
+		System.out.println("auction_QnASearchList : "+auction_QnASearchList.toString());
 		int limitPage = 10;
 		int listCount = auctionService.selectAuction_searchCount(auction_no);
 		System.out.println("listCount :"+listCount);
@@ -622,7 +624,6 @@ public class AuctionController {
 		JSONObject sendJson = new JSONObject();
 		sendJson.put("list", jarr);
 		response.setContentType("application/json; charset=utf-8");
-		 System.out.println(sendJson.toJSONString());
 		PrintWriter out = response.getWriter();
 		System.out.println(sendJson.toJSONString());
 		out.print(sendJson.toJSONString());
@@ -644,9 +645,6 @@ public class AuctionController {
 	      out.flush();
 	      out.close();
 	}
-	
-	
-	
 	
 }
 
