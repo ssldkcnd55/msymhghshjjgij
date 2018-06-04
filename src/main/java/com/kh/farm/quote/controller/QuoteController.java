@@ -31,7 +31,10 @@ public class QuoteController {
 	public void QuoteApi(HttpServletResponse response, HttpServletRequest request)
 			throws ServletException, IOException {
 		
+<<<<<<< HEAD
 		System.out.println("시세api접속");
+=======
+>>>>>>> branch 'master' of https://github.com/ssldkcnd55/msymhghshjjgij.git
 
 		/*String productclscode = request.getParameter("productclscode");*/
 		String stardate = request.getParameter("startday");

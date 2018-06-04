@@ -26,7 +26,10 @@ public class MainQuoteController {
 	public void QuoteApi(HttpServletResponse response, HttpServletRequest request)
 			throws ServletException, IOException {
 
+<<<<<<< HEAD
 		System.out.println("시세 api 접속");
+=======
+>>>>>>> branch 'master' of https://github.com/ssldkcnd55/msymhghshjjgij.git
 
 		String addr = "http://www.kamis.co.kr/service/price/xml.do?action=dailySalesList";
 		String parameter = "";
@@ -48,8 +51,6 @@ public class MainQuoteController {
 
 		String str = bos.toString("utf-8");
 		
-		System.out.println("str:"+str);
-
 		JSONObject json = new JSONObject();
 		json.put("data", str);
 

@@ -77,13 +77,13 @@
         	<!-- 정렬 메뉴바 -->
         	<div class="sort">
 	        	<h4>정렬</h4>
-	        	<input type="checkbox" > 최신순<br><br>
-	        	<input type="checkbox" > 마감임박순<br><br>
-	        	<input type="checkbox" > 가격순<br>
+	        	<input type="checkbox"  name="check" value="0"> 경매 대기<br><br>
+	        	<input type="checkbox" name="check" value="1"> 경매 중<br><br>
+	        	<input type="checkbox" name="check" value="2"> 경매 마감<br>
         	</div>
         	
         	<!-- 카테고리 메뉴바 -->
-        	<div class="category_menu" >
+        	<!-- <div class="category_menu" >
         		<h4>카테고리</h4>
 	        	<input type="checkbox" > 카테고리1<br><br>
 	        	<input type="checkbox" > 카테고리2<br><br>
@@ -96,7 +96,7 @@
 	        	<input type="checkbox" > 카테고리3<br><br>
 	        	<input type="checkbox" > 카테고리4<br><br>
 	        	<input type="checkbox" > 카테고리5<br><br>
-        	</div>
+        	</div> -->
         	
         	</div>
         	

@@ -24,13 +24,14 @@ public class Market implements java.io.Serializable{
 	private String market_complete;//판매글 상태
 	private int market_price;//판매 가격 
 	private String search;//검색
+	private int remaining;//남은 수량
 	
 	
 	public Market() {}
 
 	public Market(int market_no, int category_no, String member_id, String market_title, String market_note,
 			String market_img, Date market_releasedate, int market_amount, String market_intro, String market_complete,
-			int market_price,String search) {
+			int market_price,String search,int remaining) {
 		
 		super();
 		this.market_no = market_no;
@@ -45,6 +46,7 @@ public class Market implements java.io.Serializable{
 		this.market_complete = market_complete;
 		this.market_price = market_price;
 		this.search =search;
+		this.remaining = remaining;
 	}
 
 	@Override
@@ -151,4 +153,13 @@ public class Market implements java.io.Serializable{
 		this.search = search;
 	}
 
+	public int getRemaining() {
+		return remaining;
+	}
+
+	public void setRemaining(int remaining) {
+		this.remaining = remaining;
+	}
+
+	
 }

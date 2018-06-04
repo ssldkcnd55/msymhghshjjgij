@@ -21,12 +21,18 @@ public class AuctionHistory implements java.io.Serializable{
 	private int auction_startprice;// 경매 시작가
 	private int auction_startprice2;// 경매 시작가2
 	private int auction_directprice;	
+	private String auction_title; //옥션테이블의 제목
+	
+
+
+
 	public AuctionHistory() {}
 
 	
 
 	public AuctionHistory(int rnum, int auction_history_no, int auction_no, String member_id, int auction_history_price,
-			Date auction_history_date, int auction_startprice, int auction_startprice2,int auction_directprice) {
+			Date auction_history_date, int auction_startprice, int auction_startprice2, int auction_directprice,
+			String auction_title) {
 		super();
 		this.rnum = rnum;
 		this.auction_history_no = auction_history_no;
@@ -37,6 +43,7 @@ public class AuctionHistory implements java.io.Serializable{
 		this.auction_startprice = auction_startprice;
 		this.auction_startprice2 = auction_startprice2;
 		this.auction_directprice = auction_directprice;
+		this.auction_title = auction_title;
 	}
 
 
@@ -47,10 +54,18 @@ public class AuctionHistory implements java.io.Serializable{
 		return "AuctionHistory [rnum=" + rnum + ", auction_history_no=" + auction_history_no + ", auction_no="
 				+ auction_no + ", member_id=" + member_id + ", auction_history_price=" + auction_history_price
 				+ ", auction_history_date=" + auction_history_date + ", auction_startprice=" + auction_startprice
-				+ ", auction_startprice2=" + auction_startprice2 + ", auction_directprice=" + auction_directprice + "]";
+				+ ", auction_startprice2=" + auction_startprice2 + ", auction_directprice=" + auction_directprice
+				+ ", auction_title=" + auction_title + "]";
 	}
 
 
+	public String getAuction_title() {
+		return auction_title;
+	}
+
+	public void setAuction_title(String auction_title) {
+		this.auction_title = auction_title;
+	}
 
 	public int getRnum() {
 		return rnum;

@@ -568,5 +568,6 @@ public class MarketController {
 		return "forward:/marketDetail.do?market_no="+review.getMarket_no();
 	}
 	
+
 	
 }

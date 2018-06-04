@@ -18,8 +18,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-/*import org.apache.catalina.Session;*/
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
+/*import org.apache.catalina.Session;*/
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -39,7 +40,7 @@ import com.kh.farm.market.model.vo.Review;
 import com.kh.farm.member.model.vo.Member;
 import com.kh.farm.notice.model.vo.Notice;
 
-import net.sf.json.JSONArray;
+
 
 @Controller
 public class AuctionController {
@@ -63,7 +64,6 @@ public class AuctionController {
 		}
 		
 		for(AuctionQnA aq : list) {
-			System.out.println("dao 2");
 			JSONObject jsq = new JSONObject();
 			jsq.put("rnum", aq.getRnum());
 			jsq.put("auction_qna_no",aq.getAuction_qna_no());
@@ -89,8 +89,6 @@ public class AuctionController {
 	@RequestMapping(value="insertAuctionMake.do", method=RequestMethod.POST)
 	public String insertAuctionMake(Auction auction,HttpServletResponse response,HttpServletRequest request,
 			@RequestParam(name = "upfile", required = false) MultipartFile file){
-		System.out.println("111111 시작 호호호ㅗㅎ");
-		System.out.println(auction);
 		String path = request.getSession().getServletContext().getRealPath("resources/upload/auctionUpload");
 		
 		try {
@@ -134,7 +132,6 @@ public class AuctionController {
 		
 		int insertAuctionMake =  auctionService.insertAuctionMake(auction);
 	
-		System.out.println("insertAuctionMake : "+insertAuctionMake);
 		
 		//mv.addObject("auction", insertAuctionMake);
 		/*mv.setViewName("/farm/AuctionList_controller.do");*/
@@ -431,15 +428,12 @@ public class AuctionController {
 	public void checkAuction_history_price(HttpServletResponse response,@RequestParam(value="auction_no") int auction_no) 
 	throws IOException{
 		//가격 MAX 값 가져옴
-		System.out.println("경매입찰 가격 비교 메서드 auction_no :" + auction_no);
 		AuctionHistory checkauctionhistoryprice = auctionService.selectcheckAuction_history_price(auction_no);
-		System.out.println("되나요요요"+ checkauctionhistoryprice.getAuction_history_price());
 		response.setContentType("application/json; charset=utf-8;");
         JSONObject json = new JSONObject();
         int price = checkauctionhistoryprice.getAuction_history_price();
         int startprice =checkauctionhistoryprice.getAuction_startprice();
         int directprice = checkauctionhistoryprice.getAuction_directprice();
-        System.out.println("pirce : " + price + "startprice : " + startprice + "directprice : " + directprice);
        /* int startprice_range =checkauctionhistoryprice.getAuction_startprice2();*/
         
         json.put("price", price);//max값
@@ -460,18 +454,20 @@ public class AuctionController {
 	@RequestMapping(value="insertAuctionBidding.do")
 	public String insertAuctionBidding(AuctionHistory auctionhistory) {
 		int makeauctionhistory = auctionService.insertAuctionBidding(auctionhistory);
-		System.out.println("makeauctionhistory : "+makeauctionhistory);
 		return "redirect:/AuctionDetail.do?auction_no="+auctionhistory.getAuction_no();
 		
 	}
 	
 	//한결이가한 마이페이지
 	@RequestMapping("auction_history_list.do")
-	public void selectAuctionHistory(HttpServletResponse response,@RequestParam("page") int currentPage) throws IOException{
+	public void selectAuctionHistory(HttpServletResponse response,@RequestParam("page") Integer Page) throws IOException{
+		int currentPage = 1;
+		if(Page != null)
+		currentPage = Page;	
 		
 		JSONArray jarr =new JSONArray();
+		List<AuctionHistory> AuctionList = auctionService.selectAuctionHistory(currentPage);
 		
-		ArrayList<AuctionHistory> AuctionList = auctionService.selectAuctionHistory(currentPage);
 		int limitPage = 10;
 		int listCount = auctionService.selectAuctionHistoryCount();
 		
@@ -482,6 +478,8 @@ public class AuctionController {
 		if(maxPage<endPage) {
 			endPage = maxPage;
 		}
+		System.out.println(AuctionList);
+		
 		for (AuctionHistory ac : AuctionList) {
 			JSONObject json = new JSONObject();
 			json.put("rnum", ac.getRnum());
@@ -490,6 +488,7 @@ public class AuctionController {
 			json.put("member_id", ac.getMember_id());
 			json.put("auction_history_price", ac.getAuction_history_price());
 			json.put("auction_history_date", ac.getAuction_history_date().toString());
+			json.put("auction_title",ac.getAuction_title());
 			json.put("startPage", startPage);
 			json.put("endPage", endPage);
 			json.put("maxPage", maxPage);
@@ -564,7 +563,6 @@ public class AuctionController {
 	@RequestMapping(value="auction_timeRemaining.do",method=RequestMethod.POST)
 	public void auction_timeRemaining(HttpServletResponse response,@RequestParam(value="auction_no") int auction_no)
 			throws IOException{
-		/*System.out.println("111");*/
 		Auction auctiontime =auctionService.selectauction_timeRemaining(auction_no);
 		System.out.println("auctiontime : "+auctiontime +" / "+"day : "+auctiontime.getDay()+" / "+"hour : "+auctiontime.getHour());
 		
@@ -589,14 +587,15 @@ public class AuctionController {
 	
 	//경매 문의 검색 
 	@RequestMapping(value="auction_search2.do")
+	@ResponseBody
 	public void auction_search(HttpServletResponse response,
 			@RequestParam(value="keyword") String keyword, @RequestParam(value="page") int currentPage,
 			@RequestParam(value="select") int select,@RequestParam(value="auction_no") int auction_no) 
 					throws IOException{
-		System.out.println("안뇽");
+		System.out.println("옥션 검색 메서드");
 		JSONArray jarr =new JSONArray();
 		List<AuctionQnA> auction_QnASearchList = auctionService.selectAuction_search(keyword,select,currentPage,auction_no);
-		System.out.println("auction_QnASearchList : "+auction_QnASearchList);
+		System.out.println("auction_QnASearchList : "+auction_QnASearchList.toString());
 		int limitPage = 10;
 		int listCount = auctionService.selectAuction_searchCount(auction_no);
 		System.out.println("listCount :"+listCount);
@@ -614,7 +613,7 @@ public class AuctionController {
 			json.put("member_id", aq.getMember_id());
 			json.put("auction_qna_no", aq.getAuction_qna_no());
 			json.put("auction_qna_title", aq.getAuction_qna_title());
-			json.put("auction_qna_question_date", aq.getAuction_qna_question_date());
+			json.put("auction_qna_question_date", aq.getAuction_qna_question_date().toString());
 			json.put("startPage", startPage);
 			json.put("endPage", endPage);
 			json.put("maxPage", maxPage);
@@ -625,8 +624,8 @@ public class AuctionController {
 		JSONObject sendJson = new JSONObject();
 		sendJson.put("list", jarr);
 		response.setContentType("application/json; charset=utf-8");
-		 System.out.println(sendJson.toJSONString());
 		PrintWriter out = response.getWriter();
+		System.out.println(sendJson.toJSONString());
 		out.print(sendJson.toJSONString());
 		out.flush();
 		out.close();
@@ -646,9 +645,6 @@ public class AuctionController {
 	      out.flush();
 	      out.close();
 	}
-	
-	
-	
 	
 }
 
