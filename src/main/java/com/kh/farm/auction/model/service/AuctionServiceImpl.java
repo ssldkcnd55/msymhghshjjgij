@@ -111,7 +111,7 @@ public class AuctionServiceImpl implements AuctionService{
 	}
 
 	@Override
-	public ArrayList<AuctionHistory> selectAuctionHistory(int currentPage) {
+	public List<AuctionHistory> selectAuctionHistory(int currentPage) {
 		// TODO Auto-generated method stub
 		return auctionDao.selectAuctionHistory(sqlSession,currentPage);
 	}

@@ -193,4 +193,9 @@ public class MarketServiceImpl implements MarketService{
 		// TODO Auto-generated method stub
 		return marketDao.selectCategory(sqlSession,ctype);
 	}
+	@Override
+	public ArrayList<Market> selectCusMarketThree() {
+		// TODO Auto-generated method stub
+		return marketDao.selectCusMarketThree(sqlSession);
+	}
 }

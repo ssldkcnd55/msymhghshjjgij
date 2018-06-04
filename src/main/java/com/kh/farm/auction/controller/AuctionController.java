@@ -467,11 +467,14 @@ public class AuctionController {
 	
 	//한결이가한 마이페이지
 	@RequestMapping("auction_history_list.do")
-	public void selectAuctionHistory(HttpServletResponse response,@RequestParam("page") int currentPage) throws IOException{
+	public void selectAuctionHistory(HttpServletResponse response,@RequestParam("page") Integer Page) throws IOException{
+		int currentPage = 1;
+		if(Page != null)
+		currentPage = Page;	
 		
 		JSONArray jarr =new JSONArray();
+		List<AuctionHistory> AuctionList = auctionService.selectAuctionHistory(currentPage);
 		
-		ArrayList<AuctionHistory> AuctionList = auctionService.selectAuctionHistory(currentPage);
 		int limitPage = 10;
 		int listCount = auctionService.selectAuctionHistoryCount();
 		
@@ -482,6 +485,8 @@ public class AuctionController {
 		if(maxPage<endPage) {
 			endPage = maxPage;
 		}
+		System.out.println(AuctionList);
+		
 		for (AuctionHistory ac : AuctionList) {
 			JSONObject json = new JSONObject();
 			json.put("rnum", ac.getRnum());
@@ -490,6 +495,7 @@ public class AuctionController {
 			json.put("member_id", ac.getMember_id());
 			json.put("auction_history_price", ac.getAuction_history_price());
 			json.put("auction_history_date", ac.getAuction_history_date().toString());
+			json.put("auction_title",ac.getAuction_title());
 			json.put("startPage", startPage);
 			json.put("endPage", endPage);
 			json.put("maxPage", maxPage);
