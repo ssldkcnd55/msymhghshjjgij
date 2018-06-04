@@ -611,7 +611,7 @@ public class AuctionController {
 			json.put("member_id", aq.getMember_id());
 			json.put("auction_qna_no", aq.getAuction_qna_no());
 			json.put("auction_qna_title", aq.getAuction_qna_title());
-			json.put("auction_qna_question_date", aq.getAuction_qna_question_date());
+			json.put("auction_qna_question_date", aq.getAuction_qna_question_date().toString());
 			json.put("startPage", startPage);
 			json.put("endPage", endPage);
 			json.put("maxPage", maxPage);

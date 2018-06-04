@@ -68,15 +68,24 @@ $(function(){
 				console.log(data);
 				var objStr = JSON.stringify(data);
 				var jsonObj = JSON.parse(objStr);
+				/* alert("jsonObj.list : "+jsonObj.list.length); */
+				var outValues2 ="";
+				if(jsonObj.list.length == 0){
+					outValues2+= "<div style='width:100%; height:200px;margin-top:20%;text-align:center;font-size:20pt;font-weight: bold;color:gray;'>"+
+					"등록된 문의가 없습니다.</div>";
 				
+				$(".qna_box").html(outValues2);	
+				}
+				else{
 				var outValues = "<tr><th width='12%'>번호</th><th width='50%'>제목</th><th width='13%'>작성자</th><th width='15%'>작성일</th></tr>";
-				
 				for(var i in jsonObj.list){
 					outValues += "<tr id='hover'><td>"+jsonObj.list[i].rnum+"</td>"
 					+"<td id='QnA_td'><a href='/farm/moveauctionQnADetail.do?auction_qna_no="+jsonObj.list[i].auction_qna_no+"'>"+jsonObj.list[i].auction_qna_title+"</a></td>"
 					+"<td>"+jsonObj.list[i].member_id+"</td><td>"+jsonObj.list[i].auction_qna_question_date+"</td></tr>";
 				}
+				
 				$(".QnA_table").html(outValues);	
+				
 				
 				var startPage= jsonObj.list[0].startPage;
 				var endPage = jsonObj.list[0].endPage;
@@ -103,7 +112,7 @@ $(function(){
 					values+="<a>&raquo;</a>";
 				}
 				$(".pagination").html(values);
-			
+				}
 				
 			},error: function(request,status,errorData){
 	            alert("error code : " + request.status + "\nmessage" + 
@@ -339,9 +348,6 @@ $(function(){
 	//옥션 문의 검색창
 	function auction_search(page){
 		var auction_no = ${auction.auction_no};
-		alert(auction_no);
-		alert($("#select_val").val());
-		alert($("#auction_keyword").val());
 		var keyword = $("#auction_keyword").val();
 		var select = $("#select_val").val();
 		$.ajax({
@@ -355,27 +361,22 @@ $(function(){
 			},
 			dataType: "JSON",
 			success: function(data){
-				console.log(data);
-				console.log("검색실행");
 				var objStr = JSON.stringify(data);
 				var jsonObj = JSON.parse(objStr);
 				
 				var outValues = "";
 				 outValues += "<tr><th width='12%'>번호</th><th width='50%'>제목</th><th width='13%'>작성자</th><th width='15%'>작성일</th></tr>"; 
-				
+				 if(jsonObj.list.size > 0){
 				 for(var i in jsonObj.list){
-				 switch(jsonObj.list[i].select){
-				 case '1' :
 						outValues += "<tr id='hover'><td>"+jsonObj.list[i].rnum+"</td>"
 						+"<td id='QnA_td'><a href='/farm/moveauctionQnADetail.do?auction_qna_no="+jsonObj.list[i].auction_qna_no+"'>"+jsonObj.list[i].auction_qna_title+"</a></td>"
-						+"<td>"+jsonObj.list[i].member_id+"</td><td>"+jsonObj.list[i].auction_qna_question_date+"</td></tr>";break;
-						
-				 case '2' :
-					 	outValues += "<tr id='hover'><td>"+jsonObj.list[i].rnum+"</td>"
-						+"<td id='QnA_td'><a href='/farm/moveauctionQnADetail.do?auction_qna_no="+jsonObj.list[i].auction_qna_no+"'>"+jsonObj.list[i].auction_qna_title+"</a></td>"
-						+"<td>"+jsonObj.list[i].member_id+"</td><td>"+jsonObj.list[i].auction_qna_question_date+"</td></tr>";break;
-						 }
+						+"<td>"+jsonObj.list[i].member_id+"</td><td>"+jsonObj.list[i].auction_qna_question_date+"</td></tr>";
 					}
+				 }else{
+					 alert("검색된 결과가 없습니다.");
+					 auctionQnA(1);
+					
+				 }
 					$(".QnA_table").html(outValues);
 					
 					var startPage= jsonObj.list[0].startPage;
@@ -574,7 +575,7 @@ $(function(){
 	       	<c:if test="${loginUser.member_category eq '0'}">
 	       	<button class="auctionwrite_button" onclick="Auction_qnaMake();">문의 작성</button>
 	       	</c:if>
-		       <div class="qna_box">
+		       <div class="qna_box" >
 	            <table class="QnA_table">
 	              
 	              <!-- <tr>
