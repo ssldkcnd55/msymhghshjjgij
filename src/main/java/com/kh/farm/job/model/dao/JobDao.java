@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.farm.common.model.vo.PageNumber;
 import com.kh.farm.job.model.vo.Job;
+import com.kh.farm.notice.model.vo.Notice;
 
 @Repository
 public class JobDao {
@@ -28,6 +29,10 @@ public class JobDao {
 		
 		 List<Job> list =sqlSession.selectList("job.jobList",pnum);
 		 return (ArrayList<Job>)list;
+	}
+	public int insertJobMake(SqlSessionTemplate sqlSession, Job job) {
+		// TODO Auto-generated method stub
+		return sqlSession.insert("insertjob",job);
 	}
 
 }

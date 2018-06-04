@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.kh.farm.job.model.dao.JobDao;
 import com.kh.farm.job.model.vo.Job;
+import com.kh.farm.notice.model.vo.Notice;
 
 @Service
 public class JobServiceImpl implements JobService{
@@ -23,5 +24,10 @@ public int selectListcount() {
 public ArrayList<Job> selectJobList(int currentPage) {
 	// TODO Auto-generated method stub
 	return jobDao.selectJobList(currentPage,sqlSession);
+}
+@Override
+public int insertJobMake(Job job) {
+	// TODO Auto-generated method stub
+	return jobDao.insertJobMake(sqlSession,job);
 }
 }
