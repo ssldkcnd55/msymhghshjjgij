@@ -627,6 +627,7 @@ public class AuctionController {
 		response.setContentType("application/json; charset=utf-8");
 		 System.out.println(sendJson.toJSONString());
 		PrintWriter out = response.getWriter();
+		System.out.println(sendJson.toJSONString());
 		out.print(sendJson.toJSONString());
 		out.flush();
 		out.close();
