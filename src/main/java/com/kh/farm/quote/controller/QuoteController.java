@@ -31,7 +31,6 @@ public class QuoteController {
 	public void QuoteApi(HttpServletResponse response, HttpServletRequest request)
 			throws ServletException, IOException {
 		
-		System.out.println("矫技api立加己傍");
 
 		/*String productclscode = request.getParameter("productclscode");*/
 		String stardate = request.getParameter("startday");

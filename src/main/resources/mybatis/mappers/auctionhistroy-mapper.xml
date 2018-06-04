@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE mapper PUBLIC
+"-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="auctionhistory">
+
+	<!-- 한결 -->
+	<select id="selectAuctionHistory" parameterType="Hashmap" resultType="AuctionHistory">
+	
+	<![CDATA[
+	select * from (select rownum rnum,ah.AUCTION_HISTORY_NO,ah.AUCTION_NO,ah.MEMBER_ID,ah.AUCTION_HISTORY_PRICE,ah.AUCTION_HISTORY_DATE,au.AUCTION_TITLE 
+    from AUCTION_HISTORY ah,AUCTION au where ah.auction_no = au.auction_no order by ah.AUCTION_NO desc) where rnum >=#{startRow} and rnum <=#{endRow}
+	]]>
+	</select>
+	
+	<!-- 한결 -->
+	<select id="selectAuctionHistoryCount" parameterType="int" resultType="int">
+		select
+		count(*) from auction_history
+	</select>
+	
+
+
+</mapper>
