@@ -11,6 +11,7 @@ import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -46,7 +47,8 @@ public class ReportController {
 		}
 	}
 	
-	@RequestMapping("reportList.do")
+	@RequestMapping(value="reportList.do",method=RequestMethod.POST)
+	@ResponseBody
 	public void reportList(HttpServletResponse response,@RequestParam("page") int currentPage) throws IOException{
 		System.out.println("리포트 리스트 메서드 실행~~");
 		//response.setContentType("application/json; charset=utf-8");
@@ -74,12 +76,13 @@ public class ReportController {
 			json.put("endPage", endPage);
 			json.put("maxPage", maxPage);
 			json.put("currentPage",currentPage);
+			json.put("report_status",r.getReport_status());
 			
-			if(r.getReport_status().equals('0')) {
+			/*if(r.getReport_status().equals('0')) {
 				json.put("report_status", "미처리");
 			}else {
 				json.put("report_status", "처리됨");
-			}
+			}*/
 			
 			json.put("report_contents", r.getReport_contents());
 			json.put("report_category", r.getReport_category());

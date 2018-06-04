@@ -59,7 +59,8 @@ $(function(){
 			var objStr = JSON.stringify(data);
 			var jsonObj = JSON.parse(objStr);
 			
-			var outValues = "<tr><th width='12%'>번호</th><th width='12%'>분류</th><th width='30%'>후기 제목</th>"
+			var outValues = "";
+			outValues += "<tr><th width='12%'>번호</th><th width='12%'>분류</th><th width='30%'>후기 제목</th>"
 							+"<th width='13%'>신고내용</th><th width='15%'>신고날짜</th><th width='15%'>처리 상황</th></tr>";
 			
 		 	for(var i in jsonObj.list){
@@ -69,7 +70,7 @@ $(function(){
 				+"<td><a href='#' id='"+jsonObj.list[i].report_contents+"' onclick='viewContents(this);'>신고내용보기</a></td>"
 				+"<td>"+jsonObj.list[i].report_date+"</td><td>"+jasonObj.list[i].report_status+"</td></tr>";
 			} 
-			$(".Notice_table").html(outValues);
+			$("#notice_t").html(outValues);
 			
 			
 			var startPage= jsonObj.list[0].startPage;
@@ -203,8 +204,8 @@ function viewContents() {
                </select>
             </div>
 
-            <table class="Notice_table">
-              
+            <table class="Notice_table" id="notice_t">
+             
             </table>
 
             <!-- 하단 페이징, 검색 묶음 -->
