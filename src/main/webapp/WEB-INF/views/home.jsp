@@ -432,16 +432,7 @@
 				
 				<div class="">
 				
-				<div class="big_title2">
-						<a href=""><div class="seeMore">더보기></div></a>
-						<h2>이벤트</h2>
-					<div class="box_border2">
-						<div class="box2">
-						
-						
-							</div>
-						</div>
-					</div>
+				\
 				</div>
 
 
