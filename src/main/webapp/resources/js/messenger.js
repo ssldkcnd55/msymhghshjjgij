@@ -10,6 +10,9 @@ var beforeTime = null;
 var beforeDate = null;
 var nowDate = null;
 
+
+
+
 $(function() {
 	/* 검색 엔터키 연동 */
 	$('.search_member input').keydown(function(key) {
@@ -518,7 +521,8 @@ function move_msg_table(chat_no, my_id, your_id) {
 			});
 		};
 		ws.onmessage = function(event) {
-
+			
+			
 			var msgCode = event.data.substring(0, 3);
 			if (msgCode == 'lin') {
 				$('.msg_title_online').text('접속중');
