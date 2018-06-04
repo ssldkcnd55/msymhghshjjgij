@@ -42,6 +42,7 @@
 		<mapper resource="mybatis/mappers/qna-mapper.xml" />
 		<mapper resource="mybatis/mappers/shoppingBasket-mapper.xml" />
 		<mapper resource="mybatis/mappers/category-mapper.xml" />
+		<mapper resource="mybatis/mappers/auctionhistroy-mapper.xml" />
 		<mapper resource="mybatis/mappers/report-mapper.xml" />
 	</mappers>
 </configuration>

@@ -24,7 +24,7 @@
 	
 }
 .signUp:hover{
-	border: 2px solid #512772;
+	border: 2px solid #7e5957;
 }
 .btn{
 	border: 1px solid #bdbdbd; 
@@ -139,7 +139,7 @@ font-size: 11pt;
 }
 
 .legend{
-	color:#512772;
+	color:#7e5957;
 	text-align: left;
 	margin: 40px 0px 20px 130px;
 	font-weight: bold;

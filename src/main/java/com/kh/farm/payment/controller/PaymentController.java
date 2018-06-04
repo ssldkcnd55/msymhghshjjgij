@@ -22,6 +22,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.farm.auction.model.vo.AuctionHistory;
+import com.kh.farm.market.model.service.MarketService;
+import com.kh.farm.market.model.vo.Market;
 import com.kh.farm.member.model.vo.*;
 import com.kh.farm.payment.model.service.PaymentService;
 import com.kh.farm.payment.model.vo.*;
@@ -31,6 +33,8 @@ import com.kh.farm.shoppingBasket.model.vo.*;
 public class PaymentController {
 	@Autowired
 	private PaymentService paymentService;
+	@Autowired
+	private MarketService marketService;
 
 	@RequestMapping(value = "deleteFirstPayment.do", method = RequestMethod.POST)
 	public void deleteFirstPayment(HttpServletResponse response, @RequestParam(value = "group_no") int group_no)
@@ -167,6 +171,8 @@ public class PaymentController {
 		JSONArray jarr = new JSONArray();
 
 		ArrayList<Payment> AuctionList = paymentService.selectPaymentHistory(currentPage);
+		ArrayList<Market> MarketList = marketService.selectCusMarketThree();
+		
 		int limitPage = 10;
 		int listCount = paymentService.selectPaymentHistoryCount();
 
@@ -183,6 +189,12 @@ public class PaymentController {
 			json.put("buy_no", ac.getBuy_no());
 			json.put("group_no", ac.getGroup_no());
 			json.put("market_no", ac.getMarket_no());
+			for(Market ab : MarketList) {
+				if(ac.getMarket_no() == ab.getMarket_no()) {
+					json.put("market_title", ab.getMarket_title());
+					json.put("buy_price", ac.getBuy_amount() * ab.getMarket_price());
+				}
+			}
 			json.put("auction_no", ac.getAuction_no());
 			json.put("member_id", ac.getMember_id());
 			json.put("buy_date", ac.getBuy_date().toString());

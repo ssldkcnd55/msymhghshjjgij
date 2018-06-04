@@ -6,6 +6,18 @@ var ws = null;
 var login_id = null;
 
 
+/**/
+Notification.requestPermission().then(function(result) {
+	if (result === 'denied') {
+		return;
+	}
+	if (result === 'default') {		
+		return;
+	}
+});
+
+
+/**/
 
 function loadListPage()
 {
@@ -99,9 +111,24 @@ function loginPage() {
 
    ws_main.onmessage = function(event) {
       if (event.data == 'new') {
+    	  
          loadListPage();
       }
+      else if(event.data =='sel'){
+    	  /**/
+    	  var title = "판매알람";
+    	  var options = {
+    	  	body : my_name+"회원님의 상품이 판매되었습니다.",
+    	  	icon : "/farm/resources/images/Farmlogo.png"
+    	  }
 
+    	  var myNotification = new Notification(title, options);
+    	  myNotification.onclick = function(event) {
+    	  	  event.preventDefault(); 
+    	  	  window.open('판매상세페이지.do', '_blank');
+    	  	}
+    	  /**/
+      }
    }
 }
 

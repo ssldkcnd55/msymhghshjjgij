@@ -17,8 +17,8 @@
 		<result column="auction_status" property="auction_status" />
 		<result column="auction_startprice" property="auction_startprice" />
 		<result column="auction_directprice" property="auction_directprice" />
-
 	</resultMap>
+
 
 	<insert id="insertAuctionMake" parameterType="auction"
 		flushCache="true" useGeneratedKeys="true">
@@ -177,21 +177,6 @@
 		select * from auction_history where auction_no = #{auction_no} order by auction_history_price desc
 	]]>
 	</select> 
-	
-	<!-- 한결 -->
-	<select id="selectAuctionHistory" parameterType="PageNumber" resultType="auction">
-	<![CDATA[
-	select * from (select rownum rnum, AUCTION_HISTORY_NO, AUCTION_NO, MEMBER_ID,AUCTION_HISTORY_PRICE,AUCTION_HISTORY_DATE from AUCTION_HISTORY 
-	order by AUCTION_NO desc) where rnum >=#{startRow} and rnum <=#{endRow}
-	]]>
-	</select>
-	
-	<!-- 한결 -->
-	<select id="selectAuctionHistoryCount" parameterType="int" resultType="int">
-		select
-		count(*) from auction_history
-	</select>
-	
 	
 	<select id="selectAuctionBiddingCount" parameterType="int" resultType="int">
 	<![CDATA[

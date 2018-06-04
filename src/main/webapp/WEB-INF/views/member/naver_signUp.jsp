@@ -14,12 +14,22 @@
 <link href="/farm/resources/css/style.css" rel="stylesheet" type="text/css" />
 <link href="/farm/resources/css/join.css" rel="stylesheet" type="text/css">
 
+<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <script type="text/javascript" src="/farm/resources/js/jquery-3.3.1.min.js"></script>
 <!-- <script type="text/javascript" src="/farm/resources/js/signUp.js"></script> -->
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 <script type="text/javascript">
+function juso() {
+	new daum.Postcode({
+		oncomplete : function(data) {
+			// 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분입니다.
+			// 예제를 참고하여 다양한 활용법을 확인해 보세요.
+			$("#loc").val(data.roadAddress);
+		}
+	}).open();
+};
 
 $(function() {
     var email = ${result}.response.email;
@@ -41,8 +51,6 @@ $(function() {
 
 				<div class="join_form">
 					<!--  -->
-					<form id="mainform" action="/farm/signUp.do" method="post"
-						enctype="multipart/form-data" onsubmit="return formValidation();">
 						<!--Join_form 구역 내에 mainform을 담았음  -->
 						<div>
 							<div class="page-header">
@@ -91,10 +99,13 @@ $(function() {
 								<div class="form-group">
 									<!--e-Mail 기입란  -->
 									<label for="addr">주소</label><br> <input type="text"
-										class="form-control" id="addr" name="member_addr">
+										class="form-control" id="loc" name="member_addr">
+										<input type="text"
+										class="form-control" id="detailaddr" name="member_addr" placeholder="상세주소 입력">
 									<div class="form-group text-center">
-										<input type="button" class="btn btn-info" id="addrbtn"
-											name="addrbtn" value="주소검색" onclick="addrSearch();" required>
+										<button class="btn btn-info" id="addrbtn"
+											name="addrbtn" onclick="juso()">검색</button>
+											
 									</div>
 				
 								</div>
@@ -103,7 +114,7 @@ $(function() {
 
 								<div class="form-group text-center">
 									<!--회원가입 버튼과 가입취소 버튼으로 한 div 구역내에 존재함  -->
-									<input type="submit" class="btn btn-info" id="joinBt"
+									<input type="button" class="btn btn-info" id="joinBt"
 										name="joinBt" value="회원가입"> <input type="reset"
 										class="btn btn-danger" id="cancelBt" name="cancelBt"
 										value="가입취소">
@@ -114,7 +125,6 @@ $(function() {
 						<script
 							src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 						<!-- Include all compiled plugins (below), or include individual files as needed -->
-					</form>
 				</div>
 			</div>
 		</div>
