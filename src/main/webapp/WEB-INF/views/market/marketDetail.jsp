@@ -16,7 +16,6 @@
 <script src="/farm/resources/js/jquery-3.3.1.min.js"></script>
 <script type="text/javascript" src="/farm/resources/js/tabMove.js"></script>
 <script type="text/javascript" src="/farm/resources/js/marketDetail.js"></script>
-
 <script type="text/javascript">
 $(function(){
 	$('.goods-view-show-option-button').click(function(){
@@ -61,6 +60,7 @@ var change = 0;
 
 		document.cookie = 'farm_cookie_'+ market_no + "=" + market_no+ "a; expires=" + time;
 
+	
 }); 
 ///쿠키 끝///
 
@@ -324,6 +324,13 @@ function dailyPage(){
 function changeprice(){
 	 change = ${market.market_price} * $("input[name='buy_amount']").val();
 	 $(".mkPrice").html(change+"원");
+	  var amount = ${market.market_amount}-${market.remaining};
+	 
+	 if(amount < $("input[name='buy_amount']").val()){
+		$("input[name='buy_amount']").val(amount);
+		 alert("수량을 초과하였습니다.");
+	 } 
+			
 }
 </script>
 <title>Farm</title>
@@ -526,13 +533,25 @@ function changeprice(){
 									name="member_id" value="${sessionScope.loginUser.member_id}">
 									<!-- <div class="market_title"></div> -->
 									<table class="tb">
+									
 									<tr>
 										<td>${market.market_title}</td>
-										<td><input type="number" name="buy_amount" min="1" value="1" class="amount_text" 
+										
+										<td><input type="number" name="buy_amount" min="1" value="1" class="amount_text"
+										 
 										oninput="changeprice();"></td>
+									
+										
+									</tr>
+									<tr>
+										<td>가격</td>
 										<td>${market.market_price }원</td>
 									</tr>
 									
+									<tr>
+										<td>현재 남은 수량</td>
+										<td>${market.market_amount- market.remaining }</td>
+									</tr>									
 								<%-- 	<tr>
 										<td>출하 예정일</td>
 										<td>  </td>
