@@ -15,18 +15,16 @@
 					},
 					dataType : "JSON",
 					success : function(data) {
-						console.log(data);
 						var objStr = JSON.stringify(data);
 						var jsonObj = JSON.parse(objStr);
-
-						var outValues = "<tr><th>번호</th><th>입찰 번호</th><th>경매 번호</th><th>입찰자 아이디</th><th>입찰가</th><th>입찰 시간</th></tr>";
+						var outValues = "<tr><th>번호</th><th>입찰 번호</th><th>경매 이름</th><th>입찰자 아이디</th><th>입찰가</th><th>입찰 시간</th></tr>";
 
 						for ( var i in jsonObj.list) {
 							outValues += "<tr><td>"
 									+ jsonObj.list[i].rnum + "</td>" + "<td>"
 									+ jsonObj.list[i].auction_history_no
-									+ "</td>" + "<td>"
-									+ jsonObj.list[i].auction_no + "</td>"
+									+ "</td>" + "<td><a target=_blank href='AuctionDetail.do?auction_no="+jsonObj.list[i].auction_no+"'>"
+									+ jsonObj.list[i].auction_title + "</td>"
 									+ "<td>" + jsonObj.list[i].member_id
 									+ "</td>" + "<td>"
 									+ jsonObj.list[i].auction_history_price
@@ -67,7 +65,7 @@
 
 					},
 					error : function(request, status, errorData) {
-						alert("error code : " + request.status + "\nmessage"
+						console.log("error code : " + request.status + "\nmessage"
 								+ request.responseText + "\nerror" + errorData);
 					}
 				});
@@ -85,14 +83,14 @@
 						var objStr = JSON.stringify(data);
 						var jsonObj = JSON.parse(objStr);
 
-						var outValues = "<tr><th>번호</th><th>입찰 번호</th><th>경매 번호</th><th>입찰자 아이디</th><th>입찰가</th><th>입찰 시간</th></tr>";
+						var outValues = "<tr><th>번호</th><th>입찰 번호</th><th>경매 이름</th><th>입찰자 아이디</th><th>입찰가</th><th>입찰 시간</th></tr>";
 
 						for ( var i in jsonObj.list) {
 							outValues += "<tr><td>"
 									+ jsonObj.list[i].rnum + "</td>" + "<td>"
 									+ jsonObj.list[i].auction_history_no
-									+ "</td>" + "<td>"
-									+ jsonObj.list[i].auction_no + "</td>"
+									+ "</td>" + "<td><a target=_blank href='AuctionDetail.do?auction_no="+jsonObj.list[i].auction_no+"'>"
+									+ jsonObj.list[i].auction_title + "</td>"
 									+ "<td>" + jsonObj.list[i].member_id
 									+ "</td>" + "<td>"
 									+ jsonObj.list[i].auction_history_price
@@ -133,7 +131,7 @@
 
 					},
 					error : function(request, status, errorData) {
-						alert("error code : " + request.status + "\nmessage"
+						console.log("error code : " + request.status + "\nmessage"
 								+ request.responseText + "\nerror" + errorData);
 					}
 				});

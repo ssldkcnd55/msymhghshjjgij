@@ -58,7 +58,11 @@
 	
 	<select id="marketInfo" parameterType="int" resultType="market">
 	<![CDATA[
-		select * from market where market_no =#{market_no}
+		select m.market_no,m.category_no,m.member_id,m.market_title,m.market_note,m.market_img,m.market_releasedate,m.market_amount,m.MARKET_INTRO,m.MARKET_PRICE, nvl(sum(b.buy_amount),0) remaining from market m 
+left join buy b on m.market_no =b.market_no
+where m.market_no =#{market_no}
+group by m.market_no,m.category_no,m.member_id,m.market_title,m.market_note,m.market_img,m.market_releasedate,m.market_amount,m.MARKET_INTRO,m.MARKET_PRICE
+
 	]]>
 	
 	</select>
@@ -231,4 +235,10 @@ from(select m.market_no,category_no,m.member_id,
 		select * from category where category_main like #{ctype}
 	]]>
 	</select>
+	<select id="selectCusMarketThree" resultType="Market">
+	<![CDATA[
+	select market_no,market_title,market_price from market where market_no in(select market_no from buy)
+	]]>
+	</select>
+	
 </mapper>

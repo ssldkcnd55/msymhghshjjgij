@@ -111,7 +111,7 @@
 
 					},
 					error : function(request, status, errorData) {
-						alert("error code : " + request.status + "\nmessage"
+						console.log("error code : " + request.status + "\nmessage"
 								+ request.responseText + "\nerror" + errorData);
 					}
 				});
@@ -176,7 +176,7 @@
 
 					},
 					error : function(request, status, errorData) {
-						alert("error code : " + request.status + "\nmessage"
+						console.log("error code : " + request.status + "\nmessage"
 								+ request.responseText + "\nerror" + errorData);
 					}
 				});
@@ -207,7 +207,7 @@
 
 					},
 					error : function(request, status, errorData) {
-						alert("error code : " + request.status + "\nmessage"
+						console.log("error code : " + request.status + "\nmessage"
 								+ request.responseText + "\nerror" + errorData);
 					}
 				});
@@ -256,7 +256,7 @@
 
 					},
 					error : function(request, status, errorData) {
-						alert("error code : " + request.status + "\n"
+						console.log("error code : " + request.status + "\n"
 								+ "message : " + request.responseText + "\n"
 								+ "error : " + errorData);
 					}
@@ -409,134 +409,8 @@
 
 								<!-- Wrapper for slides -->
 								<div class="carousel-inner auction">
-									<!-- <div class="item active" align="center">
-                              <table class="auction_table">
-                                 <tr>
-
-                                    <th>상품</th>
-                                    <th>가격</th>
-                                    
-                                 </tr>
-
-                                 <tr>
-                                    <td><div class="auction_img"
-                                          style="background-image: url('/farm/resources/images/고구마.jpg');"></div>
-                                       <div>유기농 고구마 1kg</div></td>
-                                    <td>현재가  <span class="currentPrice">5,700</span>원<br><span class="directPrice">즉구가  7,000원</span></td>
-                                    
-
-                                 </tr>
-
-                                 <tr>
-                                    <td><div class="auction_img"
-                                          style="background-image: url('/farm/resources/images/아산 맑은 토마토.jpg');"></div>
-                                       <div>아산 맑은 토마토 1박스</div></td>
-                                    <td>10,500원</td>
-                                 </tr>
-
-                                 <tr>
-                                    <td><div class="auction_img"
-                                          style="background-image: url('/farm/resources/images/아산 맑은 포도.jpg');"></div>
-                                       <div>아산 맑은 포도</div></td>
-                                    <td>10,500원</td>
-                                 </tr>
-
-                                 <tr>
-                                    <td><div class="auction_img"
-                                          style="background-image: url('/farm/resources/images/청주 사과.jpg');"></div>
-                                       <div>청주 사과</div></td>
-                                    <td>10,500원</td>
-                                 </tr>
-
-
-                              </table>
-                           </div>
-
-                           <div class="item" align="center">
-                              <table class="auction_table">
-                                 <tr>
-
-                                    <th>상품</th>
-                                    <th>판매가</th>
-                                 </tr>
-
-                                 <tr>
-                                    <td><div class="auction_img"
-                                          style="background-image: url('/farm/resources/images/고구마.jpg');"></div>
-                                       <div>유기농 고구마 2kg</div></td>
-                                    <td>5,700원</td>
-                                    
-                                    </td>
-
-                                 </tr>
-
-                                 <tr>
-                                    <td><div class="auction_img"
-                                          style="background-image: url('/farm/resources/images/아산 맑은 토마토.jpg');"></div>
-                                       <div>아산 맑은 토마토 1박스</div></td>
-                                    <td>10,500원</td>
-                                 </tr>
-
-                                 <tr>
-                                    <td><div class="auction_img"
-                                          style="background-image: url('/farm/resources/images/아산 맑은 포도.jpg');"></div>
-                                       <div>아산 맑은 포도</div></td>
-                                    <td>10,500원</td>
-                                 </tr>
-
-                                 <tr>
-                                    <td><div class="auction_img"
-                                          style="background-image: url('/farm/resources/images/청주 사과.jpg');"></div>
-                                       <div>청주 사과</div></td>
-                                    <td>10,500원</td>
-                                 </tr>
-
-
-                              </table>
-                           </div>
-
-                           <div class="item" align="center">
-                              <table class="auction_table">
-                                 <tr>
-
-                                    <th>상품</th>
-                                    <th>판매가</th>
-                                 </tr>
-
-                                 <tr>
-                                    <td><div class="auction_img"
-                                          style="background-image: url('/farm/resources/images/고구마.jpg');"></div>
-                                       <div>유기농 고구마 3kg</div></td>
-                                    <td>5,700원</td>
-                                    <td style="color: red; font-weight: bold;">진<br>행<br>중
-                                    </td>
-
-                                 </tr>
-
-                                 <tr>
-                                    <td><div class="auction_img"
-                                          style="background-image: url('/farm/resources/images/아산 맑은 토마토.jpg');"></div>
-                                       <div>아산 맑은 토마토 1박스</div></td>
-                                    <td>10,500원</td>
-                                 </tr>
-
-                                 <tr>
-                                    <td><div class="auction_img"
-                                          style="background-image: url('/farm/resources/images/아산 맑은 포도.jpg');"></div>
-                                       <div>아산 맑은 포도</div></td>
-                                    <td>10,500원</td>
-                                 </tr>
-
-                                 <tr>
-                                    <td><div class="auction_img"
-                                          style="background-image: url('/farm/resources/images/청주 사과.jpg');"></div>
-                                       <div>청주 사과</div></td>
-                                    <td>10,500원</td>
-                                 </tr>
-
-
-                              </table>
-                           </div> -->
+								
+								
 								</div>
 
 								<!-- Left and right controls -->
@@ -555,6 +429,14 @@
 
 
 				</div>
+				
+				<div class="">
+				
+				\
+				</div>
+
+
+
 
 			</div>
 		</div>

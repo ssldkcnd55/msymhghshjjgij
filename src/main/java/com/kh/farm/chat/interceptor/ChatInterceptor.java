@@ -59,6 +59,7 @@ public class ChatInterceptor extends HttpSessionHandshakeInterceptor{
 			 attributes.put("chat_room1", chat_no+"_"+"system");
 			 attributes.put("chat_room2", chat_no+"_"+your_id);
 			 attributes.put("state", "msg");
+			 attributes.put("state2", "sel");
 		 }
 	        return super.beforeHandshake(request, response, wsHandler, attributes);
 

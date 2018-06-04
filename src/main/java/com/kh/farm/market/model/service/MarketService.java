@@ -85,5 +85,5 @@ public interface MarketService {
 
 	ArrayList<Category> selectCategory(String ctype);
 
-
+	ArrayList<Market> selectCusMarketThree();
 }
