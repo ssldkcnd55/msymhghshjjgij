@@ -17,6 +17,7 @@
 <script type="text/javascript">
 loginPage();
 login_id='${loginUser.member_id}';
+my_name = '${loginUser.member_name}';
 </script>
 </c:if>
 
