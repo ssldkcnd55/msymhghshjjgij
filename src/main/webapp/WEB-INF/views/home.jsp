@@ -111,7 +111,7 @@
 
 					},
 					error : function(request, status, errorData) {
-						alert("error code : " + request.status + "\nmessage"
+						console.log("error code : " + request.status + "\nmessage"
 								+ request.responseText + "\nerror" + errorData);
 					}
 				});
@@ -176,7 +176,7 @@
 
 					},
 					error : function(request, status, errorData) {
-						alert("error code : " + request.status + "\nmessage"
+						console.log("error code : " + request.status + "\nmessage"
 								+ request.responseText + "\nerror" + errorData);
 					}
 				});
@@ -207,7 +207,7 @@
 
 					},
 					error : function(request, status, errorData) {
-						alert("error code : " + request.status + "\nmessage"
+						console.log("error code : " + request.status + "\nmessage"
 								+ request.responseText + "\nerror" + errorData);
 					}
 				});
@@ -256,7 +256,7 @@
 
 					},
 					error : function(request, status, errorData) {
-						alert("error code : " + request.status + "\n"
+						console.log("error code : " + request.status + "\n"
 								+ "message : " + request.responseText + "\n"
 								+ "error : " + errorData);
 					}

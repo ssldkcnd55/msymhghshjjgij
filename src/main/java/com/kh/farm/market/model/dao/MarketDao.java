@@ -240,4 +240,8 @@ public class MarketDao {
 		List<Category> list = sqlSession.selectList("market.selectCategory",ctype);
 		return (ArrayList<Category>)list;
 	}
+	public ArrayList<Market> selectCusMarketThree(SqlSessionTemplate sqlSession) {
+		List<Market> ac = sqlSession.selectList("market.selectCusMarketThree");
+		return (ArrayList)ac;
+	}
 }

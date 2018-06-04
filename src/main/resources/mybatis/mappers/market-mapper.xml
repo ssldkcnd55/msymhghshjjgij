@@ -226,4 +226,10 @@ group by m.market_no,m.category_no,m.member_id,m.market_title,m.market_note,m.ma
 		select * from category where category_main like #{ctype}
 	]]>
 	</select>
+	<select id="selectCusMarketThree" resultType="Market">
+	<![CDATA[
+	select market_no,market_title,market_price from market where market_no in(select market_no from buy)
+	]]>
+	</select>
+	
 </mapper>
