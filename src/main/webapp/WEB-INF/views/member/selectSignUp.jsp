@@ -54,7 +54,7 @@ function checked1(){
 function clickCustom(){
 	$("#cusradio").attr("checked", true);
 	$("#farmradio").attr("checked", false); 
-	$(".signUp.cus").css('border','2px solid #512772');
+	$(".signUp.cus").css('border','2px solid #7e5957');
 	$(".signUp.farm").css('border','1px solid #dcdcdc');
 	cate = 1;
 	
@@ -63,7 +63,7 @@ function clickCustom(){
 function clickFarmer(){
 	$("#farmradio").attr("checked", true);
 	$("#cusradio").attr("checked", false); 
-	$(".signUp.farm").css('border','2px solid #512772');
+	$(".signUp.farm").css('border','2px solid #7e5957');
 	$(".signUp.cus").css('border','1px solid #dcdcdc');
 	cate=2;
 }
@@ -85,7 +85,7 @@ function clickFarmer(){
         	</div>  -->
         	<div class="title_box">
         	
-        	<div class="legend">> 회원 유형 선택</div>
+        	<div class="legend"> 회원 유형 선택</div>
         	</div>
         	<div class="comment">회원 유형에 따라 가입절차가 다르니 해당 유형을 선택해 주세요.</div>
         	<div class="select_box">
@@ -105,7 +105,7 @@ function clickFarmer(){
         <!--   <h2 class="conH2">개인정보 수집 및 이용 안내</h2> -->
           
             <!-- <fieldset class="agreement_box"> -->
-              <legend class="legend pr">> 개인정보 수집 이용 약관</legend>
+              <legend class="legend pr"> 개인정보 수집 이용 약관</legend>
               <div class="agreement01" style="height:160px !important;">
 							<textarea readonly="readonly" class="ag1">	
 작물팜은 통합회원 서비스에 필요한 개인정보 수집·이용을 위하여 개인정보보호법 제15조 및 제22조, 제24조에 따라 귀하의 동의를 받고자 합니다.
@@ -147,7 +147,7 @@ function clickFarmer(){
         	</div> 
        <!--  </fieldset> -->
        <div class="btn_box">
-  		<div class="btn cancel" onclick="cancel();">가입 취소</div>
+  		<div class="btn cancel" onclick="location.href='moveHome.do';">가입 취소</div>
   		<div class="btn ok" onclick="selectSignUp();">다음단계로</div>
         </div>	
         	       	

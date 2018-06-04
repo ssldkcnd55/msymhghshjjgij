@@ -89,7 +89,7 @@ public class MoveController {
 	}
 	@RequestMapping("moveJobDetail.do")
 	public String moveJobDetail() {
-		return "job/jobDetail";
+		return "job/jobDetail2";
 	}
 	@RequestMapping("moveJobMake.do")
 	public String moveJobMake() {

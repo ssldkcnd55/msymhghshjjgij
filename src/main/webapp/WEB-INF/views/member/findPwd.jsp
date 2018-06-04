@@ -6,7 +6,8 @@
 <meta charset="UTF-8">
 <title>Farm</title>
 <link href="/farm/resources/css/style.css" rel="stylesheet" type="text/css">
-<link href="/farm/resources/css/join.css" rel="stylesheet" type="text/css">
+<link href="/farm/resources/css/join3.css" rel="stylesheet" type="text/css">
+<link href="/farm/resources/css/boot.css" rel="stylesheet" type="text/css">
 </head>
 <body>
 	<div id="top_line"></div>
@@ -24,14 +25,14 @@
 						<h3 class="h3">가입하셨던 이메일 계정을 입력하시면,<br>비밀번호를 새로 만들 수 있는 링크로 이동됩니다.</h3>
 						<div class="pwd_box">
 								<div class="form-group"> <!--이름 label 및 이름 입력란 -->
-									<label for="userName">이름</label> <input type="text"
+									<input type="text"
 										class="form-control" id="userName" name="userName" placeholder="이름을 입력해주세요.">
 								</div>
 								
 								<div class="form-group">
 								<!--e-Mail 기입란  --><!-- 원래 이메일인데 테스트할라구 text로바ㅜㄲㅁ -->
-								<label for="userEmail">E-mail</label><br><input type="text" 
-									class="form-control" id="userEmail" name="member_id" style="width:330px;"
+								<input type="text" 
+									class="form-control" id="userEmail" name="member_id" 
 									placeholder="ex)abcd@naver.com">
 								<div class="form-group text-center">
 									<input type="button" class="btn btn-info" id="mailsend" name="dupliBt" value="메일인증" onclick="sendMail();" required/>
@@ -39,7 +40,7 @@
 							</div>
 								<div class="form-group">
 								<!--e-Mail 기입란  -->
-								<label for="vCode">인증번호</label><br><input type="text" style="width:330px;"
+								<input type="text"  placeholder="인증 번호 입력"
 									class="form-control" id="vCode" name="vCode" onChange="vCodeChange();">
 								<div class="form-group text-center">
 									<input type="button" class="btn btn-info" id="vCodecheck" name="dupliBt" value="번호확인" onclick="vCodeCheck1();" required>

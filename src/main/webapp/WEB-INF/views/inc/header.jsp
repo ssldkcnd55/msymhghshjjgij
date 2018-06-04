@@ -108,6 +108,7 @@ function getBasketCount(member_id)
             <div class="userMenu">
                <ul class="list_menu">
                <c:if test="${empty sessionScope.loginUser }">
+               
                   <li class="menu1 none_sub"><a href="moveSignUp2.do" class="link_menu">회원가입</a></li>
                   <li class="menu1 none_sub"><a href="moveLogin.do" class="link_menu">로그인</a></li>
                </c:if>
@@ -124,17 +125,19 @@ function getBasketCount(member_id)
             </div>
             <div class="header_main">
                <div class="header_main_img">
-                  <a href="moveHome.do"><img
-                     src="https://res.kurly.com/pc/img/1801/img_delivery.gif"></a>
+                  <a href="moveHome.do"><img style="margin-top:30px;"
+                     src="/farm/resources/images/farmleft.png"></a>
                </div>
                <h1 class="h1">
-                  <a href="moveHome.do"><img src="/farm/resources/images/Farmlogo.png" style="width:150px;height:auto;"></a>
+                  <a href="moveHome.do"><img src="/farm/resources/images/Farmlogo.png" style="width:130px;height:auto;"></a>
                </h1>
             </div>
             <div class="tabMenu">
+            
                <div class="tabMenu_inner">
+               
                   <ul class="tab_menu">
-                     <li><a href="marketList.do">장터</a></li>
+                    <li><a href="marketList.do">장터</a></li>
                      <li><a href="AuctionList_controller.do">경매</a></li>
                      <li><a href="moveQuote.do">시세</a></li>
                      <li><a href="moveJob.do">구인구직</a></li>
