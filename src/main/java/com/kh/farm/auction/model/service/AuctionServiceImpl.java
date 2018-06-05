@@ -28,8 +28,13 @@ public class AuctionServiceImpl implements AuctionService{
 	}
 	
 	@Override
-	public List<Auction> selectAuctionList(int page) {
-		return auctionDao.selectAuctionList(sqlSession,page);
+	public List<Auction> selectAuctionList(int currentPage) {
+		return auctionDao.selectAuctionList(sqlSession,currentPage);
+	}
+	
+	@Override
+	public int selectajaxAuctionListCount() {
+		return auctionDao.selectajaxAuctionListCount(sqlSession);
 	}
 	
 	@Override
@@ -210,5 +215,18 @@ public class AuctionServiceImpl implements AuctionService{
 	public List<Auction> select_auction_background(String member_id) {
 		return auctionDao.select_auction_background(sqlSession,member_id);
 	}
+	
+	@Override
+	public List<Auction> selectmoreAuctionCategory(int currentPage, int type) {
+		return auctionDao.selectmoreAuctionCategory(sqlSession,currentPage,type);
+	}
+	
+	@Override
+	public int selectmoreAuctionCategoryCount(int type) {
+		return auctionDao.selectmoreAuctionCategoryCount(sqlSession,type);
+
+	}
+	
+	
 	
 }

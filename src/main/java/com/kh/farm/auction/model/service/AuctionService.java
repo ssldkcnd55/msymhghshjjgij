@@ -18,8 +18,10 @@ public interface AuctionService {
 	/*경매 등록*/
 	int insertAuctionMake(Auction auction);
 
-	/*경매 메인 */
-	List<Auction> selectAuctionList(int page);
+	/*경매 메인 ajax List  */
+	List<Auction> selectAuctionList(int currentPage);
+	
+	int selectajaxAuctionListCount();
 	
 	/*경매 디테일*/
 	Auction selectAuctionDetail(int auction_no);
@@ -93,6 +95,16 @@ public interface AuctionService {
 	int selectLeft_boxChangeCount(int type);
 
 	List<Auction> select_auction_background(String member_id);
+
+	//경매 카테고리 더보기
+	List<Auction> selectmoreAuctionCategory(int currentPage, int type);
+	
+	//경매 카테고리 더보기 listCount
+	int selectmoreAuctionCategoryCount(int type);
+
+	
+
+	
 
 
 	
