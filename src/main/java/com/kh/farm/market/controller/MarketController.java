@@ -201,6 +201,7 @@ public class MarketController {
 		} catch (IllegalStateException | IOException e) {
 			e.printStackTrace();
 		}
+		
 		int insertMarket = marketService.insertMarket(market);
 		return "forward:/marketList.do";
 	}

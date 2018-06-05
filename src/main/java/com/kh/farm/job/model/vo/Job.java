@@ -5,26 +5,28 @@ import java.sql.Date;
 import org.springframework.stereotype.Component;
 
 @Component("job")
-public class Job implements java.io.Serializable{
+public class Job implements java.io.Serializable {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 8888L;
-	
-	private int job_no;//구인구직 번호
-	private String member_id;//작성자 아이디
-	private String job_title;//구인구직 제목
-	private String job_contents;//구인구직 내용
-	private Date job_date;//구인구직 작성일
-	private String job_status;//구인구직 상태
-	private Date job_startdate;//구인구직 시작일
-	private Date job_enddate;//구인구직 종료일
-	private String job_addr;//구인구직 주소
-	private String job_tel;//구인구직 전화번호
+
+	private int job_no;// 구인구직 번호
+	private String member_id;// 작성자 아이디
+	private String job_title;// 구인구직 제목
+	private String job_contents;// 구인구직 내용
+	private Date job_date;// 구인구직 작성일
+	private String job_status;// 구인구직 상태
+	private Date job_startdate;// 구인구직 시작일
+	private Date job_enddate;// 구인구직 종료일
+	private String job_addr;// 구인구직 주소
+	private String job_tel;// 구인구직 전화번호
+	private String job_img;
 	private String rnum;
+
 	public Job() {
-	
+
 	}
 
 	public Job(int job_no, String member_id, String job_title, String job_contents, Date job_date, String job_status,
@@ -138,6 +140,13 @@ public class Job implements java.io.Serializable{
 	public void setJob_tel(String job_tel) {
 		this.job_tel = job_tel;
 	}
-	
-	
+
+	public String getJob_img() {
+		return job_img;
+	}
+
+	public void setJob_img(String job_img) {
+		this.job_img = job_img;
+	}
+
 }

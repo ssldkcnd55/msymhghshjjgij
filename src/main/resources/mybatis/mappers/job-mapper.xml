@@ -3,31 +3,31 @@
 "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="job">
-
+	<!--구인구직조회수 -->
 	<select id="jobListCount" resultType="int">
 	<![CDATA[
 		select count(*) from job
 	]]>
 	</select>
-
+	<!--구인구직목록 -->
 	<select id="jobList" parameterType="PageNumber" resultType="Job">
 	<![CDATA[
 		select * from (select rownum rnum, job_no, job_status, job_title, member_id, job_date from job
 		order by job_no desc) where rnum >=#{startRow} and rnum<=#{endRow} 
 	]]>
 	</select>
-
-	<insert id="insertjob" parameterType="job" flushCache="true"
-		useGeneratedKeys="true">
-	<![CDATA[
-		insert into Job values((select max(job_no) from Job)+1,#{job_title},#{job_contents},sysdate,#{job_status},#{job_startdate},#{job_enddate},#{job_addr},#{job_tel})
-	]]>
-	</insert>
-
+	<!--구인구직상세보기 -->
 	<select id="jobDetail" parameterType="job" resultType="job">
 	<![CDATA[
 		select * from job where job_no = #{job_no}
 	]]>
 	</select>
-
+	<!--구인구직글등록 -->
+	<insert id="insertjob" parameterType="job" flushCache="true"
+		useGeneratedKeys="true">
+	<![CDATA[
+		insert into job values(  (select (case when max(job_no) is null then 0 else max(job_no) end) from job)+1,#{member_id},#{job_title},#{job_img},#{job_contents},sysdate,
+		'0',sysdate,sysdate,#{job_addr},#{job_tel})
+	]]>
+	</insert>
 </mapper>
