@@ -43,7 +43,7 @@ img{border:0}
 #container { width:100%; min-height:1085px; position:relative; clear:both;  }
 		#container div.inner-wrap { width:960px; margin:20px auto 0 ; position:relative; display: flow-root;}
 		
-		#container div.main_visual{ width:630px; height:440px;/*  border:1px solid #9CC; */ float:left;}
+		#container div.main_visual{ width:630px; height:440px;/*  border:1px solid #9CC; */  float:left; }
 		
 		#container div.tab_main{width:300px; height:507px; border:1px solid #dcdcdc; float:right; }
 		#container div.box { width:300px; height:400px; border:1px solid #DCDCDC; margin:0px 27px 0px 0; float:left; background-size: cover;}
