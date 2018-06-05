@@ -229,6 +229,68 @@ public class AuctionDao {
 	}
 
 
+	public List<Auction> selectLeft_AuctionStandBy(SqlSessionTemplate sqlSession, int currentPage) {
+		//  select box에서 경매대기: 0
+		int startRow =(currentPage-1)*10+1; //1~10, 11~20 계산할 거 ex) 1, 11, 21, 31,)
+		int endRow = startRow+9;
+		PageNumber pnum = new PageNumber();
+		pnum.setStartRow(startRow);
+		pnum.setEndRow(endRow);
+		return sqlSession.selectList("auction.selectLeft_AuctionStandBy",pnum);
+
+	}
+
+	public List<Auction> selectLeft_AuctionProgress(SqlSessionTemplate sqlSession, int currentPage) {
+		//  select box에서 경매중 : 1
+		int startRow =(currentPage-1)*10+1; //1~10, 11~20 계산할 거 ex) 1, 11, 21, 31,)
+		int endRow = startRow+9;
+		PageNumber pnum = new PageNumber();
+		pnum.setStartRow(startRow);
+		pnum.setEndRow(endRow);
+		return sqlSession.selectList("auction.selectLeft_AuctionProgress",pnum);
+	}
+
+	public List<Auction> selectLeft_AuctionFinish(SqlSessionTemplate sqlSession, int currentPage) {
+		// select box에서 경매마감 : 2
+		int startRow =(currentPage-1)*10+1; //1~10, 11~20 계산할 거 ex) 1, 11, 21, 31,)
+		int endRow = startRow+9;
+		PageNumber pnum = new PageNumber();
+		pnum.setStartRow(startRow);
+		pnum.setEndRow(endRow);
+		return sqlSession.selectList("auction.selectLeft_AuctionFinish",pnum);
+	}
+
+	public List<Auction> selectLeft_boxLatest(SqlSessionTemplate sqlSession, int currentPage) {
+		// select box에서 경매 최신순: 3
+		int startRow =(currentPage-1)*10+1; //1~10, 11~20 계산할 거 ex) 1, 11, 21, 31,)
+		int endRow = startRow+9;
+		PageNumber pnum = new PageNumber();
+		pnum.setStartRow(startRow);
+		pnum.setEndRow(endRow);
+		return sqlSession.selectList("auction.selectLeft_boxLatest",pnum);
+	}
+
+	public int selectLeft_AuctionStandByCount(SqlSessionTemplate sqlSession) {
+		return sqlSession.selectOne("auction.selectLeft_AuctionStandByCount");
+	}
+
+	public int selectLeft_AuctionProgressCount(SqlSessionTemplate sqlSession) {
+		return sqlSession.selectOne("auction.selectLeft_AuctionProgressCount");
+	}
+
+	public int selectLeft_AuctionFinishCount(SqlSessionTemplate sqlSession) {
+		return sqlSession.selectOne("auction.selectLeft_AuctionFinishCount");
+	}
+
+	public int selectLeft_boxLatestCount(SqlSessionTemplate sqlSession) {
+		return sqlSession.selectOne("auction.selectLeft_boxLatestCount");
+	}
+
+	public List<Auction> select_auction_background(SqlSessionTemplate sqlSession, String member_id) {
+		return sqlSession.selectList("auction.select_auction_background",member_id);
+	}
+
+
 	
 
 

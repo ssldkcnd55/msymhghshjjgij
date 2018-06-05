@@ -87,6 +87,13 @@ public interface AuctionService {
 
 	int selectAuctionCusQnaListCount();
 
+	//경매 카테고리
+	List<Auction> selectLeft_boxChangeList(int currentPage, int type);
+
+	int selectLeft_boxChangeCount(int type);
+
+	List<Auction> select_auction_background(String member_id);
+
 
 	
 
