@@ -3,8 +3,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link href="/farm/resources/css/style.css" rel="stylesheet" type="text/css" />
-<link href="/farm/resources/css/jobMake.css" rel="stylesheet" type="text/css" />
+<link href="/farm/resources/css/style.css" rel="stylesheet"
+	type="text/css" />
+<link href="/farm/resources/css/jobMake.css" rel="stylesheet"
+	type="text/css" />
 <script src="/farm/resources/js/jquery-3.3.1.min.js"></script>
 <script type="text/javascript" src="naver/js/HuskyEZCreator.js"
 	charset="utf-8"></script>
@@ -36,7 +38,9 @@
 		</div>
 		<div id="container">
 			<div class="inner-wrap">
-				<div class="title1 jobMake"><p class="titleP">구인구직 글쓰기</p></div>
+				<div class="title1 jobMake">
+					<p class="titleP">구인구직 글쓰기</p>
+				</div>
 
 				<div class="div">
 					<table class="jung_table">
@@ -46,7 +50,7 @@
 									<p class="p">구인제목</p>
 								</td>
 								<td colspan="3" class="td1"><input type="text"
-									name="product_name" class="input_text_box"> <br></td>
+									name="job_title" class="input_text_box"> <br></td>
 							</tr>
 							<tr class="tr">
 								<td class="td">
@@ -54,9 +58,9 @@
 									<p class="p">구인주소</p>
 								</td>
 								<td colspan="3" class="td1"><input type="text"
-									name="product_name" class="input_text_box2">
+									name="job_addr" id="loc" class="input_text_box2">
 									<button onclick="juso()" class="button">주소검색</button> <br>
-									<input type="text" name="product_name" class="input_text_box3"
+									<input type="text" name="job_addr2" class="input_text_box3"
 									placeholder="상세주소입력"></td>
 							</tr>
 							<tr class="tr">
@@ -64,26 +68,27 @@
 
 									<p class="p">구인전화번호</p>
 								</td>
-								<td colspan="3" class="td1"><select class="select">
+								<td colspan="3" class="td1"><select class="select"
+									name="job_tel">
 										<option></option>
 										<option>010</option>
 										<option>011</option>
 										<option>017</option>
-								</select><input type="text" name="product_name" class="input_text_box4">
-									<input type="text" name="product_name" class="input_text_box4"><br></td>
+								</select><input type="text" name="job_tel2" class="input_text_box4">
+									<input type="text" name="job_tel3" class="input_text_box4"><br></td>
 							</tr>
 							<tr class="tr">
 								<td class="td2">
 
 									<p class="p">구인시작날짜</p>
 								</td>
-								<td class="td3"><input type="date" name="product_name"
+								<td class="td3"><input type="date" name="job_startdate"
 									class="input_date_box"> <br></td>
 								<td class="td2">
 
 									<p class="p">구인마감날짜</p>
 								</td>
-								<td class="td3"><input type="date" name="product_name"
+								<td class="td3"><input type="date" name="job_enddate"
 									class="input_date_box"></td>
 							</tr>
 							<table class="jung_table2">
@@ -101,7 +106,7 @@
 							<tr>
 								<td style="width: 100%;"><form
 										action="sample/viewer/index.php" method="post">
-										<textarea name="ir1" id="ir1" rows="10" cols="100"
+										<textarea name="job_contents" id="ir1" rows="10" cols="100"
 											style="width: 100%; height: 250px; display: none;"></textarea>
 									</form></td>
 							</tr>
@@ -109,7 +114,7 @@
 					</table>
 					<ul class="ui">
 						<li class="li3" onclick="location.href='/#'">뒤로가기</li>
-						<li class="li4" onclick="location.href='/#'">구인등록</li>
+						<li class="li4" onclick="location.href='/farm/jobMake.do'">구인등록</li>
 					</ul>
 				</div>
 			</div>

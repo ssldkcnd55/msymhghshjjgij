@@ -89,9 +89,9 @@
 	color: gray;
 }
 .contxt1{
-	 margin-top: 20px;
-	 text-align:  left;
-	 margin-left: 330px;
+	margin-top: 20px;
+	width: 100%;
+    text-align: center;
 	 
 }
 .leaf{
