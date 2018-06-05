@@ -30,7 +30,6 @@ public class QuoteController {
 	@ResponseBody
 	public void QuoteApi(HttpServletResponse response, HttpServletRequest request)
 			throws ServletException, IOException {
-		
 
 		/*String productclscode = request.getParameter("productclscode");*/
 		String stardate = request.getParameter("startday");
