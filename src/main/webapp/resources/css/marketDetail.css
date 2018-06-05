@@ -15,7 +15,25 @@
 	width: 900px;
 	text-align: left;
 	padding-left: 15px;
-	border: 1px solid #bdbdbd;
+}
+ .Omarket{
+	
+	width: 100px;
+	height: 200px;	
+} 
+
+
+.main_visual2{ width:630px; height:300px;/*  border:1px solid #9CC; */  }
+.carousel-control.left {
+	background: rgba(0, 0, 0, 0);
+	color: black;
+	left:-10px;
+}
+
+.carousel-control.right {
+	background: rgba(0, 0, 0, 0);
+	color: black;
+	right:-10px;
 }
 .tabs{
 	 float:left;
