@@ -120,4 +120,10 @@ public class MemberServiceImpl implements MemberService {
 		}
 		
 	}
+
+	@Override
+	public Member selectIdCheck(String mail_to) {
+		// TODO Auto-generated method stub
+		return memberDao.selectIdCheck(sqlSession,mail_to);
+	}
 }

@@ -35,4 +35,6 @@ public interface MemberService {
 	int selectChangeMemberCount(int type);
 
 	List<Member> selectSearchMember(String keyword, int type, int currentPage);
+
+	Member selectIdCheck(String mail_to);
 }

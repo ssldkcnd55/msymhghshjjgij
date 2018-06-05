@@ -1,5 +1,8 @@
 package com.kh.farm.common.model.vo;
 
+import java.util.Arrays;
+import java.util.List;
+
 public class PageNumber implements java.io.Serializable{
 	private static final long serialVersionUID = 2020L;
 	
@@ -20,13 +23,38 @@ public class PageNumber implements java.io.Serializable{
 	public PageNumber() {}
 	
 	
+	
+	public PageNumber(int startRow, int endRow, int market_no, int auction_no, String member_id, String search,
+			String ctype, String cname, String sort, int review_no, int daily_no, int report_no, String keyword,
+			int select) {
+		super();
+		this.startRow = startRow;
+		this.endRow = endRow;
+		this.market_no = market_no;
+		this.auction_no = auction_no;
+		this.member_id = member_id;
+		this.search = search;
+		this.ctype = ctype;
+		this.cname = cname;
+		this.sort = sort;
+		this.review_no = review_no;
+		this.daily_no = daily_no;
+		this.report_no = report_no;
+		this.keyword = keyword;
+		this.select = select;
+		
+	}
+
+
+
 	@Override
 	public String toString() {
 		return "PageNumber [startRow=" + startRow + ", endRow=" + endRow + ", market_no=" + market_no + ", auction_no="
 				+ auction_no + ", member_id=" + member_id + ", search=" + search + ", ctype=" + ctype + ", cname="
 				+ cname + ", sort=" + sort + ", review_no=" + review_no + ", daily_no=" + daily_no + ", report_no="
-				+ report_no + ", keyword=" + keyword + ", select=" + select + "]";
+				+ report_no + ", keyword=" + keyword + ", select=" + select ;
 	}
+
 
 
 	public int getStartRow() {
@@ -173,12 +201,8 @@ public class PageNumber implements java.io.Serializable{
 		return serialVersionUID;
 	}
 
-	
-	
 
 	
-	
-
 
 	
 }

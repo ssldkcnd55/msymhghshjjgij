@@ -183,5 +183,10 @@ public class MemberDao {
 		return sqlSession.selectList("member.selectMemberId", pnum);
 	}
 
+	public Member selectIdCheck(SqlSessionTemplate sqlSession, String mail_to) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("member.selectIdCheck",mail_to);
+	}
+
 	
 }

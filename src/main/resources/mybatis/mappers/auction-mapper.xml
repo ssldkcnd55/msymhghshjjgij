@@ -257,8 +257,89 @@
 	</select>
 	
 	<select id="selectAuctionCusQnaListCount" parameterType="int" resultType="int">
+	<![CDATA[
 		select
 		count(*) from auction_qna
+	]]>
 	</select>
 
+	<select id="selectLeft_AuctionStandBy" parameterType="PageNumber" resultType="Auction">
+	<![CDATA[
+		select * from 
+			(select rownum rnum, auction_no,
+			auction_title,auction_note,auction_img,auction_status,
+			member_id from (select * from auction order by 
+			auction_no desc)) where rnum >= #{startRow} and rnum <= #{endRow} 
+			and auction_status = '0'
+	]]>
+	</select>
+	
+	
+	<select id="selectLeft_AuctionProgress" parameterType="PageNumber" resultType="Auction">
+	<![CDATA[
+		select * from 
+			(select rownum rnum, auction_no,
+			auction_title,auction_note,auction_img,auction_status,
+			member_id from (select * from auction order by 
+			auction_no desc)) where rnum >= #{startRow} and rnum <= #{endRow} 
+			and auction_status = '1'
+	]]>
+	</select>
+	
+	<select id="selectLeft_AuctionFinish" parameterType="PageNumber" resultType="Auction">
+	<![CDATA[
+		select * from 
+			(select rownum rnum, auction_no,
+			auction_title,auction_note,auction_img,auction_status,
+			member_id from (select * from auction order by 
+			auction_no desc)) where rnum >= #{startRow} and rnum <= #{endRow} 
+			and auction_status = '2'
+	]]>
+	</select>
+	
+	<select id="selectLeft_boxLatest" parameterType="PageNumber" resultType="Auction">
+	<![CDATA[
+		select * from 
+			(select rownum rnum, auction_no,
+			auction_title,auction_note,auction_img,auction_status,
+			member_id from (select * from auction order by 
+			auction_no desc)) where rnum >= #{startRow} and rnum <= #{endRow} 
+	]]>
+	</select>
+	
+	<select id="selectLeft_AuctionStandByCount" parameterType="int" resultType="int">
+	<![CDATA[
+		select count(*) from auction where auction_status = '0'
+	]]>
+	</select>
+	
+	<select id="selectLeft_AuctionProgressCount" parameterType="int" resultType="int">
+	<![CDATA[
+		select count(*) from auction where auction_status = '1'
+	]]>
+	</select>
+	
+	<select id="selectLeft_AuctionFinishCount" parameterType="int" resultType="int">
+	<![CDATA[
+		select count(*) from auction where auction_status = '2'
+	]]>
+	</select>
+	
+	<select id="selectLeft_boxLatestCount" parameterType="int" resultType="int">
+	<![CDATA[
+		select count(*) from auction 
+	]]>
+	</select>
+
+
+	
+	<select id="select_auction_background" parameterType="String" resultType="Auction">
+	<![CDATA[
+		 select ROWNUM rum, auction_no,member_id,auction_title from auction 
+		where member_id = #{member_id} order by auction_no DESC
+	]]>
+	</select>
+	
+	
+	
 </mapper>

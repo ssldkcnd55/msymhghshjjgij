@@ -179,15 +179,36 @@ public class AuctionServiceImpl implements AuctionService{
 	
 	@Override
 	public ArrayList<AuctionQnA> selectAuctionCusQnaList(int currentPage) {
-		// TODO Auto-generated method stub
 		return auctionDao.selectAuctionCusQnaList(sqlSession,currentPage);
 	}
 	@Override
 	public int selectAuctionCusQnaListCount() {
-		// TODO Auto-generated method stub
 		return auctionDao.selectAuctionCusQnaListCount(sqlSession);
 	}
 	
+	@Override
+	public List<Auction> selectLeft_boxChangeList(int currentPage, int type) {
+		switch(type) {
+		case 0: return auctionDao.selectLeft_AuctionStandBy(sqlSession,currentPage);
+		case 1: return auctionDao.selectLeft_AuctionProgress(sqlSession,currentPage);
+		case 2: return auctionDao.selectLeft_AuctionFinish(sqlSession,currentPage);
+		default : return auctionDao.selectLeft_boxLatest(sqlSession,currentPage);
+		}
+	}
 	
+	@Override
+	public int selectLeft_boxChangeCount(int type) {
+		switch(type) {
+		case 0: return auctionDao.selectLeft_AuctionStandByCount(sqlSession);
+		case 1: return auctionDao.selectLeft_AuctionProgressCount(sqlSession);
+		case 2: return auctionDao.selectLeft_AuctionFinishCount(sqlSession);
+		default : return auctionDao.selectLeft_boxLatestCount(sqlSession);
+		}
+	}
+	
+	@Override
+	public List<Auction> select_auction_background(String member_id) {
+		return auctionDao.select_auction_background(sqlSession,member_id);
+	}
 	
 }
