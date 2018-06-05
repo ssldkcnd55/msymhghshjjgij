@@ -10,7 +10,14 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Properties;
 
+import javax.mail.Authenticator;
+import javax.mail.Message;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -400,6 +407,52 @@ public class MemberController {
 		out.append(sendJson.toJSONString());
 		out.flush();
 		out.close();
+	}
+	@RequestMapping(value="sendmail.do",method=RequestMethod.POST)
+	public void sendMail(HttpServletResponse response,@RequestParam("email") String mail_to) {
+		Member returnMember = memberService.selectIdCheck(mail_to);
+		int vCode = 0;
+		if(returnMember == null) {
+			try {
+				
+				String mail_from = "JakMoolFarm" + "<jakmoolfarm@gmail.com>";
+				String title = null;
+				String contents = null;
+				// 인증번호 보내기
+				title = "JakMoolFarm VERIFICATION CODE EMAIL";
+				vCode = (int) (Math.random() * 8999 + 1000);
+				contents = "VERIFICATION CODE : " + vCode;
+				mail_from = new String(mail_from.getBytes("UTF-8"), "UTF-8");
+				mail_to = new String(mail_to.getBytes("UTF-8"), "UTF-8");
+				Properties props = new Properties();
+				props.put("mail.transport.protocol", "smtp");
+				props.put("mail.smtp.host", "smtp.gmail.com");
+				props.put("mail.smtp.port", "587");
+				props.put("mail.smtp.starttls.enable", "true");
+				props.put("mail.smtp.socketFactory.port", "587");
+				props.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
+				props.put("mail.smtp.socketFactory.fallback", "false");
+				props.put("mail.smtp.auth", "true");
+				Authenticator auth = new SMTPAuthenticator();
+				Session sess = Session.getDefaultInstance(props, auth);
+				MimeMessage msg = new MimeMessage(sess);
+				msg.setFrom(new InternetAddress(mail_from));
+				msg.setRecipient(Message.RecipientType.TO, new InternetAddress(mail_to));
+				msg.setSubject(title, "UTF-8");
+				msg.setContent(contents, "text/html; charset=UTF-8");
+				msg.setHeader("Content-type", "text/html; charset=UTF-8");
+				Transport.send(msg);
+				PrintWriter out = response.getWriter();
+				out.append(String.valueOf(vCode));
+			} catch (Exception e) {
+				e.printStackTrace();
+	
+			} finally {
+	
+			}
+		}else {
+			
+		}
 	}
 }
 

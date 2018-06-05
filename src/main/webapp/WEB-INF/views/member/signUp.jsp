@@ -64,10 +64,10 @@
 									<!--e-Mail 기입란  -->
 									<br> <input
 										type="email" class="form-control" id="userEmail"
-										name="member_id" placeholder="이메일 입력 ex)abcd@naver.com">
+										name="member_id" placeholder="이메일 입력 ex)abcd@naver.com" required>
 									<div class="form-group text-center">
 										<input type="button" class="btn btn-info" id="mailsend"
-											name="dupliBt" value="메일인증" onclick="sendMail();" required />
+											name="dupliBt" value="메일인증" onclick="sendMail();" />
 									</div>
 									<br>
 								</div>
@@ -75,10 +75,10 @@
 									<!--e-Mail 기입란  -->
 									<input type="text" placeholder="인증번호 입력"
 										class="form-control" id="vCode" name="vCode"
-										onChange="vCodeChange();">
+										onChange="vCodeChange();" required>
 									<div class="form-group text-center">
 										<input type="button" class="btn btn-info" id="vCodecheck"
-											name="dupliBt" value="번호확인" onclick="vCodeCheck1();" required>
+											name="dupliBt" value="번호확인" onclick="vCodeCheck1();">
 									</div>
 								</div>
 								<div class="form-group">
@@ -125,7 +125,7 @@
 									
 									<c:if test="${category =='0'}">
 									<label for="file">사업자 등록증</label><br> <input type="file" id="file"
-									class="form-control" name="member_businessFile" >
+									class="form-control" name="member_businessFile" required>
 									</c:if>
 									
 								</div>
