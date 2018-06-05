@@ -135,8 +135,13 @@ from(select m.market_no,category_no,m.member_id,
 	
 	<select id="selectHomePopularMarketList" resultType="market">
 	<![CDATA[
-		select * from market where market_no in ((select market_no from(select market_no,rownum rnum from(select count(*), market_no from buy 
-		group by market_no order by count(*) desc))where rnum>=1 and rnum<=4))
+		select * from market where market_no in (
+			(select market_no from (
+			select rownum rnum,remaining,market_no,market_amount from (
+			select nvl(sum(b.buy_amount),0) remaining,count(*), b.market_no,m.market_amount from buy b
+			left join market m on m.market_no = b.market_no
+			GROUP BY b.market_no,m.market_amount order by count(*) desc) where market_amount - remaining > 0)
+			WHERE rnum >= 1 and rnum <=4))
 	]]>
 	</select>
 	

@@ -564,7 +564,7 @@ function changeprice(){
 										<td>  </td>
 										<td>총 상품 금액 : <span class="mkPrice">${market.market_price }원</span></td>
 									</tr>
-								<%-- 	<tr><td colspan="3"><a href="javascript: viewSelectBox() ">${market.member_id}</a> </td></tr> --%>
+							 	<%-- <tr><td colspan="3"><a href="javascript: viewSelectBox() ">${market.member_id}</a> </td></tr> --%>
 									</table>
 								<!-- sendMsg -->
 						

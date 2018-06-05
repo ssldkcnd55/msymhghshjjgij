@@ -17,9 +17,13 @@
 			var reader = new FileReader();
 			reader.onload = function(e) {
 				$target.css('display', '');
-				//$target.css('background-image', 'url(\"' + e.target.result + '\")'); // 배경으로 지정시
-				$target
-						.html('<img src="' + e.target.result + '" border="0" alt="" />');
+				/* $target.css('background-image', 'url(\"' + e.target.result + '\")'); // 배경으로 지정시 */
+			  $target.html('<img class="backimg" src="' + e.target.result + '" border="0" alt="" />'); 
+				
+				$target.css('text-align','left');
+				$target.css('line-heigt','0px');
+				$target.css('border','none');
+						/* $target.css('background-image',e.target.result); */
 			}
 			reader.readAsDataURL(html.files[0]);
 		}
@@ -64,15 +68,15 @@
 
 									<p class="p">이미지</p>
 								</td>
-								<td colspan="3" class="td2">
+								<td colspan="3" class="td2" style="height: 370px;">
 
 										<div class="filebox">
+										<div>
 											<input type="file" name="upfile" id="cma_file"
-												accept="image/*" capture="camera"
-												onchange="getThumbnailPrivew(this,$('#cma_image'))"
-												style="margin-left: 2px;" /> <br /> <br />
-											<div id="cma_image"
-												style="width: 100px; max-width: 100px; margin-left: 210px;"></div>
+												accept="image/*" capture="camera" 
+												onchange="getThumbnailPrivew(this,$('#cma_image'))" /> <br /> <br />
+											<div id="cma_image" class="cma_image">이미지를 선택해 주세요</div>
+											</div>
 										</div>
 								</td>
 							</tr>
