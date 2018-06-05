@@ -30,8 +30,7 @@ public class ShoppingBasketController {
 
 	@RequestMapping(value = "addSoppingBasket.do", method = RequestMethod.POST)
 	public void addSoppingBasket(Payment pm, HttpServletResponse response) throws IOException {// 기존에 같은 상품이 존재하면 수량만
-																								// 바꿔야함
-																								// 존재하면 수량 가져오자~
+																								// 바꿔야함																			// 존재하면 수량 가져오자~
 		int amount = shoppingBasketService.selectBuyAmount(pm);
 		if (amount > 0) {
 			// 업데이트
