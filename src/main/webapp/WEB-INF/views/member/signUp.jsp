@@ -15,7 +15,7 @@
 <link href="/farm/resources/css/join2.css" rel="stylesheet" type="text/css">
 
 <script type="text/javascript" src="/farm/resources/js/jquery-3.3.1.min.js"></script>
-<!-- <script type="text/javascript" src="/farm/resources/js/signUp.js"></script> -->
+<script type="text/javascript" src="/farm/resources/js/signUp.js"></script>
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->

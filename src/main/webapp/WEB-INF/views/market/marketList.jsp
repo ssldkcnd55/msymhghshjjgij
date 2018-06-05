@@ -134,6 +134,7 @@
 				data : {page : count
 						,ctype : ctype
 						,cname : cname
+						,sort : sort
 					<c:if test="${search != null}">
 				,search : "${search}"
 					</c:if>},
