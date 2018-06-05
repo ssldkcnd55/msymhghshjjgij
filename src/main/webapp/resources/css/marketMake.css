@@ -21,6 +21,27 @@
 	border: 1px solid #ddd;
 }
 
+.cma_image{
+	width: 420px;
+    height: 280px;
+border:1px solid #dcdcdc;
+color: gray;
+text-align: center;
+line-height: 270px; 
+
+
+}
+
+.backimg{
+	text-align: center;
+ 
+background-size:cover;
+position:absolute; 
+width: 420px;
+height: 280px;
+border:1px solid #dcdcdc;
+}
+
 .tr2 {
 	border-left: 1px solid #ddd;
 	border-right: 1px solid #ddd;
