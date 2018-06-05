@@ -70,9 +70,11 @@ public class MarketController {
 	public void moreMarketList(HttpServletResponse response,@RequestParam("page") int page,@RequestParam(value="search",required=false) String search,
 			@RequestParam(value="ctype",required=false) String ctype,@RequestParam(value="cname",required=false) String cname,
 			@RequestParam(value="sort",required=false) String sort) throws IOException{
+		System.out.println("ajax sort : " + sort);
 		List<Market> list = marketService.selectMarketList(page,search,ctype,cname,sort);
 		JSONArray jarr = new JSONArray();
 		JSONArray jarr2 = new JSONArray();
+		
 		//list를 jarr로 복사하기
 		for(Market m : list) {
 			//추출한 user를 json 객체에 담기
