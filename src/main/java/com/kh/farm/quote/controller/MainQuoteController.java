@@ -26,7 +26,6 @@ public class MainQuoteController {
 	public void QuoteApi(HttpServletResponse response, HttpServletRequest request)
 			throws ServletException, IOException {
 
-
 		String addr = "http://www.kamis.co.kr/service/price/xml.do?action=dailySalesList";
 		String parameter = "";
 
