@@ -25,14 +25,13 @@ public class Market implements java.io.Serializable{
 	private int market_price;//판매 가격 
 	private String search;//검색
 	private int remaining;//남은 수량
-	
+	private String member_name;//회원 이름;
 	
 	public Market() {}
 
 	public Market(int market_no, int category_no, String member_id, String market_title, String market_note,
 			String market_img, Date market_releasedate, int market_amount, String market_intro, String market_complete,
-			int market_price,String search,int remaining) {
-		
+			int market_price, String search, int remaining, String member_name) {
 		super();
 		this.market_no = market_no;
 		this.category_no = category_no;
@@ -45,16 +44,9 @@ public class Market implements java.io.Serializable{
 		this.market_intro = market_intro;
 		this.market_complete = market_complete;
 		this.market_price = market_price;
-		this.search =search;
+		this.search = search;
 		this.remaining = remaining;
-	}
-
-	@Override
-	public String toString() {
-		return "Market [market_no=" + market_no + ", category_no=" + category_no + ", member_id=" + member_id
-				+ ", market_title=" + market_title + ", market_note=" + market_note + ", market_img=" + market_img
-				+ ", market_releasedate=" + market_releasedate + ", market_amount=" + market_amount + ", market_intro="
-				+ market_intro + ", market_complete=" + market_complete + ", market_price=" + market_price + "]";
+		this.member_name = member_name;
 	}
 
 	public int getMarket_no() {
@@ -144,7 +136,7 @@ public class Market implements java.io.Serializable{
 	public void setMarket_price(int market_price) {
 		this.market_price = market_price;
 	}
-	
+
 	public String getSearch() {
 		return search;
 	}
@@ -161,5 +153,22 @@ public class Market implements java.io.Serializable{
 		this.remaining = remaining;
 	}
 
-	
+	public String getMember_name() {
+		return member_name;
+	}
+
+	public void setMember_name(String member_name) {
+		this.member_name = member_name;
+	}
+
+	@Override
+	public String toString() {
+		return "Market [market_no=" + market_no + ", category_no=" + category_no + ", member_id=" + member_id
+				+ ", market_title=" + market_title + ", market_note=" + market_note + ", market_img=" + market_img
+				+ ", market_releasedate=" + market_releasedate + ", market_amount=" + market_amount + ", market_intro="
+				+ market_intro + ", market_complete=" + market_complete + ", market_price=" + market_price + ", search="
+				+ search + ", remaining=" + remaining + ", member_name=" + member_name + "]";
+	}
+
+		
 }

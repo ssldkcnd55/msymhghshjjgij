@@ -29,7 +29,12 @@ public class ShoppingBasketDao {
 
 	public int selectBuyAmount(SqlSessionTemplate sqlSession, Payment pm) {
 		
-		return sqlSession.selectOne("shoppingBasket.selectBuyAmount", pm);
+	Object result=	sqlSession.selectOne("shoppingBasket.selectBuyAmount", pm);
+	if(result==null)
+		return 0;
+	else
+		return Integer.parseInt(result.toString());
+		
 	}
 
 	public int insertShoppingBasket(SqlSessionTemplate sqlSession, Payment pm) {

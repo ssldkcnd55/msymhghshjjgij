@@ -11,22 +11,11 @@
 <link href="/farm/resources/css/qna.css" rel="stylesheet" type="text/css" />
 <link href="/farm/resources/css/dailyList.css" rel="stylesheet" type="text/css" />
 <link href="/farm/resources/css/marketDetail.css" rel="stylesheet" type="text/css" />
-
 <link href="/farm/resources/css/auctionDetail.css" rel="stylesheet" type="text/css" />
 <link href="/farm/resources/css/marketDetail_modal.css" rel="stylesheet" type="text/css" />
-<link href="/farm/resources/css/flexslider-rtl.css" rel="stylesheet"
-	type="text/css" />
-<link href="/farm/resources/css/flexslider.css" rel="stylesheet"
-	type="text/css" />
-<link href="/farm/resources/css/flexslider-rtl-min.css" rel="stylesheet"
-	type="text/css" />
 <script src="/farm/resources/js/jquery-3.3.1.min.js"></script>
 <script type="text/javascript" src="/farm/resources/js/tabMove.js"></script>
 <script type="text/javascript" src="/farm/resources/js/marketDetail.js"></script>
-<script type="text/javascript"
-	src="/farm/resources/js/jquery.flexslider.js"></script>
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script type="text/javascript">
 $(function(){
 	$('.goods-view-show-option-button').click(function(){
@@ -41,7 +30,7 @@ $(function(){
 </script>
 <script type="text/javascript">
 var change = 0;
-///최근 본 상품 쿠키 (현준)///
+
  
 
 
@@ -314,54 +303,57 @@ function changeprice(){
 							class="release_date">출고예정일</span>&nbsp;<span class="date">${market.market_releasedate }</span>
 					</div>
 				</div>
-				
-				
-			
-					<div class="box_border2">
-						<div class="box2">
-
-							<div id="myCarousel" class="carousel slide" data-ride="carousel">
-								<!-- Indicators -->
-								<ol class="carousel-indicators">
-									<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-									<li data-target="#myCarousel" data-slide-to="1"></li>
-									<li data-target="#myCarousel" data-slide-to="2"></li>
-								</ol>
-
-								<!-- Wrapper for slides -->
-								<div class="carousel-inner">
-								
-								<div class="Omarket_box">
-								<div class="Omarket"></div>
-								<div class="Omarket"></div>
-								<div class="Omarket"></div>
-								<div class="Omarket"></div>
-								</div>
-								</div>
-
-								<!-- Left and right controls -->
-								<a class="left carousel-control" href="#myCarousel"
-									data-slide="prev"> <span
-									class="glyphicon glyphicon-chevron-left"></span> <span
-									class="sr-only">Previous</span>
-								</a> <a class="right carousel-control" href="#myCarousel"
-									data-slide="next"> <span
-									class="glyphicon glyphicon-chevron-right"></span> <span
-									class="sr-only">Next</span>
-								</a>
-							</div>
-						</div>
-					</div>
-
-
-				
 				<div class="test">
 					<p class="note_content">자연의 힘으로 길러낸 유기 농산물은 기후에 영향을 많이 받습니다. 예를
 						들어 같은 파프리카라 하더라도 한기물과 한여름에 맞는 최고의 산지가 따로 있지요. 컬리는 1년 내내 전국을 뒤져
 						최고만을 전해 드립니다.</p>
 				</div>
-			
-       			
+				<%-- <div class="note">
+       				<center>
+       				
+       				<div class="note_img" style="background-image: url('/farm/resources/images/gift.png'); background-size: cover;"></div>
+       				</center>
+       				<p class="note_title">제주도부터 강원도까지,<br>
+       				최고의 산지에서 난 농산물만을<br>
+       				전해 드립니다.</p>
+       				<p class="note_content">
+       				자연의 힘으로 길러낸 유기 농산물은<br>
+       				기후에 영향을 많이 받습니다. 예를 들어<br>
+       				같은 파프리카라 하더라도 한기물과<br>
+       				한여름에 맞는 최고의 산지가 따로<br>
+       				있지요. 컬리는 1년 내내 전국을 뒤져<br>
+       				최고만을 전해 드립니다.</p>
+       			</div>
+       			<div class="note">
+       			<center>
+       				<div class="note_img" style="background-image: url('/farm/resources/images/contract.png'); background-size: cover;"></div>
+       				</center>
+       				<p class="note_title">직영 혹은 농가와의<br>
+       				계약재배를 통해 철저한 품질<br>
+       				관리가 가능합니다.</p>
+       				<p class="note_content">
+       				자연의 힘으로 길러낸 유기 농산물은<br>
+       				기후에 영향을 많이 받습니다. 예를 들어<br>
+       				같은 파프리카라 하더라도 한기물과<br>
+       				한여름에 맞는 최고의 산지가 따로<br>
+       				있지요. 컬리는 1년 내내 전국을 뒤져<br>
+       				최고만을 전해 드립니다.</p>
+       			</div>
+       			<div class="note">
+       			<center>
+       				<div class="note_img" style="background-image: url('/farm/resources/images/delivery.png'); background-size: cover;"></div>
+       				</center>
+       				<p class="note_title">국내 온라인 업체 최초로 식품 전용<br>
+       				자체 물류 창고와 냉장 차량을<br>
+       				이용해 더 신선 합니다.</p>
+       				<p class="note_content">
+       				자연의 힘으로 길러낸 유기 농산물은<br>
+       				기후에 영향을 많이 받습니다. 예를 들어<br>
+       				같은 파프리카라 하더라도 한기물과<br>
+       				한여름에 맞는 최고의 산지가 따로<br>
+       				있지요. 컬리는 1년 내내 전국을 뒤져<br>
+       				최고만을 전해 드립니다.</p>
+       			</div> --%>
 				<ul class="tabs">
 					<li class="tab-link current" data-tab="tab-1"><div
 							class="menu introduce">소개</div></li>
@@ -563,8 +555,8 @@ function changeprice(){
 			<span class="goods-view-show-option-button-value">옵션선택</span></button>
 
 			<div class="goods-view-flow-cart __active" id="flow-cart2">
-					<div class="flow_order_seller">판매자 : <span style="font-weight: 600">${market.member_id}</span><!-- (<span>판매자아이디${market.member_id}</span>) -->
-					<a href=""><span>상품 문의</span></a> | <a href=""><span>1:1대화</span></a>
+					<div class="flow_order_seller">판매자 : <span style="font-weight: 600">${market.member_name}</span><!-- (<span>판매자아이디${market.member_id}</span>) -->
+					<a href="javascript: sendProductMsg('${loginUser.member_id}','${market.member_id}'  )"><span>상품 문의</span></a> | <a href="javascript: sendMsg()"><span>1:1대화</span></a>
 					</div>
 					
 				<div class="goods-view-flow-cart-wrapper">

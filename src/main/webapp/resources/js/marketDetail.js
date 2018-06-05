@@ -109,4 +109,12 @@ function closeModal()
 $('#myModal').css("display","none");
 }
  
- 
+ //////////////////////////메시지보내기
+function sendProductMsg(my_id,your_id){
+	insertChat(my_id,your_id);
+	
+}
+function sendMsg()
+{
+	alert("1:1메시지");
+}
