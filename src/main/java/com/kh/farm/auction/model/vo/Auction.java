@@ -12,6 +12,7 @@ public class Auction implements java.io.Serializable {
 	 */
 	private static final long serialVersionUID = 9999L;
 
+	private int rnum;
 	private int auction_no;// 경매 번호
 	private String member_id;// 판매자 아이디
 	private String category_no;//카테고리
@@ -35,13 +36,15 @@ public class Auction implements java.io.Serializable {
 	}
 
 	
-
 	
-	public Auction(int auction_no, String member_id, String category_no, String auction_title, String auction_note,
-			String auction_img, String auction_startdate, String auction_enddate, String auction_intro,
-			String auction_status, int auction_startprice, int auction_directprice, String day, String hour,
-			String minute, String today) {
+
+
+	public Auction(int rnum, int auction_no, String member_id, String category_no, String auction_title,
+			String auction_note, String auction_img, String auction_startdate, String auction_enddate,
+			String auction_intro, String auction_status, int auction_startprice, int auction_directprice, String day,
+			String hour, String minute, String today) {
 		super();
+		this.rnum = rnum;
 		this.auction_no = auction_no;
 		this.member_id = member_id;
 		this.category_no = category_no;
@@ -63,13 +66,23 @@ public class Auction implements java.io.Serializable {
 
 	@Override
 	public String toString() {
-		return "Auction [auction_no=" + auction_no + ", member_id=" + member_id + ", category_no=" + category_no
-				+ ", auction_title=" + auction_title + ", auction_note=" + auction_note + ", auction_img=" + auction_img
-				+ ", auction_startdate=" + auction_startdate + ", auction_enddate=" + auction_enddate
+		return "Auction [rnum=" + rnum + ", auction_no=" + auction_no + ", member_id=" + member_id + ", category_no="
+				+ category_no + ", auction_title=" + auction_title + ", auction_note=" + auction_note + ", auction_img="
+				+ auction_img + ", auction_startdate=" + auction_startdate + ", auction_enddate=" + auction_enddate
 				+ ", auction_intro=" + auction_intro + ", auction_status=" + auction_status + ", auction_startprice="
 				+ auction_startprice + ", auction_directprice=" + auction_directprice + ", day=" + day + ", hour="
 				+ hour + ", minute=" + minute + ", today=" + today + "]";
 	}
+
+
+	public int getRnum() {
+		return rnum;
+	}
+
+	public void setRnum(int rnum) {
+		this.rnum = rnum;
+	}
+
 
 	public int getAuction_no() {
 		return auction_no;

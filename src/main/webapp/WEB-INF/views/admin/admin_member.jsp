@@ -234,7 +234,7 @@ function change_withdraw(id) {
 $(function(){
 	$("#select_val").change(function(){
 	var type = $(this).val();
-		
+	
 		$.ajax({
 			url:"changeList.do",
 			type:"post",

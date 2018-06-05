@@ -646,6 +646,81 @@ public class AuctionController {
 	      out.close();
 	}
 	
+	//경매 카테고리
+	@RequestMapping(value="left_boxChangeList.do",method=RequestMethod.POST)
+	@ResponseBody
+	public void selectLeft_boxChangeList(HttpServletResponse response,
+			@RequestParam(value="page") int currentPage,
+			@RequestParam(value="type") int type) throws IOException{
+		List<Auction> left_boxList = auctionService.selectLeft_boxChangeList(currentPage,type);
+		System.out.println("left_boxList : "+left_boxList.toString());
+		JSONArray jarr =new JSONArray();
+		int limitPage = 10;
+		int listCount = auctionService.selectLeft_boxChangeCount(type);
+		System.out.println("listCount : "+listCount);
+		
+		int maxPage=(int)((double)listCount/limitPage+0.9); //ex) 41개면 '5'페이지나와야되는데 '5'를 계산해줌
+		int startPage=((int)((double)currentPage/5+0.8)-1)*5+1;
+		int endPage=startPage+5-1;
+		
+		if(maxPage<endPage) {
+			endPage = maxPage;
+		}
+		
+		for(Auction a : left_boxList) {
+			JSONObject json = new JSONObject();
+			json.put("rnum", a.getRnum());
+			json.put("auction_no", a.getAuction_no());
+			json.put("auction_title", a.getAuction_title());
+			json.put("member_id", a.getMember_id());
+			json.put("auction_img", a.getAuction_img());
+			json.put("auction_note", a.getAuction_note());
+			json.put("auction_status", a.getAuction_status());
+			json.put("startPage", startPage);
+			json.put("endPage", endPage);
+			json.put("maxPage", maxPage);
+			json.put("currentPage",currentPage);
+			json.put("type", type);
+			jarr.add(json);
+		}
+
+		JSONObject sendJson = new JSONObject();
+		sendJson.put("list", jarr);
+		response.setContentType("application/json; charset=utf-8");
+		PrintWriter out = response.getWriter();
+		out.append(sendJson.toJSONString());
+		out.flush();
+		out.close();
+	}
+	
+	
+	//경매 이력
+	@RequestMapping(value="auction_background.do",method=RequestMethod.POST)
+	@ResponseBody
+	public void auction_background(HttpServletResponse response,@RequestParam(value="auction_no") int auction_no,
+			@RequestParam(value="member_id") String member_id)throws IOException {
+		List<Auction> list = auctionService.select_auction_background(member_id);
+		JSONArray jarr =new JSONArray();
+		System.out.println("list : "+list.toString());
+		
+		for(Auction a : list) {
+			JSONObject json = new JSONObject();
+			json.put("rnum", a.getRnum());
+			json.put("auction_no", a.getAuction_no());
+			json.put("auction_title", a.getAuction_title());
+			json.put("member_id", a.getMember_id());
+			jarr.add(json);
+		}
+		JSONObject sendJson = new JSONObject();
+		sendJson.put("list", jarr);
+		response.setContentType("application/json; charset=utf-8");
+		PrintWriter out = response.getWriter();
+		out.append(sendJson.toJSONString());
+		out.flush();
+		out.close();
+	}
+	
+	
 }
 
 

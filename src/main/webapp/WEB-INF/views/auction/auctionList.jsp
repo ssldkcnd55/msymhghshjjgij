@@ -43,7 +43,6 @@
 	       			"<div class='market'><div class='img_box' style='background-image: url(\"/farm/resources/upload/auctionUpload/"+jsonObj.list[i].auction_img+"\"); background-size: cover;'></div>"+
 	       			"<div class='title_box'><p class='title' style='text-align:center;'>"+jsonObj.list[i].auction_title+"</p> <p class='content' style='text-align:center;'>"+jsonObj.list[i].auction_note+"</p></div> "+
 	       			"</div></a>"   
-	       			
 				}
 				$(".auction_box").html(outValues);
 				},error: function(request,status,errorData){
@@ -53,6 +52,60 @@
 		});
 	}
 	
+	//경매 카테고리
+	$(function(){
+	$("input[name='check']").click(function(){
+	var type = $(this).val();	
+	alert("type : "+type);
+	$.ajax({
+		url :"left_boxChangeList.do",
+		type:"post",
+		date: {
+			type:type,
+			page:1
+		},
+		dataType: "JSON",
+		success: function(data) {
+			console.log(data);
+			var objStr = JSON.stringify(data);
+			var jsonObj = JSON.parse(objStr);
+			
+			var outValues = $(".auction_box").html();
+			for(var i in jsonObj.list){
+				
+				switch(jsonObj.list[i].type){
+				case 0 : outValues += 
+				"<a href='AuctionDetail.do?auction_no="+jsonObj.list[i].auction_no +"'>"+
+       			"<div class='market'><div class='img_box' style='background-image: url(\"/farm/resources/upload/auctionUpload/"+jsonObj.list[i].auction_img+"\"); background-size: cover;'></div>"+
+       			"<div class='title_box'><p class='title' style='text-align:center;'>"+jsonObj.list[i].auction_title+"(경매대기)</p> <p class='content' style='text-align:center;'>"+jsonObj.list[i].auction_note+"</p></div> "+
+       			"</div></a>";break;
+				case 1 : outValues += 
+					"<a href='AuctionDetail.do?auction_no="+jsonObj.list[i].auction_no +"'>"+
+	       			"<div class='market'><div class='img_box' style='background-image: url(\"/farm/resources/upload/auctionUpload/"+jsonObj.list[i].auction_img+"\"); background-size: cover;'></div>"+
+	       			"<div class='title_box'><p class='title' style='text-align:center;'>"+jsonObj.list[i].auction_title+"(경매중)</p> <p class='content' style='text-align:center;'>"+jsonObj.list[i].auction_note+"</p></div> "+
+	       			"</div></a>";break;
+				case 2 : outValues += 
+					"<a href='AuctionDetail.do?auction_no="+jsonObj.list[i].auction_no +"'>"+
+	       			"<div class='market'><div class='img_box' style='background-image: url(\"/farm/resources/upload/auctionUpload/"+jsonObj.list[i].auction_img+"\"); background-size: cover;'></div>"+
+	       			"<div class='title_box'><p class='title' style='text-align:center;'>"+jsonObj.list[i].auction_title+"(마감)</p> <p class='content' style='text-align:center;'>"+jsonObj.list[i].auction_note+"</p></div> "+
+	       			"</div></a>";break;
+				default :outValues += 
+					"<a href='AuctionDetail.do?auction_no="+jsonObj.list[i].auction_no +"'>"+
+	       			"<div class='market'><div class='img_box' style='background-image: url(\"/farm/resources/upload/auctionUpload/"+jsonObj.list[i].auction_img+"\"); background-size: cover;'></div>"+
+	       			"<div class='title_box'><p class='title' style='text-align:center;'>"+jsonObj.list[i].auction_title+"(최신순)</p> <p class='content' style='text-align:center;'>"+jsonObj.list[i].auction_note+"</p></div> "+
+	       			"</div></a>";
+				}
+			}
+			$(".auction_box").html(outValues);
+			
+			},error: function(request,status,errorData){
+			alert("error code : " + request.status + "\nmessage" + 
+					request.responseText + "\nerror" + errorData);
+				}
+			
+		});
+	});
+});
 </script>
 
 </head>
@@ -75,11 +128,12 @@
         	<div class="left_box">
         	
         	<!-- 정렬 메뉴바 -->
-        	<div class="sort">
+        	<div class="sort" style="height:auto;padding-bottom:15px;" id="select_val">
 	        	<h4>정렬</h4>
-	        	<input type="checkbox"  name="check" value="0"> 경매 대기<br><br>
-	        	<input type="checkbox" name="check" value="1"> 경매 중<br><br>
-	        	<input type="checkbox" name="check" value="2"> 경매 마감<br>
+	        	<input type="radio"  name="check" value="3"  checked="checked" value="auction_no"> 최신순<br><br>
+	        	<input type="radio"  name="check" value="0"> 경매 대기<br><br>
+	        	<input type="radio" name="check" value="1"> 경매 중<br><br>
+	        	<input type="radio" name="check" value="2"> 경매 마감<br>
         	</div>
         	
         	<!-- 카테고리 메뉴바 -->
@@ -109,7 +163,7 @@
        			<div class="title_box"><p class="title" style="text-align:center;">${list.auction_title}</p> <p class="content" style="text-align:center;">${list.auction_note}</p></div>
        			</div>   
        		</a>
-       		</c:forEach>    
+       		</c:forEach>   
       	    </div>
        			<button class="more_market" onclick="more_auction();">장터 더보기 ▼</button>
        		</div>	
