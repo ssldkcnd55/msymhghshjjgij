@@ -73,12 +73,12 @@ font-size: 14pt;
 .flow_order_basket{
 	    color: #512772;
     background: white;
-    border: 1px solid #512772;
+    border: 1px solid #7e5957;
     width: 100px;
     height: 40px;
 }
 .flow_order_buy{
-	background: #512772;
+	background: #7e5957;
     color: white;
     border: none;
     width: 100px;

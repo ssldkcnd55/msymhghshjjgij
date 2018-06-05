@@ -31,64 +31,7 @@ $(function(){
 <script type="text/javascript">
 var change = 0;
 ///최근 본 상품 쿠키 (현준)///
- $(function(){
-		var time = new Date();
-		time.setDate(time.getDate() + 7);
-		var oldtime = new Date();
-		oldtime.setDate(oldtime.getDate() - 7);
-		var decodedCookie = decodeURIComponent(document.cookie);
-		var temp = decodedCookie.split(';');
-		var ca=[];
-		for(var i=0;i<temp.length;i++)
-			{
-				if(  temp[i].indexOf('farm_cookie_') != -1)
-					{
-					ca.push( temp[i] );
-					}
-			}
-		var market_no= $('#market_no').val();
-			
-		if (document.cookie.indexOf(  'farm_cookie_'+market_no + "="+ market_no + "a") == -1) {
-			//없음
-			if (ca.length > 8) {
-				document.cookie = ca[0] + "; expires=" + oldtime;
-			}
-		} else {
-			//있음
-			document.cookie = 'farm_cookie_'+market_no + "=" + market_no+ "a; expires=" + oldtime;
-		}
-
-		document.cookie = 'farm_cookie_'+ market_no + "=" + market_no+ "a; expires=" + time;
-
-	
-}); 
-///쿠키 끝///
-
-//장바구니 (현준)//
-function addBasket()
-{
-	$.ajax({
-		url:"addSoppingBasket.do",
-		type:"post",
-		data:{
-			market_no: $('[name=market_no]').val(),
-			member_id: $('[name=member_id]').val(),
-			buy_amount: $('[name=buy_amount]').val()
-		},
-		success:function(){
-			$('#myModal').css("display","block");
-		},
-		error: function(request,status,errorData){
-			console.log("marketDetail.jsp / addBasket();")
-			console.log("error code : " + request.status + "\nmessage" + 
-                    request.responseText + "\nerror" + errorData);
-           }
-	});
-}
-function closeModal()
-{
-	$('#myModal').css("display","none");
-}
+ 
 
 
 
@@ -509,7 +452,8 @@ function changeprice(){
 			<%@  include file="../inc/foot.jsp"%>
 		</div>
 	</div>
-	<div class="goods-view-flow-cart __active" id="flow-cart">
+	
+	<%-- <div class="goods-view-flow-cart __active" id="flow-cart">
 		<div class="goods-view-flow-cart-wrapper">
 			<button type="button" id="show-option-button"
 				class="goods-view-show-option-button">
@@ -552,19 +496,19 @@ function changeprice(){
 										<td>현재 남은 수량</td>
 										<td>${market.market_amount- market.remaining }</td>
 									</tr>									
-								<%-- 	<tr>
+									<tr>
 										<td>출하 예정일</td>
 										<td>  </td>
 										<td>${market.market_releasedate}</td>
 									</tr>
-									 --%>
+									
 									
 									<tr>
 										<td></td>
 										<td>  </td>
 										<td>총 상품 금액 : <span class="mkPrice">${market.market_price }원</span></td>
 									</tr>
-							 	<%-- <tr><td colspan="3"><a href="javascript: viewSelectBox() ">${market.member_id}</a> </td></tr> --%>
+							 	<tr><td colspan="3"><a href="javascript: viewSelectBox() ">${market.member_id}</a> </td></tr>
 									</table>
 								<!-- sendMsg -->
 						
@@ -603,5 +547,77 @@ function changeprice(){
 
 		</div>
 	</div>
+</body>
+</html> --%>
+<div class="goods-view-flow-cart __active" id="flow-cart">
+		<div class="goods-view-flow-cart-wrapper">
+			<button type="button"  id="show-option-button" class="goods-view-show-option-button">
+			<span class="goods-view-show-option-button-value">옵션선택</span></button>
+
+			<div class="goods-view-flow-cart __active" id="flow-cart2">
+					<div class="flow_order_seller">판매자 : <span style="font-weight: 600">${market.member_id}</span><!-- (<span>판매자아이디${market.member_id}</span>) -->
+					<a href=""><span>상품 문의</span></a> | <a href=""><span>1:1대화</span></a>
+					</div>
+					
+				<div class="goods-view-flow-cart-wrapper">
+					<button type="button" id="show-option-button"
+						class="goods-view-show-option-button __active">
+						<span class="goods-view-show-option-button-value">옵션선택</span>
+					</button>
+					<div id="market-flow-cart-content" class="goods-view-flow-cart-content __active">
+
+
+						<c:if test="${not empty sessionScope.loginUser  }">
+							<form action="marketBuy.do" method="post">
+								<input type="hidden" name="market_no" value="${market.market_no }"> 
+								<input type="hidden" name="member_id" value="${sessionScope.loginUser.member_id}">
+							
+								<div>
+								<table class="flow_order_table">
+							<tr><td class="flow_order_title">${market.market_title}<span class="flow_order_stock" style="margin-left: 10px"> | <span>${market.market_amount- market.remaining }</span>개 남음</span></td>
+							<td><div class="amount_box" > <a href="javascript: countOperator(-1)"><div class="flow_order_operator">-</div></a>
+                    		 <input type="number" name="buy_amount" class="flow_order_count" value="1" min="1">
+                    		<a href="javascript: countOperator(+1)"><div class="flow_order_operator">+</div></a></div></td>
+							<td class="flow_order_price"><span> ${market.market_price }</span>원</td>
+							<td class="flow_order_button"><input type="button" value="장바구니" onclick="addBasket()" class="flow_order_basket"></td></tr>
+							<tr><td class="flow_order_total" colspan="3">총 상품 금액 : <span class="flow_order_total_price">${market.market_price }</span>원</td>
+							<td class="flow_order_button">	<input type="submit" value="구매하기" class="flow_order_buy"> </td>
+							</tr>
+								</table>
+								</div>	
+			
+							</form>
+
+						</c:if>
+						<c:if test="${empty sessionScope.loginUser  }">
+						<div class="loginmessage">로그인이 필요한 서비스 입니다.</div>
+						</c:if>
+						
+						<!-- 장바구니 모달창 -->
+						<div id="myModal" class="modal">
+							<div class="modal-content">
+								<div class="md_top">
+									<span class="md_top_title"><strong>장바구니 담기</strong></span>
+								</div>
+								<div class="md_mid">
+									<div class="md_mid_content">선택하신 상품을 장바구니에 담았습니다.</div>
+									<div class="md_mid_box">
+									<a href="javascript: closeModal();" class="md_mid_close_a"> <span class="md_mid_close">계속쇼핑</span></a> 
+									<a href="selectShoppingBasket.do" class="md_mid_basket_a"> <span class="md_mid_basket">장바구니</span></a>
+									</div>
+								</div>
+							</div>
+							<input type="hidden" id="market_no" value="${market.market_no }">
+						</div><!-- 장바구니 모달 끝 -->
+						
+						<br> <br> <br> <br>
+					</div>					
+				</div>
+			</div>
+
+		</div>
+	</div>
+
+
 </body>
 </html>
