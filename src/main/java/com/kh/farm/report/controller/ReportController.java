@@ -76,7 +76,12 @@ public class ReportController {
 			json.put("endPage", endPage);
 			json.put("maxPage", maxPage);
 			json.put("currentPage",currentPage);
-			json.put("report_status",r.getReport_status());
+			if(r.getReport_status().equals("0")) {
+				json.put("report_status", "접수중");	
+			}else {
+				json.put("report_status", "처리완료");
+			}
+			//json.put("report_status",r.getReport_status());
 			json.put("report_contents", r.getReport_contents());
 			json.put("report_category", r.getReport_category());
 			jarr.add(json);

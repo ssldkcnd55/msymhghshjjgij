@@ -60,7 +60,7 @@
 	$.ajax({
 		url :"left_boxChangeList.do",
 		type:"post",
-		date: {
+		data: {
 			type:type,
 			page:1
 		},

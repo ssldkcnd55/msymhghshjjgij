@@ -40,8 +40,6 @@ import com.kh.farm.market.model.vo.Review;
 import com.kh.farm.member.model.vo.Member;
 import com.kh.farm.notice.model.vo.Notice;
 
-
-
 @Controller
 public class AuctionController {
 
@@ -647,11 +645,12 @@ public class AuctionController {
 	}
 	
 	//경매 카테고리
-	@RequestMapping(value="left_boxChangeList.do",method=RequestMethod.POST)
+	@RequestMapping(value="left_boxChangeList.do")
 	@ResponseBody
 	public void selectLeft_boxChangeList(HttpServletResponse response,
 			@RequestParam(value="page") int currentPage,
 			@RequestParam(value="type") int type) throws IOException{
+		System.out.println("경매카테고리 실행됨");
 		List<Auction> left_boxList = auctionService.selectLeft_boxChangeList(currentPage,type);
 		System.out.println("left_boxList : "+left_boxList.toString());
 		JSONArray jarr =new JSONArray();
