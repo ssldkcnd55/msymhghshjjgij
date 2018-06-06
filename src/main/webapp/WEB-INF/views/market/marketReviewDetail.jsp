@@ -180,7 +180,7 @@ function reportReview() {
 function report_submit() {
 	var report_contents = $('#report_contents').val();
 	var review_no = ${review.review_no};
-	var id = '${loginUser.member_id}';
+	var id = '${review.member_id}';
 	var report_category = $('#report_category').val();
 	alert(report_contents+','+review_no+','+id+','+report_category);
 	
@@ -255,6 +255,34 @@ function report_submit() {
 								
 							</div>
 						</c:if>
+						
+						<c:if test="${loginUser.member_id != review.member_id}">
+								<div class="QnA_modify">
+								<button onclick="reportReview();">신고</button>
+								
+								<!--신고 모달창  -->
+    					<div class="white_content" id="open">
+        					<div>
+            					<h1>신고하기</h1>
+            					<select id="report_category">
+            							<option value="불량/욕설">불량/욕설</option>
+            							<option value="허위사실">허위사실</option>
+            					</select>
+            						<div>
+            							
+            							<textarea id="report_contents" class="report_textarea" rows="10" cols="95">신고내용</textarea>
+            						</div>
+            						<div>
+            							<button onclick="report_submit();">제출</button>&nbsp;<button onclick="window.location.href='#close'">취소</button>
+            						</div>
+        					</div>
+    					</div>
+								<!-- 신고 모달창 끝 -->
+								
+								
+							</div>
+						</c:if>
+						
 						<div class="QnA_note">
 							<p>${review.review_contents }</p>
 						</div>

@@ -27,10 +27,48 @@
 	report_status,report_contents,report_no,review_no from report 
 	) where rnum >=#{startRow} and rnum <=#{endRow} order by report_no desc
 	]]>
-</select>
+	</select>
 	
 	<select id="reportCount" parameterType="int" resultType="int">
 		select count(*) from report
+	</select>
+	
+	<update id="changeReportStatus" parameterType="int">
+		<![CDATA[
+			update report set report_status = case when report_status = '0' then '1' else '0' end where report_no = #{report_no}
+		]]>
+	</update>
+	
+	<select id="selectReport" parameterType="int" resultType="Report">
+		<![CDATA[
+			select * from report where report_no = #{report_no}
+		]]>
+	</select>
+	
+	<select id="selectChangeList" parameterType="PageNumber" resultType="Report">
+		<![CDATA[
+			select * from (select rownum rnum, member_id, report_category, report_date, 
+			report_status,report_contents,report_no,review_no from report 
+			) where rnum >=#{startRow} and rnum <=#{endRow}
+		]]>
+		<choose>
+			<when test='type == 1'>
+				and report_category = '불량/욕설' order by report_no desct
+			</when>
+			<when test='type == 2'>
+				and report_category = '허위사실' order by report_no desc
+			</when>
+			<when test='type == 3'>
+				and report_status = '1' order by report_no desc
+			</when>
+			<when test='type == 4'>
+				and report_status = '0' order by report_no desc
+			</when>
+			<otherwise>
+				order by report_no desc
+			</otherwise>
+		</choose>
+		 
 	</select>
 	
 </mapper>

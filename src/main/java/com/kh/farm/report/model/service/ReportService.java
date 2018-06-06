@@ -12,4 +12,10 @@ public interface ReportService {
 
 	int selectReportCount();
 
+	int changeReportStatus(int report_no);
+
+	Report selectReport(int report_no);
+
+	List<Report> selectChangeReport(int currentPage, int type);
+
 }

@@ -67,7 +67,7 @@ $(function(){
 				+"<td id='Notice_td'>"+jsonObj.list[i].report_category+"</td>"
 				+"<td><a href='reviewDeatil.do?review_no="+jsonObj.list[i].review_no+"'>리뷰페이지로<a/></td>"
 				+"<td><button id='"+jsonObj.list[i].report_contents+"' onclick='viewContents(this);'>신고내용보기</button></td>"
-				+"<td>"+jsonObj.list[i].report_date+"</td><td>"+jsonObj.list[i].report_status+"</td>"
+				+"<td>"+jsonObj.list[i].report_date+"</td><td id='st"+jsonObj.list[i].report_no+"'>"+jsonObj.list[i].report_status+"</td>"
 				+"<td><button id='"+jsonObj.list[i].report_no+"' onclick='changeStatus(this);'>신고처리</button></td></tr>";
 			} 
 			$(".Notice_table").html(outValues);
@@ -82,7 +82,7 @@ $(function(){
 			if(startPage>5){
 				values+= "<a href='javascript:noticePage("+(startPage-1)+")'>&laquo;</a>" 
 			}else{
-				values+="<a>&laquo;</a>";	
+				values+="<a>&laquo;</a>";
 			}
 			for(var i=startPage;i<=endPage;i++  ){
 				if(i==currentPage){
@@ -107,7 +107,7 @@ $(function(){
 });
 function noticePage(page){
 	$.ajax({
-		url:"noticeList.do",
+		url:"reportList.do",
 		type:"post",
 		data:{
 			page:page
@@ -118,14 +118,18 @@ function noticePage(page){
 			var objStr = JSON.stringify(data);
 			var jsonObj = JSON.parse(objStr);
 			
-			var outValues = "<tr><th width='12%'>번호</th><th width='50%'>제목</th><th width='13%'>작성자</th><th width='15%'>날짜</th></tr>";
-			
+			var outValues = "<tr><th width='8%'>번호</th><th width='10%'>분류</th><th width='15%'>신고된 후기</th>"
+				+"<th width='13%'>신고내용</th><th width='12%'>신고날짜</th><th width='10%'>처리 상황</th><th width='8%'>처리</th></tr>";
+
 			for(var i in jsonObj.list){
 				outValues += "<tr id='hover'><td>"+jsonObj.list[i].rnum+"</td>"
-				+"<td id='Notice_td'><a href='/farm/marketNoticeDetail.do?notice_no="+jsonObj.list[i].notice_no+"'>"+jsonObj.list[i].notice_title+"</a></td>"
-				+"<td>운영자</td><td>"+jsonObj.list[i].notice_date+"</td></tr>";
-			}
-			$(".Notice_table").html(outValues);	
+				+"<td id='Notice_td'>"+jsonObj.list[i].report_category+"</td>"
+				+"<td><a href='reviewDeatil.do?review_no="+jsonObj.list[i].review_no+"'>리뷰페이지로<a/></td>"
+				+"<td><button id='"+jsonObj.list[i].report_contents+"' onclick='viewContents(this);'>신고내용보기</button></td>"
+				+"<td>"+jsonObj.list[i].report_date+"</td><td id='st"+jsonObj.list[i].report_no+"'>"+jsonObj.list[i].report_status+"</td>"
+				+"<td><button id='"+jsonObj.list[i].report_no+"' onclick='changeStatus(this);'>신고처리</button></td></tr>";
+			} 
+			$(".Notice_table").html(outValues);
 			
 			var startPage= jsonObj.list[0].startPage;
 			var endPage = jsonObj.list[0].endPage;
@@ -159,6 +163,9 @@ function noticePage(page){
 	       }
 	});
 }
+
+
+
 </script>
 
 
@@ -187,16 +194,91 @@ function changeStatus(str) {
 	
 	if(con == true) {
 		$.ajax({
-			
-			
-			
-			
+			url:"changeReportStatus.do",
+			type:"post",
+			data:{
+				report_no:report_no
+			},
+			dataType: "JSON",
+			success: function(data){
+				console.log(data);
+				var objStr = JSON.stringify(data);
+				var jsonObj = JSON.parse(objStr);
+				$("#st"+jsonObj.report_no).text(jsonObj.report_status);
+				alert("처리완료!");
+			}
+				
 		});
 	}else {
 		return;
 	}
 	
 }
+
+
+//필터적용메소드
+$(function(){
+	$("#select_val").change(function(){
+	var type = $(this).val();
+		alert(type);
+		$.ajax({
+			url:"changeReportList.do",
+			type:"post",
+			data: {type:type,page:1},
+			dataType: "JSON",
+			success: function(data){
+				console.log(data);
+				var objStr = JSON.stringify(data);
+				var jsonObj = JSON.parse(objStr);
+				
+				var outValues = "<tr><th width='8%'>번호</th><th width='10%'>분류</th><th width='15%'>신고된 후기</th>"
+								+"<th width='13%'>신고내용</th><th width='12%'>신고날짜</th><th width='10%'>처리 상황</th><th width='8%'>처리</th></tr>";
+				
+			 	for(var i in jsonObj.list){
+					outValues += "<tr id='hover'><td>"+jsonObj.list[i].rnum+"</td>"
+					+"<td id='Notice_td'>"+jsonObj.list[i].report_category+"</td>"
+					+"<td><a href='reviewDeatil.do?review_no="+jsonObj.list[i].review_no+"'>리뷰페이지로<a/></td>"
+					+"<td><button id='"+jsonObj.list[i].report_contents+"' onclick='viewContents(this);'>신고내용보기</button></td>"
+					+"<td>"+jsonObj.list[i].report_date+"</td><td id='st"+jsonObj.list[i].report_no+"'>"+jsonObj.list[i].report_status+"</td>"
+					+"<td><button id='"+jsonObj.list[i].report_no+"' onclick='changeStatus(this);'>신고처리</button></td></tr>";
+				} 
+				$(".Notice_table").html(outValues);
+				
+				
+				var startPage= jsonObj.list[0].startPage;
+				var endPage = jsonObj.list[0].endPage;
+				var maxPage = jsonObj.list[0].maxPage;
+				var currentPage = jsonObj.list[0].currentPage;
+				
+				var values ="";
+				if(startPage>5){
+					values+= "<a href='javascript:noticePage("+(startPage-1)+")'>&laquo;</a>" 
+				}else{
+					values+="<a>&laquo;</a>";
+				}
+				for(var i=startPage;i<=endPage;i++  ){
+					if(i==currentPage){
+						values+= "<a class='active'>"+i+"</a>";
+					}else{
+						values+= "<a href='javascript:noticePage("+i+");'>"+i+"</a>";
+					}
+				}
+				if(endPage<maxPage){
+					values+="<a href='javascript:noticePage("+(endPage+1)+")'>&raquo;</a>";
+					
+				}else{
+					values+="<a>&raquo;</a>";
+				}
+				$(".pagination").html(values);
+				
+			},error: function(request,status,errorData){
+		        alert("error code : " + request.status + "\nmessage" + 
+		                request.responseText + "\nerror" + errorData);
+		       }
+			
+			});
+		});
+	});
 </script>
 <link rel="stylesheet" type="text/css" href="/farm/resources/css/style.css" />
 <link rel="stylesheet" type="text/css" href="/farm/resources/css/notice.css" />
@@ -217,8 +299,9 @@ function changeStatus(str) {
 
             <!-- select box -->
             <div class="select_box">
-               <select class="select">
-                  <option value="1" selected="">불량/욕설</option>
+               <select class="select" id="select_val">
+                  <option value="0" selected="">모두보기</option>
+                  <option value="1">불량/욕설</option>
                   <option value="2">허위사실</option>
                   <option value="3">처리완료</option>
                   <option value="4">처리중</option>
@@ -235,10 +318,6 @@ function changeStatus(str) {
                <div class="pagination">
                  
                </div>
-				
-				
-				
-				
 				
 				
 					<!--신고 모달창  -->
