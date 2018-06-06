@@ -1,7 +1,7 @@
 package com.kh.farm.auction.controller;
 
 
-import java.io.File;
+ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -39,6 +39,8 @@ import com.kh.farm.market.model.vo.Market;
 import com.kh.farm.market.model.vo.Review;
 import com.kh.farm.member.model.vo.Member;
 import com.kh.farm.notice.model.vo.Notice;
+
+
 
 @Controller
 public class AuctionController {
@@ -137,14 +139,58 @@ public class AuctionController {
 		
 	}
 	
-	/*경매 메인 list뿌려주기*/
-	@RequestMapping(value="AuctionList_controller.do")
-	public ModelAndView AuctionList(ModelAndView mv){	
+	//경매 ajax로 list뿌려주기 
+	@RequestMapping(value="ajaxAuctionList.do",method=RequestMethod.POST)
+	@ResponseBody
+	public void ajaxAuctionList(HttpServletResponse response,@RequestParam("page") int currentPage) 
+	throws IOException{
 		int page = 1;
-		List<Auction> AuctionList =  auctionService.selectAuctionList(page);
-		/*System.out.println(AuctionList.size());*/
+		List<Auction> AuctionList =  auctionService.selectAuctionList(currentPage);
+		System.out.println(AuctionList.size());
+		int limitPage = 10;
+		int listCount =auctionService.selectajaxAuctionListCount();
+		System.out.println("listCount : "+listCount);
+		JSONArray jarr = new JSONArray();
+		
+		int maxPage=(int)((double)listCount/limitPage+0.9); //ex) 41개면 '5'페이지나와야되는데 '5'를 계산해줌
+	    int startPage=((int)((double)currentPage/5+0.8)-1)*5+1;
+	    int endPage=startPage+5-1;
+	      
+	    if(maxPage<endPage) {
+	       endPage = maxPage;
+	    }
+	    
+	    for(Auction a : AuctionList) {
+	    	 JSONObject jsq = new JSONObject();
+	    	 jsq.put("rnum", a.getRnum());
+	    	 jsq.put("auction_no", a.getRnum());
+	    	 jsq.put("member_id", a.getMember_id());
+	    	 jsq.put("category_no", a.getCategory_no());
+	    	 jsq.put("auction_title", a.getAuction_title());
+	    	 jsq.put("auction_note", a.getAuction_note());
+	    	 jsq.put("auction_img", a.getAuction_img());
+	    	 jsq.put("auction_status", a.getAuction_status());
+	    	 jsq.put("auction_startprice", a.getAuction_startprice());
+	    	 jsq.put("auction_directprice", a.getAuction_directprice());
+	    	 jarr.add(jsq);
+	    }
+	    JSONObject sendJson = new JSONObject();
+        sendJson.put("list", jarr);
+        response.setContentType("application/json; charset=utf-8");
+        PrintWriter out = response.getWriter();
+        out.append(sendJson.toJSONString());
+        out.flush();
+        out.close();
+
+	}
+	
+	/* 메뉴 누르면 경매 메인 list뿌려주기*/
+	@RequestMapping(value="AuctionList_controller.do")
+	public ModelAndView AuctionList(ModelAndView mv,Auction auction){	
+		
+		mv.addObject("auction", auction);
 		mv.setViewName("auction/auctionList");
-		mv.addObject("list",AuctionList);
+		/*mv.addObject("list",AuctionList);*/
 		return mv;
 		
 	}
@@ -159,9 +205,9 @@ public class AuctionController {
 	
 	/*경매 메인 더보기 */
 	@RequestMapping(value="moreAuctionList.do",method=RequestMethod.POST)
-	public void moreMarketList(HttpServletResponse response, @RequestParam("page") int page) throws IOException{
+	public void moreMarketList(HttpServletResponse response, @RequestParam("page") int currentPage) throws IOException{
 		System.out.println("auction more...");
-		List<Auction> list = auctionService.selectAuctionList(page);
+		List<Auction> list = auctionService.selectAuctionList(currentPage);
 		JSONArray jarr = new JSONArray();
 		
 		//list를 jarr로 복사하기
@@ -186,6 +232,43 @@ public class AuctionController {
 		out.close();
 	}
 	
+	//경매 카테고리 더 보기
+	@RequestMapping(value="moreAuctionCategory.do",method=RequestMethod.POST)
+	@ResponseBody
+	public void moreAuctionCategory(HttpServletResponse response,
+			@RequestParam("page") int currentPage,@RequestParam("type") int type
+			)throws IOException {
+		List<Auction> moreAuctionCategory = auctionService.selectmoreAuctionCategory(currentPage,type);
+		System.out.println("moreAuctionCategory : "+moreAuctionCategory.toString());
+		int listCount = auctionService.selectmoreAuctionCategoryCount(type);
+		System.out.println("listCount : "+listCount);
+		JSONArray jarr = new JSONArray();
+		
+		for(Auction a : moreAuctionCategory) {
+			//추출한 user를 json 객체에 담기
+			JSONObject jsq = new JSONObject();
+			 jsq.put("auction_no", a.getRnum());
+	    	 jsq.put("member_id", a.getMember_id());
+	    	 jsq.put("category_no", a.getCategory_no());
+	    	 jsq.put("auction_title", a.getAuction_title());
+	    	 jsq.put("auction_note", a.getAuction_note());
+	    	 jsq.put("auction_img", a.getAuction_img());
+	    	 jsq.put("auction_status", a.getAuction_status());
+	    	 jsq.put("auction_startprice", a.getAuction_startprice());
+	    	 jsq.put("auction_directprice", a.getAuction_directprice());
+			jarr.add(jsq);
+		}
+		//전송용 최종 json 객체 선언
+		JSONObject sendJson = new JSONObject();
+		sendJson.put("list", jarr);
+		response.setContentType("application/json; charset=utf-8");
+		PrintWriter out = response.getWriter();
+		out.append(sendJson.toJSONString());
+		out.flush();
+		out.close();
+		
+		
+	}
 	/*삭제*/
 	@RequestMapping(value="auctionDelete.do")
 	public String deleteAuction(Model model, @RequestParam(value="auction_no") int auction_no) {
@@ -645,12 +728,11 @@ public class AuctionController {
 	}
 	
 	//경매 카테고리
-	@RequestMapping(value="left_boxChangeList.do")
+	@RequestMapping(value="left_boxChangeList.do",method=RequestMethod.POST)
 	@ResponseBody
 	public void selectLeft_boxChangeList(HttpServletResponse response,
 			@RequestParam(value="page") int currentPage,
 			@RequestParam(value="type") int type) throws IOException{
-		System.out.println("경매카테고리 실행됨");
 		List<Auction> left_boxList = auctionService.selectLeft_boxChangeList(currentPage,type);
 		System.out.println("left_boxList : "+left_boxList.toString());
 		JSONArray jarr =new JSONArray();

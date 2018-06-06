@@ -24,13 +24,55 @@
 </script>
 	
 <script>
+
+	$(function ONLOAD(){
+		$.ajax({
+			url :"ajaxAuctionList.do",
+			type : "POST",
+			data :{
+				page : 1
+			},
+			dataType: "JSON",
+			success: function(data){
+				console.log(data);
+				var objStr = JSON.stringify(data);
+				var jsonObj = JSON.parse(objStr);
+				
+				var outValues="";
+				
+				for(var i in jsonObj.list){
+					outValues +=
+						"<a href='AuctionDetail.do?auction_no="+jsonObj.list[i].auction_no +"'>"+
+		       			"<div class='market'><div class='img_box' style='background-image: url(\"/farm/resources/upload/auctionUpload/"+jsonObj.list[i].auction_img+"\"); background-size: cover;'></div>"+
+		       			"<div class='title_box'><p class='title' style='text-align:center;'>"+jsonObj.list[i].auction_title+"</p> <p class='content' style='text-align:center;'>"+jsonObj.list[i].auction_note+"</p></div> "+
+		       			"</div></a>";
+		       			
+				}
+				$(".auction_box").html(outValues);
+				
+				/* $(".auction_box").html();
+					outValues+= 
+						"</div>"+
+		       			"<button class='more_market' onclick='more_auction();' style='background-color:#A17977;margin-bottom:20px;''>경매 더보기 ▼</button>"+
+		       			"</div>";
+				$(".auction_box").html(outValues); */
+			},error: function(request,status,errorData){
+				alert("error code : " + request.status + "\nmessage" + 
+						request.responseText + "\nerror" + errorData);
+			}
+			
+		});
+	});
+	
+
 	function more_auction(){
 		count = count+1;
 		$.ajax({
-			
 			url: "moreAuctionList.do",
 			type:"post",
-			data: {page: count},
+			data: {
+				page: count
+			},
 			dataType: "JSON",
 			success: function(obj){
 				console.log(obj);
@@ -42,21 +84,22 @@
 					"<a href='AuctionDetail.do?auction_no="+jsonObj.list[i].auction_no +"'>"+
 	       			"<div class='market'><div class='img_box' style='background-image: url(\"/farm/resources/upload/auctionUpload/"+jsonObj.list[i].auction_img+"\"); background-size: cover;'></div>"+
 	       			"<div class='title_box'><p class='title' style='text-align:center;'>"+jsonObj.list[i].auction_title+"</p> <p class='content' style='text-align:center;'>"+jsonObj.list[i].auction_note+"</p></div> "+
-	       			"</div></a>"   
+	       			"</div></a>" ;
 				}
 				$(".auction_box").html(outValues);
+				
 				},error: function(request,status,errorData){
 					alert("error code : " + request.status + "\nmessage" + 
 							request.responseText + "\nerror" + errorData);
 				}
 		});
 	}
-	
+
 	//경매 카테고리
 	$(function(){
 	$("input[name='check']").click(function(){
 	var type = $(this).val();	
-	alert("type : "+type);
+	/* alert("type : "+type); */
 	$.ajax({
 		url :"left_boxChangeList.do",
 		type:"post",
@@ -69,10 +112,9 @@
 			console.log(data);
 			var objStr = JSON.stringify(data);
 			var jsonObj = JSON.parse(objStr);
-			
-			var outValues = $(".auction_box").html();
+			/* var select = jsonObj.list[0].type; */
+			var outValues ="";
 			for(var i in jsonObj.list){
-				
 				switch(jsonObj.list[i].type){
 				case 0 : outValues += 
 				"<a href='AuctionDetail.do?auction_no="+jsonObj.list[i].auction_no +"'>"+
@@ -83,20 +125,33 @@
 					"<a href='AuctionDetail.do?auction_no="+jsonObj.list[i].auction_no +"'>"+
 	       			"<div class='market'><div class='img_box' style='background-image: url(\"/farm/resources/upload/auctionUpload/"+jsonObj.list[i].auction_img+"\"); background-size: cover;'></div>"+
 	       			"<div class='title_box'><p class='title' style='text-align:center;'>"+jsonObj.list[i].auction_title+"(경매중)</p> <p class='content' style='text-align:center;'>"+jsonObj.list[i].auction_note+"</p></div> "+
-	       			"</div></a>";break;
+	       			"</div></a>";
+	       			break;
 				case 2 : outValues += 
 					"<a href='AuctionDetail.do?auction_no="+jsonObj.list[i].auction_no +"'>"+
 	       			"<div class='market'><div class='img_box' style='background-image: url(\"/farm/resources/upload/auctionUpload/"+jsonObj.list[i].auction_img+"\"); background-size: cover;'></div>"+
 	       			"<div class='title_box'><p class='title' style='text-align:center;'>"+jsonObj.list[i].auction_title+"(마감)</p> <p class='content' style='text-align:center;'>"+jsonObj.list[i].auction_note+"</p></div> "+
-	       			"</div></a>";break;
+	       			"</div></a>";
+	       			break;
 				default :outValues += 
 					"<a href='AuctionDetail.do?auction_no="+jsonObj.list[i].auction_no +"'>"+
 	       			"<div class='market'><div class='img_box' style='background-image: url(\"/farm/resources/upload/auctionUpload/"+jsonObj.list[i].auction_img+"\"); background-size: cover;'></div>"+
 	       			"<div class='title_box'><p class='title' style='text-align:center;'>"+jsonObj.list[i].auction_title+"(최신순)</p> <p class='content' style='text-align:center;'>"+jsonObj.list[i].auction_note+"</p></div> "+
 	       			"</div></a>";
-				}
+					}
+				
 			}
 			$(".auction_box").html(outValues);
+			
+			$("more_remove").remove();
+			
+			$(".auction_box").html();
+				outValues +=
+					"</div>"+
+   					"<button class='more_market' onclick='more_auctionCategory(select);' style='background-color:#A17977;margin-bottom:20px;''>경매 더보기 ▼</button>"+
+   					"</div>";
+			$(".auction_box").html(outValues);
+			
 			
 			},error: function(request,status,errorData){
 			alert("error code : " + request.status + "\nmessage" + 
@@ -106,6 +161,45 @@
 		});
 	});
 });
+	
+//경매 카테고리 more 버튼
+	
+	function more_auctionCategory(type){
+	count = count+1;
+	alert("타입 : "+type);
+	$.ajax({
+		url: "moreAuctionCategory.do",
+		type:"post",
+		data: {
+			page: count,
+			type:type
+		},
+		dataType: "JSON",
+		success: function(obj){
+			console.log(data);
+			var objStr = JSON.stringify(data);
+			var jsonObj = JSON.parse(objStr);
+			
+			var outValues = $(".auction_box").html();
+			outValues+=
+				"<a href='AuctionDetail.do?auction_no="+jsonObj.list[i].auction_no +"'>"+
+       			"<div class='market'><div class='img_box' style='background-image: url(\"/farm/resources/upload/auctionUpload/"+jsonObj.list[i].auction_img+"\"); background-size: cover;'></div>"+
+       			"<div class='title_box'><p class='title' style='text-align:center;'>"+jsonObj.list[i].auction_title+"(최신순)</p> <p class='content' style='text-align:center;'>"+jsonObj.list[i].auction_note+"</p></div> "+
+       			"</div></a>";
+			var outValues = $(".auction_box").html(outValues);
+			
+			$("more_remove").remove();
+			$(".auction_box").html();
+			outValues +=
+				"</div>"+
+				"<button class='more_market' onclick='more_auctionCategory();' style='background-color:#A17977;margin-bottom:20px;''>경매 더보기 ▼</button>"+
+				"</div>";
+		$(".auction_box").html(outValues);
+			}
+			
+		});
+	}
+
 </script>
 
 </head>
@@ -130,7 +224,7 @@
         	<!-- 정렬 메뉴바 -->
         	<div class="sort" style="height:auto;padding-bottom:15px;" id="select_val">
 	        	<h4>정렬</h4>
-	        	<input type="radio"  name="check" value="3"  checked="checked" value="auction_no"> 최신순<br><br>
+	        	<input type="radio"  name="check" value="3"   value="auction_no"> 최신순<br><br>
 	        	<input type="radio"  name="check" value="0"> 경매 대기<br><br>
 	        	<input type="radio" name="check" value="1"> 경매 중<br><br>
 	        	<input type="radio" name="check" value="2"> 경매 마감<br>
@@ -157,16 +251,18 @@
         	<!-- 경매 -->
         	<div class="right_box">
         	<div class="auction_box">
-        	<c:forEach items="${list}" var="list" varStatus="status">
+        	<%-- <c:forEach items="${list}" var="list" varStatus="status">
         	<a href="AuctionDetail.do?auction_no=${list.auction_no }">
        			<div class="market"><div class="img_box" style="background-image: url('/farm/resources/upload/auctionUpload/${list.auction_img}'); background-size: cover;" ></div>
        			<div class="title_box"><p class="title" style="text-align:center;">${list.auction_title}</p> <p class="content" style="text-align:center;">${list.auction_note}</p></div>
        			</div>   
        		</a>
-       		</c:forEach>   
+       		</c:forEach>   --%> 
       	    </div>
-       			<button class="more_market" onclick="more_auction();">장터 더보기 ▼</button>
-       		</div>	
+      	    <div class="more_remove">
+       			<button class="more_market" onclick="more_auction();" style="background-color:#A17977;margin-bottom:20px;">경매 더보기1 ▼</button>
+       		</div>
+       		</div> 
        		
        			
  			 </div>

@@ -38,7 +38,6 @@ public class MarketDao {
 
 	public Market marketInfo(SqlSessionTemplate sqlSession, int market_no) {
 		Market mk = sqlSession.selectOne("market.marketInfo",market_no);
-		
 		return mk;
 	}
 

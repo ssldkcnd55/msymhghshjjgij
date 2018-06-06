@@ -50,6 +50,14 @@
 			auction_no desc)) where rnum >= #{startRow} and rnum <= #{endRow}
 	]]>
 	</select>
+	
+	
+	<select id="selectajaxAuctionListCount" resultType="int">
+	<![CDATA[
+		select count(*) from auction
+	]]>
+	</select>
+	
 
 	<select id="selectAuctionDetail" parameterType="auction"
 		flushCache="true" resultType="auction">
@@ -338,6 +346,53 @@
 		 select ROWNUM rum, auction_no,member_id,auction_title from auction 
 		where member_id = #{member_id} order by auction_no DESC
 	]]>
+	</select>
+	
+	
+	<select id="selectmoreAuctionCategory" parameterType="PageNumber" resultType="Auction">
+	<![CDATA[
+		select * from 
+			(select rownum rnum, auction_no,
+			auction_title,auction_note,auction_img,auction_status,
+			member_id from (select * from auction order by 
+			auction_no desc)) where rnum >= #{startRow} and rnum <= #{endRow} 
+	]]>
+	<if test="select == 0">
+	<![CDATA[
+		and auction_status = '0'
+	]]>
+	</if>
+	<if test="select == 1">
+	<![CDATA[
+		and auction_status = '1'
+	]]>
+	</if>
+	<if test="select == 2">
+	<![CDATA[
+		and auction_status = '2'
+	]]>
+	</if>
+	</select>
+	
+	<select id="selectmoreAuctionCategoryCount" parameterType="int" resultType="int">
+	<![CDATA[
+		select count(*) from auction
+	]]>
+	<if test="type == 0">
+	<![CDATA[
+		where auction_status = '0'
+	]]>
+	</if>
+	<if test="type == 1">
+	<![CDATA[
+		where auction_status = '1'
+	]]>
+	</if>
+	<if test="type == 2">
+	<![CDATA[
+		where auction_status = '2'
+	]]>
+	</if>
 	</select>
 	
 	
