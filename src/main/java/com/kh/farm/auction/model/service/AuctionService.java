@@ -102,6 +102,9 @@ public interface AuctionService {
 	//경매 카테고리 더보기 listCount
 	int selectmoreAuctionCategoryCount(int type);
 
+	//경매 즉시 구매
+	int updateAuctionBuy(int auction_no);
+
 	
 
 	

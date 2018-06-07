@@ -396,5 +396,13 @@
 	</select>
 	
 	
+	<update id="updateAuctionBuy" parameterType="int">
+	<![CDATA[
+		update auction set auction_enddate =#{auction_enddate},auction_status = '2',
+		auction_directprice = #{auction_directprice} where auction_no = #{auction_no}
+  		
+	]]>
+	</update>
+	
 	
 </mapper>

@@ -802,7 +802,15 @@ public class AuctionController {
 		out.close();
 	}
 	
-	
+	//경매 즉시 구매
+	@RequestMapping(value="auction_Buy.do",method=RequestMethod.POST)
+	@ResponseBody
+	public void auction_Buy(HttpServletResponse response,@RequestParam(value="auction_no") int auction_no)
+			throws IOException{
+		int auction_Buy = auctionService.updateAuctionBuy(auction_no);
+		
+	}
+
 }
 
 
