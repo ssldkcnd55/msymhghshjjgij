@@ -763,8 +763,9 @@ public class AuctionController {
 			json.put("currentPage",currentPage);
 			json.put("type", type);
 			jarr.add(json);
+			System.out.println("카테고리 실행 ");
 		}
-
+		
 		JSONObject sendJson = new JSONObject();
 		sendJson.put("list", jarr);
 		response.setContentType("application/json; charset=utf-8");

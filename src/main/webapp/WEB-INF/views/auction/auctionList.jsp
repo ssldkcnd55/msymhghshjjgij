@@ -115,7 +115,9 @@
 			/* var select = jsonObj.list[0].type; */
 			var outValues ="";
 			for(var i in jsonObj.list){
+				console.log(jsonObj.list[i].type);
 				switch(jsonObj.list[i].type){
+				
 				case 0 : outValues += 
 				"<a href='AuctionDetail.do?auction_no="+jsonObj.list[i].auction_no +"'>"+
        			"<div class='market'><div class='img_box' style='background-image: url(\"/farm/resources/upload/auctionUpload/"+jsonObj.list[i].auction_img+"\"); background-size: cover;'></div>"+
@@ -137,20 +139,18 @@
 					"<a href='AuctionDetail.do?auction_no="+jsonObj.list[i].auction_no +"'>"+
 	       			"<div class='market'><div class='img_box' style='background-image: url(\"/farm/resources/upload/auctionUpload/"+jsonObj.list[i].auction_img+"\"); background-size: cover;'></div>"+
 	       			"<div class='title_box'><p class='title' style='text-align:center;'>"+jsonObj.list[i].auction_title+"(최신순)</p> <p class='content' style='text-align:center;'>"+jsonObj.list[i].auction_note+"</p></div> "+
-	       			"</div></a>";
+	       			"</div></a>";break;
 					}
 				
 			}
 			$(".auction_box").html(outValues);
 			
-			$("more_remove").remove();
-			
-			$(".auction_box").html();
-				outValues +=
+			$(".more_remove").html();
+				outValues =
 					"</div>"+
    					"<button class='more_market' onclick='more_auctionCategory(select);' style='background-color:#A17977;margin-bottom:20px;''>경매 더보기 ▼</button>"+
    					"</div>";
-			$(".auction_box").html(outValues);
+			$(".more_remove").html(outValues);
 			
 			
 			},error: function(request,status,errorData){
@@ -260,7 +260,7 @@
        		</c:forEach>   --%> 
       	    </div>
       	    <div class="more_remove">
-       			<button class="more_market" onclick="more_auction();" style="background-color:#A17977;margin-bottom:20px;">경매 더보기1 ▼</button>
+       			<button class="more_market" onclick="more_auction();" style="background-color:#A17977;margin-bottom:20px;">경매 더보기 ▼</button>
        		</div>
        		</div> 
        		
