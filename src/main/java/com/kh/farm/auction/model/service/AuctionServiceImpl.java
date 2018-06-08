@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import com.kh.farm.auction.model.dao.AuctionDao;
 import com.kh.farm.auction.model.vo.*;
 import com.kh.farm.member.model.vo.Member;
+import com.kh.farm.payment.model.vo.Payment;
 import com.kh.farm.qna.model.vo.Market_qna;
 
 @Service
@@ -228,8 +229,19 @@ public class AuctionServiceImpl implements AuctionService{
 	}
 	
 	@Override
-	public int updateAuctionBuy(int auction_no) {
+	public int updateAuctionBuy(int  auction_no) {
 		return auctionDao.updateAuctionBuy(sqlSession,auction_no);
 	}
 	
+	@Override
+	public int insertAuctionBuy(Auction auction) {
+		return auctionDao.insertAuctionBuy(sqlSession,auction);
+	}
+	
+	
+	@Override
+	public Payment selectAuctionBuy(int  auction_no) {
+		return auctionDao.selectAuctionBuy(sqlSession,auction_no);
+
+	}
 }

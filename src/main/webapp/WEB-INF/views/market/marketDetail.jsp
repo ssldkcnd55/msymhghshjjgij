@@ -13,9 +13,13 @@
 <link href="/farm/resources/css/marketDetail.css" rel="stylesheet" type="text/css" />
 <link href="/farm/resources/css/auctionDetail.css" rel="stylesheet" type="text/css" />
 <link href="/farm/resources/css/marketDetail_modal.css" rel="stylesheet" type="text/css" />
+<link href="/farm/resources/css/homeauction.css" rel="stylesheet" type="text/css" />
+
 <script src="/farm/resources/js/jquery-3.3.1.min.js"></script>
 <script type="text/javascript" src="/farm/resources/js/tabMove.js"></script>
 <script type="text/javascript" src="/farm/resources/js/marketDetail.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script type="text/javascript">
 $(function(){
 	$('.goods-view-show-option-button').click(function(){
@@ -32,7 +36,44 @@ $(function(){
 var change = 0;
 
  
-
+$(function(){
+	$.ajax({
+		url:"sellerMarketList.do",
+		type:"post",
+		data:{
+			member_id:'${market.member_id}'
+		},
+		dataType: "JSON",
+		success: function(data){
+			var objStr = JSON.stringify(data);
+			var jsonObj = JSON.parse(objStr);
+			
+			var outValues = "";
+			jsonObj.list[i]
+			for(var i in jsonObj.list){
+				if(i == 0){
+					outValues += "<div class='item active' align='center'>";
+				}else if(i % 4 == 0){
+					outValues += "<div class='item' align='center'>";
+				}
+				outValues += "<a href='#'><div class='sellerMarketList'><div class='img_box' style='background-image: url(\"/farm/resources/upload/marketUpload/"+jsonObj.list[i].market_img+"\"); background-size: cover;'></div>"
+							+ "<div class='title_box'><p class='title'>"+jsonObj.list[i].market_title+"</p>"
+							+ "<p class='content'>"+jsonObj.list[i].market_note+"</p><p class='content'>"+jsonObj.list[i].market_price+"</p></div></div></a>";
+				
+				if(i % 4 == 3){
+					outValues += "</div>";
+				}else if(i == Object.keys(jsonObj.list).length){
+					outValues += "</div>";
+				}
+			}
+			$(".carousel-inner").html(outValues);
+			
+		},error: function(request,status,errorData){
+            alert("error code : " + request.status + "\nmessage" + 
+                    request.responseText + "\nerror" + errorData);
+        }
+	});
+});
 
 
 /* $(function(){
@@ -288,18 +329,18 @@ function changeprice(){
 
 		<div id="container">
 			<div class="inner-wrap">
-				<div class="title_box">
-					<span class="title">${market.market_title }</span> &nbsp; <span
+				<div class="mainTitle_box">
+					<span class="mainTitle">${market.market_title }</span> &nbsp; <span
 						class="release_date">출고예정일</span>&nbsp;<span class="date">${market.market_releasedate }</span>
 				</div>
-				<div class="img_box"
+				<div class="mainImg_box"
 					style="background-image: url('/farm/resources/upload/marketUpload/${market.market_img}'); background-size:cover;">
 
 				</div>
-				<div class="title_box">
+				<div class="mainTitle_box">
 					<div
 						style="border-bottom: 1px solid #bdbdbd; padding-bottom: 20px;">
-						<span class="title">${market.market_title }</span> &nbsp; <span
+						<span class="mainTitle">${market.market_title }</span> &nbsp; <span
 							class="release_date">출고예정일</span>&nbsp;<span class="date">${market.market_releasedate }</span>
 					</div>
 				</div>
@@ -307,6 +348,102 @@ function changeprice(){
 					<p class="note_content">자연의 힘으로 길러낸 유기 농산물은 기후에 영향을 많이 받습니다. 예를
 						들어 같은 파프리카라 하더라도 한기물과 한여름에 맞는 최고의 산지가 따로 있지요. 컬리는 1년 내내 전국을 뒤져
 						최고만을 전해 드립니다.</p>
+				</div>
+				
+				<div class="mainTitle_box"><div class="mainTitle">판매자의 다른 상품</div></div>
+				
+				<div style="width: 100%; height: 300px;margin-top:20px">
+					<div id="myCarousel" class="carousel slide se" data-ride="carousel">
+						<!-- Indicators -->
+						<ol class="carousel-indicators">
+							<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+							<li data-target="#myCarousel" data-slide-to="1"></li>
+							<li data-target="#myCarousel" data-slide-to="2"></li>
+						</ol>
+
+						<!-- Wrapper for slides -->
+						<div class="carousel-inner auction">
+							<!-- <div class='item active' align='center'>
+								<div class='sellerMarketList'>
+									<div class="img_box" style="background-image: url('/farm/resources/upload/marketUpload/apple.jpg'); background-size: cover;"></div>
+									<div class="title_box">
+										<p class="title">토마토를 팔아보까여</p>
+										<p class="content">소개소개소개소개쇄쇄소새ㅗ개괘쇄쇄고새ㅙ괘쇄소새괘괘소새ㅙ</p>
+										<p class="content">1000원</p>
+									</div>
+								</div>
+								<div class='sellerMarketList'>
+									<div class="img_box" style="background-image: url('/farm/resources/upload/marketUpload/apple.jpg'); background-size: cover;"></div>
+									<div class="title_box">
+										<p class="title">토마토를 팔아보까여</p>
+										<p class="content">소개소개소개소개쇄쇄소새ㅗ개괘쇄쇄고새ㅙ괘쇄소새괘괘소새ㅙ</p>
+										<p class="content">1000원</p>
+									</div>
+								</div>
+								<div class='sellerMarketList'>
+									<div class="img_box" style="background-image: url('/farm/resources/upload/marketUpload/apple.jpg'); background-size: cover;"></div>
+									<div class="title_box">
+										<p class="title">토마토를 팔아보까여</p>
+										<p class="content">소개소개소개소개쇄쇄소새ㅗ개괘쇄쇄고새ㅙ괘쇄소새괘괘소새ㅙ</p>
+										<p class="content">1000원</p>
+									</div>
+								</div>
+								<div class='sellerMarketList'>
+									<div class="img_box" style="background-image: url('/farm/resources/upload/marketUpload/apple.jpg'); background-size: cover;"></div>
+									<div class="title_box">
+										<p class="title">토마토를 팔아보까여</p>
+										<p class="content">소개소개소개소개쇄쇄소새ㅗ개괘쇄쇄고새ㅙ괘쇄소새괘괘소새ㅙ</p>
+										<p class="content">1000원</p>
+									</div>
+								</div>
+							</div>
+							<div class='item' align='center'>
+								<div class='sellerMarketList'>
+									<div class="img_box" style="background-image: url('/farm/resources/upload/marketUpload/apple.jpg'); background-size: cover;"></div>
+									<div class="title_box">
+										<p class="title">토마토를 팔아보까여</p>
+										<p class="content">소개소개소개소개쇄쇄소새ㅗ개괘쇄쇄고새ㅙ괘쇄소새괘괘소새ㅙ</p>
+										<p class="content">1000원</p>
+									</div>
+								</div>
+								<div class='sellerMarketList'>
+									<div class="img_box" style="background-image: url('/farm/resources/upload/marketUpload/apple.jpg'); background-size: cover;"></div>
+									<div class="title_box">
+										<p class="title">토마토를 팔아보까여</p>
+										<p class="content">소개소개소개소개쇄쇄소새ㅗ개괘쇄쇄고새ㅙ괘쇄소새괘괘소새ㅙ</p>
+										<p class="content">1000원</p>
+									</div>
+								</div>
+								<div class='sellerMarketList'></div>
+								<div class='sellerMarketList'></div>
+							</div>
+							<div class='item' align='center'>
+								<div class='sellerMarketList'>
+									<div class="img_box" style="background-image: url('/farm/resources/upload/marketUpload/apple.jpg'); background-size: cover;"></div>
+									<div class="title_box">
+										<p class="title">토마토를 팔아보까여</p>
+										<p class="content">소개소개소개소개쇄쇄소새ㅗ개괘쇄쇄고새ㅙ괘쇄소새괘괘소새ㅙ</p>
+										<p class="content">1000원</p>
+									</div>
+								</div>
+								<div class='sellerMarketList'></div>
+								<div class='sellerMarketList'></div>
+								<div class='sellerMarketList'></div>
+							</div> -->
+
+						</div>
+						<!-- Left and right controls -->
+								<a class="left carousel-control" href="#myCarousel"
+									data-slide="prev"> <span
+									class="glyphicon glyphicon-chevron-left"></span> <span
+									class="sr-only">Previous</span>
+								</a> <a class="right carousel-control" href="#myCarousel"
+									data-slide="next"> <span
+									class="glyphicon glyphicon-chevron-right"></span> <span
+									class="sr-only">Next</span>
+								</a>
+
+					</div>
 				</div>
 				<%-- <div class="note">
        				<center>

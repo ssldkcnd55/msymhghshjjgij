@@ -53,7 +53,7 @@
 		]]>
 		<choose>
 			<when test='type == 1'>
-				and report_category = '불량/욕설' order by report_no desct
+				and report_category = '불량/욕설' order by report_no desc
 			</when>
 			<when test='type == 2'>
 				and report_category = '허위사실' order by report_no desc

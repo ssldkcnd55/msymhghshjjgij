@@ -569,7 +569,36 @@ public class MarketController {
 		int deleteReview = marketService.deleteReview(review);
 		return "forward:/marketDetail.do?market_no="+review.getMarket_no();
 	}
-	
+	@RequestMapping(value="sellerMarketList.do",method=RequestMethod.POST)
+	public void sellerMarketList(@RequestParam("member_id") String member_id,HttpServletResponse response) throws IOException{
+		List<Market> list = marketService.selectSellerMarketList(member_id);
+		int sellerMarketCount = marketService.selectSellerMarketCount(member_id);
+		
+		JSONArray jarr = new JSONArray();
+		
+		//list를 jarr로 복사하기
+		for(Market m : list) {
+			//추출한 user를 json 객체에 담기
+			JSONObject jmarket = new JSONObject();
+			jmarket.put("market_title", m.getMarket_title());
+			jmarket.put("market_note", m.getMarket_note());
+			jmarket.put("market_no", m.getMarket_no());
+			jmarket.put("market_img", m.getMarket_img());
+			jmarket.put("market_price", m.getMarket_price());
+			jmarket.put("count", sellerMarketCount);
+			
+			jarr.add(jmarket);
+		}
+		//전송용 최종 json 객체 선언
+		JSONObject sendJson = new JSONObject();
+		sendJson.put("list", jarr);
+
+		response.setContentType("application/json; charset=utf-8");
+		PrintWriter out = response.getWriter();
+		out.append(sendJson.toJSONString());
+		out.flush();
+		out.close();
+	}
 
 	
 }

@@ -2,6 +2,7 @@ package com.kh.farm.market.model.service;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -197,5 +198,15 @@ public class MarketServiceImpl implements MarketService{
 	public ArrayList<Market> selectCusMarketThree() {
 		// TODO Auto-generated method stub
 		return marketDao.selectCusMarketThree(sqlSession);
+	}
+	@Override
+	public List<Market> selectSellerMarketList(String member_id) {
+		// TODO Auto-generated method stub
+		return marketDao.selectSellerMarketList(sqlSession,member_id);
+	}
+	@Override
+	public int selectSellerMarketCount(String member_id) {
+		// TODO Auto-generated method stub
+		return marketDao.selectSellerMarketCount(sqlSession,member_id);
 	}
 }

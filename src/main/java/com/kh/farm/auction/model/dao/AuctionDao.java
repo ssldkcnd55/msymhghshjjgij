@@ -17,6 +17,7 @@ import com.kh.farm.auction.model.vo.AuctionQnA;
 import com.kh.farm.common.model.vo.PageNumber;
 import com.kh.farm.member.model.vo.Member;
 import com.kh.farm.notice.model.vo.Notice;
+import com.kh.farm.payment.model.vo.Payment;
 import com.kh.farm.qna.model.vo.Market_qna;
 
 @Repository
@@ -309,9 +310,18 @@ public class AuctionDao {
 
 	}
 
-	public int updateAuctionBuy(SqlSessionTemplate sqlSession, int auction_no) {
-		return sqlSession.selectOne("auction.updateAuctionBuy",auction_no);
+	public int updateAuctionBuy(SqlSessionTemplate sqlSession, int  auction_no) {
+		return sqlSession.update("auction.updateAuctionBuy",auction_no);
 
+	}
+
+	public int insertAuctionBuy(SqlSessionTemplate sqlSession, Auction auction) {
+		return sqlSession.insert("auction.insertAuctionBuy",auction);
+
+	}
+
+	public Payment selectAuctionBuy(SqlSessionTemplate sqlSession, int  auction_no) {
+		return sqlSession.selectOne("auction.selectAuctionBuy",auction_no);
 	}
 	
 
