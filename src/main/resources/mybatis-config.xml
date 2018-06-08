@@ -44,5 +44,6 @@
 		<mapper resource="mybatis/mappers/category-mapper.xml" />
 		<mapper resource="mybatis/mappers/auctionhistroy-mapper.xml" />
 		<mapper resource="mybatis/mappers/report-mapper.xml" />
+		<mapper resource="mybatis/mappers/visit-mapper.xml" />
 	</mappers>
 </configuration>
