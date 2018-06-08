@@ -24,8 +24,8 @@ $(function(page) {
 
 					for ( var i in jsonObj.list) {
 						outValues += "<tr><td>" + jsonObj.list[i].rnum
-								+ "</td>" + "<td>" + jsonObj.list[i].buy_no
-								+ "</td>"
+								+ "</td>" + "<td><a target='_blank' href='orderDeliveryDetail.do?buy_no="+jsonObj.list[i].buy_no+"'>" + jsonObj.list[i].buy_no
+								+ "</a></td>"
 								+"<td><a href='marketDetail.do?market_no="+jsonObj.list[i].market_no+"' target='_blank'>" + jsonObj.list[i].market_title + "</a></td>" 
 								+"<td>"
 								+ jsonObj.list[i].buy_date + "</td>"

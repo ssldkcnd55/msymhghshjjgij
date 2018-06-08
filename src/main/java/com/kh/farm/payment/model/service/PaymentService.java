@@ -27,6 +27,8 @@ public interface PaymentService {
 	List<Integer> selectChatNo(Map map);
 
 	int selectChatNo(String your_id);
+
+	Payment selectOrderDeliveryDetail(int buy_no);
 	
 
 }

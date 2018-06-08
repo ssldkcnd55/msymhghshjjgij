@@ -111,4 +111,10 @@
 	]]>
 	</select>
 	
+	<select id="selectOrderDeliveryDetail" parameterType="int" resultType="Payment">
+	<![CDATA[
+		select * from buy where buy_no =#{buy_no}
+	]]>
+	</select>
+	
 </mapper>

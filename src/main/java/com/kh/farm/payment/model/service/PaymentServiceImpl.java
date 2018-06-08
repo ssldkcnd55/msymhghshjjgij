@@ -64,5 +64,10 @@ public class PaymentServiceImpl implements PaymentService{
 		
 		return paymentDao.selectChatNo(sqlSession, your_id);
 	}
+	@Override
+	public Payment selectOrderDeliveryDetail(int buy_no) {
+		
+		return paymentDao.selectOrderDeliveryDetail(sqlSession,buy_no);
+	}
 	
 }

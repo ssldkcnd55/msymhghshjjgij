@@ -72,4 +72,9 @@ public class PaymentDao {
 	
 		return sqlSession.selectOne("payment.selectOneChatNo",your_id);
 	}
+
+	public Payment selectOrderDeliveryDetail(SqlSessionTemplate sqlSession, int buy_no) {
+		
+		return sqlSession.selectOne("payment.selectOrderDeliveryDetail",buy_no);
+	}
 }
