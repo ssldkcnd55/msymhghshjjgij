@@ -2,6 +2,7 @@ package com.kh.farm.market.model.service;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import com.kh.farm.market.exception.DeleteFailException;
 import com.kh.farm.market.model.vo.Category;
@@ -86,4 +87,10 @@ public interface MarketService {
 	ArrayList<Category> selectCategory(String ctype);
 
 	ArrayList<Market> selectCusMarketThree();
+
+
+	List<Market> selectSellerMarketList(String member_id);
+
+
+	int selectSellerMarketCount(String member_id);
 }

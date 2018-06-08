@@ -5,7 +5,7 @@
 <mapper namespace="market">
 
 
-<select id="marketList" parameterType="pageNumber" resultType="market">
+	<select id="marketList" parameterType="pageNumber" resultType="market">
 			<![CDATA[	
 			select * from 
 				(select rownum rnum, market_no,
@@ -58,7 +58,7 @@
 			count(buy_no) desc)WHERE market_amount-(remaining) > 0 ) where rnum >= #{startRow} and rnum <= #{endRow}
 		]]>
 		</if>
-</select>
+	</select>
 	
 	<select id="marketInfo" parameterType="int" resultType="market">
 	<![CDATA[
@@ -86,7 +86,7 @@ group by m.market_no,m.category_no,m.member_id,m.market_title,m.market_note,m.ma
 		select * from review where review_no = #{review_no}
 	</select>
 
-<insert id="insertMarket" parameterType="Market" flushCache="true" useGeneratedKeys="true">
+	<insert id="insertMarket" parameterType="Market" flushCache="true" useGeneratedKeys="true">
 	<![CDATA[
 		insert into market values((select max(market_no) from market)+1,1,#{member_id},#{market_title},#{market_note},#{market_img},
 		#{market_releasedate},#{market_amount},#{market_intro},'0',#{market_price})
@@ -246,6 +246,22 @@ from(select m.market_no,category_no,m.member_id,
 	<select id="selectCusMarketThree" resultType="Market">
 	<![CDATA[
 	select market_no,market_title,market_price from market where market_no in(select market_no from buy)
+	]]>
+	</select>
+	<select id="selectSellerMarketList" parameterType="string" resultType="Market">
+	<![CDATA[
+	select * from(
+		select m.market_no,market_title,market_note,market_img,market_price,market_amount,nvl(sum(buy_amount),0) remaining from market m
+		left join buy b on m.market_no = b.market_no
+		where m.member_id = #{member_id}
+		GROUP BY m.market_no,market_title,market_note,market_img,market_price,market_amount
+		order by m.market_no desc)
+	where market_amount-(remaining) > 0
+	]]>
+	</select>
+	<select id="selectSellerMarketCount" parameterType="string" resultType="int">
+	<![CDATA[
+	select count(*) from market where member_id = #{member_id}
 	]]>
 	</select>
 	

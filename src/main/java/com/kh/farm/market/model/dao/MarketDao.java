@@ -243,4 +243,15 @@ public class MarketDao {
 		List<Market> ac = sqlSession.selectList("market.selectCusMarketThree");
 		return (ArrayList)ac;
 	}
+
+	public List<Market> selectSellerMarketList(SqlSessionTemplate sqlSession, String member_id) {
+		// TODO Auto-generated method stub
+		List<Market> list = sqlSession.selectList("market.selectSellerMarketList",member_id);
+		return list;
+	}
+
+	public int selectSellerMarketCount(SqlSessionTemplate sqlSession, String member_id) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("market.selectSellerMarketCount",member_id);
+	}
 }
