@@ -141,6 +141,8 @@ public class MemberController {
 	public String logout(HttpSession session) {	
 		session.removeAttribute("loginUser");
 		session.removeAttribute("chatList");
+		session.removeAttribute("totalCount");
+		session.removeAttribute("todayCount");
 		session.invalidate();
 		
 		return "home";
