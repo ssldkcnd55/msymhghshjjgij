@@ -39,6 +39,7 @@ import com.kh.farm.market.model.vo.Market;
 import com.kh.farm.market.model.vo.Review;
 import com.kh.farm.member.model.vo.Member;
 import com.kh.farm.notice.model.vo.Notice;
+import com.kh.farm.payment.model.vo.Payment;
 
 
 
@@ -803,11 +804,23 @@ public class AuctionController {
 	}
 	
 	//경매 즉시 구매
-	@RequestMapping(value="auction_Buy.do",method=RequestMethod.POST)
-	@ResponseBody
-	public void auction_Buy(HttpServletResponse response,@RequestParam(value="auction_no") int auction_no)
+	@RequestMapping(value="auction_Buy.do")
+	public String auction_Buy(HttpServletResponse response,@RequestParam(value="auction_no") int auction_no,
+			@RequestParam(value="member_id") String member_id, Auction auction)
 			throws IOException{
+		
+		System.out.println("auction_no:"+auction_no);
+		System.out.println("member_id"+member_id);
+		System.out.println("즉시 구매 컨트롤러 실행 ");
 		int auction_Buy = auctionService.updateAuctionBuy(auction_no);
+		System.out.println("update : "+auction_Buy);
+		int Buy = auctionService.insertAuctionBuy(auction);
+		System.out.println("buy : "+Buy);
+		Payment pay = auctionService.selectAuctionBuy(auction_no);
+		System.out.println("pay:  "+pay.toString());
+		int buy_no = pay.getBuy_no();
+		System.out.println("buy_no : "+buy_no);
+		return "redirect:/makePayment.do?buy_no="+buy_no;
 		
 	}
 
