@@ -252,7 +252,7 @@ $(function(){
 				
 				var values ="";
 				if(startPage>5){
-					values+= "<a href='javascript:noticePage("+(startPage-1)+")'>&laquo;</a>" 
+					values+= "<a href='javascript:reportChangePage("+(startPage-1)+")'>&laquo;</a>" 
 				}else{
 					values+="<a>&laquo;</a>";
 				}
@@ -260,11 +260,11 @@ $(function(){
 					if(i==currentPage){
 						values+= "<a class='active'>"+i+"</a>";
 					}else{
-						values+= "<a href='javascript:noticePage("+i+");'>"+i+"</a>";
+						values+= "<a href='javascript:reportChangePage("+i+");'>"+i+"</a>";
 					}
 				}
 				if(endPage<maxPage){
-					values+="<a href='javascript:noticePage("+(endPage+1)+")'>&raquo;</a>";
+					values+="<a href='javascript:reportChangePage("+(endPage+1)+")'>&raquo;</a>";
 					
 				}else{
 					values+="<a>&raquo;</a>";
@@ -279,6 +279,67 @@ $(function(){
 			});
 		});
 	});
+	
+	
+function reportChangePage(page){
+	var type = $("#select_val").val();
+	$.ajax({
+		url:"changeReportList.do",
+		type:"post",
+		data:{
+			page:page,type:type
+		},
+		dataType: "JSON",
+		success: function(data){
+			console.log(data);
+			var objStr = JSON.stringify(data);
+			var jsonObj = JSON.parse(objStr);
+			
+			var outValues = "<tr><th width='8%'>번호</th><th width='10%'>분류</th><th width='15%'>신고된 후기</th>"
+				+"<th width='13%'>신고내용</th><th width='12%'>신고날짜</th><th width='10%'>처리 상황</th><th width='8%'>처리</th></tr>";
+
+			for(var i in jsonObj.list){
+				outValues += "<tr id='hover'><td>"+jsonObj.list[i].rnum+"</td>"
+				+"<td id='Notice_td'>"+jsonObj.list[i].report_category+"</td>"
+				+"<td><a href='reviewDeatil.do?review_no="+jsonObj.list[i].review_no+"'>리뷰페이지로<a/></td>"
+				+"<td><button id='"+jsonObj.list[i].report_contents+"' onclick='viewContents(this);'>신고내용보기</button></td>"
+				+"<td>"+jsonObj.list[i].report_date+"</td><td id='st"+jsonObj.list[i].report_no+"'>"+jsonObj.list[i].report_status+"</td>"
+				+"<td><button id='"+jsonObj.list[i].report_no+"' onclick='changeStatus(this);'>신고처리</button></td></tr>";
+			} 
+			$(".Notice_table").html(outValues);
+			
+			var startPage= jsonObj.list[0].startPage;
+			var endPage = jsonObj.list[0].endPage;
+			var maxPage = jsonObj.list[0].maxPage;
+			var currentPage = jsonObj.list[0].currentPage;
+			
+			var values ="";
+			if(startPage>5){
+				values+= "<a href='javascript:noticePage("+(startPage-1)+")'>&laquo;</a>" 
+			}else{
+				values+="<a>&laquo;</a>";	
+			}
+			for(var i=startPage;i<=endPage;i++  ){
+				if(i==currentPage){
+					values+= "<a class='active'>"+i+"</a>";
+				}else{
+					values+= "<a href='javascript:noticePage("+i+");'>"+i+"</a>";
+				}
+			}
+			if(endPage<maxPage){
+				values+="<a href='javascript:noticePage("+(endPage+1)+")'>&raquo;</a>";
+				
+			}else{
+				values+="<a>&raquo;</a>";
+			}
+			$(".pagination").html(values);
+			
+		},error: function(request,status,errorData){
+	        alert("error code : " + request.status + "\nmessage" + 
+	                request.responseText + "\nerror" + errorData);
+	       }
+	});
+}
 </script>
 <link rel="stylesheet" type="text/css" href="/farm/resources/css/style.css" />
 <link rel="stylesheet" type="text/css" href="/farm/resources/css/notice.css" />
@@ -334,10 +395,10 @@ $(function(){
 					<!-- 신고 모달창 끝 -->
                <!-- 검색 -->
                <div class="search_box">
-               <span class='green_window'> 
+               <!-- <span class='green_window'> 
                   <input type='text'class='input_text' />
                </span>
-               <button type='submit' class='sch_smit'>검색</button>
+               <button type='submit' class='sch_smit'>검색</button> -->
                </div>
             </div>
 
