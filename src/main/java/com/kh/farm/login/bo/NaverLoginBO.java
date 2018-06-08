@@ -17,8 +17,8 @@ import com.kh.farm.login.api.NaverLoginApi;
 
 public class NaverLoginBO {
 
-    private final static String CLIENT_ID = "KOlSDVatCSwF6ijIifwJ";
-    private final static String CLIENT_SECRET = "fFMIUH722w";                      
+    private final static String CLIENT_ID = "Wykpz3S6pXTiYC7FNOdA";
+    private final static String CLIENT_SECRET = "gfW6bHKaBw";                      
     private final static String REDIRECT_URI = "http://127.0.0.1:7777/farm/callback.do";
     private final static String SESSION_STATE = "oauth_state";
     private final static String PROFILE_API_URL = "https://openapi.naver.com/v1/nid/me";
