@@ -25,6 +25,7 @@ public class MarketDao {
 		PageNumber pn = new PageNumber();
 		pn.setStartRow(page * 9 -8);
 		pn.setEndRow(pn.getStartRow() + 8);
+		pn.setSearch(search);
 		System.out.println(sort);
 		if(ctype != null && ctype != "")
 			pn.setCtype(ctype);

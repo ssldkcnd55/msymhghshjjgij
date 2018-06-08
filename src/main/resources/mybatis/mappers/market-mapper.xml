@@ -15,21 +15,25 @@
 				FROM market m 
 				LEFT JOIN buy b on b.market_no = m.market_no
 			]]>
-		<if test="search != null">
-		<![CDATA[
-			WHERE market_title like '%'||#{search}||'%'
-		]]>
-		</if>
-		<if test="ctype != null">
-		<![CDATA[
-			WHERE category_no in ((SELECT category_no FROM category WHERE category_main like #{ctype} ))
-		]]>
-		</if>
-		<if test="cname != null">
-		<![CDATA[
-			WHERE category_no in ((SELECT category_no FROM category WHERE category_name like #{cname} ))
-		]]>
-		</if>
+		
+		<trim prefix="WHERE" prefixOverrides="AND |OR ">
+			<if test="search != null">
+			<![CDATA[
+				AND market_title like '%'||#{search}||'%'
+			]]>
+			</if>
+			<if test="ctype != null">
+			<![CDATA[
+				AND category_no in ((SELECT category_no FROM category WHERE category_main like #{ctype} ))
+			]]>
+			</if>
+			<if test="cname != null">
+			<![CDATA[
+				AND category_no in ((SELECT category_no FROM category WHERE category_name like #{cname} ))
+			]]>
+			</if>
+		</trim>
+		
 		<![CDATA[
 			GROUP BY m.market_no,m.category_no,m.member_id,m.market_title,m.market_note,m.market_img,
 			m.market_releasedate,m.market_amount,m.market_intro,m.market_complete,m.market_price 
