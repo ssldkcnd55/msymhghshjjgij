@@ -18,6 +18,11 @@ public class MemberDao {
 	@Autowired
 	private BCryptPasswordEncoder pwdEncoder;
 	
+	public Member selectCheckId(Member member,SqlSessionTemplate sqlsession) {
+		Member memberId=sqlsession.selectOne("member.selectCheckId",member);
+		return memberId;
+	}
+	
 	public int insertMember(Member member,SqlSessionTemplate sqlSession) {
 		// TODO Auto-generated method stub
 		int result = sqlSession.insert("member.insertMember", member);
@@ -43,7 +48,6 @@ public class MemberDao {
 		Member memberId = sqlSession.selectOne("member.findId",member);
 		
 		return memberId;
-		
 	}
 
 	public int updatePwd(Member member, SqlSessionTemplate sqlSession) {
@@ -186,6 +190,11 @@ public class MemberDao {
 	public Member selectIdCheck(SqlSessionTemplate sqlSession, String mail_to) {
 		// TODO Auto-generated method stub
 		return sqlSession.selectOne("member.selectIdCheck",mail_to);
+	}
+
+	public int insertNaverSignUp(Member member, SqlSessionTemplate sqlSession) {
+		// TODO Auto-generated method stub
+		return sqlSession.insert("member.insertNaverSignUp",member);
 	}
 
 	

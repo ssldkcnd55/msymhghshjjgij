@@ -69,14 +69,39 @@
 	var addr = "";
 	$(function() {
 		$('#memberBtn').click(function() {
+			
 			addr = $('#loc').val() + "@" + $('#detail_loc').val();
-			$.ajax({
+			
+			if('${check}' == 1){
+				$.ajax({
+					url : "customerNaverMod.do",
+					type : "post",
+					data : {
+						"member_id" : '${loginUser.member_id}',
+						"member_addr" : addr,
+						"member_name" : '${loginUser.member_name}'
+
+					},
+					success : function(data) {
+						if (data == "o") {
+							location.reload();
+						} else if (data == "x") {
+							alert("값을 제대로 입력해주세요.")
+						} else {
+							alert("error");
+						}
+
+					}
+				});
+			}else{
+				$.ajax({
 				url : "customerMod.do",
 				type : "post",
 				data : {
-					"MEMBER_ID" : '${loginUser.member_id}',
-					"MEMBER_PWD" : $('#cpwd').val(),
-					"MEMBER_ADDR" : addr
+					"member_id" : '${loginUser.member_id}',
+					"member_pwd" : $('#cpwd').val(),
+					"member_addr" : addr,
+					"member_name" : '${loginUser.member_name}'
 
 				},
 				success : function(data) {
@@ -89,9 +114,16 @@
 					}
 
 				}
-			});
+				});
+			}
 		});
+		
+	
+		if('${check}' == 1){
+			$(".naverCheck").hide();
+		}
 
+		
 	});
 </script>
 <meta charset="UTF-8">
@@ -110,17 +142,17 @@
 					<td><input class="member_input" type="text" name="member_id"
 						value="${loginUser.member_id}" readonly="readonly"></td>
 				</tr>
-				<tr>
+				<tr class="naverCheck">
 					<td>현재 비밀번호</td>
 					<td><input id="nowpwd" class="member_input" type="password"
 						onblur="nowPwdCheck()"></td>
 					<td id="npwdtext"></td>
 				</tr>
-				<tr>
+				<tr class="naverCheck">
 					<td>변경할 비밀번호</td>
 					<td><input id="pwd" name="pwd" class="member_input"
 						type="password"></td>
-				<tr>
+				<tr class="naverCheck">
 					<td>변경할 비밀번호 확인</td>
 					<td><input id="cpwd" name="member_pwd" class="member_input"
 						type="password" onblur="checkPwd()"></td>

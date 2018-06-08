@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 import java.util.Properties;
 
 import javax.mail.Authenticator;
@@ -25,10 +26,13 @@ import javax.xml.ws.Response;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -44,6 +48,8 @@ import com.kh.farm.member.model.service.MemberService;
 import com.kh.farm.member.model.service.MemberServiceImpl;
 import com.kh.farm.member.model.vo.*;
 
+
+
 @Controller
 public class MemberController {
 	@Autowired
@@ -52,6 +58,45 @@ public class MemberController {
 	private ChatService chatService;
 	@Autowired
 	private BCryptPasswordEncoder pwdEncoder;
+	
+	@RequestMapping("customerNaverMod.do")
+	public void customerNaverMod(HttpServletResponse response,Member member,HttpSession session) throws IOException {
+
+		int updateAddr = 0;
+		if (member.getMember_addr() != null) {
+			updateAddr = memberService.updateAddr(member);
+		}
+
+		PrintWriter out=response.getWriter();
+		if (updateAddr > 0) {
+			session.setAttribute("loginUser", member);
+			out.print("o");
+			out.flush();
+			out.close();
+		} else {
+			out.print("x");
+			out.flush();
+			out.close();
+		}
+	}
+	
+	@RequestMapping(value="naverSignUp.do")
+	public void naverSignUp(Member member, HttpServletResponse response) throws Exception {
+		
+		int result=memberService.insertNaverSignUp(member);
+		System.out.println(result);
+		String str="";
+		if(result>0) {
+			str="moveLogin.do";
+		}else {
+			str="오류";
+		}
+		PrintWriter out= response.getWriter();
+		out.println(str);
+		out.flush();
+		out.close();
+		
+	}
 
 	@RequestMapping(value = "signUp.do", method = RequestMethod.POST)
 	public String signUp(Member member, HttpServletRequest request,
@@ -293,37 +338,35 @@ public class MemberController {
 	}
 
 	@RequestMapping("customerMod.do")
-	public void customerMod(HttpServletResponse response,Member member,@RequestParam("MEMBER_ID") String member_id, 
-			@RequestParam("MEMBER_PWD") String member_pwd,@RequestParam("MEMBER_ADDR") String member_addr) throws IOException {
+	public void customerMod(HttpServletResponse response,Member member,HttpSession session) throws IOException {
 
-		System.out.println("333"+member_id);
-		int updatePwd = 0;
-		int updateAddr = 0;
+			int updatePwd = 0;
+			int updateAddr = 0;
 
-		if (member_pwd != null) {
-			member.setMember_pwd(pwdEncoder.encode(member_pwd));
-			member.setMember_id(member_id);
-			updatePwd = memberService.updatePwd(member);
+			if (member.getMember_pwd() != null) {
+				member.setMember_pwd(pwdEncoder.encode(member.getMember_pwd()));
+				member.setMember_id(member.getMember_id());
+				updatePwd = memberService.updatePwd(member);
+			}
+
+			if (member.getMember_addr() != null) {
+				member.setMember_addr(member.getMember_addr());
+				member.setMember_id(member.getMember_id());
+				updateAddr = memberService.updateAddr(member);
+			}
+
+			PrintWriter out=response.getWriter();
+			if (updatePwd > 0 || updateAddr > 0) {
+				session.setAttribute("loginUser", member);
+				out.print("o");
+				out.flush();
+				out.close();
+			} else {
+				out.print("x");
+				out.flush();
+				out.close();
+			}
 		}
-
-		if (member_addr != null) {
-			member.setMember_addr(member_addr);
-			member.setMember_id(member_id);
-			System.out.println("444"+member.getMember_addr());
-			updateAddr = memberService.updateAddr(member);
-		}
-
-		PrintWriter out=response.getWriter();
-		if (member.getMember_pwd() != null || member.getMember_addr() != null) {
-			out.print("o");
-			out.flush();
-			out.close();
-		} else {
-			out.print("x");
-			out.flush();
-			out.close();
-		}
-	}
 	
 	@RequestMapping("changeList.do")
 	@ResponseBody

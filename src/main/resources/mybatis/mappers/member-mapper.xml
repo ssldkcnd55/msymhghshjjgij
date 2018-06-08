@@ -162,4 +162,18 @@
 	
 	]]>
 </select>
+
+<select id="selectCheckId" parameterType="member" resultType="Member">
+<![CDATA[
+select * from MEMBER where MEMBER_ID = #{member_id}
+]]>
+</select>
+<insert id="insertNaverSignUp" parameterType="member">
+<![CDATA[
+insert into member values (
+					#{member_id}, 0, 1, #{member_name}, 
+					#{member_addr}, #{member_tel}, 'Y', 'default.png','N',0)
+]]>
+</insert>
+
 </mapper>
