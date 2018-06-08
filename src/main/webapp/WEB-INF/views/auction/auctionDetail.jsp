@@ -416,15 +416,17 @@ $(function(){
 	
 	//경매 즉시 구매
 	 function auction_Buy(){
-		var auction_no = ${auction.auction_no};
+		alert("즉시구매 실행");
 		var buycheck = confirm("정말로 즉시 구매 하시겠습니다.");
 		if(buycheck == true){
-		$.ajax({
+			location.href="/farm/auction_Buy.do?auction_no=${auction.auction_no}&member_id=${loginUser.member_id}";
+		}
+		/* $.ajax({
 			url:"auction_Buy.do",
 			type:"post",
 			data:{
 				auction_no:auction_no,
-				
+				member_id :loginUser
 			},
 			async: false,
 			dataType: "JSON",
@@ -448,14 +450,14 @@ $(function(){
 				
 				$(".auction_cart_right_div").html(outValues);	
 			}
-		});
+		}); */
 	}
-} 
+
 	
 	//경매 이력
 	function auction_background(no){
 		var auction_no = no.id;
-		var member_id = ${auction.member_id};
+		var member_id = '${auction.member_id}';
 		alert("auction_no : "+auction_no);
 		$.ajax({
 			url : "auction_background.do",

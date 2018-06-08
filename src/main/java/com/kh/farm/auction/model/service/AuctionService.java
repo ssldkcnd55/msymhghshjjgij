@@ -11,6 +11,7 @@ import com.kh.farm.auction.model.vo.AuctionHistory;
 import com.kh.farm.auction.model.vo.AuctionQnA;
 import com.kh.farm.member.model.vo.Member;
 import com.kh.farm.notice.model.vo.Notice;
+import com.kh.farm.payment.model.vo.Payment;
 import com.kh.farm.qna.model.vo.Market_qna;
 
 public interface AuctionService {
@@ -102,8 +103,13 @@ public interface AuctionService {
 	//경매 카테고리 더보기 listCount
 	int selectmoreAuctionCategoryCount(int type);
 
-	//경매 즉시 구매
+	//경매 즉시 구매 경매 태이블 update
 	int updateAuctionBuy(int auction_no);
+
+	//경매 즉시 구매 buy_table insert
+	int insertAuctionBuy(Auction auction);
+
+	Payment selectAuctionBuy(int  auction_no);
 
 	
 
