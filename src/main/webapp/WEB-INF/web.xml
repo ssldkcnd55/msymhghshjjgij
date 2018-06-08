@@ -20,6 +20,12 @@
 	<listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>
+	
+	<!-- 방문자 카운트 리스너 -->
+	<listener>
+      <listener-class>com.kh.farm.visit.controller.VisitSessionListener</listener-class>
+	</listener>
+	
 
 	<!-- Processes application requests -->
 	<servlet>

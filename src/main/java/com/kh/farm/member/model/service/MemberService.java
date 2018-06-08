@@ -37,4 +37,8 @@ public interface MemberService {
 	List<Member> selectSearchMember(String keyword, int type, int currentPage);
 
 	Member selectIdCheck(String mail_to);
+	
+	Member selectCheckId(Member member);
+
+	int insertNaverSignUp(Member member);
 }

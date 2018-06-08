@@ -267,6 +267,7 @@
 		location.href = "/farm/moveQuote.do";
 
 	}
+	
 </script>
 </head>
 

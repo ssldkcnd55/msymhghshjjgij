@@ -13,9 +13,15 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.github.scribejava.core.model.OAuth2AccessToken;
 import com.kh.farm.login.bo.NaverLoginBO;
+import com.kh.farm.member.exception.LoginFailException;
+import com.kh.farm.member.model.service.MemberService;
+import com.kh.farm.member.model.vo.Member;
 
 @Controller
 public class LoginController {
+	@Autowired
+	private MemberService memberService;
+	
 
 	private NaverLoginBO naverLoginBO;
 	private String apiResult = null;
@@ -30,7 +36,6 @@ public class LoginController {
 	public String login(Model model, HttpSession session) {
 
 		String naverAuthUrl = naverLoginBO.getAuthorizationUrl(session);
-		System.out.println(naverAuthUrl);
 		model.addAttribute("url", naverAuthUrl);
 		
 		return "member/login";
@@ -39,16 +44,21 @@ public class LoginController {
 	// 네이버 로그인 성공시 callback호출 메소드
 	@RequestMapping(value = "callback.do", method = { RequestMethod.GET, RequestMethod.POST })
 	public String callback(Model model, @RequestParam String code, @RequestParam String state, HttpSession session)
-			throws IOException {
-		System.out.println("여기는 callback");
+			throws IOException, LoginFailException {
 		OAuth2AccessToken oauthToken;
 		oauthToken = naverLoginBO.getAccessToken(session, code, state);
 		// 로그인 사용자 정보를 읽어온다.
 		apiResult = naverLoginBO.getUserProfile(oauthToken);
-		System.out.println(naverLoginBO.getUserProfile(oauthToken).toString());
 		model.addAttribute("result", apiResult);
-		System.out.println("result" + apiResult);
-
-		return "member/naver_signUp";
+		Member member = new Member();
+		member.setMember_id(apiResult.substring(apiResult.indexOf("\"email\"")+9,apiResult.indexOf(",\"name\"")-1));
+		if(memberService.selectCheckId(member) != null) {
+			session.setAttribute("loginUser", memberService.selectCheckId(member));
+			session.setAttribute("check", "1");
+			return "home";
+			//apiResult.substring(apiResult.indexOf("\"email\"")+9,apiResult.indexOf(",\"name\"")-1);
+		}else {
+			return "member/naver_signUp";
+		}
 	}
 }
