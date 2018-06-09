@@ -25,7 +25,7 @@
 	
 <script>
 
-	$(function ONLOAD(){
+	$(function(){
 		$.ajax({
 			url :"ajaxAuctionList.do",
 			type : "POST",
@@ -112,7 +112,8 @@
 			console.log(data);
 			var objStr = JSON.stringify(data);
 			var jsonObj = JSON.parse(objStr);
-			/* var select = jsonObj.list[0].type; */
+			var select = jsonObj.list[0].type; 
+			alert("select : "+select);
 			var outValues ="";
 			for(var i in jsonObj.list){
 				console.log(jsonObj.list[i].type);
@@ -148,7 +149,7 @@
 			$(".more_remove").html();
 				outValues =
 					"</div>"+
-   					"<button class='more_market' onclick='more_auctionCategory(select);' style='background-color:#A17977;margin-bottom:20px;''>경매 더보기 ▼</button>"+
+   					"<button class='more_market'  onclick='more_auctionCategory("+select+");' style='background-color:#A17977;margin-bottom:20px;''>경매 더보기 ▼</button>"+
    					"</div>";
 			$(".more_remove").html(outValues);
 			
@@ -164,20 +165,21 @@
 	
 //경매 카테고리 more 버튼
 	
-	function more_auctionCategory(type){
+	function more_auctionCategory(select){
 	count = count+1;
-	alert("타입 : "+type);
+	alert("타입 : "+select);
 	$.ajax({
 		url: "moreAuctionCategory.do",
 		type:"post",
 		data: {
 			page: count,
-			type:type
+			atype:select
 		},
 		dataType: "JSON",
 		success: function(obj){
-			console.log(data);
-			var objStr = JSON.stringify(data);
+			alert("경매 카테고리 실행");
+			console.log(obj);
+			var objStr = JSON.stringify(obj);
 			var jsonObj = JSON.parse(objStr);
 			
 			var outValues = $(".auction_box").html();

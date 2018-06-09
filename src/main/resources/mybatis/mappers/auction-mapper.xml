@@ -371,6 +371,11 @@
 		and auction_status = '2'
 	]]>
 	</if>
+	<if test="select == 3">
+	<![CDATA[
+		
+	]]>
+	</if>
 	</select>
 	
 	<select id="selectmoreAuctionCategoryCount" parameterType="int" resultType="int">
@@ -390,6 +395,11 @@
 	<if test="type == 2">
 	<![CDATA[
 		where auction_status = '2'
+	]]>
+	</if>
+	<if test="type == 3">
+	<![CDATA[
+		order by auction_no desc
 	]]>
 	</if>
 	</select>

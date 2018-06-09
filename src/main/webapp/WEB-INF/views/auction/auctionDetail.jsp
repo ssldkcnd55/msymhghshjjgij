@@ -15,8 +15,8 @@
 	type="text/css" />
 <link href="/farm/resources/css/dailyList.css" rel="stylesheet"
 	type="text/css" />
-<link href="/farm/resources/css/marketDetail.css" rel="stylesheet"
-	type="text/css" />
+<!-- <link href="/farm/resources/css/marketDetail.css" rel="stylesheet"
+	type="text/css" /> -->
 <link href="/farm/resources/css/payList.css" rel="stylesheet"
 	type="text/css" />
 
@@ -51,16 +51,17 @@ $(function(){
 	/* QnA 등록으로 가는 버튼 */
 	function Auction_qnaMake(){
 	
-		location.href ="/farm/moveAuctionQnAMake.do?auction_no="+${auction.auction_no};
+		location.href ="/farm/moveAuctionQnAMake.do?auction_no=${auction.auction_no}";
 	}
 	
 	/* 경매 문의 List */
 	 function auctionQnA(page){
+		var auction_no = '${auction.auction_no}';
 		$.ajax({
 			url:"AuctionQnAList.do",
 			type:"post",
 			data:{
-				auction_no:${auction.auction_no},
+				auction_no:auction_no,
 				page:page
 			},
 			dataType: "JSON",
@@ -169,7 +170,7 @@ $(function(){
 	/* 경매 입찰 등록 */
 		function bidcheck(){
 			var price = $('#biddingprice').val();
-			var no = ${auction.auction_no};
+			var no = '${auction.auction_no}';
 			alert(price+", " + no);
 			var result = true;
 			$.ajax({
@@ -347,7 +348,7 @@ $(function(){
 	
 	//옥션 문의 검색창
 	function auction_search(page){
-		var auction_no = ${auction.auction_no};
+		var auction_no = '${auction.auction_no}';
 		var keyword = $("#auction_keyword").val();
 		var select = $("#select_val").val();
 		$.ajax({
