@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 import com.kh.farm.common.model.vo.PageNumber;
 import com.kh.farm.member.exception.LoginFailException;
 import com.kh.farm.member.model.vo.Member;
+import com.kh.farm.visit.model.vo.Visit;
 
 @Repository
 public class MemberDao {
@@ -195,6 +196,11 @@ public class MemberDao {
 	public int insertNaverSignUp(Member member, SqlSessionTemplate sqlSession) {
 		// TODO Auto-generated method stub
 		return sqlSession.insert("member.insertNaverSignUp",member);
+	}
+
+	public int insertVisit(Member returnMember, SqlSessionTemplate sqlSession) {
+		// TODO Auto-generated method stub
+		return sqlSession.insert("visit2.insertVisit",returnMember);
 	}
 
 	

@@ -47,6 +47,7 @@ import com.kh.farm.chat.model.vo.*;
 import com.kh.farm.member.model.service.MemberService;
 import com.kh.farm.member.model.service.MemberServiceImpl;
 import com.kh.farm.member.model.vo.*;
+import com.kh.farm.visit.model.vo.Visit;
 
 
 
@@ -160,13 +161,17 @@ public class MemberController {
 	
 	
 	@RequestMapping(value="login.do",method=RequestMethod.POST)
-	public String loginCheck(Member member,HttpSession session) {
+	public String loginCheck(Member member,HttpSession session,HttpServletRequest request) {
 		
 		String viewName = null;
 		try {
 			//로그인 멤버 정보 가져오기
 			Member returnMember = memberService.selectLoginCheck(member);
 			//System.out.println("returnMember : " + returnMember);
+			String ip = getClientIP(request);
+			System.out.println("ip : " + ip);
+			returnMember.setIp(ip);
+			int visit = memberService.insertVisit(returnMember);
 			session.setAttribute("loginUser", returnMember);
 			//로그인 멤버 채팅 정보 가져오기
 			ArrayList<ChatList> chatList = (ArrayList<ChatList>)chatService.selectChatList(returnMember);
@@ -497,5 +502,26 @@ public class MemberController {
 			
 		}
 	}
+	
+	//접속자 ip 가져오기
+	 public String getClientIP(HttpServletRequest request) {
+
+	     String ip = request.getHeader("X-FORWARDED-FOR"); 
+	     
+	     if (ip == null || ip.length() == 0) {
+	         ip = request.getHeader("Proxy-Client-IP");
+	     }
+
+	     if (ip == null || ip.length() == 0) {
+	         ip = request.getHeader("WL-Proxy-Client-IP");  // 웹로직
+	     }
+
+	     if (ip == null || ip.length() == 0) {
+	         ip = request.getRemoteAddr() ;
+	     }
+	     
+	     return ip;
+
+	 }
 }
 
