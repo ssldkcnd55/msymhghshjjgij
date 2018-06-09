@@ -27,8 +27,9 @@ public class Payment implements java.io.Serializable {
 	private String buy_request; // 배송 요청 사항
 	private String buy_transport_name; //택배사 명
 	private String buy_transport_no; //운송장 번호
-	
-	
+	private String market_title;
+	private String market_img;
+	private int market_price;
 	public Payment() {
 	}
 
@@ -63,6 +64,38 @@ public class Payment implements java.io.Serializable {
 				+ buy_status + ", buy_request=" + buy_request + ", buy_transport_name=" + buy_transport_name
 				+ ", buy_transport_no=" + buy_transport_no + "]";
 	}
+
+	
+	
+	public String getMarket_title() {
+		return market_title;
+	}
+
+
+	public void setMarket_title(String market_title) {
+		this.market_title = market_title;
+	}
+
+
+	public String getMarket_img() {
+		return market_img;
+	}
+
+
+	public void setMarket_img(String market_img) {
+		this.market_img = market_img;
+	}
+
+
+	public int getMarket_price() {
+		return market_price;
+	}
+
+
+	public void setMarket_price(int market_price) {
+		this.market_price = market_price;
+	}
+
 
 	public int getRnum() {
 		return rnum;

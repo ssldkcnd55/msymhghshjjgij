@@ -2,7 +2,6 @@
  * 
  */
 
-
 function sendMsgByMarket (my_id,your_id)
 {
 	msgIcon();
@@ -19,7 +18,13 @@ function viewSelectBox(){
 	
 }
 
-
+function uncomma(str) {
+    str = String(str);
+    return str.replace(/[^\d]+/g, '');
+}
+function numberWithCommas(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
  function countOperator(op)
 {	
 	 var amount=Number($('.flow_order_stock span').text());
@@ -33,7 +38,7 @@ function viewSelectBox(){
 		alert("수량을 초과하였습니다.");
 		$(".flow_order_count").val(amount);
 		}
-	$('.flow_order_total_price').text( $(".flow_order_count").val() * $('.flow_order_price span').text() );
+	$('.flow_order_total_price').text( numberWithCommas($(".flow_order_count").val() * uncomma($('.flow_order_price span').text()) ));
 }	
  
 $(function(){

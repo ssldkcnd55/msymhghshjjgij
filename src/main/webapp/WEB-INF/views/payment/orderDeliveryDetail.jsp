@@ -24,16 +24,16 @@
         	<div class="check"></div><div class="title">주문 정보</div>
         	<table class="tbStyle">
         	<tr>
-        	<td class="first">주문번호</td>
-        	<td class="first number">123123123-123234</td>
+        	<td class="first">구매번호</td>
+        	<td class="first number">${payment.buy_no }</td>
         	</tr>
         	<tr>
         	<td>주문일</td>
-        	<td>2342-2345235</td>
+        	<td>${payment.buy_date }</td>
         	</tr>
         	<tr>
         	<td>운송장 번호</td>
-        	<td>2342-2345235</td>
+        	<td>${payment.buy_transport_no }</td>
         	</tr>                
         	</table>
         	<br><br><br>
@@ -48,27 +48,53 @@
         	</tr>
         	
         	<tr>
-        	<td class="paytable info s"><div class="marketImg" style="background-image: url('/farm/resources/images/딸기.jpg');"></div>유기농 스트로우베리</td>
-        	<td class="paytable s">2000원</td>
-        	<td class="paytable s">1개</td>
-        	<td class="paytable s">2000원</td>
-        	<td class="paytable s">배송중<div class="delBtn">수취확인</div>
+        	<td class="paytable info s"><div class="marketImg" style="background-image: url('/farm/resources/images/${payment.market_img}');"></div>
+        	${payment.market_title }</td>
+        	<td class="paytable s">${payment.market_price }원</td>
+        	<td class="paytable s">${payment.buy_amount }개</td>
+        	<td class="paytable s">${payment.market_price * payment.buy_amount }원</td>
+        	
+        	<c:if test="${payment.buy_status ==0}">
+        	<td class="paytable s">결제완료</td>
+        	</c:if>
+        	
+        	<c:if test="${payment.buy_status ==1}">
+        	<td class="paytable s">배송 준비중
+        	<div class="delBtn">배송조회</div>
         	</td>
+        	</c:if>
+        	
+        	<c:if test="${payment.buy_status ==2}">
+        	<td class="paytable s">배송중
+        	<div class="delBtn">배송조회</div>
+        	</td>
+        	</c:if>      	
+        	
+        	<c:if test="${payment.buy_status ==3}">
+        	<td class="paytable s">배송완료
+        	<div class="delBtn">수취확인</div>
+        	</td>
+        	</c:if>
+        	
+        	<c:if test="${payment.buy_status ==4}">
+        	<td class="paytable s">구매확정</td>
+        	</c:if>
+        	
         	</tr>
         	</table>
         	
         	<table class="payment">
         	<tr>
         	<td>총 상품금액</td>
-        	<td>2000원</td>
+        	<td>${payment.buy_amount * payment.market_price}원</td>
         	</tr>
         	<tr>
         	<td>배송비</td>
-        	<td><div class='plus'>+</div>0원</td>   
+        	<td><div style="float: right; margin-top: 5px;">2500원</div><div class='plus'>+</div></td>   
         	</tr>       	
         	<tr>
         	<td>총 주문 금액</td>
-        	<td><div class="orderPay">2000</div>원</td>
+        	<td><div class="orderPay">${payment.buy_amount * payment.market_price + 2500}</div>원</td>
         	</tr>
         	</table>
         	<br><br><br>
@@ -87,19 +113,19 @@
         	<table class="tbStyle">
         	<tr>
         	<td class="first">받는사람</td>
-        	<td class="first">임종식</td>
+        	<td class="first">${payment.buy_name }</td>
         	</tr>
         	<tr>
         	<td>휴대폰번호</td>
-        	<td>2342-5235</td>
+        	<td>${payment.buy_tel }</td>
         	</tr>
         	<tr>
         	<td>배송지</td>
-        	<td>경기 성남시 중원구 금광ㄷ홍</td>
+        	<td>${payment.buy_addr }</td>
         	</tr>
         	<tr>
         	<td>요청사항</td>
-        	<td>경기 성남시 중원구 금광ㄷ홍</td>
+        	<td>${payment.buy_request }</td>
         	</tr>
         	
         	

@@ -113,7 +113,7 @@
 	
 	<select id="selectOrderDeliveryDetail" parameterType="int" resultType="Payment">
 	<![CDATA[
-		select * from buy where buy_no =#{buy_no}
+		select * from buy left join market on buy.market_no= market.market_no where buy_no =#{buy_no}
 	]]>
 	</select>
 	
