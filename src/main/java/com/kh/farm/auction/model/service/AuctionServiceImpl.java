@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import com.kh.farm.auction.model.dao.AuctionDao;
 import com.kh.farm.auction.model.vo.*;
 import com.kh.farm.member.model.vo.Member;
+import com.kh.farm.payment.model.vo.Payment;
 import com.kh.farm.qna.model.vo.Market_qna;
 
 @Service
@@ -28,8 +29,13 @@ public class AuctionServiceImpl implements AuctionService{
 	}
 	
 	@Override
-	public List<Auction> selectAuctionList(int page) {
-		return auctionDao.selectAuctionList(sqlSession,page);
+	public List<Auction> selectAuctionList(int currentPage) {
+		return auctionDao.selectAuctionList(sqlSession,currentPage);
+	}
+	
+	@Override
+	public int selectajaxAuctionListCount() {
+		return auctionDao.selectajaxAuctionListCount(sqlSession);
 	}
 	
 	@Override
@@ -179,15 +185,63 @@ public class AuctionServiceImpl implements AuctionService{
 	
 	@Override
 	public ArrayList<AuctionQnA> selectAuctionCusQnaList(int currentPage) {
-		// TODO Auto-generated method stub
 		return auctionDao.selectAuctionCusQnaList(sqlSession,currentPage);
 	}
 	@Override
 	public int selectAuctionCusQnaListCount() {
-		// TODO Auto-generated method stub
 		return auctionDao.selectAuctionCusQnaListCount(sqlSession);
 	}
 	
+	@Override
+	public List<Auction> selectLeft_boxChangeList(int currentPage, int type) {
+		switch(type) {
+		case 0: return auctionDao.selectLeft_AuctionStandBy(sqlSession,currentPage);
+		case 1: return auctionDao.selectLeft_AuctionProgress(sqlSession,currentPage);
+		case 2: return auctionDao.selectLeft_AuctionFinish(sqlSession,currentPage);
+		default : return auctionDao.selectLeft_boxLatest(sqlSession,currentPage);
+		}
+	}
+	
+	@Override
+	public int selectLeft_boxChangeCount(int type) {
+		switch(type) {
+		case 0: return auctionDao.selectLeft_AuctionStandByCount(sqlSession);
+		case 1: return auctionDao.selectLeft_AuctionProgressCount(sqlSession);
+		case 2: return auctionDao.selectLeft_AuctionFinishCount(sqlSession);
+		default : return auctionDao.selectLeft_boxLatestCount(sqlSession);
+		}
+	}
+	
+	@Override
+	public List<Auction> select_auction_background(String member_id) {
+		return auctionDao.select_auction_background(sqlSession,member_id);
+	}
+	
+	@Override
+	public List<Auction> selectmoreAuctionCategory(int currentPage, int type) {
+		return auctionDao.selectmoreAuctionCategory(sqlSession,currentPage,type);
+	}
+	
+	@Override
+	public int selectmoreAuctionCategoryCount(int type) {
+		return auctionDao.selectmoreAuctionCategoryCount(sqlSession,type);
+
+	}
+	
+	@Override
+	public int updateAuctionBuy(int  auction_no) {
+		return auctionDao.updateAuctionBuy(sqlSession,auction_no);
+	}
+	
+	@Override
+	public int insertAuctionBuy(Auction auction) {
+		return auctionDao.insertAuctionBuy(sqlSession,auction);
+	}
 	
 	
+	@Override
+	public Payment selectAuctionBuy(int  auction_no) {
+		return auctionDao.selectAuctionBuy(sqlSession,auction_no);
+
+	}
 }

@@ -415,24 +415,89 @@ $(function(){
 	}
 	
 	//경매 즉시 구매
-	/* function auction_Buy(){
-		var auction_no = ${auction.auction_no};
-	
-		$.ajax({
+	 function auction_Buy(){
+		alert("즉시구매 실행");
+		var buycheck = confirm("정말로 즉시 구매 하시겠습니다.");
+		if(buycheck == true){
+			location.href="/farm/auction_Buy.do?auction_no=${auction.auction_no}&member_id=${loginUser.member_id}";
+		}
+		/* $.ajax({
 			url:"auction_Buy.do",
 			type:"post",
 			data:{
 				auction_no:auction_no,
-				
+				member_id :loginUser
 			},
 			async: false,
 			dataType: "JSON",
 			success: function(data){
 				
+				var outValues ="";
+				outValues +=
+				"<div class='auction_cart_right_div'>"+
+				"<table>"+
+				"<tr>"+
+					"<td id='a'></td>"+
+					"</tr>"+
+					"<tr>"+
+						"<td><input type='submit' id='submit'class='auction_bidding' value='입찰' / disabled ></td>"+
+							
+						"<td><button class='auction_buy' disdisabled  ><a href='javascript:auction_Buy();'>즉시구매</a></button></td>"+
+					"</tr>"+
+
+				"</table>"+
+			"</div>";
 				
+				$(".auction_cart_right_div").html(outValues);	
 			}
+		}); */
+	}
+
+	
+	//경매 이력
+	function auction_background(no){
+		var auction_no = no.id;
+		var member_id = '${auction.member_id}';
+		alert("auction_no : "+auction_no);
+		$.ajax({
+			url : "auction_background.do",
+			type:"post",
+			data : {
+				auction_no :auction_no,
+				member_id :member_id
+			},
+			dataType: "JSON",
+			success: function(data){
+				alert("실행: "+data);
+				var objStr = JSON.stringify(data);
+				var jsonObj = JSON.parse(objStr);
+				
+				var outValues = "";
+				
+				if(jsonObj.list.size > 0){
+				outValues += "<tr><th width='12%'>번호</th><th width='50%'>판매자</th><th width='13%'>제목</th><th width='15%'>작성일</th></tr>"; 
+				
+				for(var i in jsonObj.list){
+						outValues += 
+							"<tr>"+
+							"<td>"+json.list[i].rnum+"</td>"+
+							"<td>"+json.list[i].member_id+"</td>"+
+							"<td>"+json.list[i].auction_title+"</td>"+
+							"</tr>";
+					}
+				$(".auction_backgroundtable").html(outValues);
+				}else{
+					outValues += 
+					"<div style='width:100%; height:200px;margin-top:20%;text-align:center;font-size:20pt;font-weight: bold;color:gray;'>"+
+					"경매 이력이 없습니다.</div>";
+				$(".auction_background").html(outValues);
+				}
+			},error: function(request,status,errorData){
+	            alert("error code : " + request.status + "\nmessage" + 
+	                    request.responseText + "\nerror" + errorData);
+	           }
 		});
-	} */
+	}
 </script>
 </head>
 <body>
@@ -514,7 +579,7 @@ $(function(){
 							class="menu introduce">소개</div></li>
 					<li class="tab-link" data-tab="tab-2"><div class="menu daily" id="${auction.auction_no}" onclick="auction_biddingList(this);">입찰내역</div></li>
 					<li class="tab-link" data-tab="tab-3"><div
-							class="menu question">경매이력</div></li>
+							class="menu question" id="${auction.auction_no}" onclick="auction_background(this);">경매이력</div></li>
 					<li class="tab-link" data-tab="tab-4">
 						<div id="menu"
 							class="menu review" onclick="auctionQnA(1);">문의</div>
@@ -565,7 +630,16 @@ $(function(){
 				</div>
 				<!-- Daily box -->
 				<div id="tab-3" class="tab-content">
-					<div class="daily_box"></div>
+					<div class="auction_background" style="width:100% height:auto;">
+					<table class="auction_backgroundtable">
+						<!-- <tr>
+							<th class="bidder">번호</th>
+							<th class="current_price">판매자</th>
+							<th>제목</th>
+						</tr>  -->
+					</table>
+					
+					</div>
 				</div>
 				<!-- Daily box -->
 				

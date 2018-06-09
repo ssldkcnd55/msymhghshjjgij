@@ -28,6 +28,7 @@ import com.kh.farm.member.model.vo.*;
 import com.kh.farm.payment.model.service.PaymentService;
 import com.kh.farm.payment.model.vo.*;
 import com.kh.farm.shoppingBasket.model.vo.*;
+import com.sun.org.apache.xpath.internal.operations.Mod;
 
 @Controller
 public class PaymentController {
@@ -229,5 +230,14 @@ public class PaymentController {
 		mv.addObject("pc", pc);
 		mv.setViewName("payment/payment_complete");
 		return mv;
+	}
+	@RequestMapping(value="orderDeliveryDetail.do")
+	public ModelAndView selectOrderDeliveryDetail(ModelAndView mv,HttpServletResponse response,@RequestParam("buy_no") int buy_no ) {
+		Payment pm = paymentService.selectOrderDeliveryDetail(buy_no);
+
+		mv.addObject("payment",pm);
+		mv.setViewName("payment/orderDeliveryDetail");
+		return mv;
+		
 	}
 }

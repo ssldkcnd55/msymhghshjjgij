@@ -15,7 +15,56 @@
 	width: 900px;
 	text-align: left;
 	padding-left: 15px;
-	border: 1px solid #bdbdbd;
+}
+ .Omarket{
+	
+	width: 100px;
+	height: 200px;	
+} 
+.carousel-indicators {
+    text-align: center;
+    list-style: none;
+}
+
+.main_visual2{ width:630px; height:300px;/*  border:1px solid #9CC; */  }
+.carousel-control.left {
+	background: rgba(0, 0, 0, 0);
+	color: black;
+	left:-10px;
+}
+.sellerMarketList{
+	width:220px;
+	height:270px;
+	margin-right:23px;
+	border:1px solid #bdbdbd;
+	float:left;
+	text-align: left;
+}
+.sellerMarketList{
+	
+}
+.right.carousel-control,.left.carousel-control{
+	width: 30px;
+}
+.right.carousel-control{
+	margin-right:30px;
+}
+.left.carousel-control{
+	margin-left:30px;
+}
+.carousel-control.right {
+	background: rgba(0, 0, 0, 0);
+	color: black;
+	right:-10px;
+}
+.slide.se{
+    /* width: 300px; */
+    /* height: 500px; */
+    width:auto;
+    height:auto;
+    overflow: hidden;
+    position: relative;
+    margin: 0 auto;
 }
 .tabs{
 	 float:left;
@@ -26,16 +75,16 @@
 .tabs li{
 	float:left;
 }
-.title_box{
+.mainTitle_box{
 	padding-top: 15px;
 	margin-left: 15px;
 }
-.img_box{
+.mainImg_box{
 	margin-top: 20px;
 	width:960px;
 	height:550px;
 }
-.title{
+.mainTitle{
 	color:#462114;
 	font-size: 14pt; font-weight: bold;
 }
@@ -237,7 +286,7 @@ padding-left: 5px;
     vertical-align:bottom;
     margin: 0;
      border: 1px solid #dcdcdc;
-    padding: 15px;
+    padding: 7px 15px 15px 15px;
     color: #5a5a5a;
     background: #f6f6f6;
     height: 80px;
@@ -278,3 +327,127 @@ padding-left: 5px;
     color: #6a6a6a;
    
     }
+    
+    /* flow_chart */
+    @charset "UTF-8";
+
+.viewSelectBox{
+	position: absolute;
+}
+
+.flow_order_seller{
+	width: 890px;
+    margin: 0 auto 10px auto;
+    text-decoration: none;
+}
+.flow_order_seller a{
+	text-decoration: none;
+}
+.flow_order_seller > span:nth-child(1)
+{
+margin-right: 20px;	
+}
+.flow_order_seller a span{
+    font-size: 10pt;
+}
+#flow-cart2{
+height: 152px;
+}
+.flow_order_operator {
+	color:#7e5957;
+    width: 20px;
+    height: 19px;
+    font-size: 17pt;
+    text-align: center;
+    font-weight: bold;
+    float: left;
+    margin: 0px;
+    border: 1px solid #bdbdbd;
+    background: #f2f2f2;
+    line-height: 16px;
+}
+.flow_order_count {
+    width: 30px;
+    size: 3px;
+    float: left;
+    margin: 0px;
+    text-align: right;
+}
+.flow_order_table{
+width: 100%;
+}
+.flow_order_title{
+max-width: 400px;
+text-align: left;
+height: 43px;
+}
+.flow_order_stock{
+	margin-left: 10px;
+	font-size: 9pt;
+}
+.flow_order_price
+{
+
+}
+.flow_order_total_price{
+	font-size: 15pt;
+color: #7e5957;
+font-weight: 800;
+}
+.flow_order_total{
+border-top: 1px solid #bdbdbd;
+text-align: left;
+font-size: 14pt;
+}
+.flow_order_button{
+	text-align: right;
+}
+.flow_order_basket{
+	    color: #512772;
+    background: white;
+    border: 1px solid #7e5957;
+    width: 100px;
+    height: 40px;
+    cursor: pointer;
+}
+.flow_order_buy{
+	background: #7e5957;
+    color: white;
+    border: none;
+    width: 100px;
+    height: 40px;
+     cursor: pointer;
+}
+
+
+.img_box{
+	width:220px;
+	height:170px;
+	border-bottom: 1px solid gray;  
+	margin:0px;
+}
+.title_box{
+	padding: 0px;
+    margin: 0px;
+	width:200px;
+	height:102px;
+	padding-left: 10px;
+	padding-right: 10px;
+	
+}
+
+.title{
+	 font-size: 12pt; margin-bottom: 0 ;
+	 font-weight: bold;
+	 color:#462114;
+}
+
+.content{
+	font-size: 10pt; 
+	margin-top: 0;
+	
+	color:#756059;
+	margin-bottom:0px;
+}
+    
+    

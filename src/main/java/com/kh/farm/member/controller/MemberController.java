@@ -10,7 +10,15 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
+import java.util.Properties;
 
+import javax.mail.Authenticator;
+import javax.mail.Message;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -18,10 +26,13 @@ import javax.xml.ws.Response;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -37,6 +48,8 @@ import com.kh.farm.member.model.service.MemberService;
 import com.kh.farm.member.model.service.MemberServiceImpl;
 import com.kh.farm.member.model.vo.*;
 
+
+
 @Controller
 public class MemberController {
 	@Autowired
@@ -45,6 +58,45 @@ public class MemberController {
 	private ChatService chatService;
 	@Autowired
 	private BCryptPasswordEncoder pwdEncoder;
+	
+	@RequestMapping("customerNaverMod.do")
+	public void customerNaverMod(HttpServletResponse response,Member member,HttpSession session) throws IOException {
+
+		int updateAddr = 0;
+		if (member.getMember_addr() != null) {
+			updateAddr = memberService.updateAddr(member);
+		}
+
+		PrintWriter out=response.getWriter();
+		if (updateAddr > 0) {
+			session.setAttribute("loginUser", member);
+			out.print("o");
+			out.flush();
+			out.close();
+		} else {
+			out.print("x");
+			out.flush();
+			out.close();
+		}
+	}
+	
+	@RequestMapping(value="naverSignUp.do")
+	public void naverSignUp(Member member, HttpServletResponse response) throws Exception {
+		
+		int result=memberService.insertNaverSignUp(member);
+		System.out.println(result);
+		String str="";
+		if(result>0) {
+			str="moveLogin.do";
+		}else {
+			str="오류";
+		}
+		PrintWriter out= response.getWriter();
+		out.println(str);
+		out.flush();
+		out.close();
+		
+	}
 
 	@RequestMapping(value = "signUp.do", method = RequestMethod.POST)
 	public String signUp(Member member, HttpServletRequest request,
@@ -134,6 +186,8 @@ public class MemberController {
 	public String logout(HttpSession session) {	
 		session.removeAttribute("loginUser");
 		session.removeAttribute("chatList");
+		session.removeAttribute("totalCount");
+		session.removeAttribute("todayCount");
 		session.invalidate();
 		
 		return "home";
@@ -284,37 +338,35 @@ public class MemberController {
 	}
 
 	@RequestMapping("customerMod.do")
-	public void customerMod(HttpServletResponse response,Member member,@RequestParam("MEMBER_ID") String member_id, 
-			@RequestParam("MEMBER_PWD") String member_pwd,@RequestParam("MEMBER_ADDR") String member_addr) throws IOException {
+	public void customerMod(HttpServletResponse response,Member member,HttpSession session) throws IOException {
 
-		System.out.println("333"+member_id);
-		int updatePwd = 0;
-		int updateAddr = 0;
+			int updatePwd = 0;
+			int updateAddr = 0;
 
-		if (member_pwd != null) {
-			member.setMember_pwd(pwdEncoder.encode(member_pwd));
-			member.setMember_id(member_id);
-			updatePwd = memberService.updatePwd(member);
+			if (member.getMember_pwd() != null) {
+				member.setMember_pwd(pwdEncoder.encode(member.getMember_pwd()));
+				member.setMember_id(member.getMember_id());
+				updatePwd = memberService.updatePwd(member);
+			}
+
+			if (member.getMember_addr() != null) {
+				member.setMember_addr(member.getMember_addr());
+				member.setMember_id(member.getMember_id());
+				updateAddr = memberService.updateAddr(member);
+			}
+
+			PrintWriter out=response.getWriter();
+			if (updatePwd > 0 || updateAddr > 0) {
+				session.setAttribute("loginUser", member);
+				out.print("o");
+				out.flush();
+				out.close();
+			} else {
+				out.print("x");
+				out.flush();
+				out.close();
+			}
 		}
-
-		if (member_addr != null) {
-			member.setMember_addr(member_addr);
-			member.setMember_id(member_id);
-			System.out.println("444"+member.getMember_addr());
-			updateAddr = memberService.updateAddr(member);
-		}
-
-		PrintWriter out=response.getWriter();
-		if (member.getMember_pwd() != null || member.getMember_addr() != null) {
-			out.print("o");
-			out.flush();
-			out.close();
-		} else {
-			out.print("x");
-			out.flush();
-			out.close();
-		}
-	}
 	
 	@RequestMapping("changeList.do")
 	@ResponseBody
@@ -367,7 +419,6 @@ public class MemberController {
 		List<Member> memberList = memberService.selectSearchMember(keyword,type,currentPage);
 		int limitPage = 10;
 		int listCount = memberService.selectMemberCount();
-		System.out.println("시바");
 		int maxPage=(int)((double)listCount/limitPage+0.9); //ex) 41개면 '5'페이지나와야되는데 '5'를 계산해줌
 		int startPage=((int)((double)currentPage/5+0.8)-1)*5+1;
 		int endPage=startPage+5-1;
@@ -393,13 +444,58 @@ public class MemberController {
 		}
 		
 		JSONObject sendJson = new JSONObject();
-		System.out.println("시바2");
 		sendJson.put("list", jarr);
 		response.setContentType("application/json; charset=utf-8");
 		PrintWriter out = response.getWriter();
 		out.append(sendJson.toJSONString());
 		out.flush();
 		out.close();
+	}
+	@RequestMapping(value="sendmail.do",method=RequestMethod.POST)
+	public void sendMail(HttpServletResponse response,@RequestParam("email") String mail_to) {
+		Member returnMember = memberService.selectIdCheck(mail_to);
+		int vCode = 0;
+		if(returnMember == null) {
+			try {
+				
+				String mail_from = "JakMoolFarm" + "<jakmoolfarm@gmail.com>";
+				String title = null;
+				String contents = null;
+				// 인증번호 보내기
+				title = "JakMoolFarm VERIFICATION CODE EMAIL";
+				vCode = (int) (Math.random() * 8999 + 1000);
+				contents = "VERIFICATION CODE : " + vCode;
+				mail_from = new String(mail_from.getBytes("UTF-8"), "UTF-8");
+				mail_to = new String(mail_to.getBytes("UTF-8"), "UTF-8");
+				Properties props = new Properties();
+				props.put("mail.transport.protocol", "smtp");
+				props.put("mail.smtp.host", "smtp.gmail.com");
+				props.put("mail.smtp.port", "587");
+				props.put("mail.smtp.starttls.enable", "true");
+				props.put("mail.smtp.socketFactory.port", "587");
+				props.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
+				props.put("mail.smtp.socketFactory.fallback", "false");
+				props.put("mail.smtp.auth", "true");
+				Authenticator auth = new SMTPAuthenticator();
+				Session sess = Session.getDefaultInstance(props, auth);
+				MimeMessage msg = new MimeMessage(sess);
+				msg.setFrom(new InternetAddress(mail_from));
+				msg.setRecipient(Message.RecipientType.TO, new InternetAddress(mail_to));
+				msg.setSubject(title, "UTF-8");
+				msg.setContent(contents, "text/html; charset=UTF-8");
+				msg.setHeader("Content-type", "text/html; charset=UTF-8");
+				Transport.send(msg);
+				PrintWriter out = response.getWriter();
+				out.append(String.valueOf(vCode));
+			} catch (Exception e) {
+				e.printStackTrace();
+	
+			} finally {
+	
+			}
+		}else {
+			
+		}
 	}
 }
 

@@ -31,6 +31,26 @@ public class ReportServiceImpl implements ReportService{
 		// TODO Auto-generated method stub
 		return reportDao.selectReportCount(sqlSession);
 	}
+
+	@Override
+	public int changeReportStatus(int report_no) {
+		// TODO Auto-generated method stub
+		return reportDao.changeReportStatus(sqlSession,report_no);
+	}
+
+	@Override
+	public Report selectReport(int report_no) {
+		// TODO Auto-generated method stub
+		return reportDao.selectReport(sqlSession, report_no);
+	}
+
+	@Override
+	public List<Report> selectChangeReport(int currentPage, int type) {
+		// TODO Auto-generated method stub
+		return reportDao.selectChangeReport(sqlSession,currentPage,type);
+	}
+
+	
 	
 	
 }

@@ -13,9 +13,13 @@
 <link href="/farm/resources/css/marketDetail.css" rel="stylesheet" type="text/css" />
 <link href="/farm/resources/css/auctionDetail.css" rel="stylesheet" type="text/css" />
 <link href="/farm/resources/css/marketDetail_modal.css" rel="stylesheet" type="text/css" />
+<link href="/farm/resources/css/homeauction.css" rel="stylesheet" type="text/css" />
+
 <script src="/farm/resources/js/jquery-3.3.1.min.js"></script>
 <script type="text/javascript" src="/farm/resources/js/tabMove.js"></script>
 <script type="text/javascript" src="/farm/resources/js/marketDetail.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script type="text/javascript">
 $(function(){
 	$('.goods-view-show-option-button').click(function(){
@@ -30,66 +34,46 @@ $(function(){
 </script>
 <script type="text/javascript">
 var change = 0;
-///최근 본 상품 쿠키 (현준)///
- $(function(){
-		var time = new Date();
-		time.setDate(time.getDate() + 7);
-		var oldtime = new Date();
-		oldtime.setDate(oldtime.getDate() - 7);
-		var decodedCookie = decodeURIComponent(document.cookie);
-		var temp = decodedCookie.split(';');
-		var ca=[];
-		for(var i=0;i<temp.length;i++)
-			{
-				if(  temp[i].indexOf('farm_cookie_') != -1)
-					{
-					ca.push( temp[i] );
-					}
-			}
-		var market_no= $('#market_no').val();
-			
-		if (document.cookie.indexOf(  'farm_cookie_'+market_no + "="+ market_no + "a") == -1) {
-			//없음
-			if (ca.length > 8) {
-				document.cookie = ca[0] + "; expires=" + oldtime;
-			}
-		} else {
-			//있음
-			document.cookie = 'farm_cookie_'+market_no + "=" + market_no+ "a; expires=" + oldtime;
-		}
 
-		document.cookie = 'farm_cookie_'+ market_no + "=" + market_no+ "a; expires=" + time;
-
-	
-}); 
-///쿠키 끝///
-
-//장바구니 (현준)//
-function addBasket()
-{
+ 
+$(function(){
 	$.ajax({
-		url:"addSoppingBasket.do",
+		url:"sellerMarketList.do",
 		type:"post",
 		data:{
-			market_no: $('[name=market_no]').val(),
-			member_id: $('[name=member_id]').val(),
-			buy_amount: $('[name=buy_amount]').val()
+			member_id:'${market.member_id}'
 		},
-		success:function(){
-			$('#myModal').css("display","block");
-		},
-		error: function(request,status,errorData){
-			console.log("marketDetail.jsp / addBasket();")
-			console.log("error code : " + request.status + "\nmessage" + 
+		dataType: "JSON",
+		success: function(data){
+			var objStr = JSON.stringify(data);
+			var jsonObj = JSON.parse(objStr);
+			
+			var outValues = "";
+			jsonObj.list[i]
+			for(var i in jsonObj.list){
+				if(i == 0){
+					outValues += "<div class='item active' align='center'>";
+				}else if(i % 4 == 0){
+					outValues += "<div class='item' align='center'>";
+				}
+				outValues += "<a href='#'><div class='sellerMarketList'><div class='img_box' style='background-image: url(\"/farm/resources/upload/marketUpload/"+jsonObj.list[i].market_img+"\"); background-size: cover;'></div>"
+							+ "<div class='title_box'><p class='title'>"+jsonObj.list[i].market_title+"</p>"
+							+ "<p class='content'>"+jsonObj.list[i].market_note+"</p><p class='content'>"+jsonObj.list[i].market_price+"</p></div></div></a>";
+				
+				if(i % 4 == 3){
+					outValues += "</div>";
+				}else if(i == Object.keys(jsonObj.list).length){
+					outValues += "</div>";
+				}
+			}
+			$(".carousel-inner").html(outValues);
+			
+		},error: function(request,status,errorData){
+            alert("error code : " + request.status + "\nmessage" + 
                     request.responseText + "\nerror" + errorData);
-           }
+        }
 	});
-}
-function closeModal()
-{
-	$('#myModal').css("display","none");
-}
-
+});
 
 
 /* $(function(){
@@ -345,18 +329,18 @@ function changeprice(){
 
 		<div id="container">
 			<div class="inner-wrap">
-				<div class="title_box">
-					<span class="title">${market.market_title }</span> &nbsp; <span
+				<div class="mainTitle_box">
+					<span class="mainTitle">${market.market_title }</span> &nbsp; <span
 						class="release_date">출고예정일</span>&nbsp;<span class="date">${market.market_releasedate }</span>
 				</div>
-				<div class="img_box"
+				<div class="mainImg_box"
 					style="background-image: url('/farm/resources/upload/marketUpload/${market.market_img}'); background-size:cover;">
 
 				</div>
-				<div class="title_box">
+				<div class="mainTitle_box">
 					<div
 						style="border-bottom: 1px solid #bdbdbd; padding-bottom: 20px;">
-						<span class="title">${market.market_title }</span> &nbsp; <span
+						<span class="mainTitle">${market.market_title }</span> &nbsp; <span
 							class="release_date">출고예정일</span>&nbsp;<span class="date">${market.market_releasedate }</span>
 					</div>
 				</div>
@@ -364,6 +348,102 @@ function changeprice(){
 					<p class="note_content">자연의 힘으로 길러낸 유기 농산물은 기후에 영향을 많이 받습니다. 예를
 						들어 같은 파프리카라 하더라도 한기물과 한여름에 맞는 최고의 산지가 따로 있지요. 컬리는 1년 내내 전국을 뒤져
 						최고만을 전해 드립니다.</p>
+				</div>
+				
+				<div class="mainTitle_box"><div class="mainTitle">판매자의 다른 상품</div></div>
+				
+				<div style="width: 100%; height: 300px;margin-top:20px">
+					<div id="myCarousel" class="carousel slide se" data-ride="carousel">
+						<!-- Indicators -->
+						<ol class="carousel-indicators">
+							<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+							<li data-target="#myCarousel" data-slide-to="1"></li>
+							<li data-target="#myCarousel" data-slide-to="2"></li>
+						</ol>
+
+						<!-- Wrapper for slides -->
+						<div class="carousel-inner auction">
+							<!-- <div class='item active' align='center'>
+								<div class='sellerMarketList'>
+									<div class="img_box" style="background-image: url('/farm/resources/upload/marketUpload/apple.jpg'); background-size: cover;"></div>
+									<div class="title_box">
+										<p class="title">토마토를 팔아보까여</p>
+										<p class="content">소개소개소개소개쇄쇄소새ㅗ개괘쇄쇄고새ㅙ괘쇄소새괘괘소새ㅙ</p>
+										<p class="content">1000원</p>
+									</div>
+								</div>
+								<div class='sellerMarketList'>
+									<div class="img_box" style="background-image: url('/farm/resources/upload/marketUpload/apple.jpg'); background-size: cover;"></div>
+									<div class="title_box">
+										<p class="title">토마토를 팔아보까여</p>
+										<p class="content">소개소개소개소개쇄쇄소새ㅗ개괘쇄쇄고새ㅙ괘쇄소새괘괘소새ㅙ</p>
+										<p class="content">1000원</p>
+									</div>
+								</div>
+								<div class='sellerMarketList'>
+									<div class="img_box" style="background-image: url('/farm/resources/upload/marketUpload/apple.jpg'); background-size: cover;"></div>
+									<div class="title_box">
+										<p class="title">토마토를 팔아보까여</p>
+										<p class="content">소개소개소개소개쇄쇄소새ㅗ개괘쇄쇄고새ㅙ괘쇄소새괘괘소새ㅙ</p>
+										<p class="content">1000원</p>
+									</div>
+								</div>
+								<div class='sellerMarketList'>
+									<div class="img_box" style="background-image: url('/farm/resources/upload/marketUpload/apple.jpg'); background-size: cover;"></div>
+									<div class="title_box">
+										<p class="title">토마토를 팔아보까여</p>
+										<p class="content">소개소개소개소개쇄쇄소새ㅗ개괘쇄쇄고새ㅙ괘쇄소새괘괘소새ㅙ</p>
+										<p class="content">1000원</p>
+									</div>
+								</div>
+							</div>
+							<div class='item' align='center'>
+								<div class='sellerMarketList'>
+									<div class="img_box" style="background-image: url('/farm/resources/upload/marketUpload/apple.jpg'); background-size: cover;"></div>
+									<div class="title_box">
+										<p class="title">토마토를 팔아보까여</p>
+										<p class="content">소개소개소개소개쇄쇄소새ㅗ개괘쇄쇄고새ㅙ괘쇄소새괘괘소새ㅙ</p>
+										<p class="content">1000원</p>
+									</div>
+								</div>
+								<div class='sellerMarketList'>
+									<div class="img_box" style="background-image: url('/farm/resources/upload/marketUpload/apple.jpg'); background-size: cover;"></div>
+									<div class="title_box">
+										<p class="title">토마토를 팔아보까여</p>
+										<p class="content">소개소개소개소개쇄쇄소새ㅗ개괘쇄쇄고새ㅙ괘쇄소새괘괘소새ㅙ</p>
+										<p class="content">1000원</p>
+									</div>
+								</div>
+								<div class='sellerMarketList'></div>
+								<div class='sellerMarketList'></div>
+							</div>
+							<div class='item' align='center'>
+								<div class='sellerMarketList'>
+									<div class="img_box" style="background-image: url('/farm/resources/upload/marketUpload/apple.jpg'); background-size: cover;"></div>
+									<div class="title_box">
+										<p class="title">토마토를 팔아보까여</p>
+										<p class="content">소개소개소개소개쇄쇄소새ㅗ개괘쇄쇄고새ㅙ괘쇄소새괘괘소새ㅙ</p>
+										<p class="content">1000원</p>
+									</div>
+								</div>
+								<div class='sellerMarketList'></div>
+								<div class='sellerMarketList'></div>
+								<div class='sellerMarketList'></div>
+							</div> -->
+
+						</div>
+						<!-- Left and right controls -->
+								<a class="left carousel-control" href="#myCarousel"
+									data-slide="prev"> <span
+									class="glyphicon glyphicon-chevron-left"></span> <span
+									class="sr-only">Previous</span>
+								</a> <a class="right carousel-control" href="#myCarousel"
+									data-slide="next"> <span
+									class="glyphicon glyphicon-chevron-right"></span> <span
+									class="sr-only">Next</span>
+								</a>
+
+					</div>
 				</div>
 				<%-- <div class="note">
        				<center>
@@ -509,7 +589,8 @@ function changeprice(){
 			<%@  include file="../inc/foot.jsp"%>
 		</div>
 	</div>
-	<div class="goods-view-flow-cart __active" id="flow-cart">
+	
+	<%-- <div class="goods-view-flow-cart __active" id="flow-cart">
 		<div class="goods-view-flow-cart-wrapper">
 			<button type="button" id="show-option-button"
 				class="goods-view-show-option-button">
@@ -552,19 +633,19 @@ function changeprice(){
 										<td>현재 남은 수량</td>
 										<td>${market.market_amount- market.remaining }</td>
 									</tr>									
-								<%-- 	<tr>
+									<tr>
 										<td>출하 예정일</td>
 										<td>  </td>
 										<td>${market.market_releasedate}</td>
 									</tr>
-									 --%>
+									
 									
 									<tr>
 										<td></td>
 										<td>  </td>
 										<td>총 상품 금액 : <span class="mkPrice">${market.market_price }원</span></td>
 									</tr>
-								<%-- 	<tr><td colspan="3"><a href="javascript: viewSelectBox() ">${market.member_id}</a> </td></tr> --%>
+							 	<tr><td colspan="3"><a href="javascript: viewSelectBox() ">${market.member_id}</a> </td></tr>
 									</table>
 								<!-- sendMsg -->
 						
@@ -603,5 +684,77 @@ function changeprice(){
 
 		</div>
 	</div>
+</body>
+</html> --%>
+<div class="goods-view-flow-cart __active" id="flow-cart">
+		<div class="goods-view-flow-cart-wrapper">
+			<button type="button"  id="show-option-button" class="goods-view-show-option-button">
+			<span class="goods-view-show-option-button-value">옵션선택</span></button>
+
+			<div class="goods-view-flow-cart __active" id="flow-cart2">
+					<div class="flow_order_seller">판매자 : <span style="font-weight: 600">${market.member_name}</span><!-- (<span>판매자아이디${market.member_id}</span>) -->
+					<a href="javascript: sendProductMsg('${loginUser.member_id}','${market.member_id}'  )"><span>상품 문의</span></a> | <a href="javascript: sendMsg()"><span>1:1대화</span></a>
+					</div>
+					
+				<div class="goods-view-flow-cart-wrapper">
+					<button type="button" id="show-option-button"
+						class="goods-view-show-option-button __active">
+						<span class="goods-view-show-option-button-value">옵션선택</span>
+					</button>
+					<div id="market-flow-cart-content" class="goods-view-flow-cart-content __active">
+
+
+						<c:if test="${not empty sessionScope.loginUser  }">
+							<form action="marketBuy.do" method="post">
+								<input type="hidden" name="market_no" value="${market.market_no }"> 
+								<input type="hidden" name="member_id" value="${sessionScope.loginUser.member_id}">
+							
+								<div>
+								<table class="flow_order_table">
+							<tr><td class="flow_order_title">${market.market_title}<span class="flow_order_stock" style="margin-left: 10px"> | <span>${market.market_amount- market.remaining }</span>개 남음</span></td>
+							<td><div class="amount_box" > <a href="javascript: countOperator(-1)"><div class="flow_order_operator">-</div></a>
+                    		 <input type="number" name="buy_amount" class="flow_order_count" value="1" min="1">
+                    		<a href="javascript: countOperator(+1)"><div class="flow_order_operator">+</div></a></div></td>
+							<td class="flow_order_price"><span> ${market.market_price }</span>원</td>
+							<td class="flow_order_button"><input type="button" value="장바구니" onclick="addBasket()" class="flow_order_basket"></td></tr>
+							<tr><td class="flow_order_total" colspan="3">총 상품 금액 : <span class="flow_order_total_price">${market.market_price }</span>원</td>
+							<td class="flow_order_button">	<input type="submit" value="구매하기" class="flow_order_buy"> </td>
+							</tr>
+								</table>
+								</div>	
+			
+							</form>
+
+						</c:if>
+						<c:if test="${empty sessionScope.loginUser  }">
+						<div class="loginmessage">로그인이 필요한 서비스 입니다.</div>
+						</c:if>
+						
+						<!-- 장바구니 모달창 -->
+						<div id="myModal" class="modal">
+							<div class="modal-content">
+								<div class="md_top">
+									<span class="md_top_title"><strong>장바구니 담기</strong></span>
+								</div>
+								<div class="md_mid">
+									<div class="md_mid_content">선택하신 상품을 장바구니에 담았습니다.</div>
+									<div class="md_mid_box">
+									<a href="javascript: closeModal();" class="md_mid_close_a"> <span class="md_mid_close">계속쇼핑</span></a> 
+									<a href="selectShoppingBasket.do" class="md_mid_basket_a"> <span class="md_mid_basket">장바구니</span></a>
+									</div>
+								</div>
+							</div>
+							<input type="hidden" id="market_no" value="${market.market_no }">
+						</div><!-- 장바구니 모달 끝 -->
+						
+						<br> <br> <br> <br>
+					</div>					
+				</div>
+			</div>
+
+		</div>
+	</div>
+
+
 </body>
 </html>

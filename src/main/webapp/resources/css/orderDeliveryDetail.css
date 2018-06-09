@@ -1,0 +1,155 @@
+@charset "UTF-8";
+
+td{
+	border-bottom: 1px solid #dcdcdc;
+	padding: 15px;
+	margin: 0;
+	
+}
+.tbStyle td:nth-child(1){
+	width:200px;
+	text-align: center; 
+	background: #f6f6f6;
+	font-weight: bold;
+	color: #4b4b4b;
+	
+}
+
+.tbStyle td:nth-child(2){
+	width:760px;
+	
+}
+.title{
+	margin-bottom: 5px;
+	font-size: 13pt;
+	color: #4d4d4d;
+	display: inline-block;
+}
+
+table{
+	    border-collapse: collapse;
+	    border: 1px solid #dcdcdc;
+	    font-size: 11pt;
+}
+
+.first{
+	border-top: 2.8px solid #7d7d7d;
+}
+.first.number{
+	color: #d50000;
+}
+.previousBtn{
+	float: left;
+	border: 1px solid #dcdcdc;
+	padding: 5px 15px 5px 15px;
+	color: #626262;
+	cursor: pointer;
+	border-radius: 3px;
+	
+}
+
+.paytable{
+	width: 100px;	
+	border-right: 1px dotted #dcdcdc;
+	border-top: 2.8px solid #7d7d7d;
+	background: #f6f6f6;
+	font-weight: bold;
+	color: #626262;
+	text-align: center;
+}
+.paytable.info{
+	width: 560px;	
+	background: white;
+	text-align: left;
+}
+.paytable.info.s{
+	width: 560px;	
+	
+	background: white;
+}
+
+
+.paytable.s{
+	width: 100px;	
+	border-right: 1px dotted #dcdcdc;
+	border-top:none;
+	background: #f6f6f6;
+	color: #626262;
+	font-weight: normal;
+	
+	
+}
+paytabletb{
+	border-bottom: 1px dotted #dcdcdc;
+	
+}
+	
+.bigtitle{
+	text-align: center;
+	font-size: 14pt;
+	font-weight: bold;
+	margin-right: 50px;
+	color: #393939;
+}
+.marketImg{
+	width: 50px;
+	height: 50px;
+	background-size: cover;
+	float: left;
+	margin-right: 10px;
+}
+.plus{
+	font-size: 14pt;
+	color: #df0000;
+	font-weight: bold;
+	float: left;
+	padding-top: 0px;
+	text-align:right;
+	margin-left: 700px;
+}
+.payment td:nth-child(1){
+	width: 200px;
+	background: #f6f6f6;
+	font-weight:bold;
+	color: #626262;
+	
+}
+.payment td:nth-child(2) {
+	width:760px;
+	text-align: right;
+}
+
+.payment{
+
+border:7px solid #dcdcdc;
+border-top: 5px solid #dcdcdc;	
+}
+.orderPay{
+	color: red;
+	font-size: 14pt;
+	font-weight: bold;
+	float: left;
+	margin-left: 685px;
+	margin-bottom: 5px;
+}
+.check{
+	background-image: url("/farm/resources/images/check.png");
+	background-size: cover;
+	width:20px;
+	height: 15px;
+	display: inline-block;
+	margin-right: 5px;
+}
+.delBtn{
+	padding:5px;
+	
+	width:60px;
+	background: #3d7bfc;
+	border-radius: 3px;
+	color: white;
+	font-weight: bold;
+	font-size: 10pt;
+	text-align: center;
+	margin-top: 5px;
+	margin-left: 13px;
+}

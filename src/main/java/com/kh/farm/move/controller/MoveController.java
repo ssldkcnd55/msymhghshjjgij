@@ -245,5 +245,10 @@ public class MoveController {
 	public String moveAdminReport() {
 		return "admin/admin_report";
 	}
+	
+	@RequestMapping("moveOrderDeliveryDetail.do")
+	public String moveOrderDeliveryDetail() {
+		return "payment/orderDeliveryDetail";
+	}
 }
 

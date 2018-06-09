@@ -34,7 +34,10 @@
 			type: "post",
 			data : {cname : cname,
 				sort :sort,
-				page : count},
+				page : count
+				<c:if test="${search != null}">
+			,search : "${search}"
+				</c:if>},
 			dataType: "JSON",
 			success: function(data){
 				var objStr = JSON.stringify(data);
@@ -65,7 +68,10 @@
 				type: "post",
 				data : {ctype : ctype,
 					sort :sort,
-					page : count},
+					page : count
+					<c:if test="${search != null}">
+				,search : "${search}"
+					</c:if>},
 				dataType: "JSON",
 				success: function(data){
 					var objStr = JSON.stringify(data);
@@ -102,7 +108,10 @@
 				data : {sort : sort,
 					page : count,
 					ctype : ctype,
-					cname : cname},
+					cname : cname
+					<c:if test="${search != null}">
+				,search : "${search}"
+					</c:if>},
 				dataType: "JSON",
 				success: function(data){
 					var objStr = JSON.stringify(data);

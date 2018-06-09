@@ -234,7 +234,7 @@ function change_withdraw(id) {
 $(function(){
 	$("#select_val").change(function(){
 	var type = $(this).val();
-		
+	
 		$.ajax({
 			url:"changeList.do",
 			type:"post",
@@ -287,7 +287,7 @@ $(function(){
 				var type = jsonObj.list[0].type;
 				var values ="";
 				if(startPage>5){
-					values+= "<a href='javascript:memberChangePage("+(startPage-1)+type+")'>&laquo;</a>" 
+					values+= "<a href='javascript:memberChangePage("+(startPage-1)+")'>&laquo;</a>" 
 				}else{
 					values+="<a>&laquo;</a>";	
 				}
@@ -295,11 +295,11 @@ $(function(){
 					if(i==currentPage){
 						values+= "<a class='active'>"+i+"</a>";
 					}else{
-						values+= "<a href='javascript:memberChangePage("+i+type+");'>"+i+"</a>";
+						values+= "<a href='javascript:memberChangePage("+i+");'>"+i+"</a>";
 					}
 				}
 				if(endPage<maxPage){
-					values+="<a href='javascript:memberChangePage("+(endPage+1)+type+")'>&raquo;</a>";
+					values+="<a href='javascript:memberChangePage("+(endPage+1)+")'>&raquo;</a>";
 					
 				}else{
 					values+="<a>&raquo;</a>";
@@ -317,6 +317,8 @@ $(function(){
 	
 //필터적용 페이징
 function memberChangePage(page,type){
+	var type = $("#select_val").val();
+	
 	$.ajax({
 		url:"changeList.do",
 		type:"post",

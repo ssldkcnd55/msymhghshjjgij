@@ -31,7 +31,7 @@ where mk.MARKET_NO=sb.MARKET_NO and sb.MEMBER_ID= #{member_id}
 	<select id="selectBuyAmount" parameterType="Payment" resultType="int">
 	
 	<![CDATA[
-	select count(BUY_AMOUNT) from SHOP_BASKET where MEMBER_ID = #{member_id} and MARKET_NO = #{market_no} 
+	select BUY_AMOUNT from SHOP_BASKET where MEMBER_ID = #{member_id} and MARKET_NO = #{market_no} 
 	]]>
 	</select>
 	

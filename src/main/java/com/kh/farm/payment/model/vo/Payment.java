@@ -18,7 +18,7 @@ public class Payment implements java.io.Serializable {
 	private int market_no; // 판매글 번호
 	private int auction_no; // 경매글 번호
 	private String member_id; // 구매자 아이디
-	private Date buy_date; // 구매 일자
+	private Date buy_date; // 구매 일자 
 	private int buy_amount; // 구매량
 	private String buy_addr; // 배송지 주소
 	private String buy_tel; // 배송지 전화번호

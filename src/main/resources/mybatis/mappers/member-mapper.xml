@@ -21,7 +21,11 @@
 			select * from member where member_id=#{member_id}
 		]]>
 </select>
-
+<select id="selectIdCheck" parameterType="string" resultType="member">
+		<![CDATA[
+			select * from member where member_id=#{member_id}
+		]]>
+</select>
 <select id="selectMemberList" parameterType="PageNumber" resultType="Member">
 	<![CDATA[
 	select * from (select rownum rnum, member_id, member_category, member_name, 
@@ -158,4 +162,18 @@
 	
 	]]>
 </select>
+
+<select id="selectCheckId" parameterType="member" resultType="Member">
+<![CDATA[
+select * from MEMBER where MEMBER_ID = #{member_id}
+]]>
+</select>
+<insert id="insertNaverSignUp" parameterType="member">
+<![CDATA[
+insert into member values (
+					#{member_id}, 0, 1, #{member_name}, 
+					#{member_addr}, #{member_tel}, 'Y', 'default.png','N',0)
+]]>
+</insert>
+
 </mapper>

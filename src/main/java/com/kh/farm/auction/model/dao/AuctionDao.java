@@ -17,6 +17,7 @@ import com.kh.farm.auction.model.vo.AuctionQnA;
 import com.kh.farm.common.model.vo.PageNumber;
 import com.kh.farm.member.model.vo.Member;
 import com.kh.farm.notice.model.vo.Notice;
+import com.kh.farm.payment.model.vo.Payment;
 import com.kh.farm.qna.model.vo.Market_qna;
 
 @Repository
@@ -48,15 +49,20 @@ public class AuctionDao {
 		return sqlSession.selectOne("auction.selectAuctionDetail",auction_no);
 	}
 
-	public List<Auction> selectAuctionList(SqlSessionTemplate sqlSession, int page) {
+	public List<Auction> selectAuctionList(SqlSessionTemplate sqlSession, int currentPage) {
 		PageNumber pn = new PageNumber();
-		pn.setStartRow(page * 9 -8);
+		pn.setStartRow(currentPage * 9 -8);
 		pn.setEndRow(pn.getStartRow() + 8);
 		List<Auction> list = sqlSession.selectList("auction.selectAuctionList",pn);
 		list.toString();
 		return list;
 	}
 
+	//경매 맨처음 List 카운트
+	public int selectajaxAuctionListCount(SqlSessionTemplate sqlSession) {
+		return sqlSession.selectOne("auction.selectajaxAuctionListCount");
+
+	}
 
 	public Auction deleteAuction(SqlSessionTemplate sqlSession, int auction_no) {
 		return sqlSession.selectOne("auction.deleteAuction",auction_no);
@@ -227,6 +233,102 @@ public class AuctionDao {
 		return sqlSession.selectOne("auction.selectauction_startdateCheck");
 
 	}
+
+
+	public List<Auction> selectLeft_AuctionStandBy(SqlSessionTemplate sqlSession, int currentPage) {
+		//  select box에서 경매대기: 0
+		int startRow =(currentPage-1)*10+1; //1~10, 11~20 계산할 거 ex) 1, 11, 21, 31,)
+		int endRow = startRow+8;
+		PageNumber pnum = new PageNumber();
+		pnum.setStartRow(startRow);
+		pnum.setEndRow(endRow);
+		return sqlSession.selectList("auction.selectLeft_AuctionStandBy",pnum);
+
+	}
+
+	public List<Auction> selectLeft_AuctionProgress(SqlSessionTemplate sqlSession, int currentPage) {
+		//  select box에서 경매중 : 1
+		int startRow =(currentPage-1)*10+1; //1~10, 11~20 계산할 거 ex) 1, 11, 21, 31,)
+		int endRow = startRow+8;
+		PageNumber pnum = new PageNumber();
+		pnum.setStartRow(startRow);
+		pnum.setEndRow(endRow);
+		return sqlSession.selectList("auction.selectLeft_AuctionProgress",pnum);
+	}
+
+	public List<Auction> selectLeft_AuctionFinish(SqlSessionTemplate sqlSession, int currentPage) {
+		// select box에서 경매마감 : 2
+		int startRow =(currentPage-1)*10+1; //1~10, 11~20 계산할 거 ex) 1, 11, 21, 31,)
+		int endRow = startRow+8;
+		PageNumber pnum = new PageNumber();
+		pnum.setStartRow(startRow);
+		pnum.setEndRow(endRow);
+		return sqlSession.selectList("auction.selectLeft_AuctionFinish",pnum);
+	}
+
+	public List<Auction> selectLeft_boxLatest(SqlSessionTemplate sqlSession, int currentPage) {
+		// select box에서 경매 최신순: 3
+		int startRow =(currentPage-1)*10+1; //1~10, 11~20 계산할 거 ex) 1, 11, 21, 31,)
+		int endRow = startRow+8;
+		PageNumber pnum = new PageNumber();
+		pnum.setStartRow(startRow);
+		pnum.setEndRow(endRow);
+		return sqlSession.selectList("auction.selectLeft_boxLatest",pnum);
+	}
+
+	public int selectLeft_AuctionStandByCount(SqlSessionTemplate sqlSession) {
+		return sqlSession.selectOne("auction.selectLeft_AuctionStandByCount");
+	}
+
+	public int selectLeft_AuctionProgressCount(SqlSessionTemplate sqlSession) {
+		return sqlSession.selectOne("auction.selectLeft_AuctionProgressCount");
+	}
+
+	public int selectLeft_AuctionFinishCount(SqlSessionTemplate sqlSession) {
+		return sqlSession.selectOne("auction.selectLeft_AuctionFinishCount");
+	}
+
+	public int selectLeft_boxLatestCount(SqlSessionTemplate sqlSession) {
+		return sqlSession.selectOne("auction.selectLeft_boxLatestCount");
+	}
+
+	public List<Auction> select_auction_background(SqlSessionTemplate sqlSession, String member_id) {
+		return sqlSession.selectList("auction.select_auction_background",member_id);
+	}
+
+	public List<Auction> selectmoreAuctionCategory(SqlSessionTemplate sqlSession, int currentPage, int type) {
+		PageNumber pn = new PageNumber();
+		pn.setStartRow(currentPage * 9 -8);
+		pn.setEndRow(pn.getStartRow() + 8);
+		pn.setSelect(type);
+		return sqlSession.selectList("auction.selectmoreAuctionCategory",pn);
+
+	}
+
+	public int selectmoreAuctionCategoryCount(SqlSessionTemplate sqlSession, int type) {
+		return sqlSession.selectOne("auction.selectmoreAuctionCategoryCount",type);
+
+	}
+
+	public int updateAuctionBuy(SqlSessionTemplate sqlSession, int  auction_no) {
+		return sqlSession.update("auction.updateAuctionBuy",auction_no);
+
+	}
+
+	public int insertAuctionBuy(SqlSessionTemplate sqlSession, Auction auction) {
+		return sqlSession.insert("auction.insertAuctionBuy",auction);
+
+	}
+
+	public Payment selectAuctionBuy(SqlSessionTemplate sqlSession, int  auction_no) {
+		return sqlSession.selectOne("auction.selectAuctionBuy",auction_no);
+	}
+	
+
+	
+	
+
+	
 
 
 	

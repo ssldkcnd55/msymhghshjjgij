@@ -120,4 +120,21 @@ public class MemberServiceImpl implements MemberService {
 		}
 		
 	}
+
+	@Override
+	public Member selectIdCheck(String mail_to) {
+		// TODO Auto-generated method stub
+		return memberDao.selectIdCheck(sqlSession,mail_to);
+	}
+
+	@Override
+	public Member selectCheckId(Member member) {
+		return memberDao.selectCheckId(member, sqlSession);
+	}
+
+	@Override
+	public int insertNaverSignUp(Member member) {
+		// TODO Auto-generated method stub
+		return memberDao.insertNaverSignUp(member,sqlSession);
+	}
 }

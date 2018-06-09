@@ -100,6 +100,7 @@
 						if (count == 1) {
 							$(".carousel-inner.auction").html("등록된 경매가 없습니다.");
 						} else if (count < 6) {
+							
 							$(".carousel-inner.auction").html(outValues1);
 						} else if (count < 10) {
 							$(".carousel-inner.auction").html(
@@ -266,6 +267,7 @@
 		location.href = "/farm/moveQuote.do";
 
 	}
+	
 </script>
 </head>
 
@@ -323,7 +325,8 @@
 								data-ride="carousel">
 								<!-- Indicators -->
 								<ol class="carousel-indicators">
-									<li data-target="#myCarouselquote" data-slide-to="0" class="active"></li>
+									<li data-target="#myCarouselquote" data-slide-to="0" class="active">
+									</li>
 									<li data-target="#myCarouselquote" data-slide-to="1"></li>
 									<li data-target="#myCarouselquote" data-slide-to="2"></li>
 								</ol>

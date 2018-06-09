@@ -25,6 +25,7 @@ public class MarketDao {
 		PageNumber pn = new PageNumber();
 		pn.setStartRow(page * 9 -8);
 		pn.setEndRow(pn.getStartRow() + 8);
+		pn.setSearch(search);
 		System.out.println(sort);
 		if(ctype != null && ctype != "")
 			pn.setCtype(ctype);
@@ -38,7 +39,6 @@ public class MarketDao {
 
 	public Market marketInfo(SqlSessionTemplate sqlSession, int market_no) {
 		Market mk = sqlSession.selectOne("market.marketInfo",market_no);
-		
 		return mk;
 	}
 
@@ -242,5 +242,16 @@ public class MarketDao {
 	public ArrayList<Market> selectCusMarketThree(SqlSessionTemplate sqlSession) {
 		List<Market> ac = sqlSession.selectList("market.selectCusMarketThree");
 		return (ArrayList)ac;
+	}
+
+	public List<Market> selectSellerMarketList(SqlSessionTemplate sqlSession, String member_id) {
+		// TODO Auto-generated method stub
+		List<Market> list = sqlSession.selectList("market.selectSellerMarketList",member_id);
+		return list;
+	}
+
+	public int selectSellerMarketCount(SqlSessionTemplate sqlSession, String member_id) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("market.selectSellerMarketCount",member_id);
 	}
 }
