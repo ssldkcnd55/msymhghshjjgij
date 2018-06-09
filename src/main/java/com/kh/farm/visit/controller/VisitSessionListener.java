@@ -13,12 +13,13 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
 import com.kh.farm.visit.model.dao.VisitDao;
-@Controller
+/*@Controller*/
 public class VisitSessionListener implements HttpSessionListener{
-	@Autowired
-	private VisitDao visitDao;
+	/*@Autowired
+	private VisitDao visitDao;*/
 	@Override
 	public void sessionCreated(HttpSessionEvent sessionv) {
+		VisitDao visitDao = new VisitDao();
 		if(sessionv.getSession().isNew()) {
 			int result = visitDao.visitCount();
 			System.out.println(result);

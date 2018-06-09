@@ -28,7 +28,7 @@
 		 <typeAlias type="com.kh.farm.category.model.vo.Category" alias="Category" /> 
 		 <typeAlias type="com.kh.farm.common.model.vo.PageNumber" alias="PageNumber" />  
 		 <typeAlias type="com.kh.farm.report.model.vo.Report" alias="Report"/>	
-
+		 <typeAlias type="com.kh.farm.visit.model.vo.Visit" alias="Visit"/>	
 	</typeAliases>
 
 	<mappers>
@@ -45,5 +45,7 @@
 		<mapper resource="mybatis/mappers/auctionhistroy-mapper.xml" />
 		<mapper resource="mybatis/mappers/report-mapper.xml" />
 		<mapper resource="mybatis/mappers/visit-mapper.xml" />
+		<mapper resource="mybatis/mappers/visit-mapper2.xml" />
+		
 	</mappers>
 </configuration>
