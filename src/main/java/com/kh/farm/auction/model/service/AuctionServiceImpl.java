@@ -218,13 +218,13 @@ public class AuctionServiceImpl implements AuctionService{
 	}
 	
 	@Override
-	public List<Auction> selectmoreAuctionCategory(int currentPage, int type) {
-		return auctionDao.selectmoreAuctionCategory(sqlSession,currentPage,type);
+	public List<Auction> selectmoreAuctionCategory(int currentPage, int atype) {
+		return auctionDao.selectmoreAuctionCategory(sqlSession,currentPage,atype);
 	}
 	
 	@Override
-	public int selectmoreAuctionCategoryCount(int type) {
-		return auctionDao.selectmoreAuctionCategoryCount(sqlSession,type);
+	public int selectmoreAuctionCategoryCount(int atype) {
+		return auctionDao.selectmoreAuctionCategoryCount(sqlSession,atype);
 
 	}
 	
@@ -243,5 +243,15 @@ public class AuctionServiceImpl implements AuctionService{
 	public Payment selectAuctionBuy(int  auction_no) {
 		return auctionDao.selectAuctionBuy(sqlSession,auction_no);
 
+	}
+	
+	@Override
+	public Payment selectAuctionPayment(int buy_no) {
+		return auctionDao.selectAuctionPayment(sqlSession,buy_no);
+	}
+	
+@Override
+	public Auction selectAuction(int auction_no) {
+		return auctionDao.selectAuction(sqlSession,auction_no);
 	}
 }

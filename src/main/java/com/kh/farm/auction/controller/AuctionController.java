@@ -164,7 +164,7 @@ public class AuctionController {
 	    for(Auction a : AuctionList) {
 	    	 JSONObject jsq = new JSONObject();
 	    	 jsq.put("rnum", a.getRnum());
-	    	 jsq.put("auction_no", a.getRnum());
+	    	 jsq.put("auction_no", a.getAuction_no());
 	    	 jsq.put("member_id", a.getMember_id());
 	    	 jsq.put("category_no", a.getCategory_no());
 	    	 jsq.put("auction_title", a.getAuction_title());
@@ -237,11 +237,12 @@ public class AuctionController {
 	@RequestMapping(value="moreAuctionCategory.do",method=RequestMethod.POST)
 	@ResponseBody
 	public void moreAuctionCategory(HttpServletResponse response,
-			@RequestParam("page") int currentPage,@RequestParam("type") int type
+			@RequestParam("page") int currentPage,@RequestParam("atype") int atype
 			)throws IOException {
-		List<Auction> moreAuctionCategory = auctionService.selectmoreAuctionCategory(currentPage,type);
+		System.out.println("경메 카테고리 더 보기");
+		List<Auction> moreAuctionCategory = auctionService.selectmoreAuctionCategory(currentPage,atype);
 		System.out.println("moreAuctionCategory : "+moreAuctionCategory.toString());
-		int listCount = auctionService.selectmoreAuctionCategoryCount(type);
+		int listCount = auctionService.selectmoreAuctionCategoryCount(atype);
 		System.out.println("listCount : "+listCount);
 		JSONArray jarr = new JSONArray();
 		
@@ -809,8 +810,8 @@ public class AuctionController {
 			@RequestParam(value="member_id") String member_id, Auction auction)
 			throws IOException{
 		
-		System.out.println("auction_no:"+auction_no);
-		System.out.println("member_id"+member_id);
+		System.out.println("auction_no: "+auction_no);
+		System.out.println("member_id: "+member_id);
 		System.out.println("즉시 구매 컨트롤러 실행 ");
 		int auction_Buy = auctionService.updateAuctionBuy(auction_no);
 		System.out.println("update : "+auction_Buy);
@@ -820,9 +821,28 @@ public class AuctionController {
 		System.out.println("pay:  "+pay.toString());
 		int buy_no = pay.getBuy_no();
 		System.out.println("buy_no : "+buy_no);
-		return "redirect:/makePayment.do?buy_no="+buy_no;
+		return "redirect:/auctionPaymentinfo.do?buy_no="+buy_no;
 		
 	}
+	
+	@RequestMapping(value="auctionPaymentinfo.do")
+	public ModelAndView auctionPaymentinfo(ModelAndView mv,Payment payment,Auction auction) {
+		int buy_no = payment.getBuy_no();
+		System.out.println("buy_no : "+buy_no);
+		
+		Payment plist = auctionService.selectAuctionPayment(buy_no);
+		System.out.println("paumentList : "+plist.toString());
+		
+		int auction_no = plist.getAuction_no();
+		Auction alist = auctionService.selectAuction(auction_no);
+		System.out.println("alist : "+alist.toString());
+		
+		mv.addObject("auction", alist);
+		mv.addObject("payment", plist);
+		mv.setViewName("auction/auctionPayment");
+		return mv;
+	}
+	
 
 }
 

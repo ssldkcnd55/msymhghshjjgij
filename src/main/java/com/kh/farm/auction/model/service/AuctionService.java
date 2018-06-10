@@ -98,10 +98,10 @@ public interface AuctionService {
 	List<Auction> select_auction_background(String member_id);
 
 	//경매 카테고리 더보기
-	List<Auction> selectmoreAuctionCategory(int currentPage, int type);
+	List<Auction> selectmoreAuctionCategory(int currentPage, int atype);
 	
 	//경매 카테고리 더보기 listCount
-	int selectmoreAuctionCategoryCount(int type);
+	int selectmoreAuctionCategoryCount(int atype);
 
 	//경매 즉시 구매 경매 태이블 update
 	int updateAuctionBuy(int auction_no);
@@ -110,6 +110,10 @@ public interface AuctionService {
 	int insertAuctionBuy(Auction auction);
 
 	Payment selectAuctionBuy(int  auction_no);
+
+	Payment selectAuctionPayment(int buy_no);
+
+	Auction selectAuction(int auction_no);
 
 	
 

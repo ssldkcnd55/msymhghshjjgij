@@ -22,9 +22,9 @@
 	</listener>
 	
 	<!-- 방문자 카운트 리스너 -->
-	<listener>
+	<!-- <listener>
       <listener-class>com.kh.farm.visit.controller.VisitSessionListener</listener-class>
-	</listener>
+	</listener> -->
 	
 
 	<!-- Processes application requests -->

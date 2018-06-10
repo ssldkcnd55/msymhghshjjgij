@@ -3,6 +3,7 @@ package com.kh.farm.member.model.service;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.kh.farm.visit.model.vo.Visit;
 import com.kh.farm.member.exception.LoginFailException;
 import com.kh.farm.member.model.vo.Member;
 
@@ -41,4 +42,6 @@ public interface MemberService {
 	Member selectCheckId(Member member);
 
 	int insertNaverSignUp(Member member);
+
+	int insertVisit(Member returnMember);
 }

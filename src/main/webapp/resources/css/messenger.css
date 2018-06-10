@@ -801,3 +801,26 @@ margin-top:4px;
 	width: 100px;
 	height: 50px;
 }
+
+/*질문 메시지*/
+.qes_alarm_head{
+    text-align: center;
+    font-size: 11pt;
+    width: 180px;
+    height: 30px;
+    background-color: #7e5957;
+    color: white;
+    line-height: 30px;
+    vertical-align: middle;
+}
+.qes_alarm_head img{
+	    width: 15px;
+    vertical-align: middle;
+    margin-right: 5px;
+    margin-bottom: 3px;
+}
+
+.qes_alarm_img{
+width:180px;
+margin-top:4px;
+}

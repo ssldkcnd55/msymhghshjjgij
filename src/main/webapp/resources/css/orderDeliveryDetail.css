@@ -102,10 +102,11 @@ paytabletb{
 	font-size: 14pt;
 	color: #df0000;
 	font-weight: bold;
-	float: left;
+	float: right;
 	padding-top: 0px;
 	text-align:right;
-	margin-left: 700px;
+	margin-right: 5px;
+
 }
 .payment td:nth-child(1){
 	width: 200px;
@@ -144,7 +145,7 @@ border-top: 5px solid #dcdcdc;
 	padding:5px;
 	
 	width:60px;
-	background: #3d7bfc;
+	background: #3078b3;
 	border-radius: 3px;
 	color: white;
 	font-weight: bold;

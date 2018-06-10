@@ -17,7 +17,7 @@ public class Auction implements java.io.Serializable {
 	private String member_id;// 판매자 아이디
 	private String category_no;//카테고리
 	private String auction_title;// 경매 제목
-	private String auction_note;// 경매 노트
+	private String auction_note;// 경매 노트 
 	private String auction_img;// 경매 이미지
 	private String auction_startdate;// 경매 시작 시간
 	private String auction_enddate;// 경매 종료 시간

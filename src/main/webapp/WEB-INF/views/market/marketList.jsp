@@ -88,6 +88,9 @@
 					for(var i in jsonObj.list2){
 						values += "<input type='radio' value='"+jsonObj.list2[i].category_name+"' onclick='smallCategory(this);' name='SmallCategory'>"+jsonObj.list2[i].category_name+"<br><br>";
 					}
+					if(ctype == ""){
+						values+="대분류를 선택해주세요.";
+					}
 					$(".SmallCategory").html(values);
 				},error: function(request,status,errorData){
 					console.log("error code : " + request.status + "\nmessage" + 
@@ -210,11 +213,11 @@
 							곡식류<br>
 							<br>
 						</div>
-						<hr style="color: #bdbdbd">
+						<hr style="border: 0.5px solid #dddddd;">
 
 						<h4>소분류</h4>
 						<div class="SmallCategory">
-							<p class="categoryP">카테고리를 선택해주세요</p>
+							<p class="categoryP">대분류를 선택해주세요</p>
 							<!-- <input type="radio" name="smallCategory"> 카테고리1<br><br>
 	        	<input type="radio" name="smallCategory"> 카테고리2<br><br>
 	        	<input type="radio" name="smallCategory"> 카테고리3<br><br>

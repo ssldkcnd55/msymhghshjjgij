@@ -12,7 +12,7 @@
     border-top: 1px solid #4a2419;
     height:60px;
     text-align:center;
-    font-size:12pt;
+    font-size:11pt;
 }
 
 .View_table td {
@@ -21,7 +21,41 @@
     border-bottom: 1px solid #ddd;
     height:60px;
     text-align:center;
-    font-size:12pt;
+    font-size:11pt;
+}
+.View_table td:nth-child(5){
+	
+	color: gray;
 }
 
+
 .View_table tr:hover {background-color:#f5f5f5;}
+
+.orderDetail{
+	border: 1px solid #dcdcdc;
+	background: #fefefe;
+	
+	width: 60px;
+	padding: 3px;
+	margin: 0 auto;
+	border-radius: 3px; 
+	font-size: 10pt;
+}
+.orderDetail.delivery{
+	margin-bottom:5px;
+}
+.atag{
+	text-decoration: none;
+	color: gray;
+}
+.Atitle{
+	text-decoration: none;
+	font-weight: bold;
+
+}
+.complete{
+	color: #bdbdbd;
+}
+td{
+	font-size: 5pt;
+}

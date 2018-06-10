@@ -15,8 +15,8 @@
 	type="text/css" />
 <link href="/farm/resources/css/dailyList.css" rel="stylesheet"
 	type="text/css" />
-<link href="/farm/resources/css/marketDetail.css" rel="stylesheet"
-	type="text/css" />
+<!-- <link href="/farm/resources/css/marketDetail.css" rel="stylesheet"
+	type="text/css" /> -->
 <link href="/farm/resources/css/payList.css" rel="stylesheet"
 	type="text/css" />
 
@@ -51,16 +51,17 @@ $(function(){
 	/* QnA 등록으로 가는 버튼 */
 	function Auction_qnaMake(){
 	
-		location.href ="/farm/moveAuctionQnAMake.do?auction_no="+${auction.auction_no};
+		location.href ="/farm/moveAuctionQnAMake.do?auction_no=${auction.auction_no}";
 	}
 	
 	/* 경매 문의 List */
 	 function auctionQnA(page){
+		var auction_no = '${auction.auction_no}';
 		$.ajax({
 			url:"AuctionQnAList.do",
 			type:"post",
 			data:{
-				auction_no:${auction.auction_no},
+				auction_no:auction_no,
 				page:page
 			},
 			dataType: "JSON",
@@ -169,7 +170,7 @@ $(function(){
 	/* 경매 입찰 등록 */
 		function bidcheck(){
 			var price = $('#biddingprice').val();
-			var no = ${auction.auction_no};
+			var no = '${auction.auction_no}';
 			alert(price+", " + no);
 			var result = true;
 			$.ajax({
@@ -347,7 +348,7 @@ $(function(){
 	
 	//옥션 문의 검색창
 	function auction_search(page){
-		var auction_no = ${auction.auction_no};
+		var auction_no = '${auction.auction_no}';
 		var keyword = $("#auction_keyword").val();
 		var select = $("#select_val").val();
 		$.ajax({
@@ -416,41 +417,15 @@ $(function(){
 	
 	//경매 즉시 구매
 	 function auction_Buy(){
-		alert("즉시구매 실행");
 		var buycheck = confirm("정말로 즉시 구매 하시겠습니다.");
+		alert("즉시구매 실행");
+		var buycheck = confirm("정말로 즉시 구매 하시겠습니까?");
 		if(buycheck == true){
 			location.href="/farm/auction_Buy.do?auction_no=${auction.auction_no}&member_id=${loginUser.member_id}";
+			
 		}
-		/* $.ajax({
-			url:"auction_Buy.do",
-			type:"post",
-			data:{
-				auction_no:auction_no,
-				member_id :loginUser
-			},
-			async: false,
-			dataType: "JSON",
-			success: function(data){
-				
-				var outValues ="";
-				outValues +=
-				"<div class='auction_cart_right_div'>"+
-				"<table>"+
-				"<tr>"+
-					"<td id='a'></td>"+
-					"</tr>"+
-					"<tr>"+
-						"<td><input type='submit' id='submit'class='auction_bidding' value='입찰' / disabled ></td>"+
-							
-						"<td><button class='auction_buy' disdisabled  ><a href='javascript:auction_Buy();'>즉시구매</a></button></td>"+
-					"</tr>"+
-
-				"</table>"+
-			"</div>";
-				
-				$(".auction_cart_right_div").html(outValues);	
-			}
-		}); */
+		
+		
 	}
 
 	
@@ -770,10 +745,10 @@ $(function(){
 									<tr>
 									<td id="a"></td>
 									</tr>
-									<tr>
-										<td><input type="submit" id="submit"
+									<tr class="button_buy">
+										<td><input type="submit" id="bidding_button"
 											class="auction_bidding" value="입찰" /></td>
-										<td><button class="auction_buy" ><a href="javascript:auction_Buy();">즉시구매</a></button></td>
+										<td><button class="auction_buy" id="buy_button"><a href="javascript:auction_Buy();">즉시구매</a></button></td>
 									</tr>
 
 								</table>

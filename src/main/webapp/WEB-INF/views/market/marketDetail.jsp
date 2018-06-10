@@ -11,7 +11,7 @@
 <link href="/farm/resources/css/qna.css" rel="stylesheet" type="text/css" />
 <link href="/farm/resources/css/dailyList.css" rel="stylesheet" type="text/css" />
 <link href="/farm/resources/css/marketDetail.css" rel="stylesheet" type="text/css" />
-<link href="/farm/resources/css/auctionDetail.css" rel="stylesheet" type="text/css" />
+<!-- <link href="/farm/resources/css/auctionDetail.css" rel="stylesheet" type="text/css" /> -->
 <link href="/farm/resources/css/marketDetail_modal.css" rel="stylesheet" type="text/css" />
 <link href="/farm/resources/css/homeauction.css" rel="stylesheet" type="text/css" />
 
@@ -21,6 +21,10 @@
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script type="text/javascript">
+function numberWithCommas(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+
 $(function(){
 	$('.goods-view-show-option-button').click(function(){
 		if($('#flow-cart2').css('display') == 'none'){
@@ -29,11 +33,15 @@ $(function(){
 			$('#flow-cart2').css('display','none');
 		}
     });
+	$(".spanA").html(numberWithCommas(${market.market_price}));
+	$('.flow_order_total_price').html(numberWithCommas(${market.market_price}));
+	
 });
 
 </script>
 <script type="text/javascript">
 var change = 0;
+var m_img = '${market.market_img}';
 
  
 $(function(){
@@ -56,9 +64,9 @@ $(function(){
 				}else if(i % 4 == 0){
 					outValues += "<div class='item' align='center'>";
 				}
-				outValues += "<a href='#'><div class='sellerMarketList'><div class='img_box' style='background-image: url(\"/farm/resources/upload/marketUpload/"+jsonObj.list[i].market_img+"\"); background-size: cover;'></div>"
+				outValues += "<div class='margindiv'><a class='sellerLink' href='#'><div class='sellerMarketList'><div class='img_box' style='background-image: url(\"/farm/resources/upload/marketUpload/"+jsonObj.list[i].market_img+"\"); background-size: cover;'></div>"
 							+ "<div class='title_box'><p class='title'>"+jsonObj.list[i].market_title+"</p>"
-							+ "<p class='content'>"+jsonObj.list[i].market_note+"</p><p class='content'>"+jsonObj.list[i].market_price+"</p></div></div></a>";
+							+ "<p class='content'>"+jsonObj.list[i].market_note+"</p><p class='content pr'>"+numberWithCommas(jsonObj.list[i].market_price)+"원</p></div></div></a></div>";
 				
 				if(i % 4 == 3){
 					outValues += "</div>";
@@ -307,7 +315,7 @@ function dailyPage(){
 
 function changeprice(){
 	 change = ${market.market_price} * $("input[name='buy_amount']").val();
-	 $(".mkPrice").html(change+"원");
+	 $(".flow_order_total_price").html(change+"원");
 	  var amount = ${market.market_amount}-${market.remaining};
 	 
 	 if(amount < $("input[name='buy_amount']").val()){
@@ -494,8 +502,7 @@ function changeprice(){
 				<ul class="tabs">
 					<li class="tab-link current" data-tab="tab-1"><div
 							class="menu introduce">소개</div></li>
-					<li class="tab-
-					link" data-tab="tab-2"><div class="menu daily"
+					<li class="tab-link" data-tab="tab-2"><div class="menu daily"
 							onclick="dailyPage();">일지</div></li>
 					<li class="tab-link" data-tab="tab-3"><div
 							class="menu question" onclick="qnaPage(1);">문의</div></li>
@@ -693,7 +700,7 @@ function changeprice(){
 
 			<div class="goods-view-flow-cart __active" id="flow-cart2">
 					<div class="flow_order_seller">판매자 : <span style="font-weight: 600">${market.member_name}</span><!-- (<span>판매자아이디${market.member_id}</span>) -->
-					<a href="javascript: sendProductMsg('${loginUser.member_id}','${market.member_id}'  )"><span>상품 문의</span></a> | <a href="javascript: sendMsg()"><span>1:1대화</span></a>
+					<a href="javascript: sendProductMsg('${loginUser.member_id}','${market.member_id}'  )"><span>상품 문의</span></a> | <a href="javascript: sendMsg('${loginUser.member_id}','${market.member_id}' )"><span>1:1대화</span></a>
 					</div>
 					
 				<div class="goods-view-flow-cart-wrapper">
@@ -715,9 +722,9 @@ function changeprice(){
 							<td><div class="amount_box" > <a href="javascript: countOperator(-1)"><div class="flow_order_operator">-</div></a>
                     		 <input type="number" name="buy_amount" class="flow_order_count" value="1" min="1">
                     		<a href="javascript: countOperator(+1)"><div class="flow_order_operator">+</div></a></div></td>
-							<td class="flow_order_price"><span> ${market.market_price }</span>원</td>
+							<td class="flow_order_price"><span class='spanA'></span>원</td>
 							<td class="flow_order_button"><input type="button" value="장바구니" onclick="addBasket()" class="flow_order_basket"></td></tr>
-							<tr><td class="flow_order_total" colspan="3">총 상품 금액 : <span class="flow_order_total_price">${market.market_price }</span>원</td>
+							<tr><td class="flow_order_total" colspan="3">총 상품 금액 : <span class="flow_order_total_price"></span>원</td>
 							<td class="flow_order_button">	<input type="submit" value="구매하기" class="flow_order_buy"> </td>
 							</tr>
 								</table>

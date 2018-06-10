@@ -5,7 +5,7 @@
 	z-index:100;
 	width:100px;
 	height:80px;
-	border: 1px solid #bdbdbd;
+	border: 1px solid #dcdcdc;
 	top:0;
 	left:0;
 	right:0;
@@ -35,13 +35,16 @@
 .sellerMarketList{
 	width:220px;
 	height:270px;
-	margin-right:23px;
-	border:1px solid #bdbdbd;
+	border:1px solid #dcdcdc;
 	float:left;
 	text-align: left;
 }
-.sellerMarketList{
-	
+.margindiv{
+	float:left;
+	margin-right:23px;
+}
+.margindiv:last-child{
+	margin-right:0px;
 }
 .right.carousel-control,.left.carousel-control{
 	width: 30px;
@@ -362,7 +365,7 @@ height: 152px;
     font-weight: bold;
     float: left;
     margin: 0px;
-    border: 1px solid #bdbdbd;
+    border: 1px solid #dcdcdc;
     background: #f2f2f2;
     line-height: 16px;
 }
@@ -395,7 +398,7 @@ color: #7e5957;
 font-weight: 800;
 }
 .flow_order_total{
-border-top: 1px solid #bdbdbd;
+border-top: 1px solid #dcdcdc;
 text-align: left;
 font-size: 14pt;
 }
@@ -423,7 +426,7 @@ font-size: 14pt;
 .img_box{
 	width:220px;
 	height:170px;
-	border-bottom: 1px solid gray;  
+	border-bottom: 1px solid #dcdcdc;  
 	margin:0px;
 }
 .title_box{
@@ -437,9 +440,9 @@ font-size: 14pt;
 }
 
 .title{
-	 font-size: 12pt; margin-bottom: 0 ;
+	 font-size: 11pt; margin-bottom: 0 ;
 	 font-weight: bold;
-	 color:#462114;
+	 color:#4c4c4c;
 }
 
 .content{
@@ -450,4 +453,10 @@ font-size: 14pt;
 	margin-bottom:0px;
 }
     
+    
+ .content.pr{
+font-weight:bold;
+ margin :5px 5px 0 0;
+ 
+ }
     

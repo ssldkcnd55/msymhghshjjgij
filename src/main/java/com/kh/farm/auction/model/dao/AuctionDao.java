@@ -296,17 +296,17 @@ public class AuctionDao {
 		return sqlSession.selectList("auction.select_auction_background",member_id);
 	}
 
-	public List<Auction> selectmoreAuctionCategory(SqlSessionTemplate sqlSession, int currentPage, int type) {
+	public List<Auction> selectmoreAuctionCategory(SqlSessionTemplate sqlSession, int currentPage, int atype) {
 		PageNumber pn = new PageNumber();
 		pn.setStartRow(currentPage * 9 -8);
 		pn.setEndRow(pn.getStartRow() + 8);
-		pn.setSelect(type);
+		pn.setSelect(atype);
 		return sqlSession.selectList("auction.selectmoreAuctionCategory",pn);
 
 	}
 
-	public int selectmoreAuctionCategoryCount(SqlSessionTemplate sqlSession, int type) {
-		return sqlSession.selectOne("auction.selectmoreAuctionCategoryCount",type);
+	public int selectmoreAuctionCategoryCount(SqlSessionTemplate sqlSession, int atype) {
+		return sqlSession.selectOne("auction.selectmoreAuctionCategoryCount",atype);
 
 	}
 
@@ -322,6 +322,15 @@ public class AuctionDao {
 
 	public Payment selectAuctionBuy(SqlSessionTemplate sqlSession, int  auction_no) {
 		return sqlSession.selectOne("auction.selectAuctionBuy",auction_no);
+	}
+
+	public Payment selectAuctionPayment(SqlSessionTemplate sqlSession, int buy_no) {
+		return sqlSession.selectOne("auction.selectAuctionPayment",buy_no);
+
+	}
+
+	public Auction selectAuction(SqlSessionTemplate sqlSession, int auction_no) {
+		return sqlSession.selectOne("auction.selectAuction",auction_no);
 	}
 	
 

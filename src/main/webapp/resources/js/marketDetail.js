@@ -2,16 +2,15 @@
  * 
  */
 
-
-function sendMsgByMarket (my_id,your_id)
+/*function sendMsgByMarket (my_id,your_id)
 {
 	msgIcon();
-	  /*insertChat(my_id,your_id);*/
+	  insertChat(my_id,your_id);
 	ws = new WebSocket("ws://127.0.0.1:7777/farm/chat.do?state=msg&your_id=" + your_id + "&chat_no=" + 1);
 	ws.onopen = function() {
 		ws.send("테스트 메세지입니다4");
 	}
-}	
+}	*/
 
 function viewSelectBox(){
 	var htmlCode = '<div class="viewSelectBox" style="position:absolute;  z-index:10; width:100px; height:80px;"><a href="">상품문의</a><br><a href="">1:1대화</a></div>';
@@ -19,7 +18,13 @@ function viewSelectBox(){
 	
 }
 
-
+function uncomma(str) {
+    str = String(str);
+    return str.replace(/[^\d]+/g, '');
+}
+function numberWithCommas(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
  function countOperator(op)
 {	
 	 var amount=Number($('.flow_order_stock span').text());
@@ -33,7 +38,7 @@ function viewSelectBox(){
 		alert("수량을 초과하였습니다.");
 		$(".flow_order_count").val(amount);
 		}
-	$('.flow_order_total_price').text( $(".flow_order_count").val() * $('.flow_order_price span').text() );
+	$('.flow_order_total_price').text( numberWithCommas($(".flow_order_count").val() * uncomma($('.flow_order_price span').text()) ));
 }	
  
 $(function(){
@@ -111,10 +116,38 @@ $('#myModal').css("display","none");
  
  //////////////////////////메시지보내기
 function sendProductMsg(my_id,your_id){
-	insertChat(my_id,your_id);
 	
+	var msg="";
+	////
+	var msg = '<div class="qes_alarm_head"><img src="/farm/resources/images/sell_icon_white.png" />상품 문의</div>';
+	msg+='<img class="qes_alarm_img" style="width:180px; margin-top:4px;" src="/farm/resources/upload/marketUpload/'+m_img+'">';	
+	msg+='<table><tr><td>상품명</td><td>사과1</td></tr>';
+	msg+='<tr><td>가격</td><td>1000원</td></tr>';
+	msg+='</table>';
+	////
+	$('.msgframe').get(0).contentWindow.insertChat(my_id,your_id);
+
+	setTimeout(function() {
+		 $('.msgframe').get(0).contentWindow.ws.send(msg);
+	},100);
+	if (
+			  $(".msgIcon").attr("src") == "/farm/resources/images/messenger_icon_green2.png") {
+		      $(".msgIcon")
+		            .prop("src", "/farm/resources/images/messenger_back_2.png");
+		      $(".msgbox").css("visibility", "visible");
+		      loadListPage();
+
+		   }
 }
-function sendMsg()
+function sendMsg(my_id,your_id)
 {
-	alert("1:1메시지");
+	$('.msgframe').get(0).contentWindow.insertChat(my_id,your_id);
+	if (
+			  $(".msgIcon").attr("src") == "/farm/resources/images/messenger_icon_green2.png") {
+		      $(".msgIcon")
+		            .prop("src", "/farm/resources/images/messenger_back_2.png");
+		      $(".msgbox").css("visibility", "visible");
+		      loadListPage();
+
+		   }
 }
