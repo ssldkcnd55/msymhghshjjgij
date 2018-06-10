@@ -11,7 +11,7 @@
 <link href="/farm/resources/css/qna.css" rel="stylesheet" type="text/css" />
 <link href="/farm/resources/css/dailyList.css" rel="stylesheet" type="text/css" />
 <link href="/farm/resources/css/marketDetail.css" rel="stylesheet" type="text/css" />
-<link href="/farm/resources/css/auctionDetail.css" rel="stylesheet" type="text/css" />
+<!-- <link href="/farm/resources/css/auctionDetail.css" rel="stylesheet" type="text/css" /> -->
 <link href="/farm/resources/css/marketDetail_modal.css" rel="stylesheet" type="text/css" />
 <link href="/farm/resources/css/homeauction.css" rel="stylesheet" type="text/css" />
 
@@ -24,6 +24,7 @@
 function numberWithCommas(x) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
+
 $(function(){
 	$('.goods-view-show-option-button').click(function(){
 		if($('#flow-cart2').css('display') == 'none'){
@@ -40,6 +41,7 @@ $(function(){
 </script>
 <script type="text/javascript">
 var change = 0;
+var m_img = '${market.market_img}';
 
  
 $(function(){
@@ -500,8 +502,7 @@ function changeprice(){
 				<ul class="tabs">
 					<li class="tab-link current" data-tab="tab-1"><div
 							class="menu introduce">소개</div></li>
-					<li class="tab-
-					link" data-tab="tab-2"><div class="menu daily"
+					<li class="tab-link" data-tab="tab-2"><div class="menu daily"
 							onclick="dailyPage();">일지</div></li>
 					<li class="tab-link" data-tab="tab-3"><div
 							class="menu question" onclick="qnaPage(1);">문의</div></li>
@@ -699,7 +700,7 @@ function changeprice(){
 
 			<div class="goods-view-flow-cart __active" id="flow-cart2">
 					<div class="flow_order_seller">판매자 : <span style="font-weight: 600">${market.member_name}</span><!-- (<span>판매자아이디${market.member_id}</span>) -->
-					<a href="javascript: sendProductMsg('${loginUser.member_id}','${market.member_id}'  )"><span>상품 문의</span></a> | <a href="javascript: sendMsg()"><span>1:1대화</span></a>
+					<a href="javascript: sendProductMsg('${loginUser.member_id}','${market.member_id}'  )"><span>상품 문의</span></a> | <a href="javascript: sendMsg('${loginUser.member_id}','${market.member_id}' )"><span>1:1대화</span></a>
 					</div>
 					
 				<div class="goods-view-flow-cart-wrapper">

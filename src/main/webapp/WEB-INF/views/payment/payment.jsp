@@ -298,7 +298,7 @@ var sellerInfo=[];
 
 						<div>
 							<input type="button" onclick="payment()" value="결제하기" class="buy" />
-							<input type="button" style="margin-top: 10px;" onclick="paymentTest()" value="테스트" class="buy" />
+							<!-- <input type="button" style="margin-top: 10px;" onclick="paymentTest()" value="테스트" class="buy" /> -->
 						</div>
 					</div>
 				</div>
