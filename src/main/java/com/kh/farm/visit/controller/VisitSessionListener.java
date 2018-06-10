@@ -13,7 +13,7 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
 import com.kh.farm.visit.model.dao.VisitDao;
-@Controller
+/*@Controller*/
 public class VisitSessionListener implements HttpSessionListener{
 	@Autowired
 	private VisitDao visitDao;

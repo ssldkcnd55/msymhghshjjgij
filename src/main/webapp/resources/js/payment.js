@@ -120,8 +120,7 @@ function payment() {
 			request=$('#new_request').val();}
 	}
 	
-	
-	console.log("name:"+product_name);
+
 	
 	//group_no를 얻기위해 첫번째 상품만 가 등록한다.
 	//이후 결제가 완료되면 해당 group_no로 다른 상품도 등록
@@ -145,7 +144,7 @@ function payment() {
 				pay_method : 'card',
 				merchant_uid : 'merchant_' + new Date().getTime(),
 				name : product_name,
-				amount : /*order_price + delivery_price*/100,
+				amount : order_price + delivery_price,
 				buyer_email : my_id,
 				buyer_name : name,
 				buyer_tel : tel,
