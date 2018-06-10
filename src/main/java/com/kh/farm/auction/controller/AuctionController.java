@@ -810,8 +810,8 @@ public class AuctionController {
 			@RequestParam(value="member_id") String member_id, Auction auction)
 			throws IOException{
 		
-		System.out.println("auction_no:"+auction_no);
-		System.out.println("member_id"+member_id);
+		System.out.println("auction_no: "+auction_no);
+		System.out.println("member_id: "+member_id);
 		System.out.println("즉시 구매 컨트롤러 실행 ");
 		int auction_Buy = auctionService.updateAuctionBuy(auction_no);
 		System.out.println("update : "+auction_Buy);

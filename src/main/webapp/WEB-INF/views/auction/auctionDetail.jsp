@@ -418,9 +418,10 @@ $(function(){
 	//경매 즉시 구매
 	 function auction_Buy(){
 		var buycheck = confirm("정말로 즉시 구매 하시겠습니다.");
+		alert("즉시구매 실행");
+		var buycheck = confirm("정말로 즉시 구매 하시겠습니까?");
 		if(buycheck == true){
 			location.href="/farm/auction_Buy.do?auction_no=${auction.auction_no}&member_id=${loginUser.member_id}";
-			
 			
 		}
 		
