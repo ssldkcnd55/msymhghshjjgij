@@ -39,7 +39,6 @@
 				<div class="title1 jobMake">
 					<p class="titleP">구인구직 글쓰기</p>
 				</div>
-
 				<div class="div">
 					<form action="jobMake.do" method="post"
 						enctype="multipart/form-data">
@@ -60,9 +59,8 @@
 										<p class="p">주소</p>
 									</td>
 									<td colspan="3" class="td1"><input type="text"
-										name="job_addr" id="loc" class="input_text_box2">
-										<button onclick="juso()" class="button">주소검색</button> <br>
-										<!-- <input type="text" name="job_addr2" class="input_text_box3"
+										name="job_addr" id="loc" class="input_text_box2"> <a
+										onclick="javascript:juso()">주소검색</a> <br> <!-- <input type="text" name="job_addr2" class="input_text_box3"
 									placeholder="상세주소입력"> --></td>
 								</tr>
 								<tr class="tr">
@@ -72,8 +70,8 @@
 									<td colspan="3" class="td1">
 										<!-- <img
 										src="/farm/resources/images/default_user.png" id="profile"
-										style="text-align: center" alt="이미지를 선택해주세요"></img> -->
-										<input type="file" id="file-1" class="inputfile inputfile-1"
+										style="text-align: center" alt="이미지를 선택해주세요"></img> --> <input
+										type="file" id="file-1" class="inputfile inputfile-1"
 										accept='image/gif,image/jpeg,image/pnp'
 										data-multiple-caption="{count} files selected" name="upfile"
 										onchange="readURL(this);" style="width: 1px; height: 1px;" />

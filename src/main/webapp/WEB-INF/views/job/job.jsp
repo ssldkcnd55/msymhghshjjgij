@@ -10,7 +10,9 @@
 	function job_write() {
 		location.href = "/farm/moveJobMake.do";
 	}
+	/*구인구직 전체 리스트 조회  */
 	$(function() {
+
 		$
 				.ajax({
 					url : "jobList.do",
@@ -19,11 +21,12 @@
 					success : function(data) {
 						var jsonStr = JSON.stringify(data);
 						var json = JSON.parse(jsonStr);
-						var values = "<tr><th width='10%'>번호</th><th width='12%'>상태</th><th width='45%'>제목</th><th width='13%'>작성자</th><th width='20%'>날짜</th></tr>";
+						var values = "<tr><th width='10%'>번호</th><th width='10%'>지역</th><th width='12%'>상태</th><th width='35%'>제목</th><th width='13%'>작성자</th><th width='20%'>작성날짜</th></tr>";
 
 						for ( var i in json.list) {
 							values += "<tr id='hover'><td>" + json.list[i].rnum
 									+ "</td>";
+							values += "<td>" + json.list[i].job_addr + "</td>";
 							if (json.list[i].job_status == "1") {
 								values += "<td><span id='job_table_span_find'><strong>구인중</strong></span></td>";
 							} else {
@@ -78,7 +81,9 @@
 				});
 
 	});
+	/* 페이징 처리  */
 	function jobPage(page) {
+
 		$
 				.ajax({
 					url : "jobList.do",
@@ -90,7 +95,7 @@
 					success : function(data) {
 						var jsonStr = JSON.stringify(data);
 						var json = JSON.parse(jsonStr);
-						var values = "<tr><th width='10%'>번호</th><th width='12%'>상태</th><th width='45%'>제목</th><th width='13%'>작성자</th><th width='20%'>날짜</th></tr>";
+						var values = "<tr><th width='10%'>번호</th><th width='12%'>상태</th><th width='45%'>제목</th><th width='13%'>작성자</th><th width='20%'>작성날짜</th></tr>";
 
 						for ( var i in json.list) {
 							values += "<tr id='hover'><td>" + json.list[i].rnum
@@ -148,6 +153,82 @@
 
 				});
 	}
+	/*지역별 클릭시 리스트조회  */
+	function addr(addr) {
+
+		$
+				.ajax({
+					url : "jobList.do",
+					type : "post",
+					dataType : "json",
+					success : function(data) {
+						var jsonStr = JSON.stringify(data);
+						var json = JSON.parse(jsonStr);
+						var values = "<tr><th width='10%'>번호</th><th width='10%'>지역</th><th width='12%'>상태</th><th width='35%'>제목</th><th width='13%'>작성자</th><th width='20%'>작성날짜</th></tr>";
+
+						for ( var i in json.list) {
+
+							if (addr == json.list[i].job_addr) {
+								values += "<tr id='hover'><td>"
+										+ json.list[i].rnum + "</td>";
+								values += "<td>" + json.list[i].job_addr
+										+ "</td>";
+								if (json.list[i].job_status == "1") {
+									values += "<td><span id='job_table_span_find'><strong>구인중</strong></span></td>";
+								} else {
+									values += "<td><span id='job_table_span_finded'>마감</span></td>";
+								}
+
+								values += "<td id='job_td'><a href='jobDetail.do?job_no="
+										+ json.list[i].job_no
+										+ "'>"
+										+ json.list[i].job_title
+										+ "</a></td><td>"
+										+ json.list[i].member_id
+										+ "</td><td>"
+										+ json.list[i].job_date + "</td></tr>";
+							} 
+
+						}
+						$(".job_table").html(values);
+
+						var startPage = json.list[0].startPage;
+						var endPage = json.list[0].endPage;
+						var maxPage = json.list[0].maxPage;
+						var currentPage = json.list[0].currentPage;
+
+						var values1 = "";
+						if (startPage > 5) {
+							values1 += "<a href='javascript:jobPage("
+									+ (startPage - 1) + ")'>&laquo;</a>"
+						} else {
+							values1 += "<a>&laquo;</a>";
+						}
+						for (var i = startPage; i <= endPage; i++) {
+							if (i == currentPage) {
+								values1 += "<a class='active'>" + i + "</a>";
+							} else {
+								values1 += "<a href='javascript:jobPage(" + i
+										+ ");'>" + i + "</a>";
+							}
+						}
+						if (endPage < maxPage) {
+							values1 += "<a href='javascript:jobPage("
+									+ (endPage + 1) + ")'>&raquo;</a>";
+
+						} else {
+							values1 += "<a>&raquo;</a>";
+						}
+						$(".pagination").html(values1);
+					},
+					error : function(request, status, errorData) {
+						alert("error code : " + request.status + "\nmessage"
+								+ request.responseText + "\nerror" + errorData);
+					}
+
+				});
+
+	}
 </script>
 <!-- Job.css -->
 <link rel="stylesheet" type="text/css"
@@ -176,11 +257,11 @@
 									style="background-color: white; color: #f1473a; border: 1px solid #f1473a; padding: 6px 6px 6px;">구인구직등록
 								</button>
 							</c:if>
-							<select class="select">
+							<!-- <select class="select">
 								<option value="1" selected="">최근등록순</option>
 								<option value="2">좋아요많은순</option>
 								<option value="3">조회많은순</option>
-							</select>
+							</select> -->
 						</div>
 					</div>
 
@@ -193,40 +274,39 @@
 							<h4>지역별</h4>
 							<table id="left_area_table" style="text-align: center;">
 								<tr>
-									<td><a href="#">서울&nbsp;</a></td>
-									<td><a href="#">경기&nbsp;</a></td>
+									<td><a onclick="javascript:addr('서울')">서울&nbsp;</a></td>
+									<td><a onclick="javascript:addr('경기')">경기&nbsp;</a></td>
 								</tr>
 								<tr>
-									<td><a href="#">인천&nbsp;</a></td>
-									<td><a href="#">강원&nbsp;</a></td>
+									<td><a onclick="javascript:addr('인천')">인천&nbsp;</a></td>
+									<td><a onclick="javascript:addr('강원')">강원&nbsp;</a></td>
 								</tr>
 								<tr>
-									<td><a href="#">대전&nbsp;</a></td>
-									<td><a href="#">세종&nbsp;</a></td>
+									<td><a onclick="javascript:addr('대전')">대전&nbsp;</a></td>
+									<td><a onclick="javascript:addr('세종')">세종&nbsp;</a></td>
 								</tr>
 								<tr>
-									<td><a href="#">충남&nbsp;</a></td>
-									<td><a href="#">충북&nbsp;</a></td>
+									<td><a onclick="javascript:addr('충남')">충남&nbsp;</a></td>
+									<td><a onclick="javascript:addr('충북')">충북&nbsp;</a></td>
 								</tr>
 								<tr>
-									<td><a href="#">부산&nbsp;</a></td>
-									<td><a href="#">울산&nbsp;</a></td>
+									<td><a onclick="javascript:addr('부산')">부산&nbsp;</a></td>
+									<td><a onclick="javascript:addr('울산')">울산&nbsp;</a></td>
 								</tr>
 								<tr>
-									<td><a href="#">경남&nbsp;</a></td>
-									<td><a href="#">경북&nbsp;</a></td>
+									<td><a onclick="javascript:addr('경남')">경남&nbsp;</a></td>
+									<td><a onclick="javascript:addr('경북')">경북&nbsp;</a></td>
 								</tr>
 								<tr>
-									<td><a href="#">대구&nbsp;</a></td>
-									<td><a href="#">광주&nbsp;</a></td>
+									<td><a onclick="javascript:addr('대구')">대구&nbsp;</a></td>
+									<td><a onclick="javascript:addr('광주')">광주&nbsp;</a></td>
 								</tr>
 								<tr>
-									<td><a href="#">전남&nbsp;</a></td>
-									<td><a href="#">전북&nbsp;</a></td>
+									<td><a onclick="javascript:addr('전남')">전남&nbsp;</a></td>
+									<td><a onclick="javascript:addr('전북')">전북&nbsp;</a></td>
 								</tr>
 								<tr>
-									<td><a href="#">제주&nbsp;</a></td>
-									<td><a href="#">전국&nbsp;</a></td>
+									<td><a onclick="javascript:addr('제주')">제주&nbsp;</a></td>
 								</tr>
 							</table>
 
@@ -235,7 +315,7 @@
 						<!-- <hr style="clear:both"> -->
 						<!-- 왼쪽 밑 지역구 박스 -->
 						<br>
-						<div class="sort2" style="padding-left: 5px;">
+						<!-- <div class="sort2" style="padding-left: 5px;">
 							<h4>권역별</h4>
 							<table id="left_area_table2" style="text-align: center;">
 								<tr>
@@ -291,7 +371,7 @@
 								</tr>
 							</table>
 
-						</div>
+						</div> -->
 					</div>
 
 					<!--  -->

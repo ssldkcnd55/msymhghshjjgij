@@ -23,6 +23,17 @@ public class Job implements java.io.Serializable {
 	private String job_addr;// 구인구직 주소
 	private String job_tel;// 구인구직 전화번호
 	private String job_img;
+	private String job_name;//구인구직 일터이름
+	
+	
+	public String getJob_name() {
+		return job_name;
+	}
+
+	public void setJob_name(String job_name) {
+		this.job_name = job_name;
+	}
+
 	private String rnum;
 
 	public Job() {

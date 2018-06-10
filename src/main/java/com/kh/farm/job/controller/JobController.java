@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -35,6 +36,7 @@ public class JobController {
 	// 구인구직페이징처리
 	@RequestMapping(value = "jobList.do")
 	public void jobList(HttpServletResponse response, HttpServletRequest request) throws IOException {
+		System.out.println("여기오니?");
 		int limitPage = 10;
 		int currentPage = 1;
 		if (request.getParameter("page") != null) {
@@ -53,12 +55,19 @@ public class JobController {
 		JSONObject json = new JSONObject();
 		JSONArray jarr = new JSONArray();
 
+		SimpleDateFormat sd = new SimpleDateFormat("yy/mm/dd");
+		Date date = new Date();
+		String today = sd.format(date);
+		System.out.println(today);
+
 		for (Job job : jobList) {
 			JSONObject jsonobj = new JSONObject();
 			jsonobj.put("rnum", job.getRnum());
 			jsonobj.put("job_no", job.getJob_no());
 			jsonobj.put("job_status", job.getJob_status());
 			jsonobj.put("job_title", job.getJob_title());
+			/*jsonobj.put("job_enddate", job.getJob_enddate().toString());*/
+			jsonobj.put("job_addr", job.getJob_addr());
 			jsonobj.put("member_id", job.getMember_id());
 			jsonobj.put("job_date", job.getJob_date().toString());
 			jsonobj.put("startPage", startPage);
@@ -74,6 +83,7 @@ public class JobController {
 		out.print(json.toString());
 		out.flush();
 		out.close();
+
 	}
 
 	// 구인구직 글등록
@@ -154,4 +164,8 @@ public class JobController {
 
 	// 구인구직 수정
 	// 구인구직 삭제
+
+	
+	
+
 }
