@@ -429,6 +429,15 @@
 	]]>
 	</select>
 	
+	<select id="selectAuctionPayment" parameterType="int" resultType="Payment">
+	<![CDATA[
+		  select b.buy_no,b.group_no, a.auction_no, b.member_id,m.member_name,m.MEMBER_TEL,m.MEMBER_ADDR,b.buy_date,b.buy_amount,b.buy_addr,b.buy_tel,b.buy_name,b.buy_status,a.AUCTION_IMG
+ 		  from buy b, auction a, member m
+ 		  where b.auction_no = a.auction_no
+ 		  and b.member_id = m.member_id 
+		  and b.BUY_NO = #{buy_no}
+	]]>
+	</select>
 	
 	
 	

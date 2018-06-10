@@ -244,4 +244,9 @@ public class AuctionServiceImpl implements AuctionService{
 		return auctionDao.selectAuctionBuy(sqlSession,auction_no);
 
 	}
+	
+	@Override
+	public Payment selectAuctionPayment(int buy_no) {
+		return auctionDao.selectAuctionPayment(sqlSession,buy_no);
+	}
 }

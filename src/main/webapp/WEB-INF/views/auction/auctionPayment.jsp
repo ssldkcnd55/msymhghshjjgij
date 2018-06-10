@@ -23,12 +23,12 @@
 var order_price=0;
 var delivery_price=0;
 var my_id='${loginUser.member_id}';
-var product_market_no=[];
+var product_auction_no=[];
 var product_buy_amount=[];
 var member_addr = '${loginUser.member_addr}';
 var seller_id=[];
 var sellerInfo=[];
-	
+
 	
 </script>
 
@@ -61,44 +61,44 @@ var sellerInfo=[];
 							<th>주문금액</th>
 						</tr>
 
-						<c:forEach var="item" items="${sbl}" varStatus="status">
+						 <%-- <c:forEach var="item" items="${payment}" varStatus="status"> --%>
 							<tr>
 								<td><span><img class="goods_img"
-										src="/farm/resources/upload/marketUpload/${item.market_img }"></span></td>
-								<td><a href="marketDetail.do?market_no=${item.market_no}"
+										src="/farm/resources/upload/auctionUpload/${list.auction_img }"></span></td>
+								<td><a href="AuctionDetail.do?auction_no=${item.auction_no}"
 									target="_blank">
-										<div class="product_title"><strong class="product_title_strong">${item.market_title }</strong></div>
-										<div class="product_note">${item.market_note}</div>
+										<div class="product_title"><strong class="product_title_strong">${list.auction_title }</strong></div>
+										<div class="product_note">${list.auction_note}</div>
 								</a></td>
-								<td><strong>${item.member_name}</strong>
-									<p>${item.member_id}</p></td>
-								<td><fmt:formatNumber value="${item.market_price}"
+								<td><strong>${list.member_name}</strong>
+									<p>${list.member_id}</p></td>
+								<td><fmt:formatNumber value="${list.market_price}"
 										pattern="#,###" />원</td>
-								<td>${item.buy_amount }개</td>
+								<td>0 개</td>
 								<td>2,500원</td>
 								<td><fmt:formatNumber
-										value="${item.buy_amount * item.market_price }"
+										value="${list.buy_amount * list.auction_directprice }"
 										pattern="#,###" />원</td>
 							</tr>
-							<script type="text/javascript">
-                seller_id.push('${item.member_id}');
-               order_price+=${item.buy_amount * item.market_price };
+				<script type="text/javascript">
+                seller_id.push('${list.member_id}');
+               order_price+=${item.buy_amount * list.auction_directprice };
                delivery_price+=2500;
-               product_market_no.push('${item.market_no}');
-               product_buy_amount.push('${item.buy_amount}');
+               product_auction_no.push('${list.auction_no}');
+               product_buy_amount.push('${list.buy_amount}');
                var obj = new Object();
-               obj={'market_no':'${item.market_no}',
-            		   'amount':'${item.buy_amount }',
-            		   'img':'${item.market_img }',
-            		   'titme':'${item.market_title }',
-            		   'your_id':'${item.member_id}',
-            		   'member_name':'${item.member_name}',
-            		   'price':'${item.market_price}',
-            		   'total':'${item.buy_amount * item.market_price }' 
+               obj={'auction_no':'${list.auction_no}',
+            		   'amount':'${list.buy_amount }',
+            		   'img':'${list.market_img }',
+            		   'titme':'${list.market_title }',
+            		   'your_id':'${list.member_id}',
+            		   'member_name':'${list.member_name}',
+            		   'price':'${list.auction_directprice}',
+            		   'total':'${list.buy_amount * list.auction_directprice }' 
                };
                sellerInfo.push(JSON.stringify(obj));
-                </script>
-						</c:forEach>
+              </script>
+						<%-- </c:forEach>  --%>
 					</table>
 				</div>
 				<!-- 상품정보 -->
@@ -308,7 +308,7 @@ var sellerInfo=[];
          function paymentTest(){
         	 
         	 var objList=[];
-				for(var i=0; i < product_market_no.length; i++)
+				for(var i=0; i < product_auction_no.length; i++)
 					{
 					var obj = new Object();
 					obj={'group_no':'1', 'market_no':'1','member_id':'1','buy_amount':'1','buy_addr': '1','buy_tel':'1','buy_name':'1','buy_request':'1'};

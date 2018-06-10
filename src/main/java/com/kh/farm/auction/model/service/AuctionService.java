@@ -111,6 +111,8 @@ public interface AuctionService {
 
 	Payment selectAuctionBuy(int  auction_no);
 
+	Payment selectAuctionPayment(int buy_no);
+
 	
 
 	

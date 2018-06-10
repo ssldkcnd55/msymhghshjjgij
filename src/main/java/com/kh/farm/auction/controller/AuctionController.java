@@ -821,9 +821,21 @@ public class AuctionController {
 		System.out.println("pay:  "+pay.toString());
 		int buy_no = pay.getBuy_no();
 		System.out.println("buy_no : "+buy_no);
-		return "redirect:/makePayment.do?buy_no="+buy_no;
+		return "redirect:/auctionPaymentinfo.do?buy_no="+buy_no;
 		
 	}
+	
+	@RequestMapping(value="auctionPaymentinfo.do")
+	public ModelAndView auctionPaymentinfo(ModelAndView mv,Payment payment) {
+		int buy_no = payment.getBuy_no();
+		System.out.println("buy_no : "+buy_no);
+		Payment list = auctionService.selectAuctionPayment(buy_no);
+		System.out.println("paumentList : "+list.toString());
+		mv.addObject("payment", list);
+		mv.setViewName("auction/auctionPayment");
+		return mv;
+	}
+	
 
 }
 
