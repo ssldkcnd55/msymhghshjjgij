@@ -11,7 +11,7 @@
 <link href="/farm/resources/css/qna.css" rel="stylesheet" type="text/css" />
 <link href="/farm/resources/css/dailyList.css" rel="stylesheet" type="text/css" />
 <link href="/farm/resources/css/marketDetail.css" rel="stylesheet" type="text/css" />
-<link href="/farm/resources/css/auctionDetail.css" rel="stylesheet" type="text/css" />
+<!-- <link href="/farm/resources/css/auctionDetail.css" rel="stylesheet" type="text/css" /> -->
 <link href="/farm/resources/css/marketDetail_modal.css" rel="stylesheet" type="text/css" />
 <link href="/farm/resources/css/homeauction.css" rel="stylesheet" type="text/css" />
 
@@ -500,8 +500,7 @@ function changeprice(){
 				<ul class="tabs">
 					<li class="tab-link current" data-tab="tab-1"><div
 							class="menu introduce">소개</div></li>
-					<li class="tab-
-					link" data-tab="tab-2"><div class="menu daily"
+					<li class="tab-link" data-tab="tab-2"><div class="menu daily"
 							onclick="dailyPage();">일지</div></li>
 					<li class="tab-link" data-tab="tab-3"><div
 							class="menu question" onclick="qnaPage(1);">문의</div></li>
