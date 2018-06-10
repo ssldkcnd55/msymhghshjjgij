@@ -55,6 +55,13 @@
 								</tr>
 								<tr class="tr">
 									<td class="td">
+										<p class="p">일터이름</p>
+									</td>
+									<td colspan="3" class="td1"><input type="text"
+										name="job_name" class="input_text_box"> <br></td>
+								</tr>
+								<tr class="tr">
+									<td class="td">
 
 										<p class="p">주소</p>
 									</td>

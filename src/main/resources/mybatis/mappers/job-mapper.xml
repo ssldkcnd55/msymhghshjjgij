@@ -26,7 +26,7 @@
 	<insert id="insertjob" parameterType="job" flushCache="true"
 		useGeneratedKeys="true">
 	<![CDATA[
-		insert into job values(  (select (case when max(job_no) is null then 0 else max(job_no) end) from job)+1,#{member_id},#{job_title},#{job_img},#{job_contents},sysdate,
+		insert into job values(  (select (case when max(job_no) is null then 0 else max(job_no) end) from job)+1,#{member_id},#{job_title},#{job_name},#{job_img},#{job_contents},sysdate,
 		'1',#{job_startdate},#{job_enddate},#{job_addr},#{job_tel})
 	]]>
 	</insert>
