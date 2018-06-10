@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.kh.farm.member.model.dao.MemberDao;
 import com.kh.farm.member.model.vo.Member;
+import com.kh.farm.visit.model.vo.Visit;
 import com.kh.farm.member.exception.LoginFailException;
 
 @Service
@@ -17,7 +18,7 @@ public class MemberServiceImpl implements MemberService {
 	private MemberDao memberDao;
 	@Autowired
 	private SqlSessionTemplate sqlSession;
-
+	
 	@Override
 	public int insertMember(Member member) {
 		// TODO Auto-generated method stub
@@ -136,5 +137,11 @@ public class MemberServiceImpl implements MemberService {
 	public int insertNaverSignUp(Member member) {
 		// TODO Auto-generated method stub
 		return memberDao.insertNaverSignUp(member,sqlSession);
+	}
+
+	@Override
+	public int insertVisit(Member returnMember) {
+		// TODO Auto-generated method stub
+		return memberDao.insertVisit(returnMember,sqlSession);
 	}
 }

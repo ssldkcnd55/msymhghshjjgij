@@ -296,17 +296,17 @@ public class AuctionDao {
 		return sqlSession.selectList("auction.select_auction_background",member_id);
 	}
 
-	public List<Auction> selectmoreAuctionCategory(SqlSessionTemplate sqlSession, int currentPage, int type) {
+	public List<Auction> selectmoreAuctionCategory(SqlSessionTemplate sqlSession, int currentPage, int atype) {
 		PageNumber pn = new PageNumber();
 		pn.setStartRow(currentPage * 9 -8);
 		pn.setEndRow(pn.getStartRow() + 8);
-		pn.setSelect(type);
+		pn.setSelect(atype);
 		return sqlSession.selectList("auction.selectmoreAuctionCategory",pn);
 
 	}
 
-	public int selectmoreAuctionCategoryCount(SqlSessionTemplate sqlSession, int type) {
-		return sqlSession.selectOne("auction.selectmoreAuctionCategoryCount",type);
+	public int selectmoreAuctionCategoryCount(SqlSessionTemplate sqlSession, int atype) {
+		return sqlSession.selectOne("auction.selectmoreAuctionCategoryCount",atype);
 
 	}
 

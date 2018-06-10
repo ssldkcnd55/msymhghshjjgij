@@ -164,7 +164,7 @@ public class AuctionController {
 	    for(Auction a : AuctionList) {
 	    	 JSONObject jsq = new JSONObject();
 	    	 jsq.put("rnum", a.getRnum());
-	    	 jsq.put("auction_no", a.getRnum());
+	    	 jsq.put("auction_no", a.getAuction_no());
 	    	 jsq.put("member_id", a.getMember_id());
 	    	 jsq.put("category_no", a.getCategory_no());
 	    	 jsq.put("auction_title", a.getAuction_title());
@@ -237,11 +237,12 @@ public class AuctionController {
 	@RequestMapping(value="moreAuctionCategory.do",method=RequestMethod.POST)
 	@ResponseBody
 	public void moreAuctionCategory(HttpServletResponse response,
-			@RequestParam("page") int currentPage,@RequestParam("type") int type
+			@RequestParam("page") int currentPage,@RequestParam("atype") int atype
 			)throws IOException {
-		List<Auction> moreAuctionCategory = auctionService.selectmoreAuctionCategory(currentPage,type);
+		System.out.println("경메 카테고리 더 보기");
+		List<Auction> moreAuctionCategory = auctionService.selectmoreAuctionCategory(currentPage,atype);
 		System.out.println("moreAuctionCategory : "+moreAuctionCategory.toString());
-		int listCount = auctionService.selectmoreAuctionCategoryCount(type);
+		int listCount = auctionService.selectmoreAuctionCategoryCount(atype);
 		System.out.println("listCount : "+listCount);
 		JSONArray jarr = new JSONArray();
 		
