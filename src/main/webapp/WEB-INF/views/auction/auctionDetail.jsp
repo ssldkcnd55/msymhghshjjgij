@@ -417,41 +417,14 @@ $(function(){
 	
 	//경매 즉시 구매
 	 function auction_Buy(){
-		alert("즉시구매 실행");
 		var buycheck = confirm("정말로 즉시 구매 하시겠습니다.");
 		if(buycheck == true){
 			location.href="/farm/auction_Buy.do?auction_no=${auction.auction_no}&member_id=${loginUser.member_id}";
+			
+			
 		}
-		/* $.ajax({
-			url:"auction_Buy.do",
-			type:"post",
-			data:{
-				auction_no:auction_no,
-				member_id :loginUser
-			},
-			async: false,
-			dataType: "JSON",
-			success: function(data){
-				
-				var outValues ="";
-				outValues +=
-				"<div class='auction_cart_right_div'>"+
-				"<table>"+
-				"<tr>"+
-					"<td id='a'></td>"+
-					"</tr>"+
-					"<tr>"+
-						"<td><input type='submit' id='submit'class='auction_bidding' value='입찰' / disabled ></td>"+
-							
-						"<td><button class='auction_buy' disdisabled  ><a href='javascript:auction_Buy();'>즉시구매</a></button></td>"+
-					"</tr>"+
-
-				"</table>"+
-			"</div>";
-				
-				$(".auction_cart_right_div").html(outValues);	
-			}
-		}); */
+		
+		
 	}
 
 	
@@ -771,10 +744,10 @@ $(function(){
 									<tr>
 									<td id="a"></td>
 									</tr>
-									<tr>
-										<td><input type="submit" id="submit"
+									<tr class="button_buy">
+										<td><input type="submit" id="bidding_button"
 											class="auction_bidding" value="입찰" /></td>
-										<td><button class="auction_buy" ><a href="javascript:auction_Buy();">즉시구매</a></button></td>
+										<td><button class="auction_buy" id="buy_button"><a href="javascript:auction_Buy();">즉시구매</a></button></td>
 									</tr>
 
 								</table>

@@ -207,9 +207,11 @@
 	<update id="updateAuctionStatus" parameterType="int">
 	<![CDATA[
 		update auction set auction_status =
-  		case when sysdate BETWEEN auction_startdate and auction_enddate then 1
-  		when auction_startdate > sysdate then 0
- 		end 
+  		case when sysdate BETWEEN auction_startdate and auction_enddate then '1'
+      	when auction_startdate > sysdate then '0'
+      	else '2'
+     	end 
+    	where  not auction_status = '2'
 	]]>
 	</update>
 	
@@ -415,7 +417,7 @@
 	<insert id="insertAuctionBuy" parameterType="Auction" >
 	<![CDATA[
 		insert into buy values((select max(buy_no) from buy)+1,(select max(group_no) from buy)+1,null,#{auction_no},#{member_id},sysdate,
-		(select auction_directprice from auction where auction_no = #{auction_no}),
+		1,
 		(select member_addr from member where member_id = #{member_id}),
 		(select member_tel from member where member_id = #{member_id}),
 		(select member_name from member where member_id = #{member_id}),
@@ -439,6 +441,12 @@
 	]]>
 	</select>
 	
+	
+	<select id="selectAuction" parameterType="int" resultType="Auction">
+	<![CDATA[
+		 select * from auction where auction_no = #{auction_no}
+	]]>
+	</select>
 	
 	
 </mapper>

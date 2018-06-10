@@ -826,12 +826,19 @@ public class AuctionController {
 	}
 	
 	@RequestMapping(value="auctionPaymentinfo.do")
-	public ModelAndView auctionPaymentinfo(ModelAndView mv,Payment payment) {
+	public ModelAndView auctionPaymentinfo(ModelAndView mv,Payment payment,Auction auction) {
 		int buy_no = payment.getBuy_no();
 		System.out.println("buy_no : "+buy_no);
-		Payment list = auctionService.selectAuctionPayment(buy_no);
-		System.out.println("paumentList : "+list.toString());
-		mv.addObject("payment", list);
+		
+		Payment plist = auctionService.selectAuctionPayment(buy_no);
+		System.out.println("paumentList : "+plist.toString());
+		
+		int auction_no = plist.getAuction_no();
+		Auction alist = auctionService.selectAuction(auction_no);
+		System.out.println("alist : "+alist.toString());
+		
+		mv.addObject("auction", alist);
+		mv.addObject("payment", plist);
 		mv.setViewName("auction/auctionPayment");
 		return mv;
 	}

@@ -64,37 +64,37 @@ var sellerInfo=[];
 						 <%-- <c:forEach var="item" items="${payment}" varStatus="status"> --%>
 							<tr>
 								<td><span><img class="goods_img"
-										src="/farm/resources/upload/auctionUpload/${list.auction_img }"></span></td>
-								<td><a href="AuctionDetail.do?auction_no=${item.auction_no}"
+										src="/farm/resources/upload/auctionUpload/${auction.auction_img }"></span></td>
+								<td><a href="AuctionDetail.do?auction_no=${auction.auction_no}"
 									target="_blank">
-										<div class="product_title"><strong class="product_title_strong">${list.auction_title }</strong></div>
-										<div class="product_note">${list.auction_note}</div>
+										<div class="product_title"><strong class="product_title_strong">${auction.auction_title }</strong></div>
+										<div class="product_note">${auction.auction_note}</div>
 								</a></td>
-								<td><strong>${list.member_name}</strong>
-									<p>${list.member_id}</p></td>
-								<td><fmt:formatNumber value="${list.market_price}"
+								<td><strong>${loginUser.member_name}</strong>
+									<p>${payment.member_id}</p></td>
+								<td><fmt:formatNumber value="${auction.auction_directprice}"
 										pattern="#,###" />원</td>
-								<td>0 개</td>
+								<td>${payment.buy_amount} 개</td>
 								<td>2,500원</td>
 								<td><fmt:formatNumber
-										value="${list.buy_amount * list.auction_directprice }"
+										value="${payment.buy_amount * auction.auction_directprice }"
 										pattern="#,###" />원</td>
 							</tr>
 				<script type="text/javascript">
-                seller_id.push('${list.member_id}');
-               order_price+=${item.buy_amount * list.auction_directprice };
+                seller_id.push('${auction.member_id}');
+               order_price+=${payment.buy_amount * auction.auction_directprice };
                delivery_price+=2500;
-               product_auction_no.push('${list.auction_no}');
-               product_buy_amount.push('${list.buy_amount}');
+               product_auction_no.push('${auction.auction_no}');
+               product_buy_amount.push('${payment.buy_amount}');
                var obj = new Object();
-               obj={'auction_no':'${list.auction_no}',
-            		   'amount':'${list.buy_amount }',
-            		   'img':'${list.market_img }',
-            		   'titme':'${list.market_title }',
-            		   'your_id':'${list.member_id}',
-            		   'member_name':'${list.member_name}',
-            		   'price':'${list.auction_directprice}',
-            		   'total':'${list.buy_amount * list.auction_directprice }' 
+               obj={'auction_no':'${auction.auction_no}',
+            		   'amount':'${payment.buy_amount }',
+            		   'img':'${auction.auction_img }',
+            		   'titme':'${auction.auction_title }',
+            		   'your_id':'${auction.member_id}',
+            		   'member_name':'${louginUser.member_name}',
+            		   'price':'${auction.auction_directprice}',
+            		   'total':'${payment.buy_amount * auction.auction_directprice }' 
                };
                sellerInfo.push(JSON.stringify(obj));
               </script>

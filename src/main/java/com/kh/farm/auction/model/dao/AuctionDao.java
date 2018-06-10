@@ -328,6 +328,10 @@ public class AuctionDao {
 		return sqlSession.selectOne("auction.selectAuctionPayment",buy_no);
 
 	}
+
+	public Auction selectAuction(SqlSessionTemplate sqlSession, int auction_no) {
+		return sqlSession.selectOne("auction.selectAuction",auction_no);
+	}
 	
 
 	
