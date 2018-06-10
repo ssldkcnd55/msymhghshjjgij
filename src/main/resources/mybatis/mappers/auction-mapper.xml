@@ -405,10 +405,9 @@
 	</select>
 	
 	
-	<update id="updateAuctionBuy" parameterType="int">
+	<update id="updateAuctionBuy" parameterType="int" flushCache="true">
 	<![CDATA[
-		update auction set auction_status = '2'
-		 where auction_no = #{auction_no}
+		update auction set auction_status = '2' where auction_no = #{auction_no}
 	]]>
 	</update>
 	
