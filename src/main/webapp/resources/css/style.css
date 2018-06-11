@@ -152,7 +152,10 @@ img{border:0}
 		.directPrice{
 		margin-top: 5px;
 		}
-		
+.mypageContainer{
+	margin:30px 0px 0px 0px;
+	
+}		
 #footer { width:100%; padding:20px 0 40px 0; border-top:solid 1px #DCDCDC; margin:0 auto; position:relative; }
 		#footer div.inner-foot { width:960px;  margin: auto; padding:0;}
 		#footer div.inner-foot h5{ list-style:none;  font-style: normal; font-family: dotum;color: #929292;font-size: 9pt;line-height: 180%; font-weight:normal; }

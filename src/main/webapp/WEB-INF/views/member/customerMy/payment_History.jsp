@@ -164,8 +164,9 @@ function numberWithCommas(x) {
 <meta charset="UTF-8">
 <title>title</title>
 </head>
-<body>
-	<table class="View_table">
+<body style="margin:0">
+<hr style="margin :0px; border:0.5px solid #7e5957">
+	<table class="View_table" style="margin-left:10px;">
 	</table>
 
 	<div id="bottom">
