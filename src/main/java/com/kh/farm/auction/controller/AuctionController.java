@@ -12,7 +12,10 @@ import java.sql.ResultSet;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.StringTokenizer;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -32,14 +35,14 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.farm.auction.model.service.AuctionService;
-import com.kh.farm.auction.model.vo.Auction;
-import com.kh.farm.auction.model.vo.AuctionHistory;
-import com.kh.farm.auction.model.vo.AuctionQnA;
-import com.kh.farm.market.model.vo.Market;
-import com.kh.farm.market.model.vo.Review;
-import com.kh.farm.member.model.vo.Member;
-import com.kh.farm.notice.model.vo.Notice;
-import com.kh.farm.payment.model.vo.Payment;
+import com.kh.farm.auction.model.vo.*;
+import com.kh.farm.market.model.vo.*;
+import com.kh.farm.member.model.vo.*;
+import com.kh.farm.notice.model.vo.*;
+import com.kh.farm.payment.model.service.PaymentService;
+import com.kh.farm.payment.model.service.PaymentServiceImpl;
+import com.kh.farm.payment.model.vo.*;
+import com.kh.farm.shoppingBasket.model.vo.*;
 
 
 
@@ -47,6 +50,7 @@ import com.kh.farm.payment.model.vo.Payment;
 public class AuctionController {
 
 	@Autowired private AuctionService auctionService;
+	@Autowired private PaymentService paymentService;
 	
 	@RequestMapping(value="cus_auction_qna_list.do")
 	public void selectAuctionCusQnaList(HttpServletResponse response,@RequestParam("page") int currentPage) 
@@ -843,6 +847,33 @@ public class AuctionController {
 		return mv;
 	}
 	
+	//옥션 결제 페이지 이동 (현준)
+	@RequestMapping("makeAuctionPayment.do")
+	public ModelAndView makePayment(@RequestParam("auction_no") int auction_no, ModelAndView mv, HttpSession session) {
+		
+		//경매 상태:2(마감) 업데이트 :
+		int auction_Buy = auctionService.updateAuctionBuy(auction_no);
+		AuctionOrder ao = auctionService.selectAuctionPaymentInfo(auction_no);
+		mv.addObject("ao", ao);
+		mv.setViewName("auction/auctionPayment");
+		return mv;
+		
+	}
+	
+	//옥숀 결제 완료 후 db 등록 (현준)
+	@RequestMapping(value="insertAuctionPayment.do",method = RequestMethod.POST)
+	public void insertAuctionPayment(HttpServletResponse response,Payment pm) throws IOException
+	{
+	pm.setBuy_no(auctionService.insertAuctionPayment(pm));
+	int chat_no = paymentService.selectChatNo(pm.getMember_id());
+	PrintWriter out = response.getWriter();
+	JSONObject json= new JSONObject();
+	json.put("buy_no", pm.getBuy_no());
+	json.put("chat_no", chat_no);
+	out.println(json.toJSONString());
+	out.flush();
+	out.close();
+	}
 
 }
 

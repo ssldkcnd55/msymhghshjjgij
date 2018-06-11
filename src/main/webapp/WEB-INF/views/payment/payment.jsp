@@ -94,7 +94,7 @@ var sellerInfo=[];
             		   'your_id':'${item.member_id}',
             		   'member_name':'${item.member_name}',
             		   'price':'${item.market_price}',
-            		   'total':'${item.buy_amount * item.market_price }' 
+            		   'total':'${item.buy_amount * item.market_price+2500 }' 
                };
                sellerInfo.push(JSON.stringify(obj));
                 </script>

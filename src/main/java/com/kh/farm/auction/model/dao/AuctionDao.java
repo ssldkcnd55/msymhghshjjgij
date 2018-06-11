@@ -13,6 +13,7 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.farm.auction.model.vo.Auction;
 import com.kh.farm.auction.model.vo.AuctionHistory;
+import com.kh.farm.auction.model.vo.AuctionOrder;
 import com.kh.farm.auction.model.vo.AuctionQnA;
 import com.kh.farm.common.model.vo.PageNumber;
 import com.kh.farm.member.model.vo.Member;
@@ -331,6 +332,15 @@ public class AuctionDao {
 
 	public Auction selectAuction(SqlSessionTemplate sqlSession, int auction_no) {
 		return sqlSession.selectOne("auction.selectAuction",auction_no);
+	}
+
+	public AuctionOrder selectAuctionPaymentInfo(SqlSessionTemplate sqlSession, int auction_no) {
+		return sqlSession.selectOne("auction.selectAuctionPaymentInfo", auction_no);
+	}
+
+	public int insertAuctionPayment(SqlSessionTemplate sqlSession, Payment pm) {
+		sqlSession.insert("auction.insertAuctionPayment", pm);
+	return pm.getBuy_no();
 	}
 	
 

@@ -8,6 +8,7 @@ import java.util.List;
 
 import com.kh.farm.auction.model.vo.Auction;
 import com.kh.farm.auction.model.vo.AuctionHistory;
+import com.kh.farm.auction.model.vo.AuctionOrder;
 import com.kh.farm.auction.model.vo.AuctionQnA;
 import com.kh.farm.member.model.vo.Member;
 import com.kh.farm.notice.model.vo.Notice;
@@ -114,6 +115,10 @@ public interface AuctionService {
 	Payment selectAuctionPayment(int buy_no);
 
 	Auction selectAuction(int auction_no);
+
+	AuctionOrder selectAuctionPaymentInfo(int auction_no);
+
+	int insertAuctionPayment(Payment pm);
 
 	
 
