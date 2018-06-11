@@ -1,8 +1,6 @@
 @charset "UTF-8";
 /* CSS Document */
-html { overflow-y:scroll;
-font-family: 'Noto Sans KR';
-    font-weight: 400; }
+html { overflow-y:scroll; }
 html, body { margin:0; padding:0; width:100%;}
 
 img{border:0}
@@ -161,22 +159,40 @@ img{border:0}
 		
 .title1{
 	width:928px;
-	height:80px;
-	border: 2px solid #4a2419;
-   padding: 15px;
    margin:0px;
-   font-size:18pt;
-   color:#4a2419;
+   margin-bottom:20px;
+   font-size:23pt;
+   color:#7e5957;
    font-weight:bold;
-   font-family:  "굴림", gulim, arial, helvetica, sans-serif;
    float:left;
-	margin-bottom:20px;
+}
+.title_image{
+	    margin-top: 5px;
+	background-size: cover;
+   width: 40px;
+   height: 35px;
+   float: left;
 }
 .titleP{
-	margin-top:25px;
+	margin:0px;
 	margin-left:40px;
 }
-
+.market_write{
+	color: #7e5957;
+   
+   border:1px solid #7e5957;
+   background: white;
+   border-radius: 3px;
+   font-size: 10pt;
+   font-weight: bold;
+   float: right;
+   margin:10px 15px 20px 0;
+   padding: 5px;
+}
+.market_write:hover{
+	cursor: pointer;
+   background: #eee8e8;
+}
 .pagination {
     display: inline-block;
     align:center;
