@@ -30,8 +30,8 @@ function auction_update(){
 	}
 
 //경매 낙찰 검사
-var bidding;
-bidding = setInterval(function(){auction_bidding()}, 3000); 
+/* var bidding;
+bidding = setInterval(function(){auction_bidding()}, 3000);  */
 
 function auction_bidding(){
 
