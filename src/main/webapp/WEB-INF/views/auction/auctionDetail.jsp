@@ -229,11 +229,8 @@ $(function(){
          }
          
       });
-      
-      
-      
-      
    });
+   
    
    //경매 입찰 List (입찰내역)
    function auction_biddingList(no){
@@ -252,11 +249,14 @@ $(function(){
                  var json = JSON.parse(objStr);
                  
                  var biddingcount = json.list[0].biddingcount;
-                /*  alert("count : "+biddingcount); */
+                 alert("count : "+biddingcount); 
+                 alert("day :"+json.list[0].day);
+                 
+                 if(json.list.length != 0){
                  var outValues = "";
                     outValues =
-                       "<span class='s1'>입찰 수 : </span> <span>"+biddingcount+"</span> <span class='s1'>남은시간 : </span>"+
-                      "<span>4일 13시간 5분</span> <span class='s1'>경매 기간 : </span><span>5일</span>"
+                       "<span class='s1'>입찰 수 : </span> <span>"+biddingcount+"</span>&nbsp;&nbsp;&nbsp; <span class='s1'>남은기간 : </span>"+
+                      "<span>"+json.list[0].day+"</span>";
                     
                  $(".bidding_info").html(outValues);
                   
@@ -279,11 +279,18 @@ $(function(){
                  }
                    outValues2 += "</table>";
                  $(".bidding_history").html(outValues2);
+        	  }
+          else{
+        	  outValues2 = 
+        		  "<div style='width:100%; height:200px;margin-top:20%;text-align:center;font-size:20pt;font-weight: bold;color:gray;'>"+
+              	  "등록된 문의가 없습니다.</div>";
+        	  $(".bidding_info").html(outValues2);
+          	}
           }
-          
       });
           
    }
+
    
    //경매 남은 시간
    var aTime;

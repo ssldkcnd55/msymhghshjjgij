@@ -271,4 +271,9 @@ public class AuctionServiceImpl implements AuctionService{
 	public int selectprice(int auction_no) {
 		return auctionDao.selectprice(sqlSession,auction_no);
 	}
+	
+	@Override
+	public int selectDay(int auction_no) {
+		return auctionDao.selectDay(sqlSession,auction_no);
+	}
 }

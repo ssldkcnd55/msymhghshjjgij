@@ -17,6 +17,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.swing.plaf.synth.SynthSeparatorUI;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -614,6 +615,8 @@ public class AuctionController {
 		 ArrayList<AuctionHistory> selectAuctionBiddingList = auctionService.selectAuctionBiddingList(auction_no);
 		 int selectAuctionBiddingCount = auctionService.selectAuctionBiddingCount(auction_no);
 		 System.out.println("selectAuctionBiddingCount : "+selectAuctionBiddingCount);
+		 int Day = auctionService.selectDay(auction_no);
+		 System.out.println("day : "+Day);
 		 
 		 for (AuctionHistory ah : selectAuctionBiddingList) {
 	         JSONObject json = new JSONObject();
@@ -624,6 +627,7 @@ public class AuctionController {
 	         json.put("auction_history_price", ah.getAuction_history_price());
 	         json.put("auction_history_date", ah.getAuction_history_date().toString());
 	         json.put("biddingcount", selectAuctionBiddingCount);
+	         json.put("day", Day);
 	         jarr.add(json);
 		 }
 		

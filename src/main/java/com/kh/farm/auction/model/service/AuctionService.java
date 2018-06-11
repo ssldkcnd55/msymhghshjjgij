@@ -123,6 +123,9 @@ public interface AuctionService {
 
 	int selectprice(int auction_no);
 
+	//입찰내역 남은 day수 가져오기
+	int selectDay(int auction_no);
+
 	
 
 	

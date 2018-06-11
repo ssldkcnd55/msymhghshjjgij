@@ -346,6 +346,10 @@ public class AuctionDao {
 	public int selectprice(SqlSessionTemplate sqlSession, int auction_no) {
 		return sqlSession.selectOne("auction.selectprice",auction_no);
 	}
+
+	public int selectDay(SqlSessionTemplate sqlSession, int auction_no) {
+		return sqlSession.selectOne("auction.selectDay",auction_no);
+	}
 	
 
 	
