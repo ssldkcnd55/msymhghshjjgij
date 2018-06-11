@@ -29,6 +29,25 @@ function auction_update(){
 	});
 	}
 
+//경매 낙찰 검사
+var bidding;
+bidding = setInterval(function(){auction_bidding()}, 3000); 
+
+function auction_bidding(){
+
+	$.ajax({
+		url : "bidding.do",
+		type : 'get',
+		 success : function(obj) {
+			 /* console.log(obj.toString());  */
+			 var objStr = JSON.stringify(obj);
+	         var jsonObj = JSON.parse(objStr);
+			/*  alert("경매 상태"+jsonObj.auction_status); */
+		 }
+	});
+}
+
+
 
 function getBasketCount(member_id)
 {

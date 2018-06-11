@@ -56,7 +56,7 @@ $(function(){
         </iframe>
         <iframe id="cusmyframe_4" src="moveQna_List.do" hidden="true"> 
         </iframe>
-        <iframe id="cusmyframe_5" src="moveAu.do" hidden="true"> 
+        <iframe id="cusmyframe_5" src="moveAuctionBidding.do" hidden="true"> 
         </iframe>
          <!-- <hr class="hr1"> -->      
         </div>

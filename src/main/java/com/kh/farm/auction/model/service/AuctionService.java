@@ -133,6 +133,9 @@ public interface AuctionService {
 	//입찰내역 남은 day수 가져오기
 	int selectDay(int auction_no);
 
+	//경매 enddate - sysdate = 0인거 뽑아오기
+	ArrayList<Integer> selectb();
+
 	
 
 	

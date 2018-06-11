@@ -294,4 +294,9 @@ public class AuctionServiceImpl implements AuctionService {
 	public int selectDay(int auction_no) {
 		return auctionDao.selectDay(sqlSession,auction_no);
 	}
+	
+	@Override
+	public ArrayList<Integer> selectb() {
+		return auctionDao.selectb(sqlSession);
+	}
 }

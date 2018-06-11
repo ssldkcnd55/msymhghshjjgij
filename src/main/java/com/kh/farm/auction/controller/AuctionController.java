@@ -917,6 +917,17 @@ public class AuctionController {
 	      out.close();
 	}
 	
+	@RequestMapping(value="bidding.do")
+	@ResponseBody
+	public void bidding(HttpServletResponse response)throws IOException{
+		
+		ArrayList<Integer> selectb = auctionService.selectb();
+		System.out.println("selectb : "+selectb);
+		
+	}
+
+	
+	
 
 
 }

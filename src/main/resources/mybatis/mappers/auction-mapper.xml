@@ -498,5 +498,14 @@
 	]]>
 	</select>
 	
+	<select id="selectb" resultType="int" >
+	<![CDATA[
+		select 
+		to_char( trunc(to_date(AUCTION_ENDDATE,'YYYY/MM/DD HH24:MI:SS') 
+		 - to_date(SYSDATE,'YYYY/MM/DD HH24:MI:SS'),0)) as "day"
+		from auction
+	]]>
+	</select>
+	
 
 </mapper>

@@ -250,5 +250,10 @@ public class MoveController {
 	public String moveOrderDeliveryDetail() {
 		return "payment/orderDeliveryDetail";
 	}
+	
+	@RequestMapping("moveAuctionBidding.do")
+	public String moveAuctionBidding() {
+		return "member/customerMy/auction_Bidding";
+	}
 }
 
