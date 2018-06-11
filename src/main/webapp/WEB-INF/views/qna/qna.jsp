@@ -135,16 +135,15 @@ function qnaMake(){
       <div id="container">
          <div class="inner-wrap">
          <div class="board-wrap">
-            <div class="title1 qna"><p class="titleP">QnA</p></div>
-	<button class="market_write" onclick="qnaMake();">QnA 등록</button>
-            <!-- select box -->
-            <div class="select_box">
-               <select class="select">
-                  <option value="1" selected="">최근등록순</option>
-                  <option value="2">좋아요많은순</option>
-                  <option value="3">조회많은순</option>
-               </select>
+            <div class="title1 qna">
+            <div class="title_image" style="background-image: url('/farm/resources/images/question.png')"></div>
+            <p class="titleP">&nbsp;QnA</p>
             </div>
+            <c:if test="${!empty loginUser }">
+				<button class="market_write" onclick="qnaMake();">QnA 등록</button>
+			</c:if>
+            <!-- select box -->
+            
 
             <table class="QnA_table">
                <!-- <tr>

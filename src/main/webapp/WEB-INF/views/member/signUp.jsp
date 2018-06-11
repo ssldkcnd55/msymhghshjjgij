@@ -93,7 +93,7 @@
 									<!--비밀번호 다시 입력란  -->
 									<input
 										type="password" class="form-control" id="inputPwd2"
-										name="inputPwd2" placeholder="비밀번호 확인" required> <label
+										name="inputPwd2" placeholder="비밀번호 확인" oninput="passwordCheck()" required> <label
 										class="confirmPwd" id="confirmPwd"></label>
 									<!--ID 불일치의 P태그와 동일함  -->
 								</div>
