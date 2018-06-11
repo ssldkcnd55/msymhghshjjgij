@@ -253,23 +253,25 @@ $(function(){
 			        
 			        var biddingcount = json.list[0].biddingcount;
 			       /*  alert("count : "+biddingcount); */
-			        var outValues = $(".bidding_info").html();
-			        	outValues +=
+			        var outValues = "";
+			        	outValues =
 			        		"<span class='s1'>입찰 수 : </span> <span>"+biddingcount+"</span> <span class='s1'>남은시간 : </span>"+
 						    "<span>4일 13시간 5분</span> <span class='s1'>경매 기간 : </span><span>5일</span>"
 			        	
 			        $(".bidding_info").html(outValues);
+						
 			       	
-			        var outValues2=$(".bidding_table").html();
+					var outValues2 = "";
 			        for(var i in json.list){
 			        	outValues2 +=
-			        		"<tr>"+
-							"<td>"+json.list[i].member_id+"</td>"+
-							"<td>"+json.list[i].auction_history_price+"</td>"+
-							"<td>"+json.list[i].auction_history_date+"</td>"+
-							"</tr>"
+			        		"<tr >"+
+							"<td style='width:30%;'>"+json.list[i].member_id+"</td>"+
+							"<td style='width:25%;'>"+json.list[i].auction_history_price+"</td>"+
+							"<td >"+json.list[i].auction_history_date+"</td>"+
+							"</tr>";
 			        }
-			        $(".bidding_table").html(outValues2);
+			       
+			        $(".bidding_table2").html(outValues2);
 			 }
 			 
 		});
@@ -606,11 +608,14 @@ $(function(){
 
 							<div class="bidding_history">
 								<table class="bidding_table">
-									<tr>
+									<!-- <tr>
 										<th class="bidder">입찰자</th>
 										<th class="current_price">입찰가</th>
 										<th>입찰 시간</th>
 									</tr>
+									<tr class="bidding_table2">
+										
+									</tr> -->
 								</table>
 							</div>
 							<!-- 입찰 테이블 -->
