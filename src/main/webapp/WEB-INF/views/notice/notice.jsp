@@ -13,6 +13,9 @@ a:hover {text-decoration: underline; color: gray;}
 <script src="/farm/resources/js/jquery-3.3.1.min.js"></script>
 <!-- Notice.css -->
 <script>
+function noticeMake(){
+	
+}
 $(function(){
 	$.ajax({
 		url:"noticeList.do",
@@ -137,16 +140,14 @@ function noticePage(page){
       <div id="container">
          <div class="inner-wrap">
          <div class="board-wrap">
-            <div class="title1 notice"><p class="titleP">공지사항</p></div>
-
-            <!-- select box -->
-            <div class="select_box">
-               <select class="select">
-                  <option value="1" selected="">최근등록순</option>
-                  <option value="2">좋아요많은순</option>
-                  <option value="3">조회많은순</option>
-               </select>
+            <div class="title1 notice">
+            <div class="title_image" style="background-image: url('/farm/resources/images/noticeImage.png')"></div>
+            <p class="titleP">&nbsp;공지사항</p>
             </div>
+			<c:if test="${loginUser.member_category eq '2' }">
+				<button class="market_write" onclick="noticeMake();">공지 등록</button>
+			</c:if>
+          
 
             <table class="Notice_table">
               

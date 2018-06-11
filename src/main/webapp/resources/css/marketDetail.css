@@ -11,6 +11,24 @@
 	right:0;
 	bottom: 0;
 }
+.dailyContent:hover{
+	text-decoration: underline;
+}
+.dailyContent{
+	 overflow: hidden;
+     text-overflow: ellipsis;
+	display: -webkit-box;
+	-webkit-line-clamp: 3; /* 라인수 */
+	-webkit-box-orient: vertical;
+
+	word-wrap:break-word; 
+	line-height: 1.2em;
+	height: 3.6em;
+}
+.dailyContent.right{
+	float:right;
+	
+}
 .test{
 	width: 900px;
 	text-align: left;
@@ -440,12 +458,24 @@ font-size: 14pt;
 }
 
 .title{
+	 overflow: hidden;
+     text-overflow: ellipsis;
+     white-space: nowrap;
 	 font-size: 11pt; margin-bottom: 0 ;
 	 font-weight: bold;
 	 color:#4c4c4c;
 }
 
 .content{
+	overflow: hidden;
+     text-overflow: ellipsis;
+	display: -webkit-box;
+	-webkit-line-clamp: 2; /* 라인수 */
+	-webkit-box-orient: vertical;
+
+	word-wrap:break-word; 
+	line-height: 1.2em;
+	height: 2.4em;
 	font-size: 10pt; 
 	margin-top: 0;
 	

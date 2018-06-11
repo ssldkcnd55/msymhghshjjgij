@@ -105,12 +105,24 @@
 }
 
 .title{
+	 overflow: hidden;
+     text-overflow: ellipsis;
+     white-space: nowrap;
 	 font-size: 12pt; margin-bottom: 0 ;
 	 font-weight: bold;
 	 color:#462114;
 }
 
 .content{
+	 overflow: hidden;
+     text-overflow: ellipsis;
+	display: -webkit-box;
+	-webkit-line-clamp: 2; /* 라인수 */
+	-webkit-box-orient: vertical;
+
+	word-wrap:break-word; 
+	line-height: 1.2em;
+	height: 2.4em;
 	font-size: 10pt; 
 	margin-top: 0;
 	

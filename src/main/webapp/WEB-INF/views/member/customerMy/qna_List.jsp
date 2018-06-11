@@ -356,14 +356,16 @@ $(function (){
 <meta charset="UTF-8">
 <title>title</title>
 </head>
-<body>
+<body style="margin:0">
+<hr style="margin :0px; border:0.5px solid #7e5957">
+	
 <select id="sele">
 	<option value="Market">Market</option>
 	<option value="Main">Main</option>
 	<option value="Auction">Auction</option>
 </select>
 
-<table class="View_table">
+<table class="View_table" style="margin-left:10px;">
 </table>
 <div id="bottom">
 	<div class="pagination">

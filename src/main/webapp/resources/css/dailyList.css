@@ -16,11 +16,19 @@
 	text-decoration: underline;
 }
 .dailyMakeBtn{
-	background: #512772;
-	width:100px;
-	height:30px;
-	border:none;
-	color:#fff;
+	color: #7e5957;	
+	border:1px solid #7e5957;
+	background: white;
+	border-radius: 3px;
+	font-size: 10pt;
+	font-weight: bold;
+	float: right;
+	margin:10px 15px 20px 0;
+	padding: 5px;
+}
+.dailyMakeBtn:hover{
+	cursor: pointer;
+	background: #eee8e8;
 }
 .history_title {
    width: 30%;

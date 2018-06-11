@@ -150,7 +150,7 @@ public class JobController {
 	@RequestMapping(value = "jobDetail.do")
 	public String noticeDetail(Model model, @RequestParam(value = "job_no") int job_no) {
 
-		System.out.println(job_no);
+		System.out.println("구인구인글넘버:"+job_no);
 		Job job = jobService.jobDeatil(job_no);
 		System.out.println(job.getJob_title());
 		job.toString();

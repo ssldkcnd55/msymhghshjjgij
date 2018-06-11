@@ -28,12 +28,12 @@
 				<div class="job_box">
 					<div class="job_title">
 
-						<p class="job_name">옥천 농원</p>
+						<p class="job_name">${job.job_name}</p>
 						<p class="job_titleP">
 							${job.job_title}<span class="job_date">${job.job_date}</span>
 						</p>
-					</div>
-					<!-- <div class="job_imgbox">사진</div> -->
+					</div>				
+					 <div class="job_imgbox" style="background-image: url('/farm/resources/upload/jobUpload/${job.job_img}')"></div>		
 					<div>
 						<table class="job_table">
 							<tr>
@@ -44,7 +44,7 @@
 								<td>시작일</td>
 								<td>${job.job_startdate}</td>
 								<td>담당자</td>
-								<td>김영민</td>
+								<td>${job.member_id}</td>
 							</tr>
 							<tr>
 								<td>마감일</td>
@@ -103,7 +103,7 @@
 								// 인포윈도우로 장소에 대한 설명을 표시합니다
 								var infowindow = new daum.maps.InfoWindow(
 										{
-											content : "<div style='width:150px;text-align:center;padding:6px 0;'>'${job.job_addr}'</div>"
+											content : "<div style='width:150px;text-align:center;padding:6px 0;'>${job.job_name}</div>"
 										});
 								infowindow.open(map, marker);
 

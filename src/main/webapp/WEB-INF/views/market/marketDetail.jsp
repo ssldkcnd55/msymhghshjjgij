@@ -288,7 +288,7 @@ function dailyPage(){
 						+"<td class='history_right_table_td2' align='left' valign='top'>"
 						+"<span class='history_right_table_span1'>"+jsonObj.list[i].daily_date+"</span>"
 						+"</td></tr><tr><td align='left' class='hi_title'>"+jsonObj.list[i].daily_title+"</td></tr>"
-						+"<tr><td align='left' class='hi_content_right'><a class='aTag' href='marketDailyDetail.do?daily_no="+jsonObj.list[i].daily_no+"&market_no=${market.market_no}'><div>"+jsonObj.list[i].daily_contents
+						+"<tr><td align='left' class='hi_content_right'><a class='aTag' href='marketDailyDetail.do?daily_no="+jsonObj.list[i].daily_no+"&market_no=${market.market_no}'><div class='dailyContent left'>"+jsonObj.list[i].daily_contents
 						+"<span class='more'>...더보기</span></div></a></td></tr></tbody></table></td></tr>";
 				}else{
 					outValues += "<tr><td valign='top' class='history_right' align='right'>"
@@ -296,7 +296,7 @@ function dailyPage(){
 						+"<tbody><tr><td align='right' class='hi_date' valign='top'><span class='history_right_table_span1'>"+jsonObj.list[i].daily_date+"</span></td>"
 						+"<td rowspan='3' class='history_right_table_td1' ></td>"
 						+"</tr><tr><td align='right' class='hi_title'>"+jsonObj.list[i].daily_title+"</td></tr>"
-						+"<tr><td align='right' class='hi_content_right'><a class='aTag' href='marketDailyDetail.do?daily_no="+jsonObj.list[i].daily_no+"&market_no=${market.market_no}'><div style='float:right;'>"+jsonObj.list[i].daily_contents
+						+"<tr><td align='right' class='hi_content_right'><a class='aTag' href='marketDailyDetail.do?daily_no="+jsonObj.list[i].daily_no+"&market_no=${market.market_no}'><div class='dailyContent right'>"+jsonObj.list[i].daily_contents
 						+"<span class='more'>...더보기</span></div></a></td></tr></tbody></table></td><td class='space_right2'></tr>";
 				}
 			}
@@ -537,7 +537,7 @@ function changeprice(){
 
 				<!-- qna_Box -->
 				<div id="tab-3" class="tab-content">
-					<button class="market_write" onclick="qnaMake();">QnA 등록</button>
+					<button class="dailyMakeBtn" onclick="qnaMake();">QnA 등록</button>
 					<div class="qna_box">
 
 						<table class="QnA_table">
@@ -563,7 +563,7 @@ function changeprice(){
 				<!-- qna Box -->
 
 				<div id="tab-4" class="tab-content">
-					<button class="market_write" onclick="writeReview();">후기
+					<button class="dailyMakeBtn" onclick="writeReview();">후기
 						쓰기</button>
 					<div class="qna_box">
 

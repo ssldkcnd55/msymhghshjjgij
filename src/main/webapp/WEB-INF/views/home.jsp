@@ -263,10 +263,82 @@
 					}
 				});
 	}
+	/*시세정보 더보기버튼  */
 	function movequote() {
 		location.href = "/farm/moveQuote.do";
 
 	}
+	function movejob() {
+		location.href = "/farm/moveJob.do";
+
+	}
+	/*메인구인구직  */
+	$(function() {
+
+		$
+				.ajax({
+					url : "jobList.do",
+					type : "post",
+					dataType : "json",
+					success : function(data) {
+						var jsonStr = JSON.stringify(data);
+						var json = JSON.parse(jsonStr);
+						var values = "<tr><th class='th' width='7%'>지역</th><th class='th' width='10%'>상태</th><th class='th' width='25%'>제목</th></tr>";
+
+						for ( var i in json.list) {
+							values += "<tr id='hover'>";
+							values += "<td class='td'>" + json.list[i].job_addr + "</td>";
+							if (json.list[i].job_status == "1") {
+								values += "<td class='td'><span id='job_table_span_find'><strong>구인중</strong></span></td>";
+							} else {
+								values += "<td class='td'><span id='job_table_span_finded'>마감</span></td>";
+							}
+
+							values += "<td id='job_td' class='td'><a href='jobDetail.do?job_no="
+									+ json.list[i].job_no
+									+ "'>"
+									+ json.list[i].job_title
+									+ "</a></td></tr>"; 
+						}
+						$(".table2").html(values);
+
+						/* var startPage = json.list[0].startPage;
+						var endPage = json.list[0].endPage;
+						var maxPage = json.list[0].maxPage;
+						var currentPage = json.list[0].currentPage;
+
+						var values1 = "";
+						if (startPage > 5) {
+							values1 += "<a href='javascript:jobPage("
+									+ (startPage - 1) + ")'>&laquo;</a>"
+						} else {
+							values1 += "<a>&laquo;</a>";
+						}
+						for (var i = startPage; i <= endPage; i++) {
+							if (i == currentPage) {
+								values1 += "<a class='active'>" + i + "</a>";
+							} else {
+								values1 += "<a href='javascript:jobPage(" + i
+										+ ");'>" + i + "</a>";
+							}
+						}
+						if (endPage < maxPage) {
+							values1 += "<a href='javascript:jobPage("
+									+ (endPage + 1) + ")'>&raquo;</a>";
+
+						} else {
+							values1 += "<a>&raquo;</a>";
+						}
+						$(".pagination").html(values1); */
+					},
+					error : function(request, status, errorData) {
+						alert("error code : " + request.status + "\nmessage"
+								+ request.responseText + "\nerror" + errorData);
+					}
+
+				});
+
+	});
 	
 </script>
 </head>
@@ -301,7 +373,7 @@
 				<div class="tab_main">
 					<ul class="tabs">
 						<li class="active" rel="tab1">공지사항</li>
-						<li rel="tab2">구매랭킹</li>
+						<li rel="tab2">구인구직</li>
 						<li rel="tab3">시세정보</li>
 					</ul>
 					<div class="tab_container">
@@ -315,9 +387,7 @@
 							</ul>
 						</div>
 						<!-- #tab1 -->
-						<div id="tab2" class="tab_content">2222Mortal Kombat returns
-							after a lengthy hiatus and puts players back into the Tournament
-							for 2D fighting with gruesome combat.</div>
+						<div id="tab2" class="tab_content"><table class="table2"></table><button class="button2" onclick="movejob()">더보기</button></div>
 						<!-- #tab2 -->
 						<div id="tab3" class="tab_content">
 							<button class="button" onclick="movequote()">상세정보</button>

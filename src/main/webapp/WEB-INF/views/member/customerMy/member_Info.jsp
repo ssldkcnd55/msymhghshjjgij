@@ -129,18 +129,19 @@
 <meta charset="UTF-8">
 <title>title</title>
 </head>
-<body>
+<body style="margin:0">
+<hr style="margin :0px; border:0.5px solid #7e5957">
 	<div class="Info show">
 
-		<div class="Info_title">회원정보</div>
-		<hr class="hr">
-		<br>
+		<!-- <div class="Info_title">회원정보</div> -->
+		<!-- <hr class="hr"> -->
 		<div class="Info_content">
 			<table class="update_table">
 				<tr>
 					<td>아이디</td>
 					<td><input class="member_input" type="text" name="member_id"
 						value="${loginUser.member_id}" readonly="readonly"></td>
+						
 				</tr>
 				<tr class="naverCheck">
 					<td>현재 비밀번호</td>
@@ -149,11 +150,11 @@
 					<td id="npwdtext"></td>
 				</tr>
 				<tr class="naverCheck">
-					<td>변경할 비밀번호</td>
+					<td>새 비밀번호</td>
 					<td><input id="pwd" name="pwd" class="member_input"
 						type="password"></td>
 				<tr class="naverCheck">
-					<td>변경할 비밀번호 확인</td>
+					<td>새 비밀번호 확인</td>
 					<td><input id="cpwd" name="member_pwd" class="member_input"
 						type="password" onblur="checkPwd()"></td>
 					<td id="cpwdtext"></td>
@@ -170,7 +171,7 @@
 						value="${fn:substring(before_Addr,0,fn:indexOf(before_Addr,'@')) }" />
 					<td colspan="3" class="td1"><input class="member_input"
 						type="text" id="loc" readonly="readonly" value="${after_Addr}">
-						<button onclick="juso()" class="button">주소검색</button> <br> <c:set
+						<button onclick="juso()" class="memberBtn addr">주소검색</button> <br> <c:set
 							var="after_DAddr"
 							value="${fn:substring(before_Addr,fn:indexOf(before_Addr,'@')+1,fn:length(before_Addr)) }" />
 						<br> <input class="member_input" type="text" id="detail_loc"
@@ -180,7 +181,7 @@
 				<tr>
 					<td></td>
 					<td><input type="button" id="memberBtn" class="memberBtn"
-						value="확인"></td>
+						value="수정"></td>
 				</tr>
 
 			</table>
