@@ -40,13 +40,14 @@
 						<!--Join_form 구역 내에 mainform을 담았음  -->
 						<div>
 							<div class="page-header">
-								<h2 align="center" style="color: #777">회원가입</h2>
+								<h2 align="center" class="signUpTitle">회원 가입</h2>
 							</div>
 							<div>
 								<div style="text-align: center;">
 									<input type="hidden" name="category" value="${category }" >
 									<img src="/farm/resources/images/default_user.png"
-										id="profile" style="text-align: center" alt="이미지를 선택해주세요"></img><br>
+										id="profile" style="text-align: center; color:gray; font-size:11pt;" 
+										alt="이미지를 선택해주세요"></img><br>
 									<input type="file" id="file-1" class="inputfile inputfile-1"
 										accept='image/gif,image/jpeg,image/pnp'
 										data-multiple-caption="{count} files selected" name="upfile"
@@ -64,7 +65,7 @@
 									<!--e-Mail 기입란  -->
 									<br> <input
 										type="email" class="form-control" id="userEmail"
-										name="member_id" placeholder="이메일 입력 ex)abcd@naver.com" required>
+										name="member_id" placeholder="이메일 입력  ex)abcd@naver.com" required>
 									<div class="form-group text-center">
 										<input type="button" class="btn btn-info" id="mailsend"
 											name="dupliBt" value="메일인증" onclick="sendMail();" />
@@ -102,13 +103,13 @@
 									<!--이름 기입란  -->
 									<input type="text"
 										class="form-control" id="userName" name="member_name"
-										placeholder="이름을 입력해 주세요." required>
+										placeholder="이름 입력" required>
 								</div>
 								
 								<div class="form-group">
 									<input
 										type="text" class="form-control" id="tel"
-										name="member_tel" placeholder="전화 번호 입력 ex)010-1234-1234" required>
+										name="member_tel" placeholder="전화 번호 입력  ex)010-1234-1234" required>
 								</div>
 
 								

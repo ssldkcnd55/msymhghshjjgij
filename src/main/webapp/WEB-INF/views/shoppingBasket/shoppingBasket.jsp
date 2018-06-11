@@ -26,7 +26,7 @@
       </div>
       <div id="container">
          <div class="inner-wrap">
-           <!--  <div class="Notice_title">장바구니</div> -->
+           
            
            <br><br>
          <div class="title_box">

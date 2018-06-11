@@ -537,7 +537,7 @@ function changeprice(){
 
 				<!-- qna_Box -->
 				<div id="tab-3" class="tab-content">
-					<button class="market_write" onclick="qnaMake();">QnA 등록</button>
+					<button class="dailyMakeBtn" onclick="qnaMake();">QnA 등록</button>
 					<div class="qna_box">
 
 						<table class="QnA_table">
@@ -563,7 +563,7 @@ function changeprice(){
 				<!-- qna Box -->
 
 				<div id="tab-4" class="tab-content">
-					<button class="market_write" onclick="writeReview();">후기
+					<button class="dailyMakeBtn" onclick="writeReview();">후기
 						쓰기</button>
 					<div class="qna_box">
 

@@ -46,6 +46,7 @@ body {
 #vCode { /*ID LABEL 서식  */
 	width: 350px;
 	float: left;
+	margin-bottom: 14px;
 }
 
 .h2{
@@ -74,6 +75,7 @@ border-radius: 3px;
 #userEmail { /*ID LABEL 서식  */
 	width: 350px;
 	float: left;
+	margin-bottom: 9px;
 }
 
 .join_form { /*mainform을 담고 있는 div구역  */
@@ -82,7 +84,11 @@ border-radius: 3px;
 	margin: 0 auto;
 	padding: 20px 80px;
 }
-
+.signUpTitle{
+	color: #7e5957; 
+	font-weight: bold;
+	margin: 30px 0 15px 0;
+}
 #confirmId { /*p 태그의 아이디로 아이디 중복검사 시 사용 가능 여부를 보여줌  */
 	margin-top: -10px;
 }
