@@ -47,7 +47,6 @@ import com.kh.farm.payment.model.vo.Payment;
 public class AuctionController {
 
 	@Autowired private AuctionService auctionService;
-	
 	@RequestMapping(value="cus_auction_qna_list.do")
 	public void selectAuctionCusQnaList(HttpServletResponse response,@RequestParam("page") int currentPage) 
 		throws IOException{
@@ -89,7 +88,7 @@ public class AuctionController {
 	/*경매 등록시 DB저장*/
 	@RequestMapping(value="insertAuctionMake.do", method=RequestMethod.POST)
 	public String insertAuctionMake(Auction auction,HttpServletResponse response,HttpServletRequest request,
-			@RequestParam(name = "upfile", required = false) MultipartFile file){
+			@RequestParam(name = "upfile", required = false) MultipartFile file)throws IOException{
 		String path = request.getSession().getServletContext().getRealPath("resources/upload/auctionUpload");
 		
 		try {
@@ -132,11 +131,26 @@ public class AuctionController {
 		}
 		
 		int insertAuctionMake =  auctionService.insertAuctionMake(auction);
-	
+		System.out.println("insertAuctionMake : "+insertAuctionMake);
+		int auction_no = auctionService.selectAuction_no(auction.getMember_id());
+		System.out.println("auction_no :"+auction_no);
+		Auction auction2 = auctionService.selectAuction(auction_no);
+		int result;
+		if(insertAuctionMake > 0) {
+		result =  auctionService.insertMaxpriceAuction(auction2);
+		System.out.println("insertMaxpriceAuction : "+result);
+			if(result > 0) {
+				return "redirect:/AuctionList_controller.do";
+			}else {
+				//에러페이지
+				return null;
+			}
+		}else {
+			//에러페이지
+			return null;
+		}
 		
-		//mv.addObject("auction", insertAuctionMake);
-		/*mv.setViewName("/farm/AuctionList_controller.do");*/
-		return "redirect:/AuctionList_controller.do";
+		//return "redirect:/AuctionList_controller.do";
 		
 	}
 	
@@ -517,11 +531,13 @@ public class AuctionController {
         int price = checkauctionhistoryprice.getAuction_history_price();
         int startprice =checkauctionhistoryprice.getAuction_startprice();
         int directprice = checkauctionhistoryprice.getAuction_directprice();
+        int auction_history_price = checkauctionhistoryprice.getAuction_history_price();
        /* int startprice_range =checkauctionhistoryprice.getAuction_startprice2();*/
         
         json.put("price", price);//max값
         json.put("startprice", startprice);//경매 시작값
         json.put("directprice", directprice);//즉시구매가
+        json.put("auction_history_price", auction_history_price);//max갑
         /*json.put("startprice_range", startprice_range);//맨처음 경매 시작값보다 1000원 높게 입찰해야함
 */       
         System.out.println(json.toJSONString());
@@ -841,6 +857,23 @@ public class AuctionController {
 		mv.addObject("payment", plist);
 		mv.setViewName("auction/auctionPayment");
 		return mv;
+	}
+	
+	@RequestMapping(value="selectprice.do")
+	public void selectprice(HttpServletResponse response,@RequestParam(value="auction_no") int auction_no)throws IOException {
+		
+		int selectprice = auctionService.selectprice(auction_no);
+		
+		JSONObject json = new JSONObject();
+		
+		json.put("auction_history_price", selectprice);
+		System.out.println(json.toJSONString());
+        
+		 response.setContentType("application/json; charset=utf-8;");
+	      PrintWriter out = response.getWriter();
+	      out.print(json.toJSONString());
+	      out.flush();
+	      out.close();
 	}
 	
 
