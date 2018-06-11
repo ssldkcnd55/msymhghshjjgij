@@ -111,6 +111,18 @@ public interface AuctionService {
 
 	Payment selectAuctionBuy(int  auction_no);
 
+	Payment selectAuctionPayment(int buy_no);
+
+	Auction selectAuction(int auction_no);
+
+	//경매 insert한후 history에 maxprice값 insert해주기
+	int insertMaxpriceAuction(Auction auction);
+
+	//경매 member_id로 auction_no 가져오기
+	int selectAuction_no(String member_id);
+
+	int selectprice(int auction_no);
+
 	
 
 	

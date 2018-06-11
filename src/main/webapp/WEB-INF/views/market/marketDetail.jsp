@@ -24,6 +24,7 @@
 function numberWithCommas(x) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
+
 $(function(){
 	$('.goods-view-show-option-button').click(function(){
 		if($('#flow-cart2').css('display') == 'none'){
@@ -40,6 +41,7 @@ $(function(){
 </script>
 <script type="text/javascript">
 var change = 0;
+var m_img = '${market.market_img}';
 
  
 $(function(){
@@ -535,7 +537,7 @@ function changeprice(){
 
 				<!-- qna_Box -->
 				<div id="tab-3" class="tab-content">
-					<button class="market_write" onclick="qnaMake();">QnA 등록</button>
+					<button class="dailyMakeBtn" onclick="qnaMake();">QnA 등록</button>
 					<div class="qna_box">
 
 						<table class="QnA_table">
@@ -561,7 +563,7 @@ function changeprice(){
 				<!-- qna Box -->
 
 				<div id="tab-4" class="tab-content">
-					<button class="market_write" onclick="writeReview();">후기
+					<button class="dailyMakeBtn" onclick="writeReview();">후기
 						쓰기</button>
 					<div class="qna_box">
 
@@ -698,7 +700,7 @@ function changeprice(){
 
 			<div class="goods-view-flow-cart __active" id="flow-cart2">
 					<div class="flow_order_seller">판매자 : <span style="font-weight: 600">${market.member_name}</span><!-- (<span>판매자아이디${market.member_id}</span>) -->
-					<a href="javascript: sendProductMsg('${loginUser.member_id}','${market.member_id}'  )"><span>상품 문의</span></a> | <a href="javascript: sendMsg()"><span>1:1대화</span></a>
+					<a href="javascript: sendProductMsg('${loginUser.member_id}','${market.member_id}'  )"><span>상품 문의</span></a> | <a href="javascript: sendMsg('${loginUser.member_id}','${market.member_id}' )"><span>1:1대화</span></a>
 					</div>
 					
 				<div class="goods-view-flow-cart-wrapper">

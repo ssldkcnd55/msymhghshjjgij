@@ -35,7 +35,7 @@
 		flushCache="true" useGeneratedKeys="true">
 	
 	<![CDATA[
-		insert into auction values((select max(auction_no) from auction)+1,#{member_id},1,#{auction_title},#{auction_note},#{auction_img},#{auction_intro},
+		insert into auction values((select nvl( max(auction_no),0) from auction)+1,#{member_id},1,#{auction_title},#{auction_note},#{auction_img},#{auction_intro},
 		'0',#{auction_startprice},#{auction_directprice},to_date(#{auction_startdate},'YY-MM-DD'),to_date(#{auction_enddate},'YY/MM/DD'))
 	]]>
 	</insert>
@@ -207,9 +207,11 @@
 	<update id="updateAuctionStatus" parameterType="int">
 	<![CDATA[
 		update auction set auction_status =
-  		case when sysdate BETWEEN auction_startdate and auction_enddate then 1
-  		when auction_startdate > sysdate then 0
- 		end 
+  		case when sysdate BETWEEN auction_startdate and auction_enddate then '1'
+      	when auction_startdate > sysdate then '0'
+      	else '2'
+     	end 
+    	where  not auction_status = '2'
 	]]>
 	</update>
 	
@@ -405,17 +407,16 @@
 	</select>
 	
 	
-	<update id="updateAuctionBuy" parameterType="int">
+	<update id="updateAuctionBuy" parameterType="int" flushCache="true">
 	<![CDATA[
-		update auction set auction_status = '2'
-		 where auction_no = #{auction_no}
+		update auction set auction_status = '2' where auction_no = #{auction_no}
 	]]>
 	</update>
 	
 	<insert id="insertAuctionBuy" parameterType="Auction" >
 	<![CDATA[
 		insert into buy values((select max(buy_no) from buy)+1,(select max(group_no) from buy)+1,null,#{auction_no},#{member_id},sysdate,
-		(select auction_directprice from auction where auction_no = #{auction_no}),
+		1,
 		(select member_addr from member where member_id = #{member_id}),
 		(select member_tel from member where member_id = #{member_id}),
 		(select member_name from member where member_id = #{member_id}),
@@ -429,7 +430,42 @@
 	]]>
 	</select>
 	
+	<select id="selectAuctionPayment" parameterType="int" resultType="Payment">
+	<![CDATA[
+		  select b.buy_no,b.group_no, a.auction_no, b.member_id,m.member_name,m.MEMBER_TEL,m.MEMBER_ADDR,b.buy_date,b.buy_amount,b.buy_addr,b.buy_tel,b.buy_name,b.buy_status,a.AUCTION_IMG
+ 		  from buy b, auction a, member m
+ 		  where b.auction_no = a.auction_no
+ 		  and b.member_id = m.member_id 
+		  and b.BUY_NO = #{buy_no}
+	]]>
+	</select>
 	
+	
+	<select id="selectAuction" parameterType="int" resultType="Auction">
+	<![CDATA[
+		 select * from auction where auction_no = #{auction_no}
+	]]>
+	</select>
+	
+	<insert id="insertMaxpriceAuction" parameterType="Auction" >
+	<![CDATA[
+		insert into auction_history values((select max(auction_history_no) from auction_history)+1,
+		#{auction_no},null,#{auction_startprice},sysdate)
+	]]>
+	</insert>
+	
+	
+	<select id="selectAuction_no" parameterType="String" resultType="int">
+	<![CDATA[
+		 select max(auction_no) as "auction_no" from auction where member_id = #{member_id}
+	]]>
+	</select>
+	
+	<select id="selectprice" parameterType="int" resultType="int">
+	<![CDATA[
+		 select max(auction_history_price) as "auction_history_price" from auction_history where auction_no =#{auction_no}
+	]]>
+	</select>
 	
 	
 </mapper>

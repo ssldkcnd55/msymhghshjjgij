@@ -323,6 +323,29 @@ public class AuctionDao {
 	public Payment selectAuctionBuy(SqlSessionTemplate sqlSession, int  auction_no) {
 		return sqlSession.selectOne("auction.selectAuctionBuy",auction_no);
 	}
+
+	public Payment selectAuctionPayment(SqlSessionTemplate sqlSession, int buy_no) {
+		return sqlSession.selectOne("auction.selectAuctionPayment",buy_no);
+
+	}
+
+	public Auction selectAuction(SqlSessionTemplate sqlSession, int auction_no) {
+		return sqlSession.selectOne("auction.selectAuction",auction_no);
+	}
+
+	//경매 만들때 경매history에다가 경매시작값 max값으로 넣어주기
+	public int insertMaxpriceAuction(SqlSessionTemplate sqlSession, Auction auction) {
+		return sqlSession.insert("auction.insertMaxpriceAuction",auction);
+	}
+
+
+	public int selectAuction_no(SqlSessionTemplate sqlSession, String member_id) {
+		return sqlSession.selectOne("auction.selectAuction_no",member_id);
+	}
+
+	public int selectprice(SqlSessionTemplate sqlSession, int auction_no) {
+		return sqlSession.selectOne("auction.selectprice",auction_no);
+	}
 	
 
 	

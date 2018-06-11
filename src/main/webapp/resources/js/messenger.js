@@ -9,8 +9,8 @@ var beforeName = null;
 var beforeTime = null;
 var beforeDate = null;
 var nowDate = null;
-
-
+var ws = null;
+var private_chat_no=0;
 
 
 $(function() {
@@ -24,7 +24,7 @@ $(function() {
 });
 
 function insertChat(my_id, your_id) {// 대화상대 추가
-
+	
 	if (my_id != your_id) {
 		$.ajax({
 					url : "insertChat.do",
@@ -35,9 +35,11 @@ function insertChat(my_id, your_id) {// 대화상대 추가
 						'your_id' : your_id
 					},
 					success : function(resultData) {
-
+						
 						var objStr = JSON.stringify(resultData);
 						var c = JSON.parse(objStr);
+						private_chat_no=c.chat_no;
+						console.log("c.chat_no : "+c.chat_no);
 						$('.chat_list_table').css('visibility', 'visible');
 						$('.chat_list_table').css('z-index', 2);
 						$('.search_list').css('visibility', 'hidden');
@@ -59,7 +61,9 @@ function insertChat(my_id, your_id) {// 대화상대 추가
 						$('.msg_top_table').css('z-index', 2);
 						// 메세지 입력칸 가리기
 						$('.msg_bottom_table').css('visibility', 'hidden');
-						move_msg_table(c.chat_no, my_id, your_id);
+						
+					
+					return move_msg_table(c.chat_no, my_id, your_id);
 
 					},
 					error : function(request, status, errorData) {
@@ -482,12 +486,13 @@ function move_msg_table(chat_no, my_id, your_id) {
 					// ///////////////////////////////////
 					// ///////채팅방생성////////////////
 					// chat_no, my_id, your_id
-					openChat(chat_no, my_id, your_id, your_profile);
-
+					
+					return openChat(chat_no, my_id, your_id, your_profile);
+				
 					$('.msg_table_middle').scrollTop(
 							$('.msg_table_middle').prop("scrollHeight"));
 					$('.msg_input').focus();
-
+					
 				},
 				error : function(request, status, errorData) {
 					console.log("messenger.js / move_msg_table");
@@ -501,8 +506,9 @@ function move_msg_table(chat_no, my_id, your_id) {
 		ws = new WebSocket(
 				"ws://127.0.0.1:7777/farm/chat.do?state=msg&your_id=" + your_id
 						+ "&chat_no=" + chat_no);
+		console.log("채팅열림");
 		ws.onopen = function() {
-
+			
 			$('.msg_input').on('keydown', function(evt) {
 				if (evt.keyCode == 13 && $('.msg_input').val() != '') {
 					var msg = $('.msg_input').val();
@@ -659,5 +665,23 @@ function move_msg_table(chat_no, my_id, your_id) {
 			$('.msg_table_middle').scrollTop(
 					$('.msg_table_middle').prop("scrollHeight"));
 		};
+		
+		return "리턴 openChat";
 	}
 
+	function sendMsgOutside(msg,your_id,chat_no)
+	{
+		
+		if(ws != null){
+			console.log("ws!=null");
+		ws.send(msg);
+	}else
+		{
+		
+		ws = new WebSocket( "ws://127.0.0.1:7777/farm/chat.do?state=msg&your_id=" + your_id
+						+ "&chat_no=" + chat_no);
+		ws.onopen = function() {
+			ws.send(msg);
+		}
+		}
+	}

@@ -203,20 +203,37 @@ $(function(){
 							result= false;
 							}
 					}
-					 var outValues3 = $("#topprice").html();
-					 outValues3 +=
-		        		"<td>최고가격</td>"+
-						"<td>:  </td>"+
-						"<td>"+jsonObj.price+"</td>"
-		        	
-		        $("#topprice").html(outValues3); 
+					 
+		        /*  $("#topprice").text(jsonObj.auction_history_price);   */
 					
 				}
 			});
 			return result;
 		}
 	
-	
+	//최고가 찍기
+	$(function(){
+		var no = '${auction.auction_no}';
+		$.ajax({
+			url:"selectprice.do",
+			data:{
+				auction_no : no
+			},
+			type:"post",
+			dataType: "JSON",
+			success: function(data){
+				console.log(data);
+				var objStr = JSON.stringify(data);
+				var jsonObj = JSON.parse(objStr);	
+				 $("#topprice").text(jsonObj.auction_history_price); 
+			}
+			
+		});
+		
+		
+		
+		
+	});
 	
 	//경매 입찰 List (입찰내역)
 	function auction_biddingList(no){
@@ -417,41 +434,15 @@ $(function(){
 	
 	//경매 즉시 구매
 	 function auction_Buy(){
-		alert("즉시구매 실행");
 		var buycheck = confirm("정말로 즉시 구매 하시겠습니다.");
+		alert("즉시구매 실행");
+		var buycheck = confirm("정말로 즉시 구매 하시겠습니까?");
 		if(buycheck == true){
 			location.href="/farm/auction_Buy.do?auction_no=${auction.auction_no}&member_id=${loginUser.member_id}";
+			
 		}
-		/* $.ajax({
-			url:"auction_Buy.do",
-			type:"post",
-			data:{
-				auction_no:auction_no,
-				member_id :loginUser
-			},
-			async: false,
-			dataType: "JSON",
-			success: function(data){
-				
-				var outValues ="";
-				outValues +=
-				"<div class='auction_cart_right_div'>"+
-				"<table>"+
-				"<tr>"+
-					"<td id='a'></td>"+
-					"</tr>"+
-					"<tr>"+
-						"<td><input type='submit' id='submit'class='auction_bidding' value='입찰' / disabled ></td>"+
-							
-						"<td><button class='auction_buy' disdisabled  ><a href='javascript:auction_Buy();'>즉시구매</a></button></td>"+
-					"</tr>"+
-
-				"</table>"+
-			"</div>";
-				
-				$(".auction_cart_right_div").html(outValues);	
-			}
-		}); */
+		
+		
 	}
 
 	
@@ -750,10 +741,10 @@ $(function(){
 									<td>:  </td>
 									<td>${auction.auction_startprice}</td>
 								</tr>
-								<tr id="topprice">
-									<!-- <td>최고가격</td>
-									<td>:  </td>
-									<td ></td>  -->
+								<tr >
+									<td>최고가격</td>
+									<td >: </td>
+									<td id="topprice"></td> 
 								</tr>
 								<tr>
 									<td>입찰가격</td>
@@ -771,10 +762,10 @@ $(function(){
 									<tr>
 									<td id="a"></td>
 									</tr>
-									<tr>
-										<td><input type="submit" id="submit"
+									<tr class="button_buy">
+										<td><input type="submit" id="bidding_button"
 											class="auction_bidding" value="입찰" /></td>
-										<td><button class="auction_buy" ><a href="javascript:auction_Buy();">즉시구매</a></button></td>
+										<td><button class="auction_buy" id="buy_button"><a href="javascript:auction_Buy();">즉시구매</a></button></td>
 									</tr>
 
 								</table>

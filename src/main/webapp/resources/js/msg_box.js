@@ -2,7 +2,7 @@
  * 
  */
 var ws_main = null;
-var ws = null;
+/*var ws = null;*/
 var login_id = null;
 
 
@@ -173,8 +173,8 @@ function pageupIcon() {
 
 // 아이콘 클릭
 function msgIcon() {
-   if ($(".msgIcon").attr("src") == "/farm/resources/images/messenger_icon_green2.png") {
-
+   if (
+	  $(".msgIcon").attr("src") == "/farm/resources/images/messenger_icon_green2.png") {
       $(".msgIcon")
             .prop("src", "/farm/resources/images/messenger_back_2.png");
       $(".msgbox").css("visibility", "visible");
