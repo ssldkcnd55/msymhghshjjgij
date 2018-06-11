@@ -250,8 +250,25 @@ public class AuctionServiceImpl implements AuctionService{
 		return auctionDao.selectAuctionPayment(sqlSession,buy_no);
 	}
 	
-@Override
+	@Override
 	public Auction selectAuction(int auction_no) {
 		return auctionDao.selectAuction(sqlSession,auction_no);
+	}
+
+	@Override
+	public int insertMaxpriceAuction(Auction auction) {
+		return auctionDao.insertMaxpriceAuction(sqlSession,auction);
+	}
+	
+	
+	@Override
+	public int selectAuction_no(String member_id) {
+		return auctionDao.selectAuction_no(sqlSession,member_id);
+
+	}
+	
+	@Override
+	public int selectprice(int auction_no) {
+		return auctionDao.selectprice(sqlSession,auction_no);
 	}
 }

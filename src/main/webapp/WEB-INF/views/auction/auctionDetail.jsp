@@ -203,20 +203,37 @@ $(function(){
 							result= false;
 							}
 					}
-					 var outValues3 = $("#topprice").html();
-					 outValues3 +=
-		        		"<td>최고가격</td>"+
-						"<td>:  </td>"+
-						"<td>"+jsonObj.price+"</td>"
-		        	
-		        $("#topprice").html(outValues3); 
+					 
+		        /*  $("#topprice").text(jsonObj.auction_history_price);   */
 					
 				}
 			});
 			return result;
 		}
 	
-	
+	//최고가 찍기
+	$(function(){
+		var no = '${auction.auction_no}';
+		$.ajax({
+			url:"selectprice.do",
+			data:{
+				auction_no : no
+			},
+			type:"post",
+			dataType: "JSON",
+			success: function(data){
+				console.log(data);
+				var objStr = JSON.stringify(data);
+				var jsonObj = JSON.parse(objStr);	
+				 $("#topprice").text(jsonObj.auction_history_price); 
+			}
+			
+		});
+		
+		
+		
+		
+	});
 	
 	//경매 입찰 List (입찰내역)
 	function auction_biddingList(no){
@@ -724,10 +741,10 @@ $(function(){
 									<td>:  </td>
 									<td>${auction.auction_startprice}</td>
 								</tr>
-								<tr id="topprice">
-									<!-- <td>최고가격</td>
-									<td>:  </td>
-									<td ></td>  -->
+								<tr >
+									<td>최고가격</td>
+									<td >: </td>
+									<td id="topprice"></td> 
 								</tr>
 								<tr>
 									<td>입찰가격</td>
