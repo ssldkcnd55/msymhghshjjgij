@@ -26,7 +26,7 @@ $(function(page) {
 						outValues += "<tr><td>" + jsonObj.list[i].rnum
 								+ "</td>" 
 								+"<td><a class='Atitle' href='marketDetail.do?market_no="+jsonObj.list[i].market_no+"' target='_blank'>" + jsonObj.list[i].market_title + "</a></td>" 								
-								+ "<td>" + numberWithCommas(jsonObj.list[i].buy_price)
+								+ "<td>"/*  + numberWithCommas(jsonObj.list[i].buy_price) */ +jsonObj.list[i].buy_price
 								+ "원</td>";
 								if(jsonObj.list[i].buy_status == 0 ){
 									outValues+= "<td>결제완료</td>";
@@ -81,9 +81,9 @@ $(function(page) {
 				}
 			});
 });
-function numberWithCommas(x) {
+/* function numberWithCommas(x) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-}
+} */
 	function paymentPage(page) {
 		$
 				.ajax({
@@ -105,7 +105,7 @@ function numberWithCommas(x) {
 						outValues += "<tr><td>" + jsonObj.list[i].rnum
 								+ "</td>"	
 								+"<td><a class='Atitle' href='marketDetail.do?market_no="+jsonObj.list[i].market_no+"' target='_blank'>" + jsonObj.list[i].market_title + "</a></td>" 
-								+ "<td>" + numberWithCommas(jsonObj.list[i].buy_price)
+								+ "<td>" + numberWithCommas(jsonObj.list[i].buy_price) 
 								+ "원</td>";
 								if(jsonObj.list[i].buy_status == 0 ){
 									outValues+= "<td>결제완료</td>";
