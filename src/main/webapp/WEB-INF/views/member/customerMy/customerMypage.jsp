@@ -34,14 +34,17 @@ $(function(){
       <div id="header">
          <%@ include file="../../inc/header.jsp" %>
       </div>
-       <div id="container">
-        <div class="inner-wrap">
-         <div class="tabs">
+       <div id="container" class="mypageContainer">
+        <div class="tabs">
          <div id="1" class="tab active"><a href="#1">회원정보</a></div>
          <div id="2" class="tab"><a href="#2">경매내역</a></div>
          <div id="3" class="tab"><a href="#3">구매내역</a></div>
          <div id="4" class="tab"><a href="#4">QnA</a></div>
          </div>
+         
+        <div class="inner-wrap" style="margin:0;">
+        
+        
          
         <div class="info_box">
         <iframe id="cusmyframe_1" src="moveMemberInfo.do">

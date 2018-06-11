@@ -76,6 +76,15 @@
 }
 
 .sh1_title, .sh1_title_last {
+	overflow: hidden;
+     text-overflow: ellipsis;
+	display: -webkit-box;
+	-webkit-line-clamp: 2; /* 라인수 */
+	-webkit-box-orient: vertical;
+
+	word-wrap:break-word; 
+	line-height: 1.3em;
+	height: 2.6em;
     font-size: 10pt;
     text-align: center;
     height: 36px;

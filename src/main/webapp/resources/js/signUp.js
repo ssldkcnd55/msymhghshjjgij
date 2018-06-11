@@ -90,7 +90,7 @@
 	});
 	/////////////////////////////////////////////////////////////////////////////////
 	/*비밀번호 일치 여부 알아보는 스크립트*/
-	$(function() {
+	/*$(function() {
 		$('input[type=password]').blur(function() {
 			var pwd1 = $("#inputPwd1").val();
 			var pwd2 = $("#inputPwd2").val();
@@ -103,7 +103,18 @@
 				$("#inputPwd2").val("");
 			}
 		});
-	});
+	});*/
+	function passwordCheck(){
+		var pwd1 = $("#inputPwd1").val();
+		var pwd2 = $("#inputPwd2").val();
+		if (pwd1 == pwd2) {
+			$("#confirmPwd").css("color", "green").css("display", "block");
+			$("#confirmPwd").html("비밀번호가 일치합니다.");
+		} else {
+			$("#confirmPwd").css("color", "red").css("display", "block");
+			$("#confirmPwd").html("비밀번호가 불일치합니다.");
+		}
+	}
 	function formValidation() {
 		/////////////////////////////정규식 목록/////////////////////////
 		//비밀번호: 6~20자이상 영문 숫자 혼합
