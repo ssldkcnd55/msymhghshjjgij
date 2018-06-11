@@ -63,24 +63,6 @@ var chart = AmCharts.makeChart( "chartdiv", {
   }, {
     "country": "India",
     "visits": 98
-  }, {
-    "country": "Spain",
-    "visits": 71
-  }, {
-    "country": "Netherlands",
-    "visits": 66
-  }, {
-    "country": "Russia",
-    "visits": 58
-  }, {
-    "country": "South Korea",
-    "visits": 44
-  }, {
-    "country": "Canada",
-    "visits": 44
-  }, {
-    "country": "Brazil",
-    "visits": 39
   } ],
   "valueAxes": [ {
     "gridColor": "#FFFFFF",

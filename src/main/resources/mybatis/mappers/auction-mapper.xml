@@ -91,7 +91,7 @@
 	<insert id="insertAuctionQnAMake" parameterType="auctionqna"
 		flushCache="true" useGeneratedKeys="true">
 	<![CDATA[
-		insert into auction_qna values((select max(auction_qna_no) from auction_qna)+1,#{auction_no},#{member_id},sysdate,null,
+		insert into auction_qna values((select nvl(max(auction_qna_no),0) from auction_qna)+1,#{auction_no},#{member_id},sysdate,null,
 		null,#{auction_qna_title},#{auction_qna_contents},'1')
 	]]>
 	</insert>
@@ -175,7 +175,7 @@
 	
 	<select id="selectcheckAuction_history_price"  parameterType="int"  resultType="AuctionHistory" >
 	<![CDATA[
-		select max(ah.auction_history_price) as "auction_history_price",a.auction_startprice,a.AUCTION_DIRECTPRICE
+		select nvl(max(ah.auction_history_price),0) as "auction_history_price",a.auction_startprice,a.AUCTION_DIRECTPRICE
 		from auction_history ah, auction a
 		where ah.auction_no = a.auction_no
 		and ah.auction_no = #{auction_no} GROUP BY auction_startprice, a.AUCTION_DIRECTPRICE
@@ -185,7 +185,7 @@
 	<!-- 경매 입찰 등록 -->
 	<insert id="insertAuctionBidding" parameterType="AuctionHistory" flushCache="true" useGeneratedKeys="true">
 	<![CDATA[
-		insert into auction_history values((select max(auction_history_no) from auction_history)+1,
+		insert into auction_history values((select nvl(max(auction_history_no),0) from auction_history)+1,
 		#{auction_no},#{member_id},#{auction_history_price},sysdate)
 	]]>
 	</insert>
@@ -415,7 +415,7 @@
 	
 	<insert id="insertAuctionBuy" parameterType="Auction" >
 	<![CDATA[
-		insert into buy values((select max(buy_no) from buy)+1,(select max(group_no) from buy)+1,null,#{auction_no},#{member_id},sysdate,
+		insert into buy values((select nvl(max(buy_no),0) from buy)+1,(select nvl(max(group_no),0) from buy)+1,null,#{auction_no},#{member_id},sysdate,
 		1,
 		(select member_addr from member where member_id = #{member_id}),
 		(select member_tel from member where member_id = #{member_id}),
@@ -447,6 +447,28 @@
 	]]>
 	</select>
 	
+
+	<select id="selectAuctionPaymentInfo" parameterType="int" resultType="AuctionOrder">
+	<![CDATA[
+	select ac.AUCTION_IMG, ac.AUCTION_NO, ac.AUCTION_TITLE, ac.AUCTION_NOTE, mb.MEMBER_NAME, mb.MEMBER_ID,ac.AUCTION_DIRECTPRICE
+	from auction ac, member mb
+	where ac.member_id = mb.member_id and ac.auction_no = #{auction_no}
+	]]>
+	
+	</select>
+	
+	
+	<insert id="insertAuctionPayment" keyProperty="buy_no" parameterType="Payment" >
+	<![CDATA[
+	insert into buy values (#{buy_no},(select nvl ( max(group_no),0 )+1 as "group_no" from buy),null,#{auction_no},#{member_id},sysdate,1,#{buy_addr},#{buy_tel},#{buy_name},'1',#{buy_request},null,null)
+	]]>
+	<selectKey  resultType="int" keyProperty="buy_no"  statementType="STATEMENT" order="BEFORE"  >
+	<![CDATA[
+	select nvl ( max(buy_no),0 )+1 as "buy_no" from buy
+	]]>
+	</selectKey>
+	</insert>
+
 	<insert id="insertMaxpriceAuction" parameterType="Auction" >
 	<![CDATA[
 		insert into auction_history values((select max(auction_history_no) from auction_history)+1,
@@ -466,6 +488,7 @@
 		 select max(auction_history_price) as "auction_history_price" from auction_history where auction_no =#{auction_no}
 	]]>
 	</select>
+
 	
 	<select id="selectDay" parameterType="int" resultType="int">
 	<![CDATA[
@@ -475,5 +498,5 @@
 	]]>
 	</select>
 	
-	
+
 </mapper>

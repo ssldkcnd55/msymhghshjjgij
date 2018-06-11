@@ -51,8 +51,7 @@ public class ChatDao {
 	}
 
 	public int insertChat(SqlSessionTemplate sqlSession, Chat chat) {
-		sqlSession.insert("chat.insertChat",chat)  ;
-
+		sqlSession.insert("chat.insertChat",chat);
 		return chat.getChat_no();
 	}
 

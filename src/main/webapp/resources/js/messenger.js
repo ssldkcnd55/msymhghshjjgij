@@ -485,13 +485,15 @@ function move_msg_table(chat_no, my_id, your_id) {
 
 					// ///////////////////////////////////
 					// ///////채팅방생성////////////////
-					// chat_no, my_id, your_id
-					
-					return openChat(chat_no, my_id, your_id, your_profile);
-				
-					$('.msg_table_middle').scrollTop(
-							$('.msg_table_middle').prop("scrollHeight"));
+		
+					$('.msg_table_middle').scrollTop($('.msg_table_middle').prop("scrollHeight"));
 					$('.msg_input').focus();
+		
+				
+					
+				 openChat(chat_no, my_id, your_id, your_profile);
+				
+					
 					
 				},
 				error : function(request, status, errorData) {
@@ -662,11 +664,12 @@ function move_msg_table(chat_no, my_id, your_id) {
 				beforeName = your_id;
 				beforeTime = msg_time;
 			}
+			
 			$('.msg_table_middle').scrollTop(
 					$('.msg_table_middle').prop("scrollHeight"));
 		};
 		
-		return "리턴 openChat";
+		
 	}
 
 	function sendMsgOutside(msg,your_id,chat_no)
