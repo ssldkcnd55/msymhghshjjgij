@@ -144,7 +144,7 @@ function payment() {
 				pay_method : 'card',
 				merchant_uid : 'merchant_' + new Date().getTime(),
 				name : product_name,
-				amount : order_price + delivery_price,
+				amount : /*order_price + delivery_price*/100,
 				buyer_email : my_id,
 				buyer_name : name,
 				buyer_tel : tel,
@@ -179,9 +179,10 @@ function payment() {
 									msg+='<table class="sell_alarm_table"><tr><th colspan="2"><font class="sell_alarm_name">'+c.rl[i].member_name+'</font>님의<br>상품이 판매되었습니다.</th></tr>';
 									msg+='<tr><td>주문번호</td><td>'+c.rl[i].buy_no+'</td></tr>'
 									msg+='<tr><td>상품명</td><td>'+c.rl[i].titme+'</td></tr>';
-									msg+='<tr><td>가격</td><td>'+c.rl[i].price+'원</td></tr>';
-									msg+='<tr><td>수량</td><td>'+c.rl[i].amount+'개</td></tr>';
-									msg+='<tr><td>결제금액</td><td>'+c.rl[i].total+'원</td></tr>';						
+									msg+='<tr><td>가격</td><td>'+numberWithComma(c.rl[i].price)+'원</td></tr>';
+									msg+='<tr><td>수량</td><td>'+numberWithComma(c.rl[i].amount)+'개</td></tr>';
+									msg+='<tr><td>배송비</td><td>2,500원</td></tr>';
+									msg+='<tr><td>결제금액</td><td>'+numberWithComma(c.rl[i].total)+'원</td></tr>';						
 									msg+='</table>';
 									msg+='<table class="sell_alarm_table"><tr><td>구매자</td><td>'+rsp.buyer_name+'</td></tr>';
 									msg+='<tr><td>email</td><td>'+rsp.buyer_email+'</td></tr>';

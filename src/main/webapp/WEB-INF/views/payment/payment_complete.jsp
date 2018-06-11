@@ -30,7 +30,7 @@
 				<!-- inner-wrap -->
 			<!-- 	 <div class="con_title"><p class="titleP">주문/결제 완료</p></div> -->
 				
-					<div class="con_head ">구매하신 상품의 <font style="color:#512772; font-weight: 900;">주문/결제가</font> 완료되었습니다.</div>
+					<div class="con_head ">구매하신 상품의 <font style="color:#7e5957; font-weight: 900;">주문/결제가</font> 완료되었습니다.</div>
 					<div class="con_product_div">
 					<strong>
 					주문정보
@@ -53,7 +53,7 @@
 					<tr><td>구매자 주소</td><td>${pc.buyer_addr}</td></tr>	
 					</table>
 					</div>
-					<a href="moveHome.do" class="ok_a"><div class="ok_button">확인</div></a> 
+					<a href="moveHome.do" class="ok_a"><div class="ok_button">확 인</div></a> 
 						
 
 				<!-- inner-wrap -->

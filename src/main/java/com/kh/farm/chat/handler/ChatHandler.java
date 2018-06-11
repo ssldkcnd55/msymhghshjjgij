@@ -12,8 +12,10 @@ import com.kh.farm.chat.model.vo.ChatHistory;
 public class ChatHandler extends TextWebSocketHandler {
 
 	private Map<String, WebSocketSession> wsMap = new HashMap<String, WebSocketSession>();
+	
 	@Autowired
 	private ChatService chatService;
+
 
 	@Override
 	public void handleMessage(WebSocketSession session, WebSocketMessage<?> message) throws Exception {
@@ -34,6 +36,7 @@ public class ChatHandler extends TextWebSocketHandler {
 			{
 				if(wsMap.containsKey(chat_room2))
 				{//case 1
+					
 					wsMap.get(chat_room2).sendMessage(new TextMessage("you" + payloadMessage));
 					session.sendMessage(new TextMessage("meo" + payloadMessage));
 					chatService.insertChatHistory(new ChatHistory(Integer.parseInt((String) map.get("chat_no")),
@@ -163,9 +166,7 @@ public class ChatHandler extends TextWebSocketHandler {
 	// 메시지 전송시나 접속해제시 오류가 발생할 때 호출되는 메소드
 
 	@Override
-	public void handleTransportError(WebSocketSession session,
-
-			Throwable exception) throws Exception {
+	public void handleTransportError(WebSocketSession session,Throwable exception) throws Exception {
 
 		super.handleTransportError(session, exception);
 

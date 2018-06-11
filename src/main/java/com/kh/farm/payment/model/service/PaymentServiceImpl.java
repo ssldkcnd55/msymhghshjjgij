@@ -7,13 +7,17 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.kh.farm.chat.model.service.ChatService;
+import com.kh.farm.chat.model.service.ChatServiceImpl;
+import com.kh.farm.chat.model.vo.*;
 import com.kh.farm.payment.model.dao.PaymentDao;
-import com.kh.farm.payment.model.vo.Payment;
+import com.kh.farm.payment.model.vo.*;
 import com.kh.farm.shoppingBasket.model.vo.*;
 
 @Service
 public class PaymentServiceImpl implements PaymentService{
 @Autowired private PaymentDao paymentDao;
+@Autowired private ChatService chatService;
 	@Autowired
 	private SqlSessionTemplate sqlSession;
 	@Override
@@ -62,7 +66,19 @@ public class PaymentServiceImpl implements PaymentService{
 	@Override
 	public int selectChatNo(String your_id) {
 		
-		return paymentDao.selectChatNo(sqlSession, your_id);
+		 Object obj= paymentDao.selectChatNo(sqlSession, your_id);
+		 
+		 if(obj==null)
+		 {
+			 Chat chat = new Chat();
+				chat.setMember_id1(your_id);
+				chat.setMember_id2("system");
+				return chatService.insertChat(chat);
+		 }else
+		 {
+			 return Integer.parseInt(obj.toString());
+		 }
+		 
 	}
 	@Override
 	public Payment selectOrderDeliveryDetail(int buy_no) {

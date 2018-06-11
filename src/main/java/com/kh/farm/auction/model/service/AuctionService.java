@@ -8,6 +8,7 @@ import java.util.List;
 
 import com.kh.farm.auction.model.vo.Auction;
 import com.kh.farm.auction.model.vo.AuctionHistory;
+import com.kh.farm.auction.model.vo.AuctionOrder;
 import com.kh.farm.auction.model.vo.AuctionQnA;
 import com.kh.farm.member.model.vo.Member;
 import com.kh.farm.notice.model.vo.Notice;
@@ -115,6 +116,11 @@ public interface AuctionService {
 
 	Auction selectAuction(int auction_no);
 
+
+	AuctionOrder selectAuctionPaymentInfo(int auction_no);
+
+	int insertAuctionPayment(Payment pm);
+
 	//경매 insert한후 history에 maxprice값 insert해주기
 	int insertMaxpriceAuction(Auction auction);
 
@@ -122,6 +128,7 @@ public interface AuctionService {
 	int selectAuction_no(String member_id);
 
 	int selectprice(int auction_no);
+
 
 	
 

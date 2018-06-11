@@ -68,8 +68,8 @@ public class PaymentDao {
 		return sqlSession.selectList("payment.selectChatNo", map);
 	}
 
-	public int selectChatNo(SqlSessionTemplate sqlSession, String your_id) {
-	
+	public Object selectChatNo(SqlSessionTemplate sqlSession, String your_id) {
+
 		return sqlSession.selectOne("payment.selectOneChatNo",your_id);
 	}
 

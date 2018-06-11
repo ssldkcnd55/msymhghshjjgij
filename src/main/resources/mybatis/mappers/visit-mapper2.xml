@@ -18,7 +18,7 @@
 	
 	<insert id="insertVisit" parameterType="Member" flushCache="true" useGeneratedKeys="true">
 		<![CDATA[
-			insert into visit values(sysdate,(select max(visit_no) from visit)+1,#{member_id},#{ip})
+			insert into visit values(sysdate,(select nvl(max(visit_no),0) from visit)+1,#{member_id},#{ip})
 		]]>
 	</insert>
 </mapper>

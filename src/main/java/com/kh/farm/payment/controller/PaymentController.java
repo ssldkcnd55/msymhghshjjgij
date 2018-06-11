@@ -106,6 +106,7 @@ public class PaymentController {
 			/////////////////
 			JSONObject obj = (JSONObject) jparser.parse((String) sel_jarr.get(i));
 			obj.put("buy_no", buy_no);
+			
 			int chat_no = paymentService.selectChatNo((String) obj.get("your_id"));
 			obj.put("chat_no", chat_no);
 			retn_jarr.add(obj);

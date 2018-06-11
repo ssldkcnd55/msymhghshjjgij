@@ -89,15 +89,15 @@
 	
 } */
 .pay_top_table tr th:nth-child(3) {
-	width: 133px;
+	width: 150px;
 }
 
 .pay_top_table tr th:nth-child(4) {
-	width: 100px;
+	width: 140px;
 }
 
 .pay_top_table tr th:nth-child(5) {
-	width: 50px;
+	width: 80px;
 }
 
 .pay_top_table tr th:nth-child(6) {
