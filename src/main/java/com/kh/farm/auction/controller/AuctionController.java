@@ -28,6 +28,7 @@ import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -54,7 +55,7 @@ public class AuctionController {
 
 	@Autowired private PaymentService paymentService;
 	
-
+	
 
 	@RequestMapping(value="cus_auction_qna_list.do")
 	public void selectAuctionCusQnaList(HttpServletResponse response,@RequestParam("page") int currentPage) 
@@ -838,12 +839,12 @@ public class AuctionController {
 			@RequestParam(value="member_id") String member_id, Auction auction)
 			throws IOException{
 		
-		System.out.println("auction_no: "+auction_no);
+		/*System.out.println("auction_no: "+auction_no);
 		System.out.println("member_id: "+member_id);
-		System.out.println("즉시 구매 컨트롤러 실행 ");
-		int auction_Buy = auctionService.updateAuctionBuy(auction_no);
+		System.out.println("즉시 구매 컨트롤러 실행 ");*/
+		int auction_Buy = auctionService.updateAuctionBuy(auction_no);//즉시 구매하면 auction 상태 2로 update
 		System.out.println("update : "+auction_Buy);
-		int Buy = auctionService.insertAuctionBuy(auction);
+		int Buy = auctionService.insertAuctionBuy(auction);//buy테이블에 insert해줌
 		System.out.println("buy : "+Buy);
 		Payment pay = auctionService.selectAuctionBuy(auction_no);
 		System.out.println("pay:  "+pay.toString());
@@ -921,9 +922,27 @@ public class AuctionController {
 	@ResponseBody
 	public void bidding(HttpServletResponse response)throws IOException{
 		
-		ArrayList<Integer> selectb = auctionService.selectb();
+		ArrayList<Auction> selectb = auctionService.selectb();
 		System.out.println("selectb : "+selectb);
+		AuctionHistory history = null;
+		JSONArray jarr =new JSONArray();
+		for(Auction a : selectb) {
+			history = auctionService.selectMaxUser(a.getAuction_no());
+			System.out.println("history : "+history.getAuction_no() +" / "+history.getMember_id());
+			
+			
+			JSONObject json = new JSONObject();
+			
+		}
+		JSONObject json = new JSONObject();
 		
+		
+		System.out.println(json.toJSONString());
+		 response.setContentType("application/json; charset=utf-8;");
+	      PrintWriter out = response.getWriter();
+	      out.print(json.toJSONString());
+	      out.flush();
+	      out.close();
 	}
 
 	

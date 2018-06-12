@@ -361,10 +361,16 @@ public class AuctionDao {
 		return sqlSession.selectOne("auction.selectDay",auction_no);
 	}
 
-	public ArrayList<Integer> selectb(SqlSessionTemplate sqlSession) {
-		List<Integer> selectb =sqlSession.selectList("auction.selectb");
-		return (ArrayList<Integer>)selectb;
+	public ArrayList<Auction> selectb(SqlSessionTemplate sqlSession) {
+		List<Auction> selectb =sqlSession.selectList("auction.selectb");
+		return (ArrayList<Auction>)selectb;
 	}
+
+	public AuctionHistory selectMaxUser(SqlSessionTemplate sqlSession, int auction_no) {
+		return sqlSession.selectOne("auction.selectMaxUser",auction_no);
+	}
+
+	
 	
 
 	

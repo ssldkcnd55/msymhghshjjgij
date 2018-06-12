@@ -7,7 +7,7 @@
 <script src="/farm/resources/js/jquery-3.3.1.min.js"></script>
 <link rel="stylesheet" type="text/css" href="/farm/resources/css/customerMy/cusqna.css" />
 <link rel="stylesheet" type="text/css" href="/farm/resources/css/customerMy/auction_Bidding.css" />
-<title>Insert title here</title>
+<title>경매 낙찰 내역</title>
 </head>
 <body style="margin:0">
 <hr style="margin :0px; border:0.5px solid #7e5957">
@@ -20,14 +20,15 @@
 			<th>비고</th>
 		</tr>
 		
+		
 		<tr>
 		<td>1</td>
-		<td>딸기</td>
-		<td>김민선</td>
+		<td></td>
+		<td></td>
 		<th>미결제</th>
 		<td><input type="submit" value="결제" class="buy_button"/></td>
 		</tr>
-
+		
 	</table>
 
 	<div id="bottom">

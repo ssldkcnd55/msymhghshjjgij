@@ -498,14 +498,33 @@
 	]]>
 	</select>
 	
-	<select id="selectb" resultType="int" >
+	<select id="selectb" resultType="Auction" >
 	<![CDATA[
-		select 
-		to_char( trunc(to_date(AUCTION_ENDDATE,'YYYY/MM/DD HH24:MI:SS') 
-		 - to_date(SYSDATE,'YYYY/MM/DD HH24:MI:SS'),0)) as "day"
-		from auction
+		select auction_no from auction
+		where (to_char( trunc(to_date(AUCTION_ENDDATE,'YYYY/MM/DD HH24:MI:SS') 
+		 - to_date(SYSDATE,'YYYY/MM/DD HH24:MI:SS'),0))) = 0
 	]]>
 	</select>
+	
+	
+	<select id="selectMaxUser" parameterType="int" resultType="AuctionHistory" >
+	<![CDATA[
+		select *
+		from 
+		(
+		select max(ah.auction_history_price) as "auction_history_price", ah.member_id, ah.AUCTION_HISTORY_DATE,a.auction_title
+		from AUCTION_HISTORY ah,auction a
+		where ah.auction_no = a.auction_no 
+		and a.auction_no = #{auction_no} and ah.auction_history_price = ( select max(ah.auction_history_price) from AUCTION_HISTORY where a.auction_no = #{auction_no} ) 
+		group by ah.member_id,ah.AUCTION_HISTORY_DATE,a.auction_title
+		order by AUCTION_HISTORY_DATE
+		)
+		where rownum = 1
+	]]>
+	</select>
+	
+	
+	
 	
 
 </mapper>

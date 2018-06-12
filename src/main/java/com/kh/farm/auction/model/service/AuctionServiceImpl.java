@@ -296,7 +296,14 @@ public class AuctionServiceImpl implements AuctionService {
 	}
 	
 	@Override
-	public ArrayList<Integer> selectb() {
+	public ArrayList<Auction> selectb() {
 		return auctionDao.selectb(sqlSession);
 	}
+	
+	@Override
+	public AuctionHistory selectMaxUser(int auction_no) {
+		return auctionDao.selectMaxUser(sqlSession,auction_no);
+	}
+	
+	
 }

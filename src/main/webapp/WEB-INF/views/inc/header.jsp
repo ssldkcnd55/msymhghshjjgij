@@ -30,12 +30,13 @@ function auction_update(){
 	}
 
 //경매 낙찰 검사
-/* var bidding;
-bidding = setInterval(function(){auction_bidding()}, 3000);  */
+/*  var bidding;
+bidding = setInterval(function(){auction_bidding()}, 3000);  */ 
 
 function auction_bidding(){
 
-	$.ajax({
+	
+	 $.ajax({
 		url : "bidding.do",
 		type : 'get',
 		 success : function(obj) {
@@ -44,7 +45,7 @@ function auction_bidding(){
 	         var jsonObj = JSON.parse(objStr);
 			/*  alert("경매 상태"+jsonObj.auction_status); */
 		 }
-	});
+	}); 
 }
 
 

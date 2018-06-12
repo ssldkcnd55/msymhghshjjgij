@@ -134,7 +134,12 @@ public interface AuctionService {
 	int selectDay(int auction_no);
 
 	//경매 enddate - sysdate = 0인거 뽑아오기
-	ArrayList<Integer> selectb();
+	ArrayList<Auction> selectb();
+
+	//경매 넘버로 낙찰된 사람과,maxprice값 가져오기
+	AuctionHistory selectMaxUser(int auction_no);
+
+	
 
 	
 
