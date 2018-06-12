@@ -17,10 +17,10 @@ $(function(){
 		
 		$(this).addClass('active');
 		$('#'+before+' a').css("color","#462114");
-		$('#cusmyframe_'+before).hide();
+		$('#selmyframe_'+before).hide();
 		
 		$('#'+check+' a').css("color","white");
-		$('#cusmyframe_'+check).show();
+		$('#selmyframe_'+check).show();
 	});	
 	
 	var tab = document.location.href.split('#').pop();
@@ -37,10 +37,10 @@ $(function(){
        <div id="container" class="mypageContainer">
         <div class="tabs">
          <div id="1" class="tab active"><a href="#1">회원정보</a></div>
-         <div id="2" class="tab"><a href="#2">경매내역</a></div>
-         <div id="3" class="tab"><a href="#3">구매내역</a></div>
-         <div id="4" class="tab"><a href="#4">QnA</a></div>
-         <div id="5" class="tab"><a href="#5">경매낙찰내역</a></div>
+         <div id="2" class="tab"><a href="#2">구매내역</a></div>
+         <div id="3" class="tab"><a href="#3">판매내역</a></div>
+         <div id="4" class="tab"><a href="#4">경매내역</a></div>
+         <div id="5" class="tab"><a href="#5">QnA</a></div>
          </div>
          
         <div class="inner-wrap" style="margin:0;">
@@ -48,15 +48,15 @@ $(function(){
         
          
         <div class="info_box">
-        <iframe id="cusmyframe_1" src="moveCusMemberInfo.do">
+        <iframe id="selmyframe_1" src="moveSelMemberInfo.do">
         </iframe>
-        <iframe id="cusmyframe_2" src="moveAuctionHistory.do" hidden="true"> 
+        <iframe id="selmyframe_2" src="moveSelPaymentHistory.do" hidden="true"> 
         </iframe>
-        <iframe id="cusmyframe_3" src="movePaymentHistory.do" hidden="true"> 
+        <iframe id="selmyframe_3" src="moveSelmarketHistory.do" hidden="true"> 
         </iframe>
-        <iframe id="cusmyframe_4" src="moveQna_List.do" hidden="true"> 
+        <iframe id="selmyframe_4" src="moveSelAuctionHistory.do" hidden="true"> 
         </iframe>
-        <iframe id="cusmyframe_5" src="moveAuctionBidding.do" hidden="true"> 
+        <iframe id="selmyframe_5" src="moveSelQnaList.do" hidden="true"> 
         </iframe>
          <!-- <hr class="hr1"> -->      
         </div>

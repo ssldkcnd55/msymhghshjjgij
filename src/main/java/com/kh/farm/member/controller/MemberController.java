@@ -523,5 +523,29 @@ public class MemberController {
 	     return ip;
 
 	 }
+	 
+	 @RequestMapping(value="visitChart.do")
+	 @ResponseBody
+	 public void visitChart(HttpServletResponse response) throws IOException{
+		 JSONArray jarr = new JSONArray();
+		 List<Visit> visitList = memberService.selectVisitList();
+		 visitList.toString();
+		 System.out.println("방문자수 카운터 실행");
+		 for (Visit v : visitList) {
+			 JSONObject json = new JSONObject();
+			 json.put("count", v.getVisit_count());
+			 json.put("date", v.getVisit_date());
+			 jarr.add(json);
+		 }
+		 System.out.println("22222");
+		 JSONObject sendJson = new JSONObject();
+		 	jarr.toJSONString();
+			sendJson.put("list", jarr);
+			response.setContentType("application/json; charset=utf-8");
+			PrintWriter out = response.getWriter();
+			out.append(sendJson.toJSONString());
+			out.flush();
+			out.close();
+	 }
 }
 

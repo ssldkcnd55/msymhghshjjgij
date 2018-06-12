@@ -16,6 +16,23 @@ import com.kh.farm.notice.model.vo.Notice;
 public class MoveController {
 	public MoveController() {}
 	
+	@RequestMapping("moveSelPaymentHistory.do")
+	public String moveSelPaymentHistory() {
+		return "member/sellerMy/payment_History";
+	}
+	@RequestMapping("moveSelmarketHistory.do")
+	public String moveSelmarketHistory() {
+		return "member/sellerMy/market_History";
+	}
+	@RequestMapping("moveSelQnaList.do")
+	public String moveSelQnaList() {
+		return "member/sellerMy/qna_List";
+	}
+	@RequestMapping("moveSelAuctionHistory.do")
+	public String moveSelAuctionHistory() {
+		return "member/sellerMy/auction_History";
+	}
+	
 	@RequestMapping("moveGetCookie.do")
 	public String moveGetCookie() {
 		return "messenger/test_getCookie";
@@ -37,19 +54,24 @@ public class MoveController {
 		return "payment/payment_complete";
 	}
 	
-	@RequestMapping("paymentHistory.do")
+	@RequestMapping("movePaymentHistory.do")
 	public String buyHistory() {
 		return "member/customerMy/payment_History";
 	}
 	
-	@RequestMapping("auctionHistory.do")
+	@RequestMapping("moveAuctionHistory.do")
 	public String auctionHistory() {
 		return "member/customerMy/auction_History";
 	}
 	
-	@RequestMapping("moveMemberInfo.do")
-	public String moveMemberInfo() {
+	@RequestMapping("moveCusMemberInfo.do")
+	public String moveCusMemberInfo() {
 		return "member/customerMy/member_Info";
+	}
+	
+	@RequestMapping("moveSelMemberInfo.do")
+	public String moveSelMemberInfo() {
+		return "member/sellerMy/member_Info";
 	}
 
 	@RequestMapping("moveSmartEditor2Skin.do")
@@ -119,6 +141,10 @@ public class MoveController {
 	@RequestMapping("moveCustomerMypage.do")
 	public String moveCustomerMypage() {
 		return "member/customerMy/customerMypage";
+	}
+	@RequestMapping("moveSellerMypage.do")
+	public String moveSelMypage() {
+		return "member/sellerMy/sellerMypage";
 	}
 	
 	@RequestMapping("moveSelectSignUp.do")

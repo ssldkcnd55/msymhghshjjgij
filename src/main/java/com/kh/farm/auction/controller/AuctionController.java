@@ -58,7 +58,7 @@ public class AuctionController {
 	
 
 	@RequestMapping(value="cus_auction_qna_list.do")
-	public void selectAuctionCusQnaList(HttpServletResponse response,@RequestParam("page") int currentPage) 
+	public void selectAuctionCusQnaList(HttpServletResponse response,@RequestParam("page") int currentPage,Member member) 
 		throws IOException{
 		JSONArray jarr = new JSONArray();
 		ArrayList<AuctionQnA> list = auctionService.selectAuctionCusQnaList(currentPage);
@@ -74,6 +74,7 @@ public class AuctionController {
 		}
 		
 		for(AuctionQnA aq : list) {
+			if(member.getMember_id().equals(aq.getMember_id())) {
 			JSONObject jsq = new JSONObject();
 			jsq.put("rnum", aq.getRnum());
 			jsq.put("auction_qna_no",aq.getAuction_qna_no());
@@ -85,6 +86,7 @@ public class AuctionController {
 			jsq.put("maxPage", maxPage);
 			jsq.put("currentPage",currentPage);
 			jarr.add(jsq);
+			}
 		}
 			JSONObject sendJson = new JSONObject();
 			sendJson.put("list", jarr);
@@ -569,10 +571,7 @@ public class AuctionController {
 	
 	//한결이가한 마이페이지
 	@RequestMapping("auction_history_list.do")
-	public void selectAuctionHistory(HttpServletResponse response,@RequestParam("page") Integer Page) throws IOException{
-		int currentPage = 1;
-		if(Page != null)
-		currentPage = Page;	
+	public void selectAuctionHistory(HttpServletResponse response,@RequestParam("page") int currentPage,Member member) throws IOException{
 		
 		JSONArray jarr =new JSONArray();
 		List<AuctionHistory> AuctionList = auctionService.selectAuctionHistory(currentPage);
@@ -587,9 +586,9 @@ public class AuctionController {
 		if(maxPage<endPage) {
 			endPage = maxPage;
 		}
-		System.out.println(AuctionList);
 		
 		for (AuctionHistory ac : AuctionList) {
+			if(member.getMember_id().equals(ac.getMember_id())) {
 			JSONObject json = new JSONObject();
 			json.put("rnum", ac.getRnum());
 			json.put("auction_history_no", ac.getAuction_history_no());
@@ -603,6 +602,7 @@ public class AuctionController {
 			json.put("maxPage", maxPage);
 			json.put("currentPage",currentPage);
 			jarr.add(json);
+			}
 		}
 		
 		JSONObject sendJson = new JSONObject();

@@ -44,4 +44,6 @@ public interface MemberService {
 	int insertNaverSignUp(Member member);
 
 	int insertVisit(Member returnMember);
+
+	List<Visit> selectVisitList();
 }
