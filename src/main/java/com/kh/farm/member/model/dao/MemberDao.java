@@ -203,9 +203,13 @@ public class MemberDao {
 		return sqlSession.insert("visit2.insertVisit",returnMember);
 	}
 
-	public List<Visit> selectVisitList(SqlSessionTemplate sqlSession) {
+	public List<Visit> selectVisitList(SqlSessionTemplate sqlSession,int type) {
 		// TODO Auto-generated method stub
+		if(type==1) {
 		return sqlSession.selectList("visit2.selectVisitList");
+		}else {
+			return sqlSession.selectList("visit2.selectVisitList2");
+		}
 	}
 
 	

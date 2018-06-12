@@ -39,7 +39,7 @@
 
 <!-- Chart code -->
 <script>
-var chart = AmCharts.makeChart( "chartdiv", {
+/* var chart = AmCharts.makeChart( "chartdiv", {
   "type": "serial",
   "theme": "light",
   "dataProvider": [ {
@@ -94,42 +94,45 @@ var chart = AmCharts.makeChart( "chartdiv", {
     "enabled": true
   }
 
-} );
+} ); */
 
 $(function(){
+	var type = 1;
 	$.ajax({
 		url: "visitChart.do",
 		type: "post",
+		data: {type:type},
 		dataType: "JSON",
 		success: function(data){
 			console.log(data);
             var objStr = JSON.stringify(data);
             var jsonObj = JSON.parse(objStr);
-            
+         
+            //$("#chartdiv").remove();
             var chart = AmCharts.makeChart( "chartdiv", {
             	  "type": "serial",
             	  "theme": "light",
             	  "dataProvider": [ {
-            	    "country": "USA",
-            	    "visits": 10
+            	    "country": jsonObj.list[0].date,
+            	    "visits": jsonObj.list[0].count
             	  }, {
-            	    "country": "China",
-            	    "visits": 18
+            	    "country": jsonObj.list[1].date,
+            	    "visits": jsonObj.list[1].count
             	  }, {
-            	    "country": "Japan",
-            	    "visits": 18
+            	    "country": jsonObj.list[2].date,
+            	    "visits": jsonObj.list[2].count
             	  }, {
-            	    "country": "Germany",
-            	    "visits": 13
+            	    "country": jsonObj.list[3].date,
+            	    "visits": jsonObj.list[3].count
             	  }, {
-            	    "country": "UK",
-            	    "visits": 11
+            	    "country": jsonObj.list[4].date,
+            	    "visits": jsonObj.list[4].count
             	  }, {
-            	    "country": "France",
-            	    "visits": 11
+            	    "country": jsonObj.list[5].date,
+            	    "visits": jsonObj.list[5].count
             	  }, {
-            	    "country": "India",
-            	    "visits": 98
+            	    "country": jsonObj.list[6].date,
+            	    "visits": jsonObj.list[6].count
             	  } ],
             	  "valueAxes": [ {
             	    "gridColor": "#FFFFFF",
@@ -162,12 +165,104 @@ $(function(){
             	  }
 
             	} );
-		}
+			}
 		
-	});
-	
-	
+		});
 });
+
+function show_Daily(){
+	var type= 1;
+	$.ajax({
+		url: "visitChart.do",
+		type: "post",
+		data: {type:type},
+		dataType: "JSON",
+		success: function(data){
+			console.log(data);
+            var objStr = JSON.stringify(data);
+            var jsonObj = JSON.parse(objStr);
+         
+            $("#chartdiv").empty();
+            var chart = AmCharts.makeChart( "chartdiv", {
+            	  "type": "serial",
+            	  "theme": "light",
+            	  "dataProvider": [ {
+            	    "country": jsonObj.list[0].date,
+            	    "visits": jsonObj.list[0].count
+            	  }, {
+            	    "country": jsonObj.list[1].date,
+            	    "visits": jsonObj.list[1].count
+            	  }, {
+            	    "country": jsonObj.list[2].date,
+            	    "visits": jsonObj.list[2].count
+            	  }, {
+            	    "country": jsonObj.list[3].date,
+            	    "visits": jsonObj.list[3].count
+            	  }, {
+            	    "country": jsonObj.list[4].date,
+            	    "visits": jsonObj.list[4].count
+            	  }, {
+            	    "country": jsonObj.list[5].date,
+            	    "visits": jsonObj.list[5].count
+            	  }, {
+            	    "country": jsonObj.list[6].date,
+            	    "visits": jsonObj.list[6].count
+            	  } ],
+            	  "valueAxes": [ {
+            	    "gridColor": "#FFFFFF",
+            	    "gridAlpha": 0.2,
+            	    "dashLength": 0
+            	  } ],
+            	  "gridAboveGraphs": true,
+            	  "startDuration": 1,
+            	  "graphs": [ {
+            	    "balloonText": "[[category]]: <b>[[value]]</b>",
+            	    "fillAlphas": 0.8,
+            	    "lineAlpha": 0.2,
+            	    "type": "column",
+            	    "valueField": "visits"
+            	  } ],
+            	  "chartCursor": {
+            	    "categoryBalloonEnabled": false,
+            	    "cursorAlpha": 0,
+            	    "zoomable": false
+            	  },
+            	  "categoryField": "country",
+            	  "categoryAxis": {
+            	    "gridPosition": "start",
+            	    "gridAlpha": 0,
+            	    "tickPosition": "start",
+            	    "tickLength": 20
+            	  },
+            	  "export": {
+            	    "enabled": true
+            	  }
+
+            	} );
+			}
+		
+		});
+	
+	}
+
+function show_Monthly() {
+	var type = 2;
+	$.ajax({
+		url: "visitChart.do",
+		type: "post",
+		data: {type:type},
+		dataType: "JSON",
+		success: function(data){
+			console.log(data);
+            var objStr = JSON.stringify(data);
+            var jsonObj = JSON.parse(objStr);
+            
+            $("#chartdiv").empty();
+            
+            
+          }
+	});
+}
 </script>
 <!--  -->
 <link href="/farm/resources/css/style.css" rel="stylesheet" type="text/css" />
@@ -304,7 +399,9 @@ $(function(){
 
       </div>
     </div>
+    <br><br>
     <!--차트  -->
+    <button onclick="show_Daily();">일별접속량</button>&nbsp;<button onclick="show_Monthly();">월별접속량</button>
     <div id="chartdiv"></div>	
     <!--  -->
   </div>

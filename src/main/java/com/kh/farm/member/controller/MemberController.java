@@ -526,16 +526,34 @@ public class MemberController {
 	 
 	 @RequestMapping(value="visitChart.do")
 	 @ResponseBody
-	 public void visitChart(HttpServletResponse response) throws IOException{
+	 public void visitChart(HttpServletResponse response, @RequestParam("type") int type) throws IOException{
 		 JSONArray jarr = new JSONArray();
-		 List<Visit> visitList = memberService.selectVisitList();
+		 System.out.println(type);
+		 List<Visit> visitList = memberService.selectVisitList(type);
 		 visitList.toString();
 		 System.out.println("방문자수 카운터 실행");
-		 for (Visit v : visitList) {
-			 JSONObject json = new JSONObject();
-			 json.put("count", v.getVisit_count());
-			 json.put("date", v.getVisit_date());
-			 jarr.add(json);
+		 int count = 0;
+		 if(type==1) {
+			 if(count<7) {
+				 for (Visit v : visitList) {
+					 JSONObject json = new JSONObject();
+					 json.put("count", v.getVisit_count());
+					 json.put("date", v.getVisit_date().toString());
+					 jarr.add(json);
+					 count++;
+		 			}
+			 	}
+			 
+		 	}else {
+			 if(count<12) {
+				 for (Visit v : visitList) {
+					 JSONObject json = new JSONObject();
+					 json.put("count", v.getVisit_count());
+					 json.put("date", v.getVisit_month().toString());
+					 jarr.add(json);
+					 count++;
+				 		}
+			 	}
 		 }
 		 System.out.println("22222");
 		 JSONObject sendJson = new JSONObject();
@@ -543,6 +561,8 @@ public class MemberController {
 			sendJson.put("list", jarr);
 			response.setContentType("application/json; charset=utf-8");
 			PrintWriter out = response.getWriter();
+			 System.out.println("3333");
+	
 			out.append(sendJson.toJSONString());
 			out.flush();
 			out.close();

@@ -9,6 +9,7 @@
 		<result column="member_id" property="member_id" />
 		<result column="visit_date" property="visit_date" />
 		<result column="visit_ip" property="visit_ip" />
+		<result column="visit_month" property="visit_month" />
 	</resultMap>
 	
 	<insert id="visitCount">
@@ -19,10 +20,18 @@
 		select count(*) from visit
 	</select>
 	
-	<select id="selectVisitList" resultType="visit">
-		select count(*) as visit_count, to_char(visit_date,'YYYY-MM-DD') as visit_date 
-		from visit group by to_char(visit_date,'YYYY-MM-DD')
+	<select id="selectVisitList"  resultType="visit">
+		<![CDATA[
+		select count(*) as visit_count,to_char(visit_date,'YYYY-MM-DD') as visit_date from visit group by to_char(visit_date,'YYYY-MM-DD')
 		order by visit_date
+		]]>
+	</select>
+		
+	<select id="selectVisitList2" resultType="visit">
+		<![CDATA[
+		select count(*) as visit_count,to_char(visit_date,'YYYY-MM') as visit_month from visit group by to_char(visit_date,'YYYY-MM')
+		order by visit_month
+		]]>
 	</select>
 	
 	<select id="todayCount">

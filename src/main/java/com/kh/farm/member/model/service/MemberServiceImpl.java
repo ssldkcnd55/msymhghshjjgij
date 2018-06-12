@@ -146,8 +146,8 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public List<Visit> selectVisitList() {
+	public List<Visit> selectVisitList(int type) {
 		// TODO Auto-generated method stub
-		return memberDao.selectVisitList(sqlSession);
+		return memberDao.selectVisitList(sqlSession,type);
 	}
 }

@@ -45,5 +45,5 @@ public interface MemberService {
 
 	int insertVisit(Member returnMember);
 
-	List<Visit> selectVisitList();
+	List<Visit> selectVisitList(int type);
 }
