@@ -144,4 +144,10 @@ public class MemberServiceImpl implements MemberService {
 		// TODO Auto-generated method stub
 		return memberDao.insertVisit(returnMember,sqlSession);
 	}
+
+	@Override
+	public List<Visit> selectVisitList() {
+		// TODO Auto-generated method stub
+		return memberDao.selectVisitList(sqlSession);
+	}
 }

@@ -203,5 +203,10 @@ public class MemberDao {
 		return sqlSession.insert("visit2.insertVisit",returnMember);
 	}
 
+	public List<Visit> selectVisitList(SqlSessionTemplate sqlSession) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList("visit2.selectVisitList");
+	}
+
 	
 }

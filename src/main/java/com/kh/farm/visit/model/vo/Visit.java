@@ -11,45 +11,64 @@ public class Visit implements java.io.Serializable{
 	private int visit_no;
 	private String visit_ip;
 	private Date visit_date;
+	private int visit_count;
 	
 	public Visit() {}
-	
-	public Visit(String member_id, int visit_no, String visit_ip, Date visit_date) {
+
+	public Visit(String member_id, int visit_no, String visit_ip, Date visit_date, int visit_count) {
 		super();
 		this.member_id = member_id;
 		this.visit_no = visit_no;
 		this.visit_ip = visit_ip;
 		this.visit_date = visit_date;
+		this.visit_count = visit_count;
 	}
-	@Override
-	public String toString() {
-		return "Visit [member_id=" + member_id + ", visit_no=" + visit_no + ", visit_ip=" + visit_ip + ", visit_date="
-				+ visit_date + "]";
-	}
+
 	public String getMember_id() {
 		return member_id;
 	}
+
 	public void setMember_id(String member_id) {
 		this.member_id = member_id;
 	}
+
 	public int getVisit_no() {
 		return visit_no;
 	}
+
 	public void setVisit_no(int visit_no) {
 		this.visit_no = visit_no;
 	}
+
 	public String getVisit_ip() {
 		return visit_ip;
 	}
+
 	public void setVisit_ip(String visit_ip) {
 		this.visit_ip = visit_ip;
 	}
+
 	public Date getVisit_date() {
 		return visit_date;
 	}
+
 	public void setVisit_date(Date visit_date) {
 		this.visit_date = visit_date;
 	}
+
+	public int getVisit_count() {
+		return visit_count;
+	}
+
+	public void setVisit_count(int visit_count) {
+		this.visit_count = visit_count;
+	}
+
+	@Override
+	public String toString() {
+		return "Visit [member_id=" + member_id + ", visit_no=" + visit_no + ", visit_ip=" + visit_ip + ", visit_date="
+				+ visit_date + ", visit_count=" + visit_count + "]";
+	}
 	
-	
+		
 }
