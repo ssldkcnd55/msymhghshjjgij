@@ -95,6 +95,79 @@ var chart = AmCharts.makeChart( "chartdiv", {
   }
 
 } );
+
+$(function(){
+	$.ajax({
+		url: "visitChart.do",
+		type: "post",
+		dataType: "JSON",
+		success: function(data){
+			console.log(data);
+            var objStr = JSON.stringify(data);
+            var jsonObj = JSON.parse(objStr);
+            
+            var chart = AmCharts.makeChart( "chartdiv", {
+            	  "type": "serial",
+            	  "theme": "light",
+            	  "dataProvider": [ {
+            	    "country": "USA",
+            	    "visits": 10
+            	  }, {
+            	    "country": "China",
+            	    "visits": 18
+            	  }, {
+            	    "country": "Japan",
+            	    "visits": 18
+            	  }, {
+            	    "country": "Germany",
+            	    "visits": 13
+            	  }, {
+            	    "country": "UK",
+            	    "visits": 11
+            	  }, {
+            	    "country": "France",
+            	    "visits": 11
+            	  }, {
+            	    "country": "India",
+            	    "visits": 98
+            	  } ],
+            	  "valueAxes": [ {
+            	    "gridColor": "#FFFFFF",
+            	    "gridAlpha": 0.2,
+            	    "dashLength": 0
+            	  } ],
+            	  "gridAboveGraphs": true,
+            	  "startDuration": 1,
+            	  "graphs": [ {
+            	    "balloonText": "[[category]]: <b>[[value]]</b>",
+            	    "fillAlphas": 0.8,
+            	    "lineAlpha": 0.2,
+            	    "type": "column",
+            	    "valueField": "visits"
+            	  } ],
+            	  "chartCursor": {
+            	    "categoryBalloonEnabled": false,
+            	    "cursorAlpha": 0,
+            	    "zoomable": false
+            	  },
+            	  "categoryField": "country",
+            	  "categoryAxis": {
+            	    "gridPosition": "start",
+            	    "gridAlpha": 0,
+            	    "tickPosition": "start",
+            	    "tickLength": 20
+            	  },
+            	  "export": {
+            	    "enabled": true
+            	  }
+
+            	} );
+		}
+		
+	});
+	
+	
+});
 </script>
 <!--  -->
 <link href="/farm/resources/css/style.css" rel="stylesheet" type="text/css" />
