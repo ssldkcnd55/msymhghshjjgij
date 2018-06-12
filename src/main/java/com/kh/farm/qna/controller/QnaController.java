@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.farm.market.model.vo.Market;
+import com.kh.farm.member.model.vo.Member;
 import com.kh.farm.qna.model.service.QnaService;
 import com.kh.farm.qna.model.vo.MainQna;
 import com.kh.farm.qna.model.vo.Market_qna;
@@ -27,7 +28,7 @@ public class QnaController {
 	@Autowired private QnaService qnaService;
 	
 	@RequestMapping("cus_qna_list.do")
-	public void selectCusQnaList(HttpServletResponse response,@RequestParam("page") int currentPage) throws IOException{
+	public void selectCusQnaList(HttpServletResponse response,@RequestParam("page") int currentPage,Member member) throws IOException{
 		
 		JSONArray jarr =new JSONArray();
 		
@@ -43,6 +44,7 @@ public class QnaController {
 			endPage = maxPage;
 		}
 		for (Market_qna sq : QnaList) {
+			if(member.getMember_id().equals(sq.getMember_id())) {
 			JSONObject json = new JSONObject();
 			json.put("rnum", sq.getRnum());
 			json.put("market_qna_no", sq.getMarket_qna_no());
@@ -54,6 +56,7 @@ public class QnaController {
 			json.put("maxPage", maxPage);
 			json.put("currentPage",currentPage);
 			jarr.add(json);
+			}
 		}
 		
 		JSONObject sendJson = new JSONObject();
@@ -115,7 +118,7 @@ public class QnaController {
 		return mv;
 	}
 	@RequestMapping(value="mainqnaList.do")
-	public void MainQnaList(HttpServletResponse response,@RequestParam("page") int currentPage) throws IOException{
+	public void MainQnaList(HttpServletResponse response,@RequestParam("page") int currentPage,Member member) throws IOException{
 		
 		JSONArray jarr =new JSONArray();
 		
@@ -132,6 +135,7 @@ public class QnaController {
 			endPage = maxPage;
 		}
 		for (MainQna sq : qnaList) {
+			if(member.getMember_id().equals(sq.getMember_id())) {
 			JSONObject jsq = new JSONObject();
 			jsq.put("rnum", sq.getRnum());
 			jsq.put("main_qna_no", sq.getMain_qna_no());
@@ -143,6 +147,7 @@ public class QnaController {
 			jsq.put("maxPage", maxPage);
 			jsq.put("currentPage",currentPage);
 			jarr.add(jsq);
+			}
 		}
 		
 		JSONObject sendJson = new JSONObject();

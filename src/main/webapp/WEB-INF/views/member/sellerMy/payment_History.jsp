@@ -7,8 +7,7 @@
 <link rel="stylesheet" type="text/css" href="/farm/resources/css/customerMy/cusqna.css" />
 <script type="text/javascript">
 $(function(page) {
-	$
-			.ajax({
+	$.ajax({
 				url : "payment_history_list.do",
 				type : "post",
 				data : {

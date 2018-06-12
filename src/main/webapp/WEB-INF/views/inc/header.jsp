@@ -131,8 +131,12 @@ function getBasketCount(member_id)
                   <li class="menu1 none_sub"><a href="moveSignUp2.do" class="link_menu">회원가입</a></li>
                   <li class="menu1 none_sub"><a href="moveLogin.do" class="link_menu">로그인</a></li>
                </c:if>
-               <c:if test="${! empty sessionScope.loginUser }">
+               <c:if test="${loginUser.member_category == 1}">
                	  <li class="menu1 none_sub"><a href="moveCustomerMypage.do" class="link_menu">${loginUser.member_name}님</a></li>
+                  <li class="menu1 none_sub"><a href="logout.do" class="link_menu">로그아웃</a></li>
+               </c:if>
+               <c:if test="${loginUser.member_category == 0}">
+               	  <li class="menu1 none_sub"><a href="moveSellerMypage.do" class="link_menu">${loginUser.member_name}님</a></li>
                   <li class="menu1 none_sub"><a href="logout.do" class="link_menu">로그아웃</a></li>
                </c:if>
 

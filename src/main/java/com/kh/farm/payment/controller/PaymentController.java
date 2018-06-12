@@ -167,15 +167,14 @@ public class PaymentController {
 	}
 
 	@RequestMapping("payment_history_list.do")
-	public void selectPaymentHistory(HttpServletResponse response, @RequestParam("page") int currentPage)
+	public void selectPaymentHistory(HttpServletResponse response,@RequestParam("page") int currentPage,Member member)
 			throws IOException {
-
 		JSONArray jarr = new JSONArray();
 
 		ArrayList<Payment> AuctionList = paymentService.selectPaymentHistory(currentPage);
 		ArrayList<Market> MarketList = marketService.selectCusMarketThree();
 		
-		int limitPage = 10;
+		int limitPage = 10;	
 		int listCount = paymentService.selectPaymentHistoryCount();
 
 		int maxPage = (int) ((double) listCount / limitPage + 0.9); // ex) 41개면 '5'페이지나와야되는데 '5'를 계산해줌
@@ -186,6 +185,7 @@ public class PaymentController {
 			endPage = maxPage;
 		}
 		for (Payment ac : AuctionList) {
+			if(member.getMember_id().equals(ac.getMember_id())) {
 			JSONObject json = new JSONObject();
 			json.put("rnum", ac.getRnum());
 			json.put("buy_no", ac.getBuy_no());
@@ -213,6 +213,7 @@ public class PaymentController {
 			json.put("maxPage", maxPage);
 			json.put("currentPage", currentPage);
 			jarr.add(json);
+			}
 		}
 
 		JSONObject sendJson = new JSONObject();
