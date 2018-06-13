@@ -534,6 +534,7 @@ public class MemberController {
 		 visitList.toString();
 		 System.out.println("방문자수 카운터 실행");
 		 int count = 0;
+			 
 		 if(type==1) {
 			 if(count<7) {
 				 for (Visit v : visitList) {
@@ -550,7 +551,7 @@ public class MemberController {
 				 for (Visit v : visitList) {
 					 JSONObject json = new JSONObject();
 					 json.put("count", v.getVisit_count());
-					 json.put("date", v.getVisit_month().toString());
+					 json.put("month", v.getVisit_month());
 					 jarr.add(json);
 					 count++;
 				 		}
