@@ -27,7 +27,7 @@
 		]]>
 	</select>
 		
-	<select id="selectVisitList2" resultType="visit">
+	<select id="selectVisitMonthList" resultType="visit">
 		<![CDATA[
 		select count(*) as visit_count,to_char(visit_date,'YYYY-MM') as visit_month from visit group by to_char(visit_date,'YYYY-MM')
 		order by visit_month

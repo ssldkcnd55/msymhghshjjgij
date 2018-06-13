@@ -12,10 +12,10 @@ public class Visit implements java.io.Serializable{
 	private String visit_ip;
 	private Date visit_date;
 	private int visit_count;
-	private Date visit_month;
+	private String visit_month;
 	public Visit() {}
-	
-	public Visit(String member_id, int visit_no, String visit_ip, Date visit_date, int visit_count, Date visit_month) {
+	public Visit(String member_id, int visit_no, String visit_ip, Date visit_date, int visit_count,
+			String visit_month) {
 		super();
 		this.member_id = member_id;
 		this.visit_no = visit_no;
@@ -54,10 +54,10 @@ public class Visit implements java.io.Serializable{
 	public void setVisit_count(int visit_count) {
 		this.visit_count = visit_count;
 	}
-	public Date getVisit_month() {
+	public String getVisit_month() {
 		return visit_month;
 	}
-	public void setVisit_month(Date visit_month) {
+	public void setVisit_month(String visit_month) {
 		this.visit_month = visit_month;
 	}
 	@Override
@@ -65,7 +65,8 @@ public class Visit implements java.io.Serializable{
 		return "Visit [member_id=" + member_id + ", visit_no=" + visit_no + ", visit_ip=" + visit_ip + ", visit_date="
 				+ visit_date + ", visit_count=" + visit_count + ", visit_month=" + visit_month + "]";
 	}
-
+	
+	
 	
 		
 }
