@@ -110,6 +110,27 @@ public class MarketController {
 		out.flush();
 		out.close();
 	}
+	@RequestMapping("ajaxCategory.do")
+	public void categoryList(HttpServletResponse response) throws IOException{
+		List<Category> list = marketService.selectCategoryList();
+		JSONArray jarr = new JSONArray();
+		
+		//list를 jarr로 복사하기
+		for(Category c : list) {
+			JSONObject jmarket = new JSONObject();
+			jmarket.put("category_main", c.getCategory_main());
+			
+			jarr.add(jmarket);
+		}
+		JSONObject sendJson = new JSONObject();
+		sendJson.put("list", jarr);
+		response.setContentType("application/json; charset=utf-8");
+		PrintWriter out = response.getWriter();
+		out.append(sendJson.toJSONString());
+		out.flush();
+		out.close();
+	}
+	
 	
 	@RequestMapping("reviewList.do")
 	public void reiviewList(Market mk,HttpServletResponse response,@RequestParam("Rpage") int currentPage)

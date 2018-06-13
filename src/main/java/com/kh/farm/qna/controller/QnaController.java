@@ -135,7 +135,6 @@ public class QnaController {
 			endPage = maxPage;
 		}
 		for (MainQna sq : qnaList) {
-			if(member.getMember_id().equals(sq.getMember_id())) {
 			JSONObject jsq = new JSONObject();
 			jsq.put("rnum", sq.getRnum());
 			jsq.put("main_qna_no", sq.getMain_qna_no());
@@ -147,8 +146,8 @@ public class QnaController {
 			jsq.put("maxPage", maxPage);
 			jsq.put("currentPage",currentPage);
 			jarr.add(jsq);
-			}
-		}
+			
+	}
 		
 		JSONObject sendJson = new JSONObject();
 		sendJson.put("list", jarr);

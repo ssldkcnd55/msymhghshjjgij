@@ -93,4 +93,7 @@ public interface MarketService {
 
 
 	int selectSellerMarketCount(String member_id);
+
+
+	List<Category> selectCategoryList();
 }

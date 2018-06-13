@@ -209,4 +209,9 @@ public class MarketServiceImpl implements MarketService{
 		// TODO Auto-generated method stub
 		return marketDao.selectSellerMarketCount(sqlSession,member_id);
 	}
+	@Override
+	public List<Category> selectCategoryList() {
+		
+		return marketDao.selectCategoryList(sqlSession);
+	}
 }
