@@ -585,7 +585,7 @@ public class MemberController {
 			}
 
 		} else {
-			if (count < 12) {
+			if (count < 6) {
 				for (Visit v : visitList) {
 					JSONObject json = new JSONObject();
 					json.put("count", v.getVisit_count());
