@@ -30,8 +30,8 @@ function auction_update(){
 	}
 
 //경매 낙찰 검사
-/*  var bidding;
-bidding = setInterval(function(){auction_bidding()}, 3000);  */ 
+  var bidding;
+bidding = setInterval(function(){auction_bidding()}, 3000);  
 
 function auction_bidding(){
 
@@ -40,10 +40,24 @@ function auction_bidding(){
 		url : "bidding.do",
 		type : 'get',
 		 success : function(obj) {
-			 /* console.log(obj.toString());  */
+			console.log(obj.toString());  
 			 var objStr = JSON.stringify(obj);
 	         var jsonObj = JSON.parse(objStr);
-			/*  alert("경매 상태"+jsonObj.auction_status); */
+	         
+	         var values = "";
+	         for(var i in jsonObj.list){
+	         values = 
+	        "<tr>"
+	 		+"<td>1"+i+"</td>"
+	 		+"<td>"+jsonObj.list.auction_title+"</td>"
+	 		+"<td>"+jsonObj.list.member_id+"</td>"
+	 		+"<th>미결제</th>"
+	 		+"<td><input type='submit' value='결제' class='buy_button'/></td>"
+	 		"</tr>";
+	 		
+	 		
+	         }
+	         $(".auction_bidding2").html(values);
 		 }
 	}); 
 }

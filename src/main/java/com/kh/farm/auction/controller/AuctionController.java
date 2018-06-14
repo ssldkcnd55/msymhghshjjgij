@@ -918,26 +918,32 @@ public class AuctionController {
 	      out.close();
 	}
 	
+	
+	//경매 낙찰 검사
 	@RequestMapping(value="bidding.do")
 	@ResponseBody
 	public void bidding(HttpServletResponse response)throws IOException{
 		
 		ArrayList<Auction> selectb = auctionService.selectb();
-		System.out.println("selectb : "+selectb);
-		AuctionHistory history = null;
+		System.out.println("selectb : "+selectb.toString());
+		
+		
 		JSONArray jarr =new JSONArray();
 		for(Auction a : selectb) {
-			history = auctionService.selectMaxUser(a.getAuction_no());
+			AuctionHistory history = auctionService.selectMaxUser(a.getAuction_no());
 			System.out.println("history : "+history.getAuction_no() +" / "+history.getMember_id());
-			
-			
 			JSONObject json = new JSONObject();
-			
+			json.put("member_id", history.getMember_id());
+			json.put("auction_title", history.getAuction_title());
+			json.put("auction_history_date", history.getAuction_history_date());
+			json.put("auction_history_price", history.getAuction_history_price());
+			jarr.add(json);
 		}
+	
 		JSONObject json = new JSONObject();
+		json.put("list", jarr);
 		
-		
-		System.out.println(json.toJSONString());
+		 System.out.println(json.toJSONString());
 		 response.setContentType("application/json; charset=utf-8;");
 	      PrintWriter out = response.getWriter();
 	      out.print(json.toJSONString());

@@ -18,16 +18,16 @@
 			<th>입찰자</th>
 			<th>입찰상태</th>
 			<th>비고</th>
-		</tr>
+		</tr class="auction_bidding2">
 		
 		
-		<tr>
+		<!-- <tr>
 		<td>1</td>
 		<td></td>
 		<td></td>
 		<th>미결제</th>
 		<td><input type="submit" value="결제" class="buy_button"/></td>
-		</tr>
+		</tr> -->
 		
 	</table>
 
