@@ -380,31 +380,7 @@
 	</if>
 	</select>
 	
-	<select id="selectmoreAuctionCategoryCount" parameterType="int" resultType="int">
-	<![CDATA[
-		select count(*) from auction
-	]]>
-	<if test="type == 0">
-	<![CDATA[
-		where auction_status = '0'
-	]]>
-	</if>
-	<if test="type == 1">
-	<![CDATA[
-		where auction_status = '1'
-	]]>
-	</if>
-	<if test="type == 2">
-	<![CDATA[
-		where auction_status = '2'
-	]]>
-	</if>
-	<if test="type == 3">
-	<![CDATA[
-		order by auction_no desc
-	]]>
-	</if>
-	</select>
+	
 	
 	
 	<update id="updateAuctionBuy" parameterType="int" flushCache="true">

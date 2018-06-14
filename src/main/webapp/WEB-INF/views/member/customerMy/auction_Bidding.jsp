@@ -21,12 +21,13 @@ $(function(){
 			console.log(obj);  
 			 var objStr = JSON.stringify(obj);
 	         var jsonObj = JSON.parse(objStr);
-	         var values = "<tr><th>경매이름</th><th>낙찰가격</th><th>결제버튼</th><tr>";
+	         var values = "<tr><th>번호</th><th>경매이름</th><th>낙찰가격</th><th>결제버튼</th><tr>";
 	         
 	         for(var i in jsonObj.list){
 	         values += 
 	        "<tr>"
-	 		+"<td>"+jsonObj.list[i].auction_title+"</td>"
+	        +"<td>"+i+"</td>"
+	 		+"<td ><a class='auction_title_td' target=_blank href='/farm/AuctionDetail.do?auction_no="+jsonObj.list[i].auction_no+"'>"+jsonObj.list[i].auction_title+"</a></td>"
 	 		+"<td>"+jsonObj.list[i].auction_history_price+"</td>"
 	 		+"<td><input type='submit' value='결제' class='buy_button'/></td>"
 	 		+"</tr>";

@@ -307,11 +307,6 @@ public class AuctionDao {
 
 	}
 
-	public int selectmoreAuctionCategoryCount(SqlSessionTemplate sqlSession, int atype) {
-		return sqlSession.selectOne("auction.selectmoreAuctionCategoryCount",atype);
-
-	}
-
 	public int updateAuctionBuy(SqlSessionTemplate sqlSession, int  auction_no) {
 		return sqlSession.update("auction.updateAuctionBuy",auction_no);
 

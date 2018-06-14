@@ -268,14 +268,13 @@ public class AuctionController {
 		System.out.println("경메 카테고리 더 보기");
 		List<Auction> moreAuctionCategory = auctionService.selectmoreAuctionCategory(currentPage, atype);
 		System.out.println("moreAuctionCategory : " + moreAuctionCategory.toString());
-		int listCount = auctionService.selectmoreAuctionCategoryCount(atype);
-		System.out.println("listCount : " + listCount);
 		JSONArray jarr = new JSONArray();
 
 		for (Auction a : moreAuctionCategory) {
 			// 추출한 user를 json 객체에 담기
 			JSONObject jsq = new JSONObject();
-			jsq.put("auction_no", a.getRnum());
+			
+			jsq.put("auction_no", a.getAuction_no());
 			jsq.put("member_id", a.getMember_id());
 			jsq.put("category_no", a.getCategory_no());
 			jsq.put("auction_title", a.getAuction_title());
