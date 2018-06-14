@@ -297,7 +297,7 @@
 								<div class="market">
 									<div class="img_box"
 										style="background-image: url('/farm/resources/upload/marketUpload/${m.market_img}'); background-size: cover;"></div>
-									<div class="title_box">
+									<div class="title_box">${loginUser.member_id }
 										<p class="title">${m.market_title }</p>
 										<p class="content">${m.market_note }</p>
 										<p class='content'>${m.market_price }원</p>
