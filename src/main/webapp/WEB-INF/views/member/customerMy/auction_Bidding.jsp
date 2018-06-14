@@ -9,25 +9,41 @@
 <link rel="stylesheet" type="text/css" href="/farm/resources/css/customerMy/auction_Bidding.css" />
 <title>경매 낙찰 내역</title>
 </head>
+<script>
+
+$(function(){
+	
+	 $.ajax({
+		url : "bidding.do",
+		type : 'post',
+		dataType: "JSON",
+		 success : function(obj) {
+			console.log(obj);  
+			 var objStr = JSON.stringify(obj);
+	         var jsonObj = JSON.parse(objStr);
+	         var values = "<tr><th>경매이름</th><th>낙찰가격</th><th>결제버튼</th><tr>";
+	         
+	         for(var i in jsonObj.list){
+	         values += 
+	        "<tr>"
+	 		+"<td>"+jsonObj.list[i].auction_title+"</td>"
+	 		+"<td>"+jsonObj.list[i].auction_history_price+"</td>"
+	 		+"<td><input type='submit' value='결제' class='buy_button'/></td>"
+	 		+"</tr>";
+	 		
+	         }
+	         $("#Bid_win_table").html(values);
+		 }
+	}); 
+
+});
+
+</script>
 <body style="margin:0">
 <hr style="margin :0px; border:0.5px solid #7e5957">
-	<table class="View_table" style="margin-left: 10px;">
-		<tr>
-			<th>번호</th>
-			<th>경매</th>
-			<th>입찰자</th>
-			<th>입찰상태</th>
-			<th>비고</th>
-		</tr class="auction_bidding2">
+	<table class="View_table" id="Bid_win_table"style="margin-left: 10px;">
 		
 		
-		<!-- <tr>
-		<td>1</td>
-		<td></td>
-		<td></td>
-		<th>미결제</th>
-		<td><input type="submit" value="결제" class="buy_button"/></td>
-		</tr> -->
 		
 	</table>
 

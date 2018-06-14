@@ -382,7 +382,6 @@ public class AuctionDao {
 	public AuctionCommon selectWinBid(SqlSessionTemplate sqlSession, int auction_no) {
 		// TODO Auto-generated method stub
 		System.out.println("서비스2 : "+auction_no);
-		System.out.println(sqlSession.selectOne("auction.selectWinBid",auction_no));
 		return sqlSession.selectOne("auction.selectWinBid",auction_no);
 	}
 

@@ -943,7 +943,8 @@ public class AuctionController {
 	
 	
 	//경매 낙찰 검사
-	@RequestMapping(value ="bidding.do",method = RequestMethod.POST)
+
+	@RequestMapping(value = "bidding.do")
 	@ResponseBody
 	public void bidding(HttpServletResponse response) throws IOException {
 		
