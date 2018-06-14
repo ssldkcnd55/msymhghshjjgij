@@ -22,15 +22,18 @@
 	
 	<select id="selectVisitList"  resultType="visit">
 		<![CDATA[
-		select count(*) as visit_count,to_char(visit_date,'YYYY-MM-DD') as visit_date from visit group by to_char(visit_date,'YYYY-MM-DD')
-		order by visit_date
+		select * from 
+		(select count(*) as visit_count,to_char(visit_date,'YYYY-MM-DD') as visit_date 
+		from visit group by to_char(visit_date,'YYYY-MM-DD')
+		order by visit_date desc) where rownum <=7
 		]]>
 	</select>
 		
 	<select id="selectVisitMonthList" resultType="visit">
 		<![CDATA[
-		select count(*) as visit_count,to_char(visit_date,'YYYY-MM') as visit_month from visit group by to_char(visit_date,'YYYY-MM')
-		order by visit_month
+		select * from 
+		(select count(*) as visit_count,to_char(visit_date,'YYYY-MM') as visit_month from visit group by to_char(visit_date,'YYYY-MM')
+		order by visit_month desc) where rownum <=6
 		]]>
 	</select>
 	
