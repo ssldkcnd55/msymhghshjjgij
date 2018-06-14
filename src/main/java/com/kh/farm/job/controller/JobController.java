@@ -4,10 +4,13 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -66,7 +69,7 @@ public class JobController {
 			jsonobj.put("job_no", job.getJob_no());
 			jsonobj.put("job_status", job.getJob_status());
 			jsonobj.put("job_title", job.getJob_title());
-			/*jsonobj.put("job_enddate", job.getJob_enddate().toString());*/
+			/* jsonobj.put("job_enddate", job.getJob_enddate().toString()); */
 			jsonobj.put("job_addr", job.getJob_addr());
 			jsonobj.put("member_id", job.getMember_id());
 			jsonobj.put("job_date", job.getJob_date().toString());
@@ -150,7 +153,7 @@ public class JobController {
 	@RequestMapping(value = "jobDetail.do")
 	public String noticeDetail(Model model, @RequestParam(value = "job_no") int job_no) {
 
-		System.out.println("구인구인글넘버:"+job_no);
+		System.out.println("구인구인글넘버:" + job_no);
 		Job job = jobService.jobDeatil(job_no);
 		System.out.println(job.getJob_title());
 		job.toString();
@@ -162,10 +165,56 @@ public class JobController {
 		return "에러페이지";
 	}
 
-	// 구인구직 수정
-	// 구인구직 삭제
+	// 다중이미지업로드
+	@RequestMapping("multiplePhotoUpload.do")
+	public void multiplePhotoUpload(HttpServletRequest request, HttpServletResponse response) {
+		System.out.println("다중이미지업로드 컨트롤러에 들어옴");
+		try {
+			// 파일정보
+			String sFileInfo = "";
+			// 파일명을 받기 - 일반 원본파일명
+			String filename = request.getHeader("file-name");
+			// 파일 확장자
+			String filename_ext = filename.substring(filename.lastIndexOf(".") + 1);
+			// 확장자를소문자로 변경
+			filename_ext = filename_ext.toLowerCase();
+			// 파일 기본경로
+			String dftFilePath = request.getSession().getServletContext().getRealPath("resources/upload/jobUpload/");
 
-	
-	
+			File file = new File(dftFilePath);
+			if (!file.exists()) {
+				file.mkdirs();
+			}
+			String realFileNm = "";
+			SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMddHHmmss");
+			String today = formatter.format(new java.util.Date());
+			realFileNm = today + UUID.randomUUID().toString() + filename.substring(filename.lastIndexOf("."));
+			String rlFileNm = dftFilePath + realFileNm;
+			///////////////// 서버에 파일쓰기 /////////////////
+			InputStream is = request.getInputStream();
+			OutputStream os = new FileOutputStream(rlFileNm);
+			int numRead;
+			byte b[] = new byte[Integer.parseInt(request.getHeader("file-size"))];
+			while ((numRead = is.read(b, 0, b.length)) != -1) {
+				os.write(b, 0, numRead);
+			}
+			if (is != null) {
+				is.close();
+			}
+			os.flush();
+			os.close();
+			sFileInfo += "&bNewLine=true";
+			// img 태그의 이름쓰기
+			sFileInfo += "&sFileName=" + filename;
+			;
+			sFileInfo += "&sFileURL=" + "/farm/resources/upload/jobUpload/" + realFileNm;
+			PrintWriter print = response.getWriter();
+			print.print(sFileInfo);
+			print.flush();
+			print.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 
 }

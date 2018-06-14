@@ -3,6 +3,7 @@ package com.kh.farm.market.model.vo;
 import java.sql.Date;
 
 import org.springframework.stereotype.Component;
+import org.springframework.web.multipart.MultipartFile;
 
 @Component("market")
 public class Market implements java.io.Serializable{
@@ -26,7 +27,10 @@ public class Market implements java.io.Serializable{
 	private String search;//검색
 	private int remaining;//남은 수량
 	private String member_name;//회원 이름;
+	private MultipartFile Filedata; // 다중이미지 업로드
 	
+	
+
 	public Market() {}
 
 	public Market(int market_no, int category_no, String member_id, String market_title, String market_note,
@@ -47,6 +51,13 @@ public class Market implements java.io.Serializable{
 		this.search = search;
 		this.remaining = remaining;
 		this.member_name = member_name;
+	}
+	public MultipartFile getFiledata() {
+		return Filedata;
+	}
+
+	public void setFiledata(MultipartFile filedata) {
+		Filedata = filedata;
 	}
 
 	public int getMarket_no() {
