@@ -98,7 +98,7 @@
 						outValues2 += "</table></div>";
 						outValues3 += "</table></div>";
 						if (count == 1) {
-							$(".carousel-inner.auction").html("등록된 경매가 없습니다.");
+							$(".carousel-inner.auction").html("<p class='noneAuction'>등록된 경매가 없습니다.</p>");
 						} else if (count < 6) {
 							
 							$(".carousel-inner.auction").html(outValues1);

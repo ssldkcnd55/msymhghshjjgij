@@ -102,8 +102,17 @@ public class MemberController {
 
 	@RequestMapping(value = "signUp.do", method = RequestMethod.POST)
 	public String signUp(Member member, HttpServletRequest request,
+
+			/*
+			 * @RequestParam(name = "upfile", required = false) MultipartFile file,
+			 * 
+			 * @RequestParam("category") String category) {
+			 */
+
 			@RequestParam(name = "upfile", required = false) MultipartFile file,
 			@RequestParam("category") String category) {
+		System.out.println("주소 : " + member.getMember_addr());
+
 		String path = request.getSession().getServletContext().getRealPath("resources/upload/memberUpload");
 		member.setMember_pwd(pwdEncoder.encode(member.getMember_pwd()));
 		member.setMember_category(category);
@@ -525,8 +534,34 @@ public class MemberController {
 		}
 
 		return ip;
-
+		/* <<<<<<< HEAD */
 	}
+
+	/*
+	 * @RequestMapping(value = "visitChart.do")
+	 * 
+	 * @ResponseBody public void visitChart(HttpServletResponse
+	 * response, @RequestParam("type") int type) throws IOException { JSONArray jarr
+	 * = new JSONArray(); System.out.println(type); List<Visit> visitList =
+	 * memberService.selectVisitList(type); visitList.toString();
+	 * System.out.println("방문자수 카운터 실행"); int count = 0; if (type == 1) { if (count
+	 * < 7) { for (Visit v : visitList) { JSONObject json = new JSONObject();
+	 * json.put("count", v.getVisit_count()); json.put("date",
+	 * v.getVisit_date().toString()); jarr.add(json); count++; } }
+	 * 
+	 * } else { if (count < 12) { for (Visit v : visitList) { JSONObject json = new
+	 * JSONObject(); json.put("count", v.getVisit_count()); json.put("date",
+	 * v.getVisit_month().toString()); jarr.add(json); count++; } } }
+	 * System.out.println("22222"); JSONObject sendJson = new JSONObject();
+	 * jarr.toJSONString(); sendJson.put("list", jarr);
+	 * response.setContentType("application/json; charset=utf-8"); PrintWriter out =
+	 * response.getWriter(); System.out.println("3333");
+	 * 
+	 * out.append(sendJson.toJSONString()); out.flush(); out.close(); }
+	 * 
+	 * 
+	 * }
+	 */
 
 	@RequestMapping(value = "visitChart.do")
 	@ResponseBody
@@ -537,6 +572,7 @@ public class MemberController {
 		visitList.toString();
 		System.out.println("방문자수 카운터 실행");
 		int count = 0;
+
 		if (type == 1) {
 			if (count < 7) {
 				for (Visit v : visitList) {
@@ -553,7 +589,7 @@ public class MemberController {
 				for (Visit v : visitList) {
 					JSONObject json = new JSONObject();
 					json.put("count", v.getVisit_count());
-					json.put("date", v.getVisit_month().toString());
+					json.put("month", v.getVisit_month());
 					jarr.add(json);
 					count++;
 				}

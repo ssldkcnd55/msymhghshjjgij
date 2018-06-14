@@ -113,6 +113,27 @@ public class MarketController {
 		out.flush();
 		out.close();
 	}
+	@RequestMapping("ajaxCategory.do")
+	public void categoryList(HttpServletResponse response) throws IOException{
+		List<Category> list = marketService.selectCategoryList();
+		JSONArray jarr = new JSONArray();
+		
+		//list를 jarr로 복사하기
+		for(Category c : list) {
+			JSONObject jmarket = new JSONObject();
+			jmarket.put("category_main", c.getCategory_main());
+			
+			jarr.add(jmarket);
+		}
+		JSONObject sendJson = new JSONObject();
+		sendJson.put("list", jarr);
+		response.setContentType("application/json; charset=utf-8");
+		PrintWriter out = response.getWriter();
+		out.append(sendJson.toJSONString());
+		out.flush();
+		out.close();
+	}
+	
 	
 	@RequestMapping("reviewList.do")
 	public void reiviewList(Market mk,HttpServletResponse response,@RequestParam("Rpage") int currentPage)
@@ -618,7 +639,7 @@ public class MarketController {
 			// 확장자를소문자로 변경
 			filename_ext = filename_ext.toLowerCase();
 			// 파일 기본경로
-			String dftFilePath = request.getSession().getServletContext().getRealPath("resources/upload/jobUpload/");
+			String dftFilePath = request.getSession().getServletContext().getRealPath("resources/upload/marketUpload/");
 
 			File file = new File(dftFilePath);
 			if (!file.exists()) {
@@ -646,7 +667,7 @@ public class MarketController {
 			// img 태그의 이름쓰기
 			sFileInfo += "&sFileName=" + filename;
 			;
-			sFileInfo += "&sFileURL=" + "/farm/resources/upload/jobUpload/" + realFileNm;
+			sFileInfo += "&sFileURL=" + "/farm/resources/upload/marketUpload/" + realFileNm;
 			PrintWriter print = response.getWriter();
 			print.print(sFileInfo);
 			print.flush();

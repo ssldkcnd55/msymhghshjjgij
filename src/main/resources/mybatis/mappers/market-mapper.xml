@@ -265,4 +265,10 @@ from(select m.market_no,category_no,m.member_id,
 	]]>
 	</select>
 	
+	<select id="selectCategoryList" resultType="Category2">
+	<![CDATA[
+	select distinct category_main from category order by category_main
+	]]>
+	
+	</select>
 </mapper>

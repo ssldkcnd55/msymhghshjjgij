@@ -13,7 +13,7 @@
 <link  href="/farm/resources/css/boot.css" rel="stylesheet" type="text/css">
 <link href="/farm/resources/css/style.css" rel="stylesheet" type="text/css" />
 <link href="/farm/resources/css/join2.css" rel="stylesheet" type="text/css">
-
+<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <script type="text/javascript" src="/farm/resources/js/jquery-3.3.1.min.js"></script>
 <script type="text/javascript" src="/farm/resources/js/signUp.js"></script>
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -45,7 +45,7 @@
 							<div>
 								<div style="text-align: center;">
 									<input type="hidden" name="category" value="${category }" >
-									<img src="/farm/resources/images/default_user.png"
+									<img src="/farm/resources/upload/memberUpload/default.png"
 										id="profile" style="text-align: center; color:gray; font-size:11pt;" 
 										alt="이미지를 선택해주세요"></img><br>
 									<input type="file" id="file-1" class="inputfile inputfile-1"
@@ -118,12 +118,15 @@
 								<div class="form-group">
 									<!--e-Mail 기입란  -->
 									<input type="text"
-										class="form-control" id="addr" name="member_addr">
+										class="form-control" id="addr" placeholder="주소 입력" name="member_addr1" readonly="readonly">
 									<div class="form-group text-center">
 										<input type="button" class="btn btn-info" id="addrbtn"
-											name="addrbtn" value="주소검색" onclick="addrSearch();" required>
+											name="addrbtn" value="주소검색" onclick="findAddr();">
+										<input
+										type="text" class="form-control" id="member_addr2"
+										name="member_addr2" placeholder="상세주소 입력" required>
 									</div>
-									
+									<input type="hidden" name="member_addr" id="member_addr">
 									<c:if test="${category =='0'}">
 									<label for="file">사업자 등록증</label><br> <input type="file" id="file"
 									class="form-control" name="member_businessFile" required>
