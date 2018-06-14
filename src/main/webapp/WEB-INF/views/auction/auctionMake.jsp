@@ -7,7 +7,7 @@
 <link href="/farm/resources/css/auctionMake.css" rel="stylesheet" type="text/css" />
 
 <script type="text/javascript" src="/farm/resources/js/jquery-3.3.1.min.js"></script>
-<script type="text/javascript" src="/farm/resources/js/HuskyEZCreator.js" charset="utf-8"></script>
+<script type="text/javascript" src="resources/editor/auctionnaver/js/HuskyEZCreator.js" charset="utf-8"></script>
 <meta charset="UTF-8">
 <title>Farm</title>
 
