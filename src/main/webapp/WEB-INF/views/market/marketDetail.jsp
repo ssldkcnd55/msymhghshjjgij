@@ -64,7 +64,7 @@ $(function(){
 				}else if(i % 4 == 0){
 					outValues += "<div class='item' align='center'>";
 				}
-				outValues += "<div class='margindiv'><a class='sellerLink' href='#'><div class='sellerMarketList'><div class='img_box' style='background-image: url(\"/farm/resources/upload/marketUpload/"+jsonObj.list[i].market_img+"\"); background-size: cover;'></div>"
+				outValues += "<div class='margindiv'><a class='sellerLink' href='marketDetail.do?market_no="+jsonObj.list[i].market_no+"'><div class='sellerMarketList'><div class='img_box' style='background-image: url(\"/farm/resources/upload/marketUpload/"+jsonObj.list[i].market_img+"\"); background-size: cover;'></div>"
 							+ "<div class='title_box'><p class='title'>"+jsonObj.list[i].market_title+"</p>"
 							+ "<p class='content'>"+jsonObj.list[i].market_note+"</p><p class='content pr'>"+numberWithCommas(jsonObj.list[i].market_price)+"원</p></div></div></a></div>";
 				

@@ -49,10 +49,12 @@
 				}
 				$(".market_box").html(outValues);
 				for(var i in jsonObj.list2){
-					values += "<input type='radio' value='"+jsonObj.list2[i].category_name+"' onclick='smallCategory(this);' name='SmallCategory'> "+jsonObj.list2[i].category_name+"<br><br>";
+					if(jsonObj.list2[i].category_name!='더미'){
+						values += "<input type='radio' value='"+jsonObj.list2[i].category_name+"' onclick='smallCategory(this);' name='SmallCategory'> "+jsonObj.list2[i].category_name+"<br><br>";
+					}
 				}
 				if(ctype == ""){
-					values+="대분류를 선택해주세요.";
+					values+="대분류를 선택해주세요.<br><br>";
 				}
 				$(".SmallCategory").html(values);
 			},error: function(request,status,errorData){
@@ -147,10 +149,12 @@
 					}
 					$(".market_box").html(outValues);
 					for(var i in jsonObj.list2){
-						values += "<input type='radio' value='"+jsonObj.list2[i].category_name+"' onclick='smallCategory(this);' name='SmallCategory'>"+jsonObj.list2[i].category_name+"<br><br>";
+						if(jsonObj.list2[i].category_name != "더미") {
+							values += "<input type='radio' value='"+jsonObj.list2[i].category_name+"' onclick='smallCategory(this);' name='SmallCategory'>"+jsonObj.list2[i].category_name+"<br><br>";
+						}
 					}
 					if(ctype == ""){
-						values+="대분류를 선택해주세요.";
+						values+="대분류를 선택해주세요.<br><br>";
 					}
 					$(".SmallCategory").html(values);
 				},error: function(request,status,errorData){
