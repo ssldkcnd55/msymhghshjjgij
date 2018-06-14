@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.kh.farm.auction.model.vo.Auction;
+import com.kh.farm.auction.model.vo.AuctionCommon;
 import com.kh.farm.auction.model.vo.AuctionHistory;
 import com.kh.farm.auction.model.vo.AuctionOrder;
 import com.kh.farm.auction.model.vo.AuctionQnA;
@@ -361,13 +362,28 @@ public class AuctionDao {
 		return sqlSession.selectOne("auction.selectDay",auction_no);
 	}
 
-	public ArrayList<Auction> selectb(SqlSessionTemplate sqlSession) {
-		List<Auction> selectb =sqlSession.selectList("auction.selectb");
-		return (ArrayList<Auction>)selectb;
+	public ArrayList<AuctionHistory> selectb(SqlSessionTemplate sqlSession) {
+		List<AuctionHistory> selectb =sqlSession.selectList("auction.selectb");
+		return (ArrayList<AuctionHistory>)selectb;
 	}
 
-	public AuctionHistory selectMaxUser(SqlSessionTemplate sqlSession, int auction_no) {
-		return sqlSession.selectOne("auction.selectMaxUser",auction_no);
+
+
+	public int insertdirectprice(SqlSessionTemplate sqlSession, AuctionCommon common) {
+		return sqlSession.insert("auction.insertdirectprice",common);
+
+	}
+
+	public ArrayList<Auction> selectStatus_2(SqlSessionTemplate sqlSession) {
+		List<Auction> selectStatus_2 =sqlSession.selectList("auction.selectStatus_2");
+		return (ArrayList<Auction>)selectStatus_2;
+	}
+
+	public AuctionCommon selectWinBid(SqlSessionTemplate sqlSession, int auction_no) {
+		// TODO Auto-generated method stub
+		System.out.println("서비스2 : "+auction_no);
+		System.out.println(sqlSession.selectOne("auction.selectWinBid",auction_no));
+		return sqlSession.selectOne("auction.selectWinBid",auction_no);
 	}
 
 	

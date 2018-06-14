@@ -498,33 +498,39 @@
 	]]>
 	</select>
 	
-	<select id="selectb" resultType="Auction" >
+	<select id="selectb"  resultType="AuctionHistory" >
 	<![CDATA[
-		select auction_no from auction
-		where (to_char( trunc(to_date(AUCTION_ENDDATE,'YYYY/MM/DD HH24:MI:SS') 
-		 - to_date(SYSDATE,'YYYY/MM/DD HH24:MI:SS'),0))) = 0
-	]]>
-	</select>
-	
-	
-	<select id="selectMaxUser" parameterType="int" resultType="AuctionHistory" >
-	<![CDATA[
-		select *
-		from 
-		(
-		select max(ah.auction_history_price) as "auction_history_price", ah.member_id, ah.AUCTION_HISTORY_DATE,a.auction_title
-		from AUCTION_HISTORY ah,auction a
-		where ah.auction_no = a.auction_no 
-		and a.auction_no = #{auction_no} and ah.auction_history_price = ( select max(ah.auction_history_price) from AUCTION_HISTORY where a.auction_no = #{auction_no} ) 
-		group by ah.member_id,ah.AUCTION_HISTORY_DATE,a.auction_title
-		order by AUCTION_HISTORY_DATE
-		)
-		where rownum = 1
+		select ah.auction_no, max(ah.AUCTION_HISTORY_PRICE) as "AUCTION_HISTORY_PRICE",ah.member_id,a.auction_title
+		from auction a, auction_history ah where a.auction_status = 2 
+		
+		group by ah.auction_no,ah.member_id,a.auction_title
 	]]>
 	</select>
 	
 	
 	
+	
+	
+	<insert id="insertdirectprice" parameterType="AuctionCommon" >
+	<![CDATA[
+		insert into auction_history values((select nvl(max(auction_history_no),0) from auction_history)+1,
+		#{auction_no},#{member_id},(select AUCTION_DIRECTPRICE from auction where auction_no = #{auction_no} ),sysdate)
+	]]>
+	</insert>
+	
+	<select id="selectStatus_2"  resultType="Auction" >
+	<![CDATA[
+		select auction_no from auction where auction_status = '2'
+	]]>
+	</select>
+	
+	<select id="selectWinBid"  parameterType="int"  resultType="AuctionCommon">
+	<![CDATA[
+		select ah.auction_no,ah.member_id,ah.auction_history_price,a.auction_title 
+		from auction_history ah, auction a where ah.auction_no = a.auction_no and
+		ah.AUCTION_HISTORY_PRICE = (select max(AUCTION_HISTORY_PRICE) as "AUCTION_HISTORY_PRICE" from auction_history where auction_no = #{auction_no})
+	]]>
+	</select>
 	
 
 </mapper>

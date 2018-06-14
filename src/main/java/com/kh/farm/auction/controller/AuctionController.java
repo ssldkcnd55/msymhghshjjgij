@@ -886,14 +886,25 @@ public class AuctionController {
 
 	// 옥션 결제 페이지 이동 (현준)
 	@RequestMapping("makeAuctionPayment.do")
-	public ModelAndView makePayment(@RequestParam("auction_no") int auction_no, ModelAndView mv, HttpSession session) {
+	public ModelAndView makePayment(@RequestParam("auction_no") int auction_no, 
+			@RequestParam("member_id") String member_id,
+			ModelAndView mv, HttpSession session) {
 
+		//경매 즉시구매 누르면 auction_history에다가 넣어주는 insert문(민선)
+		AuctionCommon common = new AuctionCommon();
+		common.setAuction_no(auction_no);
+		common.setMember_id(member_id);
+		
+		int directprice = auctionService.insertdirectprice(common);
+		/*System.out.println("directprice : "+directprice);*/
+		
 		// 경매 상태:2(마감) 업데이트 :
 		int auction_Buy = auctionService.updateAuctionBuy(auction_no);
 		AuctionOrder ao = auctionService.selectAuctionPaymentInfo(auction_no);
 		mv.addObject("ao", ao);
 		mv.setViewName("auction/auctionPayment");
 		return mv;
+		
 
 	}
 
@@ -935,25 +946,25 @@ public class AuctionController {
 	@RequestMapping(value = "bidding.do")
 	@ResponseBody
 	public void bidding(HttpServletResponse response) throws IOException {
-		ArrayList<Auction> selectb = auctionService.selectb();
-		System.out.println("selectb : "+selectb.toString());
 		
+		ArrayList<Auction> list = auctionService.selectStatus_2();//경매 상태 2 것만 넘버 가져오기
+		System.out.println("list : "+list.toString());
 		JSONArray jarr =new JSONArray();
-		for(Auction a : selectb) {
-			AuctionHistory history = auctionService.selectMaxUser(a.getAuction_no());
-			System.out.println("history : "+history.getAuction_no() +" / "+history.getMember_id());
-
+		AuctionCommon ac = new AuctionCommon();
+		int auction_no = 0;
+		for(Auction a: list) {
+			System.out.println("no :"+a.getAuction_no());
+			auction_no = a.getAuction_no();
+			ac = auctionService.selectWinBid(auction_no);
+			System.out.println("ac : "+ac.toString());
 			JSONObject json = new JSONObject();
-
-			json.put("member_id", history.getMember_id());
-			json.put("auction_title", history.getAuction_title());
-			json.put("auction_history_date", history.getAuction_history_date());
-			json.put("auction_history_price", history.getAuction_history_price());
+			json.put("auction_no", ac.getAuction_no());
+			json.put("auction_title", ac.getAuction_title());
+			json.put("auction_history_price", ac.getAuction_history_price());
+			json.put("member_id", ac.getMember_id());
 			jarr.add(json);
-
-
 		}
-	
+		
 		JSONObject json = new JSONObject();
 		json.put("list", jarr);
 		
