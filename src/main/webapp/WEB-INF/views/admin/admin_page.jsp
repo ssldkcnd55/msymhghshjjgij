@@ -181,8 +181,9 @@ function show_Daily(){
 			console.log(data);
             var objStr = JSON.stringify(data);
             var jsonObj = JSON.parse(objStr);
-         
+         	var outvalues = "";
             $("#chartdiv").empty();
+            
             var chart = AmCharts.makeChart( "chartdiv", {
             	  "type": "serial",
             	  "theme": "light",

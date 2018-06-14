@@ -64,7 +64,7 @@ $(function(){
 				}else if(i % 4 == 0){
 					outValues += "<div class='item' align='center'>";
 				}
-				outValues += "<div class='margindiv'><a class='sellerLink' href='#'><div class='sellerMarketList'><div class='img_box' style='background-image: url(\"/farm/resources/upload/marketUpload/"+jsonObj.list[i].market_img+"\"); background-size: cover;'></div>"
+				outValues += "<div class='margindiv'><a class='sellerLink' href='marketDetail.do?market_no="+jsonObj.list[i].market_no+"'><div class='sellerMarketList'><div class='img_box' style='background-image: url(\"/farm/resources/upload/marketUpload/"+jsonObj.list[i].market_img+"\"); background-size: cover;'></div>"
 							+ "<div class='title_box'><p class='title'>"+jsonObj.list[i].market_title+"</p>"
 							+ "<p class='content'>"+jsonObj.list[i].market_note+"</p><p class='content pr'>"+numberWithCommas(jsonObj.list[i].market_price)+"원</p></div></div></a></div>";
 				
@@ -81,6 +81,25 @@ $(function(){
                     request.responseText + "\nerror" + errorData);
         }
 	});
+	
+/* 	$(".sch_smit").click(function(){
+		reviewSearch = $("#reviewSearch");
+		$.ajax({
+			url: "SearchReview.do",
+			type: "post",
+			data : {reviewSearch : reviewSearch},
+			dataType: "JSON",
+			success: function(data){
+				
+			},error: function(request,status,errorData){
+				console.log("error code : " + request.status + "\nmessage" + 
+						request.responseText + "\nerror" + errorData);
+			}
+		});
+	}); */
+	
+	
+	
 });
 
 
@@ -137,6 +156,10 @@ $(function(){
            }
 	});
 }); */
+/* function moveReviewSearchList(){
+	location.href = "reviewList.do?reviewSearch="+$("#reviewSearch").val()+"&market_no=${market.market_no}&page=1";
+} */
+
 function dailyMake(){
 	location.href="dailyMakeMove.do?market_no=${market.market_no}";
 }
@@ -204,14 +227,74 @@ function qnaMake(){
 function writeReview(){
 	location.href ="/farm/writeReviewMove.do?market_no=${market.market_no}";
 }
-
-function reviewPage(page){
+function reviewSearchPage(page){
+	reviewSearch = $("#reviewSearch").val();
 	$.ajax({
 		url:"reviewList.do",
 		type:"post",
 		data:{
 			market_no:${market.market_no},
-			Rpage:page 
+			Rpage:page, 
+			reviewSearch:reviewSearch
+			
+		},
+		dataType: "JSON",
+		success: function(data){
+			console.log(data);
+			var objStr = JSON.stringify(data);
+			var jsonObj = JSON.parse(objStr);
+			
+			var outValues = "<tr><th width='12%'>번호</th><th width='50%'>제목</th><th width='13%'>작성자</th><th width='15%'>날짜</th></tr>";
+			
+			 
+			for(var i in jsonObj.list){
+				outValues += "<tr id='hover'><td>"+jsonObj.list[i].rnum+"</td>"
+				+"<td id='QnA_td'><a href='reviewDeatil.do?review_no="+jsonObj.list[i].review_no+"&market_no=${market.market_no}'>"+jsonObj.list[i].review_title+"</a></td>"
+				+"<td>"+jsonObj.list[i].member_id+"</td><td>"+jsonObj.list[i].review_date+"</td></tr>";
+			}
+			$(".review_table").html(outValues);	
+			
+			var startPage= jsonObj.list[0].startPage;
+			var endPage = jsonObj.list[0].endPage;
+			var maxPage = jsonObj.list[0].maxPage;
+			var currentPage = jsonObj.list[0].currentPage;
+			
+			var values ="";
+			if(startPage>5){
+				values+= "<a href='javascript:reviewSearchPage("+(startPage-1)+")'>&laquo;</a>" 
+			}else{
+				values+="<a>&laquo;</a>";	
+			}
+			for(var i=startPage;i<=endPage;i++  ){
+				if(i==currentPage){
+					values+= "<a class='active'>"+i+"</a>";
+				}else{
+					values+= "<a href='javascript:reviewSearchPage("+i+");'>"+i+"</a>";
+				}
+			}
+			if(endPage<maxPage){
+				values+="<a href='javascript:reviewSearchPage("+(endPage+1)+")'>&raquo;</a>";
+				
+			}else{
+				values+="<a>&raquo;</a>";
+			}
+			$(".review_pagination").html(values);
+		
+			
+		},error: function(request,status,errorData){
+            alert("error code : " + request.status + "\nmessage" + 
+                    request.responseText + "\nerror" + errorData);
+           }
+	});
+}
+function reviewPage(page){
+	reviewSearch = $("#reviewSearch").val();
+	$.ajax({
+		url:"reviewList.do",
+		type:"post",
+		data:{
+			market_no:${market.market_no},
+			Rpage:page
 		},
 		dataType: "JSON",
 		success: function(data){
@@ -553,7 +636,7 @@ function changeprice(){
 							<!-- 검색 -->
 							<div class="search_box">
 								<span class='green_window'> <input type='text'
-									class='input_text' />
+									class='input_text' name='reviewSearch' />
 								</span>
 								<button type='submit' class='sch_smit'>검색</button>
 							</div>
@@ -580,9 +663,9 @@ function changeprice(){
 							<!-- 검색 -->
 							<div class="search_box">
 								<span class='green_window'> <input type='text'
-									class='input_text' />
+									class='input_text' id="reviewSearch"/>
 								</span>
-								<button type='submit' class='sch_smit'>검색</button>
+								<button onclick='reviewSearchPage(1);' class='sch_smit'>검색</button>
 							</div>
 						</div>
 					</div>
@@ -597,102 +680,7 @@ function changeprice(){
 		</div>
 	</div>
 	
-	<%-- <div class="goods-view-flow-cart __active" id="flow-cart">
-		<div class="goods-view-flow-cart-wrapper">
-			<button type="button" id="show-option-button"
-				class="goods-view-show-option-button">
-				<span class="goods-view-show-option-button-value">옵션선택</span>
-			</button>
-
-			<div class="goods-view-flow-cart __active" id="flow-cart2">
-				<div class="goods-view-flow-cart-wrapper">
-					<button type="button" id="show-option-button"
-						class="goods-view-show-option-button __active">
-						<span class="goods-view-show-option-button-value">옵션선택</span>
-					</button>
-					<div id="market-flow-cart-content"
-						class="goods-view-flow-cart-content __active">
-
-
-						<c:if test="${not empty sessionScope.loginUser  }">
-							<form action="marketBuy.do" method="post">
-								<input type="hidden" name="market_no"
-									value="${market.market_no }"> <input type="hidden"
-									name="member_id" value="${sessionScope.loginUser.member_id}">
-									<!-- <div class="market_title"></div> -->
-									<table class="tb">
-									
-									<tr>
-										<td>${market.market_title}</td>
-										
-										<td><input type="number" name="buy_amount" min="1" value="1" class="amount_text"
-										 
-										oninput="changeprice();"></td>
-									
-										
-									</tr>
-									<tr>
-										<td>가격</td>
-										<td>${market.market_price }원</td>
-									</tr>
-									
-									<tr>
-										<td>현재 남은 수량</td>
-										<td>${market.market_amount- market.remaining }</td>
-									</tr>									
-									<tr>
-										<td>출하 예정일</td>
-										<td>  </td>
-										<td>${market.market_releasedate}</td>
-									</tr>
-									
-									
-									<tr>
-										<td></td>
-										<td>  </td>
-										<td>총 상품 금액 : <span class="mkPrice">${market.market_price }원</span></td>
-									</tr>
-							 	<tr><td colspan="3"><a href="javascript: viewSelectBox() ">${market.member_id}</a> </td></tr>
-									</table>
-								<!-- sendMsg -->
-						
-								<div class="market_cart_right_div">
-								<input type="submit" value="구매하기" class="market_buy"> <input type="button"
-									value="장바구니" onclick="addBasket()" class="market_basket">
-									</div>
-							</form>
-
-						</c:if>
-						<c:if test="${empty sessionScope.loginUser  }">
-						<div class="loginmessage">로그인이 필요한 서비스 입니다.</div>
-						</c:if>
-						
-						<!-- 장바구니 모달창 -->
-						<div id="myModal" class="modal">
-							<div class="modal-content">
-								<div class="md_top">
-									<span class="md_top_title"><strong>장바구니 담기</strong></span>
-								</div>
-								<div class="md_mid">
-									<div class="md_mid_content">선택하신 상품을 장바구니에 담았습니다.</div>
-									<div class="md_mid_box">
-									<a href="javascript: closeModal();" class="md_mid_close_a"> <span class="md_mid_close">계속쇼핑</span></a> 
-									<a href="selectShoppingBasket.do" class="md_mid_basket_a"> <span class="md_mid_basket">장바구니</span></a>
-									</div>
-								</div>
-							</div>
-							<input type="hidden" id="market_no" value="${market.market_no }">
-						</div><!-- 장바구니 모달 끝 -->
-						
-						<br> <br> <br> <br>
-					</div>
-				</div>
-			</div>
-
-		</div>
-	</div>
-</body>
-</html> --%>
+	
 <div class="goods-view-flow-cart __active" id="flow-cart">
 		<div class="goods-view-flow-cart-wrapper">
 			<button type="button"  id="show-option-button" class="goods-view-show-option-button">

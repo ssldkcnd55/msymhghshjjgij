@@ -22,6 +22,47 @@
 	
 </script>
 <script type="text/javascript">
+	function mainCategory(a){
+		count = 1;
+		ctype = a.value;
+		cname = null;
+		$.ajax({
+			url: "ajaxMoreMarket.do",
+			type: "post",
+			data : {ctype : ctype,
+				sort :sort,
+				page : count
+				<c:if test="${search != null}">
+			,search : "${search}"
+				</c:if>},
+			dataType: "JSON",
+			success: function(data){
+				var objStr = JSON.stringify(data);
+				var jsonObj = JSON.parse(objStr);
+				var outValues = "";
+				var values = "";
+				for(var i in jsonObj.list){
+					outValues += "<a href='marketDetail.do?market_no=" + jsonObj.list[i].market_no + "'>" +
+					"<div class='market'><div class='img_box' style='background-image:url(\"/farm/resources/upload/marketUpload/"+ jsonObj.list[i].market_img+"\"); background-size: cover;'>"+
+					"</div><div class='title_box'><p class='title'>"+jsonObj.list[i].market_title +
+					"</p><p class='content'>"+jsonObj.list[i].market_note+"</p><p class='content price'>"+jsonObj.list[i].market_price+"원</p></div></div></a>";
+				}
+				$(".market_box").html(outValues);
+				for(var i in jsonObj.list2){
+					if(jsonObj.list2[i].category_name!='더미'){
+						values += "<input type='radio' value='"+jsonObj.list2[i].category_name+"' onclick='smallCategory(this);' name='SmallCategory'> "+jsonObj.list2[i].category_name+"<br><br>";
+					}
+				}
+				if(ctype == ""){
+					values+="대분류를 선택해주세요.<br><br>";
+				}
+				$(".SmallCategory").html(values);
+			},error: function(request,status,errorData){
+				console.log("error code : " + request.status + "\nmessage" + 
+						request.responseText + "\nerror" + errorData);
+			}
+		});
+	}
 	function marketMake(){
 		location.href="/farm/moveMarketMake.do";
 	}
@@ -57,9 +98,31 @@
 			}
 		});
 	}
+	
 	/* 카테고리처리 */
 	$(function(){
+		
+		$.ajax({
+			url:"ajaxCategory.do",
+			type:"post",
+			dataType:"JSON",
+			success: function(data){
+				var objStr = JSON.stringify(data);
+				var jsonObj = JSON.parse(objStr);
+				var outValues = "<input type='radio' onclick='mainCategory(this);' name='MainCategory' checked='checked' value=''> 전체보기 <br><br>";
+			for(var i in jsonObj.list){
+				outValues+= "<input type='radio' name='MainCategory' onclick='mainCategory(this);' value='"+jsonObj.list[i].category_main+"'> "+jsonObj.list[i].category_main+"<br><br>";
+			}
+			$(".MainCategory").html(outValues);	
+			},error: function(request,status,errorData){
+				console.log("error code : " + request.status + "\nmessage" + 
+						request.responseText + "\nerror" + errorData);
+			}
+			
+		});
+		
 		$("input[name='MainCategory']").click(function(){
+			alert('11');
 			count = 1;
 			ctype = $(this).val();
 			cname = null;
@@ -86,10 +149,12 @@
 					}
 					$(".market_box").html(outValues);
 					for(var i in jsonObj.list2){
-						values += "<input type='radio' value='"+jsonObj.list2[i].category_name+"' onclick='smallCategory(this);' name='SmallCategory'>"+jsonObj.list2[i].category_name+"<br><br>";
+						if(jsonObj.list2[i].category_name != "더미") {
+							values += "<input type='radio' value='"+jsonObj.list2[i].category_name+"' onclick='smallCategory(this);' name='SmallCategory'>"+jsonObj.list2[i].category_name+"<br><br>";
+						}
 					}
 					if(ctype == ""){
-						values+="대분류를 선택해주세요.";
+						values+="대분류를 선택해주세요.<br><br>";
 					}
 					$(".SmallCategory").html(values);
 				},error: function(request,status,errorData){
@@ -204,14 +269,15 @@
 					<!-- 카테고리 메뉴바 -->
 					<div class="category_menu">
 						<h4>대분류</h4>
-						<div class="MainCategory">
-						<input type="radio" name="MainCategory" checked="checked" value=""> 전체보기 <br><br>
-							<input type="radio" name="MainCategory" value="채소류"> 채소류<br>
+					<div class="MainCategory">
+						
+							<!-- <input type="radio" name="MainCategory" value="채소류"> 채소류<br>
 							<br> <input type="radio" name="MainCategory" value="과일류">
 							과일류<br>
 							<br> <input type="radio" name="MainCategory" value="곡식류">
 							곡식류<br>
-							<br>
+							<br> -->
+				
 						</div>
 						<hr style="border: 0.5px solid #dddddd;">
 

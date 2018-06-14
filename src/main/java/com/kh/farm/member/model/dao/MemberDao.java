@@ -208,7 +208,7 @@ public class MemberDao {
 		if(type==1) {
 		return sqlSession.selectList("visit2.selectVisitList");
 		}else {
-			return sqlSession.selectList("visit2.selectVisitList2");
+			return sqlSession.selectList("visit2.selectVisitMonthList");
 		}
 	}
 

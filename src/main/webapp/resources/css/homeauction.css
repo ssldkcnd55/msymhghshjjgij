@@ -29,6 +29,12 @@
 	content: "\e080"
 }
 
+.noneAuction{
+	text-align: center;
+	color: gray;
+	line-height: 440px;
+}
+
 .sr-only {
 	position: absolute;
 	width: 1px;

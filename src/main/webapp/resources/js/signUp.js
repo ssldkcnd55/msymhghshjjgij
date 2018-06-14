@@ -2,7 +2,13 @@
  * 
  */
 
-
+function findAddr() {
+	new daum.Postcode({
+		oncomplete : function(data) {
+			$('#addr').val(data.postcode + " " + data.address);
+		}
+	}).open();
+}
 (function(e, t, n) {
 		var r = e.querySelectorAll("html")[0];
 		r.className = r.className.replace(/(^|\s)no-js(\s|$)/, "$1js$2")
@@ -116,6 +122,7 @@
 		}
 	}
 	function formValidation() {
+		$('#member_addr').val($('#addr').val()+" "+$('#member_addr2').val());
 		/////////////////////////////정규식 목록/////////////////////////
 		//비밀번호: 6~20자이상 영문 숫자 혼합
 		var pwdPattern = /^.*(?=.{6,20})(?=.*[0-9])(?=.*[a-zA-Z]).*$/;

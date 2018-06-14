@@ -3,6 +3,7 @@ package com.kh.farm.job.model.vo;
 import java.sql.Date;
 
 import org.springframework.stereotype.Component;
+import org.springframework.web.multipart.MultipartFile;
 
 @Component("job")
 public class Job implements java.io.Serializable {
@@ -22,10 +23,18 @@ public class Job implements java.io.Serializable {
 	private Date job_enddate;// 구인구직 종료일
 	private String job_addr;// 구인구직 주소
 	private String job_tel;// 구인구직 전화번호
-	private String job_img;
-	private String job_name;//구인구직 일터이름
-	
-	
+	private String job_img; // 구인구직 썸네일 이미지 이름
+	private String job_name;// 구인구직 일터이름
+	private MultipartFile Filedata; // 다중이미지 업로드
+
+	public MultipartFile getFiledata() {
+		return Filedata;
+	}
+
+	public void setFiledata(MultipartFile filedata) {
+		Filedata = filedata;
+	}
+
 	public String getJob_name() {
 		return job_name;
 	}

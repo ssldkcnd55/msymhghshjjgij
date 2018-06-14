@@ -54,7 +54,7 @@ $(function(){
 			$(".pagination").html(values);
 			
 		},error: function(request,status,errorData){
-	        alert("error code : " + request.status + "\nmessage" + 
+	        console.log("error code : " + request.status + "\nmessage" + 
 	                request.responseText + "\nerror" + errorData);
 	       }
 	});
@@ -109,7 +109,7 @@ function qnaPage(page){
 		
 			
 		},error: function(request,status,errorData){
-	        alert("error code : " + request.status + "\nmessage" + 
+	        console.log("error code : " + request.status + "\nmessage" + 
 	                request.responseText + "\nerror" + errorData);
 	       }
 	});
