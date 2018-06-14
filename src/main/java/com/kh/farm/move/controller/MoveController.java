@@ -73,7 +73,11 @@ public class MoveController {
 	public String moveSelMemberInfo() {
 		return "member/sellerMy/member_Info";
 	}
-
+	
+	@RequestMapping("moveSelSales.do")
+	public String moveSelSales() {
+		return "member/sellerMy/sales_rate";
+	}
 	@RequestMapping("moveSmartEditor2Skin.do")
 	public String moveSmartEditor2Skin() {
 		return "naver/SmartEditor2Skin";
