@@ -502,13 +502,9 @@
 	<![CDATA[
 		select ah.auction_no, max(ah.AUCTION_HISTORY_PRICE) as "AUCTION_HISTORY_PRICE",ah.member_id,a.auction_title
 		from auction a, auction_history ah where a.auction_status = 2 
-		
 		group by ah.auction_no,ah.member_id,a.auction_title
 	]]>
 	</select>
-	
-	
-	
 	
 	
 	<insert id="insertdirectprice" parameterType="AuctionCommon" >
@@ -520,7 +516,9 @@
 	
 	<select id="selectStatus_2"  resultType="Auction" >
 	<![CDATA[
-		select auction_no from auction where auction_status = '2'
+		select a.auction_no from auction a, auction_history ah
+		where a.auction_no = ah.auction_no
+		and a.auction_status = '2' group by a.auction_no
 	]]>
 	</select>
 	
@@ -528,7 +526,9 @@
 	<![CDATA[
 		select ah.auction_no,ah.member_id,ah.auction_history_price,a.auction_title 
 		from auction_history ah, auction a where ah.auction_no = a.auction_no and
-		ah.AUCTION_HISTORY_PRICE = (select max(AUCTION_HISTORY_PRICE) as "AUCTION_HISTORY_PRICE" from auction_history where auction_no = #{auction_no})
+		ah.AUCTION_HISTORY_PRICE = (select max(AUCTION_HISTORY_PRICE) as "AUCTION_HISTORY_PRICE" 
+    	from auction_history where auction_no = #{auction_no}) 
+   		and a.auction_no = #{auction_no}
 	]]>
 	</select>
 	

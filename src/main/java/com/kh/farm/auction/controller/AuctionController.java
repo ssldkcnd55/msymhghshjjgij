@@ -943,20 +943,20 @@ public class AuctionController {
 	
 	
 	//경매 낙찰 검사
-	@RequestMapping(value = "bidding.do")
+	@RequestMapping(value = "bidding.do",method = RequestMethod.POST)
 	@ResponseBody
 	public void bidding(HttpServletResponse response) throws IOException {
 		
 		ArrayList<Auction> list = auctionService.selectStatus_2();//경매 상태 2 것만 넘버 가져오기
 		System.out.println("list : "+list.toString());
 		JSONArray jarr =new JSONArray();
-		AuctionCommon ac = new AuctionCommon();
-		int auction_no = 0;
+		
+		
 		for(Auction a: list) {
 			System.out.println("no :"+a.getAuction_no());
-			auction_no = a.getAuction_no();
-			ac = auctionService.selectWinBid(auction_no);
-			System.out.println("ac : "+ac.toString());
+			int auction_no = a.getAuction_no();
+			AuctionCommon ac = auctionService.selectWinBid(auction_no);
+			System.out.println("ac : "+ac);
 			JSONObject json = new JSONObject();
 			json.put("auction_no", ac.getAuction_no());
 			json.put("auction_title", ac.getAuction_title());
@@ -974,8 +974,6 @@ public class AuctionController {
 	      out.print(json.toJSONString());
 	      out.flush();
 	      out.close();
-
-		
 	}
 
 	// 경매 다중 이미지 업로드

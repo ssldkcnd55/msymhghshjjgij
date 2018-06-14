@@ -30,20 +30,20 @@ function auction_update(){
 	}
 
 //경매 낙찰 검사
-/*   var bidding;
+   var bidding;
 bidding = setInterval(function(){auction_bidding()}, 3000);   
- */
+ 
 function auction_bidding(){
 
 	
 	 $.ajax({
 		url : "bidding.do",
-		type : 'get',
+		type : 'post',
+		dataType: "JSON",
 		 success : function(obj) {
 			console.log(obj.toString());  
 			 var objStr = JSON.stringify(obj);
 	         var jsonObj = JSON.parse(objStr);
-	         
 	         var values = "";
 	         
 	         for(var i in jsonObj.list){
@@ -55,7 +55,6 @@ function auction_bidding(){
 	 		+"<th>미결제</th>"
 	 		+"<td><input type='submit' value='결제' class='buy_button'/></td>"
 	 		"</tr>";
-	 		
 	 		
 	         }
 	         $(".auction_bidding2").html(values);
