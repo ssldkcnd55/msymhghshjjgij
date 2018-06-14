@@ -21,13 +21,14 @@ public class PageNumber implements java.io.Serializable{
 	private String keyword;
 	private int select;
 	private int type;
+	private String reviewSearch;
 	public PageNumber() {}
 	
 	
 	
 	public PageNumber(int startRow, int endRow, int market_no, int auction_no, String member_id, String search,
 			String ctype, String cname, String sort, int review_no, int daily_no, int report_no, String keyword,
-			int select, int type) {
+			int select, int type,String reviewSearch) {
 		super();
 		this.startRow = startRow;
 		this.endRow = endRow;
@@ -44,6 +45,7 @@ public class PageNumber implements java.io.Serializable{
 		this.keyword = keyword;
 		this.select = select;
 		this.type = type;
+		this.reviewSearch = reviewSearch;
 	}
 
 
@@ -57,6 +59,7 @@ public class PageNumber implements java.io.Serializable{
 
 
 
+	
 	public int getType() {
 		return type;
 	}
@@ -214,6 +217,19 @@ public class PageNumber implements java.io.Serializable{
 	}
 
 
+
+	public String getReviewSearch() {
+		return reviewSearch;
+	}
+
+
+
+	public void setReviewSearch(String reviewSearch) {
+		this.reviewSearch = reviewSearch;
+	}
+
+	
+	
 	
 
 	

@@ -20,9 +20,9 @@ public interface MarketService {
 	
 	Market selectMarketInfo(int market_no);
 
-	ArrayList<Review> selectReviewList(Market mk, int currentPage);
+	ArrayList<Review> selectReviewList(Market mk, int currentPage, String reviewSearch);
 
-	int selectReviewCount(Market mk);
+	int selectReviewCount(Market mk, String reviewSearch);
 	int insertMarket(Market market);
 
 	int insertMarket_qna(Market_qna qna);

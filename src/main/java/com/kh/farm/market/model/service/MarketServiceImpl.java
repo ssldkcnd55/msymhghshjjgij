@@ -34,14 +34,14 @@ public class MarketServiceImpl implements MarketService{
 		return marketDao.marketInfo(sqlSession,market_no);
 	}
 	@Override
-	public ArrayList<Review> selectReviewList(Market mk, int currentPage) {
+	public ArrayList<Review> selectReviewList(Market mk, int currentPage, String reviewSearch) {
 		// TODO Auto-generated method stub
-		return marketDao.reviewList(sqlSession,mk,currentPage);
+		return marketDao.reviewList(sqlSession,mk,currentPage,reviewSearch);
 	}
 	@Override
-	public int selectReviewCount(Market mk) {
+	public int selectReviewCount(Market mk,String reviewSearch) {
 		// TODO Auto-generated method stub
-		return marketDao.reviewListCount(sqlSession,mk);
+		return marketDao.reviewListCount(sqlSession,mk,reviewSearch);
 	}
 	public int insertMarket(Market market) {
 		// TODO Auto-generated method stub

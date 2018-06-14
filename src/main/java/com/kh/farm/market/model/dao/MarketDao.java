@@ -42,20 +42,24 @@ public class MarketDao {
 		return mk;
 	}
 
-	public ArrayList<Review> reviewList(SqlSessionTemplate sqlSession, Market mk, int currentPage) {
+	public ArrayList<Review> reviewList(SqlSessionTemplate sqlSession, Market mk, int currentPage, String reviewSearch) {
 		int startRow = (currentPage-1)*10+1; 
 		int endRow = startRow+9;
 		PageNumber pnum = new PageNumber();
 		pnum.setStartRow(startRow);
 		pnum.setEndRow(endRow);
 		pnum.setMarket_no(mk.getMarket_no());
+		pnum.setReviewSearch(reviewSearch);
 		List<Review> list =sqlSession.selectList("market.reviewList",pnum);
 		return (ArrayList<Review>)list;
 	}
 
-	public int reviewListCount(SqlSessionTemplate sqlSession, Market mk) {
+	public int reviewListCount(SqlSessionTemplate sqlSession, Market mk, String reviewSearch) {
 		// TODO Auto-generated method stub
-		int listCount = sqlSession.selectOne("market.reviewCount",mk.getMarket_no());
+		PageNumber pnum = new PageNumber();
+		pnum.setMarket_no(mk.getMarket_no());
+		pnum.setReviewSearch(reviewSearch);
+		int listCount = sqlSession.selectOne("market.reviewCount",pnum);
 		return listCount;
 	}
 	

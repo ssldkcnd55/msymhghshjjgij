@@ -95,9 +95,12 @@
 }
 
 .QnA_comment_top_writer{
-	background: #F1F1F1;
-	width:100%;
-	margin-bottom:-15px;
+	    background: #F1F1F1;
+    width: 100%;
+    margin-bottom: -15px;
+    float: left;
+    height: 150px;
+
 }
 
 .QnA_comment_top_writer p{
@@ -222,20 +225,29 @@
 }
 
 .answerArea{	
-		width: 800px;
-		height: 100px;
-		
+	    width: 780px;
+    height: 80px;
+    float: left;
+    margin: 30px 0px 0px 45px;
+    border: 1px solid #bdbdbd;
 		}
 		
 .answerBtn{
-	background-color:red;
-	color: white;
-	width: 60px;
-	height: 30px;
-	padding-top:5px;
-	font-weight: bold;
-	text-align: center;
-	margin-left: 10px;
+    background: white;
+    color: #4e4e4e;
+    width: 86px;
+    height: 86px;
+    padding: 0px;
+    font-weight: bold;
+    text-align: center;
+    margin: 30px 0px 10px 10px;
+    border: 1px solid #bdbdbd;
+    border-radius: 2px;
+    cursor: pointer;
+    float: left;
+}
+.answerBtn:hover{
+	background: #f5f1f1
 }
 
 .white_content {
