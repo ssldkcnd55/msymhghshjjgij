@@ -61,7 +61,7 @@ $(function(){
 });
 
 function qnaSearchPage(page){
-	alert("11");
+	
 	$.ajax({
 		url:"mainqnaList.do",
 		type:"post",
