@@ -471,7 +471,7 @@
 
 	<insert id="insertMaxpriceAuction" parameterType="Auction" >
 	<![CDATA[
-		insert into auction_history values((select max(auction_history_no) from auction_history)+1,
+		insert into auction_history values((select nvl(max(auction_history_no),0) from auction_history)+1,
 		#{auction_no},null,#{auction_startprice},sysdate)
 	]]>
 	</insert>
@@ -479,13 +479,13 @@
 	
 	<select id="selectAuction_no" parameterType="String" resultType="int">
 	<![CDATA[
-		 select max(auction_no) as "auction_no" from auction where member_id = #{member_id}
+		 select nvl(max(auction_no),0) as "auction_no" from auction where member_id = #{member_id}
 	]]>
 	</select>
 	
 	<select id="selectprice" parameterType="int" resultType="int">
 	<![CDATA[
-		 select max(auction_history_price) as "auction_history_price" from auction_history where auction_no =#{auction_no}
+		 select nvl(max(auction_history_price),0) as "auction_history_price" from auction_history where auction_no =#{auction_no}
 	]]>
 	</select>
 

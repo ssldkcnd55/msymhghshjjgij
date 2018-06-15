@@ -116,38 +116,39 @@ $('#myModal').css("display","none");
  
  //////////////////////////메시지보내기
 function sendProductMsg(my_id,your_id){
-	
+
+	$('.msgframe').get(0).contentWindow.insertChat(my_id,your_id);
+	if (
+			  $(".msgIcon").attr("src") == "/farm/resources/images/messenger_icon_green2.png") {
+		      $(".msgIcon")
+		            .prop("src", "/farm/resources/images/messenger_back_2.png");
+		      $(".msgbox").css("visibility", "visible");
+		      loadListPage();
+		   }
+	if(my_id!=your_id){
 	var msg="";
 	////
 	var msg = '<div class="qes_alarm_head"><img src="/farm/resources/images/sell_icon_white.png" />상품 문의</div>';
 	msg+='<img class="qes_alarm_img" style="width:180px; margin-top:4px;" src="/farm/resources/upload/marketUpload/'+m_img+'">';	
-	msg+='<table><tr><td>상품명</td><td>사과1</td></tr>';
-	msg+='<tr><td>가격</td><td>1000원</td></tr>';
+	msg+='<table class="qes_alarm_table"><tr><td>상품명</td><td>사과</td></tr>';
+	msg+='<tr><td>가격</td><td>3000원</td></tr>';
 	msg+='</table>';
 	////
-	$('.msgframe').get(0).contentWindow.insertChat(my_id,your_id);
-
 	setTimeout(function() {
 		 $('.msgframe').get(0).contentWindow.ws.send(msg);
-	},100);
-	if (
-			  $(".msgIcon").attr("src") == "/farm/resources/images/messenger_icon_green2.png") {
-		      $(".msgIcon")
-		            .prop("src", "/farm/resources/images/messenger_back_2.png");
-		      $(".msgbox").css("visibility", "visible");
-		      loadListPage();
-
-		   }
+		 },100);
+	}
 }
 function sendMsg(my_id,your_id)
 {
+	
 	$('.msgframe').get(0).contentWindow.insertChat(my_id,your_id);
-	if (
-			  $(".msgIcon").attr("src") == "/farm/resources/images/messenger_icon_green2.png") {
+	if ( $(".msgIcon").attr("src") == "/farm/resources/images/messenger_icon_green2.png") {
 		      $(".msgIcon")
 		            .prop("src", "/farm/resources/images/messenger_back_2.png");
 		      $(".msgbox").css("visibility", "visible");
 		      loadListPage();
 
 		   }
+	
 }
