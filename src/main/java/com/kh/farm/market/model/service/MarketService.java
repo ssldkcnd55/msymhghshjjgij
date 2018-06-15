@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import com.kh.farm.common.model.vo.PageNumber;
 import com.kh.farm.market.exception.DeleteFailException;
 import com.kh.farm.market.model.vo.Category;
 import com.kh.farm.market.model.vo.Daily;
@@ -11,6 +12,7 @@ import com.kh.farm.market.model.vo.Market;
 import com.kh.farm.market.model.vo.Reply;
 import com.kh.farm.market.model.vo.Review;
 import com.kh.farm.market.model.vo.UnderReply;
+import com.kh.farm.payment.model.vo.Payment;
 import com.kh.farm.qna.model.vo.Market_qna;
 
 public interface MarketService {
@@ -96,4 +98,9 @@ public interface MarketService {
 
 
 	List<Category> selectCategoryList();
+	
+	ArrayList<Market> selectSellerMarketHistory(int currentPage,PageNumber pa);
+
+	int selectSellerMarketHistoryCount();
+	
 }

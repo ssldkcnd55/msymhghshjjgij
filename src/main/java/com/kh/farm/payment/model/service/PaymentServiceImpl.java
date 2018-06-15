@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.kh.farm.chat.model.service.ChatService;
 import com.kh.farm.chat.model.service.ChatServiceImpl;
 import com.kh.farm.chat.model.vo.*;
+import com.kh.farm.common.model.vo.PageNumber;
 import com.kh.farm.payment.model.dao.PaymentDao;
 import com.kh.farm.payment.model.vo.*;
 import com.kh.farm.shoppingBasket.model.vo.*;
@@ -84,6 +85,16 @@ public class PaymentServiceImpl implements PaymentService{
 	public Payment selectOrderDeliveryDetail(int buy_no) {
 		
 		return paymentDao.selectOrderDeliveryDetail(sqlSession,buy_no);
+	}
+	@Override
+	public ArrayList<Payment> selectSellerPaymentHistory(int currentPage,PageNumber pa) {
+		// TODO Auto-generated method stub
+		return paymentDao.selectSellerPaymentHistory(sqlSession,currentPage,pa);
+	}
+	@Override
+	public int selectSellerPaymentHistoryCount() {
+		// TODO Auto-generated method stub
+		return paymentDao.selectSellerPaymentHistoryCount(sqlSession);
 	}
 	
 }

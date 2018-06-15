@@ -3,6 +3,7 @@ package com.kh.farm.payment.model.service;
 
 import java.util.*;
 
+import com.kh.farm.common.model.vo.PageNumber;
 import com.kh.farm.payment.model.vo.Payment;
 import com.kh.farm.shoppingBasket.model.vo.*;
 
@@ -30,5 +31,7 @@ public interface PaymentService {
 
 	Payment selectOrderDeliveryDetail(int buy_no);
 	
+	ArrayList<Payment> selectSellerPaymentHistory(int currentPage,PageNumber pa);
 
+	int selectSellerPaymentHistoryCount();
 }
