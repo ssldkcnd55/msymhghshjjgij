@@ -73,14 +73,31 @@ group by m.market_no,m.category_no,m.member_id,m.market_title,m.market_note,m.ma
 	<select id="reviewList" parameterType="pageNumber" resultType="Review">
 	<![CDATA[
 		select * from (select rownum rnum, review_no,review_title,member_id,review_date from review where market_no =#{market_no}
-		order by review_no desc) where rnum>= #{startRow} and rnum <=#{endRow}
 	]]>
+	<if test="reviewSearch != null">
+		<![CDATA[
+				AND review_title like '%'||#{reviewSearch}||'%'
+		]]>
+	</if>
+		<![CDATA[
+		order by review_no desc) where rnum>= #{startRow} and rnum <=#{endRow}
+		]]>
+		
+	
+	
+	
 	</select>
 	
-	<select id="reviewCount" parameterType="int" resultType="int" >
+	<select id="reviewCount" parameterType="pageNumber" resultType="int" >
 	 <![CDATA[
 	 select count(*) from review where market_no = #{market_no}
 	 ]]>
+	 <if test="reviewSearch != null">
+		<![CDATA[
+				AND review_title like '%'||#{reviewSearch}||'%'
+		]]>
+	</if>
+	 
 	</select>
 	<select id="reviewDetail" parameterType="int" resultType="Review">
 		select * from review where review_no = #{review_no}

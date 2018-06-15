@@ -268,14 +268,13 @@ public class AuctionController {
 		System.out.println("경메 카테고리 더 보기");
 		List<Auction> moreAuctionCategory = auctionService.selectmoreAuctionCategory(currentPage, atype);
 		System.out.println("moreAuctionCategory : " + moreAuctionCategory.toString());
-		int listCount = auctionService.selectmoreAuctionCategoryCount(atype);
-		System.out.println("listCount : " + listCount);
 		JSONArray jarr = new JSONArray();
 
 		for (Auction a : moreAuctionCategory) {
 			// 추출한 user를 json 객체에 담기
 			JSONObject jsq = new JSONObject();
-			jsq.put("auction_no", a.getRnum());
+			
+			jsq.put("auction_no", a.getAuction_no());
 			jsq.put("member_id", a.getMember_id());
 			jsq.put("category_no", a.getCategory_no());
 			jsq.put("auction_title", a.getAuction_title());
@@ -886,14 +885,25 @@ public class AuctionController {
 
 	// 옥션 결제 페이지 이동 (현준)
 	@RequestMapping("makeAuctionPayment.do")
-	public ModelAndView makePayment(@RequestParam("auction_no") int auction_no, ModelAndView mv, HttpSession session) {
+	public ModelAndView makePayment(@RequestParam("auction_no") int auction_no, 
+			@RequestParam("member_id") String member_id,
+			ModelAndView mv, HttpSession session) {
 
+		//경매 즉시구매 누르면 auction_history에다가 넣어주는 insert문(민선)
+		AuctionCommon common = new AuctionCommon();
+		common.setAuction_no(auction_no);
+		common.setMember_id(member_id);
+		
+		int directprice = auctionService.insertdirectprice(common);
+		/*System.out.println("directprice : "+directprice);*/
+		
 		// 경매 상태:2(마감) 업데이트 :
 		int auction_Buy = auctionService.updateAuctionBuy(auction_no);
 		AuctionOrder ao = auctionService.selectAuctionPaymentInfo(auction_no);
 		mv.addObject("ao", ao);
 		mv.setViewName("auction/auctionPayment");
 		return mv;
+		
 
 	}
 
@@ -929,29 +939,41 @@ public class AuctionController {
 		out.close();
 	}
 
+	
+	
+	//경매 낙찰 검사
+
 	@RequestMapping(value = "bidding.do")
 	@ResponseBody
 	public void bidding(HttpServletResponse response) throws IOException {
-
-		ArrayList<Auction> selectb = auctionService.selectb();
-		System.out.println("selectb : " + selectb);
-		AuctionHistory history = null;
-		JSONArray jarr = new JSONArray();
-		for (Auction a : selectb) {
-			history = auctionService.selectMaxUser(a.getAuction_no());
-			System.out.println("history : " + history.getAuction_no() + " / " + history.getMember_id());
-
+		
+		ArrayList<Auction> list = auctionService.selectStatus_2();//경매 상태 2 것만 넘버 가져오기
+		System.out.println("list : "+list.toString());
+		JSONArray jarr =new JSONArray();
+		
+		
+		for(Auction a: list) {
+			System.out.println("no :"+a.getAuction_no());
+			int auction_no = a.getAuction_no();
+			AuctionCommon ac = auctionService.selectWinBid(auction_no);
+			System.out.println("ac : "+ac);
 			JSONObject json = new JSONObject();
-
+			json.put("auction_no", ac.getAuction_no());
+			json.put("auction_title", ac.getAuction_title());
+			json.put("auction_history_price", ac.getAuction_history_price());
+			json.put("member_id", ac.getMember_id());
+			jarr.add(json);
 		}
+		
 		JSONObject json = new JSONObject();
-
-		System.out.println(json.toJSONString());
-		response.setContentType("application/json; charset=utf-8;");
-		PrintWriter out = response.getWriter();
-		out.print(json.toJSONString());
-		out.flush();
-		out.close();
+		json.put("list", jarr);
+		
+		 System.out.println(json.toJSONString());
+		 response.setContentType("application/json; charset=utf-8;");
+	      PrintWriter out = response.getWriter();
+	      out.print(json.toJSONString());
+	      out.flush();
+	      out.close();
 	}
 
 	// 경매 다중 이미지 업로드

@@ -139,18 +139,20 @@ public class MarketController {
 	}
 
 	@RequestMapping("reviewList.do")
-	public void reiviewList(Market mk, HttpServletResponse response, @RequestParam("Rpage") int currentPage)
-			throws IOException {
+	public void reiviewList(Market mk,HttpServletResponse response,@RequestParam("Rpage") int currentPage, @RequestParam(value="reviewSearch",required=false) String reviewSearch)
+	throws IOException{
+
 		JSONArray jarr = new JSONArray();
+		
+		ArrayList<Review> reviewList = marketService.selectReviewList(mk,currentPage,reviewSearch);
 
-		ArrayList<Review> reviewList = marketService.selectReviewList(mk, currentPage);
 		int limit = 10;
-		int listCount = marketService.selectReviewCount(mk);
-		int maxPage = (int) ((double) listCount / limit + 0.9); // ex) 41개면 '5'페이지나와야되는데 '5'를 계산해줌
-		int startPage = ((int) ((double) currentPage / 5 + 0.8) - 1) * 5 + 1;
-		int endPage = startPage + 5 - 1;
-
-		if (maxPage < endPage) {
+		int listCount = marketService.selectReviewCount(mk,reviewSearch);
+		int maxPage=(int)((double)listCount/limit+0.9); //ex) 41개면 '5'페이지나와야되는데 '5'를 계산해줌
+		int startPage=((int)((double)currentPage/5+0.8)-1)*5+1;
+		int endPage=startPage+5-1;
+		
+		if(maxPage<endPage) {
 			endPage = maxPage;
 		}
 
@@ -164,7 +166,8 @@ public class MarketController {
 			jsq.put("startPage", startPage);
 			jsq.put("endPage", endPage);
 			jsq.put("maxPage", maxPage);
-			jsq.put("currentPage", currentPage);
+			jsq.put("currentPage",currentPage);
+			jsq.put("reviewSearch",reviewSearch);
 			jarr.add(jsq);
 		}
 
@@ -650,6 +653,8 @@ public class MarketController {
 		out.flush();
 		out.close();
 	}
+	
+
 
 	// 장터 다중 이미지업로드
 	@RequestMapping("marketmultiplePhotoUpload.do")

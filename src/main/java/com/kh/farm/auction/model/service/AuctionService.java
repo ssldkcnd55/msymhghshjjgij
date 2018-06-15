@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.kh.farm.auction.model.vo.Auction;
+import com.kh.farm.auction.model.vo.AuctionCommon;
 import com.kh.farm.auction.model.vo.AuctionHistory;
 import com.kh.farm.auction.model.vo.AuctionOrder;
 import com.kh.farm.auction.model.vo.AuctionQnA;
@@ -101,8 +102,6 @@ public interface AuctionService {
 	//경매 카테고리 더보기
 	List<Auction> selectmoreAuctionCategory(int currentPage, int atype);
 	
-	//경매 카테고리 더보기 listCount
-	int selectmoreAuctionCategoryCount(int atype);
 
 	//경매 즉시 구매 경매 태이블 update
 	int updateAuctionBuy(int auction_no);
@@ -133,11 +132,18 @@ public interface AuctionService {
 	//입찰내역 남은 day수 가져오기
 	int selectDay(int auction_no);
 
-	//경매 enddate - sysdate = 0인거 뽑아오기
-	ArrayList<Auction> selectb();
+	//경매 상태가 2이고 그 맥스값
+	ArrayList<AuctionHistory> selectb();
 
-	//경매 넘버로 낙찰된 사람과,maxprice값 가져오기
-	AuctionHistory selectMaxUser(int auction_no);
+	
+
+	//즉시구매 누르면 auction_history에 즉시구매값 넣어주기
+	int insertdirectprice(AuctionCommon common);
+
+	//경매 상태 2 인것만 뽑기
+	ArrayList<Auction> selectStatus_2();
+
+	AuctionCommon selectWinBid(int auction_no);
 
 	
 

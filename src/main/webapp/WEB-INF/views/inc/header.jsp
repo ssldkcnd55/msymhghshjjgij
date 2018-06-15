@@ -30,20 +30,32 @@ function auction_update(){
 	}
 
 //경매 낙찰 검사
-/*  var bidding;
-bidding = setInterval(function(){auction_bidding()}, 3000);  */ 
-
+/* var bidding;
+bidding = setInterval(function(){auction_bidding()}, 3000); */
+ 
 function auction_bidding(){
 
 	
 	 $.ajax({
 		url : "bidding.do",
-		type : 'get',
+		type : 'post',
+		dataType: "JSON",
 		 success : function(obj) {
-			 /* console.log(obj.toString());  */
+			console.log(obj);  
 			 var objStr = JSON.stringify(obj);
 	         var jsonObj = JSON.parse(objStr);
-			/*  alert("경매 상태"+jsonObj.auction_status); */
+	         var values = "<tr><th>경매이름</th><th>낙찰가격</th><th>결제버튼</th><tr>";
+	         
+	         for(var i in jsonObj.list){
+	         values += 
+	        "<tr>"
+	 		+"<td>"+jsonObj.list[i].auction_title+"</td>"
+	 		+"<td>"+jsonObj.list[i].auction_history_price+"</td>"
+	 		+"<td><input type='submit' value='결제' class='buy_button'/></td>"
+	 		+"</tr>";
+	 		
+	         }
+	         $('#Bid_win_table').html(values);
 		 }
 	}); 
 }

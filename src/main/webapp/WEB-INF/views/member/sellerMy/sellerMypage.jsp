@@ -41,6 +41,7 @@ $(function(){
          <div id="3" class="tab"><a href="#3">판매내역</a></div>
          <div id="4" class="tab"><a href="#4">경매내역</a></div>
          <div id="5" class="tab"><a href="#5">QnA</a></div>
+         <div id="6" class="tab"><a href="#6">상품판매량</a></div>
          </div>
          
         <div class="inner-wrap" style="margin:0;">
@@ -57,6 +58,8 @@ $(function(){
         <iframe id="selmyframe_4" src="moveSelAuctionHistory.do" hidden="true"> 
         </iframe>
         <iframe id="selmyframe_5" src="moveSelQnaList.do" hidden="true"> 
+        </iframe>
+        <iframe id="selmyframe_6" src="moveSelSales.do" hidden="true">
         </iframe>
          <!-- <hr class="hr1"> -->      
         </div>

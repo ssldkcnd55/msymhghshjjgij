@@ -189,7 +189,7 @@
 			<div class="inner-wrap">
 				<div class="board-wrap">
 
-					<div class="QnA_title">후기</div>
+					<div class="QnA_title">일지</div>
 
 					<div class="QnA_full">
 						<table class="QnA_table">
