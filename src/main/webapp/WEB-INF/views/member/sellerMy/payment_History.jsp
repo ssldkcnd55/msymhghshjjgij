@@ -8,7 +8,7 @@
 <script type="text/javascript">
 $(function(page) {
 	$.ajax({
-				url : "payment_history_list.do",
+				url : "payment_seller_history_list.do",
 				type : "post",
 				data : {
 					page : 1,
@@ -20,14 +20,11 @@ $(function(page) {
 					var jsonObj = JSON.parse(objStr);
 
 					var outValues = "<tr><th>번호</th><th>상품 정보</th>"
-							+ "<th>결제 금액</th><th>거래 상태</th><th>구매 일자</th><th> </th></tr>";
-
+						+ "<th>거래 상태</th><th>구매 일자</th><th> </th></tr>";
 					for ( var i in jsonObj.list) {
 						outValues += "<tr><td>" + jsonObj.list[i].rnum
 								+ "</td>" 
-								+"<td><a class='Atitle' href='marketDetail.do?market_no="+jsonObj.list[i].market_no+"' target='_blank'>" + jsonObj.list[i].market_title + "</a></td>" 								
-								+ "<td>"+ numberWithCommas(jsonObj.list[i].buy_price)
-								+ "원</td>";
+								+"<td><a class='Atitle' href='marketDetail.do?market_no="+jsonObj.list[i].market_no+"' target='_blank'>" + jsonObj.list[i].market_title + "</a></td>";
 								if(jsonObj.list[i].buy_status == 0 ){
 									outValues+= "<td>결제완료</td>";
 								}else if(jsonObj.list[i].buy_status == 1){
@@ -81,13 +78,11 @@ $(function(page) {
 				}
 			});
 });
-function numberWithCommas(x) {
-    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-}
+
 	function paymentPage(page) {
 		$
 				.ajax({
-					url : "payment_history_list.do",
+					url : "payment_seller_history_list.do",
 					type : "post",
 					data : {
 						page : page,
@@ -100,29 +95,27 @@ function numberWithCommas(x) {
 						var jsonObj = JSON.parse(objStr);
 
 						var outValues = "<tr><th>번호</th><th>상품 정보</th>"
-							+ "<th>결제 금액</th><th>거래 상태</th><th>구매 일자</th><th> </th></tr>";
+							+ "<th>거래 상태</th><th>구매 일자</th><th> </th></tr>";
 
-					for ( var i in jsonObj.list) {
-						outValues += "<tr><td>" + jsonObj.list[i].rnum
-								+ "</td>"	
-								+"<td><a class='Atitle' href='marketDetail.do?market_no="+jsonObj.list[i].market_no+"' target='_blank'>" + jsonObj.list[i].market_title + "</a></td>" 
-								+ "<td>" + numberWithCommas(jsonObj.list[i].buy_price) 
-								+ "원</td>";
-								if(jsonObj.list[i].buy_status == 0 ){
-									outValues+= "<td>결제완료</td>";
-								}else if(jsonObj.list[i].buy_status == 1){
-									outValues+= "<td>배송준비중</td>";
-								}else if(jsonObj.list[i].buy_status == 2){
-									outValues+= "<td>배송중</td>";
-								}else if(jsonObj.list[i].buy_status == 3){
-									outValues+= "<td>배송완료</td>";
-								}else if(jsonObj.list[i].buy_status == 4){
-									outValues+= "<td class='complete'>구매확정</td>";
-								}
-								outValues+= "<td>"+ jsonObj.list[i].buy_date + "</td>"	+
-								"<td><a class='atag' href='moveDelivery_Number.do?code="+jsonObj.list[i].buy_transport_name+"&name="+jsonObj.list[i].buy_transport_no+"'>"
-								+ "<div class='orderDetail delivery'>배송조회</div></a><a class='atag' target='_blank' href='orderDeliveryDetail.do?buy_no="+jsonObj.list[i].buy_no+"'><div class='orderDetail'>주문조회</div></a></td>" + "</tr>";
-					}
+							for ( var i in jsonObj.list) {
+								outValues += "<tr><td>" + jsonObj.list[i].rnum
+										+ "</td>" 
+										+"<td><a class='Atitle' href='marketDetail.do?market_no="+jsonObj.list[i].market_no+"' target='_blank'>" + jsonObj.list[i].market_title + "</a></td>";
+										if(jsonObj.list[i].buy_status == 0 ){
+											outValues+= "<td>결제완료</td>";
+										}else if(jsonObj.list[i].buy_status == 1){
+											outValues+= "<td>배송준비중</td>";
+										}else if(jsonObj.list[i].buy_status == 2){
+											outValues+= "<td>배송중</td>";
+										}else if(jsonObj.list[i].buy_status == 3){
+											outValues+= "<td>배송완료</td>";
+										}else if(jsonObj.list[i].buy_status == 4){
+											outValues+= "<td class='complete'>구매확정</td>";
+										}
+										outValues+= "<td>"+ jsonObj.list[i].buy_date + "</td>"+
+										"<td><a class='atag' href='moveDelivery_Number.do?code="+jsonObj.list[i].buy_transport_name+"&name="+jsonObj.list[i].buy_transport_no+"'>"
+										+ "<div class='orderDetail delivery'>배송조회</div></a><a class='atag' target='_blank' href='orderDeliveryDetail.do?buy_no="+jsonObj.list[i].buy_no+"'><div class='orderDetail'>주문조회</div></a></td>" + "</tr>";
+							}
 						$(".View_table").html(outValues);
 
 						var startPage = jsonObj.list[0].startPage;

@@ -13,6 +13,7 @@ public class Market implements java.io.Serializable{
 	 */
 	private static final long serialVersionUID = 7777L;
 	
+	private int rnum;
 	private int market_no;// 판매글 번호
 	private int category_no;//카테고리 번호
 	private String member_id;//판매글 작성자 아이디
@@ -33,10 +34,12 @@ public class Market implements java.io.Serializable{
 
 	public Market() {}
 
-	public Market(int market_no, int category_no, String member_id, String market_title, String market_note,
+	
+	public Market(int rnum, int market_no, int category_no, String member_id, String market_title, String market_note,
 			String market_img, Date market_releasedate, int market_amount, String market_intro, String market_complete,
-			int market_price, String search, int remaining, String member_name) {
+			int market_price, String search, int remaining, String member_name, MultipartFile filedata) {
 		super();
+		this.rnum = rnum;
 		this.market_no = market_no;
 		this.category_no = category_no;
 		this.member_id = member_id;
@@ -51,7 +54,21 @@ public class Market implements java.io.Serializable{
 		this.search = search;
 		this.remaining = remaining;
 		this.member_name = member_name;
+		Filedata = filedata;
 	}
+
+
+	
+	public int getRnum() {
+		return rnum;
+	}
+
+
+	public void setRnum(int rnum) {
+		this.rnum = rnum;
+	}
+
+
 	public MultipartFile getFiledata() {
 		return Filedata;
 	}
@@ -172,14 +189,18 @@ public class Market implements java.io.Serializable{
 		this.member_name = member_name;
 	}
 
+
 	@Override
 	public String toString() {
-		return "Market [market_no=" + market_no + ", category_no=" + category_no + ", member_id=" + member_id
-				+ ", market_title=" + market_title + ", market_note=" + market_note + ", market_img=" + market_img
-				+ ", market_releasedate=" + market_releasedate + ", market_amount=" + market_amount + ", market_intro="
-				+ market_intro + ", market_complete=" + market_complete + ", market_price=" + market_price + ", search="
-				+ search + ", remaining=" + remaining + ", member_name=" + member_name + "]";
+		return "Market [rnum=" + rnum + ", market_no=" + market_no + ", category_no=" + category_no + ", member_id="
+				+ member_id + ", market_title=" + market_title + ", market_note=" + market_note + ", market_img="
+				+ market_img + ", market_releasedate=" + market_releasedate + ", market_amount=" + market_amount
+				+ ", market_intro=" + market_intro + ", market_complete=" + market_complete + ", market_price="
+				+ market_price + ", search=" + search + ", remaining=" + remaining + ", member_name=" + member_name
+				+ ", Filedata=" + Filedata + "]";
 	}
+
+	
 
 		
 }
