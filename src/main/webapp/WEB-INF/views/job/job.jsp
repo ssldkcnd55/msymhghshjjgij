@@ -237,14 +237,16 @@
 	}
 	/*검색 구인구직 조회  */
 	$(function() {
-		$("#job_search2").on('keyup', function() {
-			/* var serach = $(this).val(); */
-			
+		$("input[name=job_search]").keyup(function() {
+			 var search = $('#job_search2').val();
+			console.log(search);
 			$
 			.ajax({
 				url : "jobserach.do",
 				type : "post",
-				
+				data : {
+					"job_search" : search
+				},
 				dataType : "json",
 				success : function(data) {
 					var jsonStr = JSON.stringify(data);
@@ -555,7 +557,7 @@
 							<span class='green_window'> <input type='text'
 								class='input_text' id="job_search2" name="job_search">
 							</span>
-							<button type='submit' class='sch_smit'>검색</button>
+							
 						</div>
 					</div>
 

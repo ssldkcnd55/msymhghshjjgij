@@ -26,7 +26,25 @@ public class Job implements java.io.Serializable {
 	private String job_img; // 구인구직 썸네일 이미지 이름
 	private String job_name;// 구인구직 일터이름
 	private MultipartFile Filedata; // 다중이미지 업로드
-	private String job_search; //구인구직 검색
+	private String job_search; // 구인구직 검색
+	private int startRow;
+	private int endRow;
+
+	public int getStartRow() {
+		return startRow;
+	}
+
+	public void setStartRow(int startRow) {
+		this.startRow = startRow;
+	}
+
+	public int getEndRow() {
+		return endRow;
+	}
+
+	public void setEndRow(int endRow) {
+		this.endRow = endRow;
+	}
 
 	public String getJob_search() {
 		return job_search;
@@ -59,7 +77,8 @@ public class Job implements java.io.Serializable {
 	}
 
 	public Job(int job_no, String member_id, String job_title, String job_contents, Date job_date, String job_status,
-			Date job_startdate, Date job_enddate, String job_addr, String job_tel, String rnum) {
+			Date job_startdate, Date job_enddate, String job_addr, String job_tel, String job_img, String job_name,
+			MultipartFile filedata, String job_search, int startRow, int endRow, String rnum) {
 		super();
 		this.job_no = job_no;
 		this.member_id = member_id;
@@ -71,8 +90,25 @@ public class Job implements java.io.Serializable {
 		this.job_enddate = job_enddate;
 		this.job_addr = job_addr;
 		this.job_tel = job_tel;
+		this.job_img = job_img;
+		this.job_name = job_name;
+		Filedata = filedata;
+		this.job_search = job_search;
+		this.startRow = startRow;
+		this.endRow = endRow;
 		this.rnum = rnum;
 	}
+
+	/*
+	 * public Job(int job_no, String member_id, String job_title, String
+	 * job_contents, Date job_date, String job_status, Date job_startdate, Date
+	 * job_enddate, String job_addr, String job_tel, String rnum) { super();
+	 * this.job_no = job_no; this.member_id = member_id; this.job_title = job_title;
+	 * this.job_contents = job_contents; this.job_date = job_date; this.job_status =
+	 * job_status; this.job_startdate = job_startdate; this.job_enddate =
+	 * job_enddate; this.job_addr = job_addr; this.job_tel = job_tel; this.rnum =
+	 * rnum; }
+	 */
 
 	@Override
 	public String toString() {

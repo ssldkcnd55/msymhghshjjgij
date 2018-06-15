@@ -2,6 +2,7 @@ package com.kh.farm.job.model.service;
 
 import java.util.ArrayList;
 
+import com.kh.farm.common.model.vo.PageNumber;
 import com.kh.farm.job.model.vo.Job;
 import com.kh.farm.notice.model.vo.Notice;
 
@@ -15,6 +16,6 @@ public interface JobService {
 
 	ArrayList<Job> selectJobList(int currentPage);
 	
-	ArrayList<Job> searchJobList(int currentPage);
+	ArrayList<Job> searchJobList(int currentPage, PageNumber pp);
 
 }

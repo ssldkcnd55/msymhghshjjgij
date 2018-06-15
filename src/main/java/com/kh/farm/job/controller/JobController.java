@@ -20,6 +20,7 @@ import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -27,6 +28,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.farm.auction.model.vo.Auction;
+import com.kh.farm.common.model.vo.PageNumber;
 import com.kh.farm.job.model.service.JobService;
 import com.kh.farm.job.model.vo.Job;
 import com.kh.farm.notice.model.vo.Notice;
@@ -167,8 +169,8 @@ public class JobController {
 
 	// 구인구직 검색
 	@RequestMapping("jobserach.do")
-	public void jobserach(HttpServletResponse response, HttpServletRequest request) throws IOException {
-		System.out.println("serach컨트롤러에 오닝~?");
+	public void jobserach(HttpServletResponse response, HttpServletRequest request , PageNumber pp) throws IOException {
+		
 		int limitPage = 10;
 		int currentPage = 1;
 		if (request.getParameter("page") != null) {
@@ -182,12 +184,13 @@ public class JobController {
 		if (endPage > maxPage) {
 			endPage = maxPage;
 		}
-		ArrayList<Job> jobList = jobService.searchJobList(currentPage);
+		ArrayList<Job> jobList = jobService.searchJobList(currentPage,pp);
 		JSONObject json = new JSONObject();
 		JSONArray jarr = new JSONArray();
 
 		for (Job job : jobList) {
 			JSONObject jsonobj = new JSONObject();
+
 			jsonobj.put("rnum", job.getRnum());
 			jsonobj.put("job_no", job.getJob_no());
 			jsonobj.put("job_status", job.getJob_status());
