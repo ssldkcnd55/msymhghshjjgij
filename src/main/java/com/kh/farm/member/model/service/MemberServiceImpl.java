@@ -150,4 +150,9 @@ public class MemberServiceImpl implements MemberService {
 		// TODO Auto-generated method stub
 		return memberDao.selectVisitList(sqlSession,type);
 	}
+	@Override
+	public int updateWarning(Member m) {
+		// TODO Auto-generated method stub
+		return memberDao.updateWarning(sqlSession,m);
+	}
 }

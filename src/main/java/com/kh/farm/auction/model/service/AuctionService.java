@@ -146,6 +146,12 @@ public interface AuctionService {
 
 	AuctionCommon selectWinBid(int auction_no);
 
+	int updateAuctionStatusDeadline(int auction_no);
+
+	List<Auction> selectStatus_4();
+
+	int selectMiscarry(String member_id);
+
 	
 
 	

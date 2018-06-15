@@ -46,4 +46,6 @@ public interface MemberService {
 	int insertVisit(Member returnMember);
 
 	List<Visit> selectVisitList(int type);
+
+	int updateWarning(Member m);
 }

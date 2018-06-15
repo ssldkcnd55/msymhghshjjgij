@@ -212,5 +212,10 @@ public class MemberDao {
 		}
 	}
 
+	public int updateWarning(SqlSessionTemplate sqlSession, Member m) {
+		// TODO Auto-generated method stub
+		return sqlSession.update("member.updateWarning", m);
+	}
+
 	
 }
