@@ -14,9 +14,9 @@ public interface QnaService {
 
 	Market_qna selectQna(int qna_no);
 
-	ArrayList<MainQna> selectMainQnaList(int currentPage);
+	ArrayList<MainQna> selectMainQnaList(int currentPage, String qnaSearch);
 
-	int selectMainQnaCount();
+	int selectMainQnaCount(String qnaSearch);
 
 	MainQna selectMainQnaDetail(int qna_no);
 

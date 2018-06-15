@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.farm.auction.model.vo.AuctionHistory;
+import com.kh.farm.common.model.vo.PageNumber;
 import com.kh.farm.market.model.service.MarketService;
 import com.kh.farm.market.model.vo.Market;
 import com.kh.farm.member.model.vo.*;
@@ -226,6 +227,56 @@ public class PaymentController {
 
 	}
 
+	@RequestMapping("payment_seller_history_list.do")
+	public void selectSellerPaymentHistory(HttpServletResponse response,@RequestParam("page") int currentPage,PageNumber pa)
+			throws IOException {
+		JSONArray jarr = new JSONArray();
+
+		ArrayList<Payment> AuctionList = paymentService.selectSellerPaymentHistory(currentPage,pa);
+		int limitPage = 10;	
+		int listCount = paymentService.selectSellerPaymentHistoryCount();
+		int maxPage = (int) ((double) listCount / limitPage + 0.9); // ex) 41개면 '5'페이지나와야되는데 '5'를 계산해줌
+		int startPage = ((int) ((double) currentPage / 5 + 0.8) - 1) * 5 + 1;
+		int endPage = startPage + 5 - 1;
+
+		if (maxPage < endPage) {
+			endPage = maxPage;
+		}
+		for (Payment ac : AuctionList) {
+			JSONObject json = new JSONObject();
+			json.put("rnum", ac.getRnum());
+			json.put("buy_no", ac.getBuy_no());
+			json.put("group_no", ac.getGroup_no());
+			json.put("market_no", ac.getMarket_no());
+			json.put("market_title", ac.getMarket_title());
+			json.put("auction_no", ac.getAuction_no());
+			json.put("member_id", ac.getMember_id());
+			json.put("buy_date", ac.getBuy_date().toString());
+			json.put("buy_amount", ac.getBuy_amount());
+			json.put("buy_addr", ac.getBuy_addr());
+			json.put("buy_tel", ac.getBuy_tel());
+			json.put("buy_name", ac.getBuy_name());
+			json.put("buy_status", ac.getBuy_status());
+			json.put("buy_request", ac.getBuy_request());
+			json.put("buy_transport_name", ac.getBuy_transport_name());
+			json.put("buy_transport_no", ac.getBuy_transport_no());
+			json.put("startPage", startPage);
+			json.put("endPage", endPage);
+			json.put("maxPage", maxPage);
+			json.put("currentPage", currentPage);
+			jarr.add(json);
+		}
+
+		JSONObject sendJson = new JSONObject();
+		sendJson.put("list", jarr);
+		response.setContentType("application/json; charset=utf-8");
+		PrintWriter out = response.getWriter();
+		out.append(sendJson.toJSONString());
+		out.flush();
+		out.close();
+
+	}
+	
 	@RequestMapping(value = "movePaymentComplete.do", method = RequestMethod.POST)
 	public ModelAndView movePaymentComplete(ModelAndView mv, PaymentComplete pc) {
 

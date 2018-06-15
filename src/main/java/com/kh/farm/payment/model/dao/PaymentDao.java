@@ -77,4 +77,22 @@ public class PaymentDao {
 		
 		return sqlSession.selectOne("payment.selectOrderDeliveryDetail",buy_no);
 	}
+
+	public ArrayList<Payment> selectSellerPaymentHistory(SqlSessionTemplate sqlSession, int currentPage,PageNumber pa) {
+		// TODO Auto-generated method stub
+		int startRow =(currentPage-1)*10+1; //1~10, 11~20 계산할 거 ex) 1, 11, 21, 31,)
+		int endRow = startRow+9;
+		PageNumber pnum = new PageNumber();
+		pnum.setStartRow(startRow);
+		pnum.setEndRow(endRow);
+		pnum.setMember_id(pa.getMember_id());
+		List<Payment> ac = sqlSession.selectList("payment.selectSellerPaymentHistory",pnum);
+		return (ArrayList)ac;
+	}
+
+	public int selectSellerPaymentHistoryCount(SqlSessionTemplate sqlSession) {
+		// TODO Auto-generated method stub
+		int listCount = sqlSession.selectOne("payment.selectSellerPaymentHistoryCount");
+		return listCount;
+	}
 }

@@ -219,4 +219,14 @@ public class MarketServiceImpl implements MarketService{
 		// TODO Auto-generated method stub
 		return marketDao.selectCategoryNameList(sqlSession,category_main);
 	}
+	@Override
+	public ArrayList<Market> selectSellerMarketHistory(int currentPage, PageNumber pa) {
+		// TODO Auto-generated method stub
+		return marketDao.selectSellerMarketHistory(sqlSession,currentPage,pa);
+	}
+	@Override
+	public int selectSellerMarketHistoryCount() {
+		// TODO Auto-generated method stub
+		return marketDao.selectSellerMarketHistoryCount(sqlSession);
+	}
 }

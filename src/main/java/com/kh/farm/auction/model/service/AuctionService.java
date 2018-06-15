@@ -105,7 +105,8 @@ public interface AuctionService {
 
 	//경매 즉시 구매 경매 태이블 update
 	int updateAuctionBuy(int auction_no);
-
+	int updateAuctionBuyComplete(int auction_no);
+	
 	//경매 즉시 구매 buy_table insert
 	int insertAuctionBuy(Auction auction);
 

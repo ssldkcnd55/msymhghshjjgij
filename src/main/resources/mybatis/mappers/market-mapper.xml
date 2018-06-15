@@ -292,6 +292,14 @@ from(select m.market_no,category_no,m.member_id,
 	<![CDATA[
 	select category_no,category_name from category where category_main = #{category_main} order by category_name
 	]]>
-	
+	</select>
+	<select id="selectSellerMarketHistory" parameterType="PageNumber" resultType="Market">
+	<![CDATA[
+	select * from (select rownum rnum, A.* from(select * from market where member_id=#{member_id}) A where rownum <= #{endRow})where rnum >= #{startRow}
+	]]>
+	</select>
+	<select id="selectSellerMarketHistoryCount" parameterType="int" resultType="int">
+	select
+		count(*) from market
 	</select>
 </mapper>

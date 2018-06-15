@@ -1,28 +1,101 @@
 @charset "UTF-8";
 .accordion {
-    background-color: #eee;
-    color: #444;
+	background:white;
+    color: #565656;
     cursor: pointer;
     padding: 18px;
-    width: 100%;
+    width: 88.5%;
     border: none;
     text-align: left;
     outline: none;
-    font-size: 15px;
+    font-size: 13pt;
     transition: 0.4s;
+
+}
+.delImg{
+	background-image: url("/farm/resources/images/delBtn.png");
+	width: 35px;
+	height: 35px;
+	background-size: cover;
+}
+.modImg{
+	background-image: url("/farm/resources/images/modify.png");
+	width: 35px;
+	height: 35px;
+	background-size: cover;
 }
 
+.deleteBig{
+	
+    float: right;
+    width: 50px;
+    background: white;
+    border: 1.3px solid #ebadab;
+    height: 50px;
+    font-size: 20pt;
+    color: gray;
+    padding-left:3px;
+	margin-top:5px;
+	margin-right: 5px;
+}
+.modifyBig{
+	
+    float: right;
+    width: 50px;
+    background: white;
+    border: 1.3px solid #99adbf;
+    height: 50px;
+    font-size: 20pt;
+    color: gray;
+    margin-top:5px
+}
+.modifyBig:hover{
+	background: #f2f2f2;
+	cursor: pointer;
+}
+.deleteBig:hover{
+	background: #f2f2f2;
+	cursor: pointer;
+}
+.addBtn{
+	width: 100px;
+	height: 102px;
+	margin-top:10px;
+	background: white;
+	color: gray;
+	border : 1px solid #dcdcdc;
+	
+}
+.plus{
+	font-weight: bold;
+	font-size: 11pt;
+	color: gray;
+}
+.addBtn:hover{
+	cursor: pointer;
+	background: #f2f2f2;
+}
 .active, .accordion:hover {
-    background-color: #ccc; 
+   background: #f2f2f2;
 }
-
+.line{
+	border: 0.5px solid #dcdcdc;
+	margin:0px;
+}
 .panel {
     padding: 0 18px;
     display: none;
     background-color: white;
     overflow: hidden;
+    margin-bottom: 50px;
 }
-
+.big_add{
+	background: white;
+	border:none;	
+	cursor: pointer;
+	border: 1px solid #dcdcdc;
+	
+}
 .category_top {
 	margin-bottom: 30px;
 	width:100%;
@@ -31,9 +104,50 @@
 
 .category_top button{
 	float:right;
+	padding-top: 5px;
+}
+.btn{
+	
+	margin: 0 auto;
 	
 }
+.addCategory{
+	font-weight: bold;
+	color: #7e5957;
+	font-size: 15pt;
+	margin-left: 5px;
 
+	float: right;
+}
+.addCategory{
+	cursor: pointer;
+}
+.Btn{
+	color: gray;
+	background: white;
+	border: 1px solid #dcdcdc;
+	margin-top: 15px;
+	   width: 50px;
+    height: 29px;
+    cursor:pointer;
+    
+}
+.Btn:hover{
+	background: #f2f2f2;
+}
+
+.ptag{
+	float: left;
+	text-align:center;
+	width: 100px;
+	height: 100px;
+	border: 1px solid #dcdcdc;
+	margin: 10px 10px 10px 0;
+}
+.ptitle{
+	line-height: 10px;
+	margin-top:31px;
+}
 .category_list {
 	width:100%;
 	height:auto;
