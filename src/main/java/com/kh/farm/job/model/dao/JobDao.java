@@ -30,6 +30,18 @@ public class JobDao {
 		return (ArrayList<Job>) list;
 	}
 
+	public ArrayList<Job> searchJobList(int currentPage, SqlSessionTemplate sqlSession) {
+		int startRow = (currentPage - 1) * 10 + 1;
+		int endRow = startRow + 9;
+
+		PageNumber pnum = new PageNumber();
+		pnum.setStartRow(startRow);
+		pnum.setEndRow(endRow);
+
+		List<Job> list = sqlSession.selectList("job.jobserach", pnum);
+		return (ArrayList<Job>) list;
+	}
+
 	public int insertJobMake(SqlSessionTemplate sqlSession, Job job) {
 		// TODO Auto-generated method stub
 		return sqlSession.insert("insertjob", job);

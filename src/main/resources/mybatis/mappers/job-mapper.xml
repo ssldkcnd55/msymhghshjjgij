@@ -30,7 +30,14 @@
 		'1',#{job_startdate},#{job_enddate},#{job_addr},#{job_tel})
 	]]>
 	</insert>
-	<!--구인중/마감 선별 -->
+	<!--구인구직 검색 -->
+	<select id="jobserach" parameterType="PageNumber" resultType="Job">
+	<![CDATA[
+		select * from (select rownum rnum, job_no, substr(job_addr,1,2) as "job_addr" ,(select case when TO_CHAR(JOB_ENDDATE,'YY/MM/DD') <= TO_CHAR(SYSDATE,'YY/MM/DD') THEN TO_CHAR(JOB_STATUS -1) ELSE '1' END  from dual )as "JOB_STATUS", (select job_title from job where job_title like '%#{job_search}%' ) as "JOB_TITLE", member_id, job_date from job
+		order by job_no desc) where rnum >=  #{startRow} and rnum<= #{endRow}
+	]]>
+	</select>
+
 
 	<!-- -->
 </mapper>

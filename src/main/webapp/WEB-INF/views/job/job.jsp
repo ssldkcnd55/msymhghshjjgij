@@ -78,7 +78,14 @@
 								+ request.responseText + "\nerror" + errorData);
 					}
 
-				});
+				}); //ajax list
+
+		function jobserach() {
+			var jobsearchvalue = $("#job_search").val();
+
+			console.log("keyup으로 들어온값" + jobsearchvalue);
+
+		}
 
 	});
 	/* 페이징 처리  */
@@ -187,7 +194,7 @@
 										+ json.list[i].member_id
 										+ "</td><td>"
 										+ json.list[i].job_date + "</td></tr>";
-							} 
+							}
 
 						}
 						$(".job_table").html(values);
@@ -227,8 +234,82 @@
 					}
 
 				});
-
 	}
+	/*검색 구인구직 조회  */
+	$(function() {
+		$("#job_search2").on('keyup', function() {
+			/* var serach = $(this).val(); */
+			
+			$
+			.ajax({
+				url : "jobserach.do",
+				type : "post",
+				
+				dataType : "json",
+				success : function(data) {
+					var jsonStr = JSON.stringify(data);
+					var json = JSON.parse(jsonStr);
+					var values = "<tr><th width='10%'>번호</th><th width='10%'>지역</th><th width='12%'>상태</th><th width='35%'>제목</th><th width='13%'>작성자</th><th width='20%'>작성날짜</th></tr>";
+
+					for ( var i in json.list) {
+						values += "<tr id='hover'><td>" + json.list[i].rnum
+								+ "</td>";
+						values += "<td>" + json.list[i].job_addr + "</td>";
+						if (json.list[i].job_status == "1") {
+							values += "<td><span id='job_table_span_find'><strong>구인중</strong></span></td>";
+						} else {
+							values += "<td><span id='job_table_span_finded'>마감</span></td>";
+						}
+
+						values += "<td id='job_td'><a href='jobDetail.do?job_no="
+								+ json.list[i].job_no
+								+ "'>"
+								+ json.list[i].job_title
+								+ "</a></td><td>"
+								+ json.list[i].member_id
+								+ "</td><td>"
+								+ json.list[i].job_date + "</td></tr>";
+					}
+					$(".job_table").html(values);
+
+					var startPage = json.list[0].startPage;
+					var endPage = json.list[0].endPage;
+					var maxPage = json.list[0].maxPage;
+					var currentPage = json.list[0].currentPage;
+
+					var values1 = "";
+					if (startPage > 5) {
+						values1 += "<a href='javascript:jobPage("
+								+ (startPage - 1) + ")'>&laquo;</a>"
+					} else {
+						values1 += "<a>&laquo;</a>";
+					}
+					for (var i = startPage; i <= endPage; i++) {
+						if (i == currentPage) {
+							values1 += "<a class='active'>" + i + "</a>";
+						} else {
+							values1 += "<a href='javascript:jobPage(" + i
+									+ ");'>" + i + "</a>";
+						}
+					}
+					if (endPage < maxPage) {
+						values1 += "<a href='javascript:jobPage("
+								+ (endPage + 1) + ")'>&raquo;</a>";
+
+					} else {
+						values1 += "<a>&raquo;</a>";
+					}
+					$(".pagination").html(values1);
+				},
+				error : function(request, status, errorData) {
+					alert("error code : " + request.status + "\nmessage"
+							+ request.responseText + "\nerror" + errorData);
+				}
+
+			});
+			
+		});
+	});
 </script>
 <!-- Job.css -->
 <link rel="stylesheet" type="text/css"
@@ -248,7 +329,10 @@
 			<div class="inner-wrap">
 				<div class="board-wrap">
 					<div id="top">
-						<div class="Job_title">구인구직</div>
+						<div id="job_image"
+							style="background-image: url('/farm/resources/images/job.png')"></div>
+						<div id="job">&nbsp;구인구직</div>
+						<!-- <div class="Job_title">구인구직</div> -->
 
 						<!-- select box -->
 						<div class="select_box">
@@ -469,7 +553,7 @@
 						<!-- 검색 -->
 						<div class="search_box">
 							<span class='green_window'> <input type='text'
-								class='input_text' />
+								class='input_text' id="job_search2" name="job_search">
 							</span>
 							<button type='submit' class='sch_smit'>검색</button>
 						</div>

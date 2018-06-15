@@ -26,6 +26,15 @@ public class Job implements java.io.Serializable {
 	private String job_img; // 구인구직 썸네일 이미지 이름
 	private String job_name;// 구인구직 일터이름
 	private MultipartFile Filedata; // 다중이미지 업로드
+	private String job_search; //구인구직 검색
+
+	public String getJob_search() {
+		return job_search;
+	}
+
+	public void setJob_search(String job_search) {
+		this.job_search = job_search;
+	}
 
 	public MultipartFile getFiledata() {
 		return Filedata;

@@ -14,5 +14,7 @@ public interface JobService {
 	Job jobDeatil(int job_no);
 
 	ArrayList<Job> selectJobList(int currentPage);
+	
+	ArrayList<Job> searchJobList(int currentPage);
 
 }
