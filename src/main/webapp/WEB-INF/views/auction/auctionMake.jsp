@@ -113,9 +113,9 @@
 									<p class="p">상품명</p>
 								</td>
 								<td class="td2" colspan="3"><input type="text"
-									name="auction_title"  placeholder="한글 10~15글자"> <input type="submit"
+									name="auction_title"  placeholder="한글 10~15글자"> <!-- <input type="submit"
 									 name="category_no" value="카테고리검색" class="input_text_box">
-									<br></td>
+									<br> --></td>
 							</tr>
 							<tr class="tr1">
 									<td class="td1">

@@ -227,6 +227,7 @@ public class AuctionController {
 	@RequestMapping(value = "AuctionDetail.do")
 	public String selectAuctionDetail(Model model, @RequestParam(value = "auction_no") int auction_no) {
 		Auction selectAuctionDetail = auctionService.selectAuctionDetail(auction_no);
+		System.out.println("날짜 : "+selectAuctionDetail.getAuction_startdate());
 		model.addAttribute("auction", selectAuctionDetail);
 		return "auction/auctionDetail";
 	}
