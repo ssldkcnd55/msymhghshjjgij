@@ -105,7 +105,8 @@ public interface AuctionService {
 
 	//경매 즉시 구매 경매 태이블 update
 	int updateAuctionBuy(int auction_no);
-
+	int updateAuctionBuyComplete(int auction_no);
+	
 	//경매 즉시 구매 buy_table insert
 	int insertAuctionBuy(Auction auction);
 
@@ -144,6 +145,12 @@ public interface AuctionService {
 	ArrayList<Auction> selectStatus_2();
 
 	AuctionCommon selectWinBid(int auction_no);
+
+	int updateAuctionStatusDeadline(int auction_no);
+
+	List<Auction> selectStatus_4();
+
+	int selectMiscarry(String member_id);
 
 	
 

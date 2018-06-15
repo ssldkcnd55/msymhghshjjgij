@@ -41,6 +41,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.kh.farm.auction.model.service.AuctionService;
 import com.kh.farm.auction.model.vo.*;
 import com.kh.farm.market.model.vo.*;
+import com.kh.farm.member.model.service.MemberService;
 import com.kh.farm.member.model.vo.*;
 import com.kh.farm.notice.model.vo.*;
 import com.kh.farm.payment.model.service.PaymentService;
@@ -56,7 +57,9 @@ public class AuctionController {
 
 	@Autowired
 	private PaymentService paymentService;
-
+	
+	@Autowired
+	private MemberService memberService;
 	@RequestMapping(value = "cus_auction_qna_list.do")
 	public void selectAuctionCusQnaList(HttpServletResponse response, @RequestParam("page") int currentPage,
 			Member member) throws IOException {
@@ -913,6 +916,9 @@ public class AuctionController {
 	public void insertAuctionPayment(HttpServletResponse response, Payment pm) throws IOException {
 		pm.setBuy_no(auctionService.insertAuctionPayment(pm));
 		int chat_no = paymentService.selectChatNo(pm.getMember_id());
+		//경매상태 3(결제완료) 업데이트
+		auctionService.updateAuctionBuyComplete(pm.getAuction_no());
+		
 		PrintWriter out = response.getWriter();
 		JSONObject json = new JSONObject();
 		json.put("buy_no", pm.getBuy_no());
@@ -976,7 +982,34 @@ public class AuctionController {
 	      out.flush();
 	      out.close();
 	}
-
+	
+	//경매 낙찰 기한 확인
+	@RequestMapping("bidDeadline.do")
+	@ResponseBody
+	public void bidDeadline(HttpServletResponse response) throws IOException{
+		ArrayList<Auction> list = auctionService.selectStatus_2();//경매 상태 2 것만 넘버 가져오기
+		System.out.println("list : "+list.toString());
+		JSONArray jarr =new JSONArray();
+		
+		for(Auction a : list) {
+			int result = auctionService.updateAuctionStatusDeadline(a.getAuction_no()); //낙찰시간으로 부터 3일 지난 경매 상태 4로 변경
+		}
+		
+		List<Auction> list2 = auctionService.selectStatus_4();//경매 상태 4 것만 넘버 가져오기
+		
+		
+		for(Auction a2 : list2) {
+			//경매 상태 4인 경매의 낙찰인 뽑아오기
+			AuctionCommon ac2 = auctionService.selectWinBid(a2.getAuction_directprice());
+			int warningCount = auctionService.selectMiscarry(ac2.getMember_id());
+			//뽑아온 4인 경매 낙찰인 수로 member warning_count 업데이트
+			Member m = new Member();
+			m.setMember_id(ac2.getMember_id());
+			m.setMember_warning_count(warningCount);
+			int updateWarning = memberService.updateWarning(m);
+		}
+	}
+	
 	// 경매 다중 이미지 업로드
 	@RequestMapping("auctionmultiplePhotoUpload.do")
 	public void multiplePhotoUpload(HttpServletRequest request, HttpServletResponse response) {

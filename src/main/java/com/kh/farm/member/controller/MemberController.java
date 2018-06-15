@@ -573,26 +573,30 @@ public class MemberController {
 		System.out.println("방문자수 카운터 실행");
 		int count = 0;
 
+		//count => 0 // data => 
+		
 		if (type == 1) {
-			if (count < 7) {
 				for (Visit v : visitList) {
 					JSONObject json = new JSONObject();
 					json.put("count", v.getVisit_count());
 					json.put("date", v.getVisit_date().toString());
 					jarr.add(json);
 					count++;
-				}
+					if(count==6)
+						break;
 			}
 
 		} else {
-			if (count < 6) {
+			
 				for (Visit v : visitList) {
 					JSONObject json = new JSONObject();
 					json.put("count", v.getVisit_count());
 					json.put("month", v.getVisit_month());
 					jarr.add(json);
 					count++;
-				}
+					if(count==5)
+						break;
+				
 			}
 		}
 		System.out.println("22222");

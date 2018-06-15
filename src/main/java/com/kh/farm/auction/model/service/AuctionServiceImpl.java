@@ -233,6 +233,10 @@ public class AuctionServiceImpl implements AuctionService {
 	public int updateAuctionBuy(int auction_no) {
 		return auctionDao.updateAuctionBuy(sqlSession, auction_no);
 	}
+	@Override
+	public int updateAuctionBuyComplete(int auction_no) {
+		return auctionDao.updateAuctionBuyComplete(sqlSession, auction_no);
+	}
 
 	@Override
 	public int insertAuctionBuy(Auction auction) {
@@ -311,9 +315,24 @@ public class AuctionServiceImpl implements AuctionService {
 	@Override
 	public AuctionCommon selectWinBid(int auction_no) {
 		// TODO Auto-generated method stub
-		System.out.println("서비스 : "+auction_no);
 		return auctionDao.selectWinBid(sqlSession,auction_no);
 	}
+
+	@Override
+	public int updateAuctionStatusDeadline(int auction_no) {
+		// TODO Auto-generated method stub
+		return auctionDao.updateAuctionStatusDeadline(sqlSession,auction_no);
+	}
+
+	@Override
+	public List<Auction> selectStatus_4() {
+		// TODO Auto-generated method stub
+		return auctionDao.selectStatus_4(sqlSession);
+	}
 	
-	
+	@Override
+	public int selectMiscarry(String member_id) {
+		// TODO Auto-generated method stub
+		return auctionDao.selectMiscarry(sqlSession,member_id);
+	}
 }

@@ -216,7 +216,7 @@
       	when auction_startdate > sysdate then '0'
       	else '2'
      	end 
-    	where  not auction_status = '2'
+    	where  not auction_status in('2','3','4') 
 	]]>
 	</update>
 	
@@ -385,12 +385,22 @@
 	</if>
 	</select>
 	
+	<update id="updateAuctionStatusDeadline" parameterType="int" flushCache="true">
+	<![CDATA[
+		update auction set auction_status = '4' where (select auction_enddate from auction where auction_no = #{auction_no}) + 3 <= sysdate
+		and auction_no = #{auction_no}
+	]]>
+	</update>
 	
-	
+	<update id="updateAuctionBuyComplete" parameterType="int" flushCache="true">
+	<![CDATA[
+		update auction set auction_status = '3' where auction_no = #{auction_no}
+	]]>
+	</update>
 	
 	<update id="updateAuctionBuy" parameterType="int" flushCache="true">
 	<![CDATA[
-		update auction set auction_status = '2' where auction_no = #{auction_no}
+		update auction set auction_status = '2' ,auction_enddate = sysdate where auction_no = #{auction_no}
 	]]>
 	</update>
 	
@@ -452,7 +462,7 @@
 
 	<insert id="insertMaxpriceAuction" parameterType="Auction" >
 	<![CDATA[
-		insert into auction_history values((select max(auction_history_no) from auction_history)+1,
+		insert into auction_history values((select nvl(max(auction_history_no),0) from auction_history)+1,
 		#{auction_no},null,#{auction_startprice},sysdate)
 	]]>
 	</insert>
@@ -460,13 +470,13 @@
 	
 	<select id="selectAuction_no" parameterType="String" resultType="int">
 	<![CDATA[
-		 select max(auction_no) as "auction_no" from auction where member_id = #{member_id}
+		 select nvl(max(auction_no),0) as "auction_no" from auction where member_id = #{member_id}
 	]]>
 	</select>
 	
 	<select id="selectprice" parameterType="int" resultType="int">
 	<![CDATA[
-		 select max(auction_history_price) as "auction_history_price" from auction_history where auction_no =#{auction_no}
+		 select nvl(max(auction_history_price),0) as "auction_history_price" from auction_history where auction_no =#{auction_no}
 	]]>
 	</select>
 
@@ -503,6 +513,14 @@
 	]]>
 	</select>
 	
+	<select id="selectStatus_4" resultType="Auction">
+	<![CDATA[
+		select a.auction_no from auction a, auction_history ah
+		where a.auction_no = ah.auction_no
+		and a.auction_status = '4' group by a.auction_no
+	]]>
+	</select>
+	
 	<select id="selectWinBid"  parameterType="int"  resultType="AuctionCommon">
 	<![CDATA[
 		select ah.auction_no,ah.member_id,ah.auction_history_price,a.auction_title 
@@ -513,5 +531,10 @@
 	]]>
 	</select>
 	
-
+	<select id="selectMiscarry" parameterType="String" resultType="int">
+		<![CDATA[
+		select count(ah.member_id) from auction_history ah, auction a where a.auction_status = '4' and a.auction_no = ah.auction_no 
+		and ah.member_id = #{member_id}
+		]]>
+	</select>
 </mapper>

@@ -4,6 +4,22 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="payment">
 
+	<select id="selectSellerPaymentHistory" parameterType="PageNumber" resultType="payment">
+	<![CDATA[
+	select * from (select rownum rnum, A.*from(select 
+b.*,
+m.MARKET_TITLE 
+from buy b,MARKET 
+m where b.market_no in 
+(select market_no 
+from market 
+where member_id=#{member_id}) and b.market_no=m.MARKET_NO) A where rownum <= #{endRow})where rnum >= #{startRow}
+	]]>
+	</select>
+	<select id="selectSellerPaymentHistoryCount" parameterType="int" resultType="int">
+		select
+		count(*) from buy
+	</select>
 
 	<select id="selectPaymentInfo" parameterType="hashmap" resultType="ShowBasket">
 			<![CDATA[

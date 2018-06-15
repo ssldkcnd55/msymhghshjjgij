@@ -17,14 +17,14 @@ public class QnaServiceImpl implements QnaService{
 	@Autowired
 	private SqlSessionTemplate sqlSession;
 	@Override
-	public ArrayList<Market_qna> selectQnaList(Market mk, int currentPage) {
+	public ArrayList<Market_qna> selectQnaList(Market mk, int currentPage,String qnaSearch) {
 		// TODO Auto-generated method stub
-		return qnaDao.qnaList(sqlSession,mk,currentPage);
+		return qnaDao.qnaList(sqlSession,mk,currentPage,qnaSearch);
 	}
 	@Override
-	public int selectQnaCount(Market mk) {
+	public int selectQnaCount(Market mk,String qnaSearch) {
 		// TODO Auto-generated method stub
-		return qnaDao.selectQnaCount(sqlSession,mk);
+		return qnaDao.selectQnaCount(sqlSession,mk,qnaSearch);
 	}
 	@Override
 	public Market_qna selectQna(int qna_no) {
@@ -32,14 +32,14 @@ public class QnaServiceImpl implements QnaService{
 		return qnaDao.selectQna(sqlSession, qna_no);
 	}
 	@Override
-	public ArrayList<MainQna> selectMainQnaList(int currentPage) {
+	public ArrayList<MainQna> selectMainQnaList(int currentPage,String qnaSearch) {
 		// TODO Auto-generated method stub
-		return qnaDao.mainQnaList(sqlSession,currentPage);
+		return qnaDao.mainQnaList(sqlSession,currentPage,qnaSearch);
 	}
 	@Override
-	public int selectMainQnaCount() {
+	public int selectMainQnaCount(String qnaSearch) {
 		// TODO Auto-generated method stub
-		return qnaDao.selectMainQnaCount(sqlSession);
+		return qnaDao.selectMainQnaCount(sqlSession,qnaSearch);
 	}
 	@Override
 	public MainQna selectMainQnaDetail(int qna_no) {

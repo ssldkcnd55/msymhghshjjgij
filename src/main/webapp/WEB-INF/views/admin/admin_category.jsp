@@ -28,7 +28,7 @@
 		<!--  -->
 			<h2>카테고리 관리</h2>
 			<div class="category_top">
-				<button class="big_add" onclick="add_category_big()">대분류 추가</button>
+				<button class="big_add" onclick="add_category_big()"><div class='addCategory'>+</div>카테고리 추가</button>
 			</div>
 			
 			<div class="category_list">
@@ -69,10 +69,10 @@
 			var category_big = ""; 
 			
 			for(var i in json.big) {
-				category_big+='<button id="'+json.big[i].category_main+'" onclick="deleteBig(this)">'
-				+'대분류삭제</button><button class="accordion"  onclick="toggleList();">'
+				category_big+='<button id="'+json.big[i].category_main+'" class="deleteBig" onclick="deleteBig(this)">'
+				+'<div class="delImg"></div></button><button class="modifyBig"><div class="modImg"></div></button><button class="accordion"  onclick="toggleList();">ㆍ'
 				+json.big[i].category_main+'</button>'
-				+'<div class="panel" id="'+json.big[i].category_main+'1" name="'+json.big[i].category_main+'"></div>'
+				+'<div class="panel" id="'+json.big[i].category_main+'1" name="'+json.big[i].category_main+'"></div><hr class=\"line\">'
 			}
 			$('.category_list').append(category_big);
 			//소분류 출력
@@ -90,13 +90,14 @@
 					for(var i in json.name) {
 						console.log(json.name[i].category_name);
 						if(json.name[i].category_name != "더미") {
-						$("#"+json.name[i].category_main+"1").append("<p>"+json.name[i].category_name
-								+"<button id='"+json.name[i].category_no
-								+"' onclick='deleteName(this)'>항목삭제</button></p>")
+						$("#"+json.name[i].category_main+"1").append("<div class='ptag'><p class='ptitle'>"+json.name[i].category_name
+								+"</p><div class='btn'><button class='Btn del' id='"+json.name[i].category_no
+								+"' onclick='deleteName(this)'>삭제</button>"
+								+"<button class='Btn mod'>수정</button></div></div>")
 						}
 						
 					}
-					$(".panel").append("<button onclick='add_category_name(this);'>항목추가</button>");
+					$(".panel").append("<button class='addBtn' onclick='add_category_name(this);'><div class='plus'>+</div>항목추가</button>");
 				}
 				
 			});

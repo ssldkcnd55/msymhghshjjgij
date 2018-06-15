@@ -176,4 +176,11 @@ insert into member values (
 ]]>
 </insert>
 
+<update id="updateWarning" parameterType="member">
+<![CDATA[
+	update member set MEMBER_WARNING_COUNT = #{member_warning_count} where member_id = #{member_id}
+]]>
+</update>
+
+
 </mapper>

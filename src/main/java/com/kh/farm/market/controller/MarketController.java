@@ -8,6 +8,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.net.URLEncoder;
+import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -33,6 +34,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.farm.auction.model.vo.Auction;
+import com.kh.farm.common.model.vo.PageNumber;
 import com.kh.farm.market.exception.DeleteFailException;
 import com.kh.farm.market.model.service.MarketService;
 import com.kh.farm.market.model.vo.*;
@@ -44,6 +46,54 @@ import com.kh.farm.shoppingBasket.model.vo.*;
 public class MarketController {
 	@Autowired
 	private MarketService marketService;
+	
+	@RequestMapping("market_seller_history_list.do")
+	public void selectSellerPaymentHistory(HttpServletResponse response,@RequestParam("page") int currentPage,PageNumber pa)
+			throws IOException {
+		JSONArray jarr = new JSONArray();
+
+		ArrayList<Market> MarketList = marketService.selectSellerMarketHistory(currentPage,pa);
+		int limitPage = 10;	
+		int listCount = marketService.selectSellerMarketHistoryCount();
+		int maxPage = (int) ((double) listCount / limitPage + 0.9); // ex) 41개면 '5'페이지나와야되는데 '5'를 계산해줌
+		int startPage = ((int) ((double) currentPage / 5 + 0.8) - 1) * 5 + 1;
+		int endPage = startPage + 5 - 1;
+
+		if (maxPage < endPage) {
+			endPage = maxPage;
+		}
+		for (Market ac : MarketList) {
+			JSONObject json = new JSONObject();
+			json.put("rnum", ac.getRnum());
+			json.put("market_no", ac.getMarket_no());
+			json.put("category_no", ac);
+			json.put("member_id", ac.getMember_id());
+			json.put("market_title", ac.getMarket_title());
+			json.put("market_note", ac.getMarket_note());
+			json.put("market_releasedate", ac.getMarket_releasedate().toString());
+			json.put("market_amount", ac.getMarket_amount());
+			json.put("market_intro", ac.getMarket_intro());
+			json.put("market_complete", ac.getMarket_complete());
+			json.put("market_price", ac.getMarket_price());
+			json.put("search", ac.getSearch());
+			json.put("remaining", ac.getRemaining());
+			json.put("member_name", ac.getMember_name());
+			json.put("startPage", startPage);
+			json.put("endPage", endPage);
+			json.put("maxPage", maxPage);
+			json.put("currentPage", currentPage);
+			jarr.add(json);
+		}
+
+		JSONObject sendJson = new JSONObject();
+		sendJson.put("list", jarr);
+		response.setContentType("application/json; charset=utf-8");
+		PrintWriter out = response.getWriter();
+		out.append(sendJson.toJSONString());
+		out.flush();
+		out.close();
+
+	}
 
 	@RequestMapping(value = "marketList.do")
 	public ModelAndView marketList(ModelAndView mv, @RequestParam(value = "search", required = false) String search) {
@@ -69,7 +119,7 @@ public class MarketController {
 		return mv;
 
 	}
-
+	
 	@RequestMapping(value = "ajaxMoreMarket.do", method = RequestMethod.POST)
 	public void moreMarketList(HttpServletResponse response, @RequestParam("page") int page,
 			@RequestParam(value = "search", required = false) String search,
@@ -137,7 +187,28 @@ public class MarketController {
 		out.flush();
 		out.close();
 	}
+	
+	@RequestMapping("ajaxCategoryName.do")
+	public void categoryNameList(HttpServletResponse response,@RequestParam("category_main") String category_main) throws IOException {
+		List<Category> list = marketService.selectCategoryNameList(category_main);
+		JSONArray jarr = new JSONArray();
 
+		// list를 jarr로 복사하기
+		for (Category c : list) {
+			JSONObject jmarket = new JSONObject();
+			jmarket.put("category_name", c.getCategory_name());
+			jmarket.put("category_no", c.getCategory_no());
+
+			jarr.add(jmarket);
+		}
+		JSONObject sendJson = new JSONObject();
+		sendJson.put("list", jarr);
+		response.setContentType("application/json; charset=utf-8");
+		PrintWriter out = response.getWriter();
+		out.append(sendJson.toJSONString());
+		out.flush();
+		out.close();
+	}
 	@RequestMapping("reviewList.do")
 	public void reiviewList(Market mk,HttpServletResponse response,@RequestParam("Rpage") int currentPage, @RequestParam(value="reviewSearch",required=false) String reviewSearch)
 	throws IOException{
@@ -193,7 +264,6 @@ public class MarketController {
 	@RequestMapping(value = "insertMarketMake.do", method = RequestMethod.POST)
 	public String insertMarket(Market market, HttpServletRequest request,
 			@RequestParam(name = "upfile", required = false) MultipartFile file) {
-
 		String path = request.getSession().getServletContext().getRealPath("resources/upload/marketUpload");
 
 		try {

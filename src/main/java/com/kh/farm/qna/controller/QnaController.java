@@ -77,14 +77,14 @@ public class QnaController {
 	}
 
 	@RequestMapping(value="qnaList.do")
-	public void qnaList(Market mk, HttpServletResponse response,@RequestParam("page") int currentPage) throws IOException{
+	public void qnaList(Market mk, HttpServletResponse response,@RequestParam("page") int currentPage,@RequestParam(value="qnaSearch",required=false) String qnaSearch) throws IOException{
 		
 		JSONArray jarr =new JSONArray();
 		
-		ArrayList<Market_qna> qnaList = qnaService.selectQnaList(mk,currentPage);
+		ArrayList<Market_qna> qnaList = qnaService.selectQnaList(mk,currentPage,qnaSearch);
 		int limitPage = 10;
 		
-		int listCount = qnaService.selectQnaCount(mk);
+		int listCount = qnaService.selectQnaCount(mk,qnaSearch);
 		
 		int maxPage=(int)((double)listCount/limitPage+0.9); //ex) 41개면 '5'페이지나와야되는데 '5'를 계산해줌
 		int startPage=((int)((double)currentPage/5+0.8)-1)*5+1;
@@ -125,14 +125,15 @@ public class QnaController {
 		return mv;
 	}
 	@RequestMapping(value="mainqnaList.do")
-	public void MainQnaList(HttpServletResponse response,@RequestParam("page") int currentPage,Member member) throws IOException{
+	public void MainQnaList(HttpServletResponse response,@RequestParam("page") int currentPage,Member member,@RequestParam(value="qnaSearch", required=false) 
+	String qnaSearch) throws IOException{
 		
 		JSONArray jarr =new JSONArray();
-		
-		ArrayList<MainQna> qnaList = qnaService.selectMainQnaList(currentPage);
+		System.out.println("컨트롤러:"+ qnaSearch);
+		ArrayList<MainQna> qnaList = qnaService.selectMainQnaList(currentPage,qnaSearch);
 		int limitPage = 10;
 		System.out.println("111");
-		int listCount = qnaService.selectMainQnaCount();
+		int listCount = qnaService.selectMainQnaCount(qnaSearch);
 		
 		int maxPage=(int)((double)listCount/limitPage+0.9); //ex) 41개면 '5'페이지나와야되는데 '5'를 계산해줌
 		int startPage=((int)((double)currentPage/5+0.8)-1)*5+1;
@@ -152,6 +153,7 @@ public class QnaController {
 			jsq.put("endPage", endPage);
 			jsq.put("maxPage", maxPage);
 			jsq.put("currentPage",currentPage);
+			
 			jarr.add(jsq);
 			
 	}

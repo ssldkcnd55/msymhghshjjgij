@@ -72,7 +72,7 @@ group by m.market_no,m.category_no,m.member_id,m.market_title,m.market_note,m.ma
 	
 	<select id="reviewList" parameterType="pageNumber" resultType="Review">
 	<![CDATA[
-		select * from (select rownum rnum, review_no,review_title,member_id,review_date from review where market_no =#{market_no}
+		select * from (select rownum rnum, review_no,review_title,member_id,review_date from (select review_no,review_title,member_id,review_date from review where market_no =#{market_no}
 	]]>
 	<if test="reviewSearch != null">
 		<![CDATA[
@@ -80,7 +80,7 @@ group by m.market_no,m.category_no,m.member_id,m.market_title,m.market_note,m.ma
 		]]>
 	</if>
 		<![CDATA[
-		order by review_no desc) where rnum>= #{startRow} and rnum <=#{endRow}
+		order by review_no desc)) where rnum>= #{startRow} and rnum <=#{endRow}
 		]]>
 		
 	
@@ -105,7 +105,7 @@ group by m.market_no,m.category_no,m.member_id,m.market_title,m.market_note,m.ma
 
 	<insert id="insertMarket" parameterType="Market" flushCache="true" useGeneratedKeys="true">
 	<![CDATA[
-		insert into market values((select max(market_no) from market)+1,1,#{member_id},#{market_title},#{market_note},#{market_img},
+		insert into market values((select max(market_no) from market)+1,#{category_no},#{member_id},#{market_title},#{market_note},#{market_img},
 		#{market_releasedate},#{market_amount},#{market_intro},'0',#{market_price})
 	]]>
 	</insert>
@@ -287,5 +287,19 @@ from(select m.market_no,category_no,m.member_id,
 	select distinct category_main from category order by category_main
 	]]>
 	
+	</select>
+	<select id="selectCategoryNameList" parameterType="string" resultType="Category2">
+	<![CDATA[
+	select category_no,category_name from category where category_main = #{category_main} order by category_name
+	]]>
+	</select>
+	<select id="selectSellerMarketHistory" parameterType="PageNumber" resultType="Market">
+	<![CDATA[
+	select * from (select rownum rnum, A.* from(select * from market where member_id=#{member_id}) A where rownum <= #{endRow})where rnum >= #{startRow}
+	]]>
+	</select>
+	<select id="selectSellerMarketHistoryCount" parameterType="int" resultType="int">
+	select
+		count(*) from market
 	</select>
 </mapper>
