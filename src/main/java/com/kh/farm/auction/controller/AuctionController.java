@@ -912,6 +912,9 @@ public class AuctionController {
 	public void insertAuctionPayment(HttpServletResponse response, Payment pm) throws IOException {
 		pm.setBuy_no(auctionService.insertAuctionPayment(pm));
 		int chat_no = paymentService.selectChatNo(pm.getMember_id());
+		//경매상태 3(결제완료) 업데이트
+		auctionService.updateAuctionBuyComplete(pm.getAuction_no());
+		
 		PrintWriter out = response.getWriter();
 		JSONObject json = new JSONObject();
 		json.put("buy_no", pm.getBuy_no());

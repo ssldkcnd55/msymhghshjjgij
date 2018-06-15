@@ -211,7 +211,7 @@
       	when auction_startdate > sysdate then '0'
       	else '2'
      	end 
-    	where  not auction_status = '2'
+    	where  not auction_status in('2','3') 
 	]]>
 	</update>
 	
@@ -381,7 +381,11 @@
 	</select>
 	
 	
-	
+		<update id="updateAuctionBuyComplete" parameterType="int" flushCache="true">
+	<![CDATA[
+		update auction set auction_status = '3' where auction_no = #{auction_no}
+	]]>
+	</update>
 	
 	<update id="updateAuctionBuy" parameterType="int" flushCache="true">
 	<![CDATA[
