@@ -20,6 +20,7 @@
 		select count(*) from visit
 	</select>
 	
+	
 	<select id="selectVisitList"  resultType="visit">
 		<![CDATA[
 		select * from 

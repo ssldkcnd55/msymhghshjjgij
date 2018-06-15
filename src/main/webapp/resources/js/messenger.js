@@ -75,6 +75,13 @@ function insertChat(my_id, your_id) {// 대화상대 추가
 
 				});
 	} else if (my_id == your_id) {
+		/* 대화목록 가리고 검색결과창 띄우기 */
+		$('.search_list').css('visibility', 'visible');
+		$('.search_list').css('z-index', 2);
+		$('.chat_list_table').css('visibility', 'hidden');
+		$('.chat_list_table').css('z-index', 1);
+		$('.msg_top_div img').css('visibility', 'visible');
+
 		$('.search_list').html('');
 		$('.search_member input').val('');
 		var fail_msg = " <div class='searchNotFoundID'>본인과는 대화를 할 수 없습니다</div "
