@@ -233,6 +233,10 @@ public class AuctionServiceImpl implements AuctionService {
 	public int updateAuctionBuy(int auction_no) {
 		return auctionDao.updateAuctionBuy(sqlSession, auction_no);
 	}
+	@Override
+	public int updateAuctionBuyComplete(int auction_no) {
+		return auctionDao.updateAuctionBuyComplete(sqlSession, auction_no);
+	}
 
 	@Override
 	public int insertAuctionBuy(Auction auction) {

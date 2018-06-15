@@ -830,6 +830,24 @@ margin-top:4px;
 }
 
 .qes_alarm_img{
-width:180px;
-margin-top:4px;
+	width:180px;
+	margin-top:4px;
+}
+.qes_alarm_table{
+	width: 100%;
+}
+.qes_alarm_table tr{
+	width: 170px; 
+    height: 17px;
+    white-space: nowrap;
+}
+.qes_alarm_table td:nth-child(1)
+{
+	text-align: left;
+	width: 70px;
+}
+.qes_alarm_table td:nth-child(2)
+{
+	text-align: right;
+	width: 90px;
 }

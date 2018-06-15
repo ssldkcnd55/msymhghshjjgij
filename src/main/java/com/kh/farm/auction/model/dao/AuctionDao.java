@@ -311,6 +311,10 @@ public class AuctionDao {
 		return sqlSession.update("auction.updateAuctionBuy",auction_no);
 
 	}
+	public int updateAuctionBuyComplete(SqlSessionTemplate sqlSession, int  auction_no) {
+		return sqlSession.update("auction.updateAuctionBuyComplete",auction_no);
+
+	}
 
 	public int insertAuctionBuy(SqlSessionTemplate sqlSession, Auction auction) {
 		return sqlSession.insert("auction.insertAuctionBuy",auction);
