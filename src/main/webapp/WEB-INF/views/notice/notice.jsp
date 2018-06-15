@@ -14,7 +14,7 @@ a:hover {text-decoration: underline; color: gray;}
 <!-- Notice.css -->
 <script>
 function noticeMake(){
-	
+	location.href = "/farm/moveNotcie_write.do"
 }
 $(function(){
 	$.ajax({

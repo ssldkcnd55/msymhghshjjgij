@@ -61,7 +61,7 @@
 						<!-- <div class="map_div" id="map">지도</div> -->
 						<div id="map" style="width: 100%; height: 350px;"></div>
 						<div class="content_div">상세모집요강</div>
-						<div style="padding: 10px;">${job.job_contents}</div>
+						<div style="margin:0px;width:930px;float:left;;padding:10px;">${job.job_contents}</div>
 					</div>
 				</div>
 			</div>

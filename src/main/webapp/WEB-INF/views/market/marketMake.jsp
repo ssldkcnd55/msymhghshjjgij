@@ -6,7 +6,7 @@
 <link href="/farm/resources/css/style.css" rel="stylesheet" type="text/css" />
 <link href="/farm/resources/css/marketMake.css" rel="stylesheet" type="text/css" />
 <script src="/farm/resources/js/jquery-3.3.1.min.js"></script>
-<script type="text/javascript" src="naver/js/HuskyEZCreator.js"
+<script type="text/javascript" src="resources/editor/marketnaver/js/HuskyEZCreator.js"
 	charset="utf-8"></script>
 <meta charset="UTF-8">
 <title>Farm</title>
@@ -161,7 +161,7 @@
 		nhn.husky.EZCreator.createInIFrame({
 			oAppRef : oEditors,
 			elPlaceHolder : "ir1",
-			sSkinURI : "/farm/naver/SmartEditor2Skin.html",
+			sSkinURI : "/farm/resources/editor/marketnaver/SmartEditor2Skin.html",
 			htParams : {
 				bUseToolbar : true, // 툴바 사용 여부 (true:사용/ false:사용하지 않음)
 				bUseVerticalResizer : false, // 입력창 크기 조절바 사용 여부 (true:사용/ false:사용하지 않음)

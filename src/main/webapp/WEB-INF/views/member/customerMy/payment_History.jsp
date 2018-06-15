@@ -12,7 +12,8 @@ $(function(page) {
 				url : "payment_history_list.do",
 				type : "post",
 				data : {
-					page : 1
+					page : 1,
+					member_id : '${loginUser.member_id}'
 				},
 				dataType : "JSON",
 				success : function(data) {
@@ -26,7 +27,7 @@ $(function(page) {
 						outValues += "<tr><td>" + jsonObj.list[i].rnum
 								+ "</td>" 
 								+"<td><a class='Atitle' href='marketDetail.do?market_no="+jsonObj.list[i].market_no+"' target='_blank'>" + jsonObj.list[i].market_title + "</a></td>" 								
-								+ "<td>"/*  + numberWithCommas(jsonObj.list[i].buy_price) */ +jsonObj.list[i].buy_price
+								+ "<td>"+ numberWithCommas(jsonObj.list[i].buy_price)
 								+ "원</td>";
 								if(jsonObj.list[i].buy_status == 0 ){
 									outValues+= "<td>결제완료</td>";
@@ -81,16 +82,17 @@ $(function(page) {
 				}
 			});
 });
-/* function numberWithCommas(x) {
+function numberWithCommas(x) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-} */
+}
 	function paymentPage(page) {
 		$
 				.ajax({
 					url : "payment_history_list.do",
 					type : "post",
 					data : {
-						page : page
+						page : page,
+						member_id : '${loginUser.member_id}'
 					},
 					dataType : "JSON",
 					success : function(data) {

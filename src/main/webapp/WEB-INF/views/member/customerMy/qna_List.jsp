@@ -12,7 +12,8 @@ function market(page){
 		url:"cus_qna_list.do",
 		type:"post",
 		data:{
-			page:1
+			page:1,
+			member_id : '${loginUser.member_id}'
 		},
 		dataType: "JSON",
 		success: function(data){
@@ -67,7 +68,8 @@ function marketQnaPage(page){
 		url:"cus_qna_list.do",
 		type:"post",
 		data:{
-			page:page
+			page:page,
+			member_id : '${loginUser.member_id}'
 		},
 		dataType: "JSON",
 		success: function(data){
@@ -123,7 +125,8 @@ function main(){
 		url:"mainqnaList.do",
 		type:"post",
 		data:{
-			page:1
+			page:1,
+			member_id : '${loginUser.member_id}'
 		},
 		dataType: "JSON",
 		success: function(data){
@@ -177,7 +180,8 @@ function mainQnaPage(page){
 		url:"mainqnaList.do",
 		type:"post",
 		data:{
-			page:page
+			page:page,
+			member_id : '${loginUser.member_id}'
 		},
 		dataType: "JSON",
 		success: function(data){
@@ -233,7 +237,8 @@ function auction(){
 		url:"cus_auction_qna_list.do",
 		type:"post",
 		data:{
-			page:1
+			page:1,
+			member_id : '${loginUser.member_id}'
 		},
 		dataType: "JSON",
 		success: function(data){
@@ -289,7 +294,8 @@ function auctionQnaPage(page){
 		url:"cus_auction_qna_list.do",
 		type:"post",
 		data:{
-			page:page
+			page:page,
+			member_id : '${loginUser.member_id}'
 		},
 		dataType: "JSON",
 		success: function(data){

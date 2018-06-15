@@ -31,20 +31,33 @@ function auction_update(){
 
 //경매 낙찰 검사
 /* var bidding;
-bidding = setInterval(function(){auction_bidding()}, 3000);  */
-
+bidding = setInterval(function(){auction_bidding()}, 3000); */
+ 
 function auction_bidding(){
 
-	$.ajax({
+	
+	 $.ajax({
 		url : "bidding.do",
-		type : 'get',
+		type : 'post',
+		dataType: "JSON",
 		 success : function(obj) {
-			 /* console.log(obj.toString());  */
+			console.log(obj);  
 			 var objStr = JSON.stringify(obj);
 	         var jsonObj = JSON.parse(objStr);
-			/*  alert("경매 상태"+jsonObj.auction_status); */
+	         var values = "<tr><th>경매이름</th><th>낙찰가격</th><th>결제버튼</th><tr>";
+	         
+	         for(var i in jsonObj.list){
+	         values += 
+	        "<tr>"
+	 		+"<td>"+jsonObj.list[i].auction_title+"</td>"
+	 		+"<td>"+jsonObj.list[i].auction_history_price+"</td>"
+	 		+"<td><input type='submit' value='결제' class='buy_button'/></td>"
+	 		+"</tr>";
+	 		
+	         }
+	         $('#Bid_win_table').html(values);
 		 }
-	});
+	}); 
 }
 
 
@@ -131,11 +144,17 @@ function getBasketCount(member_id)
                   <li class="menu1 none_sub"><a href="moveSignUp2.do" class="link_menu">회원가입</a></li>
                   <li class="menu1 none_sub"><a href="moveLogin.do" class="link_menu">로그인</a></li>
                </c:if>
-               <c:if test="${! empty sessionScope.loginUser }">
+               <c:if test="${loginUser.member_category == 1}">
                	  <li class="menu1 none_sub"><a href="moveCustomerMypage.do" class="link_menu">${loginUser.member_name}님</a></li>
                   <li class="menu1 none_sub"><a href="logout.do" class="link_menu">로그아웃</a></li>
                </c:if>
-
+               <c:if test="${loginUser.member_category == 0}">
+               	  <li class="menu1 none_sub"><a href="moveSellerMypage.do" class="link_menu">${loginUser.member_name}님</a></li>
+                  <li class="menu1 none_sub"><a href="logout.do" class="link_menu">로그아웃</a></li>
+               </c:if>
+				<c:if test="${loginUser.member_category == 2}">
+                  <li class="menu1 none_sub"><a href="logout.do" class="link_menu">로그아웃</a></li>
+               </c:if>
                   <li class="menu1"><a href="/farm/moveQnAPage.do" class="link_menu">고객센터</a></li>
                   <li class="menu1 lst"><a href="moveNotice.do" class="link_menu">공지사항 </a></li>
                   <li class="menu1 lst"><a href="moveAdminPage.do" class="link_menu">관리자 페이지</a></li>

@@ -3,13 +3,38 @@
 "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="visit2">
-
+	
+	<resultMap type="Visit" id="resultVisit">
+		<id column="visit_no" property="visit_no" />
+		<result column="member_id" property="member_id" />
+		<result column="visit_date" property="visit_date" />
+		<result column="visit_ip" property="visit_ip" />
+		<result column="visit_month" property="visit_month" />
+	</resultMap>
+	
 	<insert id="visitCount">
 		insert into visit values(sysdate)
 	</insert>
 	
 	<select id="totalCount">
 		select count(*) from visit
+	</select>
+	
+	<select id="selectVisitList"  resultType="visit">
+		<![CDATA[
+		select * from 
+		(select count(*) as visit_count,to_char(visit_date,'YYYY-MM-DD') as visit_date 
+		from visit group by to_char(visit_date,'YYYY-MM-DD')
+		order by visit_date desc) where rownum <=7
+		]]>
+	</select>
+		
+	<select id="selectVisitMonthList" resultType="visit">
+		<![CDATA[
+		select * from 
+		(select count(*) as visit_count,to_char(visit_date,'YYYY-MM') as visit_month from visit group by to_char(visit_date,'YYYY-MM')
+		order by visit_month desc) where rownum <=6
+		]]>
 	</select>
 	
 	<select id="todayCount">

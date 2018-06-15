@@ -453,7 +453,7 @@ $(function(){
 		var buycheck = confirm("정말로 즉시 구매 하시겠습니까?");
 		if(buycheck == true){
 			/* location.href="/farm/makeAuctionPayment.do?auction_no=${auction.auction_no}&member_id=${loginUser.member_id}"; */
-			location.href="makeAuctionPayment.do?auction_no=${auction.auction_no}";
+			location.href="makeAuctionPayment.do?auction_no=${auction.auction_no}&member_id=${loginUser.member_id}";
 		}
 		
 		

@@ -48,11 +48,11 @@ $(function(){
         
          
         <div class="info_box">
-        <iframe id="cusmyframe_1" src="moveMemberInfo.do">
+        <iframe id="cusmyframe_1" src="moveCusMemberInfo.do">
         </iframe>
-        <iframe id="cusmyframe_2" src="auctionHistory.do" hidden="true"> 
+        <iframe id="cusmyframe_2" src="moveAuctionHistory.do" hidden="true"> 
         </iframe>
-        <iframe id="cusmyframe_3" src="paymentHistory.do" hidden="true"> 
+        <iframe id="cusmyframe_3" src="movePaymentHistory.do" hidden="true"> 
         </iframe>
         <iframe id="cusmyframe_4" src="moveQna_List.do" hidden="true"> 
         </iframe>
