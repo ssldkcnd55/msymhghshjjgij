@@ -23,14 +23,31 @@
 <select id="mainQnaList" parameterType="PageNumber" resultType="MainQna">
 	<![CDATA[
 	select * from (select rownum rnum, main_qna_no, main_qna_title, member_id,main_qna_date from main_qna 
-	order by main_qna_no desc) where rnum >=#{startRow} and rnum <=#{endRow}
-	
+		
 	]]>
+	
+	<if test="qnaSearch != null">
+		<![CDATA[
+				where MAIN_QNA_TITLE like '%'||#{qnaSearch}||'%'
+		]]>
+	</if>
+	<![CDATA[
+	order by main_qna_no desc) where rnum >=#{startRow} and rnum <=#{endRow}
+	]]>
+	
 
 </select>
 <select id="mainQnaCount" parameterType="int" resultType="int">
+		<![CDATA[		
 		select count(*) from main_qna
+		]]>
+		<if test="qnaSearch != null">
+		<![CDATA[
+				AND MAIN_QNA_TITLE like '%'||#{qnaSearch}||'%'
+		]]>
+	</if>
 	</select>
+	
 	
 	<select id="mainQnaDetail" parameterType="int" resultType="MainQna">
 	select * from main_qna where main_qna_no = #{main_qna_no}

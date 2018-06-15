@@ -32,14 +32,14 @@ public class QnaServiceImpl implements QnaService{
 		return qnaDao.selectQna(sqlSession, qna_no);
 	}
 	@Override
-	public ArrayList<MainQna> selectMainQnaList(int currentPage) {
+	public ArrayList<MainQna> selectMainQnaList(int currentPage,String qnaSearch) {
 		// TODO Auto-generated method stub
-		return qnaDao.mainQnaList(sqlSession,currentPage);
+		return qnaDao.mainQnaList(sqlSession,currentPage,qnaSearch);
 	}
 	@Override
-	public int selectMainQnaCount() {
+	public int selectMainQnaCount(String qnaSearch) {
 		// TODO Auto-generated method stub
-		return qnaDao.selectMainQnaCount(sqlSession);
+		return qnaDao.selectMainQnaCount(sqlSession,qnaSearch);
 	}
 	@Override
 	public MainQna selectMainQnaDetail(int qna_no) {

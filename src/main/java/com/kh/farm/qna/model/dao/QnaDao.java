@@ -55,20 +55,22 @@ public class QnaDao {
 		return qna;
 	}
 
-	public ArrayList<MainQna> mainQnaList(SqlSessionTemplate sqlSession, int currentPage) {
+	public ArrayList<MainQna> mainQnaList(SqlSessionTemplate sqlSession, int currentPage, String qnaSearch) {
 		// TODO Auto-generated method stub
 		int startRow =(currentPage-1)*10+1; //1~10, 11~20 계산할 거 ex) 1, 11, 21, 31,)
 		int endRow = startRow+9;
 		PageNumber pnum = new PageNumber();
 		pnum.setStartRow(startRow);
 		pnum.setEndRow(endRow);
+		pnum.setQnaSearch(qnaSearch);
+		System.out.println(qnaSearch);
 		List<MainQna> sq = sqlSession.selectList("qna.mainQnaList",pnum);
 		return (ArrayList)sq;
 	}
 
-	public int selectMainQnaCount(SqlSessionTemplate sqlSession) {
+	public int selectMainQnaCount(SqlSessionTemplate sqlSession, String qnaSearch) {
 		// TODO Auto-generated method stub
-		int listCount = sqlSession.selectOne("qna.mainQnaCount");
+		int listCount = sqlSession.selectOne("qna.mainQnaCount",qnaSearch);
 		return listCount;
 	}
 

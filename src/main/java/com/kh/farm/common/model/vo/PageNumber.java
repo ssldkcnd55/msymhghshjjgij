@@ -22,13 +22,15 @@ public class PageNumber implements java.io.Serializable{
 	private int select;
 	private int type;
 	private String reviewSearch;
+	private String qnaSearch;
+	
 	public PageNumber() {}
 	
 	
 	
 	public PageNumber(int startRow, int endRow, int market_no, int auction_no, String member_id, String search,
 			String ctype, String cname, String sort, int review_no, int daily_no, int report_no, String keyword,
-			int select, int type,String reviewSearch) {
+			int select, int type,String reviewSearch,String qnaSearch) {
 		super();
 		this.startRow = startRow;
 		this.endRow = endRow;
@@ -46,6 +48,7 @@ public class PageNumber implements java.io.Serializable{
 		this.select = select;
 		this.type = type;
 		this.reviewSearch = reviewSearch;
+		this.qnaSearch = qnaSearch;
 	}
 
 
@@ -228,6 +231,19 @@ public class PageNumber implements java.io.Serializable{
 		this.reviewSearch = reviewSearch;
 	}
 
+
+
+	public String getQnaSearch() {
+		return qnaSearch;
+	}
+
+
+
+	public void setQnaSearch(String qnaSearch) {
+		this.qnaSearch = qnaSearch;
+	}
+	
+	
 	
 	
 	
