@@ -77,11 +77,13 @@ $(function(){
 		});
 	}); 
 	 $('#CategoryName').change(function(){
+		 alert($(this).val());
 		 $('#category_no').val($(this).val());
+		 alert($('#category_no').val());
 	 });
  });
 function categoryCheck(){
-	if($('#CategoryName').val() != ''){
+	if($('#category_no').val() != ''){
 		return true;
 	}else{
 		alert('카테고리를 선택해주세요.');
@@ -103,9 +105,9 @@ function categoryCheck(){
 				<br> <br> <br>
 
 				<div class="div">
-				<form action="insertMarketMake.do" method="post" enctype="multipart/form-data">
+				<form action="insertMarketMake.do" method="post" enctype="multipart/form-data" onsubmit='return categoryCheck()'>
 					<input type="hidden" name="member_id" value="${loginUser.member_id }">
-					<input type="hidden" name="category_no" id="category_no">
+					<input type="hidden" name="category_no" id="category_no" value="">
 					<table class="jung_table">
 						<tbody>
 							<tr class="tr">

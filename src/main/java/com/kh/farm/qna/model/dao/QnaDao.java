@@ -74,7 +74,9 @@ public class QnaDao {
 
 	public int selectMainQnaCount(SqlSessionTemplate sqlSession, String qnaSearch) {
 		// TODO Auto-generated method stub
-		int listCount = sqlSession.selectOne("qna.mainQnaCount",qnaSearch);
+		PageNumber pnum = new PageNumber();
+		pnum.setQnaSearch(qnaSearch);
+		int listCount = sqlSession.selectOne("qna.mainQnaCount",pnum);
 		return listCount;
 	}
 

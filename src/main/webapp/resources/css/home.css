@@ -17,7 +17,7 @@ ul.tabs li {
 	float: left;
 	text-align: center;
 	cursor: pointer;
-	width: 99px;
+	width: 149px;
 	height: 31px;
 	line-height: 31px;
 	border: 1px solid #eee;
@@ -77,29 +77,26 @@ ul.tabs li.active {
 }
 
 .table2 {
-	margin-top: 15px;
-	border: 1px solid #444444;
 	border-collapse: collapse;
-	width: 90%;
-	margin-left: 20px;
+	width: 100%;
 }
 
 .td {
-	border: 1px solid #444444;
 	padding: 4px;
 	color: #222;
-	border: solid 1px #c7c7c7;
+	border-bottom: 1px solid #dcdcdc;
 	text-align: center;
+	height: 50px;
 }
 
 .th {
 	color: #222;
-	background: #f7f7f7;
-	border: solid 1px #c7c7c7;
-	border-bottom: solid 1px #555;
+	border-bottom: solid 1px #b2b2b2;
 	font-size: 1.15em;
 	text-align: center;
-	padding: 4px;
+	padding: 10px;
+	width:15%;
+	
 }
 
 .button {
@@ -108,7 +105,9 @@ ul.tabs li.active {
 	border: 1px solid #f1473a;
 	padding: 6px 6px 6px;
 	margin-left: 218px;
+	cursor: pointer;
 }
+
 .button2 {
 	background-color: white;
 	color: #f1473a;
@@ -118,6 +117,7 @@ ul.tabs li.active {
 	padding: 3px 3px 2px;
 	margin-top: 115px;
 	margin-left: 3px;
+	cursor: pointer;
 }
 #job_table_span_find {
 	color: #ff0000;

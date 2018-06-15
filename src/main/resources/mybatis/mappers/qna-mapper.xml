@@ -49,13 +49,13 @@
 	
 
 </select>
-<select id="mainQnaCount" parameterType="int" resultType="int">
+<select id="mainQnaCount" parameterType="PageNumber" resultType="int">
 		<![CDATA[		
 		select count(*) from main_qna
 		]]>
 		<if test="qnaSearch != null">
 		<![CDATA[
-				AND MAIN_QNA_TITLE like '%'||#{qnaSearch}||'%'
+				where MAIN_QNA_TITLE like '%'||#{qnaSearch}||'%'
 		]]>
 	</if>
 	</select>

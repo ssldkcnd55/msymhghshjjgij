@@ -39,7 +39,6 @@ public class JobController {
 	// 구인구직페이징처리
 	@RequestMapping(value = "jobList.do")
 	public void jobList(HttpServletResponse response, HttpServletRequest request) throws IOException {
-		System.out.println("여기오니?");
 		int limitPage = 10;
 		int currentPage = 1;
 		if (request.getParameter("page") != null) {
