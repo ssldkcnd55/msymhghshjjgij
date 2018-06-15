@@ -69,7 +69,7 @@ public class MarketController {
 		return mv;
 
 	}
-
+	
 	@RequestMapping(value = "ajaxMoreMarket.do", method = RequestMethod.POST)
 	public void moreMarketList(HttpServletResponse response, @RequestParam("page") int page,
 			@RequestParam(value = "search", required = false) String search,
@@ -137,7 +137,28 @@ public class MarketController {
 		out.flush();
 		out.close();
 	}
+	
+	@RequestMapping("ajaxCategoryName.do")
+	public void categoryNameList(HttpServletResponse response,@RequestParam("category_main") String category_main) throws IOException {
+		List<Category> list = marketService.selectCategoryNameList(category_main);
+		JSONArray jarr = new JSONArray();
 
+		// list를 jarr로 복사하기
+		for (Category c : list) {
+			JSONObject jmarket = new JSONObject();
+			jmarket.put("category_name", c.getCategory_name());
+			jmarket.put("category_no", c.getCategory_no());
+
+			jarr.add(jmarket);
+		}
+		JSONObject sendJson = new JSONObject();
+		sendJson.put("list", jarr);
+		response.setContentType("application/json; charset=utf-8");
+		PrintWriter out = response.getWriter();
+		out.append(sendJson.toJSONString());
+		out.flush();
+		out.close();
+	}
 	@RequestMapping("reviewList.do")
 	public void reiviewList(Market mk,HttpServletResponse response,@RequestParam("Rpage") int currentPage, @RequestParam(value="reviewSearch",required=false) String reviewSearch)
 	throws IOException{
@@ -193,7 +214,6 @@ public class MarketController {
 	@RequestMapping(value = "insertMarketMake.do", method = RequestMethod.POST)
 	public String insertMarket(Market market, HttpServletRequest request,
 			@RequestParam(name = "upfile", required = false) MultipartFile file) {
-
 		String path = request.getSession().getServletContext().getRealPath("resources/upload/marketUpload");
 
 		try {

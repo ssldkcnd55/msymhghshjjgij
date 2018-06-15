@@ -214,4 +214,9 @@ public class MarketServiceImpl implements MarketService{
 		
 		return marketDao.selectCategoryList(sqlSession);
 	}
+	@Override
+	public List<Category> selectCategoryNameList(String category_main) {
+		// TODO Auto-generated method stub
+		return marketDao.selectCategoryNameList(sqlSession,category_main);
+	}
 }

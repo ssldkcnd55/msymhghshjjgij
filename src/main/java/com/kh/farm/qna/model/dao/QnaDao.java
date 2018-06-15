@@ -31,7 +31,7 @@ public class QnaDao {
 		return listCount;
 	}
 
-	public ArrayList<Market_qna> qnaList(SqlSessionTemplate sqlSession, Market mk,int currentPage) {
+	public ArrayList<Market_qna> qnaList(SqlSessionTemplate sqlSession, Market mk,int currentPage,String qnaSearch) {
 		// TODO Auto-generated method stub
 		int startRow =(currentPage-1)*10+1; //1~10, 11~20 계산할 거 ex) 1, 11, 21, 31,)
 		int endRow = startRow+9;
@@ -39,14 +39,18 @@ public class QnaDao {
 		pnum.setStartRow(startRow);
 		pnum.setEndRow(endRow);
 		pnum.setMarket_no(mk.getMarket_no());
+		pnum.setQnaSearch(qnaSearch);
 		
 		List<Market_qna> sq = sqlSession.selectList("qna.qnaList",pnum);
 		return (ArrayList)sq;
 	}
 
-	public int selectQnaCount(SqlSessionTemplate sqlSession, Market mk) {
+	public int selectQnaCount(SqlSessionTemplate sqlSession, Market mk,String qnaSearch) {
+		PageNumber pnum = new PageNumber();
+		pnum.setMarket_no(mk.getMarket_no());
+		pnum.setQnaSearch(qnaSearch);
 		
-		int listCount = sqlSession.selectOne("qna.qnaCount",mk.getMarket_no());
+		int listCount = sqlSession.selectOne("qna.qnaCount",pnum);
 		return listCount;
 	}
 

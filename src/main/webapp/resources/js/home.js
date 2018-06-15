@@ -171,13 +171,13 @@ $(function() {
 						var outValues = "";
 
 						for ( var i in jsonObj.list) {
-							outValues += "<li><a href='marketDetail.do?market_no="
+							outValues += "<li><a style='text-decoration: none;' href='marketDetail.do?market_no="
 									+ jsonObj.list[i].market_no
 									+ "'><img src='/farm/resources/upload/marketUpload/"+jsonObj.list[i].market_img+"'/><div class='pretty'>"
 									+ "<div class='pmarketTitle'>"
 									+ jsonObj.list[i].market_title
 									+ "<div class='nmarketPrice'>"
-									+ numberWithCommas(jsonObj.list[i].market_price)
+									+ numberWithCommas(jsonObj.list[i].market_price)+"원"
 									+ "</div></div>" + "</div></a></li>";
 						}
 

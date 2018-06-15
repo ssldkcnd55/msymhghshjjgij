@@ -263,4 +263,9 @@ public class MarketDao {
 		// TODO Auto-generated method stub
 		return sqlSession.selectList("market.selectCategoryList");
 	}
+
+	public List<Category> selectCategoryNameList(SqlSessionTemplate sqlSession,String category_main) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList("market.selectCategoryNameList",category_main);
+	}
 }

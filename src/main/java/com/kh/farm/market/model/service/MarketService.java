@@ -96,4 +96,7 @@ public interface MarketService {
 
 
 	List<Category> selectCategoryList();
+
+
+	List<Category> selectCategoryNameList(String category_main);
 }

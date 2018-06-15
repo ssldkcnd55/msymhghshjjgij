@@ -22,13 +22,19 @@ public class PageNumber implements java.io.Serializable{
 	private int select;
 	private int type;
 	private String reviewSearch;
+	private String qnaSearch;
 	public PageNumber() {}
 	
 	
 	
+
+
+
+
+
 	public PageNumber(int startRow, int endRow, int market_no, int auction_no, String member_id, String search,
 			String ctype, String cname, String sort, int review_no, int daily_no, int report_no, String keyword,
-			int select, int type,String reviewSearch) {
+			int select, int type, String reviewSearch, String qnaSearch) {
 		super();
 		this.startRow = startRow;
 		this.endRow = endRow;
@@ -46,20 +52,38 @@ public class PageNumber implements java.io.Serializable{
 		this.select = select;
 		this.type = type;
 		this.reviewSearch = reviewSearch;
+		this.qnaSearch = qnaSearch;
 	}
 
+
+	
+	public String getQnaSearch() {
+		return qnaSearch;
+	}
+
+
+
+
+	public void setQnaSearch(String qnaSearch) {
+		this.qnaSearch = qnaSearch;
+	}
 
 	@Override
 	public String toString() {
 		return "PageNumber [startRow=" + startRow + ", endRow=" + endRow + ", market_no=" + market_no + ", auction_no="
 				+ auction_no + ", member_id=" + member_id + ", search=" + search + ", ctype=" + ctype + ", cname="
 				+ cname + ", sort=" + sort + ", review_no=" + review_no + ", daily_no=" + daily_no + ", report_no="
-				+ report_no + ", keyword=" + keyword + ", select=" + select + ", type=" + type + "]";
+				+ report_no + ", keyword=" + keyword + ", select=" + select + ", type=" + type + ", reviewSearch="
+				+ reviewSearch + ", qnaSearch=" + qnaSearch + "]";
 	}
 
 
 
-	
+
+
+
+
+
 	public int getType() {
 		return type;
 	}
