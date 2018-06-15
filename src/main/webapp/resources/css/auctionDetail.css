@@ -661,10 +661,23 @@ font-size: 14pt;
  	margin :5px 5px 0 0;
  
  }
+
+
+
+.auction_backgroundtable tr:nth-child(1){
+	background: #ece6ce;
+}
+
+
+.auction_backgroundtable tr th:nth-child(1){
+	width:12%;
+}
+.auction_backgroundtable tr th:nth-child(2){
+	width:35%;
+}
+.auction_backgroundtable tr th:nth-child(3){
+	width:53%;
+}
  
- #a{
- 	
- 	
- }
- 
+
  

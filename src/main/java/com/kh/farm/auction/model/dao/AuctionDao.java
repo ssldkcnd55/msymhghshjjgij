@@ -296,6 +296,7 @@ public class AuctionDao {
 
 	public List<Auction> select_auction_background(SqlSessionTemplate sqlSession, String member_id) {
 		return sqlSession.selectList("auction.select_auction_background",member_id);
+		
 	}
 
 	public List<Auction> selectmoreAuctionCategory(SqlSessionTemplate sqlSession, int currentPage, int atype) {

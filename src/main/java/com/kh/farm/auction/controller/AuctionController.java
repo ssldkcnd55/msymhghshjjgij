@@ -826,17 +826,19 @@ public class AuctionController {
 	@ResponseBody
 	public void auction_background(HttpServletResponse response, @RequestParam(value = "auction_no") int auction_no,
 			@RequestParam(value = "member_id") String member_id) throws IOException {
+		
 		List<Auction> list = auctionService.select_auction_background(member_id);
 		JSONArray jarr = new JSONArray();
 		System.out.println("list : " + list.toString());
 
 		for (Auction a : list) {
 			JSONObject json = new JSONObject();
-			json.put("rnum", a.getRnum());
+			
 			json.put("auction_no", a.getAuction_no());
 			json.put("auction_title", a.getAuction_title());
 			json.put("member_id", a.getMember_id());
 			jarr.add(json);
+			
 		}
 		JSONObject sendJson = new JSONObject();
 		sendJson.put("list", jarr);
