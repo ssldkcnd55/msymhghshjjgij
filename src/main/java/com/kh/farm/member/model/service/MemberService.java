@@ -17,7 +17,7 @@ public interface MemberService {
 	Member selectFindId(Member member);
 
 	int updatePwd(Member member);
-	
+
 	Member selectMember(String member_id2);
 
 	List<Member> selectMemberList(int currentPage);
@@ -27,9 +27,9 @@ public interface MemberService {
 	int change_app(String member_id);
 
 	int change_with(String member_id);
-	
+
 	String nowPwdCheck(String member_id);
-	
+
 	int updateAddr(Member member);
 
 	List<Member> selectChangeList(int currentPage, int type);
@@ -39,7 +39,7 @@ public interface MemberService {
 	List<Member> selectSearchMember(String keyword, int type, int currentPage);
 
 	Member selectIdCheck(String mail_to);
-	
+
 	Member selectCheckId(Member member);
 
 	int insertNaverSignUp(Member member);
@@ -47,11 +47,9 @@ public interface MemberService {
 	int insertVisit(Member returnMember);
 
 	List<Visit> selectVisitList(int type);
-<<<<<<< HEAD
-	
+
 	List<Market> buygraph(Market market);
-=======
 
 	int updateWarning(Member m);
->>>>>>> branch 'master' of https://github.com/ssldkcnd55/msymhghshjjgij.git
+
 }
