@@ -187,8 +187,9 @@ insert into member values (
 
 	<select id="buygraph" parameterType="member" resultType="market">
 	<![CDATA[
-	select m.market_title,m.market_no , sum(b.buy_AMOUNT) as "buy_AMOUNT"  from MARKET m ,  BUY b 
-	where m.MARKET_NO = b.MARKET_NO and m.member_id = #{member_id} group by m.market_title,m.market_no
+	 select *
+  from  (select m.market_title , sum(b.buy_AMOUNT) as "buy_AMOUNT"  from MARKET m ,  BUY b 
+	where m.MARKET_NO = b.MARKET_NO and m.member_id = #{member_id} group by m.market_title,m.market_no order by sum(buy_AMOUNT) desc) where ROWNUM <=5
 	]]>
 	</select>
 
