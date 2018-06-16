@@ -214,7 +214,7 @@
         	<div class="inner-wrap"> 
         	<!-- 경매 등록버튼 -->
         	<c:if test="${loginUser.member_category eq '0'}">
-        	<button class="auction_write" onclick="auction_write();">경매 등록</button>
+        	<button class="auction_write" onclick="auction_write();">경매등록</button>
         	</c:if>
         	<div class="left_box">
         	

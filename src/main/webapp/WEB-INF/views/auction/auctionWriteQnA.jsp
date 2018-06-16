@@ -60,7 +60,7 @@
 							</tr>
 						</tbody>
 					</table>
-					<input class="li4_input" type="button" value="뒤로가기">
+					<input class="li4_input" type="button" onclick="location.href='/farm/AuctionDetail.do?auction_no=${auction.auction_no}'" value="뒤로가기">
 						<input class="li4_input submit" type="submit" value="문의등록" onclick="submitContents();">
 						
 				</form>

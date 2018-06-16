@@ -230,7 +230,7 @@
 						</tbody>
 					</table> -->
 					<ul style="list-style: none;">
-						<li class="li3" onclick="location.href='/#'">뒤로가기</li>
+						<li class="li3" onclick="location.href='/farm/AuctionList_controller.do'">뒤로가기</li>
 						<li class="li4"><input class="li4_input" type="submit" value="경매등록" onclick="submitContents();" ></li>
 						<!-- <li class="li4" onclick="location.href='/#'">물품등록</li> -->
 					</ul>

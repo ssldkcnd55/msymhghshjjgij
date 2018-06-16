@@ -319,7 +319,7 @@ public class AuctionController {
 
 	/* 수정 등록 */
 	@RequestMapping(value = "updateAuctionMake.do", method = RequestMethod.POST)
-	public String updateAuctionMake(Model model, @RequestParam(value = "auction_no") int auction_no,
+	public String updateAuctionMake( @RequestParam(value = "auction_no") int auction_no,
 			@RequestParam(name = "upfile", required = false) MultipartFile file,
 			@RequestParam(name = "auction_img") String auction_img, Auction auction, HttpServletResponse response,
 			HttpServletRequest request) {

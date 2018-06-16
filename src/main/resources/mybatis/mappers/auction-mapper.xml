@@ -85,7 +85,7 @@
 	]]>
 	</select>
 
-	<update id="updateAuctionMake">
+	<update id="updateAuctionMake" parameterType="Auction">
 	<![CDATA[
 		update auction set auction_title=#{auction_title},auction_note=#{auction_note},auction_img=#{auction_img},
 		auction_intro=#{auction_intro},auction_startprice=#{auction_startprice},auction_directprice=#{auction_directprice} 
