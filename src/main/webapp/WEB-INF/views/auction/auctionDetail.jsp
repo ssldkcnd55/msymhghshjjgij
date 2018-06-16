@@ -123,49 +123,6 @@ $(function(){
    
       
    
-   /* $(function(){
-      $('input#submit').click(function(event){
-         var price = $('#biddingprice').val();
-         var no = ${auction.auction_no};
-         alert(price+", " + no);
-         
-         $.ajax({
-            url:"checkAuction_history_price.do",
-            type:"post",
-            data:{
-               auction_no:no
-            },
-            dataType: "JSON",
-            success: function(data){
-               console.log(data);
-               var objStr = JSON.stringify(data);
-               var jsonObj = JSON.parse(objStr);   
-               
-               if(jsonObj.startprice >= price) {
-                  alert("경매 시작가보다 높은 금액을 입력해 주세요.");
-                  return false;
-               }else if(jsonObj.directprice <= price){
-                  alert("즉시 구매가 보다 높은 금액을 입력하셨습니다.");
-                  return false;
-               }else if(jsonObj.price >= price) {
-                  alert("현재 최고 입찰가보다 높은 금액을 입력해 주세요.")
-                  return false;
-               }else {
-                  var con_test = confirm("정말 입찰하시겠습니까?")
-                  if(con_test == true) {
-                     $('#bidsubmit').submit();
-                     } else {
-                     return false;
-                     }
-               }
-                  
-            }
-         })
-      }); 
-   }); */
-       
-   
-   
    /* 경매 입찰 등록 */
       function bidcheck(){
          var price = $('#biddingprice').val();

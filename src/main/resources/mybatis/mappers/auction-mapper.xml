@@ -257,11 +257,6 @@
 	]]>
 	</select>
 	
-	<select id="selectauction_startdateCheck" parameterType="String" resultType="String" >
-	<![CDATA[
-		select to_char(sysdate, 'YYYY-MM-DD') as "sysdate" from DUAL
-	]]>
-	</select>
 	
 	<select id="selectAuctionCusQnaList" parameterType="PageNumber" resultType="AuctionQnA">
 	<![CDATA[

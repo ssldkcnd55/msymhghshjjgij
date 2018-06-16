@@ -231,12 +231,6 @@ public class AuctionDao {
 	}
 
 
-	public String selectauction_startdateCheck(SqlSessionTemplate sqlSession) {
-		return sqlSession.selectOne("auction.selectauction_startdateCheck");
-
-	}
-
-
 	public List<Auction> selectLeft_AuctionStandBy(SqlSessionTemplate sqlSession, int currentPage) {
 		//  select box에서 경매대기: 0
 		int startRow =(currentPage-1)*10+1; //1~10, 11~20 계산할 거 ex) 1, 11, 21, 31,)

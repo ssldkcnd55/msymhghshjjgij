@@ -759,20 +759,6 @@ public class AuctionController {
 		out.close();
 	}
 
-	// 경매 Make startDate 체크
-	@RequestMapping(value = "auction_startdateCheck.do")
-	public void auction_startdateCheck(HttpServletResponse response) throws IOException {
-		String sysdate2 = auctionService.selectauction_startdateCheck();
-		/* System.out.println(" sysdate2 : "+sysdate2); */
-		JSONObject json = new JSONObject();
-		json.put("sysdate2", sysdate2);
-		/* System.out.println(json.toJSONString()); */
-		response.setContentType("application/json; charset=utf-8;");
-		PrintWriter out = response.getWriter();
-		out.print(json.toJSONString());
-		out.flush();
-		out.close();
-	}
 
 	// 경매 카테고리
 	@RequestMapping(value = "left_boxChangeList.do", method = RequestMethod.POST)
