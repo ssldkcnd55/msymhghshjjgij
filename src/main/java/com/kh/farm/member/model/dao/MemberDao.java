@@ -9,6 +9,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Repository;
 
 import com.kh.farm.common.model.vo.PageNumber;
+import com.kh.farm.market.model.vo.Market;
 import com.kh.farm.member.exception.LoginFailException;
 import com.kh.farm.member.model.vo.Member;
 import com.kh.farm.visit.model.vo.Visit;
@@ -210,6 +211,11 @@ public class MemberDao {
 		}else {
 			return sqlSession.selectList("visit2.selectVisitMonthList");
 		}
+	}
+
+	public List<Market> buygraph( SqlSessionTemplate sqlSession  ,Market market) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList("member.buygraph",market);
 	}
 
 	

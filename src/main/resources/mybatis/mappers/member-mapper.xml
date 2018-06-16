@@ -3,7 +3,7 @@
 "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="member">
-<resultMap type="Member" id="resultMember">
+	<resultMap type="Member" id="resultMember">
 		<id column="member_id" property="member_id" />
 		<result column="member_pwd" property="member_pwd" />
 		<result column="member_name" property="member_name" />
@@ -14,166 +14,182 @@
 		<result column="member_withdraw" property="member_withdraw" />
 		<result column="member_img" property="member_img" />
 	</resultMap>
-	
-	
-<select id="loginMember" parameterType="member" resultType="member">
+
+
+	<select id="loginMember" parameterType="member" resultType="member">
 		<![CDATA[
 			select * from member where member_id=#{member_id}
 		]]>
-</select>
-<select id="selectIdCheck" parameterType="string" resultType="member">
+	</select>
+	<select id="selectIdCheck" parameterType="string" resultType="member">
 		<![CDATA[
 			select * from member where member_id=#{member_id}
 		]]>
-</select>
-<select id="selectMemberList" parameterType="PageNumber" resultType="Member">
+	</select>
+	<select id="selectMemberList" parameterType="PageNumber"
+		resultType="Member">
 	<![CDATA[
 	select * from (select rownum rnum, member_id, member_category, member_name, 
 	member_approval,member_withdraw,MEMBER_WARNING_COUNT from member 
 	) where rnum >=#{startRow} and rnum <=#{endRow}
 	
 	]]>
-</select>
+	</select>
 
-<insert parameterType="Member" id="insertMember" useGeneratedKeys="true" statementType="PREPARED" flushCache="true">
+	<insert parameterType="Member" id="insertMember"
+		useGeneratedKeys="true" statementType="PREPARED" flushCache="true">
 		<![CDATA[ insert into member values (
 					#{member_id}, #{member_pwd}, #{member_category}, #{member_name}, 
 					#{member_addr}, #{member_tel}, 'Y', #{member_img},'N',0) ]]>
-</insert>
+	</insert>
 
-<select id="findId" parameterType="member" resultType="member">
+	<select id="findId" parameterType="member" resultType="member">
 		<![CDATA[
 			select * from member where member_id=#{member_id} and member_name=#{member_name}
 		]]>
 
-</select>
+	</select>
 
-<update parameterType="member" id="updatePwd" flushCache="true">
+	<update parameterType="member" id="updatePwd" flushCache="true">
 		<![CDATA[
 			update member set member_pwd = #{member_pwd} where member_id = #{member_id}
 		]]>
-</update>
+	</update>
 
-<select id="selectMember" parameterType="string" resultType="Member">
+	<select id="selectMember" parameterType="string" resultType="Member">
 <![CDATA[
 	select member_name, member_img, member_approval, member_id, member_withdraw, MEMBER_WARNING_COUNT from member where member_id=#{member_id2}
 ]]>
-</select>
+	</select>
 
 
-<select id="selectMemberName" parameterType="PageNumber" resultType="Member">
+	<select id="selectMemberName" parameterType="PageNumber"
+		resultType="Member">
 	<![CDATA[
 	select * from (select rownum rnum, member_id, member_category, member_name, 
 	member_approval,member_withdraw,MEMBER_WARNING_COUNT from member 
 	)where rnum >=#{startRow} and rnum <=#{endRow} and member_name like '%'||#{keyword}||'%'
 	]]>
-</select>	
+	</select>
 
-<select id="selectMemberId" parameterType="PageNumber" resultType="Member">
+	<select id="selectMemberId" parameterType="PageNumber"
+		resultType="Member">
 	<![CDATA[
 	select * from (select rownum rnum, member_id, member_category, member_name, 
 	member_approval,member_withdraw,MEMBER_WARNING_COUNT from member 
 	)where rnum >=#{startRow} and rnum <=#{endRow} and member_id like '%'||#{keyword}||'%'
 	]]>
-</select>	
-<select id="memberCount" parameterType="int" resultType="int">
-	select count(*) from member
-</select>
-<select id="FarmerCount" parameterType="int" resultType="int">
+	</select>
+	<select id="memberCount" parameterType="int" resultType="int">
+		select
+		count(*) from member
+	</select>
+	<select id="FarmerCount" parameterType="int" resultType="int">
 	<![CDATA[
 	select count(*) from member where member_category = 0
 	]]>
-</select>
-<select id="CommonCount" parameterType="int" resultType="int">
+	</select>
+	<select id="CommonCount" parameterType="int" resultType="int">
 	<![CDATA[
 	select count(*) from member where member_category = 1
 	]]>
-</select>
-<select id="ApprovalCount" parameterType="int" resultType="int">
+	</select>
+	<select id="ApprovalCount" parameterType="int" resultType="int">
 	<![CDATA[
 	select count(*) from member where member_approval = 'N'
 	]]>
-</select>
-<select id="WithdrawCount" parameterType="int" resultType="int">
+	</select>
+	<select id="WithdrawCount" parameterType="int" resultType="int">
 	<![CDATA[
 	select count(*) from member where member_withdraw = 'Y'
 	]]>
-</select>
+	</select>
 
-<update id="change_approval" parameterType="member" flushCache="true">
+	<update id="change_approval" parameterType="member" flushCache="true">
 	<![CDATA[
 			update member set member_approval = case when member_approval = 'Y' then 'N' else 'Y' end where member_id = #{member_id}
 		]]>
-</update>
+	</update>
 
-<update id="change_withdraw" parameterType="member" flushCache="true">
+	<update id="change_withdraw" parameterType="member" flushCache="true">
 	<![CDATA[
 			update member set member_withdraw = case when member_withdraw = 'Y' then 'N' else 'Y' end where member_id = #{member_id}
 		]]>
-</update>	
-<select id="nowPwdCheck" parameterType="string" resultType="string" >
-	select MEMBER_PWD from member where MEMBER_ID=#{member_id}
-</select>
-<update id="updateAddr" parameterType="member">
-	update member set member_addr=#{member_addr} where member_id=#{member_id} 
-</update>
+	</update>
+	<select id="nowPwdCheck" parameterType="string" resultType="string">
+		select MEMBER_PWD from member where MEMBER_ID=#{member_id}
+	</select>
+	<update id="updateAddr" parameterType="member">
+		update member set
+		member_addr=#{member_addr} where member_id=#{member_id}
+	</update>
 
-<select id="selectFarmer" parameterType="PageNumber" resultType="Member">
+	<select id="selectFarmer" parameterType="PageNumber" resultType="Member">
 	<![CDATA[
 	select * from (select rownum rnum, member_id, member_category, member_name, 
 	member_approval,member_withdraw,MEMBER_WARNING_COUNT from member 
 	) where rnum >=#{startRow} and rnum <=#{endRow} and member_category=0
 	
 	]]>
-</select>
+	</select>
 
-<select id="selectCommon" parameterType="PageNumber" resultType="Member">
+	<select id="selectCommon" parameterType="PageNumber" resultType="Member">
 	<![CDATA[
 	select * from (select rownum rnum, member_id, member_category, member_name, 
 	member_approval,member_withdraw,MEMBER_WARNING_COUNT from member 
 	) where rnum >=#{startRow} and rnum <=#{endRow} and member_category=1
 	
 	]]>
-</select>
+	</select>
 
-<select id="selectApproval" parameterType="PageNumber" resultType="Member">
+	<select id="selectApproval" parameterType="PageNumber"
+		resultType="Member">
 	<![CDATA[
 	select * from (select rownum rnum, member_id, member_category, member_name, 
 	member_approval,member_withdraw,MEMBER_WARNING_COUNT from member 
 	) where rnum >=#{startRow} and rnum <=#{endRow} and member_approval='N'
 	
 	]]>
-</select>
+	</select>
 
-<select id="selectWithdraw" parameterType="PageNumber" resultType="Member">
+	<select id="selectWithdraw" parameterType="PageNumber"
+		resultType="Member">
 	<![CDATA[
 	select * from (select rownum rnum, member_id, member_category, member_name, 
 	member_approval,member_withdraw,MEMBER_WARNING_COUNT from member 
 	) where rnum >=#{startRow} and rnum <=#{endRow} and member_withdraw='Y'
 	
 	]]>
-</select>
+	</select>
 
-<select id="selectWarning" parameterType="PageNumber" resultType="Member">
+	<select id="selectWarning" parameterType="PageNumber"
+		resultType="Member">
 	<![CDATA[
 	select * from (select rownum rnum, member_id, member_category, member_name, 
 	member_approval,member_withdraw,MEMBER_WARNING_COUNT from member 
 	) where rnum >=#{startRow} and rnum <=#{endRow} order by member_warning_count desc
 	
 	]]>
-</select>
+	</select>
 
-<select id="selectCheckId" parameterType="member" resultType="Member">
+	<select id="selectCheckId" parameterType="member" resultType="Member">
 <![CDATA[
 select * from MEMBER where MEMBER_ID = #{member_id}
 ]]>
-</select>
-<insert id="insertNaverSignUp" parameterType="member">
+	</select>
+	<insert id="insertNaverSignUp" parameterType="member">
 <![CDATA[
 insert into member values (
 					#{member_id}, 0, 1, #{member_name}, 
 					#{member_addr}, #{member_tel}, 'Y', 'default.png','N',0)
 ]]>
-</insert>
+	</insert>
+
+	<select id="buygraph" parameterType="member" resultType="market">
+	<![CDATA[
+	select m.market_title,m.market_no , sum(b.buy_AMOUNT) as "buy_AMOUNT"  from MARKET m ,  BUY b 
+	where m.MARKET_NO = b.MARKET_NO and m.member_id = #{member_id} group by m.market_title,m.market_no
+	]]>
+	</select>
 
 </mapper>

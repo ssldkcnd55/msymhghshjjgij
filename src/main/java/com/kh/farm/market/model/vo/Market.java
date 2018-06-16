@@ -6,36 +6,44 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
 @Component("market")
-public class Market implements java.io.Serializable{
+public class Market implements java.io.Serializable {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 7777L;
-	
-	private int market_no;// 판매글 번호
-	private int category_no;//카테고리 번호
-	private String member_id;//판매글 작성자 아이디
-	private String market_title;//판매글 제목
-	private String market_note;//판매글 노트
-	private String market_img;//판매글 이미지
-	private Date market_releasedate;//출고예정일
-	private int market_amount;//총 판매 수량
-	private String market_intro;//판매글 소개
-	private String market_complete;//판매글 상태
-	private int market_price;//판매 가격 
-	private String search;//검색
-	private int remaining;//남은 수량
-	private String member_name;//회원 이름;
-	private MultipartFile Filedata; // 다중이미지 업로드
-	
-	
 
-	public Market() {}
+	private int market_no;// 판매글 번호
+	private int category_no;// 카테고리 번호
+	private String member_id;// 판매글 작성자 아이디
+	private String market_title;// 판매글 제목
+	private String market_note;// 판매글 노트
+	private String market_img;// 판매글 이미지
+	private Date market_releasedate;// 출고예정일
+	private int market_amount;// 총 판매 수량
+	private String market_intro;// 판매글 소개
+	private String market_complete;// 판매글 상태
+	private int market_price;// 판매 가격
+	private String search;// 검색
+	private int remaining;// 남은 수량
+	private String member_name;// 회원 이름;
+	private MultipartFile Filedata; // 다중이미지 업로드
+	private String buy_amount;
+
+	public String getBuy_amount() {
+		return buy_amount;
+	}
+
+	public void setBuy_amount(String buy_amount) {
+		this.buy_amount = buy_amount;
+	}
+
+	public Market() {
+	}
 
 	public Market(int market_no, int category_no, String member_id, String market_title, String market_note,
 			String market_img, Date market_releasedate, int market_amount, String market_intro, String market_complete,
-			int market_price, String search, int remaining, String member_name) {
+			int market_price, String search, int remaining, String member_name ,String buy_amount) {
 		super();
 		this.market_no = market_no;
 		this.category_no = category_no;
@@ -51,7 +59,9 @@ public class Market implements java.io.Serializable{
 		this.search = search;
 		this.remaining = remaining;
 		this.member_name = member_name;
+		this.buy_amount = buy_amount;
 	}
+
 	public MultipartFile getFiledata() {
 		return Filedata;
 	}
@@ -178,8 +188,7 @@ public class Market implements java.io.Serializable{
 				+ ", market_title=" + market_title + ", market_note=" + market_note + ", market_img=" + market_img
 				+ ", market_releasedate=" + market_releasedate + ", market_amount=" + market_amount + ", market_intro="
 				+ market_intro + ", market_complete=" + market_complete + ", market_price=" + market_price + ", search="
-				+ search + ", remaining=" + remaining + ", member_name=" + member_name + "]";
+				+ search + ", remaining=" + remaining + ", member_name=" + member_name + ",buy_amount="+ buy_amount + "]";
 	}
 
-		
 }

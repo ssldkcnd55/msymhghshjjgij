@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.kh.farm.visit.model.vo.Visit;
+import com.kh.farm.market.model.vo.Market;
 import com.kh.farm.member.exception.LoginFailException;
 import com.kh.farm.member.model.vo.Member;
 
@@ -46,4 +47,6 @@ public interface MemberService {
 	int insertVisit(Member returnMember);
 
 	List<Visit> selectVisitList(int type);
+	
+	List<Market> buygraph(Market market);
 }

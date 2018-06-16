@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.kh.farm.member.model.dao.MemberDao;
 import com.kh.farm.member.model.vo.Member;
 import com.kh.farm.visit.model.vo.Visit;
+import com.kh.farm.market.model.vo.Market;
 import com.kh.farm.member.exception.LoginFailException;
 
 @Service
@@ -149,5 +150,10 @@ public class MemberServiceImpl implements MemberService {
 	public List<Visit> selectVisitList(int type) {
 		// TODO Auto-generated method stub
 		return memberDao.selectVisitList(sqlSession,type);
+	}
+	@Override
+	public List<Market> buygraph(Market market) {
+		
+		return memberDao.buygraph(sqlSession , market);
 	}
 }

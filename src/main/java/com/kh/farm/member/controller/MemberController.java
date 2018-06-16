@@ -47,6 +47,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.farm.chat.model.service.ChatService;
 import com.kh.farm.chat.model.vo.*;
+import com.kh.farm.market.model.vo.Market;
 import com.kh.farm.member.model.service.MemberService;
 import com.kh.farm.member.model.service.MemberServiceImpl;
 import com.kh.farm.member.model.vo.*;
@@ -573,30 +574,30 @@ public class MemberController {
 		System.out.println("방문자수 카운터 실행");
 		int count = 0;
 
-		//count => 0 // data => 
-		
+		// count => 0 // data =>
+
 		if (type == 1) {
-				for (Visit v : visitList) {
-					JSONObject json = new JSONObject();
-					json.put("count", v.getVisit_count());
-					json.put("date", v.getVisit_date().toString());
-					jarr.add(json);
-					count++;
-					if(count==6)
-						break;
+			for (Visit v : visitList) {
+				JSONObject json = new JSONObject();
+				json.put("count", v.getVisit_count());
+				json.put("date", v.getVisit_date().toString());
+				jarr.add(json);
+				count++;
+				if (count == 6)
+					break;
 			}
 
 		} else {
-			
-				for (Visit v : visitList) {
-					JSONObject json = new JSONObject();
-					json.put("count", v.getVisit_count());
-					json.put("month", v.getVisit_month());
-					jarr.add(json);
-					count++;
-					if(count==5)
-						break;
-				
+
+			for (Visit v : visitList) {
+				JSONObject json = new JSONObject();
+				json.put("count", v.getVisit_count());
+				json.put("month", v.getVisit_month());
+				jarr.add(json);
+				count++;
+				if (count == 5)
+					break;
+
 			}
 		}
 		System.out.println("22222");
@@ -610,6 +611,33 @@ public class MemberController {
 		out.append(sendJson.toJSONString());
 		out.flush();
 		out.close();
+	}
+
+	// 상품판매량 그래프
+	@RequestMapping(value = "mybuy.do")
+	public void mybuygraph(HttpServletResponse response, Market market) throws IOException {
+		System.out.println("mybuy에 들어옴");
+		System.out.println("member_id 불러옴:" + market.getMember_id());
+		List<Market> marketlist = memberService.buygraph(market);
+		System.out.println(marketlist);
+		JSONArray jarr = new JSONArray();
+		for (Market m : marketlist) {
+			JSONObject json = new JSONObject();
+			json.put("market_title", m.getMarket_title());
+			json.put("buy_amount", m.getBuy_amount());
+			json.put("market_no", m.getMarket_no());
+
+			jarr.add(json);
+		}
+
+		JSONObject sendJson = new JSONObject();
+		sendJson.put("list", jarr);
+		response.setContentType("application/json; charset=utf-8");
+		PrintWriter out = response.getWriter();
+		out.append(sendJson.toJSONString());
+		out.flush();
+		out.close();
+
 	}
 
 }
