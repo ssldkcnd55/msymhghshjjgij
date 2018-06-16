@@ -22,7 +22,7 @@ public class PageNumber implements java.io.Serializable{
 	private int select;
 	private int type;
 	private String reviewSearch;
-<<<<<<< HEAD
+
 	private String job_search; // 구인구직 검색
 	public String getJob_search() {
 		return job_search;
@@ -36,9 +36,8 @@ public class PageNumber implements java.io.Serializable{
 
 
 
-=======
+
 	private String qnaSearch;
->>>>>>> branch 'master' of https://github.com/ssldkcnd55/msymhghshjjgij.git
 	public PageNumber() {}
 	
 	
