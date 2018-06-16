@@ -152,8 +152,14 @@ public class MemberServiceImpl implements MemberService {
 		return memberDao.selectVisitList(sqlSession,type);
 	}
 	@Override
+<<<<<<< HEAD
 	public List<Market> buygraph(Market market) {
 		
 		return memberDao.buygraph(sqlSession , market);
+=======
+	public int updateWarning(Member m) {
+		// TODO Auto-generated method stub
+		return memberDao.updateWarning(sqlSession,m);
+>>>>>>> branch 'master' of https://github.com/ssldkcnd55/msymhghshjjgij.git
 	}
 }

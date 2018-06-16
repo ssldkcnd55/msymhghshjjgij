@@ -163,6 +163,64 @@ $(function(){
 function dailyMake(){
 	location.href="dailyMakeMove.do?market_no=${market.market_no}";
 }
+function qnaSearchPage(page){
+	qnaSearch = $("#qnaSearch").val();
+	$.ajax({
+		url:"qnaList.do",
+		type:"post",
+		data:{
+			market_no: ${market.market_no},
+			page:page,
+			qnaSearch:qnaSearch
+		},
+		dataType: "JSON",
+		success: function(data){
+			console.log(data);
+			var objStr = JSON.stringify(data);
+			var jsonObj = JSON.parse(objStr);
+			
+			var outValues = "<tr><th width='12%'>번호</th><th width='50%'>제목</th><th width='13%'>작성자</th><th width='15%'>날짜</th></tr>";
+			
+			for(var i in jsonObj.list){
+				outValues += "<tr id='hover'><td>"+jsonObj.list[i].rnum+"</td>"
+				+"<td id='QnA_td'><a href='/farm/marketQnaDetail.do?qna_no="+jsonObj.list[i].market_qna_no+"&member_id=${market.member_id}'>"+jsonObj.list[i].market_qna_title+"</a></td>"
+				+"<td>"+jsonObj.list[i].member_id+"</td><td>"+jsonObj.list[i].market_qna_question_date+"</td></tr>";
+			}
+			$(".QnA_table").html(outValues);	
+			
+			var startPage= jsonObj.list[0].startPage;
+			var endPage = jsonObj.list[0].endPage;
+			var maxPage = jsonObj.list[0].maxPage;
+			var currentPage = jsonObj.list[0].currentPage;
+			
+			var values ="";
+			if(startPage>5){
+				values+= "<a href='javascript:qnaSearchPage("+(startPage-1)+")'>&laquo;</a>" 
+			}else{
+				values+="<a>&laquo;</a>";	
+			}
+			for(var i=startPage;i<=endPage;i++  ){
+				if(i==currentPage){
+					values+= "<a class='active'>"+i+"</a>";
+				}else{
+					values+= "<a href='javascript:qnaSearchPage("+i+");'>"+i+"</a>";
+				}
+			}
+			if(endPage<maxPage){
+				values+="<a href='javascript:qnaSearchPage("+(endPage+1)+")'>&raquo;</a>";
+				
+			}else{
+				values+="<a>&raquo;</a>";
+			}
+			$(".pagination").html(values);
+		
+			
+		},error: function(request,status,errorData){
+            alert("error code : " + request.status + "\nmessage" + 
+                    request.responseText + "\nerror" + errorData);
+           }
+	});
+}
 function qnaPage(page){
 	$.ajax({
 		url:"qnaList.do",
@@ -454,73 +512,7 @@ function changeprice(){
 
 						<!-- Wrapper for slides -->
 						<div class="carousel-inner auction">
-							<!-- <div class='item active' align='center'>
-								<div class='sellerMarketList'>
-									<div class="img_box" style="background-image: url('/farm/resources/upload/marketUpload/apple.jpg'); background-size: cover;"></div>
-									<div class="title_box">
-										<p class="title">토마토를 팔아보까여</p>
-										<p class="content">소개소개소개소개쇄쇄소새ㅗ개괘쇄쇄고새ㅙ괘쇄소새괘괘소새ㅙ</p>
-										<p class="content">1000원</p>
-									</div>
-								</div>
-								<div class='sellerMarketList'>
-									<div class="img_box" style="background-image: url('/farm/resources/upload/marketUpload/apple.jpg'); background-size: cover;"></div>
-									<div class="title_box">
-										<p class="title">토마토를 팔아보까여</p>
-										<p class="content">소개소개소개소개쇄쇄소새ㅗ개괘쇄쇄고새ㅙ괘쇄소새괘괘소새ㅙ</p>
-										<p class="content">1000원</p>
-									</div>
-								</div>
-								<div class='sellerMarketList'>
-									<div class="img_box" style="background-image: url('/farm/resources/upload/marketUpload/apple.jpg'); background-size: cover;"></div>
-									<div class="title_box">
-										<p class="title">토마토를 팔아보까여</p>
-										<p class="content">소개소개소개소개쇄쇄소새ㅗ개괘쇄쇄고새ㅙ괘쇄소새괘괘소새ㅙ</p>
-										<p class="content">1000원</p>
-									</div>
-								</div>
-								<div class='sellerMarketList'>
-									<div class="img_box" style="background-image: url('/farm/resources/upload/marketUpload/apple.jpg'); background-size: cover;"></div>
-									<div class="title_box">
-										<p class="title">토마토를 팔아보까여</p>
-										<p class="content">소개소개소개소개쇄쇄소새ㅗ개괘쇄쇄고새ㅙ괘쇄소새괘괘소새ㅙ</p>
-										<p class="content">1000원</p>
-									</div>
-								</div>
-							</div>
-							<div class='item' align='center'>
-								<div class='sellerMarketList'>
-									<div class="img_box" style="background-image: url('/farm/resources/upload/marketUpload/apple.jpg'); background-size: cover;"></div>
-									<div class="title_box">
-										<p class="title">토마토를 팔아보까여</p>
-										<p class="content">소개소개소개소개쇄쇄소새ㅗ개괘쇄쇄고새ㅙ괘쇄소새괘괘소새ㅙ</p>
-										<p class="content">1000원</p>
-									</div>
-								</div>
-								<div class='sellerMarketList'>
-									<div class="img_box" style="background-image: url('/farm/resources/upload/marketUpload/apple.jpg'); background-size: cover;"></div>
-									<div class="title_box">
-										<p class="title">토마토를 팔아보까여</p>
-										<p class="content">소개소개소개소개쇄쇄소새ㅗ개괘쇄쇄고새ㅙ괘쇄소새괘괘소새ㅙ</p>
-										<p class="content">1000원</p>
-									</div>
-								</div>
-								<div class='sellerMarketList'></div>
-								<div class='sellerMarketList'></div>
-							</div>
-							<div class='item' align='center'>
-								<div class='sellerMarketList'>
-									<div class="img_box" style="background-image: url('/farm/resources/upload/marketUpload/apple.jpg'); background-size: cover;"></div>
-									<div class="title_box">
-										<p class="title">토마토를 팔아보까여</p>
-										<p class="content">소개소개소개소개쇄쇄소새ㅗ개괘쇄쇄고새ㅙ괘쇄소새괘괘소새ㅙ</p>
-										<p class="content">1000원</p>
-									</div>
-								</div>
-								<div class='sellerMarketList'></div>
-								<div class='sellerMarketList'></div>
-								<div class='sellerMarketList'></div>
-							</div> -->
+							
 
 						</div>
 						<!-- Left and right controls -->
@@ -536,52 +528,7 @@ function changeprice(){
 
 					</div>
 				</div>
-				<%-- <div class="note">
-       				<center>
-       				
-       				<div class="note_img" style="background-image: url('/farm/resources/images/gift.png'); background-size: cover;"></div>
-       				</center>
-       				<p class="note_title">제주도부터 강원도까지,<br>
-       				최고의 산지에서 난 농산물만을<br>
-       				전해 드립니다.</p>
-       				<p class="note_content">
-       				자연의 힘으로 길러낸 유기 농산물은<br>
-       				기후에 영향을 많이 받습니다. 예를 들어<br>
-       				같은 파프리카라 하더라도 한기물과<br>
-       				한여름에 맞는 최고의 산지가 따로<br>
-       				있지요. 컬리는 1년 내내 전국을 뒤져<br>
-       				최고만을 전해 드립니다.</p>
-       			</div>
-       			<div class="note">
-       			<center>
-       				<div class="note_img" style="background-image: url('/farm/resources/images/contract.png'); background-size: cover;"></div>
-       				</center>
-       				<p class="note_title">직영 혹은 농가와의<br>
-       				계약재배를 통해 철저한 품질<br>
-       				관리가 가능합니다.</p>
-       				<p class="note_content">
-       				자연의 힘으로 길러낸 유기 농산물은<br>
-       				기후에 영향을 많이 받습니다. 예를 들어<br>
-       				같은 파프리카라 하더라도 한기물과<br>
-       				한여름에 맞는 최고의 산지가 따로<br>
-       				있지요. 컬리는 1년 내내 전국을 뒤져<br>
-       				최고만을 전해 드립니다.</p>
-       			</div>
-       			<div class="note">
-       			<center>
-       				<div class="note_img" style="background-image: url('/farm/resources/images/delivery.png'); background-size: cover;"></div>
-       				</center>
-       				<p class="note_title">국내 온라인 업체 최초로 식품 전용<br>
-       				자체 물류 창고와 냉장 차량을<br>
-       				이용해 더 신선 합니다.</p>
-       				<p class="note_content">
-       				자연의 힘으로 길러낸 유기 농산물은<br>
-       				기후에 영향을 많이 받습니다. 예를 들어<br>
-       				같은 파프리카라 하더라도 한기물과<br>
-       				한여름에 맞는 최고의 산지가 따로<br>
-       				있지요. 컬리는 1년 내내 전국을 뒤져<br>
-       				최고만을 전해 드립니다.</p>
-       			</div> --%>
+				
 				<ul class="tabs">
 					<li class="tab-link current" data-tab="tab-1"><div
 							class="menu introduce">소개</div></li>
@@ -599,7 +546,7 @@ function changeprice(){
 
 				<!-- introduce_box -->
 				<div id="tab-1" class="tab-content current">
-					<div class="introduce_box">${market.market_intro }</div>
+					<div class="introduce_box">${market.market_intro }<br><br></div>
 				</div>
 				<!-- introduce_box -->
 
@@ -636,9 +583,9 @@ function changeprice(){
 							<!-- 검색 -->
 							<div class="search_box">
 								<span class='green_window'> <input type='text'
-									class='input_text' name='reviewSearch' />
+									class='input_text' id='qnaSearch' />
 								</span>
-								<button type='submit' class='sch_smit'>검색</button>
+								<button type='button' onclick='qnaSearchPage(1);' class='sch_smit'>검색</button>
 							</div>
 						</div>
 					</div>

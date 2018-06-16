@@ -61,12 +61,11 @@
 				</div>
 				<div class="tab_main">
 					<ul class="tabs">
-						<li class="active" rel="tab1">공지사항</li>
-						<li rel="tab2">구인구직</li>
+						<li class="active" rel="tab2">구인구직</li>
 						<li rel="tab3">시세정보</li>
 					</ul>
 					<div class="tab_container">
-						<div id="tab1" class="tab_content">
+						<!-- <div id="tab1" class="tab_content">
 							<ul>
 								<li><a href="#">이것은 두 번째 탭의</a></li>
 								<li><a href="#">이것은 두 번째 탭의</a></li>
@@ -74,7 +73,7 @@
 								<li><a href="#">이것은 두 번째 탭의</a></li>
 								<li><a href="#">이것은 두 번째 탭의</a></li>
 							</ul>
-						</div>
+						</div> -->
 						<!-- #tab1 -->
 						<div id="tab2" class="tab_content"><table class="table2"></table><button class="button2" onclick="movejob()">더보기</button></div>
 						<!-- #tab2 -->

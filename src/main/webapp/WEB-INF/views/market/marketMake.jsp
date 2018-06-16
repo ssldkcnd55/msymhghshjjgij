@@ -29,7 +29,68 @@
 		}
 	}
 </script>
+<script>
+$(function(){
+	$.ajax({
+		url : "ajaxCategory.do",
+		type : "post",
+		dataType : "JSON",
+		success : function(obj) {
+			var objStr = JSON.stringify(obj);
+			var jsonObj = JSON.parse(objStr);
+			
+			var outValues = "<option value=''>분류 선택</option>";
+			
+			for ( var i in jsonObj.list) {
+				outValues += "<option value='"+jsonObj.list[i].category_main+"'>"+jsonObj.list[i].category_main+"</option>";
+			}
+			$('#CategoryMain').html(outValues);
+		},error : function(request, status, errorData) {
+			console.log("error code : " + request.status + "\nmessage"
+					+ request.responseText + "\nerror" + errorData);
+		}
+	});
 
+	 $('#CategoryMain').change(function(){
+		$.ajax({
+			url : "ajaxCategoryName.do",
+			type : "post",
+			data : {
+				
+				category_main : $(this).val()
+			},
+			dataType : "JSON",
+			success : function(obj) {
+				var objStr = JSON.stringify(obj);
+				var jsonObj = JSON.parse(objStr);
+				$('#CategoryName').removeAttr('disabled'); 
+				var outValues = "<option value=''>분류 선택</option>";
+				
+				for ( var i in jsonObj.list) {
+					outValues += "<option value='"+jsonObj.list[i].category_no+"'>"+jsonObj.list[i].category_name+"</option>";
+				}
+				$('#CategoryName').html(outValues);
+			},error : function(request, status, errorData) {
+				console.log("error code : " + request.status + "\nmessage"
+						+ request.responseText + "\nerror" + errorData);
+			}
+		});
+	}); 
+	 $('#CategoryName').change(function(){
+		 alert($(this).val());
+		 $('#category_no').val($(this).val());
+		 alert($('#category_no').val());
+	 });
+ });
+function categoryCheck(){
+	if($('#category_no').val() != ''){
+		return true;
+	}else{
+		alert('카테고리를 선택해주세요.');
+		return false;
+	}
+}
+</script>
 </head>
 <body>
 	<div id="top_line"></div>
@@ -44,8 +105,9 @@
 				<br> <br> <br>
 
 				<div class="div">
-				<form action="insertMarketMake.do" method="post" enctype="multipart/form-data">
+				<form action="insertMarketMake.do" method="post" enctype="multipart/form-data" onsubmit='return categoryCheck()'>
 					<input type="hidden" name="member_id" value="${loginUser.member_id }">
+					<input type="hidden" name="category_no" id="category_no" value="">
 					<table class="jung_table">
 						<tbody>
 							<tr class="tr">
@@ -62,6 +124,16 @@
 								</td>
 								<td colspan="3" class="td2"><input type="text"
 									name="market_note" class="input_text_box"> <br></td>
+							</tr>
+							<tr class="tr">
+								<td class="td">
+
+									<p class="p">카테고리</p>
+								</td>
+								<td colspan="3" class="td2" id="categoryTd">
+									대분류<select id='CategoryMain'></select>
+									소분류<select id="CategoryName" disabled></select>
+								</td>
 							</tr>
 							<tr class="tr">
 								<td class="td">
@@ -186,14 +258,13 @@
 
 		function showHTML() {
 			var sHTML = oEditors.getById["ir1"].getIR();
-			alert(sHTML);
 		}
 
 		function submitContents(elClickedObj) {
 			oEditors.getById["ir1"].exec("UPDATE_CONTENTS_FIELD", []); // 에디터의 내용이 textarea에 적용됩니다.
 
 			// 에디터의 내용에 대한 값 검증은 이곳에서 document.getElementById("ir1").value를 이용해서 처리하면 됩니다.
-			alert(document.getElementById("ir1").value);
+			/* alert(document.getElementById("ir1").value); */
 			try {
 				elClickedObj.form.submit();
 			} catch (e) {

@@ -98,6 +98,8 @@
 	width:33%;
 	float:left;
 	height:aucto;
+	padding-top:10px;
+	padding-left:10px;
 }
 
 .1{
@@ -112,7 +114,7 @@
 }
 
 .auction_cart_center_div{
-	padding-top:19px;
+	padding-top:10px;
 	width:33%;
 	float:left;
 	height:aucto;
@@ -124,12 +126,18 @@
 	width:28%;
 	float:right;
 	height:auto;
+	
 	/* padding-top:36px; */
 	
 }
 
 
 /* 옥션 입찰 버튼 */
+.auction_bidding:hover{
+	background-color:#7e5957;
+	
+}
+
 .auction_bidding{
 	cursor: pointer;
 	margin-right:5px;
@@ -140,17 +148,22 @@
 	disply:inline-block;
 	font-size:12pt;
 	font-weight: bold;
-	color:gray;
+	color:#000000;
 	/* margin-left:761px; */
 	/* margin-bottom:10px; */
-	background: #e4dcbc;
+	background: #c7aead;
 	outline: none;
     overflow: visible;
     border-radius: 5px;
     float:right;
+    
 }
 
 /* 옥션 바로구매 버튼 */
+
+.auction_buy:hover{
+	background-color:#7e5957;
+}
 .auction_buy{
 	
 	cursor: pointer;
@@ -162,10 +175,10 @@
 	disply:inline-block;
 	font-size:12pt;
 	font-weight: bold;
-	color:gray;
+	color:#000000;
 	/* margin-left:761px; */
 	/* margin-bottom:10px; */
-	background: #e4dcbc;
+	background: #c7aead;
 	outline: none;
     overflow: visible;
     border-radius: 5px;
@@ -633,7 +646,6 @@ font-size: 14pt;
 	 font-size: 11pt; margin-bottom: 0 ;
 	 font-weight: bold;
 	 color:#4c4c4c;
-}
 
 .content{
 	font-size: 10pt; 
@@ -645,7 +657,27 @@ font-size: 14pt;
     
     
  .content.pr{
-font-weight:bold;
- margin :5px 5px 0 0;
+	font-weight:bold;
+ 	margin :5px 5px 0 0;
  
  }
+
+
+
+.auction_backgroundtable tr:nth-child(1){
+	background: #ece6ce;
+}
+
+
+.auction_backgroundtable tr th:nth-child(1){
+	width:12%;
+}
+.auction_backgroundtable tr th:nth-child(2){
+	width:35%;
+}
+.auction_backgroundtable tr th:nth-child(3){
+	width:53%;
+}
+ 
+
+ 

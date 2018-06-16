@@ -15,8 +15,7 @@
    type="text/css" />
 <link href="/farm/resources/css/dailyList.css" rel="stylesheet"
    type="text/css" />
-<!-- <link href="/farm/resources/css/marketDetail.css" rel="stylesheet"
-   type="text/css" /> -->
+
 <link href="/farm/resources/css/payList.css" rel="stylesheet"
    type="text/css" />
 
@@ -204,8 +203,6 @@ $(function(){
                      }
                }
                 
-              /*  $("#topprice").text(jsonObj.auction_history_price);   */
-               
             }
          });
          return result;
@@ -362,7 +359,7 @@ $(function(){
                    jsonObj.day+"일&nbsp;"+jsonObj.hour+"시간 &nbsp;"+
                      jsonObj.min+"분 &nbsp;";  
                      
-             }else if(jsonObj.status == 0){
+              }else if(jsonObj.status == 0){
                 outValues+="경매 준비중";
                 outValues2+="경매 준비중";
              }else if(jsonObj.status == 2){
@@ -452,8 +449,13 @@ $(function(){
 	 function auction_Buy(){
 		var buycheck = confirm("정말로 즉시 구매 하시겠습니까?");
 		if(buycheck == true){
-			/* location.href="/farm/makeAuctionPayment.do?auction_no=${auction.auction_no}&member_id=${loginUser.member_id}"; */
+			/*  var input = document.getElementById('buy_button');
+			input.setAttribute("disabled","disabled");
+			var input2 = document.getElementById('bidding_button');
+			input2.setAttribute("disabled","disabled");  */
+			
 			location.href="makeAuctionPayment.do?auction_no=${auction.auction_no}&member_id=${loginUser.member_id}";
+		
 		}
 		
 		
@@ -462,10 +464,10 @@ $(function(){
 
    
    //경매 이력
-   function auction_background(no){
+   function Background(no){
       var auction_no = no.id;
       var member_id = '${auction.member_id}';
-      alert("auction_no : "+auction_no);
+    /*   alert("auction_no : "+auction_no); */
       $.ajax({
          url : "auction_background.do",
          type:"post",
@@ -475,30 +477,27 @@ $(function(){
          },
          dataType: "JSON",
          success: function(data){
-            alert("실행: "+data);
+        	 console.log(data);
             var objStr = JSON.stringify(data);
             var jsonObj = JSON.parse(objStr);
             
-            var outValues = "";
-            
-            if(jsonObj.list.size > 0){
-            outValues += "<tr><th width='12%'>번호</th><th width='50%'>판매자</th><th width='13%'>제목</th><th width='15%'>작성일</th></tr>"; 
+            var outValues = "<tr><th >번호</th><th >판매자</th><th >제목</th></tr>"; 
             
             for(var i in jsonObj.list){
                   outValues += 
                      "<tr>"+
-                     "<td>"+json.list[i].rnum+"</td>"+
-                     "<td>"+json.list[i].member_id+"</td>"+
-                     "<td>"+json.list[i].auction_title+"</td>"+
+                     "<td style='text-align:center;'>"+i+"</td>"+
+                     "<td>"+jsonObj.list[i].member_id+"</td>"+
+                     "<td>"+jsonObj.list[i].auction_title+"</td>"+
                      "</tr>";
                }
             $(".auction_backgroundtable").html(outValues);
-            }else{
-               outValues += 
+          
+             /*   outValues += 
                "<div style='width:100%; height:200px;margin-top:20%;text-align:center;font-size:20pt;font-weight: bold;color:gray;'>"+
                "경매 이력이 없습니다.</div>";
             $(".auction_background").html(outValues);
-            }
+            } */
          },error: function(request,status,errorData){
                alert("error code : " + request.status + "\nmessage" + 
                        request.responseText + "\nerror" + errorData);
@@ -586,7 +585,7 @@ $(function(){
                      class="menu introduce">소개</div></li>
                <li class="tab-link" data-tab="tab-2"><div class="menu daily" id="${auction.auction_no}" onclick="auction_biddingList(this);">입찰내역</div></li>
                <li class="tab-link" data-tab="tab-3"><div
-                     class="menu question" id="${auction.auction_no}" onclick="auction_background(this);">경매이력</div></li>
+                     class="menu question" id="${auction.auction_no}" onclick="Background(this);">경매이력</div></li>
                <li class="tab-link" data-tab="tab-4">
                   <div id="menu"
                      class="menu review" onclick="auctionQnA(1);">문의</div>
@@ -629,13 +628,10 @@ $(function(){
             </div>
             <!-- Daily box -->
             <div id="tab-3" class="tab-content">
-               <div class="auction_background" style="width:100% height:auto;">
-               <table class="auction_backgroundtable">
-                  <!-- <tr>
-                     <th class="bidder">번호</th>
-                     <th class="current_price">판매자</th>
-                     <th>제목</th>
-                  </tr>  -->
+               <div class="auction_background" style="width:97%;height:500px;padding:10px;border:3px solid #ddd;" >
+               <h2 style="margin-left:42%;margin-bottom:20px;">경매 이력</h2>
+               <table class="auction_backgroundtable" style="width:90%;margin-left:45px;">
+                  
                </table>
                
                </div>
@@ -712,21 +708,33 @@ $(function(){
                   <span class="goods-view-show-option-button-value">입찰</span>
                </button>
                
+               <c:if test="${ empty sessionScope.loginUser  }">
                <div id="flow-cart-content"
                   class="goods-view-flow-cart-content __active">
-                  <!-- <form action="/farm/insertAuctionBidding.do" onsubmit="return checkAuction_bidding()"  method="post"> -->
+                   <div style="padding-bottom:10px;padding-left:10px;font-weight: bold;font-size:13pt;">${auction.auction_title }</div>
+                   <div style="background:#f3f3f3; height:100px;;width:100%;padding:5px;border:2px solid #e6e6e6;">
+                  		<div style="width:100%; height:auto; font-weight: bold; font-size:15pt; color:gray; text-align:center;padding-top:32px;">
+                  		로그인이 필요한 서비스입니다.
+						</div>
+                   </div>
+               </div>
+               </c:if>
+               
+               <c:if test="${not empty sessionScope.loginUser  }">
+               <div id="flow-cart-content"
+                  class="goods-view-flow-cart-content __active">
                   <form action="/farm/insertAuctionBidding.do" name="bidding" id="bidsubmit" method="post" onsubmit="return bidcheck();">
                   <input type="hidden" name="auction_no" value="${auction.auction_no}" id="no">
                   <input type="hidden" name="member_id" value="${loginUser.member_id}">
+                  <div style="padding-bottom:10px;padding-left:10px;font-weight: bold;font-size:13pt;">${auction.auction_title }</div>
+                  <div style="background:#f3f3f3; height:100px;;width:100%;padding:5px;border:2px solid #e6e6e6;">
+                  
                   <div class="auction_cart_info_div">
                      <table class="auction_cart_info_table">
                         <tr>
-                           <td colspan="2" class="1">${auction.auction_title }</td>
-                        </tr>
-                        <tr>
                            <td class="2">시작일</td>
                            <td>:  </td>
-                           <td>${auction.auction_startdate }</td>
+                           <td>${auction.auction_startdate}</td>
                         </tr>
                         <tr>
                            <td class="2">마감일</td>
@@ -743,7 +751,7 @@ $(function(){
                   
                   <div class="auction_cart_center_div">
                      <table>
-                        <tr>
+                        <tr >
                            <td>경매시작값</td>
                            <td>:  </td>
                            <td>${auction.auction_startprice}</td>
@@ -764,22 +772,40 @@ $(function(){
 
                   </div>
                   
-                  <div class="auction_cart_right_div">
+              
+                <c:choose>
+                 <c:when test="${auction.auction_status eq 1 }">
+                  	<div class="auction_cart_right_div">
                         <table>
                            <tr>
-                           <td id="a"></td>
+                           <td id="a" colspan="3" style=" width:100%;padding:10px 10px 10px 40px;font-weight: bold;font-size:15pt;">
+                           </td>
                            </tr>
                            <tr class="button_buy">
                               <td><input type="submit" id="bidding_button"
                                  class="auction_bidding" value="입찰" /></td>
-                              <td><button class="auction_buy" id="buy_button"><a href="javascript:auction_Buy();">즉시구매</a></button></td>
+                              <td><button type="button"  class="auction_buy" id="buy_button" onclick="auction_Buy();">즉시구매</button></td>
                            </tr>
-
                         </table>
                      </div>
-                  </form>
+                    </c:when>
+                    
+                    <c:otherwise>
+                  		<table>
+                           <tr>
+                           	<td id="a" colspan="2" style="width:300px;; padding:35px 0px 0px 20px ; font-weight: bold;font-size:15pt;text-align:center;"></td>
+                           </tr>
+                         </table>
+                   </c:otherwise>
+                  
+                  </c:choose>
                
+                
+                    </div>
+                  </form>
+               	
                </div>
+               </c:if>
                
                <br><br><br><br>
             </div>

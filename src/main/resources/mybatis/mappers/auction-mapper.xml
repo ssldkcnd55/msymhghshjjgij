@@ -62,7 +62,12 @@
 	<select id="selectAuctionDetail" parameterType="auction"
 		flushCache="true" resultType="auction">
 	<![CDATA[
-		select * from auction where auction_no=#{auction_no}
+		select 
+		 auction_no,member_id, category_no, auction_title, auction_note,auction_img, 
+		 auction_intro,auction_status,auction_startprice,
+		auction_directprice, to_char(auction_startdate,'YYYY-MM-DD') as "auction_startdate",
+		to_char(auction_enddate,'YYYY-MM-DD') as "auction_enddate"
+		from auction where auction_no=#{auction_no}
 	]]>
 	</select>
 
@@ -211,7 +216,7 @@
       	when auction_startdate > sysdate then '0'
       	else '2'
      	end 
-    	where  not auction_status in('2','3') 
+    	where  not auction_status in('2','3','4') 
 	]]>
 	</update>
 	
@@ -380,8 +385,14 @@
 	</if>
 	</select>
 	
+	<update id="updateAuctionStatusDeadline" parameterType="int" flushCache="true">
+	<![CDATA[
+		update auction set auction_status = '4' where (select auction_enddate from auction where auction_no = #{auction_no}) + 3 <= sysdate
+		and auction_no = #{auction_no}
+	]]>
+	</update>
 	
-		<update id="updateAuctionBuyComplete" parameterType="int" flushCache="true">
+	<update id="updateAuctionBuyComplete" parameterType="int" flushCache="true">
 	<![CDATA[
 		update auction set auction_status = '3' where auction_no = #{auction_no}
 	]]>
@@ -502,6 +513,14 @@
 	]]>
 	</select>
 	
+	<select id="selectStatus_4" resultType="Auction">
+	<![CDATA[
+		select a.auction_no from auction a, auction_history ah
+		where a.auction_no = ah.auction_no
+		and a.auction_status = '4' group by a.auction_no
+	]]>
+	</select>
+	
 	<select id="selectWinBid"  parameterType="int"  resultType="AuctionCommon">
 	<![CDATA[
 		select ah.auction_no,ah.member_id,ah.auction_history_price,a.auction_title 
@@ -512,5 +531,10 @@
 	]]>
 	</select>
 	
-
+	<select id="selectMiscarry" parameterType="String" resultType="int">
+		<![CDATA[
+		select count(ah.member_id) from auction_history ah, auction a where a.auction_status = '4' and a.auction_no = ah.auction_no 
+		and ah.member_id = #{member_id}
+		]]>
+	</select>
 </mapper>

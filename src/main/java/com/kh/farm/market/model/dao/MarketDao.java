@@ -16,6 +16,7 @@ import com.kh.farm.market.model.vo.Market;
 import com.kh.farm.market.model.vo.Reply;
 import com.kh.farm.market.model.vo.Review;
 import com.kh.farm.market.model.vo.UnderReply;
+import com.kh.farm.payment.model.vo.Payment;
 import com.kh.farm.qna.model.vo.Market_qna;
 
 @Repository
@@ -262,5 +263,27 @@ public class MarketDao {
 	public List<Category> selectCategoryList(SqlSessionTemplate sqlSession) {
 		// TODO Auto-generated method stub
 		return sqlSession.selectList("market.selectCategoryList");
+	}
+
+	public List<Category> selectCategoryNameList(SqlSessionTemplate sqlSession,String category_main) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList("market.selectCategoryNameList",category_main);
+	}
+	public ArrayList<Market> selectSellerMarketHistory(SqlSessionTemplate sqlSession, int currentPage, PageNumber pa) {
+		// TODO Auto-generated method stub
+		int startRow =(currentPage-1)*10+1; //1~10, 11~20 계산할 거 ex) 1, 11, 21, 31,)
+		int endRow = startRow+9;
+		PageNumber pnum = new PageNumber();
+		pnum.setStartRow(startRow);
+		pnum.setEndRow(endRow);
+		pnum.setMember_id(pa.getMember_id());
+		List<Market> ac = sqlSession.selectList("market.selectSellerMarketHistory",pnum);
+		return (ArrayList)ac;
+	}
+
+	public int selectSellerMarketHistoryCount(SqlSessionTemplate sqlSession) {
+		// TODO Auto-generated method stub
+		int listCount = sqlSession.selectOne("market.selectSellerMarketHistoryCount");
+		return listCount;
 	}
 }

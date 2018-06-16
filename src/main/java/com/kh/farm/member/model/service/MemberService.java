@@ -47,6 +47,11 @@ public interface MemberService {
 	int insertVisit(Member returnMember);
 
 	List<Visit> selectVisitList(int type);
+<<<<<<< HEAD
 	
 	List<Market> buygraph(Market market);
+=======
+
+	int updateWarning(Member m);
+>>>>>>> branch 'master' of https://github.com/ssldkcnd55/msymhghshjjgij.git
 }

@@ -221,6 +221,7 @@ public class AuctionServiceImpl implements AuctionService {
 
 	@Override
 	public List<Auction> select_auction_background(String member_id) {
+		System.out.println("서비스 : "+auctionDao.select_auction_background(sqlSession, member_id));
 		return auctionDao.select_auction_background(sqlSession, member_id);
 	}
 
@@ -315,9 +316,24 @@ public class AuctionServiceImpl implements AuctionService {
 	@Override
 	public AuctionCommon selectWinBid(int auction_no) {
 		// TODO Auto-generated method stub
-		System.out.println("서비스 : "+auction_no);
 		return auctionDao.selectWinBid(sqlSession,auction_no);
 	}
+
+	@Override
+	public int updateAuctionStatusDeadline(int auction_no) {
+		// TODO Auto-generated method stub
+		return auctionDao.updateAuctionStatusDeadline(sqlSession,auction_no);
+	}
+
+	@Override
+	public List<Auction> selectStatus_4() {
+		// TODO Auto-generated method stub
+		return auctionDao.selectStatus_4(sqlSession);
+	}
 	
-	
+	@Override
+	public int selectMiscarry(String member_id) {
+		// TODO Auto-generated method stub
+		return auctionDao.selectMiscarry(sqlSession,member_id);
+	}
 }

@@ -8,15 +8,15 @@ import com.kh.farm.qna.model.vo.Market_qna;
 
 public interface QnaService {
 
-	ArrayList<Market_qna> selectQnaList(Market mk,int currentPage);
+	ArrayList<Market_qna> selectQnaList(Market mk,int currentPage,String qnaSearch);
 
-	int selectQnaCount(Market mk);
+	int selectQnaCount(Market mk,String qnaSearch);
 
 	Market_qna selectQna(int qna_no);
 
-	ArrayList<MainQna> selectMainQnaList(int currentPage);
+	ArrayList<MainQna> selectMainQnaList(int currentPage, String qnaSearch);
 
-	int selectMainQnaCount();
+	int selectMainQnaCount(String qnaSearch);
 
 	MainQna selectMainQnaDetail(int qna_no);
 

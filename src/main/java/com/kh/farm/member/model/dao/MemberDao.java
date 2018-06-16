@@ -213,9 +213,15 @@ public class MemberDao {
 		}
 	}
 
+<<<<<<< HEAD
 	public List<Market> buygraph( SqlSessionTemplate sqlSession  ,Market market) {
 		// TODO Auto-generated method stub
 		return sqlSession.selectList("member.buygraph",market);
+=======
+	public int updateWarning(SqlSessionTemplate sqlSession, Member m) {
+		// TODO Auto-generated method stub
+		return sqlSession.update("member.updateWarning", m);
+>>>>>>> branch 'master' of https://github.com/ssldkcnd55/msymhghshjjgij.git
 	}
 
 	
