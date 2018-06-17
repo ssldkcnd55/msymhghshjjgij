@@ -975,8 +975,9 @@ public class AuctionController {
 	@RequestMapping("bidDeadline.do")
 	@ResponseBody
 	public void bidDeadline(HttpServletResponse response) throws IOException{
+		System.out.println("유찰 검사 실행");
 		ArrayList<Auction> list = auctionService.selectStatus_2();//경매 상태 2 것만 넘버 가져오기
-		System.out.println("list : "+list.toString());
+		//System.out.println("경매 상태 2 list : "+list.toString());
 		JSONArray jarr =new JSONArray();
 		
 		for(Auction a : list) {
@@ -984,17 +985,19 @@ public class AuctionController {
 		}
 		
 		List<Auction> list2 = auctionService.selectStatus_4();//경매 상태 4 것만 넘버 가져오기
-		
+		//System.out.println("경매 상태 4 : " + list2.toString());
 		
 		for(Auction a2 : list2) {
 			//경매 상태 4인 경매의 낙찰인 뽑아오기
-			AuctionCommon ac2 = auctionService.selectWinBid(a2.getAuction_directprice());
+			AuctionCommon ac2 = auctionService.selectWinBid(a2.getAuction_no());
+			//System.out.println("유찰인 : " + ac2.getMember_id());
 			int warningCount = auctionService.selectMiscarry(ac2.getMember_id());
 			//뽑아온 4인 경매 낙찰인 수로 member warning_count 업데이트
 			Member m = new Member();
 			m.setMember_id(ac2.getMember_id());
 			m.setMember_warning_count(warningCount);
 			int updateWarning = memberService.updateWarning(m);
+			System.out.println("유찰 업데이트 확인 : " + updateWarning);
 		}
 	}
 	
