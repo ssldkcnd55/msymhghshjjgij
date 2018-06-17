@@ -664,7 +664,7 @@ font-size: 14pt;
 
 
 
-.auction_backgroundtable tr:nth-child(1){
+#table_tr_1{
 	background: #ece6ce;
 }
 
