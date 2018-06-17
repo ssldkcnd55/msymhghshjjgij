@@ -9,6 +9,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Repository;
 
 import com.kh.farm.common.model.vo.PageNumber;
+import com.kh.farm.market.model.vo.Market;
 import com.kh.farm.member.exception.LoginFailException;
 import com.kh.farm.member.model.vo.Member;
 import com.kh.farm.visit.model.vo.Visit;
@@ -18,55 +19,55 @@ public class MemberDao {
 
 	@Autowired
 	private BCryptPasswordEncoder pwdEncoder;
-	
-	public Member selectCheckId(Member member,SqlSessionTemplate sqlsession) {
-		Member memberId=sqlsession.selectOne("member.selectCheckId",member);
+
+	public Member selectCheckId(Member member, SqlSessionTemplate sqlsession) {
+		Member memberId = sqlsession.selectOne("member.selectCheckId", member);
 		return memberId;
 	}
-	
-	public int insertMember(Member member,SqlSessionTemplate sqlSession) {
+
+	public int insertMember(Member member, SqlSessionTemplate sqlSession) {
 		// TODO Auto-generated method stub
 		int result = sqlSession.insert("member.insertMember", member);
 		return result;
 	}
 
-	public Member loginCheck(Member member, SqlSessionTemplate sqlSession) throws LoginFailException{
+	public Member loginCheck(Member member, SqlSessionTemplate sqlSession) throws LoginFailException {
 		Member resultMember = sqlSession.selectOne("member.loginMember", member);
-		if(resultMember != null) {
-			if(pwdEncoder.matches(member.getMember_pwd(), resultMember.getMember_pwd())) {
+		if (resultMember != null) {
+			if (pwdEncoder.matches(member.getMember_pwd(), resultMember.getMember_pwd())) {
 				return resultMember;
-			}else {
-				//return null;
+			} else {
+				// return null;
 				throw new LoginFailException("로그인 실패");
 			}
-		}else {
+		} else {
 			throw new LoginFailException("로그인 실패");
 		}
 	}
 
 	public Member findId(Member member, SqlSessionTemplate sqlSession) {
-		
-		Member memberId = sqlSession.selectOne("member.findId",member);
-		
+
+		Member memberId = sqlSession.selectOne("member.findId", member);
+
 		return memberId;
 	}
 
 	public int updatePwd(Member member, SqlSessionTemplate sqlSession) {
 		System.out.println(member.getMember_id());
 		System.out.println(member.getMember_pwd());
-		int result = sqlSession.update("member.updatePwd",member);
+		int result = sqlSession.update("member.updatePwd", member);
 		System.out.println("111");
 		return result;
 	}
 
 	public Member selectMember(String member_id2, SqlSessionTemplate sqlSession) {
-		
+
 		return sqlSession.selectOne("member.selectMember", member_id2);
 	}
 
 	public List<Member> selectMemberList(int currentPage, SqlSessionTemplate sqlSession) {
-		int startRow =(currentPage-1)*10+1; //1~10, 11~20 계산할 거 ex) 1, 11, 21, 31,)
-		int endRow = startRow+9;
+		int startRow = (currentPage - 1) * 10 + 1; // 1~10, 11~20 계산할 거 ex) 1, 11, 21, 31,)
+		int endRow = startRow + 9;
 		PageNumber pnum = new PageNumber();
 		pnum.setStartRow(startRow);
 		pnum.setEndRow(endRow);
@@ -88,9 +89,9 @@ public class MemberDao {
 		// TODO Auto-generated method stub
 		return sqlSession.update("member.change_withdraw", member_id);
 	}
-	
-	public String nowPwdCheck(String member_id,SqlSessionTemplate sqlSession) {
-		return sqlSession.selectOne("member.nowPwdCheck",member_id);
+
+	public String nowPwdCheck(String member_id, SqlSessionTemplate sqlSession) {
+		return sqlSession.selectOne("member.nowPwdCheck", member_id);
 	}
 
 	public int updateAddr(Member member, SqlSessionTemplate sqlSession) {
@@ -99,8 +100,8 @@ public class MemberDao {
 	}
 
 	public List<Member> selectFarmer(SqlSessionTemplate sqlSession, int currentPage) {
-		int startRow =(currentPage-1)*10+1; //1~10, 11~20 계산할 거 ex) 1, 11, 21, 31,)
-		int endRow = startRow+9;
+		int startRow = (currentPage - 1) * 10 + 1; // 1~10, 11~20 계산할 거 ex) 1, 11, 21, 31,)
+		int endRow = startRow + 9;
 		PageNumber pnum = new PageNumber();
 		pnum.setStartRow(startRow);
 		pnum.setEndRow(endRow);
@@ -108,8 +109,8 @@ public class MemberDao {
 	}
 
 	public List<Member> selectCommon(SqlSessionTemplate sqlSession, int currentPage) {
-		int startRow =(currentPage-1)*10+1; //1~10, 11~20 계산할 거 ex) 1, 11, 21, 31,)
-		int endRow = startRow+9;
+		int startRow = (currentPage - 1) * 10 + 1; // 1~10, 11~20 계산할 거 ex) 1, 11, 21, 31,)
+		int endRow = startRow + 9;
 		PageNumber pnum = new PageNumber();
 		pnum.setStartRow(startRow);
 		pnum.setEndRow(endRow);
@@ -117,8 +118,8 @@ public class MemberDao {
 	}
 
 	public List<Member> selectApproval(SqlSessionTemplate sqlSession, int currentPage) {
-		int startRow =(currentPage-1)*10+1; //1~10, 11~20 계산할 거 ex) 1, 11, 21, 31,)
-		int endRow = startRow+9;
+		int startRow = (currentPage - 1) * 10 + 1; // 1~10, 11~20 계산할 거 ex) 1, 11, 21, 31,)
+		int endRow = startRow + 9;
 		PageNumber pnum = new PageNumber();
 		pnum.setStartRow(startRow);
 		pnum.setEndRow(endRow);
@@ -126,8 +127,8 @@ public class MemberDao {
 	}
 
 	public List<Member> selectWithdraw(SqlSessionTemplate sqlSession, int currentPage) {
-		int startRow =(currentPage-1)*10+1; //1~10, 11~20 계산할 거 ex) 1, 11, 21, 31,)
-		int endRow = startRow+9;
+		int startRow = (currentPage - 1) * 10 + 1; // 1~10, 11~20 계산할 거 ex) 1, 11, 21, 31,)
+		int endRow = startRow + 9;
 		PageNumber pnum = new PageNumber();
 		pnum.setStartRow(startRow);
 		pnum.setEndRow(endRow);
@@ -135,8 +136,8 @@ public class MemberDao {
 	}
 
 	public List<Member> selectWarning(SqlSessionTemplate sqlSession, int currentPage) {
-		int startRow =(currentPage-1)*10+1; //1~10, 11~20 계산할 거 ex) 1, 11, 21, 31,)
-		int endRow = startRow+9;
+		int startRow = (currentPage - 1) * 10 + 1; // 1~10, 11~20 계산할 거 ex) 1, 11, 21, 31,)
+		int endRow = startRow + 9;
 		PageNumber pnum = new PageNumber();
 		pnum.setStartRow(startRow);
 		pnum.setEndRow(endRow);
@@ -169,8 +170,8 @@ public class MemberDao {
 	}
 
 	public List<Member> selectMemberName(SqlSessionTemplate sqlSession, String keyword, int currentPage) {
-		int startRow =(currentPage-1)*10+1; //1~10, 11~20 계산할 거 ex) 1, 11, 21, 31,)
-		int endRow = startRow+9;
+		int startRow = (currentPage - 1) * 10 + 1; // 1~10, 11~20 계산할 거 ex) 1, 11, 21, 31,)
+		int endRow = startRow + 9;
 		PageNumber pnum = new PageNumber();
 		pnum.setStartRow(startRow);
 		pnum.setEndRow(endRow);
@@ -179,8 +180,8 @@ public class MemberDao {
 	}
 
 	public List<Member> selectMemberId(SqlSessionTemplate sqlSession, String keyword, int currentPage) {
-		int startRow =(currentPage-1)*10+1; //1~10, 11~20 계산할 거 ex) 1, 11, 21, 31,)
-		int endRow = startRow+9;
+		int startRow = (currentPage - 1) * 10 + 1; // 1~10, 11~20 계산할 거 ex) 1, 11, 21, 31,)
+		int endRow = startRow + 9;
 		PageNumber pnum = new PageNumber();
 		pnum.setStartRow(startRow);
 		pnum.setEndRow(endRow);
@@ -190,32 +191,37 @@ public class MemberDao {
 
 	public Member selectIdCheck(SqlSessionTemplate sqlSession, String mail_to) {
 		// TODO Auto-generated method stub
-		return sqlSession.selectOne("member.selectIdCheck",mail_to);
+		return sqlSession.selectOne("member.selectIdCheck", mail_to);
 	}
 
 	public int insertNaverSignUp(Member member, SqlSessionTemplate sqlSession) {
 		// TODO Auto-generated method stub
-		return sqlSession.insert("member.insertNaverSignUp",member);
+		return sqlSession.insert("member.insertNaverSignUp", member);
 	}
 
 	public int insertVisit(Member returnMember, SqlSessionTemplate sqlSession) {
 		// TODO Auto-generated method stub
-		return sqlSession.insert("visit2.insertVisit",returnMember);
+		return sqlSession.insert("visit2.insertVisit", returnMember);
 	}
 
-	public List<Visit> selectVisitList(SqlSessionTemplate sqlSession,int type) {
+	public List<Visit> selectVisitList(SqlSessionTemplate sqlSession, int type) {
 		// TODO Auto-generated method stub
-		if(type==1) {
-		return sqlSession.selectList("visit2.selectVisitList");
-		}else {
+		if (type == 1) {
+			return sqlSession.selectList("visit2.selectVisitList");
+		} else {
 			return sqlSession.selectList("visit2.selectVisitMonthList");
 		}
+	}
+
+	public List<Market> buygraph(SqlSessionTemplate sqlSession, Market market) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList("member.buygraph", market);
 	}
 
 	public int updateWarning(SqlSessionTemplate sqlSession, Member m) {
 		// TODO Auto-generated method stub
 		return sqlSession.update("member.updateWarning", m);
+
 	}
 
-	
 }

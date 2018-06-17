@@ -29,11 +29,30 @@ function auction_update(){
 	});
 	}
 
+//경매 유찰 검사
+var bidDeadlineIn;
+bidDeadlineIn = setInterval(function(){bidDeadline()}, 5000);
+
+function bidDeadline(){
+	$.ajax({
+		url : "bidDeadline.do",
+		type : 'post',
+		success : function() {
+			//alert("갱신완료");
+		}
+		,error: function(request,status,errorData){
+		 console.log("header.jsp/bidDeadline");
+         console.log("error code : " + request.status + "\nmessage" + 
+         request.responseText + "\nerror" + errorData); 
+       }
+	});
+	
+}
 //경매 낙찰 검사
 /* var bidding;
 bidding = setInterval(function(){auction_bidding()}, 3000); */
  
-function auction_bidding(){
+/* function auction_bidding(){
 
 	
 	 $.ajax({
@@ -78,7 +97,7 @@ function getBasketCount(member_id)
                     request.responseText + "\nerror" + errorData); 
            }
 	});
-}
+} */
 
 	/* $(function() {
 

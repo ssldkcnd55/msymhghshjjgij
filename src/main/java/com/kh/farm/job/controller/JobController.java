@@ -20,6 +20,7 @@ import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -27,6 +28,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.farm.auction.model.vo.Auction;
+import com.kh.farm.common.model.vo.PageNumber;
 import com.kh.farm.job.model.service.JobService;
 import com.kh.farm.job.model.vo.Job;
 import com.kh.farm.notice.model.vo.Notice;
@@ -39,6 +41,7 @@ public class JobController {
 	// 구인구직페이징처리
 	@RequestMapping(value = "jobList.do")
 	public void jobList(HttpServletResponse response, HttpServletRequest request) throws IOException {
+
 		int limitPage = 10;
 		int currentPage = 1;
 		if (request.getParameter("page") != null) {
@@ -57,10 +60,10 @@ public class JobController {
 		JSONObject json = new JSONObject();
 		JSONArray jarr = new JSONArray();
 
-		SimpleDateFormat sd = new SimpleDateFormat("yy/mm/dd");
-		Date date = new Date();
-		String today = sd.format(date);
-		System.out.println(today);
+		/*
+		 * SimpleDateFormat sd = new SimpleDateFormat("yy/mm/dd"); Date date = new
+		 * Date(); String today = sd.format(date); System.out.println(today);
+		 */
 
 		for (Job job : jobList) {
 			JSONObject jsonobj = new JSONObject();
@@ -162,6 +165,53 @@ public class JobController {
 			return "job/jobDetail";
 		}
 		return "에러페이지";
+	}
+
+	// 구인구직 검색
+	@RequestMapping("jobserach.do")
+	public void jobserach(HttpServletResponse response, HttpServletRequest request , PageNumber pp) throws IOException {
+		
+		int limitPage = 10;
+		int currentPage = 1;
+		if (request.getParameter("page") != null) {
+			currentPage = Integer.parseInt(request.getParameter("page"));
+		}
+		int listCount = jobService.selectListcount();
+		int startPage = ((int) ((double) currentPage / 5 + 0.8) - 1) * 5 + 1;
+		int endPage = startPage + 4;
+		int maxPage = (int) ((double) listCount / limitPage + 0.9);
+
+		if (endPage > maxPage) {
+			endPage = maxPage;
+		}
+		ArrayList<Job> jobList = jobService.searchJobList(currentPage,pp);
+		JSONObject json = new JSONObject();
+		JSONArray jarr = new JSONArray();
+
+		for (Job job : jobList) {
+			JSONObject jsonobj = new JSONObject();
+
+			jsonobj.put("rnum", job.getRnum());
+			jsonobj.put("job_no", job.getJob_no());
+			jsonobj.put("job_status", job.getJob_status());
+			jsonobj.put("job_title", job.getJob_title());
+			jsonobj.put("job_addr", job.getJob_addr());
+			jsonobj.put("member_id", job.getMember_id());
+			jsonobj.put("job_date", job.getJob_date().toString());
+			jsonobj.put("startPage", startPage);
+			jsonobj.put("endPage", endPage);
+			jsonobj.put("maxPage", maxPage);
+			jsonobj.put("currentPage", currentPage);
+
+			jarr.add(jsonobj);
+		}
+		json.put("list", jarr);
+		response.setContentType("application/json; charset=utf-8");
+		PrintWriter out = response.getWriter();
+		out.print(json.toString());
+		out.flush();
+		out.close();
+
 	}
 
 	// 다중이미지업로드

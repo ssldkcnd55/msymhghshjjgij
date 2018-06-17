@@ -177,11 +177,6 @@ public class AuctionServiceImpl implements AuctionService {
 	}
 
 	@Override
-	public String selectauction_startdateCheck() {
-		return auctionDao.selectauction_startdateCheck(sqlSession);
-	}
-
-	@Override
 	public ArrayList<AuctionQnA> selectAuctionCusQnaList(int currentPage) {
 		return auctionDao.selectAuctionCusQnaList(sqlSession, currentPage);
 	}
@@ -221,6 +216,7 @@ public class AuctionServiceImpl implements AuctionService {
 
 	@Override
 	public List<Auction> select_auction_background(String member_id) {
+		System.out.println("서비스 : "+auctionDao.select_auction_background(sqlSession, member_id));
 		return auctionDao.select_auction_background(sqlSession, member_id);
 	}
 

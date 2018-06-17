@@ -3,16 +3,16 @@
 .modify{
 	cursor: pointer;
 	margin-right:5px;
-	border:none;
+	border:1px solid #7e5957;
 	width:80px;
 	height:36px;
 	disply:inline-block;
-	font-size:12pt;
+	font-size:10pt;
 	font-weight: bold;
-	color:gray;
+	color:#7e5957;
 	/* margin-left:761px; */
 	/* margin-bottom:10px; */
-	background: #e4dcbc;
+	background: #ffffff;
 	outline: none;
     overflow: visible;
     border-radius: 5px;
@@ -22,16 +22,16 @@
 .delete{
 	cursor: pointer;
 	margin-right:10px;
-	border:none;
+	border:1px solid #7e5957;
 	width:80px;
 	height:36px;
 	disply:inline-block;
-	font-size:12pt;
+	font-size:10pt;
 	font-weight: bold;
-	color:gray;
+	color:#7e5957;
 	float:right;
 	/* margin-bottom:10px; */
-	background: #e4dcbc;
+	background: #ffffff;
 	outline: none;
     overflow: visible;
     border-radius: 5px;
@@ -72,16 +72,16 @@
 	cursor: pointer;
 	margin-right:5px;
 	margin-bottom:10px;
-	border:none;
+	border:1px solid #7e5957 ;
 	width:100px;
 	height:36px;
 	disply:inline-block;
-	font-size:12pt;
+	font-size:10pt;
 	font-weight: bold;
-	color:gray;
+	color:#7e5957;
 	/* margin-left:761px; */
 	/* margin-bottom:10px; */
-	background: #e4dcbc;
+	background: #ffffff;
 	outline: none;
     overflow: visible;
     border-radius: 5px;
@@ -661,10 +661,23 @@ font-size: 14pt;
  	margin :5px 5px 0 0;
  
  }
+
+
+
+.auction_backgroundtable tr:nth-child(1){
+	background: #ece6ce;
+}
+
+
+.auction_backgroundtable tr th:nth-child(1){
+	width:12%;
+}
+.auction_backgroundtable tr th:nth-child(2){
+	width:35%;
+}
+.auction_backgroundtable tr th:nth-child(3){
+	width:53%;
+}
  
- #a{
- 	
- 	
- }
- 
+
  

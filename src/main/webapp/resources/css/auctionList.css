@@ -5,16 +5,16 @@
 .auction_write{
 	cursor: pointer;
 	margin-right:14px;
-	border:none;
+	border:1px solid #7e5957;
 	width:82px;
 	height:36px;
-	disply:inline-block;
-	font-size:12pt;
+	/* disply:inline-block; */
+	font-size:10pt;
 	font-weight: bold;
 	color:gray;
 	float:right;
-	margin-bottom:10px;
-	background: #e4dcbc;
+	margin-bottom:20px;
+	background: #ffffff;
 	outline: none;
     overflow: visible;
     border-radius: 5px;	

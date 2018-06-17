@@ -86,8 +86,6 @@ public interface AuctionService {
 
 	int selectAuction_searchCount(int auction_no);
 
-	String selectauction_startdateCheck();
-
 	ArrayList<AuctionQnA> selectAuctionCusQnaList(int currentPage);
 
 	int selectAuctionCusQnaListCount();

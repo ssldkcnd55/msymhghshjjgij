@@ -6,6 +6,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.kh.farm.common.model.vo.PageNumber;
 import com.kh.farm.job.model.dao.JobDao;
 import com.kh.farm.job.model.vo.Job;
 import com.kh.farm.notice.model.vo.Notice;
@@ -27,6 +28,10 @@ public class JobServiceImpl implements JobService {
 	public ArrayList<Job> selectJobList(int currentPage) {
 		// TODO Auto-generated method stub
 		return jobDao.selectJobList(currentPage, sqlSession);
+	}
+	public ArrayList<Job> searchJobList(int currentPage , PageNumber pp) {
+		// TODO Auto-generated method stub
+		return jobDao.searchJobList(currentPage, sqlSession,pp);
 	}
 
 	@Override

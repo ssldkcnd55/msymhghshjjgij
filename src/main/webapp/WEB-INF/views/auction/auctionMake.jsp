@@ -37,60 +37,78 @@
 	
 
 	/* 경매등록 버튼 */
-	function submitContents(){
+	/* function submitContents(){
 		location.href="/farm/moveAcutionDetail.do";
 	}
+	 */
 	
-	//경매 등록 전 경매 시작 날짜 체크
-	$(function(){
-		$.ajax({
-			url:"auction_startdateCheck.do",
-			type:"post",
-			dataType: "JSON",
-			success: function(data){
-				/* console.log(data); */
-				var objStr = JSON.stringify(data);
-				var jsonObj = JSON.parse(objStr);	
-				/* alert("확인 sysdate : "+jsonObj.sysdate2); */
-				
-				var outValues ="";
-					outValues +=
-						"<input type='date' name='auction_startdate' class='input_datebox' required "+
-						+"min='"+jsonObj.sysdate2+"'/>";
-				 $("#start_date").html(outValues);
-				
-				}
-			
-			});
-		
-	});
-	
-	/* function auction_startdateCheck(){
-		
+	 //경매 즉시구매, 시작 날짜 ,마감 날짜 체크 
+	function auction_startdateCheck(){
 		var startdate = $("#startdate").val();
-		alert("startdate : "+startdate);
-		var result = true;
-		$.ajax({
-			url:"auction_startdateCheck.do",
-			type:"post",
-			dataType: "JSON",
-			success: function(data){
-				console.log(data);
-				var objStr = JSON.stringify(data);
-				var jsonObj = JSON.parse(objStr);	
-				alert("확인 sysdate : "+jsonObj.sysdate2);
+		/* alert("startdate : "+startdate); */
+		var enddate = $("#enddate").val();
+		/* alert("enddate : "+enddate); */
+		var directprice =$("#directprice").val();
+		/* alert("directprice : "+directprice); */
+		var startprice =$("#startprice").val();
+		/* alert("startprice : "+startprice); */
+		
+		var result2 = true;
+		async: false;
+		
+		var today = new Date();
+		var dd = today.getDate();
+		var mm = today.getMonth()+1; //January is 0!
+		var yyyy = today.getFullYear();
+		
+		if(dd<10) {
+		    dd='0'+dd
+		} 
+
+		if(mm<10) {
+		    mm='0'+mm
+		} 
+		
+		today = yyyy+'-'+mm+'-'+dd;
+		/* alert("현재 날짜 : "+today); */
 				
-				var outValues ="";
-					outValues +=
-						"<input type='date' name='auction_startdate' class='input_datebox' required "+
-						+"min='"+jsonObj.sysdate2+"'>";
-				 $(".start_date").html(outValues);
-				 return true;
+		if((directprice < startprice) || (directprice == startprice)){
+			alert("즉시구매가격은 시작가격보다 같거나 적게 설정할 수 없습니다.");
+			result2 = false;
+			$("#directprice").focus();
+					
+		}else{
+			if((today == startdate) ||(today < startdate)){
+						
+				if((enddate <= startdate) || (enddate <= today)){
+					alert("마감날짜는 시작날짜 및 현재날짜 이후로만 설정가능합니다.");
+					result2 = false;
+					$("#enddate").focus();
+				}else{
+					
+					result2 = true;
 				}
-			
-			});
-		return result;
-	} */
+						
+			}else{
+				alert("현재 날짜 이후로 선택해주세요.");
+				result2 = false;
+				$("#startdate").focus();
+			}
+		}
+		if(result2 == true) {
+			var make = confirm("정말로 등록하시겠습니까?");
+			if(make == true){
+				result2 =true;
+				return result2;
+			}else{
+				return false;
+			}
+		}else{
+			return result2;		
+		}	
+		
+		
+	}
 
 </script>
 </head>
@@ -103,7 +121,7 @@
 		<div id="container">
 			<div class="inner-wrap">
 				<div class="title1 auctionMake"><p class="titleP">경매 글쓰기</p></div>
-				<form action="insertAuctionMake.do" method="post" enctype="multipart/form-data" >
+				<form action="insertAuctionMake.do" method="post" enctype="multipart/form-data" onsubmit="return auction_startdateCheck();">
 				<input type="hidden" value="${loginUser.member_id}" name="member_id">
 				<div class="main_width">
 					<table class="jung_table">
@@ -113,7 +131,7 @@
 									<p class="p">상품명</p>
 								</td>
 								<td class="td2" colspan="3"><input type="text"
-									name="auction_title"  placeholder="한글 10~15글자"> <!-- <input type="submit"
+									name="auction_title"  placeholder="한글 10~15글자" required="required"> <!-- <input type="submit"
 									 name="category_no" value="카테고리검색" class="input_text_box">
 									<br> --></td>
 							</tr>
@@ -123,7 +141,7 @@
 									
 									</td>
 									<td class="td2" colspan="3"><input type="text"
-									name="auction_note" placeholder="한글 60~65글자"></td>
+									name="auction_note" placeholder="한글 60~65글자" required="required"></td>
 							</tr>
 							<tr class="tr1">
 									<td class="td1">
@@ -135,7 +153,7 @@
 											<input type="file" name="upfile" id="cma_file"
 												accept="image/*" capture="camera"
 												onchange="getThumbnailPrivew(this,$('#cma_image'))"
-												style="margin-left: 2px;"  /> <br /> <br />
+												style="margin-left: 2px;" required="required" /> <br /> <br />
 											<div id="cma_image" style="margin-left:200px;">
 												<%-- <img src="/farm/resources/upload/auctionUpload/${auction.auction_img}"> --%></div>
 										</div>
@@ -146,16 +164,16 @@
 
 									<p class="p">경매시작가</p>
 								</td>
-								<td colspan="3" class="td2"><input type="text"
-									name="auction_startprice"> <br></td>
+								<td colspan="3" class="td2"><input type="number" id="startprice"
+									name="auction_startprice" required="required"> <br></td>
 							</tr>
 							<tr class="tr1">
 								<td class="td1">
 
 									<p class="p">즉시구매가</p>
 								</td>
-								<td colspan="3" class="td2"><input type="text"
-									name="auction_directprice"> <input type="checkbox"
+								<td colspan="3" class="td2"><input type="number" id="directprice"
+									name="auction_directprice" required="required"> <input type="checkbox"
 									 class="input_checkbox"
 									style="margin-left: 15px;">즉시구매가설정안함<br></td>
 							</tr>
@@ -165,13 +183,13 @@
 									<p class="p">경매시작날짜</p>
 								</td>
 								<td class="td4" > <div id="start_date"></div>
-								<!-- <input type="date" name="auction_startdate" id="startdate" 
-									class="input_datebox" required> -->  <br></td>
+								<input type="date" name="auction_startdate" id="startdate" 
+									class="input_datebox" required>  <br></td>
 								<td class="td3">
 
 									<p class="p">경매마감날짜</p>
 								</td>
-								<td class="td4" > <input type="date" name="auction_enddate" 
+								<td class="td4" > <input type="date" name="auction_enddate" id="enddate"
 									class="input_datebox" required> </td>
 							</tr>
 							<table class="jung_table2">
@@ -189,7 +207,7 @@
 							<tr>
 								<td class="main_width">
 										<textarea name="auction_intro" id="auction_note" rows="10" cols="100"
-											style="width: 100%; height: 600px; display: none;"></textarea>
+											style="width: 100%; height: 600px; display: none;" required="required"></textarea>
 									</td>
 							</tr>
 						</tbody>
@@ -212,7 +230,7 @@
 						</tbody>
 					</table> -->
 					<ul style="list-style: none;">
-						<li class="li3" onclick="location.href='/#'">뒤로가기</li>
+						<li class="li3" onclick="location.href='/farm/AuctionList_controller.do'">뒤로가기</li>
 						<li class="li4"><input class="li4_input" type="submit" value="경매등록" onclick="submitContents();" ></li>
 						<!-- <li class="li4" onclick="location.href='/#'">물품등록</li> -->
 					</ul>

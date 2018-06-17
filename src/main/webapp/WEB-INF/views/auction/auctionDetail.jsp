@@ -15,8 +15,7 @@
    type="text/css" />
 <link href="/farm/resources/css/dailyList.css" rel="stylesheet"
    type="text/css" />
-<!-- <link href="/farm/resources/css/marketDetail.css" rel="stylesheet"
-   type="text/css" /> -->
+
 <link href="/farm/resources/css/payList.css" rel="stylesheet"
    type="text/css" />
 
@@ -123,49 +122,6 @@ $(function(){
    }
    
       
-   
-   /* $(function(){
-      $('input#submit').click(function(event){
-         var price = $('#biddingprice').val();
-         var no = ${auction.auction_no};
-         alert(price+", " + no);
-         
-         $.ajax({
-            url:"checkAuction_history_price.do",
-            type:"post",
-            data:{
-               auction_no:no
-            },
-            dataType: "JSON",
-            success: function(data){
-               console.log(data);
-               var objStr = JSON.stringify(data);
-               var jsonObj = JSON.parse(objStr);   
-               
-               if(jsonObj.startprice >= price) {
-                  alert("경매 시작가보다 높은 금액을 입력해 주세요.");
-                  return false;
-               }else if(jsonObj.directprice <= price){
-                  alert("즉시 구매가 보다 높은 금액을 입력하셨습니다.");
-                  return false;
-               }else if(jsonObj.price >= price) {
-                  alert("현재 최고 입찰가보다 높은 금액을 입력해 주세요.")
-                  return false;
-               }else {
-                  var con_test = confirm("정말 입찰하시겠습니까?")
-                  if(con_test == true) {
-                     $('#bidsubmit').submit();
-                     } else {
-                     return false;
-                     }
-               }
-                  
-            }
-         })
-      }); 
-   }); */
-       
-   
    
    /* 경매 입찰 등록 */
       function bidcheck(){
@@ -465,10 +421,10 @@ $(function(){
 
    
    //경매 이력
-   function auction_background(no){
+   function Background(no){
       var auction_no = no.id;
       var member_id = '${auction.member_id}';
-      alert("auction_no : "+auction_no);
+    /*   alert("auction_no : "+auction_no); */
       $.ajax({
          url : "auction_background.do",
          type:"post",
@@ -478,30 +434,27 @@ $(function(){
          },
          dataType: "JSON",
          success: function(data){
-            alert("실행: "+data);
+        	 console.log(data);
             var objStr = JSON.stringify(data);
             var jsonObj = JSON.parse(objStr);
             
-            var outValues = "";
-            
-            if(jsonObj.list.size > 0){
-            outValues += "<tr><th width='12%'>번호</th><th width='50%'>판매자</th><th width='13%'>제목</th><th width='15%'>작성일</th></tr>"; 
+            var outValues = "<tr><th >번호</th><th >판매자</th><th >제목</th></tr>"; 
             
             for(var i in jsonObj.list){
                   outValues += 
                      "<tr>"+
-                     "<td>"+json.list[i].rnum+"</td>"+
-                     "<td>"+json.list[i].member_id+"</td>"+
-                     "<td>"+json.list[i].auction_title+"</td>"+
+                     "<td style='text-align:center;'>"+i+"</td>"+
+                     "<td>"+jsonObj.list[i].member_id+"</td>"+
+                     "<td>"+jsonObj.list[i].auction_title+"</td>"+
                      "</tr>";
                }
             $(".auction_backgroundtable").html(outValues);
-            }else{
-               outValues += 
+          
+             /*   outValues += 
                "<div style='width:100%; height:200px;margin-top:20%;text-align:center;font-size:20pt;font-weight: bold;color:gray;'>"+
                "경매 이력이 없습니다.</div>";
             $(".auction_background").html(outValues);
-            }
+            } */
          },error: function(request,status,errorData){
                alert("error code : " + request.status + "\nmessage" + 
                        request.responseText + "\nerror" + errorData);
@@ -589,7 +542,7 @@ $(function(){
                      class="menu introduce">소개</div></li>
                <li class="tab-link" data-tab="tab-2"><div class="menu daily" id="${auction.auction_no}" onclick="auction_biddingList(this);">입찰내역</div></li>
                <li class="tab-link" data-tab="tab-3"><div
-                     class="menu question" id="${auction.auction_no}" onclick="auction_background(this);">경매이력</div></li>
+                     class="menu question" id="${auction.auction_no}" onclick="Background(this);">경매이력</div></li>
                <li class="tab-link" data-tab="tab-4">
                   <div id="menu"
                      class="menu review" onclick="auctionQnA(1);">문의</div>
@@ -632,13 +585,10 @@ $(function(){
             </div>
             <!-- Daily box -->
             <div id="tab-3" class="tab-content">
-               <div class="auction_background" style="width:100% height:auto;">
-               <table class="auction_backgroundtable">
-                  <!-- <tr>
-                     <th class="bidder">번호</th>
-                     <th class="current_price">판매자</th>
-                     <th>제목</th>
-                  </tr>  -->
+               <div class="auction_background" style="width:97%;height:500px;padding:10px;border:3px solid #ddd;" >
+               <h2 style="margin-left:42%;margin-bottom:20px;">경매 이력</h2>
+               <table class="auction_backgroundtable" style="width:90%;margin-left:45px;">
+                  
                </table>
                
                </div>
