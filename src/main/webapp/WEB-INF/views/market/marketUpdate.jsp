@@ -31,7 +31,7 @@
 </script>
 <script>
 $(function(){
-	
+	getThumbnailPrivew('${market.market_img}',$('#cma_image'));
 	$.ajax({
 		url : "ajaxCategory.do",
 		type : "post",
@@ -43,15 +43,46 @@ $(function(){
 			var outValues = "<option value=''>분류 선택</option>";
 			
 			for ( var i in jsonObj.list) {
-				outValues += "<option value='"+jsonObj.list[i].category_main+"'>"+jsonObj.list[i].category_main+"</option>";
+				if(jsonObj.list[i].category_main != '${market.category_main}'){
+					outValues += "<option value='"+jsonObj.list[i].category_main+"'>"+jsonObj.list[i].category_main+"</option>";
+				}else{
+					outValues += "<option value='"+jsonObj.list[i].category_main+"' selected>"+jsonObj.list[i].category_main+"</option>";
+				}
 			}
 			$('#CategoryMain').html(outValues);
+			$.ajax({
+				url : "ajaxCategoryName.do",
+				type : "post",
+				data : {
+					
+					category_main : $("#CategoryMain option:selected").val()
+				},
+				dataType : "JSON",
+				success : function(obj) {
+					var objStr = JSON.stringify(obj);
+					var jsonObj = JSON.parse(objStr);
+					$('#CategoryName').removeAttr('disabled'); 
+					var outValues = "<option value=''>분류 선택</option>";
+					
+					for ( var i in jsonObj.list) {
+						if(jsonObj.list[i].category_name != '${market.category_name}'){
+							outValues += "<option value='"+jsonObj.list[i].category_no+"'>"+jsonObj.list[i].category_name+"</option>";
+						}else{
+							outValues += "<option value='"+jsonObj.list[i].category_no+"' selected>"+jsonObj.list[i].category_name+"</option>";
+						}
+					}
+					$('#CategoryName').html(outValues);
+				},error : function(request, status, errorData) {
+					console.log("error code : " + request.status + "\nmessage"
+							+ request.responseText + "\nerror" + errorData);
+				}
+			});
 		},error : function(request, status, errorData) {
 			console.log("error code : " + request.status + "\nmessage"
 					+ request.responseText + "\nerror" + errorData);
 		}
 	});
-
+	
 	 $('#CategoryMain').change(function(){
 		$.ajax({
 			url : "ajaxCategoryName.do",
@@ -104,16 +135,17 @@ function categoryCheck(){
 				<br> <br> <br>
 
 				<div class="div">
-				<form action="insertMarketMake.do" method="post" enctype="multipart/form-data" onsubmit='return categoryCheck()'>
+				<form action="updateMarket.do" method="post" enctype="multipart/form-data" onsubmit='return categoryCheck()'>
 					<input type="hidden" name="member_id" value="${loginUser.member_id }">
-					<input type="hidden" name="category_no" id="category_no" value="">
+					<input type="hidden" name="market_no" value="${market.market_no }">
+					<input type="hidden" name="category_no" id="category_no" value="${market.category_no }">
 					<table class="jung_table">
 						<tbody>
 							<tr class="tr">
 								<td class="td">
 									<p class="p">판매제목</p>
 								</td>
-								<td colspan="3" class="td2"><input type="text"
+								<td colspan="3" class="td2"><input type="text" value='${market.market_title}'
 									name="market_title" class="input_text_box"> <br></td>
 							</tr>
 							<tr class="tr">
@@ -121,7 +153,7 @@ function categoryCheck(){
 
 									<p class="p">부제목</p>
 								</td>
-								<td colspan="3" class="td2"><input type="text"
+								<td colspan="3" class="td2"><input type="text" value="${market.market_note }"
 									name="market_note" class="input_text_box"> <br></td>
 							</tr>
 							<tr class="tr">
@@ -144,9 +176,9 @@ function categoryCheck(){
 										<div class="filebox">
 										<div>
 											<input type="file" name="upfile" id="cma_file"
-												accept="image/*" capture="camera" 
+												accept="image/*" capture="camera"
 												onchange="getThumbnailPrivew(this,$('#cma_image'))" /> <br /> <br />
-											<div id="cma_image" class="cma_image">이미지를 선택해 주세요</div>
+											<div id="cma_image" class="cma_image" style='display:-webkit-box' ><img class="backimg" src="/farm/resources/upload/marketUpload/${market.market_img }" border="0" alt="" /></div>
 											</div>
 										</div>
 								</td>
@@ -156,7 +188,7 @@ function categoryCheck(){
 
 									<p class="p">출고예정일</p>
 								</td>
-								<td class="td4"><input type="date" name="market_releasedate"
+								<td class="td4"><input type="date" name="market_releasedate" value="${market.market_releasedate }"
 									class="input_date_box"> <br></td>
 
 							</tr>
@@ -165,7 +197,7 @@ function categoryCheck(){
 
 									<p class="p">판매가격</p>
 								</td>
-								<td colspan="3" class="td2"><input type="number"
+								<td colspan="3" class="td2"><input type="number" value="${market.market_price }"
 									name="market_price" class="input_text_box2" placeholder="가격입력">
 									원 <br></td>
 							</tr>
@@ -173,7 +205,7 @@ function categoryCheck(){
 								<td class="td">
 									<p class="p">판매수량</p>
 								</td>
-								<td colspan="3" class="td2"><input type="number"
+								<td colspan="3" class="td2"><input type="number" value="${market.market_amount }"
 									name="market_amount" class="input_text_box2" placeholder="수량입력">
 									kg <br></td>
 							</tr>
@@ -192,7 +224,7 @@ function categoryCheck(){
 							<tr>
 								<td style="width: 100%;">
 										<textarea name="market_intro" id="ir1" rows="10" cols="100"
-											style="width: 100%; height: 250px; display: none;"></textarea>
+											style="width: 100%; height: 250px; display: none;">${market.market_intro }</textarea>
 								</td>
 							</tr>
 						</tbody>

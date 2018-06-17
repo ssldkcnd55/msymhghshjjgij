@@ -105,5 +105,11 @@ public interface MarketService {
 	ArrayList<Market> selectSellerMarketHistory(int currentPage,PageNumber pa);
 
 	int selectSellerMarketHistoryCount();
+
+
+	int updateMarketDel(int market_no);
+
+
+	int updateMarket(Market market);
 	
 }

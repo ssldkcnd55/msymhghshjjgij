@@ -229,4 +229,14 @@ public class MarketServiceImpl implements MarketService{
 		// TODO Auto-generated method stub
 		return marketDao.selectSellerMarketHistoryCount(sqlSession);
 	}
+	@Override
+	public int updateMarketDel(int market_no) {
+		// TODO Auto-generated method stub
+		return marketDao.updateMarketDel(sqlSession,market_no);
+	}
+	@Override
+	public int updateMarket(Market market) {
+		// TODO Auto-generated method stub
+		return marketDao.updateMarket(sqlSession,market);
+	}
 }
