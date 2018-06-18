@@ -210,7 +210,7 @@ public class AuctionServiceImpl implements AuctionService {
 		case 2:
 			return auctionDao.selectLeft_AuctionFinishCount(sqlSession);
 		default:
-			return auctionDao.selectLeft_boxLatestCount(sqlSession);
+			return auctionDao.selectLeft_boxLatestCount(sqlSession);/*최신*/
 		}
 	}
 
