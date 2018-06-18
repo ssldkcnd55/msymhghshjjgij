@@ -475,7 +475,7 @@
 	<insert id="insertMaxpriceAuction" parameterType="Auction" >
 	<![CDATA[
 		insert into auction_history values((select nvl(max(auction_history_no),0) from auction_history)+1,
-		#{auction_no},null,#{auction_startprice},sysdate)
+		#{auction_no},'system',#{auction_startprice},sysdate)
 	]]>
 	</insert>
 	
