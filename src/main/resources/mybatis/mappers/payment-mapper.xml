@@ -135,5 +135,7 @@ where member_id=#{member_id}) and b.market_no=m.MARKET_NO) A where rownum <= #{e
 	<update id="updateBuyComplete" parameterType="int">
 		update buy set buy_status = 4 where buy_no = #{buy_no}
 	</update>
-	
+	<update id="updateBuyTransport" parameterType="Payment">
+		update buy set buy_status = 2,buy_transport_name='한진',buy_transport_no=#{buy_transport_no} where buy_no = #{buy_no}
+	</update>
 </mapper>
