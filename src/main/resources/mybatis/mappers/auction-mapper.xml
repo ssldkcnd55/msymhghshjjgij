@@ -44,17 +44,18 @@
 		resultType="auction">
 	<![CDATA[
 		select * from 
-			(select rownum rnum, auction_no,
+			(select rownum rnum, auction_no,auction_status,
 			auction_title,auction_note,auction_img,
 			member_id from (select * from auction order by 
-			auction_no desc)) where rnum >= #{startRow} and rnum <= #{endRow}
+			auction_no desc)) where rnum >= #{startRow} and rnum <= #{endRow} 
+			and auction_status != '5' 
 	]]>
 	</select>
 	
 	
 	<select id="selectajaxAuctionListCount" resultType="int">
 	<![CDATA[
-		select count(*) from auction
+		select count(*) from auction where auction_status != '5' 
 	]]>
 	</select>
 	
@@ -74,7 +75,7 @@
 
 	<delete id="deleteAuction" parameterType="auction">
 	<![CDATA[
-		delete from auction where auction_no=#{auction_no}
+		update auction set auction_status='5' where auction_no=#{auction_no}
 	]]>
 	</delete>
 
@@ -216,7 +217,7 @@
       	when auction_startdate > sysdate then '0'
       	else '2'
      	end 
-    	where  not auction_status in('2','3','4') 
+    	where  not auction_status in('2','3','4','5') 
 	]]>
 	</update>
 	
@@ -279,7 +280,7 @@
 			auction_title,auction_note,auction_img,auction_status,
 			member_id from (select * from auction order by 
 			auction_no desc)) where rnum >= #{startRow} and rnum <= #{endRow} 
-			and auction_status = '0'
+			and auction_status = '0' 
 	]]>
 	</select>
 	
@@ -302,7 +303,7 @@
 			auction_title,auction_note,auction_img,auction_status,
 			member_id from (select * from auction order by 
 			auction_no desc)) where rnum >= #{startRow} and rnum <= #{endRow} 
-			and auction_status = '2'
+			and auction_status in( '2','3','4')
 	]]>
 	</select>
 	
@@ -313,6 +314,7 @@
 			auction_title,auction_note,auction_img,auction_status,
 			member_id from (select * from auction order by 
 			auction_no desc)) where rnum >= #{startRow} and rnum <= #{endRow} 
+			and auction_status != '5'
 	]]>
 	</select>
 	
@@ -330,13 +332,14 @@
 	
 	<select id="selectLeft_AuctionFinishCount" parameterType="int" resultType="int">
 	<![CDATA[
-		select count(*) from auction where auction_status = '2'
+		select count(*) from auction where auction_status in( '2' , '3', '4') 
+		or auction_status = '4'
 	]]>
 	</select>
 	
 	<select id="selectLeft_boxLatestCount" parameterType="int" resultType="int">
 	<![CDATA[
-		select count(*) from auction 
+		select count(*) from auction where auction_status != '5' 
 	]]>
 	</select>
 
@@ -357,6 +360,7 @@
 			auction_title,auction_note,auction_img,auction_status,
 			member_id from (select * from auction order by 
 			auction_no desc)) where rnum >= #{startRow} and rnum <= #{endRow} 
+			and auction_status != '5' 
 	]]>
 	<if test="select == 0">
 	<![CDATA[
@@ -370,12 +374,12 @@
 	</if>
 	<if test="select == 2">
 	<![CDATA[
-		and auction_status = '2'
+		and auction_status in( '2','3','4')
 	]]>
 	</if>
 	<if test="select == 3">
 	<![CDATA[
-		
+		order by auction_no desc 
 	]]>
 	</if>
 	</select>
