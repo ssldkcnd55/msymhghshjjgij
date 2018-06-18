@@ -885,7 +885,7 @@ public class AuctionController {
 		AuctionCommon common = new AuctionCommon();
 		common.setAuction_no(auction_no);
 		common.setMember_id(member_id);
-		
+		System.out.println("makeAuctionPayment : "+common);
 		int directprice = auctionService.insertdirectprice(common);
 		/*System.out.println("directprice : "+directprice);*/
 		
@@ -975,11 +975,11 @@ public class AuctionController {
 	@RequestMapping("bidDeadline.do")
 	@ResponseBody
 	public void bidDeadline(HttpServletResponse response) throws IOException{
-		System.out.println("유찰 검사 실행");
+		/*System.out.println("유찰 검사 실행");*/
 		ArrayList<Auction> list = auctionService.selectStatus_2();//경매 상태 2 것만 넘버 가져오기
 		//System.out.println("경매 상태 2 list : "+list.toString());
 		JSONArray jarr =new JSONArray();
-		
+		JSONObject json = new JSONObject();
 		for(Auction a : list) {
 			int result = auctionService.updateAuctionStatusDeadline(a.getAuction_no()); //낙찰시간으로 부터 3일 지난 경매 상태 4로 변경
 		}
@@ -997,7 +997,19 @@ public class AuctionController {
 			m.setMember_id(ac2.getMember_id());
 			m.setMember_warning_count(warningCount);
 			int updateWarning = memberService.updateWarning(m);
+			if(updateWarning > 0) {
+				System.out.println("updateWarning>0");
+				JSONObject job=new JSONObject();
+				job.put("member_id", m.getMember_id());
+			jarr.add(job);
+			}
+			json.put("list", jarr);
+			 response.setContentType("application/json; charset=utf-8;");
 			System.out.println("유찰 업데이트 확인 : " + updateWarning);
+			PrintWriter out = response.getWriter();
+			out.println(json.toJSONString());
+			out.flush();
+			out.close();
 		}
 	}
 	
