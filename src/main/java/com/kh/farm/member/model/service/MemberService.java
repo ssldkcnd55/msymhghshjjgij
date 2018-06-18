@@ -55,4 +55,6 @@ public interface MemberService {
 
 	Member selectMemberInfo(String member_id);
 
+	int selectMiscaryChatNo(String member_id);
+
 }
