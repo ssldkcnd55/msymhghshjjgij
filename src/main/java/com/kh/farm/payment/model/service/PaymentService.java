@@ -36,4 +36,6 @@ public interface PaymentService {
 	int selectSellerPaymentHistoryCount();
 
 	int updateBuyComplete(int buy_no);
+
+	int insertPoint(int buy_no);
 }

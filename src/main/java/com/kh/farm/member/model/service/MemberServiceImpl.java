@@ -176,4 +176,10 @@ public class MemberServiceImpl implements MemberService {
 		return memberDao.updateWarning(sqlSession, m);
 
 	}
+
+	@Override
+	public Member selectMemberInfo(String member_id) {
+		// TODO Auto-generated method stub
+		return memberDao.selectMemberInfo(sqlSession,member_id);
+	}
 }

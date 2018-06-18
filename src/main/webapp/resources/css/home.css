@@ -78,7 +78,8 @@ ul.tabs li.active {
 
 .table2 {
 	border-collapse: collapse;
-	width: 100%;
+	width: 90%;
+	margin:0 auto;
 }
 
 .td {

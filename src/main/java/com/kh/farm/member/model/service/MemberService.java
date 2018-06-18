@@ -24,6 +24,7 @@ public interface MemberService {
 
 	int selectMemberCount();
 
+	
 	int change_app(String member_id);
 
 	int change_with(String member_id);
@@ -51,5 +52,7 @@ public interface MemberService {
 	List<Market> buygraph(Market market);
 
 	int updateWarning(Member m);
+
+	Member selectMemberInfo(String member_id);
 
 }
