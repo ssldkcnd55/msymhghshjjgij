@@ -210,7 +210,7 @@ public class AuctionServiceImpl implements AuctionService {
 		case 2:
 			return auctionDao.selectLeft_AuctionFinishCount(sqlSession);
 		default:
-			return auctionDao.selectLeft_boxLatestCount(sqlSession);
+			return auctionDao.selectLeft_boxLatestCount(sqlSession);/*최신*/
 		}
 	}
 
@@ -330,5 +330,11 @@ public class AuctionServiceImpl implements AuctionService {
 	public int selectMiscarry(String member_id) {
 		// TODO Auto-generated method stub
 		return auctionDao.selectMiscarry(sqlSession,member_id);
+	}
+	
+	@Override
+	public AuctionOrder selectAuctionPaymentInfoFromCS(AuctionCommon common) {
+		// TODO Auto-generated method stub
+		return auctionDao.selectAuctionPaymentInfoFromCS(sqlSession,common);
 	}
 }

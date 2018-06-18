@@ -100,4 +100,9 @@ public class PaymentDao {
 		// TODO Auto-generated method stub
 		return sqlSession.update("payment.updateBuyComplete",buy_no);
 	}
+
+	public int updateBuyTransport(SqlSessionTemplate sqlSession, Payment payment) {
+		// TODO Auto-generated method stub
+		return sqlSession.update("payment.updateBuyTransport",payment);
+	}
 }

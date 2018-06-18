@@ -298,4 +298,8 @@ public class PaymentController {
 		int buyComplete = paymentService.updateBuyComplete(buy_no);
 		
 	}
+	@RequestMapping("transportUpdate.do")
+	public void transportUpdate(HttpServletResponse response,Payment payment) {
+		int buyTransport = paymentService.updateBuyTransport(payment);
+	}
 }

@@ -6,6 +6,26 @@
 <script src="/farm/resources/js/jquery-3.3.1.min.js"></script>
 <link rel="stylesheet" type="text/css" href="/farm/resources/css/customerMy/cusqna.css" />
 <script type="text/javascript">
+function transport(buy_no){
+	
+	
+	$.ajax({
+		url : "transportUpdate.do",
+		type : "post",
+		data : {
+			buy_no : buy_no,
+			buy_transport_no : $('#transport_no').val()
+		},
+		success : function() {
+			alert("운송장이 등록되었습니다.");
+			$("#statusTd"+buy_no).html("배송중");
+		},
+		error : function(request, status, errorData) {
+			console.log("error code : " + request.status + "\nmessage"
+					+ request.responseText + "\nerror" + errorData);
+		}
+	});
+}
 $(function(page) {
 	$.ajax({
 				url : "payment_seller_history_list.do",
@@ -28,7 +48,7 @@ $(function(page) {
 								if(jsonObj.list[i].buy_status == 0 ){
 									outValues+= "<td>결제완료</td>";
 								}else if(jsonObj.list[i].buy_status == 1){
-									outValues+= "<td>배송준비중</td>";
+									outValues+= "<td id='statusTd"+jsonObj.list[i].buy_no+"'><div><input type='text' id='transport_no'><div class='transport' onclick='transport("+jsonObj.list[i].buy_no+")'>운송장 등록</div><div></td>";
 								}else if(jsonObj.list[i].buy_status == 2){
 									outValues+= "<td>배송중</td>";
 								}else if(jsonObj.list[i].buy_status == 3){
@@ -95,7 +115,7 @@ $(function(page) {
 						var jsonObj = JSON.parse(objStr);
 
 						var outValues = "<tr><th>번호</th><th>상품 정보</th>"
-							+ "<th>거래 상태</th><th>구매 일자</th><th> </th></tr>";
+							+ "<th>거래 상태</th><th>구매 일자</th><th>구매자 아이디</th></tr>";
 
 							for ( var i in jsonObj.list) {
 								outValues += "<tr><td>" + jsonObj.list[i].rnum
@@ -104,7 +124,7 @@ $(function(page) {
 										if(jsonObj.list[i].buy_status == 0 ){
 											outValues+= "<td>결제완료</td>";
 										}else if(jsonObj.list[i].buy_status == 1){
-											outValues+= "<td>배송준비중</td>";
+											outValues+= "<td id='statusTd"+jsonObj.list[i].buy_no+"'><div><input type='text' id='transport_no'><div class='transport' onclick='transport()'>운송장 등록</div><div></td>";
 										}else if(jsonObj.list[i].buy_status == 2){
 											outValues+= "<td>배송중</td>";
 										}else if(jsonObj.list[i].buy_status == 3){
@@ -113,8 +133,7 @@ $(function(page) {
 											outValues+= "<td class='complete'>구매확정</td>";
 										}
 										outValues+= "<td>"+ jsonObj.list[i].buy_date + "</td>"+
-										"<td><a class='atag' href='moveDelivery_Number.do?code="+jsonObj.list[i].buy_transport_name+"&name="+jsonObj.list[i].buy_transport_no+"'>"
-										+ "<div class='orderDetail delivery'>배송조회</div></a><a class='atag' target='_blank' href='orderDeliveryDetail.do?buy_no="+jsonObj.list[i].buy_no+"'><div class='orderDetail'>주문조회</div></a></td>" + "</tr>";
+										"<td>"+jsonObj.list[i].member_id+"</td></tr>";
 							}
 						$(".View_table").html(outValues);
 
