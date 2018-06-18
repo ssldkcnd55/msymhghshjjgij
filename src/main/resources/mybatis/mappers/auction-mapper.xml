@@ -443,6 +443,19 @@
 	]]>
 	</select>
 	
+	<select id="selectAuctionPaymentInfoFromCS" parameterType="AuctionCommon" resultType="AuctionOrder">
+	<![CDATA[
+	select ac.AUCTION_IMG, ac.AUCTION_NO, ac.AUCTION_TITLE, ac.AUCTION_NOTE, mb.MEMBER_NAME, mb.MEMBER_ID,ah.AUCTION_HISTORY_PRICE as "auction_directprice"
+	from auction ac, member mb, AUCTION_HISTORY ah
+	where ac.member_id = mb.member_id and ac.auction_no = #{auction_no} and ac.auction_no = ah.AUCTION_NO 
+  and ah.AUCTION_HISTORY_PRICE = #{auction_history_price}
+  and ah.AUCTION_HISTORY_DATE = 
+    (select min(AUCTION_HISTORY_DATE) 
+      from AUCTION_HISTORY
+      where AUCTION_HISTORY_PRICE = #{auction_history_price}
+      and auction_no = #{auction_no})
+	]]>
+	</select>
 
 	<select id="selectAuctionPaymentInfo" parameterType="int" resultType="AuctionOrder">
 	<![CDATA[
@@ -468,7 +481,7 @@
 	<insert id="insertMaxpriceAuction" parameterType="Auction" >
 	<![CDATA[
 		insert into auction_history values((select nvl(max(auction_history_no),0) from auction_history)+1,
-		#{auction_no},null,#{auction_startprice},sysdate)
+		#{auction_no},'system',#{auction_startprice},sysdate)
 	]]>
 	</insert>
 	
@@ -531,9 +544,17 @@
 		select ah.auction_no,ah.member_id,ah.auction_history_price,a.auction_title 
 		from auction_history ah, auction a where ah.auction_no = a.auction_no and
 		ah.AUCTION_HISTORY_PRICE = (select max(AUCTION_HISTORY_PRICE) as "AUCTION_HISTORY_PRICE" 
-    	from auction_history where auction_no = #{auction_no}) 
-   		and a.auction_no = #{auction_no}
+    	from auction_history where auction_no = #{auction_no} ) 
+   		and ah.auction_no = #{auction_no}
+      and ah.AUCTION_HISTORY_DATE = 
+      (select min(AUCTION_HISTORY_DATE)
+      from auction_history
+      where AUCTION_HISTORY_PRICE = (select max(AUCTION_HISTORY_PRICE) as "AUCTION_HISTORY_PRICE" 
+    	from auction_history where auction_no = #{auction_no} ) 
+    	and auction_no = #{auction_no}
+      )
 	]]>
+
 	</select>
 	
 	<select id="selectMiscarry" parameterType="String" resultType="int">

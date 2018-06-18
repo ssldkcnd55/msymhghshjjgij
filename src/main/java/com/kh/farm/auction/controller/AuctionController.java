@@ -874,8 +874,24 @@ public class AuctionController {
 		mv.setViewName("auction/auctionPayment");
 		return mv;
 	}
-
-	// 옥션 결제 페이지 이동 (현준)
+	// 옥셩션 미결제 -> 결제 페이지 이동 (현준)
+	@RequestMapping("makeAuctionPaymentFromCSMy.do")
+	public ModelAndView makePaymentFromCs(@RequestParam("price") int price,@RequestParam("auction_no") int auction_no, @RequestParam("member_id") String member_id,ModelAndView mv, HttpSession session)
+	{
+		AuctionCommon common = new AuctionCommon();
+		common.setMember_id(member_id);
+		common.setAuction_no(auction_no);
+		common.setAuction_history_price(price);
+		System.out.println("common : "+common);
+		AuctionOrder ao = auctionService.selectAuctionPaymentInfoFromCS(common);
+		System.out.println("AO : " + ao);
+		mv.addObject("ao", ao);
+		mv.setViewName("auction/auctionPayment");
+		return mv;
+		
+	}
+	
+	// 옥션 즉시구매 결제 페이지 이동 (현준)
 	@RequestMapping("makeAuctionPayment.do")
 	public ModelAndView makePayment(@RequestParam("auction_no") int auction_no, 
 			@RequestParam("member_id") String member_id,
@@ -885,18 +901,16 @@ public class AuctionController {
 		AuctionCommon common = new AuctionCommon();
 		common.setAuction_no(auction_no);
 		common.setMember_id(member_id);
-		System.out.println("makeAuctionPayment : "+common);
 		int directprice = auctionService.insertdirectprice(common);
 		/*System.out.println("directprice : "+directprice);*/
 		
 		// 경매 상태:2(마감) 업데이트 :
 		int auction_Buy = auctionService.updateAuctionBuy(auction_no);
+		
 		AuctionOrder ao = auctionService.selectAuctionPaymentInfo(auction_no);
 		mv.addObject("ao", ao);
 		mv.setViewName("auction/auctionPayment");
 		return mv;
-		
-
 	}
 
 	// 옥숀 결제 완료 후 db 등록 (현준)
@@ -943,7 +957,7 @@ public class AuctionController {
 	public void bidding(HttpServletResponse response) throws IOException {
 		
 		ArrayList<Auction> list = auctionService.selectStatus_2();//경매 상태 2 것만 넘버 가져오기
-		System.out.println("list : "+list.toString());
+		/*System.out.println("list : "+list.toString());*/
 		JSONArray jarr =new JSONArray();
 		
 		
@@ -990,27 +1004,31 @@ public class AuctionController {
 		for(Auction a2 : list2) {
 			//경매 상태 4인 경매의 낙찰인 뽑아오기
 			AuctionCommon ac2 = auctionService.selectWinBid(a2.getAuction_no());
-			//System.out.println("유찰인 : " + ac2.getMember_id());
+			System.out.println("유찰인 : " + ac2.getMember_id());
 			int warningCount = auctionService.selectMiscarry(ac2.getMember_id());
+			System.out.println("경고회수 :" + warningCount);
 			//뽑아온 4인 경매 낙찰인 수로 member warning_count 업데이트
 			Member m = new Member();
 			m.setMember_id(ac2.getMember_id());
 			m.setMember_warning_count(warningCount);
 			int updateWarning = memberService.updateWarning(m);
+			System.out.println("유찰 업데이트 확인 : " + updateWarning);
+			//카운트값이 변경되었을 때만 업데이트 실행하고 알람 보내줌
 			if(updateWarning > 0) {
 				System.out.println("updateWarning>0");
+				//int chat_no = memberService.selectc
 				JSONObject job=new JSONObject();
 				job.put("member_id", m.getMember_id());
-			jarr.add(job);
+				jarr.add(job);
+				}
 			}
 			json.put("list", jarr);
 			 response.setContentType("application/json; charset=utf-8;");
-			System.out.println("유찰 업데이트 확인 : " + updateWarning);
+			/*System.out.println("유찰 업데이트 확인 : " + updateWarning);*/
 			PrintWriter out = response.getWriter();
 			out.println(json.toJSONString());
 			out.flush();
 			out.close();
-		}
 	}
 	
 	// 경매 다중 이미지 업로드

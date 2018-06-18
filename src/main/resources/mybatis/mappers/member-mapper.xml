@@ -200,5 +200,10 @@ insert into member values (
 ]]>
 </update>
 
+<!-- <select id="selectMemberInfo" parameterType="stirng" resultType="member">
+<![CDATA[
+	select member.MEMBER_ID,member.MEMBER_NAME,member.MEMBER_ADDR from member left join userpoint on member.MEMBER_ID = userpoint.MEMBER_ID where member.member_id = #{member_id};
+]]>
+</select> -->
 
 </mapper>

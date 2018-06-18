@@ -29,9 +29,23 @@
 	color: gray;
 }
 
-
+#delivery{
+	width:88px;
+}
+#transport_no{
+	width:84px;
+}
 .View_table tr:hover {background-color:#f5f5f5;}
-
+.transport{
+	border: 1px solid #dcdcdc;
+	background: #fefefe;
+	cursor:pointer;
+	width: 80px;
+	padding: 3px;
+	margin: 0 auto;
+	border-radius: 3px; 
+	font-size: 10pt;
+}
 .orderDetail{
 	border: 1px solid #dcdcdc;
 	background: #fefefe;
