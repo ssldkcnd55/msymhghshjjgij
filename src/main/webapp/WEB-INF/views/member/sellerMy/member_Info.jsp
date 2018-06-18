@@ -179,10 +179,17 @@
 						placeholder="상세주소입력"></td>
 				</tr>
 				<tr>
+					<td>포인트</td>
+					<td><input class="member_input" type="text"
+						value="" readonly="readonly">&nbsp;<button class="memberBtn addr">출금하기</button></td>
+					
+				</tr>
+				<tr>
 					<td></td>
 					<td><input type="button" id="memberBtn" class="memberBtn"
 						value="수정"></td>
 				</tr>
+				
 
 			</table>
 
