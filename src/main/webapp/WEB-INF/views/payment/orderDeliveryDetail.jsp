@@ -8,6 +8,30 @@
 <link href="/farm/resources/css/orderDeliveryDetail.css" rel="stylesheet" type="text/css">
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script type="text/javascript"
+	src="/farm/resources/js/jquery-3.3.1.min.js"></script>
+<script>
+	function buyComplete(){
+		var a = confirm("구매확정 하시겠습니까?");
+		if(a == true){
+			$.ajax({
+				url : "buyComplete.do",
+				type : "post",
+				data : {
+					buy_no : ${payment.buy_no }
+				},
+				success : function() {
+					$(".paytable.s.a").html("구매확정");
+					$(".delBtn").remove();
+				},
+				error : function(request, status, errorData) {
+					console.log("error code : " + request.status + "\nmessage"
+							+ request.responseText + "\nerror" + errorData);
+				}
+			});
+		}
+	}
+</script>
 </head>
 <body>
 <div id="top_line"></div>
@@ -71,8 +95,8 @@
         	</c:if>      	
         	
         	<c:if test="${payment.buy_status ==3}">
-        	<td class="paytable s">배송완료
-        	<div class="delBtn">수취확인</div>
+        	<td class="paytable s a">배송완료
+        	<div class="delBtn" onclick='buyComplete()'>구매확정</div>
         	</td>
         	</c:if>
         	

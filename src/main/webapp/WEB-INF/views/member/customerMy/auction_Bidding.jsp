@@ -41,7 +41,7 @@ $(function(){
 
 
 function movePaymentPage(auction_no,member_id)
-{
+{console.log("movePaymentPage/ no : "+auction_no+" member_id : "+member_id);
 	location.href="makeAuctionPayment.do?auction_no="+auction_no+"&member_id="+member_id;
 }
 

@@ -293,4 +293,8 @@ public class PaymentController {
 		return mv;
 		
 	}
+	@RequestMapping("buyComplete.do")
+	public void buyComplete(HttpServletResponse response,@RequestParam("buy_no") int buy_no) {
+		int buyComplete = paymentService.updateBuyComplete(buy_no);
+	}
 }

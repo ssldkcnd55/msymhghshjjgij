@@ -31,13 +31,21 @@ function auction_update(){
 
 //경매 유찰 검사
 var bidDeadlineIn;
-bidDeadlineIn = setInterval(function(){bidDeadline()}, 5000);
+bidDeadlineIn = setInterval(function(){bidDeadline()}, 60000);
 
 function bidDeadline(){
 	$.ajax({
 		url : "bidDeadline.do",
 		type : 'post',
-		success : function() {
+		dataType:'json',
+		success : function(data) {
+			var d = JSON.parse(JSON.stringify(data));
+			console.log("되니?");
+			for(i in d.list)
+				{
+				console.log(d.list[i].member_id);
+				}
+			
 			//alert("갱신완료");
 		}
 		,error: function(request,status,errorData){

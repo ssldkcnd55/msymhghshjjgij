@@ -96,5 +96,10 @@ public class PaymentServiceImpl implements PaymentService{
 		// TODO Auto-generated method stub
 		return paymentDao.selectSellerPaymentHistoryCount(sqlSession);
 	}
+	@Override
+	public int updateBuyComplete(int buy_no) {
+		// TODO Auto-generated method stub
+		return paymentDao.updateBuyComplete(sqlSession,buy_no);
+	}
 	
 }

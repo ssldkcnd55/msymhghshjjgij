@@ -142,6 +142,7 @@ border-top: 5px solid #dcdcdc;
 	margin-right: 5px;
 }
 .delBtn{
+	cursor:pointer;
 	padding:5px;
 	
 	width:60px;
