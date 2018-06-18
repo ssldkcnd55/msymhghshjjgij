@@ -1013,8 +1013,10 @@ public class AuctionController {
 			m.setMember_warning_count(warningCount);
 			int updateWarning = memberService.updateWarning(m);
 			System.out.println("유찰 업데이트 확인 : " + updateWarning);
+			//카운트값이 변경되었을 때만 업데이트 실행하고 알람 보내줌
 			if(updateWarning > 0) {
 				System.out.println("updateWarning>0");
+				//int chat_no = memberService.selectc
 				JSONObject job=new JSONObject();
 				job.put("member_id", m.getMember_id());
 				jarr.add(job);
