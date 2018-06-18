@@ -132,5 +132,8 @@ where member_id=#{member_id}) and b.market_no=m.MARKET_NO) A where rownum <= #{e
 		select * from buy left join market on buy.market_no= market.market_no where buy_no =#{buy_no}
 	]]>
 	</select>
+	<update id="updateBuyComplete" parameterType="int">
+		update buy set buy_status = 4 where buy_no = #{buy_no}
+	</update>
 	
 </mapper>

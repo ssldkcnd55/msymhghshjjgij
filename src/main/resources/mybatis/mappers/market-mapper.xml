@@ -32,6 +32,9 @@
 				AND category_no in ((SELECT category_no FROM category WHERE category_name like #{cname} ))
 			]]>
 			</if>
+			<![CDATA[
+				AND market_complete = '0'
+			]]>
 		</trim>
 		
 		<![CDATA[

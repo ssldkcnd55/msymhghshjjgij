@@ -263,7 +263,7 @@ $(function() {
 				success : function(data) {
 					var jsonStr = JSON.stringify(data);
 					var json = JSON.parse(jsonStr);
-					var values = "<tr><th class='th' width='5%'>상태</th><th class='th' width='5%'>제목</th><th class='th' width='5%'>지역</th></tr>";
+					var values = "<tr><th class='th' width='22%'>제목</th><th class='th' width='15%'>지역</th></tr>";
 
 					for ( var i in json.list) {
 						if (i <= 4) {
@@ -275,13 +275,13 @@ $(function() {
 
 							values += "<td class='td'>" + json.list[i].job_addr
 									+ "</td></tr>";
-							if (json.list[i].job_status == "1") {
+							/*if (json.list[i].job_status == "1") {
 
 								values += "<td class='td'><span id='job_table_span_find'><strong>구인중</strong></span></td>";
 							} else {
 								values += "<td class='td'><span id='job_table_span_finded'>마감</span></td>";
 							}
-
+*/
 						}
 
 					}
