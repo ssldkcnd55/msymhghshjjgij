@@ -585,7 +585,7 @@ public class MemberController {
 				json.put("date", v.getVisit_date().toString());
 				jarr.add(json);
 				count++;
-				if (count == 6)
+				if (count == 7)
 					break;
 			}
 
@@ -597,7 +597,7 @@ public class MemberController {
 				json.put("month", v.getVisit_month());
 				jarr.add(json);
 				count++;
-				if (count == 5)
+				if (count == 6)
 					break;
 
 			}

@@ -183,4 +183,9 @@ public class MemberServiceImpl implements MemberService {
 		return memberDao.selectMemberInfo(sqlSession,member_id);
 	}
 
+	@Override
+	public int selectMiscaryChatNo(String member_id) {
+		// TODO Auto-generated method stub
+		return memberDao.selectMiscaryChatNo(sqlSession,member_id);
+	}
 }

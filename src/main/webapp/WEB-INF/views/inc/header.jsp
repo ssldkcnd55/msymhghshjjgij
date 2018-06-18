@@ -31,7 +31,7 @@ function auction_update(){
 
 //경매 유찰 검사
 var bidDeadlineIn;
-bidDeadlineIn = setInterval(function(){bidDeadline()}, 60000);
+bidDeadlineIn = setInterval(function(){bidDeadline()}, 10000);
 
 function bidDeadline(){
 	$.ajax({
@@ -41,9 +41,39 @@ function bidDeadline(){
 		success : function(data) {
 			var d = JSON.parse(JSON.stringify(data));
 			console.log("되니?");
-			for(i in d.list)
+			var chat_no = "";
+			var your_id = "";
+			var ws=[];
+			var msgList=[];
+			for(i in d.list){
+				var msg = 
+				'<div class="sell_alarm_head"><img src="/farm/resources/images/sell_icon_white.png" />유찰 알림</div>';
+				msg+='<table class="sell_alarm_table"><tr><th colspan="2">상품금액 미결제로 인해 유찰되었습니다.</th></tr>';
+				msg+='<tr><td>상품명</td><td>'+d.list[i].auction_title+'</td></tr>';
+				msg+='</table>';
+				msg+='<table class="sell_alarm_table"><tr><td colspan="2">3회 유찰 시 사이트 이용에 제재가 이루어 질 수 있습니다</td></tr>';
+				msg+='<tr><td>현재 유찰 횟수<td><td>'+d.list[i].member_warning_count+'</td></tr>'
+				msg+='</table>';
+				
+				chat_no = d.list[i].chat_no;
+				your_id = d.list[i].member_id;
+				msgList[i]=msg;
+				ws[i] = new WebSocket("ws://127.0.0.1:7777/farm/chat.do?state=mar&your_id=" + your_id + "&chat_no=" + chat_no  );
+				function sendMsg(index)
 				{
-				console.log(d.list[i].member_id);
+					 if(index >= ws.length){
+						 moveComplePage();
+					 }
+					else
+						{ 
+						ws[index].onopen= function(){ ws[index].send( msgList[index]) };
+						ws[index].onmessage = function(){
+							ws[index].close();
+							sendMsg(index+1);
+						};
+						 } 
+				}
+				
 				}
 			
 			//alert("갱신완료");
