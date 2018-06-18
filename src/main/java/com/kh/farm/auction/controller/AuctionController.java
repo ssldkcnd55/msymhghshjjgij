@@ -373,7 +373,7 @@ public class AuctionController {
 
 		System.out.println("updateAuctionMake : " + updateAuctionMake);
 
-		return "forward:/AuctionDetail.do?auction_no="+auction.getAuction_no();
+		return "forward:/AuctionDetail.do";
 	}
 
 	/* QnA 등록 페이지이동 */
@@ -645,7 +645,7 @@ public class AuctionController {
 
 		for (AuctionHistory ah : selectAuctionBiddingList) {
 			JSONObject json = new JSONObject();
-			
+
 			json.put("auction_history_no", ah.getAuction_history_no());
 			json.put("auction_no", ah.getAuction_no());
 			json.put("member_id", ah.getMember_id());
@@ -654,7 +654,6 @@ public class AuctionController {
 			json.put("biddingcount", selectAuctionBiddingCount);
 			json.put("day", Day);
 			jarr.add(json);
-			System.out.println("selectAuctionBiddingCount :"+selectAuctionBiddingCount);
 		}
 
 		JSONObject json = new JSONObject();

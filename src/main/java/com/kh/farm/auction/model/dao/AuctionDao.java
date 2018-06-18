@@ -184,7 +184,7 @@ public class AuctionDao {
 
 
 	public int selectAuctionBiddingCount(SqlSessionTemplate sqlSession, int auction_no) {
-		return sqlSession.selectOne("auction.selectAuctionBiddingCount", auction_no);
+		return sqlSession.insert("auction.selectAuctionBiddingCount", auction_no);
 	}
 
 

@@ -678,14 +678,6 @@ font-size: 14pt;
 .auction_backgroundtable tr th:nth-child(3){
 	width:53%;
 }
-
-.img_box{
-	text-align: center;
-    background-size: cover;
-    width: 420px;
-    height: 280px;
-    border: 1px solid #dcdcdc;
-}
  
 
  

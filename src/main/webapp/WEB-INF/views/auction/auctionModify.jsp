@@ -12,7 +12,13 @@
 <script type="text/javascript" src="resources/editor/auctionnaver/js/HuskyEZCreator.js" charset="utf-8"></script>
 <meta charset="UTF-8">
 <title>경매 수정</title>
-
+<style type="text/css">
+ #cma_image img{
+ 	height:250px;
+ 	width:auto;
+ 	float:center;
+ }
+</style>
 <script type="text/javascript">
 
 	/* 사진 */
@@ -137,14 +143,15 @@
 										<p class="p">이미지</p>
 									
 									</td>
-									<td class="td2" colspan="3" style="height:370px;">
+									<td class="td2" colspan="3">
 									<div class="filebox">
 											<input type="file" name="upfile" id="cma_file"
 												accept="image/*" capture="camera"
 												onchange="getThumbnailPrivew(this,$('#cma_image'))"
+												style=" margin-left:2px; " 
 												/> <br /> <br />
-											<div id="cma_image" >
-											<img src="/farm/resources/upload/auctionUpload/${auction.auction_img}" class="img_box"></div>
+											<div id="cma_image" style="margin-left:120px;">
+											<img src="/farm/resources/upload/auctionUpload/${auction.auction_img}"></div>
 											
 										<br>
 										</div>

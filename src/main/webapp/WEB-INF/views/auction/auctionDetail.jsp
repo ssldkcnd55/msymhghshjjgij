@@ -204,20 +204,18 @@ $(function(){
                  var json = JSON.parse(objStr);
                  
                  var biddingcount = json.list[0].biddingcount;
-                /*  alert("count : "+biddingcount); 
-                 alert("day :"+json.list[0].day); */
+                 alert("count : "+biddingcount); 
+                 alert("day :"+json.list[0].day);
                  
-                 
-                 if(json.list.length > 1){
-                	 if(json.list[0].day > 0 && biddingcount > 0){
+                 if(json.list.length != 0){
                  var outValues = "";
                     outValues =
                        "<span class='s1'>입찰 수 : </span> <span>"+biddingcount+"</span>&nbsp;&nbsp;&nbsp; <span class='s1'>남은기간 : </span>"+
                       "<span>"+json.list[0].day+"</span>";
-                	 }
+                    
                  $(".bidding_info").html(outValues);
                   
-                
+                   
                var outValues2 = 
                   "<table class='bidding_table'>"+
                "<tr>"+
@@ -226,26 +224,22 @@ $(function(){
                   "<th>입찰 시간</th>"+
                "</tr>";
                
-               
                  for(var i in json.list){
-                	 if(json.list[i].member_id != null ){
                     outValues2 +=
                        "<tr>"+
                      "<td>"+json.list[i].member_id+"</td>"+
                      "<td>"+json.list[i].auction_history_price+"</td>"+
                      "<td>"+json.list[i].auction_history_date+"</td>"+
                      "</tr>";
-                	 }
                  }
                    outValues2 += "</table>";
                  $(".bidding_history").html(outValues2);
         	  }
           else{
-        	  var outValues3="";
-        	 	outValues3 = 
+        	  outValues2 = 
         		  "<div style='width:100%; height:200px;margin-top:20%;text-align:center;font-size:20pt;font-weight: bold;color:gray;'>"+
               	  "등록된 문의가 없습니다.</div>";
-        	  $(".bidding_history").html(outValues3);
+        	  $(".bidding_info").html(outValues2);
           	}
           }
       });
@@ -577,7 +571,7 @@ $(function(){
                      </div>
 
                      <!-- 경매정보 -->
-                     <div class="bidding_info" style="width:100%; height:auto;">
+                     <div class="bidding_info">
                         <!-- <span class="s1">입찰 수 : </span> <span>10</span> <span class="s1">남은
                            시간 : </span> <span>4일 13시간 5분</span> <span class="s1">경매 기간 : </span>
                         <span>5일</span> -->

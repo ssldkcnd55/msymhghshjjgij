@@ -148,13 +148,13 @@
 										<p class="p">이미지</p>
 									
 									</td>
-									<td class="td2" colspan="3" style="height:370px;">
-									<div class="filebox" margin-top="-10px;">
+									<td class="td2" colspan="3">
+									<div class="filebox">
 											<input type="file" name="upfile" id="cma_file"
 												accept="image/*" capture="camera"
 												onchange="getThumbnailPrivew(this,$('#cma_image'))"
-												required="required" /> <br /> <br />
-											<div id="cma_image"  class="img_box">
+												style="margin-left: 2px;" required="required" /> <br /> <br />
+											<div id="cma_image" style="margin-left:200px;">
 												<%-- <img src="/farm/resources/upload/auctionUpload/${auction.auction_img}"> --%></div>
 										</div>
 									</td>
