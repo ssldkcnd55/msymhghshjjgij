@@ -45,20 +45,20 @@
 		<if test="sort == 'market_no'">
 		<![CDATA[		
 			order by 
-			market_no desc)WHERE market_amount-(remaining) > 0 ) where rnum >= #{startRow} and rnum <= #{endRow}		
+			market_no desc)) where rnum >= #{startRow} and rnum <= #{endRow}		
 		]]>
 		</if>
 		
 		<if test="sort == 'market_price'">
 		<![CDATA[		
 			order by
-			market_price asc)WHERE market_amount-(remaining) > 0 ) where rnum >= #{startRow} and rnum <= #{endRow}
+			market_price asc)) where rnum >= #{startRow} and rnum <= #{endRow}
 		]]>
 		</if>
 		<if test="sort == 'buy'">
 		<![CDATA[		
 			order by
-			count(buy_no) desc)WHERE market_amount-(remaining) > 0 ) where rnum >= #{startRow} and rnum <= #{endRow}
+			count(buy_no) desc)) where rnum >= #{startRow} and rnum <= #{endRow}
 		]]>
 		</if>
 	</select>

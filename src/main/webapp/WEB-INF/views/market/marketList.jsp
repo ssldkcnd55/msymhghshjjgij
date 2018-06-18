@@ -44,8 +44,13 @@
 				for(var i in jsonObj.list){
 					outValues += "<a href='marketDetail.do?market_no=" + jsonObj.list[i].market_no + "'>" +
 					"<div class='market'><div class='img_box' style='background-image:url(\"/farm/resources/upload/marketUpload/"+ jsonObj.list[i].market_img+"\"); background-size: cover;'>"+
-					"</div><div class='title_box'><p class='title'>"+jsonObj.list[i].market_title +
-					"</p><p class='content'>"+jsonObj.list[i].market_note+"</p><p class='content price'>"+jsonObj.list[i].market_price+"원</p></div></div></a>";
+					"</div><div class='title_box'><p class='title'>";
+					if(jsonObj.list[i].market_amount - jsonObj.list[i].remaining > 0){
+						outValues += jsonObj.list[i].market_title;
+					}else{
+						outValues += "[품절]"+jsonObj.list[i].market_title;
+					}
+					outValues +="</p><p class='content'>"+jsonObj.list[i].market_note+"</p><p class='content price'>"+jsonObj.list[i].market_price+"원</p></div></div></a>";
 				}
 				$(".market_box").html(outValues);
 				for(var i in jsonObj.list2){
@@ -88,8 +93,13 @@
 				for(var i in jsonObj.list){
 					outValues += "<a href='marketDetail.do?market_no=" + jsonObj.list[i].market_no + "'>" +
 					"<div class='market'><div class='img_box' style='background-image:url(\"/farm/resources/upload/marketUpload/"+ jsonObj.list[i].market_img+"\"); background-size: cover;'>"+
-					"</div><div class='title_box'><p class='title'>"+jsonObj.list[i].market_title +
-					"</p><p class='content'>"+jsonObj.list[i].market_note+"</p><p class='content price'>"+jsonObj.list[i].market_price+"원</p></div></div></a>";
+					"</div><div class='title_box'><p class='title'>";
+					if(jsonObj.list[i].market_amount - jsonObj.list[i].remaining > 0){
+						outValues += jsonObj.list[i].market_title;
+					}else{
+						outValues += "[품절]"+jsonObj.list[i].market_title;
+					}
+					outValues +="</p><p class='content'>"+jsonObj.list[i].market_note+"</p><p class='content price'>"+jsonObj.list[i].market_price+"원</p></div></div></a>";
 				}
 				$(".market_box").html(outValues);
 			},error: function(request,status,errorData){
@@ -144,8 +154,13 @@
 					for(var i in jsonObj.list){
 						outValues += "<a href='marketDetail.do?market_no=" + jsonObj.list[i].market_no + "'>" +
 						"<div class='market'><div class='img_box' style='background-image:url(\"/farm/resources/upload/marketUpload/"+ jsonObj.list[i].market_img+"\"); background-size: cover;'>"+
-						"</div><div class='title_box'><p class='title'>"+jsonObj.list[i].market_title +
-						"</p><p class='content'>"+jsonObj.list[i].market_note+"</p><p class='content price'>"+jsonObj.list[i].market_price+"원</p></div></div></a>";
+						"</div><div class='title_box'><p class='title'>";
+						if(jsonObj.list[i].market_amount - jsonObj.list[i].remaining > 0){
+							outValues += jsonObj.list[i].market_title;
+						}else{
+							outValues += "[품절]"+jsonObj.list[i].market_title;
+						}
+						outValues +="</p><p class='content'>"+jsonObj.list[i].market_note+"</p><p class='content price'>"+jsonObj.list[i].market_price+"원</p></div></div></a>";
 					}
 					$(".market_box").html(outValues);
 					for(var i in jsonObj.list2){
@@ -188,8 +203,13 @@
 					for(var i in jsonObj.list){
 						outValues += "<a href='marketDetail.do?market_no=" + jsonObj.list[i].market_no + "'>" +
 						"<div class='market'><div class='img_box' style='background-image:url(\"/farm/resources/upload/marketUpload/"+ jsonObj.list[i].market_img+"\"); background-size: cover;'>"+
-						"</div><div class='title_box'><p class='title'>"+jsonObj.list[i].market_title +
-						"</p><p class='content'>"+jsonObj.list[i].market_note+"</p><p class='content price'>"+jsonObj.list[i].market_price+"원</p></div></div></a>";
+						"</div><div class='title_box'><p class='title'>";
+						if(jsonObj.list[i].market_amount - jsonObj.list[i].remaining > 0){
+							outValues += jsonObj.list[i].market_title;
+						}else{
+							outValues += "[품절]"+jsonObj.list[i].market_title;
+						}
+						outValues +="</p><p class='content'>"+jsonObj.list[i].market_note+"</p><p class='content price'>"+jsonObj.list[i].market_price+"원</p></div></div></a>";
 					}
 					$(".market_box").html(outValues);
 				},error: function(request,status,errorData){
@@ -224,8 +244,13 @@
 					for(var i in jsonObj.list){
 						outValues += "<a href='marketDetail.do?market_no=" + jsonObj.list[i].market_no + "'>" +
 								"<div class='market'><div class='img_box' style='background-image:url(\"/farm/resources/upload/marketUpload/"+ jsonObj.list[i].market_img+"\"); background-size: cover;'>"+
-								"</div><div class='title_box'><p class='title'>"+jsonObj.list[i].market_title +
-								"</p><p class='content'>"+jsonObj.list[i].market_note+"</p><p class='content price'>"+jsonObj.list[i].market_price+"원</p></div></div></a>";
+								"</div><div class='title_box'><p class='title'>";
+						if(jsonObj.list[i].market_amount - jsonObj.list[i].remaining > 0){
+							outValues += jsonObj.list[i].market_title;
+						}else{
+							outValues += "[품절]"+jsonObj.list[i].market_title;
+						}
+						outValues +="</p><p class='content'>"+jsonObj.list[i].market_note+"</p><p class='content price'>"+jsonObj.list[i].market_price+"원</p></div></div></a>";
 					}
 					$(".market_box").html(outValues);
 				},error: function(request,status,errorData){
@@ -302,7 +327,12 @@
 									<div class="img_box"
 										style="background-image: url('/farm/resources/upload/marketUpload/${m.market_img}'); background-size: cover;"></div>
 									<div class="title_box">
+									<c:if test="${m.market_amount - m.remaining > 0}">
 										<p class="title">${m.market_title }</p>
+									</c:if>
+									<c:if test="${m.market_amount - m.remaining <= 0}">
+										<p class="title">[품절]${m.market_title }</p>
+									</c:if>
 										<p class="content">${m.market_note }</p>
 										<p class='content'>${m.market_price }원</p>
 									</div>
