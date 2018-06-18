@@ -29,6 +29,9 @@ public class Market implements java.io.Serializable {
 	private int remaining;// 남은 수량
 	private String member_name;// 회원 이름;
 	private MultipartFile Filedata; // 다중이미지 업로드
+	private String category_main;
+	private String category_name;
+	
 	private String buy_amount;
 
 	public String getBuy_amount() {
@@ -65,6 +68,28 @@ public class Market implements java.io.Serializable {
 		this.buy_amount = buy_amount;
 
 	}
+
+
+	
+	public String getCategory_main() {
+		return category_main;
+	}
+
+
+	public void setCategory_main(String category_main) {
+		this.category_main = category_main;
+	}
+
+
+	public String getCategory_name() {
+		return category_name;
+	}
+
+
+	public void setCategory_name(String category_name) {
+		this.category_name = category_name;
+	}
+
 
 	public int getRnum() {
 		return rnum;

@@ -95,4 +95,18 @@ public class PaymentDao {
 		int listCount = sqlSession.selectOne("payment.selectSellerPaymentHistoryCount");
 		return listCount;
 	}
+
+	public int updateBuyComplete(SqlSessionTemplate sqlSession, int buy_no) {
+		// TODO Auto-generated method stub
+		return sqlSession.update("payment.updateBuyComplete",buy_no);
+	}
+
+	public int insertPoint(SqlSessionTemplate sqlSession, int buy_no) {
+		// TODO Auto-generated method stub
+		return sqlSession.insert("payment.insertPoint",buy_no);
+	}
+	public int updateBuyTransport(SqlSessionTemplate sqlSession, Payment payment) {
+		// TODO Auto-generated method stub
+		return sqlSession.update("payment.updateBuyTransport",payment);
+	}
 }

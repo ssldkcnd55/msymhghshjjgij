@@ -286,4 +286,14 @@ public class MarketDao {
 		int listCount = sqlSession.selectOne("market.selectSellerMarketHistoryCount");
 		return listCount;
 	}
+
+	public int updateMarketDel(SqlSessionTemplate sqlSession, int market_no) {
+		// TODO Auto-generated method stub
+		return sqlSession.update("market.updateMarketDel", market_no);
+	}
+
+	public int updateMarket(SqlSessionTemplate sqlSession, Market market) {
+		// TODO Auto-generated method stub
+		return sqlSession.update("market.updateMarket", market);
+	}
 }

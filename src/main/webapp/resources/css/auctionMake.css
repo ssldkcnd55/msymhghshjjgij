@@ -127,3 +127,11 @@
 	color: #fff;
 	font-size:11pt;
 }
+
+.img_box{
+	text-align: center;
+   background-size: cover;
+   width: 420px;
+   height: 280px;
+   border: 1px solid #dcdcdc;
+}

@@ -32,6 +32,9 @@
 				AND category_no in ((SELECT category_no FROM category WHERE category_name like #{cname} ))
 			]]>
 			</if>
+			<![CDATA[
+				AND market_complete = '0'
+			]]>
 		</trim>
 		
 		<![CDATA[
@@ -42,30 +45,31 @@
 		<if test="sort == 'market_no'">
 		<![CDATA[		
 			order by 
-			market_no desc)WHERE market_amount-(remaining) > 0 ) where rnum >= #{startRow} and rnum <= #{endRow}		
+			market_no desc)) where rnum >= #{startRow} and rnum <= #{endRow}		
 		]]>
 		</if>
 		
 		<if test="sort == 'market_price'">
 		<![CDATA[		
 			order by
-			market_price asc)WHERE market_amount-(remaining) > 0 ) where rnum >= #{startRow} and rnum <= #{endRow}
+			market_price asc)) where rnum >= #{startRow} and rnum <= #{endRow}
 		]]>
 		</if>
 		<if test="sort == 'buy'">
 		<![CDATA[		
 			order by
-			count(buy_no) desc)WHERE market_amount-(remaining) > 0 ) where rnum >= #{startRow} and rnum <= #{endRow}
+			count(buy_no) desc)) where rnum >= #{startRow} and rnum <= #{endRow}
 		]]>
 		</if>
 	</select>
 	
 	<select id="marketInfo" parameterType="int" resultType="market">
 	<![CDATA[
-		select mb.MEMBER_NAME, m.market_no,m.category_no,m.member_id,m.market_title,m.market_note,m.market_img,m.market_releasedate,m.market_amount,m.MARKET_INTRO,m.MARKET_PRICE, nvl(sum(b.buy_amount),0) remaining from member mb, market m 
-left join buy b on m.market_no =b.market_no
-where m.market_no = #{market_no} and mb.MEMBER_ID = m.MEMBER_ID
-group by m.market_no,m.category_no,m.member_id,m.market_title,m.market_note,m.market_img,m.market_releasedate,m.market_amount,m.MARKET_INTRO,m.MARKET_PRICE,mb.MEMBER_NAME
+		select mb.MEMBER_NAME, m.market_no,m.category_no,m.member_id,m.market_title,m.market_note,m.market_img,m.market_releasedate,m.market_amount,m.MARKET_INTRO,m.MARKET_PRICE, nvl(sum(b.buy_amount),0) remaining,c.category_main,c.category_name from member mb, market m 
+			left join buy b on m.market_no =b.market_no
+			left join category c on m.category_no = c.category_no
+			where m.market_no = #{market_no} and mb.MEMBER_ID = m.MEMBER_ID
+			group by m.market_no,m.category_no,m.member_id,m.market_title,m.market_note,m.market_img,m.market_releasedate,m.market_amount,m.MARKET_INTRO,m.MARKET_PRICE,mb.MEMBER_NAME,c.category_main,c.category_name
 	]]>
 	
 	</select>
@@ -302,4 +306,16 @@ from(select m.market_no,category_no,m.member_id,
 	select
 		count(*) from market
 	</select>
+	<update id="updateMarketDel" parameterType="int">
+		update market set market_complete = 2 where market_no = #{market_no}
+	</update>
+	<update id="updateMarket" parameterType="market">
+		update market set market_title=#{market_title},market_note=#{market_note},
+		market_releasedate = #{market_releasedate},market_intro=#{market_intro},
+		category_no = #{category_no},market_amount = #{market_amount},market_price=#{market_price}
+		<if test="market_img != null">
+			,market_img = #{market_img}
+		</if>
+		 where market_no = #{market_no}
+	</update>
 </mapper>

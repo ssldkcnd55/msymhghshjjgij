@@ -44,17 +44,18 @@
 		resultType="auction">
 	<![CDATA[
 		select * from 
-			(select rownum rnum, auction_no,
+			(select rownum rnum, auction_no,auction_status,
 			auction_title,auction_note,auction_img,
 			member_id from (select * from auction order by 
-			auction_no desc)) where rnum >= #{startRow} and rnum <= #{endRow}
+			auction_no desc)) where rnum >= #{startRow} and rnum <= #{endRow} 
+			and auction_status != '5' 
 	]]>
 	</select>
 	
 	
 	<select id="selectajaxAuctionListCount" resultType="int">
 	<![CDATA[
-		select count(*) from auction
+		select count(*) from auction where auction_status != '5' 
 	]]>
 	</select>
 	
@@ -74,21 +75,27 @@
 
 	<delete id="deleteAuction" parameterType="auction">
 	<![CDATA[
-		delete from auction where auction_no=#{auction_no}
+		update auction set auction_status='5' where auction_no=#{auction_no}
 	]]>
 	</delete>
 
 	<select id="selectmodifyAuction" parameterType="auction"
 		flushCache="true" resultType="auction">
 	<![CDATA[
-		select * from auction where auction_no=#{auction_no}
+		select 
+		 auction_no,member_id, category_no, auction_title, auction_note,auction_img, 
+		 auction_intro,auction_status,auction_startprice,
+		auction_directprice, to_char(auction_startdate,'YYYY-MM-DD') as "auction_startdate",
+		to_char(auction_enddate,'YYYY-MM-DD') as "auction_enddate"
+		from auction where auction_no=#{auction_no}
 	]]>
 	</select>
 
 	<update id="updateAuctionMake" parameterType="Auction">
 	<![CDATA[
 		update auction set auction_title=#{auction_title},auction_note=#{auction_note},auction_img=#{auction_img},
-		auction_intro=#{auction_intro},auction_startprice=#{auction_startprice},auction_directprice=#{auction_directprice} 
+		auction_intro=#{auction_intro},auction_startprice=#{auction_startprice},auction_directprice=#{auction_directprice} ,
+		auction_startdate=#{auction_startdate},auction_enddate=#{auction_enddate} 
 		where auction_no = #{auction_no}
 	]]>
 	</update>
@@ -204,7 +211,7 @@
 	
 	<select id="selectAuctionBiddingCount" parameterType="int" resultType="int">
 	<![CDATA[
-		select count(*) as "rnum" from auction_history where auction_no = #{auction_no}
+		select count(*) from auction_history where auction_no = #{auction_no}
 	]]>
 	</select>
 	
@@ -216,7 +223,7 @@
       	when auction_startdate > sysdate then '0'
       	else '2'
      	end 
-    	where  not auction_status in('2','3','4') 
+    	where  not auction_status in('2','3','4','5') 
 	]]>
 	</update>
 	
@@ -279,7 +286,7 @@
 			auction_title,auction_note,auction_img,auction_status,
 			member_id from (select * from auction order by 
 			auction_no desc)) where rnum >= #{startRow} and rnum <= #{endRow} 
-			and auction_status = '0'
+			and auction_status = '0' 
 	]]>
 	</select>
 	
@@ -302,7 +309,7 @@
 			auction_title,auction_note,auction_img,auction_status,
 			member_id from (select * from auction order by 
 			auction_no desc)) where rnum >= #{startRow} and rnum <= #{endRow} 
-			and auction_status = '2'
+			and auction_status in( '2','3','4')
 	]]>
 	</select>
 	
@@ -313,6 +320,7 @@
 			auction_title,auction_note,auction_img,auction_status,
 			member_id from (select * from auction order by 
 			auction_no desc)) where rnum >= #{startRow} and rnum <= #{endRow} 
+			and auction_status != '5'
 	]]>
 	</select>
 	
@@ -330,13 +338,14 @@
 	
 	<select id="selectLeft_AuctionFinishCount" parameterType="int" resultType="int">
 	<![CDATA[
-		select count(*) from auction where auction_status = '2'
+		select count(*) from auction where auction_status in( '2' , '3', '4') 
+		or auction_status = '4'
 	]]>
 	</select>
 	
 	<select id="selectLeft_boxLatestCount" parameterType="int" resultType="int">
 	<![CDATA[
-		select count(*) from auction 
+		select count(*) from auction where auction_status != '5' 
 	]]>
 	</select>
 
@@ -345,7 +354,7 @@
 	<select id="select_auction_background" parameterType="String" resultType="Auction">
 	<![CDATA[
 		 select ROWNUM rum, auction_no,member_id,auction_title from auction 
-		where member_id = #{member_id} order by auction_no DESC
+		where member_id = #{member_id} and auction_status != '5' order by auction_no DESC
 	]]>
 	</select>
 	
@@ -357,6 +366,7 @@
 			auction_title,auction_note,auction_img,auction_status,
 			member_id from (select * from auction order by 
 			auction_no desc)) where rnum >= #{startRow} and rnum <= #{endRow} 
+			and auction_status != '5' 
 	]]>
 	<if test="select == 0">
 	<![CDATA[
@@ -370,12 +380,12 @@
 	</if>
 	<if test="select == 2">
 	<![CDATA[
-		and auction_status = '2'
+		and auction_status in( '2','3','4')
 	]]>
 	</if>
 	<if test="select == 3">
 	<![CDATA[
-		
+		order by auction_no desc 
 	]]>
 	</if>
 	</select>
@@ -434,6 +444,20 @@
 	</select>
 	
 
+	<select id="selectAuctionPaymentInfoFromCS" parameterType="AuctionCommon" resultType="AuctionOrder">
+	<![CDATA[
+	select ac.AUCTION_IMG, ac.AUCTION_NO, ac.AUCTION_TITLE, ac.AUCTION_NOTE, mb.MEMBER_NAME, mb.MEMBER_ID,ah.AUCTION_HISTORY_PRICE as "auction_directprice"
+	from auction ac, member mb, AUCTION_HISTORY ah
+	where ac.member_id = mb.member_id and ac.auction_no = #{auction_no} and ac.auction_no = ah.AUCTION_NO 
+  and ah.AUCTION_HISTORY_PRICE = #{auction_history_price}
+  and ah.AUCTION_HISTORY_DATE = 
+    (select min(AUCTION_HISTORY_DATE) 
+      from AUCTION_HISTORY
+      where AUCTION_HISTORY_PRICE = #{auction_history_price}
+      and auction_no = #{auction_no})
+	]]>
+	</select>
+
 	<select id="selectAuctionPaymentInfo" parameterType="int" resultType="AuctionOrder">
 	<![CDATA[
 	select ac.AUCTION_IMG, ac.AUCTION_NO, ac.AUCTION_TITLE, ac.AUCTION_NOTE, mb.MEMBER_NAME, mb.MEMBER_ID,ac.AUCTION_DIRECTPRICE
@@ -458,7 +482,7 @@
 	<insert id="insertMaxpriceAuction" parameterType="Auction" >
 	<![CDATA[
 		insert into auction_history values((select nvl(max(auction_history_no),0) from auction_history)+1,
-		#{auction_no},null,#{auction_startprice},sysdate)
+		#{auction_no},'system',#{auction_startprice},sysdate)
 	]]>
 	</insert>
 	
@@ -521,9 +545,17 @@
 		select ah.auction_no,ah.member_id,ah.auction_history_price,a.auction_title 
 		from auction_history ah, auction a where ah.auction_no = a.auction_no and
 		ah.AUCTION_HISTORY_PRICE = (select max(AUCTION_HISTORY_PRICE) as "AUCTION_HISTORY_PRICE" 
-    	from auction_history where auction_no = #{auction_no}) 
-   		and a.auction_no = #{auction_no}
+    	from auction_history where auction_no = #{auction_no} ) 
+   		and ah.auction_no = #{auction_no}
+      and ah.AUCTION_HISTORY_DATE = 
+      (select min(AUCTION_HISTORY_DATE)
+      from auction_history
+      where AUCTION_HISTORY_PRICE = (select max(AUCTION_HISTORY_PRICE) as "AUCTION_HISTORY_PRICE" 
+    	from auction_history where auction_no = #{auction_no} ) 
+    	and auction_no = #{auction_no}
+      )
 	]]>
+
 	</select>
 	
 	<select id="selectMiscarry" parameterType="String" resultType="int">

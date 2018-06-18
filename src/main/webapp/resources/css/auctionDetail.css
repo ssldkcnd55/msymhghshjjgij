@@ -664,7 +664,7 @@ font-size: 14pt;
 
 
 
-.auction_backgroundtable tr:nth-child(1){
+#table_tr_1{
 	background: #ece6ce;
 }
 
@@ -679,5 +679,11 @@ font-size: 14pt;
 	width:53%;
 }
  
-
+.img_box{
+	text-align: center;
+   background-size: cover;
+   width: 420px;
+   height: 280px;
+   border: 1px solid #dcdcdc;
+}
  

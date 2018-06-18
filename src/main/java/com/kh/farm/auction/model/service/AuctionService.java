@@ -150,6 +150,8 @@ public interface AuctionService {
 
 	int selectMiscarry(String member_id);
 
+	AuctionOrder selectAuctionPaymentInfoFromCS(AuctionCommon common);
+
 	
 
 	

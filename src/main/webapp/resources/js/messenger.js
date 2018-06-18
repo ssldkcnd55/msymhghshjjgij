@@ -324,8 +324,7 @@ function move_msg_table(chat_no, my_id, your_id) {
 					for ( var i in c.ht) {
 						// ///////////////////////////시간설정////////////////////
 
-						var msg_time = trans_time(c.ht[i].date
-								.substring(11, 16));
+						var msg_time = trans_time(c.ht[i].date.substring(11, 16));
 
 						var today = new Date(c.ht[i].date)
 						nowDate = today.getFullYear() + "년 "
@@ -575,8 +574,8 @@ function move_msg_table(chat_no, my_id, your_id) {
 			default:
 				nowDate += "토요일"
 			}
-
-			var timeTemp = (new Date()).toString().slice(-28).substring(0, 5);
+			
+			var timeTemp = (new Date()).toString().slice(-26).substring(0, 5);
 			var msg_time = trans_time(timeTemp);
 
 			// 첫 메세지

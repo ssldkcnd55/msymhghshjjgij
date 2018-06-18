@@ -31,13 +31,21 @@ function auction_update(){
 
 //경매 유찰 검사
 var bidDeadlineIn;
-bidDeadlineIn = setInterval(function(){bidDeadline()}, 5000);
+bidDeadlineIn = setInterval(function(){bidDeadline()}, 60000);
 
 function bidDeadline(){
 	$.ajax({
 		url : "bidDeadline.do",
 		type : 'post',
-		success : function() {
+		dataType:'json',
+		success : function(data) {
+			var d = JSON.parse(JSON.stringify(data));
+			console.log("되니?");
+			for(i in d.list)
+				{
+				console.log(d.list[i].member_id);
+				}
+			
 			//alert("갱신완료");
 		}
 		,error: function(request,status,errorData){
@@ -164,11 +172,11 @@ function getBasketCount(member_id)
                   <li class="menu1 none_sub"><a href="moveLogin.do" class="link_menu">로그인</a></li>
                </c:if>
                <c:if test="${loginUser.member_category == 1}">
-               	  <li class="menu1 none_sub"><a href="moveCustomerMypage.do" class="link_menu">${loginUser.member_name}님</a></li>
+               	  <li class="menu1 none_sub"><a href="moveCustomerMypage.do?member_id=${loginUser.member_id }" class="link_menu">${loginUser.member_name}님</a></li>
                   <li class="menu1 none_sub"><a href="logout.do" class="link_menu">로그아웃</a></li>
                </c:if>
                <c:if test="${loginUser.member_category == 0}">
-               	  <li class="menu1 none_sub"><a href="moveSellerMypage.do" class="link_menu">${loginUser.member_name}님</a></li>
+               	  <li class="menu1 none_sub"><a href="moveSellerMypage.do?member_id=${loginUser.member_id }" class="link_menu">${loginUser.member_name}님</a></li>
                   <li class="menu1 none_sub"><a href="logout.do" class="link_menu">로그아웃</a></li>
                </c:if>
 				<c:if test="${loginUser.member_category == 2}">

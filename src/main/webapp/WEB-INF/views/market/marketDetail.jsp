@@ -42,7 +42,17 @@ $(function(){
 <script type="text/javascript">
 var change = 0;
 var m_img = '${market.market_img}';
-
+function marketDelete(){
+	var a = confirm("정말 삭제하시겠습니까?");
+	 if(a == true){
+   		 location.href="/farm/marketDelete.do?market_no=${market.market_no}";
+	 }
+ }
+ 
+ /* 수정 버튼 */
+ function marketModify(){
+	location.href="/farm/marketUpdateMove.do?market_no=${market.market_no}";
+ }
  
 $(function(){
 	$.ajax({
@@ -481,6 +491,16 @@ function changeprice(){
 				<div class="mainTitle_box">
 					<span class="mainTitle">${market.market_title }</span> &nbsp; <span
 						class="release_date">출고예정일</span>&nbsp;<span class="date">${market.market_releasedate }</span>
+					<c:choose>
+                      <c:when test="${loginUser.member_category eq '2'} ">
+                        <span><button class="modify" onclick="marketModify();">수정</button></span>
+                        <span><button class="delete" onclick="marketDelete();">삭제</button></span>
+                     </c:when>
+                     <c:when test="${loginUser.member_id eq market.member_id}">
+                        <span><button class="modify" onclick="marketModify();">수정</button></span>
+                        <span><button class="delete" onclick="marketDelete();">삭제</button></span>
+                     </c:when>
+                  </c:choose>	
 				</div>
 				<div class="mainImg_box"
 					style="background-image: url('/farm/resources/upload/marketUpload/${market.market_img}'); background-size:cover;">

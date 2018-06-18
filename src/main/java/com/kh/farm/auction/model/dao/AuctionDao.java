@@ -184,7 +184,7 @@ public class AuctionDao {
 
 
 	public int selectAuctionBiddingCount(SqlSessionTemplate sqlSession, int auction_no) {
-		return sqlSession.insert("auction.selectAuctionBiddingCount", auction_no);
+		return sqlSession.selectOne("auction.selectAuctionBiddingCount", auction_no);
 	}
 
 
@@ -375,6 +375,7 @@ public class AuctionDao {
 
 	public AuctionCommon selectWinBid(SqlSessionTemplate sqlSession, int auction_no) {
 		// TODO Auto-generated method stub
+	
 		return sqlSession.selectOne("auction.selectWinBid",auction_no);
 	}
 
@@ -391,6 +392,11 @@ public class AuctionDao {
 	public int selectMiscarry(SqlSessionTemplate sqlSession, String member_id) {
 		// TODO Auto-generated method stub
 		return sqlSession.selectOne("auction.selectMiscarry", member_id);
+	}
+
+	public AuctionOrder selectAuctionPaymentInfoFromCS(SqlSessionTemplate sqlSession,AuctionCommon common) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("auction.selectAuctionPaymentInfoFromCS",common);
 	}
 
 	

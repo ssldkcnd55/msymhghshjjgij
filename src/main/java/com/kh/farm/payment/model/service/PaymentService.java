@@ -34,4 +34,10 @@ public interface PaymentService {
 	ArrayList<Payment> selectSellerPaymentHistory(int currentPage,PageNumber pa);
 
 	int selectSellerPaymentHistoryCount();
+
+	int updateBuyComplete(int buy_no);
+
+	int insertPoint(int buy_no);
+
+	int updateBuyTransport(Payment payment);
 }

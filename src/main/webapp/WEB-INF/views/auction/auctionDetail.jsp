@@ -5,12 +5,13 @@
 <head>
 <meta charset="UTF-8">
 <title>Farm</title>
+<link href="/farm/resources/css/auctionDetail.css" rel="stylesheet"
+   type="text/css" />
 <link href="/farm/resources/css/bottommovemenu.css" rel="stylesheet"
    type="text/css" />   
 <link href="/farm/resources/css/style.css" rel="stylesheet"
    type="text/css" />
-<link href="/farm/resources/css/auctionDetail.css" rel="stylesheet"
-   type="text/css" />
+
 <link href="/farm/resources/css/qna.css" rel="stylesheet"
    type="text/css" />
 <link href="/farm/resources/css/dailyList.css" rel="stylesheet"
@@ -127,7 +128,7 @@ $(function(){
       function bidcheck(){
          var price = $('#biddingprice').val();
          var no = '${auction.auction_no}';
-         alert(price+", " + no);
+        /*  alert(price+", " + no); */
          var result = true;
          $.ajax({
             url:"checkAuction_history_price.do",
@@ -203,14 +204,16 @@ $(function(){
                  var json = JSON.parse(objStr);
                  
                  var biddingcount = json.list[0].biddingcount;
-                 alert("count : "+biddingcount); 
-                 alert("day :"+json.list[0].day);
+               /*   alert("count : "+biddingcount); 
+                 alert("day :"+json.list[0].day); */
                  
-                 if(json.list.length != 0){
+                 if(json.list.length > 1){
+                 if(json.list[0].day > 0 && biddingcount > 0){
                  var outValues = "";
                     outValues =
                        "<span class='s1'>입찰 수 : </span> <span>"+biddingcount+"</span>&nbsp;&nbsp;&nbsp; <span class='s1'>남은기간 : </span>"+
                       "<span>"+json.list[0].day+"</span>";
+                 }
                     
                  $(".bidding_info").html(outValues);
                   
@@ -224,21 +227,24 @@ $(function(){
                "</tr>";
                
                  for(var i in json.list){
+                	 if(json.list[i].member_id != system ){
                     outValues2 +=
                        "<tr>"+
                      "<td>"+json.list[i].member_id+"</td>"+
                      "<td>"+json.list[i].auction_history_price+"</td>"+
                      "<td>"+json.list[i].auction_history_date+"</td>"+
                      "</tr>";
+                	 }
                  }
                    outValues2 += "</table>";
                  $(".bidding_history").html(outValues2);
         	  }
           else{
-        	  outValues2 = 
+        	  var outValues3="";
+        	 	outValues3 = 
         		  "<div style='width:100%; height:200px;margin-top:20%;text-align:center;font-size:20pt;font-weight: bold;color:gray;'>"+
               	  "등록된 문의가 없습니다.</div>";
-        	  $(".bidding_info").html(outValues2);
+        	  $(".bidding_history").html(outValues3);
           	}
           }
       });
@@ -438,7 +444,7 @@ $(function(){
             var objStr = JSON.stringify(data);
             var jsonObj = JSON.parse(objStr);
             
-            var outValues = "<tr><th >번호</th><th >판매자</th><th >제목</th></tr>"; 
+            var outValues = "<tr id='table_tr_1'><th >번호</th><th >판매자</th><th >제목</th></tr>"; 
             
             for(var i in jsonObj.list){
                   outValues += 
@@ -478,15 +484,18 @@ $(function(){
                <span class="release_date">경매 시작일</span>&nbsp;<span class="date">${auction.auction_startdate}</span>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
                &nbsp; &nbsp;  <span>남은시간 : </span>
                  <span id="time"></span>&nbsp; 
-                    <c:choose>
-                      <c:when test="${loginUser.member_category eq '0'} ">
-                        <span><button class="modify" onclick="auctionModify();">수정</button></span>
-                        <span><button class="delete" onclick="auctionDelete();">삭제</button></span>
-                     </c:when>
-                     <c:when test="${loginUser.member_id eq auction.member_id}">
-                        <span><button class="modify" onclick="auctionModify();">수정</button></span>
-                        <span><button class="delete" onclick="auctionDelete();">삭제</button></span>
-                     </c:when>
+                 <c:choose>
+                  <c:when test="${loginUser.member_id eq auction.member_id && auction.auction_status eq 0}">
+                     <span><button class="modify" onclick="auctionModify();">수정</button></span>
+                     <span><button class="delete" onclick="auctionDelete();">삭제</button></span>
+                  </c:when>
+                  
+                  <c:when test="${loginUser.member_category eq 2 }">
+                  	<span><button class="modify" onclick="auctionModify();">수정</button></span>
+                    <span><button class="delete" onclick="auctionDelete();">삭제</button></span>
+                  </c:when>
+                  <c:otherwise></c:otherwise>
+                
                   </c:choose>
             </div>
             <div class="img_box"
@@ -567,7 +576,7 @@ $(function(){
                      </div>
 
                      <!-- 경매정보 -->
-                     <div class="bidding_info">
+                     <div class="bidding_info" style="width:100%; height:auto;">
                         <!-- <span class="s1">입찰 수 : </span> <span>10</span> <span class="s1">남은
                            시간 : </span> <span>4일 13시간 5분</span> <span class="s1">경매 기간 : </span>
                         <span>5일</span> -->
