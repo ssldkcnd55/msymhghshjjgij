@@ -1004,18 +1004,21 @@ public class AuctionController {
 		for(Auction a2 : list2) {
 			//경매 상태 4인 경매의 낙찰인 뽑아오기
 			AuctionCommon ac2 = auctionService.selectWinBid(a2.getAuction_no());
-			//System.out.println("유찰인 : " + ac2.getMember_id());
+			System.out.println("유찰인 : " + ac2.getMember_id());
 			int warningCount = auctionService.selectMiscarry(ac2.getMember_id());
+			System.out.println("경고회수 :" + warningCount);
 			//뽑아온 4인 경매 낙찰인 수로 member warning_count 업데이트
 			Member m = new Member();
 			m.setMember_id(ac2.getMember_id());
 			m.setMember_warning_count(warningCount);
 			int updateWarning = memberService.updateWarning(m);
+			System.out.println("유찰 업데이트 확인 : " + updateWarning);
 			if(updateWarning > 0) {
 				System.out.println("updateWarning>0");
 				JSONObject job=new JSONObject();
 				job.put("member_id", m.getMember_id());
-			jarr.add(job);
+				jarr.add(job);
+				}
 			}
 			json.put("list", jarr);
 			 response.setContentType("application/json; charset=utf-8;");
@@ -1024,7 +1027,6 @@ public class AuctionController {
 			out.println(json.toJSONString());
 			out.flush();
 			out.close();
-		}
 	}
 	
 	// 경매 다중 이미지 업로드
