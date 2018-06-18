@@ -82,14 +82,20 @@
 	<select id="selectmodifyAuction" parameterType="auction"
 		flushCache="true" resultType="auction">
 	<![CDATA[
-		select * from auction where auction_no=#{auction_no}
+		select 
+		 auction_no,member_id, category_no, auction_title, auction_note,auction_img, 
+		 auction_intro,auction_status,auction_startprice,
+		auction_directprice, to_char(auction_startdate,'YYYY-MM-DD') as "auction_startdate",
+		to_char(auction_enddate,'YYYY-MM-DD') as "auction_enddate"
+		from auction where auction_no=#{auction_no}
 	]]>
 	</select>
 
 	<update id="updateAuctionMake" parameterType="Auction">
 	<![CDATA[
 		update auction set auction_title=#{auction_title},auction_note=#{auction_note},auction_img=#{auction_img},
-		auction_intro=#{auction_intro},auction_startprice=#{auction_startprice},auction_directprice=#{auction_directprice} 
+		auction_intro=#{auction_intro},auction_startprice=#{auction_startprice},auction_directprice=#{auction_directprice} ,
+		auction_startdate=#{auction_startdate},auction_enddate=#{auction_enddate} 
 		where auction_no = #{auction_no}
 	]]>
 	</update>
@@ -205,7 +211,7 @@
 	
 	<select id="selectAuctionBiddingCount" parameterType="int" resultType="int">
 	<![CDATA[
-		select count(*) as "rnum" from auction_history where auction_no = #{auction_no}
+		select count(*) from auction_history where auction_no = #{auction_no}
 	]]>
 	</select>
 	
@@ -348,7 +354,7 @@
 	<select id="select_auction_background" parameterType="String" resultType="Auction">
 	<![CDATA[
 		 select ROWNUM rum, auction_no,member_id,auction_title from auction 
-		where member_id = #{member_id} order by auction_no DESC
+		where member_id = #{member_id} and auction_status != '5' order by auction_no DESC
 	]]>
 	</select>
 	

@@ -373,7 +373,7 @@ public class AuctionController {
 
 		System.out.println("updateAuctionMake : " + updateAuctionMake);
 
-		return "forward:/AuctionDetail.do";
+		return "forward:/AuctionDetail.do?auction_no="+auction.getAuction_no();
 	}
 
 	/* QnA 등록 페이지이동 */
