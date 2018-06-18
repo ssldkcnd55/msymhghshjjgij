@@ -139,4 +139,7 @@ where member_id=#{member_id}) and b.market_no=m.MARKET_NO) A where rownum <= #{e
 	<insert id="insertPoint" parameterType="int">
 		insert into userpoint values ((select max(point_no)+1 from userpoint),(select market.MEMBER_ID from market left join buy on buy.market_no = market.market_no where buy_no = #{buy_no}),(select buy_amount*market_price from buy left join market on market.market_no = buy.market_no where buy_no = #{buy_no}))
 	</insert>
+	<update id="updateBuyTransport" parameterType="Payment">
+		update buy set buy_status = 2,buy_transport_name='한진',buy_transport_no=#{buy_transport_no} where buy_no = #{buy_no}
+	</update>
 </mapper>

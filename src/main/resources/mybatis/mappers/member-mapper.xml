@@ -195,7 +195,8 @@ insert into member values (
 
 <update id="updateWarning" parameterType="member">
 <![CDATA[
-	update member set MEMBER_WARNING_COUNT = #{member_warning_count} where member_id = #{member_id}
+	update member set MEMBER_WARNING_COUNT = #{member_warning_count} where member_id = #{member_id} and 
+	MEMBER_WARNING_COUNT != #{member_warning_count}
 ]]>
 </update>
 

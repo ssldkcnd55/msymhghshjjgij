@@ -158,13 +158,13 @@ public class MemberController {
 			member.setMember_img("default.png");
 		}
 		int insertmember = memberService.insertMember(member);
-		/// 사업자 category==0 이면 'system'과 채팅방 생성
-		if (category.equals("0")) {
+		/// 'system'과 채팅방 생성
+		
 			Chat chat = new Chat();
 			chat.setMember_id1(member.getMember_id());
 			chat.setMember_id2("system");
 			chatService.insertChat(chat);
-		}
+		
 		///
 		return "home";
 	}

@@ -106,5 +106,10 @@ public class PaymentServiceImpl implements PaymentService{
 		// TODO Auto-generated method stub
 		return paymentDao.insertPoint(sqlSession,buy_no);
 	}
+	@Override
+	public int updateBuyTransport(Payment payment) {
+		// TODO Auto-generated method stub
+		return paymentDao.updateBuyTransport(sqlSession,payment);
+	}
 	
 }

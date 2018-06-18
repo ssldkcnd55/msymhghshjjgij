@@ -38,4 +38,6 @@ public interface PaymentService {
 	int updateBuyComplete(int buy_no);
 
 	int insertPoint(int buy_no);
+
+	int updateBuyTransport(Payment payment);
 }

@@ -140,6 +140,9 @@ public class MarketController {
 			jmarket.put("market_note", m.getMarket_note());
 			jmarket.put("market_img", m.getMarket_img());
 			jmarket.put("search", m.getSearch());
+			jmarket.put("market_amount", m.getMarket_amount());
+			jmarket.put("remaining", m.getRemaining());
+			
 			jmarket.put("market_price", m.getMarket_price());
 			jmarket.put("sort", sort);
 
