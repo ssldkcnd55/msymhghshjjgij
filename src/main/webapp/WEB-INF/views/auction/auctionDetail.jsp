@@ -227,7 +227,7 @@ $(function(){
                "</tr>";
                
                  for(var i in json.list){
-                	 if(json.list[i].member_id != null ){
+                	 if(json.list[i].member_id != system ){
                     outValues2 +=
                        "<tr>"+
                      "<td>"+json.list[i].member_id+"</td>"+
