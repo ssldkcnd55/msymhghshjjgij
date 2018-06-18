@@ -38,7 +38,7 @@ public class Market implements java.io.Serializable {
 		return buy_amount;
 	}
 
-	public void setBuy_amount(String buy_amount) {
+	public void setBuy_amount(String 	_amount) {
 		this.buy_amount = buy_amount;
 	}
 

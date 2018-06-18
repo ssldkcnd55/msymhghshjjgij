@@ -642,6 +642,21 @@ public class MemberController {
 
 	}
 	
-	
+	@RequestMapping("selectSelInfo.do")
+	public void sellerInfo(@RequestParam("member_id") String member_id,HttpServletResponse response)throws IOException {
+		System.out.println(member_id);
+		Member member = memberService.selectMemberInfo(member_id);
+		JSONObject json = new JSONObject();
+		json.put("member_id", member.getMember_id());
+		json.put("member_name",member.getMember_name());
+		json.put("member_addr", member.getMember_addr());
+		json.put("point_point",member.getUserpoint());
+		
+		response.setContentType("application/json; charset=utf-8");
+		PrintWriter out = response.getWriter();
+		out.append(json.toJSONString());
+		out.flush();
+		out.close();
+	}
 
 }

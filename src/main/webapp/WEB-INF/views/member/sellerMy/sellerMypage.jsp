@@ -25,6 +25,9 @@ $(function(){
 	
 	var tab = document.location.href.split('#').pop();
 	$('#'+tab+' a').trigger("click");
+	
+	
+
 });
 </script>
 </head>
