@@ -47,6 +47,8 @@ public class ChatHandler extends TextWebSocketHandler {
 					wsMap.get(your_id).sendMessage(new TextMessage("new"));
 					if( map.get("state2") != null && map.get("state2").equals("sel") )
 					{wsMap.get(your_id).sendMessage(new TextMessage("sel"));}
+					else if (map.get("state2") != null && map.get("state2").equals("mom"))
+					{wsMap.get(your_id).sendMessage(new TextMessage("mom"));}
 					session.sendMessage(new TextMessage("mex" + payloadMessage));
 					chatService.insertChatHistory(new ChatHistory(Integer.parseInt((String) map.get("chat_no")),
 							(String) map.get("my_id"), payloadMessage, null, "N"));
