@@ -120,7 +120,7 @@ bidding = setInterval(function(){auction_bidding()}, 3000); */
 	}); 
 }
 
-
+*/
 
 function getBasketCount(member_id)
 {
@@ -138,7 +138,7 @@ function getBasketCount(member_id)
                     request.responseText + "\nerror" + errorData); 
            }
 	});
-} */
+} 
 
 	/* $(function() {
 

@@ -18,7 +18,23 @@ function clickPayment()
 	location.href= "makePayment.do?buy_no="+buy_no.toString();
 	}
 }
-
+function getBasketCount(member_id)
+{
+	$.ajax({
+		url:"selectBasketCount.do",
+		type:"post",
+		data:{"member_id":member_id},
+		success: function(data)
+		{
+			$('#cart_item_count').text(data);
+			
+		},error: function(request,status,errorData){
+			console.log("header.jsp/getBasketCount");
+             console.log("error code : " + request.status + "\nmessage" + 
+                    request.responseText + "\nerror" + errorData); 
+           }
+	});
+}
 function deleteConfirmBasket(market_no)
 {
 //confirm("해당 상품을 장바구니에서 삭제 하시겠습니까?");
@@ -163,7 +179,7 @@ function deleteBasket()
 				$('.checkedCount').text(count);
 				setPrice();
 			});
-			
+			getBasketCount('${loginUser.member_id}');
 		},
 		error: function(request,status,errorData){
 			console.log("ShoppingBasket.js / deleteBasket();")

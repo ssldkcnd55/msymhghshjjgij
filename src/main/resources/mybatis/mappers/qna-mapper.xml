@@ -34,8 +34,8 @@
 	
 <select id="mainQnaList" parameterType="PageNumber" resultType="MainQna">
 	<![CDATA[
-	select * from (select rownum rnum, main_qna_no, main_qna_title, member_id,main_qna_date from main_qna 
-		
+	select * from(
+select rownum rnum,main_qna_no, main_qna_title, member_id,main_qna_date from (select main_qna_no, main_qna_title, member_id,main_qna_date from main_qna 
 	]]>
 	
 	<if test="qnaSearch != null">
@@ -44,7 +44,7 @@
 		]]>
 	</if>
 	<![CDATA[
-	order by main_qna_no desc) where rnum >=#{startRow} and rnum <=#{endRow}
+	order by main_qna_no desc)) where rnum >=#{startRow} and rnum <=#{endRow}
 	]]>
 	
 

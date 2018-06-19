@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
    pageEncoding="UTF-8"%>
+   <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -40,6 +41,13 @@
 </style>
    
 <script type="text/javascript">
+function uncomma(str) {
+    str = String(str);
+    return str.replace(/[^\d]+/g, '');
+}
+function numberWithCommas(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
 $(function(){
    $('.goods-view-show-option-button').click(function(){
       if($('#flow-cart2').css('display') == 'none'){
@@ -195,7 +203,7 @@ $(function(){
             console.log(data);
             var objStr = JSON.stringify(data);
             var jsonObj = JSON.parse(objStr);   
-             $("#topprice").text(jsonObj.auction_history_price); 
+             $("#topprice").text(numberWithCommas(jsonObj.auction_history_price)+"원"); 
          }
          
       });
@@ -246,7 +254,7 @@ $(function(){
                     outValues2 +=
                        "<tr>"+
                      "<td>"+json.list[i].member_id+"</td>"+
-                     "<td>"+json.list[i].auction_history_price+"</td>"+
+                     "<td>"+numberWithCommas(json.list[i].auction_history_price)+"원</td>"+
                      "<td>"+json.list[i].auction_history_date+"</td>"+
                      "</tr>";
                 	 }
@@ -280,32 +288,24 @@ $(function(){
              var objStr = JSON.stringify(obj);
              var jsonObj = JSON.parse(objStr);
             /*  alert("날짜 : "+jsonObj.auction_enddate); */
-               
+             
+            if(jsonObj.status == 1){
              $('.demo1').timeTo(new Date(jsonObj.auction_enddate)); 
              $('.a').timeTo(new Date(jsonObj.auction_enddate)); 
+            }
             
-            /*  var outValues = $("#time").html(); 
-             var outValues2 = $("#a").html(); 
-             if(jsonObj.status == 1){
-                outValues+=
-               /* dayRound+dy+hoursRound+hr+minutesRound+min+secondsRound+sec; 
-				
-                   jsonObj.day+"일&nbsp;"+jsonObj.hour+"시간 &nbsp;"+
-                  jsonObj.min+"분 &nbsp;";  
-                  
-                outValues2 += 
-                   jsonObj.day+"일&nbsp;"+jsonObj.hour+"시간 &nbsp;"+
-                     jsonObj.min+"분 &nbsp;";  
-                     
-              }else if(jsonObj.status == 0){
+             var outValues = $("#time").html(); 
+             var outValues2 = $(".a").html(); 
+             
+              if(jsonObj.status == 0){
                 outValues+="경매 준비중";
                 outValues2+="경매 준비중";
-             }else if(jsonObj.status == 2){
+             }else if(jsonObj.status == 2 || jsonObj.status ==3 || jsonObj.status ==4 ){
                 outValues+=  "경매 마감";
                 outValues2+=  "경매 마감";
              }
                $("#time").html(outValues);  
-               $("#a").html(outValues2);  */
+               $(".a").html(outValues2); 
                
          },error: function(request,status,errorData){
                alert("error code : " + request.status + "\nmessage" + 
@@ -459,7 +459,7 @@ $(function(){
             <div class="title_box">
                <span class="title">${auction.auction_title }</span> &nbsp; 
                <span class="release_date">경매 시작일</span>&nbsp;<span class="date">${auction.auction_startdate}</span>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
-               &nbsp; &nbsp;  <span>남은시간 : </span>
+               &nbsp; &nbsp;  <span class="end">남은시간 : </span>
                  <span id="time" class="demo1"></span>&nbsp; 
                  <c:choose>
                   <c:when test="${loginUser.member_id eq auction.member_id && auction.auction_status eq 0}">
@@ -687,7 +687,7 @@ $(function(){
                         <tr>
                            <td class="2">즉시 구매 가격</td>
                            <td>:  </td>
-                           <td>${auction.auction_directprice}</td>
+                           <td><fmt:formatNumber value="${auction.auction_directprice}" pattern="#,###" />원</td>
                         </tr >
                      </table>
                   </div>
@@ -697,7 +697,7 @@ $(function(){
                         <tr >
                            <td>경매시작값</td>
                            <td>:  </td>
-                           <td>${auction.auction_startprice}</td>
+                           <td><fmt:formatNumber value="${auction.auction_startprice}" pattern="#,###" />원</td>
                         </tr>
                         <tr >
                            <td>최고가격</td>
