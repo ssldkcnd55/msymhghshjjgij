@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
    pageEncoding="UTF-8"%>
+   <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -40,6 +41,13 @@
 </style>
    
 <script type="text/javascript">
+function uncomma(str) {
+    str = String(str);
+    return str.replace(/[^\d]+/g, '');
+}
+function numberWithCommas(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
 $(function(){
    $('.goods-view-show-option-button').click(function(){
       if($('#flow-cart2').css('display') == 'none'){
@@ -195,7 +203,7 @@ $(function(){
             console.log(data);
             var objStr = JSON.stringify(data);
             var jsonObj = JSON.parse(objStr);   
-             $("#topprice").text(jsonObj.auction_history_price); 
+             $("#topprice").text(numberWithCommas(jsonObj.auction_history_price)+"원"); 
          }
          
       });
@@ -246,7 +254,7 @@ $(function(){
                     outValues2 +=
                        "<tr>"+
                      "<td>"+json.list[i].member_id+"</td>"+
-                     "<td>"+json.list[i].auction_history_price+"</td>"+
+                     "<td>"+numberWithCommas(json.list[i].auction_history_price)+"원</td>"+
                      "<td>"+json.list[i].auction_history_date+"</td>"+
                      "</tr>";
                 	 }
@@ -679,7 +687,7 @@ $(function(){
                         <tr>
                            <td class="2">즉시 구매 가격</td>
                            <td>:  </td>
-                           <td>${auction.auction_directprice}</td>
+                           <td><fmt:formatNumber value="${auction.auction_directprice}" pattern="#,###" />원</td>
                         </tr >
                      </table>
                   </div>
@@ -689,7 +697,7 @@ $(function(){
                         <tr >
                            <td>경매시작값</td>
                            <td>:  </td>
-                           <td>${auction.auction_startprice}</td>
+                           <td><fmt:formatNumber value="${auction.auction_startprice}" pattern="#,###" />원</td>
                         </tr>
                         <tr >
                            <td>최고가격</td>

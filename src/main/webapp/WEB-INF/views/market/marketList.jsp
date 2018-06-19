@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -341,8 +342,7 @@ function numberWithCommas(x) {
 										<p class="title">[품절]${m.market_title }</p>
 									</c:if>
 										<p class="content">${m.market_note }</p>
-										
-										<p class='content'><c:out value="numberWithCommas(${m.market_price })"/>원</p>
+										<p class='content'><fmt:formatNumber value="${m.market_price }" pattern="#,###" />원</p>
 									</div>
 								</div>
 							</a>
