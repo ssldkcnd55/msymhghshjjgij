@@ -8,8 +8,8 @@
 <link href="/farm/resources/css/jobMake.css" rel="stylesheet"
 	type="text/css" />
 <script src="/farm/resources/js/jquery-3.3.1.min.js"></script>
-<script type="text/javascript" src="resources/editor/naver/js/HuskyEZCreator.js"
-	charset="utf-8"></script>
+<script type="text/javascript"
+	src="resources/editor/naver/js/HuskyEZCreator.js" charset="utf-8"></script>
 <meta charset="UTF-8">
 <title>Farm</title>
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js">
@@ -26,6 +26,23 @@
 			}
 		}).open();
 	};
+	function getThumbnailPrivew(html, $target) {
+		if (html.files && html.files[0]) {
+			var reader = new FileReader();
+			reader.onload = function(e) {
+				$target.css('display', '');
+				/* $target.css('background-image', 'url(\"' + e.target.result + '\")'); // 배경으로 지정시 */
+				$target
+						.html('<img class="backimg" src="' + e.target.result + '" border="0" alt="" />');
+
+				$target.css('text-align', 'left');
+				$target.css('line-heigt', '0px');
+				$target.css('border', 'none');
+				/* $target.css('background-image',e.target.result); */
+			}
+			reader.readAsDataURL(html.files[0]);
+		}
+	}
 </script>
 </head>
 <body>
@@ -74,22 +91,18 @@
 									<td class="td">
 										<p class="p">농장프로필</p>
 									</td>
-									<td colspan="3" class="td1">
-										<!-- <!-- <img
-										src="/farm/resources/images/default_user.png" id="profile"
-										style="text-align: center" alt="이미지를 선택해주세요"></img> --> <input
-										type="file" id="file-1" class="inputfile inputfile-1"
-										accept='image/gif,image/jpeg,image/pnp'
-										data-multiple-caption="{count} files selected" name="upfile"
-										onchange="readURL(this);" style="width: 1px; height: 1px;" />
-										<label for="file-1" style="background: #7e5957;"><svg
-												xmlns="http://www.w3.org/2000/svg" width="20" height="17"
-												viewBox="0 0 20 17">
-										<path
-													d="M10 0l-5.2 4.9h3.3v5.1h3.8v-5.1h3.3l-5.2-4.9zm9.3 11.5l-3.2-2.1h-2l3.4 2.6h-3.5c-.1 0-.2.1-.2.1l-.8 2.3h-6l-.8-2.2c-.1-.1-.1-.2-.2-.2h-3.6l3.4-2.6h-2l-3.2 2.1c-.4.3-.7 1-.6 1.5l.6 3.1c.1.5.7.9 1.2.9h16.3c.6 0 1.1-.4 1.3-.9l.6-3.1c.1-.5-.2-1.2-.7-1.5z" /></svg>
-											<span style="font-size: 12pt;">프로필 사진</span></label> -->
+									<td colspan="3" class="td1" style="height: 370px;">
+										<div class="filebox">
+											<div>
+												<input type="file" name="upfile" id="cma_file"
+													accept="image/*" capture="camera"
+													onchange="getThumbnailPrivew(this,$('#cma_image'))" /> <br />
+												<br />
+												<div id="cma_image" class="cma_image">이미지를 선택해 주세요</div>
+											</div>
+										</div>
 									</td>
-								</tr>								
+								</tr>
 								<tr class="tr">
 									<td class="td">
 										<p class="p">전화번호</p>
@@ -146,7 +159,7 @@
 							<li class="li4" onclick="location.href='/#'"><input
 								type="submit" value="구인등록"></li>
 						</ul> -->
-						<input class="li4_input" type="button" value="뒤로가기"> <input
+						<!-- <input class=li4_input type="button" value="뒤로가기"> --> <input
 							class="li4_input submit" type="submit" value="구인등록"
 							onclick="submitContents();">
 					</form>
