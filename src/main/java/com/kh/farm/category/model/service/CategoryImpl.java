@@ -60,6 +60,11 @@ public class CategoryImpl implements CategoryService{
 		// TODO Auto-generated method stub
 		return categoryDao.updateCategory_main(sqlSession,c);
 	}
+	@Override
+	public int updateCategory_name(Category c) {
+		// TODO Auto-generated method stub
+		return categoryDao.updateCategory_name(sqlSession,c);
+	}
 	
 	
 }
