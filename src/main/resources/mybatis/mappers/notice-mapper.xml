@@ -7,8 +7,9 @@
 
 <select id="noticeList" parameterType="PageNumber" resultType="notice">
 	<![CDATA[
-	select * from (select rownum rnum, notice_no, notice_title, notice_date from notice 
-	order by notice_no desc) where rnum >=#{startRow} and rnum <=#{endRow}
+	select * from(
+	select rownum rnum, notice_no, notice_title, notice_date from (select notice_no, notice_title, notice_date from notice 
+	order by notice_no desc)) where rnum >=#{startRow} and rnum <=#{endRow}
 	
 	]]>
 </select>

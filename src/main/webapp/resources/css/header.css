@@ -86,7 +86,8 @@ img{border:0}
     text-decoration: none;
     color: inherit;
     float:left;
-   margin-top:3px;
+   margin-top:13px;
+   position:relative;
 }
 .cart_img{
        display: block;
@@ -94,7 +95,8 @@ img{border:0}
     margin: 0 auto;
 }
 .num{
-
+	top:-5px;
+	right:17px;
     height: 17px;
     padding: 0 5px 0 5px;
     border-radius: 8px;
@@ -104,6 +106,7 @@ img{border:0}
     line-height: 15px;
     text-align: center;
     white-space: nowrap;
+    position:absolute;
 }
 .header_main{
    width: 1050px;
