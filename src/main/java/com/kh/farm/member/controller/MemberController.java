@@ -593,7 +593,7 @@ public class MemberController {
 
 			for (Visit v : visitList) {
 				JSONObject json = new JSONObject();
-				json.put("count", v.getVisit_count());
+				json.put("count2", v.getVisit_count());
 				json.put("month", v.getVisit_month());
 				jarr.add(json);
 				count++;

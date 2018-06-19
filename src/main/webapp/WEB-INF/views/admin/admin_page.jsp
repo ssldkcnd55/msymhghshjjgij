@@ -39,14 +39,9 @@
 </style>
 
 <!-- Resources -->
-<script src="https://www.amcharts.com/lib/3/amcharts.js"></script>
-<script src="https://www.amcharts.com/lib/3/serial.js"></script>
-<script
-	src="https://www.amcharts.com/lib/3/plugins/export/export.min.js"></script>
-<link rel="stylesheet"
-	href="https://www.amcharts.com/lib/3/plugins/export/export.css"
-	type="text/css" media="all" />
-<script src="https://www.amcharts.com/lib/3/themes/light.js"></script>
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+<script src="https://code.highcharts.com/modules/export-data.js"></script>
 
 <!-- Chart code -->
 <script>
@@ -117,66 +112,63 @@
 			},
 			dataType : "JSON",
 			success : function(data) {
+
 				console.log(data);
 				var objStr = JSON.stringify(data);
 				var jsonObj = JSON.parse(objStr);
+				/* var outvalues = ""; */
+				/* $("#chartdiv").empty(); */
 
-				//$("#chartdiv").remove();
-				var chart = AmCharts.makeChart("chartdiv", {
-					"type" : "serial",
-					"theme" : "light",
-					"dataProvider" : [ {
-						"country" : jsonObj.list[6].date,
-						"visits" : jsonObj.list[6].count
-					}, {
-						"country" : jsonObj.list[5].date,
-						"visits" : jsonObj.list[5].count
-					}, {
-						"country" : jsonObj.list[4].date,
-						"visits" : jsonObj.list[4].count
-					}, {
-						"country" : jsonObj.list[3].date,
-						"visits" : jsonObj.list[3].count
-					}, {
-						"country" : jsonObj.list[2].date,
-						"visits" : jsonObj.list[2].count
-					}, {
-						"country" : jsonObj.list[1].date,
-						"visits" : jsonObj.list[1].count
-					}, {
-						"country" : jsonObj.list[0].date,
-						"visits" : jsonObj.list[0].count
-					} ],
-					"valueAxes" : [ {
-						"gridColor" : "#FFFFFF",
-						"gridAlpha" : 0.2,
-						"dashLength" : 0
-					} ],
-					"gridAboveGraphs" : true,
-					"startDuration" : 1,
-					"graphs" : [ {
-						"balloonText" : "[[category]]: <b>[[value]]</b>",
-						"fillAlphas" : 0.8,
-						"lineAlpha" : 0.2,
-						"type" : "column",
-						"valueField" : "visits"
-					} ],
-					"chartCursor" : {
-						"categoryBalloonEnabled" : false,
-						"cursorAlpha" : 0,
-						"zoomable" : false
-					},
-					"categoryField" : "country",
-					"categoryAxis" : {
-						"gridPosition" : "start",
-						"gridAlpha" : 0,
-						"tickPosition" : "start",
-						"tickLength" : 20
-					},
-					"export" : {
-						"enabled" : true
-					}
+				var day = [];
+				var visit = [];
 
+				for ( var i in jsonObj.list) {
+					day.push(jsonObj.list[i].date);
+					visit.push(jsonObj.list[i].count);
+				}
+				console.log(day);
+				console.log(visit);
+
+				Highcharts.chart('chartdiv', {
+					chart : {
+						type : 'column'
+					},
+
+					title : {
+						text : '일별 접속량수'
+					},
+					xAxis : {
+						categories : day
+
+					},
+					yAxis : {
+						min : 0,
+						title : {
+							text : '방문자수'
+						}
+					},
+					legend : {
+						enabled : false
+					},
+					tooltip : {
+						pointFormat : '판매량: <b>{point.y:.1f} 개</b>'
+					},
+					series : [ {
+						name : day,
+						data : visit,
+						dataLabels : {
+							enabled : true,
+							rotation : -90,
+							color : '#FFFFFF',
+							align : 'right',
+							format : '{point.y:.1f}', // one decimal
+							y : 10, // 10 pixels down from the top
+							style : {
+								fontSize : '13px',
+								fontFamily : 'Verdana, sans-serif'
+							}
+						}
+					} ]
 				});
 			}
 
@@ -196,64 +188,59 @@
 				console.log(data);
 				var objStr = JSON.stringify(data);
 				var jsonObj = JSON.parse(objStr);
-				var outvalues = "";
+				/* var outvalues = ""; */
 				$("#chartdiv").empty();
 
-				var chart = AmCharts.makeChart("chartdiv", {
-					"type" : "serial",
-					"theme" : "light",
-					"dataProvider" : [ {
-						"country" : jsonObj.list[6].date,
-						"visits" : jsonObj.list[6].count
-					}, {
-						"country" : jsonObj.list[5].date,
-						"visits" : jsonObj.list[5].count
-					}, {
-						"country" : jsonObj.list[4].date,
-						"visits" : jsonObj.list[4].count
-					}, {
-						"country" : jsonObj.list[3].date,
-						"visits" : jsonObj.list[3].count
-					}, {
-						"country" : jsonObj.list[2].date,
-						"visits" : jsonObj.list[2].count
-					}, {
-						"country" : jsonObj.list[1].date,
-						"visits" : jsonObj.list[1].count
-					}, {
-						"country" : jsonObj.list[0].date,
-						"visits" : jsonObj.list[0].count
-					} ],
-					"valueAxes" : [ {
-						"gridColor" : "#FFFFFF",
-						"gridAlpha" : 0.2,
-						"dashLength" : 0
-					} ],
-					"gridAboveGraphs" : true,
-					"startDuration" : 1,
-					"graphs" : [ {
-						"balloonText" : "[[category]]: <b>[[value]]</b>",
-						"fillAlphas" : 0.8,
-						"lineAlpha" : 0.2,
-						"type" : "column",
-						"valueField" : "visits"
-					} ],
-					"chartCursor" : {
-						"categoryBalloonEnabled" : false,
-						"cursorAlpha" : 0,
-						"zoomable" : false
-					},
-					"categoryField" : "country",
-					"categoryAxis" : {
-						"gridPosition" : "start",
-						"gridAlpha" : 0,
-						"tickPosition" : "start",
-						"tickLength" : 20
-					},
-					"export" : {
-						"enabled" : true
-					}
+				var day = [];
+				var visit = [];
 
+				for ( var i in jsonObj.list) {
+					day.push(jsonObj.list[i].date);
+					visit.push(jsonObj.list[i].count);
+				}
+				console.log(day);
+				console.log(visit);
+
+				Highcharts.chart('chartdiv', {
+					chart : {
+						type : 'column'
+					},
+
+					title : {
+						text : '일별 방문자수'
+					},
+					xAxis : {
+						categories : day
+
+					},
+					yAxis : {
+						min : 0,
+						title : {
+							text : '방문자수'
+						}
+					},
+					legend : {
+						enabled : false
+					},
+					tooltip : {
+						pointFormat : '판매량: <b>{point.y:.1f} 개</b>'
+					},
+					series : [ {
+						name : day,
+						data : visit,
+						dataLabels : {
+							enabled : true,
+							rotation : -90,
+							color : '#FFFFFF',
+							align : 'right',
+							format : '{point.y:.1f}', // one decimal
+							y : 10, // 10 pixels down from the top
+							style : {
+								fontSize : '13px',
+								fontFamily : 'Verdana, sans-serif'
+							}
+						}
+					} ]
 				});
 			}
 
@@ -275,60 +262,56 @@
 				var objStr = JSON.stringify(data);
 				var jsonObj = JSON.parse(objStr);
 
+				var month = [];
+				var visit = [];
 				$("#chartdiv").empty();
+				for ( var i in jsonObj.list) {
+					month.push(jsonObj.list[i].month);
+					visit.push(jsonObj.list[i].count2);
+				}
+				console.log(month);
+				console.log(visit);
 
-				var chart = AmCharts.makeChart("chartdiv", {
-					"type" : "serial",
-					"theme" : "light",
-					"dataProvider" : [ {
-						"country" : jsonObj.list[5].month,
-						"visits" : jsonObj.list[5].count
-					}, {
-						"country" : jsonObj.list[4].month,
-						"visits" : jsonObj.list[4].count
-					}, {
-						"country" : jsonObj.list[3].month,
-						"visits" : jsonObj.list[3].count
-					}, {
-						"country" : jsonObj.list[2].month,
-						"visits" : jsonObj.list[2].count
-					}, {
-						"country" : jsonObj.list[1].month,
-						"visits" : jsonObj.list[1].count
-					}, {
-						"country" : jsonObj.list[0].month,
-						"visits" : jsonObj.list[0].count
-					} ],
-					"valueAxes" : [ {
-						"gridColor" : "#FFFFFF",
-						"gridAlpha" : 0.2,
-						"dashLength" : 0
-					} ],
-					"gridAboveGraphs" : true,
-					"startDuration" : 1,
-					"graphs" : [ {
-						"balloonText" : "[[category]]: <b>[[value]]</b>",
-						"fillAlphas" : 0.8,
-						"lineAlpha" : 0.2,
-						"type" : "column",
-						"valueField" : "visits"
-					} ],
-					"chartCursor" : {
-						"categoryBalloonEnabled" : false,
-						"cursorAlpha" : 0,
-						"zoomable" : false
+				Highcharts.chart('chartdiv', {
+					chart : {
+						type : 'column'
 					},
-					"categoryField" : "country",
-					"categoryAxis" : {
-						"gridPosition" : "start",
-						"gridAlpha" : 0,
-						"tickPosition" : "start",
-						"tickLength" : 20
-					},
-					"export" : {
-						"enabled" : true
-					}
 
+					title : {
+						text : '월별 방문자수'
+					},
+					xAxis : {
+						categories : month
+
+					},
+					yAxis : {
+						min : 0,
+						title : {
+							text : '방문자수'
+						}
+					},
+					legend : {
+						enabled : false
+					},
+					tooltip : {
+						pointFormat : '판매량: <b>{point.y:.1f} 개</b>'
+					},
+					series : [ {
+						name : month,
+						data : visit,
+						dataLabels : {
+							enabled : true,
+							rotation : -90,
+							color : '#FFFFFF',
+							align : 'right',
+							format : '{point.y:.1f}', // one decimal
+							y : 10, // 10 pixels down from the top
+							style : {
+								fontSize : '13px',
+								fontFamily : 'Verdana, sans-serif'
+							}
+						}
+					} ]
 				});
 
 			}
@@ -416,31 +399,33 @@
 													<span class="glyphicon glyphicon-user" aria-hidden="true"
 														id="membercount">&nbsp;</span>
 												</h2>
-												<h4>회원수</h4>
+												<h4>총 회원수</h4>
 											</div>
 										</div>
 										<div class="col-md-3">
 											<div class="well dash-box">
 												<h2>
 													<span class="glyphicon glyphicon-list-alt"
-														aria-hidden="true" id="marketcount">&nbsp; 
+														aria-hidden="true" id="marketcount">&nbsp;</span>
 												</h2>
-												<h4>등록 판매 수</h4>
+												<h4>총 등록 판매 수</h4>
 											</div>
 										</div>
 										<div class="col-md-3">
 											<div class="well dash-box">
 												<h2>
-													<span class="glyphicon glyphicon-pencil" aria-hidden="true" id="auctioncount">&nbsp;</span>
+													<span class="glyphicon glyphicon-pencil" aria-hidden="true"
+														id="auctioncount">&nbsp;</span>
 												</h2>
-												<h4>등록 경매 수</h4>
+												<h4>총 등록 경매 수</h4>
 											</div>
 										</div>
 										<div class="col-md-3">
 											<div class="well dash-box">
 												<h2>
-													<span class="glyphicon glyphicon-stats" aria-hidden="true" id="visitcount">&nbsp;</span>
-													
+													<span class="glyphicon glyphicon-stats" aria-hidden="true"
+														id="visitcount">&nbsp;</span>
+
 												</h2>
 												<h4>총 방문자수</h4>
 											</div>
@@ -481,15 +466,15 @@
 
 								<div class="panel panel-default">
 									<div class="panel-heading" style="background-color: #095f59;">
-										<h3 class="panel-title" style="color: #ffffff">최신 유저</h3>
+										<h3 class="panel-title" style="color: #ffffff">최신 경매</h3>
 									</div>
 
 									<div class="panel-body">
 										<table class="table table-striped table-hover">
 											<tr>
-												<th>이름</th>
-												<th>메일</th>
-												<th>가입일</th>
+												<th>경매명</th>
+												<th>경매자</th>
+												<th>등록일</th>
 											</tr>
 											<%-- <% for (int i=0; i<5; i++){ %> --%>
 											<tr>
