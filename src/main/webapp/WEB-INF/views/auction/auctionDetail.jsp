@@ -280,32 +280,24 @@ $(function(){
              var objStr = JSON.stringify(obj);
              var jsonObj = JSON.parse(objStr);
             /*  alert("날짜 : "+jsonObj.auction_enddate); */
-               
+             
+            if(jsonObj.status == 1){
              $('.demo1').timeTo(new Date(jsonObj.auction_enddate)); 
              $('.a').timeTo(new Date(jsonObj.auction_enddate)); 
+            }
             
-            /*  var outValues = $("#time").html(); 
-             var outValues2 = $("#a").html(); 
-             if(jsonObj.status == 1){
-                outValues+=
-               /* dayRound+dy+hoursRound+hr+minutesRound+min+secondsRound+sec; 
-				
-                   jsonObj.day+"일&nbsp;"+jsonObj.hour+"시간 &nbsp;"+
-                  jsonObj.min+"분 &nbsp;";  
-                  
-                outValues2 += 
-                   jsonObj.day+"일&nbsp;"+jsonObj.hour+"시간 &nbsp;"+
-                     jsonObj.min+"분 &nbsp;";  
-                     
-              }else if(jsonObj.status == 0){
+             var outValues = $("#time").html(); 
+             var outValues2 = $(".a").html(); 
+             
+              if(jsonObj.status == 0){
                 outValues+="경매 준비중";
                 outValues2+="경매 준비중";
-             }else if(jsonObj.status == 2){
+             }else if(jsonObj.status == 2 || jsonObj.status ==3 || jsonObj.status ==4 ){
                 outValues+=  "경매 마감";
                 outValues2+=  "경매 마감";
              }
                $("#time").html(outValues);  
-               $("#a").html(outValues2);  */
+               $(".a").html(outValues2); 
                
          },error: function(request,status,errorData){
                alert("error code : " + request.status + "\nmessage" + 
@@ -459,7 +451,7 @@ $(function(){
             <div class="title_box">
                <span class="title">${auction.auction_title }</span> &nbsp; 
                <span class="release_date">경매 시작일</span>&nbsp;<span class="date">${auction.auction_startdate}</span>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
-               &nbsp; &nbsp;  <span>남은시간 : </span>
+               &nbsp; &nbsp;  <span class="end">남은시간 : </span>
                  <span id="time" class="demo1"></span>&nbsp; 
                  <c:choose>
                   <c:when test="${loginUser.member_id eq auction.member_id && auction.auction_status eq 0}">

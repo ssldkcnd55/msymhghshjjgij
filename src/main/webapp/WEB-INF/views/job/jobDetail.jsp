@@ -27,13 +27,15 @@
 			<div class="inner-wrap">
 				<div class="job_box">
 					<div class="job_title">
-
-						<p class="job_name">${job.job_name}</p>
-						<p class="job_titleP">
-							${job.job_title}<span class="job_date">${job.job_date}</span>
-						</p>
+						<div id="job_image"
+							style="background-image: url('/farm/resources/images/job2.png')"></div>
+						<div id="job">&nbsp;${job.job_title}</div>
+						<%-- <p class="job_name">${job.job_name}</p> --%>						
+						<%-- <p class="job_titleP">
+							<span class="job_date">${job.job_date}</span>
+						</p> --%>
 					</div>				
-					 <div class="job_imgbox" style="background-image: url('/farm/resources/upload/jobUpload/${job.job_img}')"></div>		
+					 <div class="job_imgbox" style="background-image: url('/farm/resources/upload/jobUpload/${job.job_img}'); background-size:cover;"></div>		
 					<div>
 						<table class="job_table">
 							<tr>

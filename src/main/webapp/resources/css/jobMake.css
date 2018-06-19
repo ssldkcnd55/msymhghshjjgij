@@ -1,6 +1,5 @@
 @charset "UTF-8";
 
-
 .jung_table {
 	width: 100%;
 	border-collapse: collapse;
@@ -139,4 +138,28 @@
 	cursor: pointer;
 	margin-top: 15px;
 	color: #fff;
+}
+
+.cma_image {
+	width: 420px;
+	height: 280px;
+	border: 1px solid #dcdcdc;
+	color: gray;
+	text-align: center;
+	line-height: 270px;
+}
+
+.li4_input {
+	float: right;
+	padding: 8px;
+	background: #f27634;
+	cursor: pointer;
+	margin-top: 15px;
+	color: #fff;
+	border-color: #f27634;
+	border-style: none;
+}
+
+.li4_input.submit {
+	margin-right: 0px;
 }
