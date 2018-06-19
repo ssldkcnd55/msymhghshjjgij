@@ -229,12 +229,8 @@
 	
 	<select id="selectauction_timeRemaining" parameterType="int" resultType="auction">
 	<![CDATA[
-		select auction_no,sysdate ,AUCTION_STARTDATE, auction_enddate, auction_status, 
-      to_char   (trunc (TO_DATE (auction_enddate, 'YYYY/MM/DD HH24:MI:SS') - TO_DATE (AUCTION_STARTDATE, 'YYYY/MM/DD HH24:MI:SS'), 0)) as "day", 
-      to_char(   trunc ((TO_DATE (auction_enddate, 'YYYY/MM/DD HH24:MI:SS') - TO_DATE (AUCTION_STARTDATE, 'YYYY/MM/DD HH24:MI:SS'))*24, 0) - trunc (TO_DATE (auction_enddate, 'YYYY/MM/DD HH24:MI:SS')
-      - TO_DATE (AUCTION_STARTDATE, 'YYYY/MM/DD HH24:MI:SS'), 0) * 24 ) as "hour",
-      to_char( round (MOD ((TO_DATE (auction_enddate, 'YYYY/MM/DD HH24:MI:SS') - TO_DATE (AUCTION_STARTDATE, 'YYYY/MM/DD HH24:MI:SS'))*24*60, 60))) as "minute" 
-      from auction where auction_no = #{auction_no}
+		select to_char(auction_enddate, 'Month DD YYYY HH24:MI:SS','NLS_DATE_LANGUAGE=ENGLISH') as "auction_enddate" 
+		from auction where auction_no = #{auction_no}
 
 	]]>
 	</select>
