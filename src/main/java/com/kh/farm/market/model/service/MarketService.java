@@ -91,10 +91,10 @@ public interface MarketService {
 	ArrayList<Market> selectCusMarketThree();
 
 
-	List<Market> selectSellerMarketList(String member_id);
+	List<Market> selectSellerMarketList(String member_id,int market_no);
 
 
-	int selectSellerMarketCount(String member_id);
+	int selectSellerMarketCount(String member_id,int market_no);
 
 
 	List<Category> selectCategoryList();

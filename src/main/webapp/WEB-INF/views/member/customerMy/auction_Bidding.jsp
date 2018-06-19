@@ -1,12 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html>
+<html class="MyHtml">
 <head>
 <meta charset="UTF-8">
 <script src="/farm/resources/js/jquery-3.3.1.min.js"></script>
 <link rel="stylesheet" type="text/css" href="/farm/resources/css/customerMy/cusqna.css" />
 <link rel="stylesheet" type="text/css" href="/farm/resources/css/customerMy/auction_Bidding.css" />
+<link rel="stylesheet" type="text/css" href="/farm/resources/css/style.css" />
 <title>경매 낙찰 내역</title>
 </head>
 <script>

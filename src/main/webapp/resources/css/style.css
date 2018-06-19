@@ -2,7 +2,10 @@
 /* CSS Document */
 html { overflow-y:scroll; }
 html, body { margin:0; padding:0; width:100%;}
-
+.MyHtml{
+	overflow-y:auto;
+	overflow-x:hidden;
+}
 img{border:0}
 
 /* #top_line {width:100%; height:10px; background-color:#462114;} */
