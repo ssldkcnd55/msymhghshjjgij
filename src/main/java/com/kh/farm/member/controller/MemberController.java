@@ -170,7 +170,7 @@ public class MemberController {
 	}
 
 	@RequestMapping(value = "login.do", method = RequestMethod.POST)
-	public String loginCheck(Member member, HttpSession session, HttpServletRequest request) {
+	public ModelAndView loginCheck(ModelAndView mv,Member member, HttpSession session, HttpServletRequest request) {
 
 		String viewName = null;
 		try {
@@ -189,13 +189,13 @@ public class MemberController {
 			session.setAttribute("chatList", chatList);
 
 			// System.out.println(chatList);
+			mv.setViewName("home");
 			viewName = "home";
 		} catch (Exception e) {
-			e.printStackTrace();
-			System.out.println("0");
-			viewName = "member/login";
+			mv.addObject("message", "로그인 실패");
+			mv.setViewName("member/login");
 		}
-		return viewName;
+		return mv;
 	}
 
 	@RequestMapping("logout.do")
