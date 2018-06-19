@@ -696,13 +696,13 @@ public class MarketController {
 	}
 
 	@RequestMapping(value = "sellerMarketList.do", method = RequestMethod.POST)
-	public void sellerMarketList(@RequestParam("member_id") String member_id, HttpServletResponse response)
+	public void sellerMarketList(@RequestParam("member_id") String member_id,@RequestParam("market_no") int market_no, HttpServletResponse response)
 			throws IOException {
-		List<Market> list = marketService.selectSellerMarketList(member_id);
-		int sellerMarketCount = marketService.selectSellerMarketCount(member_id);
+		List<Market> list = marketService.selectSellerMarketList(member_id,market_no);
+		int sellerMarketCount = marketService.selectSellerMarketCount(member_id,market_no);
 
 		JSONArray jarr = new JSONArray();
-
+		
 		// list를 jarr로 복사하기
 		for (Market m : list) {
 			// 추출한 user를 json 객체에 담기

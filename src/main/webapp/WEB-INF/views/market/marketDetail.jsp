@@ -59,7 +59,8 @@ $(function(){
 		url:"sellerMarketList.do",
 		type:"post",
 		data:{
-			member_id:'${market.member_id}'
+			member_id:'${market.member_id}',
+			market:no:'${market.market_no}'
 		},
 		dataType: "JSON",
 		success: function(data){

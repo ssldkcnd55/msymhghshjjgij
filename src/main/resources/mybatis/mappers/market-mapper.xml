@@ -269,20 +269,20 @@ from(select m.market_no,category_no,m.member_id,
 	select market_no,market_title,market_price from market where market_no in(select market_no from buy)
 	]]>
 	</select>
-	<select id="selectSellerMarketList" parameterType="string" resultType="Market">
+	<select id="selectSellerMarketList" parameterType="PageNumber" resultType="Market">
 	<![CDATA[
 	select * from(
 		select m.market_no,market_title,market_note,market_img,market_price,market_amount,nvl(sum(buy_amount),0) remaining from market m
 		left join buy b on m.market_no = b.market_no
-		where m.member_id = #{member_id}
+		where m.member_id = #{member_id} and m.market_no <> #{market_no}
 		GROUP BY m.market_no,market_title,market_note,market_img,market_price,market_amount
 		order by m.market_no desc)
 	where market_amount-(remaining) > 0
 	]]>
 	</select>
-	<select id="selectSellerMarketCount" parameterType="string" resultType="int">
+	<select id="selectSellerMarketCount" parameterType="PageNumber" resultType="int">
 	<![CDATA[
-	select count(*) from market where member_id = #{member_id}
+	select count(*) from market where member_id = #{member_id} and market_no <> #{market_no}
 	]]>
 	</select>
 	
