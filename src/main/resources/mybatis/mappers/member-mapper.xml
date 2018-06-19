@@ -40,7 +40,14 @@
 		useGeneratedKeys="true" statementType="PREPARED" flushCache="true">
 		<![CDATA[ insert into member values (
 					#{member_id}, #{member_pwd}, #{member_category}, #{member_name}, 
-					#{member_addr}, #{member_tel}, 'Y', #{member_img},'N',0) ]]>
+					#{member_addr}, #{member_tel} ]]>
+		<if test="member_category == 0">
+		<![CDATA[,'N']]>
+		</if>
+		<if test="member_category != 0">
+		<![CDATA[,'Y']]>
+		</if>
+		<![CDATA[, #{member_img},'N',0)]]>
 	</insert>
 
 	<select id="findId" parameterType="member" resultType="member">

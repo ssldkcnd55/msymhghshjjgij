@@ -197,7 +197,13 @@ function change_app(id) {
 					$('#btnapp_'+ m).text(jsonObj.member_approval);
 				}
 			});
-					
+			$.ajax({
+				url:"sellerSendmail.do",
+				type:"post",
+				data: {email:id},
+				success: function() {
+				}
+			});	
 		}else{   //취소
 		    return;
 		}
