@@ -5,6 +5,9 @@
 html, body {
 	height: 100%;
 }
+.inputfile.inputfile-1{
+	overflow:hidden;
+}
 label {
 	display: inline-block;
 	margin-bottom: .5rem;
