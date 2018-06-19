@@ -58,4 +58,10 @@
 		update category set category_main = #{category_main} where category_main = #{category_name}
 	]]>
 </update>
+
+<update id="updateCategory_name" parameterType="category" flushCache="true">
+	<![CDATA[
+		update category set category_name = #{category_name} where category_name = #{category_main}
+	]]>
+</update>
 </mapper>

@@ -93,7 +93,7 @@
 						$("#"+json.name[i].category_main+"1").append("<div class='ptag'><p class='ptitle'>"+json.name[i].category_name
 								+"</p><div class='btn'><button class='Btn del' id='"+json.name[i].category_no
 								+"' onclick='deleteName(this)'>삭제</button>"
-								+"<button class='Btn mod'>수정</button></div></div>")
+								+"<button class='Btn mod' id='"+json.name[i].category_name+"1' onclick='updateName(this);'>수정</button></div></div>")
 						}
 						
 					}
@@ -152,9 +152,7 @@
 	//카테고리 대분류 수정
 	function updateBig(big) {
 		var big_id = big.id
-		alert(big_id);
 		var res = big_id.substring(0, big_id.length-1);
-		alert(res);
 		var input = prompt('수정할 대분류 카테고리의 이름을 적으세요.');
 		if(input == null) {
 			return false;
@@ -194,6 +192,17 @@
 	}
 	
 	//카테고리 소분류 수정
+	function updateName(name) {
+		var name_id = name.id;
+		var res = name_id.substring(0, name_id.length-1);
+		var input = prompt('수정할 소분류 카테고리의 이름을 적으세요.');
+		if(input == null) {
+			return false;
+		}else{
+			location.href='updateCategory_name.do?category_name='+input+'&category_name_ori='+res;
+		
+		}
+	}
 	/* 리스트 열림 */
 	function toggleList() {
 	var acc = document.getElementsByClassName("accordion");

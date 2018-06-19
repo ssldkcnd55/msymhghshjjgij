@@ -141,6 +141,22 @@ public class CategoryController {
 		}
 	}
 	
+	@RequestMapping(value="updateCategory_name.do")
+	public String updateCategory_name(@RequestParam(value="category_name") String category_name,@RequestParam(value="category_name_ori") String category_name_ori) {
+		System.out.println(category_name);
+		Category c = new Category();
+		c.setCategory_name(category_name);
+		c.setCategory_main(category_name_ori);
+		int result = categoryService.updateCategory_name(c);
+		if(result > 0) {
+			
+			return "redirect:/moveAdminCategory.do";
+		}else {
+		return "에러페이지";
+		}
+	}
+	
+	
 	
 	@RequestMapping(value="addCategory_name.do")
 	public String addCategory_name(Category category) {
