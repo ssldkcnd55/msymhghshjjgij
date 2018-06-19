@@ -1,13 +1,28 @@
 @charset "UTF-8";
 
 .buy_button{
-	width:60px;
+	width:70px;
 	height:40px;
 	border:2px solid #7e5957;
 	font-weight: bold;
 	background: #ffffff;
 	
 }
+
+.buy_button2:hover{
+	background: #7e5957;
+
+}
+	
+.buy_button2{
+	width:70px;
+	height:40px;
+	border:2px solid #7e5957;
+	font-weight: bold;
+	background: #ffffff;
+	
+}
+	
 
 .auction_title_td{
 	text-decoration: none;
