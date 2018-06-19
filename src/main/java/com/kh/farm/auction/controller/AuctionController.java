@@ -691,20 +691,21 @@ public class AuctionController {
 	public void auction_timeRemaining(HttpServletResponse response, @RequestParam(value = "auction_no") int auction_no)
 			throws IOException {
 		Auction auctiontime = auctionService.selectauction_timeRemaining(auction_no);
-		System.out.println("auctiontime : " + auctiontime + " / " + "day : " + auctiontime.getDay() + " / " + "hour : "
-				+ auctiontime.getHour());
-
+		/*System.out.println("auctiontime : " + auctiontime + " / " + "day : " + auctiontime.getDay() + " / " + "hour : "
+				+ auctiontime.getHour());*/
+		System.out.println("auctiontime : "+auctiontime.getAuction_enddate() );
+		
 		JSONObject json = new JSONObject();
 		// json.put("auctiontime",auctiontime);
-		json.put("day", auctiontime.getDay());
+		/*json.put("day", auctiontime.getDay());
 		json.put("hour", auctiontime.getHour());
 		json.put("min", auctiontime.getMinute());
 		json.put("today", auctiontime.getToday());
 		json.put("status", auctiontime.getAuction_status());
 		json.put("auction_startdate", auctiontime.getAuction_startdate());
 		json.put("auction_enddate", auctiontime.getAuction_enddate());
-		System.out.println(json.toJSONString());
-
+		System.out.println(json.toJSONString());*/
+		json.put("auction_enddate", auctiontime.getAuction_enddate());
 		response.setContentType("application/json; charset=utf-8;");
 		PrintWriter out = response.getWriter();
 		out.print(json.toJSONString());
