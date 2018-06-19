@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -22,6 +23,13 @@
 	
 </script>
 <script type="text/javascript">
+function uncomma(str) {
+    str = String(str);
+    return str.replace(/[^\d]+/g, '');
+}
+function numberWithCommas(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
 	function mainCategory(a){
 		count = 1;
 		ctype = a.value;
@@ -52,7 +60,7 @@
 					}else{
 						outValues += "[품절]"+jsonObj.list[i].market_title;
 					}
-					outValues +="</p><p class='content'>"+jsonObj.list[i].market_note+"</p><p class='content price'>"+jsonObj.list[i].market_price+"원</p></div></div></a>";
+					outValues +="</p><p class='content'>"+jsonObj.list[i].market_note+"</p><p class='content price'>"+numberWithCommas(jsonObj.list[i].market_price)+"원</p></div></div></a>";
 				}
 				if(count>0){
 					$(".market_box").html(outValues);	
@@ -109,7 +117,7 @@
 					}else{
 						outValues += "[품절]"+jsonObj.list[i].market_title;
 					}
-					outValues +="</p><p class='content'>"+jsonObj.list[i].market_note+"</p><p class='content price'>"+jsonObj.list[i].market_price+"원</p></div></div></a>";
+					outValues +="</p><p class='content'>"+jsonObj.list[i].market_note+"</p><p class='content price'>"+numberWithCommas(jsonObj.list[i].market_price)+"원</p></div></div></a>";
 				}
 				if(count>0){
 					$(".market_box").html(outValues);	
@@ -177,7 +185,7 @@
 						}else{
 							outValues += "[품절]"+jsonObj.list[i].market_title;
 						}
-						outValues +="</p><p class='content'>"+jsonObj.list[i].market_note+"</p><p class='content price'>"+jsonObj.list[i].market_price+"원</p></div></div></a>";
+						outValues +="</p><p class='content'>"+jsonObj.list[i].market_note+"</p><p class='content price'>"+numberWithCommas(jsonObj.list[i].market_price)+"원</p></div></div></a>";
 					}
 					$(".market_box").html(outValues);
 					for(var i in jsonObj.list2){
@@ -235,7 +243,7 @@
 						}else{
 							outValues += "[품절]"+jsonObj.list[i].market_title;
 						}
-						outValues +="</p><p class='content'>"+jsonObj.list[i].market_note+"</p><p class='content price'>"+jsonObj.list[i].market_price+"원</p></div></div></a>";
+						outValues +="</p><p class='content'>"+jsonObj.list[i].market_note+"</p><p class='content price'>"+numberWithCommas(jsonObj.list[i].market_price)+"원</p></div></div></a>";
 					}
 					if(count>0){
 						$(".market_box").html(outValues);	
@@ -283,7 +291,7 @@
 						}else{
 							outValues += "[품절]"+jsonObj.list[i].market_title;
 						}
-						outValues +="</p><p class='content'>"+jsonObj.list[i].market_note+"</p><p class='content price'>"+jsonObj.list[i].market_price+"원</p></div></div></a>";
+						outValues +="</p><p class='content'>"+jsonObj.list[i].market_note+"</p><p class='content price'>"+numberWithCommas(jsonObj.list[i].market_price)+"원</p></div></div></a>";
 					}
 					if(count>0){
 						$(".market_box").html(outValues);	
@@ -372,7 +380,7 @@
 										<p class="title">[품절]${m.market_title }</p>
 									</c:if>
 										<p class="content">${m.market_note }</p>
-										<p class='content'>${m.market_price }원</p>
+										<p class='content'><fmt:formatNumber value="${m.market_price }" pattern="#,###" />원</p>
 									</div>
 								</div>
 							</a>

@@ -1,10 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html>
+<html class="MyHtml">
 <head>
 <script src="/farm/resources/js/jquery-3.3.1.min.js"></script>
 <link rel="stylesheet" type="text/css" href="/farm/resources/css/customerMy/cusqna.css" />
+<link rel="stylesheet" type="text/css" href="/farm/resources/css/style.css" />
 <script type="text/javascript">
 
 function main(){

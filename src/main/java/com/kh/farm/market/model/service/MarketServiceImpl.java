@@ -200,14 +200,14 @@ public class MarketServiceImpl implements MarketService{
 		return marketDao.selectCusMarketThree(sqlSession);
 	}
 	@Override
-	public List<Market> selectSellerMarketList(String member_id) {
+	public List<Market> selectSellerMarketList(String member_id,int market_no) {
 		// TODO Auto-generated method stub
-		return marketDao.selectSellerMarketList(sqlSession,member_id);
+		return marketDao.selectSellerMarketList(sqlSession,member_id,market_no);
 	}
 	@Override
-	public int selectSellerMarketCount(String member_id) {
+	public int selectSellerMarketCount(String member_id,int market_no) {
 		// TODO Auto-generated method stub
-		return marketDao.selectSellerMarketCount(sqlSession,member_id);
+		return marketDao.selectSellerMarketCount(sqlSession,member_id,market_no);
 	}
 	@Override
 	public List<Category> selectCategoryList() {

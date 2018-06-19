@@ -30,8 +30,8 @@ function auction_update(){
 	}
 
 //경매 유찰 검사
-var bidDeadlineIn;
-bidDeadlineIn = setInterval(function(){bidDeadline()}, 10000);
+/* var bidDeadlineIn;
+bidDeadlineIn = setInterval(function(){bidDeadline()}, 20000); */
 
 function bidDeadline(){
 	$.ajax({
@@ -57,8 +57,10 @@ function bidDeadline(){
 				
 				chat_no = d.list[i].chat_no;
 				your_id = d.list[i].member_id;
+				console.log("chat_no : "+chat_no);
+				console.log("your_id : "+your_id);
 				msgList[i]=msg;
-				ws[i] = new WebSocket("ws://127.0.0.1:7777/farm/chat.do?state=mar&your_id=" + your_id + "&chat_no=" + chat_no  );
+				ws[i] = new WebSocket("ws://127.0.0.1:7777/farm/chat.do?state=mom&your_id="+your_id+"&chat_no="+chat_no);
 				function sendMsg(index)
 				{
 					 if(index >= ws.length){
@@ -73,7 +75,7 @@ function bidDeadline(){
 						};
 						 } 
 				}
-				
+				sendMsg(index);
 				}
 			
 			//alert("갱신완료");
@@ -117,7 +119,7 @@ bidding = setInterval(function(){auction_bidding()}, 3000); */
 	}); 
 }
 
-
+*/
 
 function getBasketCount(member_id)
 {
@@ -135,7 +137,7 @@ function getBasketCount(member_id)
                     request.responseText + "\nerror" + errorData); 
            }
 	});
-} */
+} 
 
 	/* $(function() {
 
@@ -258,6 +260,7 @@ function getBasketCount(member_id)
                </div>
             </div>
             <div class="bg"></div>
+            <button onclick="bidDeadline();">테스트</button>
             <%-- <h1 class="logo">
 	<div id="header">
 		<div class="inner-wrap">

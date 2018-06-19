@@ -249,15 +249,21 @@ public class MarketDao {
 		return (ArrayList)ac;
 	}
 
-	public List<Market> selectSellerMarketList(SqlSessionTemplate sqlSession, String member_id) {
+	public List<Market> selectSellerMarketList(SqlSessionTemplate sqlSession, String member_id,int market_no) {
 		// TODO Auto-generated method stub
-		List<Market> list = sqlSession.selectList("market.selectSellerMarketList",member_id);
+		PageNumber pn = new PageNumber();
+		pn.setMember_id(member_id);
+		pn.setMarket_no(market_no);
+		List<Market> list = sqlSession.selectList("market.selectSellerMarketList",pn);
 		return list;
 	}
 
-	public int selectSellerMarketCount(SqlSessionTemplate sqlSession, String member_id) {
+	public int selectSellerMarketCount(SqlSessionTemplate sqlSession, String member_id,int market_no) {
 		// TODO Auto-generated method stub
-		return sqlSession.selectOne("market.selectSellerMarketCount",member_id);
+		PageNumber pn = new PageNumber();
+		pn.setMember_id(member_id);
+		pn.setMarket_no(market_no);
+		return sqlSession.selectOne("market.selectSellerMarketCount",pn);
 	}
 
 	public List<Category> selectCategoryList(SqlSessionTemplate sqlSession) {

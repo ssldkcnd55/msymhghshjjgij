@@ -59,7 +59,8 @@ $(function(){
 		url:"sellerMarketList.do",
 		type:"post",
 		data:{
-			member_id:'${market.member_id}'
+			member_id:'${market.member_id}',
+			market_no:'${market.market_no}'
 		},
 		dataType: "JSON",
 		success: function(data){
@@ -68,6 +69,7 @@ $(function(){
 			
 			var outValues = "";
 			jsonObj.list[i]
+			var count = 0;
 			for(var i in jsonObj.list){
 				if(i == 0){
 					outValues += "<div class='item active' align='center'>";
@@ -83,8 +85,14 @@ $(function(){
 				}else if(i == Object.keys(jsonObj.list).length){
 					outValues += "</div>";
 				}
+				count++;
 			}
-			$(".carousel-inner").html(outValues);
+			if(count > 0){
+				$(".carousel-inner").html(outValues);
+			}else{
+				$(".carousel-inner").html("<div style='line-height: 250px;text-align:center;font-size:20pt;font-weight: bold;color:gray;'>"+
+		              	  "등록된 다른 상품이 없습니다.</div>");
+			}
 			
 		},error: function(request,status,errorData){
             alert("error code : " + request.status + "\nmessage" + 
@@ -246,14 +254,19 @@ function qnaPage(page){
 			var jsonObj = JSON.parse(objStr);
 			
 			var outValues = "<tr><th width='12%'>번호</th><th width='50%'>제목</th><th width='13%'>작성자</th><th width='15%'>날짜</th></tr>";
-			
+			var count = 0;
 			for(var i in jsonObj.list){
 				outValues += "<tr id='hover'><td>"+jsonObj.list[i].rnum+"</td>"
 				+"<td id='QnA_td'><a href='/farm/marketQnaDetail.do?qna_no="+jsonObj.list[i].market_qna_no+"&member_id=${market.member_id}'>"+jsonObj.list[i].market_qna_title+"</a></td>"
 				+"<td>"+jsonObj.list[i].member_id+"</td><td>"+jsonObj.list[i].market_qna_question_date+"</td></tr>";
+				count++;
 			}
-			$(".QnA_table").html(outValues);	
-			
+			if(count > 0){
+				$(".QnA_table").html(outValues);
+			}else{
+				$(".QnA_table").html("<div style='line-height: 250px;text-align:center;font-size:20pt;font-weight: bold;color:gray;'>"+
+		        	  "등록된 문의가 없습니다.</div>");
+			}
 			var startPage= jsonObj.list[0].startPage;
 			var endPage = jsonObj.list[0].endPage;
 			var maxPage = jsonObj.list[0].maxPage;
@@ -371,14 +384,20 @@ function reviewPage(page){
 			var jsonObj = JSON.parse(objStr);
 			
 			var outValues = "<tr><th width='12%'>번호</th><th width='50%'>제목</th><th width='13%'>작성자</th><th width='15%'>날짜</th></tr>";
-			
+			var count = 0;
 			 
 			for(var i in jsonObj.list){
 				outValues += "<tr id='hover'><td>"+jsonObj.list[i].rnum+"</td>"
 				+"<td id='QnA_td'><a href='reviewDeatil.do?review_no="+jsonObj.list[i].review_no+"&market_no=${market.market_no}'>"+jsonObj.list[i].review_title+"</a></td>"
 				+"<td>"+jsonObj.list[i].member_id+"</td><td>"+jsonObj.list[i].review_date+"</td></tr>";
+				count++;
 			}
-			$(".review_table").html(outValues);	
+			if(count > 0 ){
+				$(".review_table").html(outValues);
+			}else{
+				$(".review_table").html("<div style='line-height: 250px;text-align:center;font-size:20pt;font-weight: bold;color:gray;'>"+
+		        	  "등록된 후기가 없습니다.</div>");
+			}
 			
 			var startPage= jsonObj.list[0].startPage;
 			var endPage = jsonObj.list[0].endPage;
@@ -425,10 +444,10 @@ function dailyPage(){
 			console.log(data);
 			var objStr = JSON.stringify(data);
 			var jsonObj = JSON.parse(objStr);
-			
+			var count = 0;
 			var outValues = "<tr><td class='history_start' colspan='3' align='center'>"
-				+"<table class='history_title'><tr><td class='start_date' align='center'>농사시작일자</td></tr>"
-				+"<tr><td class='start_date' align='center'>2018/01/01</td></tr></table></td></tr>"
+				+"<table class='history_title'><tr><td class='start_date' align='center'>농사시작</td></tr>"
+				+"<tr><td class='start_date' align='center'> </td></tr></table></td></tr>"
 				+"<tr><td class='space_left'></td><td></td></tr>";
 			
 			for(var i in jsonObj.list){
@@ -450,12 +469,18 @@ function dailyPage(){
 						+"<tr><td align='right' class='hi_content_right'><a class='aTag' href='marketDailyDetail.do?daily_no="+jsonObj.list[i].daily_no+"&market_no=${market.market_no}'><div class='dailyContent right'>"+jsonObj.list[i].daily_contents
 						+"<span class='more'>...더보기</span></div></a></td></tr></tbody></table></td><td class='space_right2'></tr>";
 				}
+				count++;
 			}
-
+			
 			outValues += "<tr><td class='space_left'></td><td></td></tr><tr><td colspan='3' align='center'>"
-				+"<table class='history_title' cellspacing='0'><tr><td class='start_date' align='center'>농사끝일자</td>"
-				+"</tr><tr><td class='start_date' align='center'>2018/01/01</td></tr></table></td></tr><tr><td height='100'></td></tr>";
-			$(".history_body").html(outValues);	
+				+"<table class='history_title' cellspacing='0'><tr><td class='start_date' align='center'>농사끝</td>"
+				+"</tr><tr><td class='start_date' align='center'> </td></tr></table></td></tr><tr><td height='100'></td></tr>";
+			if(count > 0){
+				$(".history_body").html(outValues);
+			}else{
+				$(".history_body").html("<div style='line-height: 250px;text-align:center;font-size:20pt;font-weight: bold;color:gray;'>"+
+			    		"등록된 후기가 없습니다.</div>");
+			}
 
 		},error: function(request,status,errorData){
             alert("error code : " + request.status + "\nmessage" + 
