@@ -30,8 +30,8 @@ function auction_update(){
 	}
 
 //경매 유찰 검사
-/* var bidDeadlineIn;
-bidDeadlineIn = setInterval(function(){bidDeadline()}, 20000); */
+var bidDeadlineIn;
+bidDeadlineIn = setInterval(function(){bidDeadline()}, 60000);
 
 function bidDeadline(){
 	$.ajax({
@@ -40,18 +40,17 @@ function bidDeadline(){
 		dataType:'json',
 		success : function(data) {
 			var d = JSON.parse(JSON.stringify(data));
-			console.log("되니?");
 			var chat_no = "";
 			var your_id = "";
 			var ws=[];
 			var msgList=[];
 			for(i in d.list){
 				var msg = 
-				'<div class="sell_alarm_head"><img src="/farm/resources/images/sell_icon_white.png" />유찰 알림</div>';
+				'<div class="sell_warning_head"><img src="/farm/resources/images/warning.png" />유찰 알림</div>';
 				msg+='<table class="sell_alarm_table"><tr><th colspan="2">상품금액 미결제로 인해 유찰되었습니다.</th></tr>';
-				msg+='<tr><td>상품명</td><td>'+d.list[i].auction_title+'</td></tr>';
+				msg+='<tr><td>상품명</td><td><a target="blank" href="/farm/AuctionDetail.do?auction_no='+d.list[i].auction_no+'">'+d.list[i].auction_title+'</a></td></tr>';
 				msg+='</table>';
-				msg+='<table class="sell_alarm_table"><tr><td colspan="2">3회 유찰 시 사이트 이용에 제재가 이루어 질 수 있습니다</td></tr>';
+				msg+='<table class="sell_alarm_table"><tr><td colspan="2">3회 유찰 시 사이트 이용에 제재가 이루어 질 수 있습니다.</td></tr>';
 				msg+='<tr><td>현재 유찰 횟수<td><td>'+d.list[i].member_warning_count+'</td></tr>'
 				msg+='</table>';
 				
@@ -88,6 +87,8 @@ function bidDeadline(){
 	});
 	
 }
+
+
 //경매 낙찰 검사
 /* var bidding;
 bidding = setInterval(function(){auction_bidding()}, 3000); */
@@ -119,7 +120,7 @@ bidding = setInterval(function(){auction_bidding()}, 3000); */
 	}); 
 }
 
-
+*/
 
 function getBasketCount(member_id)
 {
@@ -137,7 +138,7 @@ function getBasketCount(member_id)
                     request.responseText + "\nerror" + errorData); 
            }
 	});
-} */
+} 
 
 	/* $(function() {
 
@@ -260,7 +261,7 @@ function getBasketCount(member_id)
                </div>
             </div>
             <div class="bg"></div>
-            <button onclick="bidDeadline();">테스트</button>
+            <!-- <button onclick="bidDeadline();">테스트</button> -->
             <%-- <h1 class="logo">
 	<div id="header">
 		<div class="inner-wrap">

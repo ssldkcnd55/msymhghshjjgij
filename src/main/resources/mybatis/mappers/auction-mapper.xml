@@ -229,7 +229,8 @@
 	
 	<select id="selectauction_timeRemaining" parameterType="int" resultType="auction">
 	<![CDATA[
-		select to_char(auction_enddate, 'Month DD YYYY HH24:MI:SS','NLS_DATE_LANGUAGE=ENGLISH') as "auction_enddate" 
+		select to_char(auction_enddate, 'Month DD YYYY HH24:MI:SS','NLS_DATE_LANGUAGE=ENGLISH') 
+		as "auction_enddate" , auction_status
 		from auction where auction_no = #{auction_no}
 
 	]]>
@@ -538,7 +539,7 @@
 	
 	<select id="selectWinBid"  parameterType="int"  resultType="AuctionCommon">
 	<![CDATA[
-		select ah.auction_no,ah.member_id,ah.auction_history_price,a.auction_title 
+		select ah.auction_no,ah.member_id,ah.auction_history_price,a.auction_title,a.auction_status
 		from auction_history ah, auction a where ah.auction_no = a.auction_no and
 		ah.AUCTION_HISTORY_PRICE = (select max(AUCTION_HISTORY_PRICE) as "AUCTION_HISTORY_PRICE" 
     	from auction_history where auction_no = #{auction_no} ) 
@@ -549,7 +550,7 @@
       where AUCTION_HISTORY_PRICE = (select max(AUCTION_HISTORY_PRICE) as "AUCTION_HISTORY_PRICE" 
     	from auction_history where auction_no = #{auction_no} ) 
     	and auction_no = #{auction_no}
-      )
+      )order by ah.auction_no desc
 	]]>
 
 	</select>

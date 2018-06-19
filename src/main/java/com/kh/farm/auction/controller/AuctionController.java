@@ -691,20 +691,11 @@ public class AuctionController {
 	public void auction_timeRemaining(HttpServletResponse response, @RequestParam(value = "auction_no") int auction_no)
 			throws IOException {
 		Auction auctiontime = auctionService.selectauction_timeRemaining(auction_no);
-		/*System.out.println("auctiontime : " + auctiontime + " / " + "day : " + auctiontime.getDay() + " / " + "hour : "
-				+ auctiontime.getHour());*/
-		System.out.println("auctiontime : "+auctiontime.getAuction_enddate() );
+		
+		/*System.out.println("auctiontime : "+auctiontime.getAuction_enddate() );*/
 		
 		JSONObject json = new JSONObject();
-		// json.put("auctiontime",auctiontime);
-		/*json.put("day", auctiontime.getDay());
-		json.put("hour", auctiontime.getHour());
-		json.put("min", auctiontime.getMinute());
-		json.put("today", auctiontime.getToday());
 		json.put("status", auctiontime.getAuction_status());
-		json.put("auction_startdate", auctiontime.getAuction_startdate());
-		json.put("auction_enddate", auctiontime.getAuction_enddate());
-		System.out.println(json.toJSONString());*/
 		json.put("auction_enddate", auctiontime.getAuction_enddate());
 		response.setContentType("application/json; charset=utf-8;");
 		PrintWriter out = response.getWriter();
@@ -958,7 +949,8 @@ public class AuctionController {
 	public void bidding(HttpServletResponse response) throws IOException {
 		
 		ArrayList<Auction> list = auctionService.selectStatus_2();//경매 상태 2 것만 넘버 가져오기
-		/*System.out.println("list : "+list.toString());*/
+		System.out.println(" list : "+list);
+		
 		JSONArray jarr =new JSONArray();
 		
 		
@@ -972,7 +964,9 @@ public class AuctionController {
 			json.put("auction_title", ac.getAuction_title());
 			json.put("auction_history_price", ac.getAuction_history_price());
 			json.put("member_id", ac.getMember_id());
+			json.put("auction_status", ac.getAuction_status());
 			jarr.add(json);
+			
 		}
 		
 		JSONObject json = new JSONObject();
