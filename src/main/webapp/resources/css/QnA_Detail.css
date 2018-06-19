@@ -90,6 +90,7 @@
 
 .QnA_comment{
 	width:100%;
+	float: left;
 	margin-bottom:70px;
 	
 }
