@@ -163,3 +163,12 @@
 .li4_input.submit {
 	margin-right: 0px;
 }
+
+.backimg {
+	text-align: center;
+	background-size: cover;
+	position: absolute;
+	width: 420px;
+	height: 280px;
+	border: 1px solid #dcdcdc;
+}

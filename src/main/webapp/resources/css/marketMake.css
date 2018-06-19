@@ -1,6 +1,5 @@
 @charset "UTF-8";
 
-
 .jung_table {
 	width: 100%;
 	border-collapse: collapse;
@@ -21,25 +20,22 @@
 	border: 1px solid #ddd;
 }
 
-.cma_image{
+.cma_image {
 	width: 420px;
-    height: 280px;
-border:1px solid #dcdcdc;
-color: gray;
-text-align: center;
-line-height: 270px; 
-
-
+	height: 280px;
+	border: 1px solid #dcdcdc;
+	color: gray;
+	text-align: center;
+	line-height: 270px;
 }
 
-.backimg{
+.backimg {
 	text-align: center;
- 
-background-size:cover;
-position:absolute; 
-width: 420px;
-height: 280px;
-border:1px solid #dcdcdc;
+	background-size: cover;
+	position: absolute;
+	width: 420px;
+	height: 280px;
+	border: 1px solid #dcdcdc;
 }
 
 .tr2 {
@@ -135,7 +131,8 @@ border:1px solid #dcdcdc;
 	margin-top: 15px;
 	color: #fff;
 }
-.li4_input{
+
+.li4_input {
 	float: right;
 	padding: 8px;
 	background: #f27634;
@@ -145,7 +142,7 @@ border:1px solid #dcdcdc;
 	border-color: #f27634;
 	border-style: none;
 }
-.li4_input.submit{
-	margin-right:10px;
-	
+
+.li4_input.submit {
+	margin-right: 10px;
 }
