@@ -565,6 +565,19 @@
 	visibility: visible !important;
 	font-size: 18px;
 }
+
+#job_image {
+	background-size: cover;
+	width: 50px;
+	height: 50px;
+	float: left;
+}
+
+#job {
+	font-weight: bold;
+	font-size: 23pt;
+	color: #7e5957;
+}
 </style>
 </head>
 <body>
@@ -581,8 +594,11 @@
 				<br> <br> <br>
 
 				<!--기간 시작-->
-				<div class="period_box" style="padding: 40px;">
-					<h3 class="j_title">기간</h3>
+				<div class="period_box" style="padding: 20px;">
+					<!-- <h3 class="j_title">기간</h3> -->
+					<!-- <div id="job_image"
+							style="background-image: url('/farm/resources/images/job.png')"></div> -->
+						<div id="job">&nbsp;항목선택</div>
 					<form style="padding: 4px; margin: 20px 0px;">
 						<span style="color: #555;">시작날 :</span> <input type="date"
 							id="start" name="firstname" style="margin-right: 40px;"
@@ -658,7 +674,10 @@
 				<hr style="border-color: #ddd; width: 100%;">
 				<!--명칭 시작-->
 				<div class="name_box" style="padding: 20px;">
-					<h3 class="j_title">시세정보</h3>
+				<!-- 	<h3 class="j_title">시세정보</h3> -->
+					<div id="job_image"
+							style="background-image: url('/farm/resources/images/quote01.png')"></div>
+						<div id="job">&nbsp;시세정보</div>
 					<div class="j_name_content_box">
 						<p id="p1" style="margin: auto;">조회된 데이터가 없습니다</p>
 						<table class="table" style="margin: auto;">
@@ -673,8 +692,11 @@
 				<!--명칭끝-->
 				<hr style="border-color: #ddd; width: 100%;">
 				<!--조건 시작-->
-				<div class="condition_box" style="padding: 40px;">
-					<h3 class="j_title">시세정보그래프</h3>
+				<div class="condition_box" style="padding: 20px;">
+					<!-- <h3 class="j_title">시세정보그래프</h3> -->
+					<div id="job_image"
+							style="background-image: url('/farm/resources/images/quote02.png')"></div>
+							<div id="job">&nbsp;시세그래프</div>
 					<div class="graph_box">
 						<p id="p2" style="margin: auto;">조회된 데이터가 없습니다</p>
 						<div id="g" style="margin: auto;"></div>

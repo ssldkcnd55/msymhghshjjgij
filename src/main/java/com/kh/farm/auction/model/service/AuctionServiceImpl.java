@@ -185,7 +185,7 @@ public class AuctionServiceImpl implements AuctionService {
 	public int selectAuctionCusQnaListCount() {
 		return auctionDao.selectAuctionCusQnaListCount(sqlSession);
 	}
-
+ 
 	@Override
 	public List<Auction> selectLeft_boxChangeList(int currentPage, int type) {
 		switch (type) {

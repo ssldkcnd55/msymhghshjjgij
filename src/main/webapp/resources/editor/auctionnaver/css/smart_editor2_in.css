@@ -8,6 +8,7 @@ body,.se2_inputarea{margin:0;padding:0;font-family:'돋움',Dotum,Helvetica,Sans
 .se2_inputarea td{word-break:break-all}
 .se2_inputarea_890{width:741px;margin:20px 0 10px 64px}
 .se2_inputarea_698{width:548px;margin:20px 0 10px 64px}
+.se2_inputarea img { max-width:100%; }
 /* TEXT_TOOLBAR : QUOTE */
 .se2_quote1{margin:0 0 30px 20px;padding:0 8px;border-left:2px solid #ccc;color:#888}
 .se2_quote2{margin:0 0 30px 13px;padding:0 8px 0 16px;background:url("../img/bg_quote2.gif") 0 3px no-repeat;color:#888}
@@ -19,3 +20,4 @@ body,.se2_inputarea{margin:0;padding:0;font-family:'돋움',Dotum,Helvetica,Sans
 .se2_quote8{margin:0 0 30px;padding:12px 10px 11px;border:1px solid #e5e5e5;background:#fafafa;color:#888}
 .se2_quote9{margin:0 0 30px;padding:12px 10px 11px;border:2px solid #e5e5e5;color:#888}
 .se2_quote10{margin:0 0 30px;padding:12px 10px 11px;border:2px solid #e5e5e5;background:#fafafa;color:#888}
+

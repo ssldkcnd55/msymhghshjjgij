@@ -111,4 +111,9 @@ select MARKET_NO,MARKET_TITLE,MARKET_IMG from market where MARKET_NO=#{market_no
 ]]>
 </select>
 
+<select id="selectMiscaryChatNo" parameterType="String" resultType="int">
+<![CDATA[
+select chat_no from chat where MEMBER_ID1 = #{member_id} and MEMBER_ID2 = 'system'
+]]>
+</select>
 </mapper>

@@ -123,7 +123,28 @@
 			$(".naverCheck").hide();
 		}
 
-		
+		$.ajax({
+			url : "selectSelInfo.do",
+			type : "post",
+			dataType : "JSON",
+			data: {
+				member_id:'${loginUser.member_id}'
+			},
+			success : function(data) {
+				var objStr = JSON.stringify(data);
+				var jsonObj = JSON.parse(objStr);
+				$('#member_id').val(jsonObj.member_id);
+				$('#member_name').val(jsonObj.member_name);
+				$('#loc').val(jsonObj.member_addr);
+				
+				$('#point').val(jsonObj.point_point);
+			},
+			error : function(request, status, errorData) {
+				console.log("error code : " + request.status + "\nmessage"
+						+ request.responseText + "\nerror" + errorData);
+			}
+			
+		});
 	});
 </script>
 <meta charset="UTF-8">
@@ -140,7 +161,7 @@
 				<tr>
 					<td>아이디</td>
 					<td><input class="member_input" type="text" name="member_id"
-						value="${loginUser.member_id}" readonly="readonly"></td>
+						value="" id='member_id' readonly="readonly"></td>
 						
 				</tr>
 				<tr class="naverCheck">
@@ -162,7 +183,7 @@
 				<tr>
 					<td>이름</td>
 					<td><input class="member_input" type="text"
-						value="${loginUser.member_name}" readonly="readonly"></td>
+						value="" readonly="readonly"  id='member_name'></td>
 				</tr>
 				<tr>
 					<td>주소</td>
@@ -170,7 +191,7 @@
 					<c:set var="after_Addr"
 						value="${fn:substring(before_Addr,0,fn:indexOf(before_Addr,'@')) }" />
 					<td colspan="3" class="td1"><input class="member_input"
-						type="text" id="loc" readonly="readonly" value="${after_Addr}">
+						type="text" id="loc" readonly="readonly" value="">
 						<button onclick="juso()" class="memberBtn addr">주소검색</button> <br> <c:set
 							var="after_DAddr"
 							value="${fn:substring(before_Addr,fn:indexOf(before_Addr,'@')+1,fn:length(before_Addr)) }" />
@@ -179,10 +200,17 @@
 						placeholder="상세주소입력"></td>
 				</tr>
 				<tr>
+					<td>포인트</td>
+					<td><input class="member_input" type="text"
+						value="" readonly="readonly" id='point'>&nbsp;<button class="memberBtn addr">출금하기</button></td>
+					
+				</tr>
+				<tr>
 					<td></td>
 					<td><input type="button" id="memberBtn" class="memberBtn"
 						value="수정"></td>
 				</tr>
+				
 
 			</table>
 

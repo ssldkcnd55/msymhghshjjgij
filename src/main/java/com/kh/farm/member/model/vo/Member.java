@@ -22,12 +22,14 @@ public class Member implements java.io.Serializable{
 	private int member_warning_count;//회원 경고 횟수
 	private int rnum;
 	private String ip; //접속 ip
+	private int userpoint;
+	
 	public Member() {
 	
 	}
 	public Member(String member_id, String member_pwd, String member_category, String member_name, String member_addr,
 			String member_tel, String member_approval, String member_img, String member_withdraw,
-			int member_warning_count, int rnum, String ip) {
+			int member_warning_count, int rnum, String ip,int userpoint) {
 		super();
 		this.member_id = member_id;
 		this.member_pwd = member_pwd;
@@ -41,6 +43,7 @@ public class Member implements java.io.Serializable{
 		this.member_warning_count = member_warning_count;
 		this.rnum = rnum;
 		this.ip = ip;
+		this.userpoint = userpoint;
 	}
 	public String getMember_id() {
 		return member_id;
@@ -113,6 +116,14 @@ public class Member implements java.io.Serializable{
 	}
 	public void setIp(String ip) {
 		this.ip = ip;
+	}
+	
+	
+	public int getUserpoint() {
+		return userpoint;
+	}
+	public void setUserpoint(int userpoint) {
+		this.userpoint = userpoint;
 	}
 	@Override
 	public String toString() {

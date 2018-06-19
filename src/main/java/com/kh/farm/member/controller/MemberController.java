@@ -182,6 +182,8 @@ public class MemberController {
 			returnMember.setIp(ip);
 			int visit = memberService.insertVisit(returnMember);
 			session.setAttribute("loginUser", returnMember);
+			
+			
 			// 로그인 멤버 채팅 정보 가져오기
 			ArrayList<ChatList> chatList = (ArrayList<ChatList>) chatService.selectChatList(returnMember);
 			session.setAttribute("chatList", chatList);
@@ -583,7 +585,7 @@ public class MemberController {
 				json.put("date", v.getVisit_date().toString());
 				jarr.add(json);
 				count++;
-				if (count == 6)
+				if (count == 7)
 					break;
 			}
 
@@ -595,7 +597,7 @@ public class MemberController {
 				json.put("month", v.getVisit_month());
 				jarr.add(json);
 				count++;
-				if (count == 5)
+				if (count == 6)
 					break;
 
 			}
@@ -638,6 +640,23 @@ public class MemberController {
 		out.flush();
 		out.close();
 
+	}
+	
+	@RequestMapping("selectSelInfo.do")
+	public void sellerInfo(@RequestParam("member_id") String member_id,HttpServletResponse response)throws IOException {
+		System.out.println(member_id);
+		Member member = memberService.selectMemberInfo(member_id);
+		JSONObject json = new JSONObject();
+		json.put("member_id", member.getMember_id());
+		json.put("member_name",member.getMember_name());
+		json.put("member_addr", member.getMember_addr());
+		json.put("point_point",member.getUserpoint());
+		
+		response.setContentType("application/json; charset=utf-8");
+		PrintWriter out = response.getWriter();
+		out.append(json.toJSONString());
+		out.flush();
+		out.close();
 	}
 
 }

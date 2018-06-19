@@ -373,7 +373,7 @@ public class AuctionController {
 
 		System.out.println("updateAuctionMake : " + updateAuctionMake);
 
-		return "forward:/AuctionDetail.do";
+		return "forward:/AuctionDetail.do?auction_no="+auction.getAuction_no();
 	}
 
 	/* QnA 등록 페이지이동 */
@@ -1013,10 +1013,17 @@ public class AuctionController {
 			m.setMember_warning_count(warningCount);
 			int updateWarning = memberService.updateWarning(m);
 			System.out.println("유찰 업데이트 확인 : " + updateWarning);
+			//카운트값이 변경되었을 때만 업데이트 실행하고 알람 보내줌
 			if(updateWarning > 0) {
 				System.out.println("updateWarning>0");
+				//유찰 유저 system과의 chat_no 가져오기
+				int chat_no = memberService.selectMiscaryChatNo(m.getMember_id());
 				JSONObject job=new JSONObject();
 				job.put("member_id", m.getMember_id());
+				job.put("chat_no", chat_no);
+				job.put("auction_no", ac2.getAuction_no());
+				job.put("auction_title", ac2.getAuction_title());
+				job.put("member_warning_count", warningCount);
 				jarr.add(job);
 				}
 			}

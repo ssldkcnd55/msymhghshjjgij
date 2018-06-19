@@ -73,12 +73,12 @@ ul.tabs li.active {
 	border: 1px solid #444444;
 	border-collapse: collapse;
 	width: 90%;
-	
 }
 
 .table2 {
 	border-collapse: collapse;
-	width: 100%;
+	width: 90%;
+	margin: 0 auto;
 }
 
 .td {
@@ -98,6 +98,7 @@ ul.tabs li.active {
 	text-align: center;
 	padding: 4px;
 }
+
 .td1 {
 	padding: 4px;
 	color: #222;
@@ -112,9 +113,9 @@ ul.tabs li.active {
 	font-size: 1.15em;
 	text-align: center;
 	padding: 10px;
-	width:15%;
-	
+	width: 15%;
 }
+
 .button {
 	background-color: white;
 	color: #f1473a;
@@ -131,13 +132,15 @@ ul.tabs li.active {
 	height: 25px;
 	border: 1px solid #f1473a;
 	padding: 3px 3px 2px;
-	margin-top: 115px;
+	margin-top: 90px;
 	margin-left: 3px;
 	cursor: pointer;
 }
+
 #job_table_span_find {
 	color: #ff0000;
 }
+
 #job_table_span_finded {
 	color: #c0c0c0;
 }

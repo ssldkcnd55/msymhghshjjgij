@@ -224,4 +224,14 @@ public class MemberDao {
 
 	}
 
+	public Member selectMemberInfo(SqlSessionTemplate sqlSession, String member_id) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("member.selectMemberInfo",member_id);
+	}
+
+	public int selectMiscaryChatNo(SqlSessionTemplate sqlSession, String member_id) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("chat.selectMiscaryChatNo",member_id);
+	}
+
 }
