@@ -517,6 +517,10 @@ function move_msg_table(chat_no, my_id, your_id) {
 		console.log("채팅열림");
 		ws.onopen = function() {
 			
+			$('#img_a').on('click',function(evt){
+				$('#img_input').click();
+			});
+			
 			$('.msg_input').on('keydown', function(evt) {
 				if (evt.keyCode == 13 && $('.msg_input').val() != '') {
 					var msg = $('.msg_input').val();

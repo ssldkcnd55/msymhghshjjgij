@@ -15,7 +15,9 @@
 <link href="/farm/resources/css/marketDetail_modal.css" rel="stylesheet" type="text/css" />
 <meta charset="UTF-8">
 <title>Farm</title>
-
+<script type="text/javascript">
+var my_id = '${loginUser.member_id}';
+</script>
 </head>
 <body>
 
@@ -58,8 +60,9 @@
                     <a href="javascript: controlCount(${basket.market_no},-1);"><div class="operator">-</div></a>
                  </div>
                   </td>
-                  <td >${basket.market_price}원</td>
+                  <td ><fmt:formatNumber value="${basket.market_price}" pattern="#,###" />원</td>
                   <td><a href="javascript: deleteConfirmBasket(${basket.market_no});"><div class="x">x</div></a></td>
+                  <input id="${basket.market_no}_stack" type="hidden" value="${basket.stack}">
                   <input id="${basket.market_no}_price"  type="hidden" value="${basket.market_price}">
                </tr>
                

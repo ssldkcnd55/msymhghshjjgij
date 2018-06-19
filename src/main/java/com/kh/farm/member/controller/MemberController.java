@@ -176,7 +176,7 @@ public class MemberController {
 		try {
 			// 로그인 멤버 정보 가져오기
 			Member returnMember = memberService.selectLoginCheck(member);
-			if(returnMember.getMember_approval() == "Y") {
+			if(returnMember.getMember_approval().equals("Y")) {
 				// System.out.println("returnMember : " + returnMember);
 				String ip = getClientIP(request);
 				System.out.println("ip : " + ip);
