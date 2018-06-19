@@ -70,7 +70,7 @@
 			
 			for(var i in json.big) {
 				category_big+='<button id="'+json.big[i].category_main+'" class="deleteBig" onclick="deleteBig(this)">'
-				+'<div class="delImg"></div></button><button class="modifyBig"><div class="modImg"></div></button><button class="accordion"  onclick="toggleList();">ㆍ'
+				+'<div class="delImg"></div></button><button class="modifyBig" id="'+json.big[i].category_main+'2" onclick="updateBig(this)"><div class="modImg"></div></button><button class="accordion"  onclick="toggleList();">ㆍ'
 				+json.big[i].category_main+'</button>'
 				+'<div class="panel" id="'+json.big[i].category_main+'1" name="'+json.big[i].category_main+'"></div><hr class=\"line\">'
 			}
@@ -148,6 +148,22 @@
 		}
 	}
 	
+	
+	//카테고리 대분류 수정
+	function updateBig(big) {
+		var big_id = big.id
+		alert(big_id);
+		var res = big_id.substring(0, big_id.length-1);
+		alert(res);
+		var input = prompt('수정할 대분류 카테고리의 이름을 적으세요.');
+		if(input == null) {
+			return false;
+		}else{
+			location.href='updateCategory_main.do?category_main='+input+'&category_main_ori='+res;
+		
+		}
+	}
+	
 	//카테고리 소분류 추가
 	function add_category_name(str) {
 		console.log($(str).closest('div').attr('name'));
@@ -176,6 +192,8 @@
 		
 		} 
 	}
+	
+	//카테고리 소분류 수정
 	/* 리스트 열림 */
 	function toggleList() {
 	var acc = document.getElementsByClassName("accordion");
