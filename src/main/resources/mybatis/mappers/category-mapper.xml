@@ -52,4 +52,10 @@
 	]]>
 
 </insert>
+
+<update id="updateCategory_main" parameterType="category" flushCache="true">
+	<![CDATA[
+		update category set category_main = #{category_main} where category_main = #{category_name}
+	]]>
+</update>
 </mapper>

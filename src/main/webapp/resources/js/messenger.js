@@ -267,7 +267,7 @@ function trans_time(time) {
 
 /* 리스트 가리고 대화창 화면 띄우기 */
 function move_msg_table(chat_no, my_id, your_id) {
-
+	console.log(chat_no+","+my_id+your_id);
 	$.ajax({
 				url : "chatHistory.do",
 				type : "post",
