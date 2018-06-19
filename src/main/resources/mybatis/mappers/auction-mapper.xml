@@ -229,7 +229,8 @@
 	
 	<select id="selectauction_timeRemaining" parameterType="int" resultType="auction">
 	<![CDATA[
-		select to_char(auction_enddate, 'Month DD YYYY HH24:MI:SS','NLS_DATE_LANGUAGE=ENGLISH') as "auction_enddate" 
+		select to_char(auction_enddate, 'Month DD YYYY HH24:MI:SS','NLS_DATE_LANGUAGE=ENGLISH') 
+		as "auction_enddate" , auction_status
 		from auction where auction_no = #{auction_no}
 
 	]]>
