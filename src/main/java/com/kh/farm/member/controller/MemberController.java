@@ -35,6 +35,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -159,18 +160,18 @@ public class MemberController {
 		}
 		int insertmember = memberService.insertMember(member);
 		/// 'system'과 채팅방 생성
-		
-			Chat chat = new Chat();
-			chat.setMember_id1(member.getMember_id());
-			chat.setMember_id2("system");
-			chatService.insertChat(chat);
-		
+
+		Chat chat = new Chat();
+		chat.setMember_id1(member.getMember_id());
+		chat.setMember_id2("system");
+		chatService.insertChat(chat);
+
 		///
 		return "home";
 	}
 
 	@RequestMapping(value = "login.do", method = RequestMethod.POST)
-	public ModelAndView loginCheck(ModelAndView mv,Member member, HttpSession session, HttpServletRequest request) {
+	public ModelAndView loginCheck(ModelAndView mv, Member member, HttpSession session, HttpServletRequest request) {
 
 		String viewName = null;
 		try {
@@ -182,8 +183,7 @@ public class MemberController {
 			returnMember.setIp(ip);
 			int visit = memberService.insertVisit(returnMember);
 			session.setAttribute("loginUser", returnMember);
-			
-			
+
 			// 로그인 멤버 채팅 정보 가져오기
 			ArrayList<ChatList> chatList = (ArrayList<ChatList>) chatService.selectChatList(returnMember);
 			session.setAttribute("chatList", chatList);
@@ -641,22 +641,48 @@ public class MemberController {
 		out.close();
 
 	}
-	
+
 	@RequestMapping("selectSelInfo.do")
-	public void sellerInfo(@RequestParam("member_id") String member_id,HttpServletResponse response)throws IOException {
+	public void sellerInfo(@RequestParam("member_id") String member_id, HttpServletResponse response)
+			throws IOException {
 		System.out.println(member_id);
 		Member member = memberService.selectMemberInfo(member_id);
 		JSONObject json = new JSONObject();
 		json.put("member_id", member.getMember_id());
-		json.put("member_name",member.getMember_name());
+		json.put("member_name", member.getMember_name());
 		json.put("member_addr", member.getMember_addr());
-		json.put("point_point",member.getUserpoint());
-		
+		json.put("point_point", member.getUserpoint());
+
 		response.setContentType("application/json; charset=utf-8");
 		PrintWriter out = response.getWriter();
 		out.append(json.toJSONString());
 		out.flush();
 		out.close();
+	}
+
+	// admin 총회원수/총 판매 등록수/총 경매 등록수
+	@RequestMapping(value = "countAll.do")
+	public void selectAllcount(Member member, HttpServletResponse response) throws IOException {
+		System.out.println("회원수조회들어옴");
+		Member result = memberService.selectAllcount();
+
+		System.out.println("result값:" + result.getMembercount());
+
+		JSONObject json = new JSONObject();
+
+		json.put("membercount", result.getMembercount());
+		json.put("marketcount", result.getMarketcount());
+		json.put("auctioncount", result.getAuctioncount());
+		json.put("visitcount", result.getVisitcount());
+		
+		System.out.println(json.toJSONString());
+
+		response.setContentType("application/json; charset=utf-8;");
+		PrintWriter out = response.getWriter();
+		out.print(json.toJSONString());
+		out.flush();
+		out.close();
+
 	}
 
 }

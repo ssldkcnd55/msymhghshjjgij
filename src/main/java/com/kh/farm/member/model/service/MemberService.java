@@ -42,6 +42,8 @@ public interface MemberService {
 	Member selectIdCheck(String mail_to);
 
 	Member selectCheckId(Member member);
+	
+	Member selectAllcount();
 
 	int insertNaverSignUp(Member member);
 
