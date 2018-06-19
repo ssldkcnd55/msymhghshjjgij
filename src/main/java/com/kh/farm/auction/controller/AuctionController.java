@@ -949,7 +949,8 @@ public class AuctionController {
 	public void bidding(HttpServletResponse response) throws IOException {
 		
 		ArrayList<Auction> list = auctionService.selectStatus_2();//경매 상태 2 것만 넘버 가져오기
-		/*System.out.println("list : "+list.toString());*/
+		System.out.println(" list : "+list);
+		
 		JSONArray jarr =new JSONArray();
 		
 		
@@ -963,7 +964,9 @@ public class AuctionController {
 			json.put("auction_title", ac.getAuction_title());
 			json.put("auction_history_price", ac.getAuction_history_price());
 			json.put("member_id", ac.getMember_id());
+			json.put("auction_status", ac.getAuction_status());
 			jarr.add(json);
+			
 		}
 		
 		JSONObject json = new JSONObject();
