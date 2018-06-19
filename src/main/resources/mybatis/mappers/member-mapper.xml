@@ -213,4 +213,12 @@ insert into member values (
 ]]>
 </select> 
 
+ <select id="selectAllcount" resultType="member">
+<![CDATA[
+	select * from (select count(member_id) as "membercount" from member),(select count(market_no) as "marketcount"  from market),(select count(auction_no) as "auctioncount" from auction),(select count(visit_no) as "visitcount" from visit)
+]]>
+</select>  
+
+
+
 </mapper>

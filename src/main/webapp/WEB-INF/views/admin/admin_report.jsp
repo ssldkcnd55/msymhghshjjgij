@@ -5,7 +5,7 @@
 <head>
 <style type="text/css">
 a:link {text-decoration: none; color: black;}
-a:visited {text-decoration: none; color: green;}
+a:visited {text-decoration: none; color: black;}
 a:active {text-decoration: none; color: grey;}
 a:hover {text-decoration: underline; color: gray;}
 .white_content {
@@ -38,10 +38,28 @@ a:hover {text-decoration: underline; color: gray;}
 }
 
 .report_textarea {
-	width: 90%; 
+	width: 99%; 
 	height: 135px; 
 	margin-bottom: 15px;
+	border: 2px solid #adabab;
 	
+}
+
+.report_close {
+	border: none;
+    width: 13%;
+    height: 33px;
+    border-radius: 7px;
+    /* color: black; */
+    background: #7e59575e;
+}
+
+.report {
+	border: 1px solid #7e5957;
+    background: white;
+    color: #7e5957;
+    border-radius: 3px;
+    height: 36px;
 }
 </style> 
 <script src="/farm/resources/js/jquery-3.3.1.min.js"></script>
@@ -66,9 +84,9 @@ $(function(){
 				outValues += "<tr id='hover'><td>"+jsonObj.list[i].rnum+"</td>"
 				+"<td id='Notice_td'>"+jsonObj.list[i].report_category+"</td>"
 				+"<td><a href='reviewDeatil.do?review_no="+jsonObj.list[i].review_no+"'>리뷰페이지로<a/></td>"
-				+"<td><button id='"+jsonObj.list[i].report_contents+"' onclick='viewContents(this);'>신고내용보기</button></td>"
+				+"<td><button id='"+jsonObj.list[i].report_contents+"' onclick='viewContents(this);' class='report'>신고내용보기</button></td>"
 				+"<td>"+jsonObj.list[i].report_date+"</td><td id='st"+jsonObj.list[i].report_no+"'>"+jsonObj.list[i].report_status+"</td>"
-				+"<td><button id='"+jsonObj.list[i].report_no+"' onclick='changeStatus(this);'>신고처리</button></td></tr>";
+				+"<td><button id='"+jsonObj.list[i].report_no+"' onclick='changeStatus(this);' class='report'>신고처리</button></td></tr>";
 			} 
 			$(".Notice_table").html(outValues);
 			
@@ -388,7 +406,9 @@ function reportChangePage(page){
             						<div>
             							<div id="report_contents" class="report_textarea">신고내용</div>
             						</div>
-            						<button onclick="closemodal();">닫기</button>
+            						<div style="text-align: center;">
+            							<button onclick="closemodal();" class="report_close">닫기</button>
+            						</div>
         					</div>
     					</div>
     					

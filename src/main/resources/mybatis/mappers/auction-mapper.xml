@@ -525,7 +525,7 @@
 	<![CDATA[
 		select a.auction_no from auction a, auction_history ah
 		where a.auction_no = ah.auction_no
-		and a.auction_status = '2' group by a.auction_no
+		and a.auction_status in( '2','3','4') group by a.auction_no
 	]]>
 	</select>
 	
@@ -550,7 +550,7 @@
       where AUCTION_HISTORY_PRICE = (select max(AUCTION_HISTORY_PRICE) as "AUCTION_HISTORY_PRICE" 
     	from auction_history where auction_no = #{auction_no} ) 
     	and auction_no = #{auction_no}
-      )order by ah.auction_no desc
+      )order by a.auction_no desc
 	]]>
 
 	</select>

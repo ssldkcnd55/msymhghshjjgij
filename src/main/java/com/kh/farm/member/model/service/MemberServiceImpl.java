@@ -180,12 +180,19 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public Member selectMemberInfo(String member_id) {
 		// TODO Auto-generated method stub
-		return memberDao.selectMemberInfo(sqlSession,member_id);
+		return memberDao.selectMemberInfo(sqlSession, member_id);
 	}
 
 	@Override
 	public int selectMiscaryChatNo(String member_id) {
 		// TODO Auto-generated method stub
-		return memberDao.selectMiscaryChatNo(sqlSession,member_id);
+		return memberDao.selectMiscaryChatNo(sqlSession, member_id);
 	}
+
+	@Override
+	public Member selectAllcount() {
+
+		return memberDao.selectAllcount(sqlSession);
+	}
+
 }

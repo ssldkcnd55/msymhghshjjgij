@@ -25,5 +25,7 @@ public interface CategoryService {
 
 	int updateCategory_main(Category c);
 
+	int updateCategory_name(Category c);
+
 	
 }

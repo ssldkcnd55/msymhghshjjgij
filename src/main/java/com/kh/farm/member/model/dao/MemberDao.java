@@ -235,4 +235,9 @@ public class MemberDao {
 		return sqlSession.selectOne("chat.selectMiscaryChatNo",member_id);
 	}
 
+	public Member selectAllcount(SqlSessionTemplate sqlSession) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("member.selectAllcount");
+	}
+
 }
