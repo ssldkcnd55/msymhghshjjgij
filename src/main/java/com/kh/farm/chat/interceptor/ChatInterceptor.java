@@ -61,6 +61,17 @@ public class ChatInterceptor extends HttpSessionHandshakeInterceptor{
 			 attributes.put("state", "msg");
 			 attributes.put("state2", "sel");
 		 }
+		 else if(hsr.getParameter("state")!=null && hsr.getParameter("state").equals("mom")) {
+			 String your_id=(String)hsr.getParameter("your_id");
+			 String chat_no=(String)hsr.getParameter("chat_no");
+			 attributes.put("your_id",your_id);
+			 attributes.put("chat_no", chat_no);
+			 attributes.put("my_id","system");
+			 attributes.put("chat_room1", chat_no+"_"+"system");
+			 attributes.put("chat_room2", chat_no+"_"+your_id);
+			 attributes.put("state", "msg");
+			 attributes.put("state2", "mom");
+		 }
 	        return super.beforeHandshake(request, response, wsHandler, attributes);
 
 	    }

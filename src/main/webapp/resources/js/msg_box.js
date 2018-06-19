@@ -114,6 +114,10 @@ function loginPage() {
     	  
          loadListPage();
       }
+      else if (event.data =='mom')
+    	  {
+    	  loadListPage();
+    	  }
       else if(event.data =='sel'){
     	  /**/
     	  var title = "판매알람";
