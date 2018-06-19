@@ -41,7 +41,9 @@
 				var jsonObj = JSON.parse(objStr);
 				var outValues = "";
 				var values = "";
+				var count = 0;
 				for(var i in jsonObj.list){
+					count++;
 					outValues += "<a href='marketDetail.do?market_no=" + jsonObj.list[i].market_no + "'>" +
 					"<div class='market'><div class='img_box' style='background-image:url(\"/farm/resources/upload/marketUpload/"+ jsonObj.list[i].market_img+"\"); background-size: cover;'>"+
 					"</div><div class='title_box'><p class='title'>";
@@ -52,7 +54,13 @@
 					}
 					outValues +="</p><p class='content'>"+jsonObj.list[i].market_note+"</p><p class='content price'>"+jsonObj.list[i].market_price+"원</p></div></div></a>";
 				}
-				$(".market_box").html(outValues);
+				if(count>0){
+					$(".market_box").html(outValues);	
+				}else{
+					$(".market_box").html("<div style='line-height: 250px;text-align:center;font-size:15pt;font-weight: bold;color:gray;'>"+
+			                   "등록된 작물이 없습니다.</div>");
+				}
+				
 				for(var i in jsonObj.list2){
 					if(jsonObj.list2[i].category_name!='더미'){
 						values += "<input type='radio' value='"+jsonObj.list2[i].category_name+"' onclick='smallCategory(this);' name='SmallCategory'> "+jsonObj.list2[i].category_name+"<br><br>";
@@ -90,7 +98,9 @@
 				var jsonObj = JSON.parse(objStr);
 				var outValues = "";
 				var values = "";
+				var count = 0;
 				for(var i in jsonObj.list){
+					count++;
 					outValues += "<a href='marketDetail.do?market_no=" + jsonObj.list[i].market_no + "'>" +
 					"<div class='market'><div class='img_box' style='background-image:url(\"/farm/resources/upload/marketUpload/"+ jsonObj.list[i].market_img+"\"); background-size: cover;'>"+
 					"</div><div class='title_box'><p class='title'>";
@@ -101,7 +111,12 @@
 					}
 					outValues +="</p><p class='content'>"+jsonObj.list[i].market_note+"</p><p class='content price'>"+jsonObj.list[i].market_price+"원</p></div></div></a>";
 				}
-				$(".market_box").html(outValues);
+				if(count>0){
+					$(".market_box").html(outValues);	
+				}else{
+					$(".market_box").html("<div style='line-height: 250px;text-align:center;font-size:15pt;font-weight: bold;color:gray;'>"+
+			                   "등록된 작물이 없습니다.</div>");
+				}
 			},error: function(request,status,errorData){
 				console.log("error code : " + request.status + "\nmessage" + 
 						request.responseText + "\nerror" + errorData);
@@ -151,7 +166,9 @@
 					var jsonObj = JSON.parse(objStr);
 					var outValues = "";
 					var values = "";
+					var count = 0;
 					for(var i in jsonObj.list){
+						count++;
 						outValues += "<a href='marketDetail.do?market_no=" + jsonObj.list[i].market_no + "'>" +
 						"<div class='market'><div class='img_box' style='background-image:url(\"/farm/resources/upload/marketUpload/"+ jsonObj.list[i].market_img+"\"); background-size: cover;'>"+
 						"</div><div class='title_box'><p class='title'>";
@@ -171,7 +188,14 @@
 					if(ctype == ""){
 						values+="대분류를 선택해주세요.<br><br>";
 					}
-					$(".SmallCategory").html(values);
+					if(count>0){
+						$(".SmallCategory").html(outValues);	
+					}else{
+						$(".SmallCategory").html("<div style='line-height: 250px;text-align:center;font-size:15pt;font-weight: bold;color:gray;'>"+
+				                   "등록된 작물이 없습니다.</div>");
+					}
+					
+					
 				},error: function(request,status,errorData){
 					console.log("error code : " + request.status + "\nmessage" + 
 							request.responseText + "\nerror" + errorData);
@@ -200,7 +224,9 @@
 					var objStr = JSON.stringify(data);
 					var jsonObj = JSON.parse(objStr);
 					var outValues = "";
+					var count = 0;
 					for(var i in jsonObj.list){
+						count++;
 						outValues += "<a href='marketDetail.do?market_no=" + jsonObj.list[i].market_no + "'>" +
 						"<div class='market'><div class='img_box' style='background-image:url(\"/farm/resources/upload/marketUpload/"+ jsonObj.list[i].market_img+"\"); background-size: cover;'>"+
 						"</div><div class='title_box'><p class='title'>";
@@ -211,7 +237,12 @@
 						}
 						outValues +="</p><p class='content'>"+jsonObj.list[i].market_note+"</p><p class='content price'>"+jsonObj.list[i].market_price+"원</p></div></div></a>";
 					}
-					$(".market_box").html(outValues);
+					if(count>0){
+						$(".market_box").html(outValues);	
+					}else{
+						$(".market_box").html("<div style='line-height: 250px;text-align:center;font-size:15pt;font-weight: bold;color:gray;'>"+
+				                   "등록된 작물이 없습니다.</div>");
+					}
 				},error: function(request,status,errorData){
 					console.log("error code : " + request.status + "\nmessage" + 
 							request.responseText + "\nerror" + errorData);
@@ -241,7 +272,9 @@
 					var jsonObj = JSON.parse(objStr);
 					//문자열 변수 준비
 					var outValues = $(".market_box").html();
+					var count = 0;
 					for(var i in jsonObj.list){
+						count++;
 						outValues += "<a href='marketDetail.do?market_no=" + jsonObj.list[i].market_no + "'>" +
 								"<div class='market'><div class='img_box' style='background-image:url(\"/farm/resources/upload/marketUpload/"+ jsonObj.list[i].market_img+"\"); background-size: cover;'>"+
 								"</div><div class='title_box'><p class='title'>";
@@ -252,7 +285,12 @@
 						}
 						outValues +="</p><p class='content'>"+jsonObj.list[i].market_note+"</p><p class='content price'>"+jsonObj.list[i].market_price+"원</p></div></div></a>";
 					}
-					$(".market_box").html(outValues);
+					if(count>0){
+						$(".market_box").html(outValues);	
+					}else{
+						$(".market_box").html("<div style='line-height: 250px;text-align:center;font-size:15pt;font-weight: bold;color:gray;'>"+
+				                   "등록된 작물이 없습니다.</div>");
+					}
 				},error: function(request,status,errorData){
 					alert("error code : " + request.status + "\nmessage" + 
 							request.responseText + "\nerror" + errorData);
