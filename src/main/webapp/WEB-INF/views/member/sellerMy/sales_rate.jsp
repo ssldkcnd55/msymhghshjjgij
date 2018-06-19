@@ -13,7 +13,6 @@
 
 <script type="text/javascript">
 	window.onload = function() {
-		alert("로딩 완료");
 
 		$
 				.ajax({
