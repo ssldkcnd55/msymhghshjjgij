@@ -1,3 +1,4 @@
+
 package com.kh.farm.job.controller;
 
 import java.io.File;
@@ -41,12 +42,13 @@ public class JobController {
 	// 구인구직페이징처리
 	@RequestMapping(value = "jobList.do")
 	public void jobList(HttpServletResponse response, HttpServletRequest request) throws IOException {
-
+		
 		int limitPage = 10;
 		int currentPage = 1;
 		if (request.getParameter("page") != null) {
 			currentPage = Integer.parseInt(request.getParameter("page"));
 		}
+
 		int listCount = jobService.selectListcount();
 		int startPage = ((int) ((double) currentPage / 5 + 0.8) - 1) * 5 + 1;
 		int endPage = startPage + 4;
@@ -66,6 +68,7 @@ public class JobController {
 		 */
 
 		for (Job job : jobList) {
+
 			JSONObject jsonobj = new JSONObject();
 			jsonobj.put("rnum", job.getRnum());
 			jsonobj.put("job_no", job.getJob_no());
@@ -82,6 +85,7 @@ public class JobController {
 
 			jarr.add(jsonobj);
 		}
+
 		json.put("list", jarr);
 		response.setContentType("application/json; charset=utf-8");
 		PrintWriter out = response.getWriter();
@@ -90,6 +94,8 @@ public class JobController {
 		out.close();
 
 	}
+	
+	
 
 	// 구인구직 글등록
 	@RequestMapping(value = "jobMake.do", method = RequestMethod.POST)
@@ -169,8 +175,8 @@ public class JobController {
 
 	// 구인구직 검색
 	@RequestMapping("jobserach.do")
-	public void jobserach(HttpServletResponse response, HttpServletRequest request , PageNumber pp) throws IOException {
-		
+	public void jobserach(HttpServletResponse response, HttpServletRequest request, PageNumber pp) throws IOException {
+
 		int limitPage = 10;
 		int currentPage = 1;
 		if (request.getParameter("page") != null) {
@@ -184,7 +190,7 @@ public class JobController {
 		if (endPage > maxPage) {
 			endPage = maxPage;
 		}
-		ArrayList<Job> jobList = jobService.searchJobList(currentPage,pp);
+		ArrayList<Job> jobList = jobService.searchJobList(currentPage, pp);
 		JSONObject json = new JSONObject();
 		JSONArray jarr = new JSONArray();
 
