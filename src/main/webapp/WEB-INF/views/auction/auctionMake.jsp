@@ -45,14 +45,9 @@
 	 //경매 즉시구매, 시작 날짜 ,마감 날짜 체크 
 	function auction_startdateCheck(){
 		var startdate = $("#startdate").val();
-		/* alert("startdate : "+startdate); */
 		var enddate = $("#enddate").val();
-		/* alert("enddate : "+enddate); */
 		var directprice =$("#directprice").val();
-		/* alert("directprice : "+directprice); */
 		var startprice =$("#startprice").val();
-		/* alert("startprice : "+startprice); */
-		
 		var result2 = true;
 		async: false;
 		
@@ -64,11 +59,9 @@
 		if(dd<10) {
 		    dd='0'+dd
 		} 
-
 		if(mm<10) {
 		    mm='0'+mm
 		} 
-		
 		today = yyyy+'-'+mm+'-'+dd;
 		/* alert("현재 날짜 : "+today); */
 				
