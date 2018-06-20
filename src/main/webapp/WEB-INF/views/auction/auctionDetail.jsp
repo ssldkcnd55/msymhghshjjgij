@@ -6,8 +6,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Farm</title>
-<link href="/farm/resources/css/auctionDetail.css" rel="stylesheet"
-   type="text/css" />
+
+
 <link href="/farm/resources/css/bottommovemenu.css" rel="stylesheet"
    type="text/css" />   
 <link href="/farm/resources/css/style.css" rel="stylesheet"
@@ -23,7 +23,8 @@
    
 <link href="resources/time/timeTo.css" rel="stylesheet"
    type="text/css" />
-
+<link href="/farm/resources/css/auctionDetail.css" rel="stylesheet"
+   type="text/css" />
 
 <script type="text/javascript"
    src="/farm/resources/js/jquery-3.3.1.min.js"></script>
@@ -35,6 +36,12 @@
 	}
 	.a> .first:nth-child(1){
 		margin-right:13px;
+	}
+	.auction_backgroundtable{
+	overflow-y: scroll;
+	}
+	.auction_backgroundtable tr td,.auction_backgroundtable tr th{	
+		height:40px;
 	}
 	
 
@@ -242,11 +249,11 @@ $(function(){
                   
                    
                var outValues2 = 
-                  "<table class='bidding_table'>"+
+                  "<table class='bidding_table' >"+
               	 "<tr>"+
                   "<th class='bidder'>입찰자</th>"+
                   "<th class='current_price'>입찰가</th>"+
-                  "<th>입찰 시간</th>"+
+                  "<th>입찰  시간</th>"+
              	  "</tr>";
                
                  for(var i in json.list){
@@ -288,12 +295,12 @@ $(function(){
              var objStr = JSON.stringify(obj);
              var jsonObj = JSON.parse(objStr);
             /*  alert("날짜 : "+jsonObj.auction_enddate); */
-             
+             var time = "";
             if(jsonObj.status == 1){
              $('.demo1').timeTo(new Date(jsonObj.auction_enddate)); 
              $('.a').timeTo(new Date(jsonObj.auction_enddate)); 
             }
-            
+           
              var outValues = $("#time").html(); 
              var outValues2 = $(".a").html(); 
              
@@ -421,14 +428,15 @@ $(function(){
             var objStr = JSON.stringify(data);
             var jsonObj = JSON.parse(objStr);
             
-            var outValues = "<tr id='table_tr_1'><th >번호</th><th >판매자</th><th >제목</th></tr>"; 
+            var outValues = "<tr id='table_tr_1' style='background: #ece6ce;width:60px;'><th >번호</th><th >판매자</th><th >제목</th></tr>"; 
             
             for(var i in jsonObj.list){
+            	
                   outValues += 
                      "<tr>"+
                      "<td style='text-align:center;'>"+i+"</td>"+
-                     "<td>"+jsonObj.list[i].member_id+"</td>"+
-                     "<td>"+jsonObj.list[i].auction_title+"</td>"+
+                     "<td style='text-align:center;'>"+jsonObj.list[i].member_id+"</td>"+
+                     "<td style='text-align:center;'>"+jsonObj.list[i].auction_title+"</td>"+
                      "</tr>";
                }
             $(".auction_backgroundtable").html(outValues);
@@ -547,8 +555,8 @@ $(function(){
             <div id="tab-2" class="tab-content">
                <div class="auction_history_box">
 
-                  <div class="bidding_top">
-                     <div style="width:100%; margin-left:45%;">
+                  <div class="bidding_top" style="height:500px;">
+                     <div style="width:100%; text-align:center; ">
                      <h2 class="">입찰 내역</h2>
                      </div>
 
@@ -561,7 +569,7 @@ $(function(){
 
                      <!-- 경매정보  -->
 
-                     <div class="bidding_history"></div>
+                     <div class="bidding_history" ></div>
                      <!-- 입찰 테이블 -->
                      <!--  -->
                   </div>
@@ -572,11 +580,12 @@ $(function(){
             <!-- Daily box -->
             <div id="tab-3" class="tab-content">
                <div class="auction_background" style="width:97%;height:500px;padding:10px;border:3px solid #ddd;" >
-               <h2 style="margin-left:42%;margin-bottom:20px;">경매 이력</h2>
+               <h2 style="text-align:center;margin-bottom:40px;">경매 이력</h2>
+               <div style="overflow-y: scroll;    height: 370px; overflow: auto;">
                <table class="auction_backgroundtable" style="width:90%;margin-left:45px;">
                   
                </table>
-               
+               </div>
                </div>
             </div>
             <!-- Daily box -->
