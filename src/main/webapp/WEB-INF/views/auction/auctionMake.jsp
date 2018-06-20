@@ -130,7 +130,7 @@
 								<td class="td1">
 									<p class="p">상품명</p>
 								</td>
-								<td class="td2" colspan="3"><input type="text"
+								<td class="td2" colspan="3"><input type="text" style="width:400px;"
 									name="auction_title"  placeholder="한글 10~15글자" required="required"> <!-- <input type="submit"
 									 name="category_no" value="카테고리검색" class="input_text_box">
 									<br> --></td>
@@ -140,7 +140,7 @@
 										<p class="p">부제목</p>
 									
 									</td>
-									<td class="td2" colspan="3"><input type="text"
+									<td class="td2" colspan="3"><input type="text" style="width:400px;"
 									name="auction_note" placeholder="한글 60~65글자" required="required"></td>
 							</tr>
 							<tr class="tr1">
@@ -173,9 +173,9 @@
 									<p class="p">즉시구매가</p>
 								</td>
 								<td colspan="3" class="td2"><input type="number" id="directprice" min="0"
-									name="auction_directprice" required="required"> <input type="checkbox"
+									name="auction_directprice" required="required"><!--  <input type="checkbox"
 									 class="input_checkbox"
-									style="margin-left: 15px;">즉시구매가설정안함<br></td>
+									style="margin-left: 15px;">즉시구매가설정안함<br> --></td>
 							</tr>
 							<tr class="tr1">
 								<td class="td3">

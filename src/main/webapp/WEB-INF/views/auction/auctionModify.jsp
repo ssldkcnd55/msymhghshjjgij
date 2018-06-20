@@ -119,9 +119,9 @@
 								<td class="td1">
 									<p class="p">상품명</p>
 								</td>
-								<td class="td2" colspan="3"><input type="text"
-									name="auction_title" value="${auction.auction_title}" required="required"> <input type="submit"
-									 name="category_no" value="카테고리검색" class="input_text_box">
+								<td class="td2" colspan="3"><input type="text" style="width:400px;"
+									name="auction_title" value="${auction.auction_title}" required="required"> <!-- <input type="submit"
+									 name="category_no" value="카테고리검색" class="input_text_box"> -->
 									<br></td>
 							</tr>
 							<tr class="tr1">
@@ -129,7 +129,7 @@
 										<p class="p">부제목</p>
 									
 									</td>
-									<td class="td2" colspan="3"><input type="text"
+									<td class="td2" colspan="3"><input type="text" style="width:400px;"
 									name="auction_note" value="${auction.auction_note}" required="required"></td>
 							</tr>
 							<tr class="tr1">
@@ -164,9 +164,9 @@
 									<p class="p">즉시구매가</p>
 								</td>
 								<td colspan="3" class="td2"><input type="number" id="directprice"
-									name="auction_directprice" value="${auction.auction_directprice}"> <input type="checkbox"
+									name="auction_directprice" value="${auction.auction_directprice}"> <!-- <input type="checkbox"
 									 class="input_checkbox"
-									style="margin-left: 15px;" >즉시구매가설정안함<br></td>
+									style="margin-left: 15px;" >즉시구매가설정안함<br> --></td>
 							</tr>
 							<tr class="tr1">
 								<td class="td3">

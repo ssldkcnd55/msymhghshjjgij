@@ -294,50 +294,48 @@ $(function(){
          success:function(obj){
              var objStr = JSON.stringify(obj);
              var jsonObj = JSON.parse(objStr);
-          	
+             async: false;
+             var outValues = ""; 
+             var outValues2 = "";  
+             var outValues3 = "";
+             
             if(jsonObj.status == 1){
              $('.demo1').timeTo(new Date(jsonObj.auction_enddate)); 
              $('.a').timeTo(new Date(jsonObj.auction_enddate)); 
-            }
+            var stop = 0;
+            var upadte;
+            //타이머 시간이 0이 될때
+            update = setInterval(function(){
+         	   stop = 0;
+         	   $("#time li").each(function(){
+          	  if( $(this).text()==0){
+          		 stop += 0;
+            	  }else{
+            		  stop += 1;
+            	  }
+            	   console.log( $(this).text());
+               });
+					   if(stop == 0){
+						   outValues3=  "경매 마감";
+			               outValues2=  "경매 마감"; 
+			               $("#time").html(outValues3);  
+			               $(".a").html(outValues2); 
+			               $(".button_buy").remove();
+					   }   
+            }, 1000);
             
-             var outValues = $("#time").html(); 
-             var outValues2 = $(".a").html(); 
-             
+           }
+           
               if(jsonObj.status == 0){
-                outValues="경매 준비중";
+            	  outValues="<span style='font-weight: bold;font-size:15pt;'>경매 준비중</span>";
                 outValues2="경매 준비중";
              }else if(jsonObj.status == 2 || jsonObj.status ==3 || jsonObj.status ==4 ){
-                outValues=  "경매 마감";
+            	 outValues=  "경매 마감";
                 outValues2=  "경매 마감";
              }
-               $("#time").html(outValues);  
+               $(".end").html(outValues);  
                $("#a").html(outValues2); 
-               
-               var stop = 0;
-               var upadte;
-               update = setInterval(function(){
-            	   stop = 0;
-            	   $("#time li").each(function(){
-             	  if( $(this).text()==0){
-             		 stop += 0;
-               	  }else{
-               		  stop += 1;
-               		
-               	  }
-               	   console.log( $(this).text());
-                  });
-					   if(stop == 0){
-						   outValues=  "경매 마감";
-			               outValues2=  "경매 마감"; 
-			               $("#time").html(outValues);  
-			               $("#a").html(outValues2); 
-					   }   
-					
-               }, 1000);
-               
-               
-               
-               
+             
          },error: function(request,status,errorData){
                alert("error code : " + request.status + "\nmessage" + 
                        request.responseText + "\nerror" + errorData);
@@ -491,7 +489,7 @@ $(function(){
             <div class="title_box">
                <span class="title">${auction.auction_title }</span> &nbsp; 
                <span class="release_date">경매 시작일</span>&nbsp;<span class="date">${auction.auction_startdate}</span>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
-               &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp;  <span class="end">&nbsp; &nbsp; 남은시간 : </span>
+               &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; <span class="end">&nbsp; &nbsp; 남은시간 : </span>
                  <span id="time" class="demo1"></span>&nbsp; 
                  <c:choose>
                   <c:when test="${loginUser.member_id eq auction.member_id && auction.auction_status eq 0}">

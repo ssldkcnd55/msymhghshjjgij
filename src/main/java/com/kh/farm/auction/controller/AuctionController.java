@@ -581,10 +581,10 @@ public class AuctionController {
 	@RequestMapping(value = "insertAuctionBidding.do")
 	public String insertAuctionBidding(AuctionHistory auctionhistory,
 			 @RequestParam("auction_no") int auction_no) {
-		System.out.println("경매 입찰 버튼 옥션 번호 : "+auction_no);
+		
 		int makeauctionhistory = auctionService.insertAuctionBidding(auctionhistory);
-		/*Auction no = auctionService.selectbid(auction_no);*/
-		return "redirect:/AuctionDetail.do?auction_no=" + auctionhistory.getAuction_no();
+		Auction no = auctionService.selectbid(auction_no);
+		return "redirect:/AuctionDetail.do?auction_no=" +no.getAuction_no();
 
 	}
 
