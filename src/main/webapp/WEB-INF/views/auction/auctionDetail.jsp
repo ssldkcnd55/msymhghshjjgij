@@ -294,13 +294,12 @@ $(function(){
          success:function(obj){
              var objStr = JSON.stringify(obj);
              var jsonObj = JSON.parse(objStr);
-            /*  alert("날짜 : "+jsonObj.auction_enddate); */
-             var time = "";
+          	
             if(jsonObj.status == 1){
              $('.demo1').timeTo(new Date(jsonObj.auction_enddate)); 
              $('.a').timeTo(new Date(jsonObj.auction_enddate)); 
             }
-           
+            
              var outValues = $("#time").html(); 
              var outValues2 = $(".a").html(); 
              
@@ -313,6 +312,31 @@ $(function(){
              }
                $("#time").html(outValues);  
                $("#a").html(outValues2); 
+               
+               var stop = 0;
+               var upadte;
+               update = setInterval(function(){
+            	   stop = 0;
+            	   $("#time li").each(function(){
+             	  if( $(this).text()==0){
+             		 stop += 0;
+               	  }else{
+               		  stop += 1;
+               		
+               	  }
+               	   console.log( $(this).text());
+                  });
+					   if(stop == 0){
+						   outValues=  "경매 마감";
+			               outValues2=  "경매 마감"; 
+			               $("#time").html(outValues);  
+			               $("#a").html(outValues2); 
+					   }   
+					
+               }, 1000);
+               
+               
+               
                
          },error: function(request,status,errorData){
                alert("error code : " + request.status + "\nmessage" + 
