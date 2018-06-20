@@ -10,6 +10,14 @@
    border-right: 1px solid #7e5957;
 }
 
+.selltabs{
+	
+   overflow: hidden;
+   float: left;
+  margin-left:24%;
+   border-right: 1px solid #7e5957;
+}
+
 .tab{
    width:130px;
    height: 40px;

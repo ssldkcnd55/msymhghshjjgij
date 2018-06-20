@@ -100,7 +100,7 @@ function categoryCheck(){
 		<div id="container">
 			<div class="inner-wrap">
 				<br> <br>
-				<h1 style="text-align: center; margin: auto;">장터판매</h1>
+				<h1 style="text-align: center; margin: auto;">장터등록</h1>
 				<br> <br> <br>
 
 				<div class="div">
@@ -129,9 +129,9 @@ function categoryCheck(){
 
 									<p class="p">카테고리</p>
 								</td>
-								<td colspan="3" class="td2" id="categoryTd">
-									대분류<select id='CategoryMain'></select>
-									소분류<select id="CategoryName" disabled></select>
+								<td colspan="3" class="td2" id="categoryTd" style="font-size: 10pt">
+									대분류 <select id='CategoryMain'></select>
+									   소분류  <select id="CategoryName" disabled></select>
 								</td>
 							</tr>
 							<tr class="tr">

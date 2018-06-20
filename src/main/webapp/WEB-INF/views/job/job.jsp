@@ -358,7 +358,7 @@
 					<div id="sort_all">
 						<div class="sort" style="padding-left: 10px;">
 							<h4>지역별</h4>
-							<table id="left_area_table" style="text-align: center;">
+							<table id="left_area_table" style="text-align: center; cursor: pointer;">
 								<tr>
 									<td><a onclick="javascript:addr('서울')">서울&nbsp;</a></td>
 									<td><a onclick="javascript:addr('경기')">경기&nbsp;</a></td>

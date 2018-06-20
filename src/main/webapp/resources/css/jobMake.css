@@ -120,7 +120,15 @@
 .li2 {
 	float: left;
 }
-
+.searchAddr{
+	background: #f27634;
+	color: white;
+	font-size: 10pt;
+	padding: 3px 6px 3px 6px;
+	cursor: pointer;
+	border-radius: 2px;
+	margin-top: 3px;
+}
 .li3 {
 	float: right;
 	margin-left: 15px;

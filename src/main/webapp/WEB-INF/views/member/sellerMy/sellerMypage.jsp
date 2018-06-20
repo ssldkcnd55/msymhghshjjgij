@@ -38,7 +38,7 @@ $(function(){
          <%@ include file="../../inc/header.jsp" %>
       </div>
        <div id="container" class="mypageContainer">
-        <div class="tabs">
+        <div class="selltabs">
          <div id="1" class="tab active"><a href="#1">회원정보</a></div>
          <div id="2" class="tab"><a href="#2">구매내역</a></div>
          <div id="3" class="tab"><a href="#3">판매내역</a></div>
