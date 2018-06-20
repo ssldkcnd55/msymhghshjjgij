@@ -907,9 +907,9 @@ public class AuctionController {
 
 	// 옥숀 결제 완료 후 db 등록 (현준)
 	@RequestMapping(value = "insertAuctionPayment.do", method = RequestMethod.POST)
-	public void insertAuctionPayment(HttpServletResponse response, Payment pm) throws IOException {
+	public void insertAuctionPayment(HttpServletResponse response, Payment pm, @RequestParam(value="your_id") String your_id) throws IOException {
 		pm.setBuy_no(auctionService.insertAuctionPayment(pm));
-		int chat_no = paymentService.selectChatNo(pm.getMember_id());
+		int chat_no = paymentService.selectChatNo(your_id);
 		//경매상태 3(결제완료) 업데이트
 		auctionService.updateAuctionBuyComplete(pm.getAuction_no());
 		
