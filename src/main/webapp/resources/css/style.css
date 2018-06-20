@@ -166,11 +166,13 @@ img{border:0}
 .title1{
 	width:928px;
    margin:0px;
-   margin-bottom:20px;
+   margin-top:20px;
+   margin-bottom:30px;
    font-size:23pt;
-   color:#7e5957;
+  /*  color:#7e5957; */
    font-weight:bold;
    float:left;
+   text-align:center;
 }
 .title_image{
 	    margin-top: 5px;
