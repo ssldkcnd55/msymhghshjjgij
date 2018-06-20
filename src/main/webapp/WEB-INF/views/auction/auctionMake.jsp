@@ -72,7 +72,7 @@
 		today = yyyy+'-'+mm+'-'+dd;
 		/* alert("현재 날짜 : "+today); */
 				
-		if((directprice < startprice) || (directprice == startprice)){
+		if((directprice > startprice) || (directprice == startprice)){
 			alert("즉시구매가격은 시작가격보다 같거나 적게 설정할 수 없습니다.");
 			result2 = false;
 			$("#directprice").focus();
@@ -164,7 +164,7 @@
 
 									<p class="p">경매시작가</p>
 								</td>
-								<td colspan="3" class="td2"><input type="number" id="startprice"
+								<td colspan="3" class="td2"><input type="number" id="startprice" min="0"
 									name="auction_startprice" required="required"> <br></td>
 							</tr>
 							<tr class="tr1">
@@ -172,7 +172,7 @@
 
 									<p class="p">즉시구매가</p>
 								</td>
-								<td colspan="3" class="td2"><input type="number" id="directprice"
+								<td colspan="3" class="td2"><input type="number" id="directprice" min="0"
 									name="auction_directprice" required="required"> <input type="checkbox"
 									 class="input_checkbox"
 									style="margin-left: 15px;">즉시구매가설정안함<br></td>

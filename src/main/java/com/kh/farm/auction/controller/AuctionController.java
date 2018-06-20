@@ -591,8 +591,7 @@ public class AuctionController {
 			throws IOException {
 
 		JSONArray jarr = new JSONArray();
-		List<AuctionHistory> AuctionList = auctionService.selectAuctionHistory(currentPage);
-
+		List<Auction> AuctionList = auctionService.selectAuctionHistory(currentPage);
 		int limitPage = 10;
 		int listCount = auctionService.selectAuctionHistoryCount();
 
@@ -604,16 +603,17 @@ public class AuctionController {
 			endPage = maxPage;
 		}
 
-		for (AuctionHistory ac : AuctionList) {
+		for (Auction ac : AuctionList) {
 			if (member.getMember_id().equals(ac.getMember_id())) {
 				JSONObject json = new JSONObject();
 				json.put("rnum", ac.getRnum());
-				json.put("auction_history_no", ac.getAuction_history_no());
 				json.put("auction_no", ac.getAuction_no());
-				json.put("member_id", ac.getMember_id());
-				json.put("auction_history_price", ac.getAuction_history_price());
-				json.put("auction_history_date", ac.getAuction_history_date().toString());
 				json.put("auction_title", ac.getAuction_title());
+				json.put("member_id", ac.getMember_id());
+				json.put("auction_startprice", ac.getAuction_startprice());
+				json.put("auction_directprice", ac.getAuction_directprice());
+				json.put("auction_startdate", ac.getAuction_startdate().toString());
+				json.put("auction_enddate", ac.getAuction_enddate().toString());
 				json.put("startPage", startPage);
 				json.put("endPage", endPage);
 				json.put("maxPage", maxPage);
