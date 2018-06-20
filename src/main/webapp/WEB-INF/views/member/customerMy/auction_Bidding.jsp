@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+ <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html class="MyHtml">
@@ -26,15 +26,32 @@ $(function(){
 	         
 	         if(jsonObj.list.length > 0){
 	         for(var i in jsonObj.list){
-	        	 if(('${loginUser.member_id}' == jsonObj.list[i].member_id) && (jsonObj.list[i].auction_status == '2') ){
-	        		
+	        	 if('${loginUser.member_id}' == jsonObj.list[i].member_id){
+	        		if(jsonObj.list[i].auction_status == '2'){
 				         values += 
 				        "<tr>"
 				        +"<td>"+jsonObj.list[i].auction_no+"</td>"
 				 		+"<td ><a class='auction_title_td' target=_blank href='/farm/AuctionDetail.do?auction_no="+jsonObj.list[i].auction_no+" '>"+jsonObj.list[i].auction_title+"</a></td>"
 				 		+"<td>"+jsonObj.list[i].auction_history_price+"</td>"
-				 		+"<td><input type='submit' onclick='movePaymentPage("+jsonObj.list[i].auction_no+",\""+jsonObj.list[i].member_id+"\","+jsonObj.list[i].auction_history_price+")' value='결제' class='buy_button'/></td>"
+				 		+"<td><input type='submit' onclick='movePaymentPage("+jsonObj.list[i].auction_no+",\""+jsonObj.list[i].member_id+"\","+jsonObj.list[i].auction_history_price+")' value='결제' class='buy_button2'/></td>"
 				 		+"</tr>";
+	        		}else if(jsonObj.list[i].auction_status == '3'){
+	        			 values += 
+	 				        "<tr>"
+	 				        +"<td>"+jsonObj.list[i].auction_no+"</td>"
+	 				 		+"<td ><a class='auction_title_td' target=_blank href='/farm/AuctionDetail.do?auction_no="+jsonObj.list[i].auction_no+" '>"+jsonObj.list[i].auction_title+"</a></td>"
+	 				 		+"<td>"+jsonObj.list[i].auction_history_price+"</td>"
+	 				 		+"<td><input type='submit' value='결제완료' class='buy_button'/></td>"
+	 				 		+"</tr>";
+	        		}else if(jsonObj.list[i].auction_status == '4'){
+	        			 values += 
+		 				        "<tr>"
+		 				        +"<td>"+jsonObj.list[i].auction_no+"</td>"
+		 				 		+"<td ><a class='auction_title_td' target=_blank href='/farm/AuctionDetail.do?auction_no="+jsonObj.list[i].auction_no+" '>"+jsonObj.list[i].auction_title+"</a></td>"
+		 				 		+"<td>"+jsonObj.list[i].auction_history_price+"</td>"
+		 				 		+"<td><input type='submit' value='유찰' class='buy_button'/></td>"
+		 				 		+"</tr>";
+	        		}
 	        	 }
 	         }
 	         $("#Bid_win_table").html(values);

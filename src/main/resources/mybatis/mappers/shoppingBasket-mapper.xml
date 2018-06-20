@@ -6,9 +6,10 @@
 
 	<select id="selectShoppingBasket" parameterType="String" resultType="ShowBasket">
 		<![CDATA[ 
-		select mk.market_no, mk.MARKET_IMG, mk.MARKET_TITLE, mk.MARKET_PRICE, sb.BUY_AMOUNT
-from market mk, shop_basket sb
-where mk.MARKET_NO=sb.MARKET_NO and sb.MEMBER_ID= #{member_id}
+		select mk.market_no, mk.MARKET_IMG, mk.MARKET_TITLE, mk.MARKET_PRICE, sb.BUY_AMOUNT , (max(mk.MARKET_AMOUNT) - nvl(sum(buy.buy_amount),0)) as "stack"
+from market mk, shop_basket sb , buy
+where mk.MARKET_NO=sb.MARKET_NO and mk.MARKET_NO=buy.MARKET_NO(+) and sb.MEMBER_ID= #{member_id}
+group by mk.market_no, mk.MARKET_IMG, mk.MARKET_TITLE, mk.MARKET_PRICE, sb.BUY_AMOUNT
 	]]>
 	</select>
 	

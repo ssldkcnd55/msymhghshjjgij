@@ -31,10 +31,10 @@
 
 <style type="text/css">
 	#time > .first:nth-child(1){
-		margin-right:10px;
+		margin-right:13px;
 	}
 	.a> .first:nth-child(1){
-		margin-right:10px;
+		margin-right:13px;
 	}
 	
 
@@ -234,7 +234,7 @@ $(function(){
                  if(json.list[0].day > 0 && biddingcount > 0){
                  var outValues = "";
                     outValues =
-                       "<span class='s1'>입찰 수 : </span> <span>"+biddingcount+"</span>&nbsp;&nbsp;&nbsp; <span class='s1'>남은기간 : </span>"+
+                       "<span class='s1'>입찰 수 : </span> <span>"+(biddingcount-1)+"</span>&nbsp;&nbsp;&nbsp; <span class='s1'>남은기간 : </span>"+
                       "<span>"+json.list[0].day+"</span>";
                  }
                     
@@ -243,23 +243,23 @@ $(function(){
                    
                var outValues2 = 
                   "<table class='bidding_table'>"+
-               "<tr>"+
+              	 "<tr>"+
                   "<th class='bidder'>입찰자</th>"+
                   "<th class='current_price'>입찰가</th>"+
                   "<th>입찰 시간</th>"+
-               "</tr>";
+             	  "</tr>";
                
                  for(var i in json.list){
-                	 if(json.list[i].member_id != system ){
+                	 if(json.list[i].member_id != 'system' ){
                     outValues2 +=
-                       "<tr>"+
+                     "<tr>"+
                      "<td>"+json.list[i].member_id+"</td>"+
                      "<td>"+numberWithCommas(json.list[i].auction_history_price)+"원</td>"+
                      "<td>"+json.list[i].auction_history_date+"</td>"+
                      "</tr>";
                 	 }
                  }
-                   outValues2 += "</table>";
+                  outValues2 += "</table>"; 
                  $(".bidding_history").html(outValues2);
         	  }
           else{
@@ -302,7 +302,7 @@ $(function(){
                 outValues2+="경매 준비중";
              }else if(jsonObj.status == 2 || jsonObj.status ==3 || jsonObj.status ==4 ){
                 outValues+=  "경매 마감";
-                outValues2+=  "경매 마감";
+                outValues2=  "경매 마감";
              }
                $("#time").html(outValues);  
                $(".a").html(outValues2); 
@@ -459,7 +459,7 @@ $(function(){
             <div class="title_box">
                <span class="title">${auction.auction_title }</span> &nbsp; 
                <span class="release_date">경매 시작일</span>&nbsp;<span class="date">${auction.auction_startdate}</span>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
-               &nbsp; &nbsp;  <span class="end">남은시간 : </span>
+               &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp;  <span class="end">&nbsp; &nbsp; 남은시간 : </span>
                  <span id="time" class="demo1"></span>&nbsp; 
                  <c:choose>
                   <c:when test="${loginUser.member_id eq auction.member_id && auction.auction_status eq 0}">
@@ -584,7 +584,7 @@ $(function(){
             
       <!-- QnA box -->
              <div id="tab-4" class="tab-content" >
-             <c:if test="${loginUser.member_category eq '0'}">
+             <c:if test="${loginUser.member_category eq '1' && not empty sessionScope.loginUser}">
              <button class="auctionwrite_button" onclick="Auction_qnaMake();">문의 작성</button>
              </c:if>
              <div class="qna_box" >

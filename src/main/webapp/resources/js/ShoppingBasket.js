@@ -64,9 +64,15 @@ function selectDelete()
 function controlCount(market_no, operator) {
 	var mcount = Number($('#' + market_no + '_count').val());
 	var op = Number(operator);
+
 	if (mcount + op < 1){
 		deleteConfirmBasket(market_no)
 		//$('#' + market_no + '_count').val(1);
+		}
+	else if( (mcount + op) > $("#"+market_no+"_stack").val() )
+		{
+		alert("남은 수량을 초과하였습니다.");
+		$('#'+market_no+'_count').val( $("#"+market_no+"_stack").val() );
 		}
 	else{
 		$.ajax({
@@ -137,7 +143,7 @@ function setPrice() {
 }
 function deleteBasket()
 {	
-	alert("d1");
+
 	$.ajax({
 		url:"deleteSoppingBasket.do",
 		type:"post",
@@ -156,8 +162,8 @@ function deleteBasket()
 					code+='<td><center><a href="marketDetail.do?market_no='+js.bl[i].no+'"><div class="images" style="background-image: url(\'/farm/resources/upload/marketUpload/'+decodeURIComponent((js.bl[i].img).replace(/\+/g, '%20'))+'\');"></div></a></center></td>';
 					code+='<td id="Notice_td"><a href="marketDetail.do?market_no='+js.bl[i].no+'">'+decodeURIComponent((js.bl[i].title).replace(/\+/g, '%20'))+'</a></td>';
 					code+='<td><div class="amount_box"><a href="javascript: controlCount('+js.bl[i].no+',+1);"><div class="operator">+</div></a><input type="number" id="'+js.bl[i].no+'_count" class="count" value="'+js.bl[i].amount+'" min="0"><a href="javascript: controlCount('+js.bl[i].no+',-1);"><div class="operator">-</div></a></div></td>';
-					code+='<td >'+js.bl[i].price+'원</td>';
-					code+='<td><a href="javascript: deleteConfirmBasket('+js.bl[i].no+');"><div class="x">x</div></a></td><input id="'+js.bl[i].no+'_price"  type="hidden" value="'+js.bl[i].price+'"></tr>';
+					code+='<td >'+numberWithComma(js.bl[i].price)+'원</td>';
+					code+='<td><a href="javascript: deleteConfirmBasket('+js.bl[i].no+');"><div class="x">x</div></a></td><input id="'+js.bl[i].no+'_stack" type="hidden" value="'+js.bl[i].stack+'"><input id="'+js.bl[i].no+'_price"  type="hidden" value="'+js.bl[i].price+'"></tr>';
 					
 				}
 			
@@ -179,7 +185,7 @@ function deleteBasket()
 				$('.checkedCount').text(count);
 				setPrice();
 			});
-			getBasketCount('${loginUser.member_id}');
+			getBasketCount(my_id);
 		},
 		error: function(request,status,errorData){
 			console.log("ShoppingBasket.js / deleteBasket();")

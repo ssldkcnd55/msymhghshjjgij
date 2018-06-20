@@ -173,24 +173,28 @@ public class MemberController {
 	@RequestMapping(value = "login.do", method = RequestMethod.POST)
 	public ModelAndView loginCheck(ModelAndView mv, Member member, HttpSession session, HttpServletRequest request) {
 
-		String viewName = null;
 		try {
 			// 로그인 멤버 정보 가져오기
 			Member returnMember = memberService.selectLoginCheck(member);
-			// System.out.println("returnMember : " + returnMember);
-			String ip = getClientIP(request);
-			System.out.println("ip : " + ip);
-			returnMember.setIp(ip);
-			int visit = memberService.insertVisit(returnMember);
-			session.setAttribute("loginUser", returnMember);
-
-			// 로그인 멤버 채팅 정보 가져오기
-			ArrayList<ChatList> chatList = (ArrayList<ChatList>) chatService.selectChatList(returnMember);
-			session.setAttribute("chatList", chatList);
-
-			// System.out.println(chatList);
-			mv.setViewName("home");
-			viewName = "home";
+			if(returnMember.getMember_approval().equals("Y")) {
+				// System.out.println("returnMember : " + returnMember);
+				String ip = getClientIP(request);
+				System.out.println("ip : " + ip);
+				returnMember.setIp(ip);
+				int visit = memberService.insertVisit(returnMember);
+				session.setAttribute("loginUser", returnMember);
+				
+				
+				// 로그인 멤버 채팅 정보 가져오기
+				ArrayList<ChatList> chatList = (ArrayList<ChatList>) chatService.selectChatList(returnMember);
+				session.setAttribute("chatList", chatList);
+	
+				// System.out.println(chatList);
+				mv.setViewName("home");
+			}else {
+				mv.addObject("message", "승인되지 않은 판매자입니다.");
+				mv.setViewName("member/login");
+			}
 		} catch (Exception e) {
 			mv.addObject("message", "로그인 실패");
 			mv.setViewName("member/login");
@@ -517,6 +521,45 @@ public class MemberController {
 		} else {
 
 		}
+	}
+
+	@RequestMapping(value = "sellerSendmail.do", method = RequestMethod.POST)
+	public void sellerSendMail(HttpServletResponse response, @RequestParam("email") String mail_to) {
+			try {
+
+				String mail_from = "JakMoolFarm" + "<jakmoolfarm@gmail.com>";
+				String title = null;
+				String contents = null;
+				// 인증번호 보내기
+				title = "JakMoolFarm 판매자 승인";
+				contents = "JakMoolFarm 판매자 승인이 완료되었습니다.";
+				mail_from = new String(mail_from.getBytes("UTF-8"), "UTF-8");
+				mail_to = new String(mail_to.getBytes("UTF-8"), "UTF-8");
+				Properties props = new Properties();
+				props.put("mail.transport.protocol", "smtp");
+				props.put("mail.smtp.host", "smtp.gmail.com");
+				props.put("mail.smtp.port", "587");
+				props.put("mail.smtp.starttls.enable", "true");
+				props.put("mail.smtp.socketFactory.port", "587");
+				props.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
+				props.put("mail.smtp.socketFactory.fallback", "false");
+				props.put("mail.smtp.auth", "true");
+				Authenticator auth = new SMTPAuthenticator();
+				Session sess = Session.getDefaultInstance(props, auth);
+				MimeMessage msg = new MimeMessage(sess);
+				msg.setFrom(new InternetAddress(mail_from));
+				msg.setRecipient(Message.RecipientType.TO, new InternetAddress(mail_to));
+				msg.setSubject(title, "UTF-8");
+				msg.setContent(contents, "text/html; charset=UTF-8");
+				msg.setHeader("Content-type", "text/html; charset=UTF-8");
+				Transport.send(msg);
+			} catch (Exception e) {
+				e.printStackTrace();
+
+			} finally {
+
+			}
+
 	}
 
 	// 접속자 ip 가져오기

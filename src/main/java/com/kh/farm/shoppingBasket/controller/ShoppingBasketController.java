@@ -48,8 +48,14 @@ public class ShoppingBasketController {
 
 	@RequestMapping(value = "selectShoppingBasket.do", method = RequestMethod.GET)
 	public ModelAndView selectShoppingBasket(ModelAndView mv, HttpSession session) {
-		ArrayList<ShowBasket> basketList = (ArrayList<ShowBasket>) shoppingBasketService
-				.selectShoppingBasket(((Member) session.getAttribute("loginUser")).getMember_id());
+		ArrayList<ShowBasket> basketList = (ArrayList<ShowBasket>) shoppingBasketService.selectShoppingBasket(((Member) session.getAttribute("loginUser")).getMember_id());
+		for(ShowBasket sb:basketList)
+		{
+			if(sb.getBuy_amount()>sb.getStack())
+			{
+				sb.setBuy_amount(sb.getStack());
+			}
+		}
 		mv.addObject("basketList", basketList);
 		mv.setViewName("shoppingBasket/shoppingBasket");
 		return mv;
@@ -91,7 +97,12 @@ public class ShoppingBasketController {
 			j.put("img", URLEncoder.encode(sb.getMarket_img(), "utf-8"));
 			j.put("title", URLEncoder.encode(sb.getMarket_title(), "utf-8"));
 			j.put("price", sb.getMarket_price());
+			if(sb.getBuy_amount()>sb.getStack())
+			{
+				sb.setBuy_amount(sb.getStack());
+			}
 			j.put("amount", sb.getBuy_amount());
+			j.put("stack", sb.getStack());
 			jarr.add(j);
 		}
 		JSONObject json = new JSONObject();
