@@ -13,7 +13,6 @@
 <script>
 
 $(function(){
-	
 	 $.ajax({
 		url : "bidding.do",
 		type : 'post',
@@ -57,7 +56,7 @@ $(function(){
 	         $("#Bid_win_table").html(values);
 	         }else{
 	        	values =
-	        	 "경매 낙찰 내역이 없습니다.";
+	        	 "<p style='text-align:center;font-size:15pt;padding-top:20px;'>경매 낙찰 내역이 없습니다.</p>";
 	         $(".not").html(values);
 	         }
 		 
@@ -76,8 +75,8 @@ function movePaymentPage(auction_no,member_id,price)
 
 </script>
 <body style="margin:0">
-<hr style="margin :0px; border:0.5px solid #7e5957">
-	<div class="not">
+<hr style=" border:0.5px solid #7e5957">
+	<div class="not" >
 	<table class="View_table" id="Bid_win_table"style="margin-left: 10px;">
 		
 		

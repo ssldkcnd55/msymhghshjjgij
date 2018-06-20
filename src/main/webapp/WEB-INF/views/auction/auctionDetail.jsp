@@ -305,14 +305,14 @@ $(function(){
              var outValues2 = $(".a").html(); 
              
               if(jsonObj.status == 0){
-                outValues+="경매 준비중";
-                outValues2+="경매 준비중";
+                outValues="경매 준비중";
+                outValues2="경매 준비중";
              }else if(jsonObj.status == 2 || jsonObj.status ==3 || jsonObj.status ==4 ){
-                outValues+=  "경매 마감";
+                outValues=  "경매 마감";
                 outValues2=  "경매 마감";
              }
                $("#time").html(outValues);  
-               $(".a").html(outValues2); 
+               $("#a").html(outValues2); 
                
          },error: function(request,status,errorData){
                alert("error code : " + request.status + "\nmessage" + 
