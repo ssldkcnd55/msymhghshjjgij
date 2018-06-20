@@ -228,7 +228,7 @@ public class PaymentController {
 	}
 
 	@RequestMapping("payment_seller_history_list.do")
-	public void selectSellerPaymentHistory(HttpServletResponse response,@RequestParam("page") int currentPage,PageNumber pa)
+	public void selectSellerPaymentHistory(HttpServletResponse response,@RequestParam("page") int currentPage,PageNumber pa,Member mem)
 			throws IOException {
 		JSONArray jarr = new JSONArray();
 
