@@ -140,46 +140,6 @@ function getBasketCount(member_id)
 	});
 } 
 
-	/* $(function() {
-
-		$.ajax({
-					url : 'Weather.do',
-					type : 'get',
-					dataType : 'json',
-					success : function(data) {
-						var myItem = data.response.body.items.item;
-						var img = "";
-						var img_text = "";
-						var t3h_check = 0;
-						var sky_check = 0;
-
-						for ( var i in myItem) {
-							if (myItem[i].category == "T3H" && t3h_check == 0) {
-								img_text = myItem[i].fcstValue + "℃";
-								t3h_check = 1;
-							}
-
-							if (myItem[i].category == "SKY" && sky_check == 0) {
-								sky_check = 1;
-								var fv = myItem[i].fcstValue;
-								if (fv >= 0 && fv <= 2) {
-									img = "resources/images/weather/sun.png";
-								} else if (fv >= 3 && fv <= 5) {
-									img = "resources/images/weather/cloud.png";
-								} else if (fv >= 6 && fv <= 8) {
-									img = "resources/images/weather/m_cloud.png";
-								} else if (fv >= 9 && fv <= 10) {
-									img = "resources/images/weather/rain.png";
-								}
-							}
-						}
-
-						$("#weather_img").attr("src", img);
-						$("#w_text").html(img_text);
-					}
-				});
-	}); */
-
 	
 	/*검색기능*/
 
@@ -191,6 +151,55 @@ function getBasketCount(member_id)
 	function moveSearchList(){
 		location.href = "marketList.do?search="+$("#search").val();
 	}
+	
+	 $(function() {
+	      $.ajax({
+	         url : 'Weather.do',
+	         type : 'get',
+	         dataType : 'json',
+	         success : function(data) {
+	            var myItem = data.response.body.items.item;
+	            var img = "";
+	            var img_text="";
+	            var t3h_check=0;
+	            var sky_check=0;
+	            
+	            for (var i in myItem) {
+	               console.log(i);
+	               if(myItem[i].category == "T3H" && t3h_check == 0){
+	                  img_text = myItem[i].fcstValue+"℃";
+	                  t3h_check=1;
+	               }
+
+	               if(myItem[i].category == "SKY" && sky_check == 0){
+	                     sky_check=1;
+	                     var fv=myItem[i].fcstValue;
+	                     if(fv>= 0 && fv <=2){
+	                        img  ="resources/images/weather/sun.png";
+	                        $('.weatherTitle').html("맑음");
+	                     }else if(fv>= 3 && fv <=5){
+	                    	 img  ="resources/images/weather/cloud.png";
+	                    	 $('.weatherTitle').html("구름 조금");
+	                     }else if(fv>= 6 && fv <=8){
+	                    	 img  ="resources/images/weather/m_cloud.png";
+	                    	 $('.weatherTitle').html("구름 많음");
+	                     }else if(fv>= 9 && fv <=10){
+	                    	 img  ="resources/images/weather/rain.png";
+	                    	 $('.weatherTitle').html("비");
+	                     }
+	                  }
+	            }
+	            
+	            $("#weather_img").attr("src",img);
+	            $("#w_text").html(img_text);
+	         },
+	         error: function(request, status, errorData){
+	            alert("error code : " + request.status + "\n"
+	                  + "message : " + request.responseText + "\n"
+	                  + "error : " + errorData);
+	            }
+	      });
+	   }); 
 </script>
 </head>
 
@@ -218,7 +227,7 @@ function getBasketCount(member_id)
                   <li class="menu1"><a href="/farm/moveQnAPage.do" class="link_menu">고객센터</a></li>
                   <li class="menu1 lst"><a href="moveNotice.do" class="link_menu">공지사항 </a></li>
                   <li class="menu1 lst"><a href="moveAdminPage.do" class="link_menu">관리자 페이지</a></li>
-
+				<li class="menu1 lst" ><div><img id="weather_img" style="width: 30px;"></div><div class='weatherTitle'></div><div id="w_text"></div></li>
                </ul>
             </div>
             <div class="header_main">

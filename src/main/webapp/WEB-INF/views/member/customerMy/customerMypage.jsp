@@ -23,8 +23,6 @@ $(function(){
 		$('#cusmyframe_'+check).show();
 	});	
 	
-	var tab = document.location.href.split('#').pop();
-	$('#'+tab+' a').trigger("click");
 });
 </script>
 </head>
@@ -37,11 +35,11 @@ $(function(){
        <div id="container" class="mypageContainer">
         <div class="inner-wrap">
         <div class="tabs" style="display:inline-block">
-	         <div id="1" class="tab active"><a href="#1">회원정보</a></div>
-	         <div id="2" class="tab"><a href="#2">경매내역</a></div>
-	         <div id="3" class="tab"><a href="#3">구매내역</a></div>
-	         <div id="4" class="tab"><a href="#4">QnA</a></div>
-	         <div id="5" class="tab"><a href="#5">경매낙찰내역</a></div>
+	         <div id="1" class="tab active">회원정보</div>
+	         <div id="2" class="tab">경매내역</div>
+	         <div id="3" class="tab">구매내역</div>
+	         <div id="4" class="tab">QnA</div>
+	         <div id="5" class="tab">경매낙찰내역</div>
          </div>
          
         <div class="info_box" >

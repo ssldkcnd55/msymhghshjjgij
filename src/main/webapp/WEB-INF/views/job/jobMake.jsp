@@ -84,7 +84,7 @@
 									</td>
 									<td colspan="3" class="td1"><input type="text"
 										name="job_addr" id="loc" class="input_text_box2"> <a
-										onclick="javascript:juso()">주소검색</a> <br> <!-- <input type="text" name="job_addr2" class="input_text_box3"
+										class='searchAddr' onclick="javascript:juso()">주소검색</a> <br> <!-- <input type="text" name="job_addr2" class="input_text_box3"
 									placeholder="상세주소입력"> --></td>
 								</tr>
 								<tr class="tr">

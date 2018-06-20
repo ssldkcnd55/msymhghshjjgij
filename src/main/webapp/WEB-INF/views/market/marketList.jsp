@@ -6,7 +6,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<!-- 영미낭 -->
+
 <meta charset="UTF-8">
 <title>Farm</title>
 <link href="/farm/resources/css/style.css" rel="stylesheet"
@@ -296,9 +296,12 @@ function numberWithCommas(x) {
 					if(count>0){
 						$(".market_box").html(outValues);	
 					}else{
-						$(".market_box").html("<div style='line-height: 250px;text-align:center;font-size:15pt;font-weight: bold;color:gray;'>"+
-				                   "등록된 작물이 없습니다.</div>");
-					}
+						/* $(".market_box").html("<div style='line-height: 250px;text-align:center;font-size:15pt;font-weight: bold;color:gray;'>"+
+				                   "등록된 작물이 없습니다.</div>");*/
+				          $('.more_market').attr('disabled', false);
+
+				               
+					} 
 				},error: function(request,status,errorData){
 					alert("error code : " + request.status + "\nmessage" + 
 							request.responseText + "\nerror" + errorData);

@@ -10,10 +10,10 @@
 <title>Farm</title>
 <script type="text/javascript">
 $(function(){
-	$('div .tabs .tab').click(function(){
+	$('div .selltabs .tab').click(function(){
 		var before=$('.active').attr("id");
 		var check=$(this).attr("id");
-		$('div .tabs .tab').removeClass('active');
+		$('div .selltabs .tab').removeClass('active');
 		
 		$(this).addClass('active');
 		$('#'+before+' a').css("color","#462114");
@@ -23,11 +23,6 @@ $(function(){
 		$('#selmyframe_'+check).show();
 	});	
 	
-	var tab = document.location.href.split('#').pop();
-	$('#'+tab+' a').trigger("click");
-	
-	
-
 });
 </script>
 </head>
@@ -38,12 +33,12 @@ $(function(){
          <%@ include file="../../inc/header.jsp" %>
       </div>
        <div id="container" class="mypageContainer">
-        <div class="tabs">
-         <div id="1" class="tab active"><a href="#1">회원정보</a></div>
-         <div id="2" class="tab"><a href="#2">구매내역</a></div>
-         <div id="3" class="tab"><a href="#3">판매내역</a></div>
-         <div id="4" class="tab"><a href="#4">경매내역</a></div>
-         <div id="5" class="tab"><a href="#5">상품판매량</a></div>
+        <div class="selltabs">
+         <div id="1" class="tab active">회원정보</div>
+         <div id="2" class="tab">구매내역</div>
+         <div id="3" class="tab">판매내역</div>
+         <div id="4" class="tab">경매내역</div>
+         <div id="5" class="tab">상품판매량</div>
          </div>
          
         <div class="inner-wrap" style="margin:0;">
