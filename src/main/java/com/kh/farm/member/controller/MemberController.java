@@ -661,10 +661,7 @@ public class MemberController {
 	// 상품판매량 그래프
 	@RequestMapping(value = "mybuy.do")
 	public void mybuygraph(HttpServletResponse response, Market market) throws IOException {
-		System.out.println("mybuy에 들어옴");
-		System.out.println("member_id 불러옴:" + market.getMember_id());
 		List<Market> marketlist = memberService.buygraph(market);
-		System.out.println(marketlist);
 		JSONArray jarr = new JSONArray();
 		for (Market m : marketlist) {
 			JSONObject json = new JSONObject();

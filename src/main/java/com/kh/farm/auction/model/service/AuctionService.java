@@ -66,7 +66,7 @@ public interface AuctionService {
 
 	
 	/*한결*/
-	List<AuctionHistory> selectAuctionHistory(int currentPage);
+	List<Auction> selectAuctionHistory(int currentPage);
 
 	int selectAuctionHistoryCount();
 	/*한결*/
