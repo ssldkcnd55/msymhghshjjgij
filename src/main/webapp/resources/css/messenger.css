@@ -255,7 +255,7 @@ width: 20px;
 
 .msg_title_name {
 	margin-top: 2px;
-    max-width: 241px;
+   width: 222px;
     max-height: 23px;
     color: #ffffffdb;
     overflow: hidden;
