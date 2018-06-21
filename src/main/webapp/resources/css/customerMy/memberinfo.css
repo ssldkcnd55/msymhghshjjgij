@@ -99,6 +99,20 @@ margin: 0px;
     height:30px;
     border-radius: 3px;
 }
+.kakaoBtn:hover{
+	color:#7e5957;
+	background:white;
+	border: 1px solid #7e5957;
+}
+.kakaoBtn{
+	background: #7e5957;
+	color:white;
+	cursor:pointer;
+    border: none;
+    width:50px;
+    height:30px;
+    border-radius: 3px;
+}
 .memberBtn.addr{
 	width:70px;
 }

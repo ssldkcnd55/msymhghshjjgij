@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE mapper PUBLIC
+"-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kakao">
+	<select id="selectKakaoId" parameterType="kakao" resultType="kakao">
+	<![CDATA[
+		select kakao_id from kakao where kakao_id=#{kakao_id}
+	]]>
+	</select>
+	<insert id="insertKakaoInfo" parameterType="kakao">
+	<![CDATA[
+		insert into kakao values(#{kakao_id},#{kakao_access},#{kakao_refresh})
+	]]>
+	</insert>
+	<update id="updateKakaoInfo" parameterType="kakao">
+	<![CDATA[
+		update kakao set kakao_access=#{kakao_access},kakao_refresh=#{kakao_refresh} where kakao_id=#{kakao_id}
+	]]>
+	</update>
+	<select id="selectKakaoInfo" parameterType="kakao" resultType="kakao">
+	<![CDATA[
+		select * from kakao where kakao_id=#{kakao_id}
+	]]>
+	</select>
+
+</mapper>
