@@ -22,6 +22,15 @@ public class PageNumber implements java.io.Serializable {
 	private int select;
 	private int type;
 	private String reviewSearch;
+	private String addr;
+
+	public String getAddr() {
+		return addr;
+	}
+
+	public void setAddr(String addr) {
+		this.addr = addr;
+	}
 
 	private String job_search; // 구인구직 검색
 
@@ -40,7 +49,7 @@ public class PageNumber implements java.io.Serializable {
 
 	public PageNumber(int startRow, int endRow, int market_no, int auction_no, String member_id, String search,
 			String ctype, String cname, String sort, int review_no, int daily_no, int report_no, String keyword,
-			int select, int type, String reviewSearch, String qnaSearch) {
+			int select, int type, String reviewSearch, String qnaSearch , String addr) {
 		super();
 		this.startRow = startRow;
 		this.endRow = endRow;
@@ -59,6 +68,7 @@ public class PageNumber implements java.io.Serializable {
 		this.type = type;
 		this.reviewSearch = reviewSearch;
 		this.qnaSearch = qnaSearch;
+		this.addr = addr;
 	}
 
 	public String getQnaSearch() {

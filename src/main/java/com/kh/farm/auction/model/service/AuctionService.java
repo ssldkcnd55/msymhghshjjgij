@@ -153,7 +153,7 @@ public interface AuctionService {
 	AuctionOrder selectAuctionPaymentInfoFromCS(AuctionCommon common);
 
 	//옥션 입찰안에 값 셀렉트로 값  뽑
-	/*Auction selectbid(int auction_no);*/
+	Auction selectbid(int auction_no);
 
 	
 

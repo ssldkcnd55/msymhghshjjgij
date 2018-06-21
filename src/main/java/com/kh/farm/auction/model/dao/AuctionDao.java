@@ -399,6 +399,11 @@ public class AuctionDao {
 		return sqlSession.selectOne("auction.selectAuctionPaymentInfoFromCS",common);
 	}
 
+	public Auction selectbid(SqlSessionTemplate sqlSession, int auction_no) {
+		return sqlSession.selectOne("auction.selectbid",auction_no);
+
+	}
+
 	
 	
 

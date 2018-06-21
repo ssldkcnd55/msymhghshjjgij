@@ -74,7 +74,6 @@ public class JobController {
 			jsonobj.put("job_no", job.getJob_no());
 			jsonobj.put("job_status", job.getJob_status());
 			jsonobj.put("job_title", job.getJob_title());
-			/* jsonobj.put("job_enddate", job.getJob_enddate().toString()); */
 			jsonobj.put("job_addr", job.getJob_addr());
 			jsonobj.put("member_id", job.getMember_id());
 			jsonobj.put("job_date", job.getJob_date().toString());
@@ -95,7 +94,61 @@ public class JobController {
 
 	}
 	
-	
+	// 구인구직 주소값	
+	@RequestMapping(value = "jobaddr.do")
+	public void jobaddr(HttpServletResponse response, HttpServletRequest request) throws IOException {
+		
+		String addr = request.getParameter("addr");
+		
+		System.out.println("넘어온 addr 값은 :" + addr);
+		
+		int limitPage = 10;
+		int currentPage = 1;
+		if (request.getParameter("page") != null) {
+			currentPage = Integer.parseInt(request.getParameter("page"));
+		}
+		System.out.println(currentPage);
+
+		int listCount = jobService.selectListcount();
+		int startPage = ((int) ((double) currentPage / 5 + 0.8) - 1) * 5 + 1;
+		int endPage = startPage + 4;
+		int maxPage = (int) ((double) listCount / limitPage + 0.9);
+
+		if (endPage > maxPage) {
+			endPage = maxPage;
+		}
+
+		ArrayList<Job> jobList = jobService.selectJobaddr(currentPage,addr);
+		JSONObject json = new JSONObject();
+		JSONArray jarr = new JSONArray();
+
+
+		for (Job job : jobList) {
+
+			JSONObject jsonobj = new JSONObject();
+			jsonobj.put("rnum", job.getRnum());
+			jsonobj.put("job_no", job.getJob_no());
+			jsonobj.put("job_status", job.getJob_status());
+			jsonobj.put("job_title", job.getJob_title());
+			jsonobj.put("job_addr", job.getJob_addr());
+			jsonobj.put("member_id", job.getMember_id());
+			jsonobj.put("job_date", job.getJob_date().toString());
+			jsonobj.put("startPage", startPage);
+			jsonobj.put("endPage", endPage);
+			jsonobj.put("maxPage", maxPage);
+			jsonobj.put("currentPage", currentPage);
+
+			jarr.add(jsonobj);
+		}
+
+		json.put("list", jarr);
+		response.setContentType("application/json; charset=utf-8");
+		PrintWriter out = response.getWriter();
+		out.print(json.toString());
+		out.flush();
+		out.close();
+
+	}
 
 	// 구인구직 글등록
 	@RequestMapping(value = "jobMake.do", method = RequestMethod.POST)

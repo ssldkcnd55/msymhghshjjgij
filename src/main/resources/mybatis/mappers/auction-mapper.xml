@@ -561,4 +561,17 @@
 		and ah.member_id = #{member_id}
 		]]>
 	</select>
+	
+	<select id="selectbid" parameterType="int" resultType="Auction">
+		<![CDATA[
+		select auction_no, member_id, auction_title, auction_status, 
+		auction_startprice,auction_directprice, 
+		to_char(auction_startdate, 'YYYY/MM/DD') as "auction_startdate", 
+		to_char(auction_enddate, 'YYYY/MM/DD') as "auction_enddate"
+		from auction 
+		where auction_no = #{auction_no}
+		
+		]]>
+	</select>
+	
 </mapper>

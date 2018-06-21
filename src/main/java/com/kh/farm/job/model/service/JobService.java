@@ -16,6 +16,8 @@ public interface JobService {
 
 	ArrayList<Job> selectJobList(int currentPage);
 	
+	ArrayList<Job> selectJobaddr(int currentPage,String addr);
+	
 	ArrayList<Job> searchJobList(int currentPage, PageNumber pp);
 
 }

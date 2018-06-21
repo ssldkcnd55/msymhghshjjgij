@@ -337,4 +337,10 @@ public class AuctionServiceImpl implements AuctionService {
 		// TODO Auto-generated method stub
 		return auctionDao.selectAuctionPaymentInfoFromCS(sqlSession,common);
 	}
+	
+	@Override
+	public Auction selectbid(int auction_no) {
+		return auctionDao.selectbid(sqlSession,auction_no);
+
+	}
 }
