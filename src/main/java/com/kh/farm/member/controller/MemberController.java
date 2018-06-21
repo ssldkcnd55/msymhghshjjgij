@@ -365,7 +365,7 @@ public class MemberController {
 
 		int updatePwd = 0;
 		int updateAddr = 0;
-		
+
 		if (member.getMember_pwd() != "") {
 			member.setMember_pwd(pwdEncoder.encode(member.getMember_pwd()));
 			member.setMember_id(member.getMember_id());
@@ -783,7 +783,7 @@ public class MemberController {
 		JSONArray jarr = new JSONArray();
 		for (Market m : marketlist) {
 			JSONObject json = new JSONObject();
-			
+
 			json.put("market_amount", m.getMarket_amount());
 
 			jarr.add(json);
@@ -819,6 +819,28 @@ public class MemberController {
 		out.append(sendJson.toJSONString());
 		out.flush();
 		out.close();
+	}
+
+	// 일별판매량 그래프
+	@RequestMapping(value = "buydategraph.do")
+	public void buydategraph(HttpServletResponse response, Market market) throws IOException {
+		List<Market> marketlist = memberService.buydategraph(market);
+		JSONArray jarr = new JSONArray();
+		for (Market m : marketlist) {
+			JSONObject json = new JSONObject();
+			json.put("market_title", m.getMarket_title());
+			json.put("buy_amount", m.getBuy_amount());
+			json.put("buy_date", m.getBuy_date().toString());
+			jarr.add(json);
+		}
+		JSONObject sendJson = new JSONObject();
+		sendJson.put("list", jarr);
+		response.setContentType("application/json; charset=utf-8");
+		PrintWriter out = response.getWriter();
+		out.append(sendJson.toJSONString());
+		out.flush();
+		out.close();
+
 	}
 
 }

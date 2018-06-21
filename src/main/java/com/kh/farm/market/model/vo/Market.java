@@ -31,7 +31,16 @@ public class Market implements java.io.Serializable {
 	private MultipartFile Filedata; // 다중이미지 업로드
 	private String category_main;
 	private String category_name;
+	private Date buy_date;
 	
+	public Date getBuy_date() {
+		return buy_date;
+	}
+
+	public void setBuy_date(Date buy_date) {
+		this.buy_date = buy_date;
+	}
+
 	private String buy_amount;
 
 	public String getBuy_amount() {
@@ -47,7 +56,7 @@ public class Market implements java.io.Serializable {
 
 	public Market(int rnum, int market_no, int category_no, String member_id, String market_title, String market_note,
 			String market_img, Date market_releasedate, int market_amount, String market_intro, String market_complete,
-			int market_price, String search, int remaining, String member_name, String buy_amount) {
+			int market_price, String search, int remaining, String member_name, String buy_amount,Date buy_date) {
 
 		super();
 		this.rnum = rnum;
@@ -66,6 +75,7 @@ public class Market implements java.io.Serializable {
 		this.remaining = remaining;
 		this.member_name = member_name;
 		this.buy_amount = buy_amount;
+		this.buy_date = buy_date;
 
 	}
 
