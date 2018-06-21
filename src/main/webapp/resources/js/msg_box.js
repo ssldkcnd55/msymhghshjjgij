@@ -54,10 +54,15 @@ function loadListPage()
                con += '<td class="list_time">'
                      + trans_time(c.cl[i].date.slice(-5))
                      + '</td></tr>';
-               con += '<tr><td colspan="2"><span class="list_content">'
-                     + decodeURIComponent((c.cl[i].contents)
-                           .replace(/\+/g, '%20'))
-                     + '</span>';
+           	if( decodeURIComponent((c.cl[i].contents).replace(/\+/g, '%20')).indexOf("openImgPage(") != -1 ){
+				con += '<tr><td colspan="2"><span class="list_content"><img class="list_content_img_icon" src="resources/upload/chatUpload/img_icon.png"><span class="list_content_img_span">사진</span></span>';
+			}else if(decodeURIComponent((c.cl[i].contents).replace(/\+/g, '%20')).indexOf("openFilePage") != -1)
+			{
+				con += '<tr><td colspan="2"><span class="list_content"><img class="list_content_img_icon" src="resources/upload/chatUpload/file_down_icon.png"><span class="list_content_img_span">파일</span></span>';
+				}
+           	else{
+			con += '<tr><td colspan="2"><span class="list_content">'+decodeURIComponent((c.cl[i].contents).replace(/\+/g, '%20')) + '</span>';
+			}
                if (c.cl[i].alarm > 0) {
                   con += '<span class="list_alarm">'
                         + c.cl[i].alarm + '</span>';

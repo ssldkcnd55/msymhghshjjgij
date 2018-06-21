@@ -69,5 +69,10 @@ public class ChatDao {
 	
 		return sqlSession.selectOne("chat.selectRecentViewMarketList",m);
 	}
+
+	public List<String> selectChatImages(SqlSessionTemplate sqlSession, int chat_no) {
+		
+		return sqlSession.selectList("chat.selectChatImages", chat_no);
+	}
 	
 }

@@ -18,4 +18,5 @@ public interface ChatService {
 	List<String> selectChatFriends(String member_id);
 	int selectAlarmCount(String member_id);
 	Market selectRecentViewMarketList(Market m);
+	List<String> selectChatImages(int chat_no);
 }
