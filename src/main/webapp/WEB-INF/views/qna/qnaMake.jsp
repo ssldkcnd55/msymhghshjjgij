@@ -56,7 +56,7 @@
 					</table>
 					<ul style="list-style: none;">
 						<li class="li3" onclick="location.href='/#'">뒤로가기</li>
-						<li class="li4"><input type="submit" onclick="submitContents();" value="글쓰기"></li>
+						<li class="li4"><input type="submit" class='qnaSubmit' onclick="submitContents();" value="글쓰기"></li>
 					</ul>
 				</div>
 				</form>

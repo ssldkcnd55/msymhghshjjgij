@@ -79,17 +79,23 @@
 	margin-top: 15px;
 	color: #fff
 }
+.qnaSubmit{
+	    float: right;
+    padding: 8px;
+    background: #f27634;
+    cursor: pointer;
+    color: #fff;
+    border-color: #f27634;
+    border-style: none;
+    margin-top:15px;
+    font-size:12pt;
+}
 .li4:hover{
 	background: #7e5957;
 	
 }
 .li4 {
-	float: right;
-	padding: 8px;
-	background: #fff;
-	cursor: pointer;
-	margin-top: 15px;
-	color: #7e5957;
+
 	
 }
 
