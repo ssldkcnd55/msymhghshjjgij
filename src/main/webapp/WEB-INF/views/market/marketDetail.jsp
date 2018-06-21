@@ -201,7 +201,13 @@ function qnaSearchPage(page){
 			
 			for(var i in jsonObj.list){
 				outValues += "<tr id='hover'><td>"+jsonObj.list[i].rnum+"</td>"
-				+"<td id='QnA_td'><a href='/farm/marketQnaDetail.do?qna_no="+jsonObj.list[i].market_qna_no+"&member_id=${market.member_id}'>"+jsonObj.list[i].market_qna_title+"</a></td>"
+				+"<td id='QnA_td'><a href='/farm/marketQnaDetail.do?qna_no="+jsonObj.list[i].market_qna_no+"&member_id=${market.member_id}'>";
+						if(jsonObj.list[i].market_qna_title !=null && jsonObj.list[i].market_qna_title !=""){
+							outValues += jsonObj.list[i].market_qna_title;
+						}else{
+						outValues += "제목없음";	
+						}
+						outValues +="</a></td>"
 				+"<td>"+jsonObj.list[i].member_id+"</td><td>"+jsonObj.list[i].market_qna_question_date+"</td></tr>";
 			}
 			$(".QnA_table").html(outValues);	
@@ -257,7 +263,14 @@ function qnaPage(page){
 			var count = 0;
 			for(var i in jsonObj.list){
 				outValues += "<tr id='hover'><td>"+jsonObj.list[i].rnum+"</td>"
-				+"<td id='QnA_td'><a href='/farm/marketQnaDetail.do?qna_no="+jsonObj.list[i].market_qna_no+"&member_id=${market.member_id}'>"+jsonObj.list[i].market_qna_title+"</a></td>"
+				+"<td id='QnA_td'><a href='/farm/marketQnaDetail.do?qna_no="+jsonObj.list[i].market_qna_no+"&member_id=${market.member_id}'>";
+				if(jsonObj.list[i].market_qna_title !=null && jsonObj.list[i].market_qna_title !=""){
+					outValues += jsonObj.list[i].market_qna_title;
+				}else {
+				outValues += "제목없음";	
+				}
+				outValues +="</a></td>"
+						
 				+"<td>"+jsonObj.list[i].member_id+"</td><td>"+jsonObj.list[i].market_qna_question_date+"</td></tr>";
 				count++;
 			}
@@ -330,7 +343,8 @@ function reviewSearchPage(page){
 			 
 			for(var i in jsonObj.list){
 				outValues += "<tr id='hover'><td>"+jsonObj.list[i].rnum+"</td>"
-				+"<td id='QnA_td'><a href='reviewDeatil.do?review_no="+jsonObj.list[i].review_no+"&market_no=${market.market_no}'>"+jsonObj.list[i].review_title+"</a></td>"
+				+"<td id='QnA_td'><a href='reviewDeatil.do?review_no="+jsonObj.list[i].review_no+"&market_no=${market.market_no}'>"
+						+jsonObj.list[i].review_title+"</a></td>"
 				+"<td>"+jsonObj.list[i].member_id+"</td><td>"+jsonObj.list[i].review_date+"</td></tr>";
 			}
 			$(".review_table").html(outValues);	

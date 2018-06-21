@@ -263,15 +263,17 @@ $(function() {
 				success : function(data) {
 					var jsonStr = JSON.stringify(data);
 					var json = JSON.parse(jsonStr);
-					var values = "<tr><th class='th1' width='22%'>제목</th><th class='th1' width='15%'>지역</th></tr>";
+					var values = "<tr><th class='th1' ></th><th class='th1' >제목</th><th class='th1'>지역</th></tr>";
 
 					for ( var i in json.list) {
 						if (i <= 4) {
 							values += "<tr id='hover'>";
-							values += "<td id='job_td' class='td1'><a href='jobDetail.do?job_no="
+							values += "<td class='td1'><div class='jobImg'" 
+							+"style='background-image:url(\"/farm/resources/upload/jobUpload/"+json.list[i].job_img+"\");'></div></td><td id='job_td' class='td1'><a href='jobDetail.do?job_no="
 									+ json.list[i].job_no
 									+ "'>"
 									+ json.list[i].job_title + "</a></td>";
+									
 
 							values += "<td class='td1'>" + json.list[i].job_addr
 									+ "</td></tr>";

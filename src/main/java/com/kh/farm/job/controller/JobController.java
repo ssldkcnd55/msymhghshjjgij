@@ -74,6 +74,7 @@ public class JobController {
 			jsonobj.put("job_no", job.getJob_no());
 			jsonobj.put("job_status", job.getJob_status());
 			jsonobj.put("job_title", job.getJob_title());
+			jsonobj.put("job_img", job.getJob_img());
 			/* jsonobj.put("job_enddate", job.getJob_enddate().toString()); */
 			jsonobj.put("job_addr", job.getJob_addr());
 			jsonobj.put("member_id", job.getMember_id());
