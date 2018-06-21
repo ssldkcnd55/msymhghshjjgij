@@ -65,7 +65,7 @@
 		today = yyyy+'-'+mm+'-'+dd;
 		/* alert("현재 날짜 : "+today); */
 				
-		if((directprice > startprice) || (directprice == startprice)){
+		if((directprice < startprice) || (directprice == startprice)){
 			alert("즉시구매가격은 시작가격보다 같거나 적게 설정할 수 없습니다.");
 			result2 = false;
 			$("#directprice").focus();
