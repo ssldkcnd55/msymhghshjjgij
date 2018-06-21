@@ -37,7 +37,7 @@
 		location.href = "marketDailyUpdateMove.do?daily_no=${daily.daily_no}";
 	}
 	function deleteDaily(){
-		location.href = "marketDailyDelete.do?daily_no=${daily.daily_no}&market_no=${market_no}";
+		location.href = "marketDailyDelete.do?daily_no=${daily.daily_no}&market_no=${daily.market_no}";
 	}
 	
 	function underReplyWrite(a,reply_no){
