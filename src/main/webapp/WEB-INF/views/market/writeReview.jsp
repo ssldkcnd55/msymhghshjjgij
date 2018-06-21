@@ -22,7 +22,7 @@
 		</div>
 		<div id="container">
 			<div class="inner-wrap">
-				<div class="title qna"><p class="titleP">후기 쓰기</p></div>
+				<div class="title qna" style='text-align: center; margin-bottom: 50px;'><h2>후기쓰기</h2></div>
 
 				<div class="div">
 				<form action="writeReivew.do" method="post">

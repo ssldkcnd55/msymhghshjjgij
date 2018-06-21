@@ -171,7 +171,6 @@
 								<!-- Wrapper for slides -->
 								<div class="carousel-inner auction">
 								
-								
 								</div>
 
 								<!-- Left and right controls -->
@@ -191,11 +190,6 @@
 
 				</div>
 				
-			
-
-
-
-
 			</div>
 		</div>
 	</div>

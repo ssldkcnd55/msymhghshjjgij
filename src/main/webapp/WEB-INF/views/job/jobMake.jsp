@@ -53,8 +53,8 @@
 		</div>
 		<div id="container">
 			<div class="inner-wrap">
-				<div class="title1 jobMake">
-					<p class="titleP">구인구직 글쓰기</p>
+				<div class="title jobMake" style='text-align: center; margin-bottom: 50px;'>
+					<h2>구인구직 등록</h2>
 				</div>
 				<div class="div">
 					<form action="jobMake.do" method="post"

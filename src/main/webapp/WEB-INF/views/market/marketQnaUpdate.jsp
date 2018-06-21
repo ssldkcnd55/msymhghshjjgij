@@ -22,7 +22,7 @@
 		</div>
 		<div id="container">
 			<div class="inner-wrap">
-				<div class="title qna"><p class="titleP">QnA</p></div>
+				<div class="title qna" style='text-align: center;'><h2>QnA</h2></div>
 
 				<div class="div">
 				<form action="marketQnaUpdate.do" method="post">

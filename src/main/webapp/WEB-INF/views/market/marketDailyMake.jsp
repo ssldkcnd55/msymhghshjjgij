@@ -22,7 +22,7 @@
 		</div>
 		<div id="container">
 			<div class="inner-wrap">
-				<div class="title qna"><p class="titleP">일지</p></div>
+				<div class="title qna" style='text-align: center;margin-bottom: 50px;'><h2>일지쓰기</h2></div>
 
 				<div class="div">
 				<form action="marketDailyMake.do" method="post">
@@ -38,7 +38,7 @@
 							<table class="jung_table2">
 								<tbody>
 									<tr class="tr2">
-										<td class="td3"><h3 class="h3">질문내용</h3></td>
+										<td class="td3"><h3 class="h3">일지내용</h3></td>
 									</tr>
 								</tbody>
 							</table>

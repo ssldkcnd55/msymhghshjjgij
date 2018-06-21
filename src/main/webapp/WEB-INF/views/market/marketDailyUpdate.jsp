@@ -22,7 +22,7 @@
 		</div>
 		<div id="container">
 			<div class="inner-wrap">
-				<div class="title qna"><p class="titleP">일지</p></div>
+				<div class="title qna" style="text-align: center;"><h2>일지 수정</h2></div>
 
 				<div class="div">
 				<form action="marketDailyUpdate.do" method="post">

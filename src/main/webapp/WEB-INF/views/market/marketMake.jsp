@@ -100,7 +100,7 @@ function categoryCheck(){
 		<div id="container">
 			<div class="inner-wrap">
 				<br> <br>
-				<h1 style="text-align: center; margin: auto;">장터등록</h1>
+				<h2 style="text-align: center; margin: auto;">장터등록</h2>
 				<br> <br> <br>
 
 				<div class="div">
