@@ -674,7 +674,19 @@ public class AuctionController {
 	@RequestMapping(value = "auction_updateStatus.do")
 	@ResponseBody
 	public void auction_updateStatus(HttpServletResponse response) throws IOException {
-		int auctionStatus = auctionService.updateAuctionStatus();
+		int auctionStatus = auctionService.updateAuctionStatus(); //0에서 1로될때
+		
+		int auctionStatus2 = 0; //1에서 2로될때
+		
+		if(auctionStatus2 > 0 ) {
+			//이때 category_no를 2로 바꿔줍니다 경매 상태가 2인 경매를 찾아서. 단 category_no가 3인 경매는 건들면 안됨
+			//category_no가 2인 경매의 정보를 가져옴.
+			//category_no가 2인 경매를 category_no가 3이 되도록 업데이트 시킴.
+			//category_no가 2인 경매의 정보를 이용해서 낙찰자를 뽑아냄
+			//뽑아낸 낙찰자의 system과의 chat_no와 아이디를 뽑아옴
+			//그 낙찰자 정보를 json으로 넣어서 보내줌
+		}
+		
 		/* System.out.println("auctionStatus : "+auctionStatus); */
 
 		JSONObject json = new JSONObject();
