@@ -156,6 +156,9 @@ function getBasketCount(member_id)
 	      $.ajax({
 	         url : 'Weather.do',
 	         type : 'get',
+	         data:{
+		        id :'${loginUser.member_id}'
+		     },
 	         dataType : 'json',
 	         success : function(data) {
 	            var myItem = data.response.body.items.item;
@@ -165,7 +168,6 @@ function getBasketCount(member_id)
 	            var sky_check=0;
 	            
 	            for (var i in myItem) {
-	               console.log(i);
 	               if(myItem[i].category == "T3H" && t3h_check == 0){
 	                  img_text = myItem[i].fcstValue+"℃";
 	                  t3h_check=1;
