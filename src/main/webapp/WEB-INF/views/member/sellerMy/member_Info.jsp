@@ -5,6 +5,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
 <link href="/farm/resources/css/customerMy/memberinfo.css"
 	rel="stylesheet" type="text/css" />
 <script type="text/javascript"
@@ -12,6 +13,32 @@
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 
 <script type="text/javascript">
+	Kakao.init('539a8c741155797e275ac9feed4f4760');
+	function kaka(){
+		 Kakao.Auth.login({
+ 		 success: function(obj) {
+ 			 $.ajax({
+					url: "kakaoInfo.do",
+					type: "post",
+					data : {
+						kakao_id : '${loginUser.member_id}',
+						kakao_access : obj.access_token,
+						kakao_refresh : obj.refresh_token
+						
+					},
+					success : function(data){
+						alert('dddd');
+					}
+				}); 
+	 		console.log(obj);
+	 		console.log(obj.access_token);
+	 		console.log(obj.refresh_token);
+		  },
+		  fail: function(err) {
+		     alert(JSON.stringify(err));
+		  }
+		});
+	}	
 	function juso() {
 		new daum.Postcode({
 			oncomplete : function(data) {
@@ -210,10 +237,15 @@
 					<td><input type="button" id="memberBtn" class="memberBtn"
 						value="수정"></td>
 				</tr>
-				
-
+				<tr>
+					<td>카카오 메세지</td>
+					<td><input type="button" id="kakaoBtn" class="kakaoBtn"
+						value="수락" onclick="javascript:kaka()"></td>
+				</tr>
 			</table>
+<script type="text/javascript">
 
+</script>
 		</div>
 
 	</div>

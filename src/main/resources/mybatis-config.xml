@@ -31,9 +31,11 @@
 		 <typeAlias type="com.kh.farm.common.model.vo.PageNumber" alias="PageNumber" />  
 		 <typeAlias type="com.kh.farm.report.model.vo.Report" alias="Report"/>	
 		 <typeAlias type="com.kh.farm.visit.model.vo.Visit" alias="Visit"/>	
+		 <typeAlias type="com.kh.farm.kakao.model.vo.Kakao" alias="Kakao"/>
 	</typeAliases>
 
 	<mappers>
+ 		<mapper resource="mybatis/mappers/kakao-mapper.xml" />
 		<mapper resource="mybatis/mappers/auction-mapper.xml" />
 		<mapper resource="mybatis/mappers/chat-mapper.xml" />
 		<mapper resource="mybatis/mappers/job-mapper.xml" />

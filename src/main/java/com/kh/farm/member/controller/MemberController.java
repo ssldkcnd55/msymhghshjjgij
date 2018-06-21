@@ -365,8 +365,8 @@ public class MemberController {
 
 		int updatePwd = 0;
 		int updateAddr = 0;
-
-		if (member.getMember_pwd() != null) {
+		
+		if (member.getMember_pwd() != "") {
 			member.setMember_pwd(pwdEncoder.encode(member.getMember_pwd()));
 			member.setMember_id(member.getMember_id());
 			updatePwd = memberService.updatePwd(member);
@@ -377,10 +377,10 @@ public class MemberController {
 			member.setMember_id(member.getMember_id());
 			updateAddr = memberService.updateAddr(member);
 		}
-
+		Member returnMember = memberService.selectIdCheck(member.getMember_id());
 		PrintWriter out = response.getWriter();
 		if (updatePwd > 0 || updateAddr > 0) {
-			session.setAttribute("loginUser", member);
+			session.setAttribute("loginUser", returnMember);
 			out.print("o");
 			out.flush();
 			out.close();
