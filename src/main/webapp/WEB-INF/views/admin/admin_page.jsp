@@ -334,6 +334,59 @@
 				$("#visitcount").append(jsonObj.visitcount);
 			}
 		});
+		$.ajax({
+			url : "newmarketDate.do",
+			type : "post",
+			dataType : "JSON",
+			success : function(data) {
+				console.log(data);
+				var objStr = JSON.stringify(data);
+				var jsonObj = JSON.parse(objStr);
+				var newmarket = "";
+				newmarket += "<table class='table table-striped table-hover'>"
+						+ "<tr><th>판매제목</th><th>등록자</th><th>출고예정일</th></tr>"
+				for ( var i in jsonObj.list) {
+					newmarket += "<tr><td>" + jsonObj.list[i].market_title
+							+ "</td><td>" + jsonObj.list[i].member_id
+							+ "</td><td>" + jsonObj.list[i].market_releasedate
+							+ "</td></tr>";
+				}
+				newmarket += "</table>";
+				$("#table").html(newmarket);
+			}
+		});
+		$.ajax({
+			url : "newauctionDate.do",
+			type : "post",
+			dataType : "JSON",
+			success : function(data) {
+				console.log(data);
+				var objStr = JSON.stringify(data);
+				var jsonObj = JSON.parse(objStr);
+				var newauction = "";
+				newauction += "<table class='table table-striped table-hover'>"
+						+ "<tr><th>경매제목</th><th>등록자</th><th>경매상태</th></tr>"
+				for ( var i in jsonObj.list) {
+					newauction += "<tr><td>" + jsonObj.list[i].auction_title
+							+ "</td><td>" + jsonObj.list[i].member_id + "</td>"
+					if (jsonObj.list[i].auction_status == 0) {
+						newauction += "<td>경매준비중</td></tr>"
+					}
+					if (jsonObj.list[i].auction_status == 1) {
+						newauction += "<td>경매중</td></tr>"
+					}
+					if (jsonObj.list[i].auction_status == 2) {
+						newauction += "<td>입찰</td></tr>"
+					}
+					if (jsonObj.list[i].auction_status == 3) {
+						newauction += "<td>결제완료</td></tr>"
+					}
+
+				}
+				newauction += "</table>";
+				$("#auctiontable").html(newauction);
+			}
+		});
 	});
 </script>
 <!--  -->
@@ -375,11 +428,7 @@
 										&nbsp;공지사항작성</a> <a href="/farm/moveAdminMember.do"
 										class="list-group-item"><span
 										class="glyphicon glyphicon-user" aria-hidden="true"></span>
-										&nbsp;유저검색</a> <a href="" class="list-group-item"><span
-										class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
-										&nbsp;판매관리</a> <a href="" class="list-group-item"><span
-										class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
-										&nbsp;경매관리</a>
+										&nbsp;유저검색</a>
 								</div>
 
 
@@ -441,24 +490,23 @@
 									<div class="panel-heading" style="background-color: #095f59;">
 										<h3 class="panel-title" style="color: #ffffff">최신 판매</h3>
 									</div>
-									<div class="panel-body">
-										<table class="table table-striped table-hover">
+									<div class="panel-body" id="table">
+										<!-- 	<table class="table table-striped table-hover">
 											<tr>
 												<th>판매명</th>
 												<th>판매자</th>
 												<th>등록일</th>
 											</tr>
 
-											<%-- 
-   <% for (int i=0; i<5; i++){ %> --%>
-											<tr>
+
+											<tr >
 												<td>더미</td>
 												<td>더미</td>
 												<td>더미</td>
 											</tr>
-											<%-- <%} %> --%>
 
-										</table>
+
+										</table> -->
 
 									</div>
 								</div>
@@ -469,22 +517,16 @@
 										<h3 class="panel-title" style="color: #ffffff">최신 경매</h3>
 									</div>
 
-									<div class="panel-body">
-										<table class="table table-striped table-hover">
+									<div class="panel-body" id="auctiontable">
+										<!-- <table class="table table-striped table-hover"
+											id="newdatetable">
 											<tr>
 												<th>경매명</th>
 												<th>경매자</th>
 												<th>등록일</th>
 											</tr>
-											<%-- <% for (int i=0; i<5; i++){ %> --%>
-											<tr>
-												<td>더미</td>
-												<td>더미</td>
-												<td>더미</td>
-											</tr>
-											<%--   <%} %> --%>
-										</table>
 
+										</table> -->
 									</div>
 								</div>
 
