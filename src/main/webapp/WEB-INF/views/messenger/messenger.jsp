@@ -15,7 +15,7 @@
 
 <script type="text/javascript">
 function openImgPage(img_name,chat_no){
-	window.open('moveMsg_image.do?chat_no='+chat_no+'&img_name='+img_name, '' ,'status=yes,width=950,height=600,top=30,left=300');
+	window.open('moveMsg_image.do?chat_no='+chat_no+'&img_name='+img_name, '' ,'status=yes,width=950,height=600,top=30,left=30');
 }
 function openFilePage(file_name){
 	location.href='msg_img_down.do?filename='+file_name;

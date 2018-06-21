@@ -278,6 +278,19 @@ function paymentTest(){
 			ws = new WebSocket("ws://127.0.0.1:7777/farm/chat.do?state=mar&your_id=" + your_id + "&chat_no=" + chat_no  );
 			ws.onopen=function(){
 				ws.send(msg);
+				var msg2 = obj.your_name+"님  / 상품 : "+obj.title+"이 판매 되었습니다.";
+				$.ajax({
+					url: "kakaoRefresh.do",
+					type: "post",
+					success : function(data){
+						if(data != 1){
+							$.post("kakaoMessage.do", 
+								{ content : msg2,
+								  refresh : data
+							});
+						}
+					}
+				}); 
 			}
 			
 			/*function moveComplePage(){

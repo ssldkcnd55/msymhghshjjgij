@@ -999,7 +999,7 @@ public class AuctionController {
 	@RequestMapping("bidDeadline.do")
 	@ResponseBody
 	public void bidDeadline(HttpServletResponse response) throws IOException{
-		/*System.out.println("유찰 검사 실행");*/
+		System.out.println("유찰 검사 실행");
 		ArrayList<Auction> list = auctionService.selectStatus_2();//경매 상태 2 것만 넘버 가져오기
 		//System.out.println("경매 상태 2 list : "+list.toString());
 		JSONArray jarr =new JSONArray();

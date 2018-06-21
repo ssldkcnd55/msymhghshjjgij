@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.kh.farm.visit.model.vo.Visit;
+import com.kh.farm.auction.model.vo.Auction;
 import com.kh.farm.market.model.vo.Market;
 import com.kh.farm.member.exception.LoginFailException;
 import com.kh.farm.member.model.vo.Member;
@@ -58,5 +59,13 @@ public interface MemberService {
 	Member selectMemberInfo(String member_id);
 
 	int selectMiscaryChatNo(String member_id);
+
+	List<Market> newmarket(Market market);
+
+	List<Auction> newauction(Auction auction);
+
+	List<Market> allmarketAmount(Market market);
+
+	List<Market> allbuyAmount(Market market);
 
 }

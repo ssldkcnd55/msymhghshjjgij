@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Repository;
 
+import com.kh.farm.auction.model.vo.Auction;
 import com.kh.farm.common.model.vo.PageNumber;
 import com.kh.farm.market.model.vo.Market;
 import com.kh.farm.member.exception.LoginFailException;
@@ -238,6 +239,24 @@ public class MemberDao {
 	public Member selectAllcount(SqlSessionTemplate sqlSession) {
 		// TODO Auto-generated method stub
 		return sqlSession.selectOne("member.selectAllcount");
+	}
+
+	public List<Market> newmarket(SqlSessionTemplate sqlSession, Market market) {
+		
+		return sqlSession.selectList("member.newmarket", market);
+	}
+
+	public List<Auction> newauction(SqlSessionTemplate sqlSession, Auction auction) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList("member.newauction", auction);
+	}
+	public List<Market> allmarketAmount(SqlSessionTemplate sqlSession, Market market) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList("member.allmarketAmount", market);
+	}
+	public List<Market> allbuyAmount(SqlSessionTemplate sqlSession, Market market) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList("member.allbuyAmount", market);
 	}
 
 }

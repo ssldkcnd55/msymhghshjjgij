@@ -200,25 +200,48 @@ insert into member values (
 	]]>
 	</select>
 
-<update id="updateWarning" parameterType="member">
+	<update id="updateWarning" parameterType="member">
 <![CDATA[
 	update member set MEMBER_WARNING_COUNT = #{member_warning_count} where member_id = #{member_id} and 
 	MEMBER_WARNING_COUNT != #{member_warning_count}
 ]]>
-</update>
+	</update>
 
-<select id="selectMemberInfo" parameterType="string" resultType="member">
+	<select id="selectMemberInfo" parameterType="string" resultType="member">
 <![CDATA[
 	select member.MEMBER_ID,member.MEMBER_NAME,member.MEMBER_ADDR from member left join userpoint on member.MEMBER_ID = userpoint.MEMBER_ID where member.member_id = #{member_id}
 ]]>
-</select> 
+	</select>
 
- <select id="selectAllcount" resultType="member">
+	<select id="selectAllcount" resultType="member">
 <![CDATA[
 	select * from (select count(member_id) as "membercount" from member),(select count(market_no) as "marketcount"  from market),(select count(auction_no) as "auctioncount" from auction),(select count(visit_no) as "visitcount" from visit)
 ]]>
-</select>  
+	</select>
 
+	<select id="newmarket" parameterType="member" resultType="market">
+	<![CDATA[
+	 select market_no , market_title , member_id , market_releasedate from market where rownum <= 5 ORDER by market_no desc
+	]]>
+	</select>
+
+	<select id="newauction" parameterType="member" resultType="auction">
+	<![CDATA[
+	select auction_no ,auction_title , member_id , auction_status from auction where rownum <= 5 order by auction_no desc
+	]]>
+	</select>
+
+	<select id="allmarketAmount" parameterType="member" resultType="market">
+	<![CDATA[
+	select sum(market_amount) as "market_amount" from market where member_id = #{member_id}
+	]]>
+	</select>
+
+	<select id="allbuyAmount" parameterType="member" resultType="market">
+	<![CDATA[
+		select sum(b.buy_amount) as buy_amount  from market m , buy b where m.market_no = b.market_no and m.member_id = #{member_id}
+	]]>
+	</select>
 
 
 

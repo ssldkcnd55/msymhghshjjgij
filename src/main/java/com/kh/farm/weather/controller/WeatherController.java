@@ -46,8 +46,12 @@ public class WeatherController {
 		if(!rid.equals("")) {
 		Member id = memberService.selectIdCheck(rid);
 		String memAddr = id.getMember_addr();
-		oneAddr = memAddr.substring(0,memAddr.indexOf("시 ")+1);
-		twoAddr = memAddr.substring(memAddr.indexOf("시 ")+2,memAddr.indexOf("구 ")+1);
+		if(memAddr.substring(0,memAddr.indexOf(" ")).equals("서울")) {
+			oneAddr="서울특별시";
+		}else {
+			oneAddr = memAddr.substring(0,memAddr.indexOf(" "));
+		}
+		twoAddr = memAddr.substring(memAddr.indexOf(" ")+1,memAddr.indexOf("구 ")+1);
 		}
 
 		String addr = "http://newsky2.kma.go.kr/service/SecndSrtpdFrcstInfoService2/ForecastSpaceData?serviceKey=";

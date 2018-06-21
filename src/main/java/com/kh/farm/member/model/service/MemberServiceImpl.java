@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.kh.farm.member.model.dao.MemberDao;
 import com.kh.farm.member.model.vo.Member;
 import com.kh.farm.visit.model.vo.Visit;
+import com.kh.farm.auction.model.vo.Auction;
 import com.kh.farm.market.model.vo.Market;
 import com.kh.farm.member.exception.LoginFailException;
 
@@ -193,6 +194,31 @@ public class MemberServiceImpl implements MemberService {
 	public Member selectAllcount() {
 
 		return memberDao.selectAllcount(sqlSession);
+	}
+	
+	@Override
+
+	public List<Market> newmarket(Market market) {
+
+		return memberDao.newmarket(sqlSession, market);
+	}
+	@Override
+
+	public List<Auction> newauction(Auction auction) {
+
+		return memberDao.newauction(sqlSession, auction);
+	}
+	@Override
+
+	public List<Market> allmarketAmount(Market market) {
+
+		return memberDao.allmarketAmount(sqlSession, market);
+	}
+	@Override
+
+	public List<Market> allbuyAmount(Market market) {
+
+		return memberDao.allbuyAmount(sqlSession, market);
 	}
 
 }
