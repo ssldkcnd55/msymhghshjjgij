@@ -35,8 +35,8 @@ $(function(){
        <div id="container" class="mypageContainer">
         <div class="selltabs">
          <div id="1" class="tab active">회원정보</div>
-         <div id="2" class="tab">구매내역</div>
-         <div id="3" class="tab">판매내역</div>
+         <div id="2" class="tab">판매내역</div>
+         <div id="3" class="tab">장터내역</div>
          <div id="4" class="tab">경매내역</div>
          <div id="5" class="tab">상품판매량</div>
          </div>

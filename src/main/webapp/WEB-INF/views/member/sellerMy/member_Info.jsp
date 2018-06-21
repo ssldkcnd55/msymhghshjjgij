@@ -239,7 +239,7 @@
 				</tr>
 				<tr>
 					<td>카카오 메세지</td>
-					<td><input type="button" id="kakaoBtn" class="kakaoBtn"
+					<td><input type="button" id="kakaoBtn" class="memberBtn kakaoBtn"
 						value="수락" onclick="javascript:kaka()"></td>
 				</tr>
 			</table>

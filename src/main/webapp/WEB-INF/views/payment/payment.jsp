@@ -138,12 +138,12 @@ var sellerInfo=[];
 										<td class="info_head">연락처</td>
 										<td><input type="text" autocomplete="tel" id="user_phone"
 											name="user_phone" value="${loginUser.member_tel }"></td>
-										<td class="relief_number"><input type="checkbox"
-											name="relief_number" value="delivery_username_phone" />안심번호
-											사용 <span class="info_relief"
+										<td class="relief_number"><!-- <input type="checkbox"
+											name="relief_number" value="delivery_username_phone" /> 
+											  <span class="info_relief"
 											onmouseleave="removeInfoRelief()"
-											onmouseover="printInfoRelief()">?
-												<div class="InfoReliefDiv">
+											onmouseover="printInfoRelief()">? -->
+												<!-- <div class="InfoReliefDiv">
 													<h5>안심번호 서비스 안내</h5>
 													<p class="text">
 														고객님의 개인정보보호를 위해 상품 주문 시 연락처<br>정보가 유출되지 않도록 1회성 임시번호를
@@ -164,7 +164,7 @@ var sellerInfo=[];
 															드립니다.
 														</li>
 													</ul>
-												</div>
+												</div> -->
 										</span></td>
 									</tr>
 									<tr>

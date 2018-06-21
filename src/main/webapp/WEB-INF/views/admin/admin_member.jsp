@@ -48,22 +48,14 @@ $(function(){
 				case '0' : outValues += "<tr id='hover'><td>"+jsonObj.list[i].rnum+"</td>"
 				+"<td id='Notice_td'><a href='/farm/memberDetail.do?member_id="+jsonObj.list[i].member_id+"'>"+jsonObj.list[i].member_id+"</a></td>"
 				+"<td>"+jsonObj.list[i].member_name+"</td><td>농업인</td>"
-				+"<td><button onclick='change_app( \""+ jsonObj.list[i].member_id +"\" );'" 
-				+ "id='btnapp_"+ m +"' class='approval'>"+jsonObj.list[i].member_approval+"</button></td>"
+				+"<td><button class='approval' onclick='change_app( \""+ jsonObj.list[i].member_id +"\" );' id='btnapp_"+ m +"'>"+jsonObj.list[i].member_approval+"</button></td>"
 				+"<td><button class='approval' onclick='change_withdraw(\""+ jsonObj.list[i].member_id +"\")' id='btnwith_" + m +"'>"+jsonObj.list[i].member_withdraw+"</button></td>"
 				+"<td>"+jsonObj.list[i].member_warning_count+"</td>"
 				+"</tr>";break;
 				case '1' : outValues += "<tr id='hover'><td>"+jsonObj.list[i].rnum+"</td>"
 				+"<td id='Notice_td'><a href='/farm/memberDetail.do?member_id="+jsonObj.list[i].member_id+"'>"+jsonObj.list[i].member_id+"</a></td>"
 				+"<td>"+jsonObj.list[i].member_name+"</td><td>일반회원</td>"
-				+"<td><button class='approval' onclick='change_app( \""+ jsonObj.list[i].member_id +"\" );' id='btnapp_"+ m +"'>"+jsonObj.list[i].member_approval+"</button></td>"
-				+"<td><button class='approval' onclick='change_withdraw(\""+ jsonObj.list[i].member_id +"\")' id='btnwith_" + m +"'>"+jsonObj.list[i].member_withdraw+"</button></td>"
-				+"<td>"+jsonObj.list[i].member_warning_count+"</td>"
-				+"</tr>";break;
-				case '2' : outValues += "<tr id='hover'><td>"+jsonObj.list[i].rnum+"</td>"
-				+"<td id='Notice_td'><a href='/farm/memberDetail.do?member_id="+jsonObj.list[i].member_id+"'>"+jsonObj.list[i].member_id+"</a></td>"
-				+"<td>"+jsonObj.list[i].member_name+"</td><td>관리자</td>"
-				+"<td><button class='approval' onclick='change_app( \""+ jsonObj.list[i].member_id +"\" );' id='btnapp_"+ m +"'>"+jsonObj.list[i].member_approval+"</button></td>"
+				+"<td> </td>"
 				+"<td><button class='approval' onclick='change_withdraw(\""+ jsonObj.list[i].member_id +"\")' id='btnwith_" + m +"'>"+jsonObj.list[i].member_withdraw+"</button></td>"
 				+"<td>"+jsonObj.list[i].member_warning_count+"</td>"
 				+"</tr>";break;
@@ -98,7 +90,7 @@ $(function(){
 			$(".pagination").html(values);
 			
 		},error: function(request,status,errorData){
-	        alert("error code : " + request.status + "\nmessage" + 
+	        console.log("error code : " + request.status + "\nmessage" + 
 	                request.responseText + "\nerror" + errorData);
 	       }
 	});
@@ -137,17 +129,11 @@ function memberPage(page){
 					case '1' : outValues += "<tr id='hover'><td>"+jsonObj.list[i].rnum+"</td>"
 					+"<td id='Notice_td'><a href='/farm/memberDetail.do?member_id="+jsonObj.list[i].member_id+"'>"+jsonObj.list[i].member_id+"</a></td>"
 					+"<td>"+jsonObj.list[i].member_name+"</td><td>일반회원</td>"
-					+"<td><button class='approval' onclick='change_app( \""+ jsonObj.list[i].member_id +"\" );' id='btnapp_"+ m +"'>"+jsonObj.list[i].member_approval+"</button></td>"
+					+"<td> </td>"
 					+"<td><button class='approval' onclick='change_withdraw(\""+ jsonObj.list[i].member_id +"\")' id='btnwith_" + m +"'>"+jsonObj.list[i].member_withdraw+"</button></td>"
 					+"<td>"+jsonObj.list[i].member_warning_count+"</td>"
 					+"</tr>";break;
-					case '2' : outValues += "<tr id='hover'><td>"+jsonObj.list[i].rnum+"</td>"
-					+"<td id='Notice_td'><a href='/farm/memberDetail.do?member_id="+jsonObj.list[i].member_id+"'>"+jsonObj.list[i].member_id+"</a></td>"
-					+"<td>"+jsonObj.list[i].member_name+"</td><td>관리자</td>"
-					+"<td><button class='approval' onclick='change_app( \""+ jsonObj.list[i].member_id +"\" );' id='btnapp_"+ m +"'>"+jsonObj.list[i].member_approval+"</button></td>"
-					+"<td><button class='approval' onclick='change_withdraw(\""+ jsonObj.list[i].member_id +"\")' id='btnwith_" + m +"'>"+jsonObj.list[i].member_withdraw+"</button></td>"
-					+"<td>"+jsonObj.list[i].member_warning_count+"</td>"
-					+"</tr>";break;
+					
 					}
 				}
 				$(".Member_table").html(outValues);	
@@ -179,7 +165,7 @@ function memberPage(page){
 			$(".pagination").html(values);
 			
 		},error: function(request,status,errorData){
-	        alert("error code : " + request.status + "\nmessage" + 
+	        console.log("error code : " + request.status + "\nmessage" + 
 	                request.responseText + "\nerror" + errorData);
 	       }
 	});
@@ -279,14 +265,7 @@ $(function(){
 					case '1' : outValues += "<tr id='hover'><td>"+jsonObj.list[i].rnum+"</td>"
 					+"<td id='Notice_td'><a href='/farm/memberDetail.do?member_id="+jsonObj.list[i].member_id+"'>"+jsonObj.list[i].member_id+"</a></td>"
 					+"<td>"+jsonObj.list[i].member_name+"</td><td>일반회원</td>"
-					+"<td><button class='approval' onclick='change_app( \""+ jsonObj.list[i].member_id +"\" );' id='btnapp_"+ m +"'>"+jsonObj.list[i].member_approval+"</button></td>"
-					+"<td><button class='approval' onclick='change_withdraw(\""+ jsonObj.list[i].member_id +"\")' id='btnwith_" + m +"'>"+jsonObj.list[i].member_withdraw+"</button></td>"
-					+"<td>"+jsonObj.list[i].member_warning_count+"</td>"
-					+"</tr>";break;
-					case '2' : outValues += "<tr id='hover'><td>"+jsonObj.list[i].rnum+"</td>"
-					+"<td id='Notice_td'><a href='/farm/memberDetail.do?member_id="+jsonObj.list[i].member_id+"'>"+jsonObj.list[i].member_id+"</a></td>"
-					+"<td>"+jsonObj.list[i].member_name+"</td><td>관리자</td>"
-					+"<td><button class='approval' onclick='change_app( \""+ jsonObj.list[i].member_id +"\" );' id='btnapp_"+ m +"'>"+jsonObj.list[i].member_approval+"</button></td>"
+					+"<td> </td>"
 					+"<td><button class='approval' onclick='change_withdraw(\""+ jsonObj.list[i].member_id +"\")' id='btnwith_" + m +"'>"+jsonObj.list[i].member_withdraw+"</button></td>"
 					+"<td>"+jsonObj.list[i].member_warning_count+"</td>"
 					+"</tr>";break;
@@ -321,7 +300,7 @@ $(function(){
 				$(".pagination").html(values);
 				
 			},error: function(request,status,errorData){
-		        alert("error code : " + request.status + "\nmessage" + 
+		        console.log("error code : " + request.status + "\nmessage" + 
 		                request.responseText + "\nerror" + errorData);
 		       }
 			
@@ -366,14 +345,7 @@ function memberChangePage(page,type){
 					case '1' : outValues += "<tr id='hover'><td>"+jsonObj.list[i].rnum+"</td>"
 					+"<td id='Notice_td'><a href='/farm/memberDetail.do?member_id="+jsonObj.list[i].member_id+"'>"+jsonObj.list[i].member_id+"</a></td>"
 					+"<td>"+jsonObj.list[i].member_name+"</td><td>일반회원</td>"
-					+"<td><button class='approval' onclick='change_app( \""+ jsonObj.list[i].member_id +"\" );' id='btnapp_"+ m +"'>"+jsonObj.list[i].member_approval+"</button></td>"
-					+"<td><button class='approval' onclick='change_withdraw(\""+ jsonObj.list[i].member_id +"\")' id='btnwith_" + m +"'>"+jsonObj.list[i].member_withdraw+"</button></td>"
-					+"<td>"+jsonObj.list[i].member_warning_count+"</td>"
-					+"</tr>";break;
-					case '2' : outValues += "<tr id='hover'><td>"+jsonObj.list[i].rnum+"</td>"
-					+"<td id='Notice_td'><a href='/farm/memberDetail.do?member_id="+jsonObj.list[i].member_id+"'>"+jsonObj.list[i].member_id+"</a></td>"
-					+"<td>"+jsonObj.list[i].member_name+"</td><td>관리자</td>"
-					+"<td><button class='approval' onclick='change_app( \""+ jsonObj.list[i].member_id +"\" );' id='btnapp_"+ m +"'>"+jsonObj.list[i].member_approval+"</button></td>"
+					+"<td> </td>"
 					+"<td><button class='approval' onclick='change_withdraw(\""+ jsonObj.list[i].member_id +"\")' id='btnwith_" + m +"'>"+jsonObj.list[i].member_withdraw+"</button></td>"
 					+"<td>"+jsonObj.list[i].member_warning_count+"</td>"
 					+"</tr>";break;
@@ -408,7 +380,7 @@ function memberChangePage(page,type){
 			$(".pagination").html(values);
 			
 		},error: function(request,status,errorData){
-	        alert("error code : " + request.status + "\nmessage" + 
+	        console.log("error code : " + request.status + "\nmessage" + 
 	                request.responseText + "\nerror" + errorData);
 	       }
 	});
@@ -416,8 +388,6 @@ function memberChangePage(page,type){
 
 //검색메소드
 function search_member(){
-	alert($('#search_filter').val());
-	alert($('#search_keyword').val());
 	var keyword = $('#search_keyword').val();
 	var type = $('#search_filter').val();
 	$.ajax({
@@ -455,14 +425,7 @@ function search_member(){
 					case '1' : outValues += "<tr id='hover'><td>"+jsonObj.list[i].rnum+"</td>"
 					+"<td id='Notice_td'><a href='/farm/memberDetail.do?member_id="+jsonObj.list[i].member_id+"'>"+jsonObj.list[i].member_id+"</a></td>"
 					+"<td>"+jsonObj.list[i].member_name+"</td><td>일반회원</td>"
-					+"<td><button class='approval' onclick='change_app( \""+ jsonObj.list[i].member_id +"\" );' id='btnapp_"+ m +"'>"+jsonObj.list[i].member_approval+"</button></td>"
-					+"<td><button class='approval' onclick='change_withdraw(\""+ jsonObj.list[i].member_id +"\")' id='btnwith_" + m +"'>"+jsonObj.list[i].member_withdraw+"</button></td>"
-					+"<td>"+jsonObj.list[i].member_warning_count+"</td>"
-					+"</tr>";break;
-					case '2' : outValues += "<tr id='hover'><td>"+jsonObj.list[i].rnum+"</td>"
-					+"<td id='Notice_td'><a href='/farm/memberDetail.do?member_id="+jsonObj.list[i].member_id+"'>"+jsonObj.list[i].member_id+"</a></td>"
-					+"<td>"+jsonObj.list[i].member_name+"</td><td>관리자</td>"
-					+"<td><button class='approval' onclick='change_app( \""+ jsonObj.list[i].member_id +"\" );' id='btnapp_"+ m +"'>"+jsonObj.list[i].member_approval+"</button></td>"
+					+"<td> </td>"
 					+"<td><button class='approval' onclick='change_withdraw(\""+ jsonObj.list[i].member_id +"\")' id='btnwith_" + m +"'>"+jsonObj.list[i].member_withdraw+"</button></td>"
 					+"<td>"+jsonObj.list[i].member_warning_count+"</td>"
 					+"</tr>";break;
