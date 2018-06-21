@@ -76,6 +76,12 @@ public class ChatServiceImpl implements ChatService {
 	
 		return chatDao.selectRecentViewMarketList(sqlSession,m);
 	}
+
+	@Override
+	public List<String> selectChatImages(int chat_no) {
+	
+		return chatDao.selectChatImages(sqlSession,chat_no);
+	}
 	
 	
 }

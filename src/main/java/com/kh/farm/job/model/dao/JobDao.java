@@ -25,16 +25,16 @@ public class JobDao {
 		PageNumber pnum = new PageNumber();
 		pnum.setStartRow(startRow);
 		pnum.setEndRow(endRow);
-		
-		System.out.println();
+
+		System.out.println("hi");
 
 		List<Job> list = sqlSession.selectList("job.jobList", pnum);
 		return (ArrayList<Job>) list;
 	}
 
-	public ArrayList<Job> searchJobList(int currentPage, SqlSessionTemplate sqlSession , PageNumber pp) {
+	public ArrayList<Job> searchJobList(int currentPage, SqlSessionTemplate sqlSession, PageNumber pp) {
 		int startRow = (currentPage - 1) * 10 + 1;
-		int endRow = startRow + 100;
+		int endRow = startRow + 9;
 
 		PageNumber pnum = new PageNumber();
 		pnum.setStartRow(startRow);
@@ -53,6 +53,22 @@ public class JobDao {
 	public Job jobDeatil(SqlSessionTemplate sqlSession, int job_no) {
 		// TODO Auto-generated method stub
 		return sqlSession.selectOne("job.jobDetail", job_no);
+	}
+
+	public ArrayList<Job> selectJobaddr(int currentPage, SqlSessionTemplate sqlSession, String addr) {
+		int startRow = (currentPage - 1) * 10 + 1;
+		int endRow = startRow + 9;
+
+		PageNumber pnum = new PageNumber();
+		pnum.setStartRow(startRow);
+		pnum.setEndRow(endRow);
+		pnum.setAddr(addr);
+		System.out.println("pnum startRoW 값:"+pnum.getStartRow());
+		System.out.println("pnum endRoW 값:"+pnum.getEndRow());
+
+		List<Job> list = sqlSession.selectList("job.jobaddr", pnum);
+		return (ArrayList<Job>) list;
+
 	}
 
 }

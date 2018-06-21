@@ -4,6 +4,17 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="chat">
 
+
+<select id="selectChatImages" parameterType="int" resultType="String">
+<![CDATA[
+select substr(CHAT_HISTORY_CONTENTS,instr(CHAT_HISTORY_CONTENTS,'filename',1,1)+9,instr(CHAT_HISTORY_CONTENTS,'''><img src',1,1)-instr(CHAT_HISTORY_CONTENTS,'filename',1,1)-9) from chat_history
+where chat_no = #{chat_no}
+and CHAT_HISTORY_CONTENTS like '%openImgPage%'
+order by CHAT_INDEX desc
+]]>
+</select>
+
+
  	<select id="selectChatList" parameterType="Member" resultType="ChatList">
 	
 	 <![CDATA[ 

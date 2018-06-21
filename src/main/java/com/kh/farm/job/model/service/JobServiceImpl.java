@@ -29,9 +29,15 @@ public class JobServiceImpl implements JobService {
 		// TODO Auto-generated method stub
 		return jobDao.selectJobList(currentPage, sqlSession);
 	}
+	@Override
 	public ArrayList<Job> searchJobList(int currentPage , PageNumber pp) {
 		// TODO Auto-generated method stub
 		return jobDao.searchJobList(currentPage, sqlSession,pp);
+	}
+	@Override
+	public ArrayList<Job> selectJobaddr(int currentPage , String addr) {
+		// TODO Auto-generated method stub
+		return jobDao.selectJobaddr(currentPage, sqlSession,addr);
 	}
 
 	@Override

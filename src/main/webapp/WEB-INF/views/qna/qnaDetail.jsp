@@ -60,11 +60,13 @@
 								<td>${main_qna.main_qna_date }</td>
 							</tr>
 						</table>
+						<c:if test="${loginUser.member_id eq main_qna.member_id}">
 						<div class="QnA_modify">
 							<button onclick="move_QnA_modify();">수정</button>
 							&nbsp;
 							<button onclick="deleteQna();">삭제</button>
 						</div>
+						</c:if>
 						<div class="QnA_note">
 							<p>${main_qna.main_qna_contents }</p>
 						</div>

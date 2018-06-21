@@ -641,9 +641,6 @@
 										<option value="2300">인천</option>
 										<option value="2100">부산</option>
 										<option value="2200">대구</option>
-										<option value="2401">광주</option>
-										<option value="2501">대전</option>
-										<option value="3111">수원</option>
 								</select></td>
 
 								<td style="width: 16.6667%;"><select id="h1" class="select">

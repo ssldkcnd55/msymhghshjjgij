@@ -50,7 +50,8 @@ xmlns:websocket="http://www.springframework.org/schema/websocket"
 	<aop:aspectj-autoproxy proxy-target-class="true"></aop:aspectj-autoproxy>
 	<beans:bean id="multipartResolver"
 		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
-		<beans:property name="maxUploadSize" value="10000000"></beans:property>
+		<!-- <beans:property name="maxUploadSize" value="10000000"></beans:property> -->
+		<beans:property name="maxUploadSize" value="31457280"></beans:property>
 	</beans:bean>
 
 
