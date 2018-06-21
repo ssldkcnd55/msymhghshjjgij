@@ -62,10 +62,10 @@
 }
 
 .job_imgbox {
-	margin: 0 auto;
-	background-size: cover;
+	/* margin: 0 auto;
+	background-size: cover; */
 	width: 100%;
-	height: 300px;
+	height: 400px;
 }
 
 .map_div {

@@ -12,13 +12,13 @@
 	}
 	/*구인구직 전체 리스트 조회  */
 	$(function() {
-
-		$
+		 $
 				.ajax({
 					url : "jobList.do",
 					type : "post",
 					dataType : "json",
 					success : function(data) {
+						console.log(data)
 						var jsonStr = JSON.stringify(data);
 						var json = JSON.parse(jsonStr);
 						var values = "<tr><th width='10%'>번호</th><th width='10%'>지역</th><th width='12%'>상태</th><th width='35%'>제목</th><th width='13%'>작성자</th><th width='20%'>작성날짜</th></tr>";
@@ -80,171 +80,8 @@
 								+ request.responseText + "\nerror" + errorData);
 					}
 
-				}); //ajax list
+				});  //ajax list
 
-		function jobserach() {
-			var jobsearchvalue = $("#job_search").val();
-
-			console.log("keyup으로 들어온값" + jobsearchvalue);
-
-		}
-
-	});
-
-	/* 페이징 처리  */
-	function jobPage(page) {
-		$
-				.ajax({
-					url : "jobList.do",
-					type : "post",
-					data : {
-						page : page
-
-					},
-					dataType : "json",
-					success : function(data) {
-						var jsonStr = JSON.stringify(data);
-						var json = JSON.parse(jsonStr);
-						var values = "<tr><th width='10%'>번호</th><th width='10%'>지역</th><th width='12%'>상태</th><th width='35%'>제목</th><th width='13%'>작성자</th><th width='20%'>작성날짜</th></tr>";
-
-						for ( var i in json.list) {
-
-							values += "<tr id='hover'><td>" + json.list[i].rnum
-									+ "</td>";
-							values += "<td>" + json.list[i].job_addr + "</td>";
-							if (json.list[i].job_status == "1") {
-								values += "<td><span id='job_table_span_find'><strong>구인중</strong></span></td>";
-							} else {
-								values += "<td><span id='job_table_span_finded'>마감</span></td>";
-							}
-
-							values += "<td id='job_td'><a href='jobDetail.do?job_no="
-									+ json.list[i].job_no
-									+ "'>"
-									+ json.list[i].job_title
-									+ "</a></td><td>"
-									+ json.list[i].member_id
-									+ "</td><td>"
-									+ json.list[i].job_date + "</td></tr>";
-
-						}
-						$(".job_table").html(values);
-
-						var startPage = json.list[0].startPage;
-						var endPage = json.list[0].endPage;
-						var maxPage = json.list[0].maxPage;
-						var currentPage = json.list[0].currentPage;
-
-						var values1 = "";
-						if (startPage > 5) {
-							values1 += "<a href='javascript:jobPage("
-									+ (startPage - 1) + ")'>&laquo;</a>"
-						} else {
-							values1 += "<a>&laquo;</a>";
-						}
-						for (var i = startPage; i <= endPage; i++) {
-							if (i == currentPage) {
-								values1 += "<a class='active'>" + i + "</a>";
-							} else {
-								values1 += "<a href='javascript:jobPage(" + i
-										+ ");'>" + i + "</a>";
-							}
-						}
-						if (endPage < maxPage) {
-							values1 += "<a href='javascript:jobPage("
-									+ (endPage + 1) + ")'>&raquo;</a>";
-
-						} else {
-							values1 += "<a>&raquo;</a>";
-						}
-						$(".pagination").html(values1);
-					},
-					error : function(request, status, errorData) {
-						alert("error code : " + request.status + "\nmessage"
-								+ request.responseText + "\nerror" + errorData);
-					}
-
-				});
-	}
-
-	/*지역별 클릭시 리스트조회  */
-	function addr(addr) {
-		$
-				.ajax({
-					url : "jobList.do",
-					type : "post",
-					dataType : "json",
-					success : function(data) {
-
-						var jsonStr = JSON.stringify(data);
-						var json = JSON.parse(jsonStr);
-						var values = "<tr><th width='10%'>번호</th><th width='10%'>지역</th><th width='12%'>상태</th><th width='35%'>제목</th><th width='13%'>작성자</th><th width='20%'>작성날짜</th></tr>";
-
-						for ( var i in json.list) {
-							if (addr == json.list[i].job_addr) {
-								values += "<tr id='hover'><td>"
-										+ json.list[i].rnum + "</td>";
-								values += "<td>" + json.list[i].job_addr
-										+ "</td>";
-								if (json.list[i].job_status == "1") {
-									values += "<td><span id='job_table_span_find'><strong>구인중</strong></span></td>";
-								} else {
-									values += "<td><span id='job_table_span_finded'>마감</span></td>";
-								}
-
-								values += "<td id='job_td'><a href='jobDetail.do?job_no="
-										+ json.list[i].job_no
-										+ "'>"
-										+ json.list[i].job_title
-										+ "</a></td><td>"
-										+ json.list[i].member_id
-										+ "</td><td>"
-										+ json.list[i].job_date + "</td></tr>";
-							}
-
-						}
-						$(".job_table").html(values);
-
-						/* var startPage = json.list[0].startPage;
-						console.log(startPage);
-						var endPage = json.list[0].endPage;
-						var maxPage = json.list[0].maxPage;
-						var currentPage = json.list[0].currentPage;
-
-						var values1 = "";
-						if (startPage > 5) {
-							values1 += "<a href='javascript:jobPage("
-									+ (startPage - 1) + ")'>&laquo;</a>"
-						} else {
-							values1 += "<a>&laquo;</a>";
-						}
-						for (var i = startPage; i <= endPage; i++) {
-							if (i == currentPage) {
-								values1 += "<a class='active'>" + i + "</a>";
-							} else {
-								values1 += "<a href='javascript:jobPage(" + i
-										+ ");'>" + i + "</a>";
-							}
-						}
-						if (endPage < maxPage) {
-							values1 += "<a href='javascript:jobPage("
-									+ (endPage + 1) + ")'>&raquo;</a>";
-
-						} else {
-							values1 += "<a>&raquo;</a>";
-						}
-						$(".pagination").html(values1); */
-					},
-					error : function(request, status, errorData) {
-						alert("error code : " + request.status + "\nmessage"
-								+ request.responseText + "\nerror" + errorData);
-					}
-
-				});
-
-	}
-	/*검색 구인구직 조회  */
-	$(function() {
 		$("input[name=job_search]")
 				.keyup(
 						function() {
@@ -288,40 +125,40 @@
 											}
 											$(".job_table").html(values);
 
-											/* var startPage = json.list[0].startPage;
-											var endPage = json.list[0].endPage;
-											var maxPage = json.list[0].maxPage;
-											var currentPage = json.list[0].currentPage;
+											/* 	 var startPage = json.list[0].startPage;
+												var endPage = json.list[0].endPage;
+												var maxPage = json.list[0].maxPage;
+												var currentPage = json.list[0].currentPage;
 
-											var values1 = "";
-											if (startPage > 5) {
-												values1 += "<a href='javascript:jobPage("
-														+ (startPage - 1)
-														+ ")'>&laquo;</a>"
-											} else {
-												values1 += "<a>&laquo;</a>";
-											}
-											for (var i = startPage; i <= endPage; i++) {
-												if (i == currentPage) {
-													values1 += "<a class='active'>"
-															+ i + "</a>";
-												} else {
+												var values1 = "";
+												if (startPage > 5) {
 													values1 += "<a href='javascript:jobPage("
-															+ i
-															+ ");'>"
-															+ i
-															+ "</a>";
+															+ (startPage - 1)
+															+ ")'>&laquo;</a>"
+												} else {
+													values1 += "<a>&laquo;</a>";
 												}
-											}
-											if (endPage < maxPage) {
-												values1 += "<a href='javascript:jobPage("
-														+ (endPage + 1)
-														+ ")'>&raquo;</a>";
+												for (var i = startPage; i <= endPage; i++) {
+													if (i == currentPage) {
+														values1 += "<a class='active'>"
+																+ i + "</a>";
+													} else {
+														values1 += "<a href='javascript:jobPage("
+																+ i
+																+ ");'>"
+																+ i
+																+ "</a>";
+													}
+												}
+												if (endPage < maxPage) {
+													values1 += "<a href='javascript:jobPage("
+															+ (endPage + 1)
+															+ ")'>&raquo;</a>";
 
-											} else {
-												values1 += "<a>&raquo;</a>";
-											}
-											$(".pagination").html(values1); */
+												} else {
+													values1 += "<a>&raquo;</a>";
+												}
+												$(".pagination").html(values1);  */
 										},
 										error : function(request, status,
 												errorData) {
@@ -336,6 +173,164 @@
 
 						});
 	});
+	/*지역별 클릭시 리스트조회  */
+	function addr(addr) {
+		var addr = addr
+		$
+				.ajax({
+					url : "jobaddr.do",
+					type : "post",
+					data : {
+						addr : addr
+					},
+					dataType : "json",
+					success : function(data) {
+						console.log(data)
+						var jsonStr = JSON.stringify(data);
+						var json = JSON.parse(jsonStr);
+						var values = "<tr><th width='10%'>번호</th><th width='10%'>지역</th><th width='12%'>상태</th><th width='35%'>제목</th><th width='13%'>작성자</th><th width='20%'>작성날짜</th></tr>";
+
+						for ( var i in json.list) {
+							if (addr == json.list[i].job_addr) {
+								values += "<tr id='hover'><td>"
+										+ json.list[i].rnum + "</td>";
+								values += "<td>" + json.list[i].job_addr
+										+ "</td>";
+								if (json.list[i].job_status == "1") {
+									values += "<td><span id='job_table_span_find'><strong>구인중</strong></span></td>";
+								} else {
+									values += "<td><span id='job_table_span_finded'>마감</span></td>";
+								}
+
+								values += "<td id='job_td'><a href='jobDetail.do?job_no="
+										+ json.list[i].job_no
+										+ "'>"
+										+ json.list[i].job_title
+										+ "</a></td><td>"
+										+ json.list[i].member_id
+										+ "</td><td>"
+										+ json.list[i].job_date + "</td></tr>";
+							}
+
+						}
+						$(".job_table").html(values);
+
+					    var startPage = json.list[0].startPage;					
+						var endPage = json.list[0].endPage;
+						var maxPage = json.list[0].maxPage;
+						var currentPage = json.list[0].currentPage;
+
+						var values1 = "";
+						if (startPage > 5) {
+							values1 += "<a href='javascript:jobPage("
+									+ (startPage - 1) + ")'>&laquo;</a>"
+						} else {
+							values1 += "<a>&laquo;</a>";
+						}
+						for (var i = startPage; i <= endPage; i++) {
+							if (i == currentPage) {
+								values1 += "<a class='active'>" + i + "</a>";
+							} else {
+								values1 += "<a href='javascript:jobPage(" + i
+										+ ");'>" + i + "</a>";
+							}
+						}
+						if (endPage < maxPage) {
+							values1 += "<a href='javascript:jobPage("
+									+ (endPage + 1) + ")'>&raquo;</a>";
+
+						} else {
+							values1 += "<a>&raquo;</a>";
+						}
+						$(".pagination").html(values1);
+					},
+					error : function(request, status, errorData) {
+						alert("error code : " + request.status + "\nmessage"
+								+ request.responseText + "\nerror" + errorData);
+					}
+
+				});
+
+	}
+
+	/*페이징처리  */
+	function jobPage(page) {
+
+		$
+				.ajax({
+					url : "jobList.do",
+					type : "post",
+					data : {
+						page : page
+
+					},
+					dataType : "json",
+					success : function(data) {
+						console.log("여기옵니다")
+						console.log(data)
+						var jsonStr = JSON.stringify(data);
+						var json = JSON.parse(jsonStr);
+						var values = "<tr><th width='10%'>번호</th><th width='10%'>지역</th><th width='12%'>상태</th><th width='35%'>제목</th><th width='13%'>작성자</th><th width='20%'>작성날짜</th></tr>";
+
+						for ( var i in json.list) {
+
+							values += "<tr id='hover'><td>" + json.list[i].rnum
+									+ "</td>";
+							values += "<td>" + json.list[i].job_addr + "</td>";
+							if (json.list[i].job_status == "1") {
+								values += "<td><span id='job_table_span_find'><strong>구인중</strong></span></td>";
+							} else {
+								values += "<td><span id='job_table_span_finded'>마감</span></td>";
+							}
+
+							values += "<td id='job_td'><a href='jobDetail.do?job_no="
+									+ json.list[i].job_no
+									+ "'>"
+									+ json.list[i].job_title
+									+ "</a></td><td>"
+									+ json.list[i].member_id
+									+ "</td><td>"
+									+ json.list[i].job_date + "</td></tr>";
+
+						}
+						$(".job_table").html(values);
+
+						var startPage = json.list[0].startPage;
+						var endPage = json.list[0].endPage;
+						var maxPage = json.list[0].maxPage;
+						var currentPage = json.list[0].currentPage;
+
+						var values1 = "";
+						if (startPage > 5) {
+							values1 += "<a href='javascript:jobPage("
+									+ (startPage - 1) + ")'>&laquo;</a>"
+						} else {
+							values1 += "<a>&laquo;</a>";
+						}
+						for (var i = startPage; i <= endPage; i++) {
+							if (i == currentPage) {
+								values1 += "<a class='active'>" + i + "</a>";
+							} else {
+								values1 += "<a href='javascript:jobPage(" + i
+										+ ");'>" + i + "</a>";
+							}
+						}
+						if (endPage < maxPage) {
+							values1 += "<a href='javascript:jobPage("
+									+ (endPage + 1) + ")'>&raquo;</a>";
+
+						} else {
+							values1 += "<a>&raquo;</a>";
+						}
+						$(".pagination").html(values1);
+					},
+					error : function(request, status, errorData) {
+						alert("error code : " + request.status + "\nmessage"
+								+ request.responseText + "\nerror" + errorData);
+					}
+
+				});
+	}
 </script>
 <!-- Job.css -->
 <link rel="stylesheet" type="text/css"
@@ -382,7 +377,8 @@
 					<div id="sort_all">
 						<div class="sort" style="padding-left: 10px;">
 							<h4>지역별</h4>
-							<table id="left_area_table" style="text-align: center; cursor: pointer;">
+							<table id="left_area_table"
+								style="text-align: center; cursor: pointer;">
 								<tr>
 									<td><a onclick="javascript:addr('서울')">서울&nbsp;</a></td>
 									<td><a onclick="javascript:addr('경기')">경기&nbsp;</a></td>
@@ -570,11 +566,8 @@
 					<!-- 하단 페이징, 검색 묶음 -->
 					<div id="bottom">
 						<!-- 페이징 처리 -->
-						<div class="pagination">
-							<!--  <a href="#">&laquo;</a> <a href="#">1</a> <a href="#"
-                     class="active">2</a> <a href="#">3</a> <a href="#">4</a> <a
-                     href="#">5</a> <a href="#">&raquo;</a> -->
-						</div>
+						<div class="pagination"></div>
+
 
 						<!-- 검색 -->
 						<div class="search_box">
