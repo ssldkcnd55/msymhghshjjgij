@@ -64,4 +64,8 @@ public interface MemberService {
 
 	List<Auction> newauction(Auction auction);
 
+	List<Market> allmarketAmount(Market market);
+
+	List<Market> allbuyAmount(Market market);
+
 }

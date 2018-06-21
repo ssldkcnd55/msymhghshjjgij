@@ -122,7 +122,7 @@ function findAddr() {
 		}
 	}
 	function formValidation() {
-		$('#member_addr').val($('#addr').val()+" "+$('#member_addr2').val());
+		$('#member_addr').val($('#addr').val()+"@"+$('#member_addr2').val());
 		/////////////////////////////정규식 목록/////////////////////////
 		//비밀번호: 6~20자이상 영문 숫자 혼합
 		var pwdPattern = /^.*(?=.{6,20})(?=.*[0-9])(?=.*[a-zA-Z]).*$/;

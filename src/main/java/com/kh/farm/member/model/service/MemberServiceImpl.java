@@ -208,5 +208,17 @@ public class MemberServiceImpl implements MemberService {
 
 		return memberDao.newauction(sqlSession, auction);
 	}
+	@Override
+
+	public List<Market> allmarketAmount(Market market) {
+
+		return memberDao.allmarketAmount(sqlSession, market);
+	}
+	@Override
+
+	public List<Market> allbuyAmount(Market market) {
+
+		return memberDao.allbuyAmount(sqlSession, market);
+	}
 
 }
