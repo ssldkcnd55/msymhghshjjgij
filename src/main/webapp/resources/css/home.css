@@ -47,10 +47,12 @@ ul.tabs li.active {
 }
 
 .tab_content {
-	font-size: 12px;
-	display: none;
-	height: 380px;
-	padding-top: 20px;
+    font-size: 12px;
+    display: none;
+    height: 380px;
+    padding-top: 20px;
+    background: #eaf1e6;
+    
 }
 
 .tab_container .tab_content ul {
@@ -100,7 +102,7 @@ ul.tabs li.active {
 }
 
 .td1 {
-	padding: 4px;
+	padding: 8px 0px 8px 0px;
 	color: #222;
 	border-bottom: 1px solid #dcdcdc;
 	text-align: center;
@@ -108,7 +110,7 @@ ul.tabs li.active {
 }
 
 .th1 {
-	color: #222;
+	color: #302727;
 	border-bottom: solid 1px #b2b2b2;
 	font-size: 1.15em;
 	text-align: center;
@@ -116,31 +118,64 @@ ul.tabs li.active {
 	width: 15%;
 }
 
+.td1 a{
+	text-decoration: none;
+color: #204404;
+font-weight: bold;
+	
+}
+.td1 a:hover{
+	text-decoration: underline;
+}
 .button {
 	background-color: white;
-	color: #f1473a;
-	border: 1px solid #f1473a;
-	padding: 6px 6px 6px;
-	margin-left: 218px;
-	cursor: pointer;
+    color: #7e5957;
+    border: 1px solid #7e5957;
+    padding: 4px;
+    margin-left: 226px;
+    cursor: pointer;
+    border-radius: 3px;
+    font-size: 9pt;
+     
 }
-
+.jobImg{
+    background-size: cover;
+    width: 45px;
+    height: 45px;
+    border: 1px solid #dcdcdc;
+    margin: 0 auto;
+    border-radius: 25px;
+	
+}
 .button2 {
-	background-color: white;
-	color: #f1473a;
-	width: 99%;
-	height: 25px;
-	border: 1px solid #f1473a;
-	padding: 3px 3px 2px;
-	margin-top: 90px;
-	margin-left: 3px;
-	cursor: pointer;
+     background-color: #f7fbf4;
+    color: #295313;
+    width: 80%;
+    height: 32px;
+    border: 2px solid #9dbb8d;
+    padding: 3px 3px 2px;
+    margin-top: 25px;
+    margin-left: 30px;
+    cursor: pointer;
+    text-align: center;
+    font-weight: bold;
+    border-radius: 3px;
 }
-
+.button2:hover{
+	background: white;
+}
+a{
+	text-decoration: none;
+}
 #job_table_span_find {
 	color: #ff0000;
 }
 
 #job_table_span_finded {
 	color: #c0c0c0;
+}
+
+.tab_main{
+	
+	background: #eaf1e6;
 }

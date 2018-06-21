@@ -219,6 +219,17 @@ insert into member values (
 ]]>
 </select>  
 
+<select id="newmarket" parameterType="member" resultType="market">
+	<![CDATA[
+	 select market_no , market_title , member_id , market_releasedate from market where rownum <= 5 ORDER by market_no desc
+	]]>
+	</select>
+	
+	<select id="newauction" parameterType="member" resultType="auction">
+	<![CDATA[
+	select auction_no ,auction_title , member_id , auction_status from auction where rownum <= 5 order by auction_no desc
+	]]>
+	</select>
 
 
 

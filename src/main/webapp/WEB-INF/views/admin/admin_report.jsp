@@ -143,9 +143,9 @@ function noticePage(page){
 				outValues += "<tr id='hover'><td>"+jsonObj.list[i].rnum+"</td>"
 				+"<td id='Notice_td'>"+jsonObj.list[i].report_category+"</td>"
 				+"<td><a href='reviewDeatil.do?review_no="+jsonObj.list[i].review_no+"'>리뷰페이지로<a/></td>"
-				+"<td><button id='"+jsonObj.list[i].report_contents+"' onclick='viewContents(this);'>신고내용보기</button></td>"
+				+"<td><button class='report' id='"+jsonObj.list[i].report_contents+"' onclick='viewContents(this);'>신고내용보기</button></td>"
 				+"<td>"+jsonObj.list[i].report_date+"</td><td id='st"+jsonObj.list[i].report_no+"'>"+jsonObj.list[i].report_status+"</td>"
-				+"<td><button id='"+jsonObj.list[i].report_no+"' onclick='changeStatus(this);'>신고처리</button></td></tr>";
+				+"<td><button class='report' id='"+jsonObj.list[i].report_no+"' onclick='changeStatus(this);'>신고처리</button></td></tr>";
 			} 
 			$(".Notice_table").html(outValues);
 			
@@ -256,9 +256,9 @@ $(function(){
 					outValues += "<tr id='hover'><td>"+jsonObj.list[i].rnum+"</td>"
 					+"<td id='Notice_td'>"+jsonObj.list[i].report_category+"</td>"
 					+"<td><a href='reviewDeatil.do?review_no="+jsonObj.list[i].review_no+"'>리뷰페이지로<a/></td>"
-					+"<td><button id='"+jsonObj.list[i].report_contents+"' onclick='viewContents(this);'>신고내용보기</button></td>"
+					+"<td><button class='report' id='"+jsonObj.list[i].report_contents+"' onclick='viewContents(this);'>신고내용보기</button></td>"
 					+"<td>"+jsonObj.list[i].report_date+"</td><td id='st"+jsonObj.list[i].report_no+"'>"+jsonObj.list[i].report_status+"</td>"
-					+"<td><button id='"+jsonObj.list[i].report_no+"' onclick='changeStatus(this);'>신고처리</button></td></tr>";
+					+"<td><button class='report' id='"+jsonObj.list[i].report_no+"' onclick='changeStatus(this);'>신고처리</button></td></tr>";
 				} 
 				$(".Notice_table").html(outValues);
 				
@@ -320,9 +320,9 @@ function reportChangePage(page){
 				outValues += "<tr id='hover'><td>"+jsonObj.list[i].rnum+"</td>"
 				+"<td id='Notice_td'>"+jsonObj.list[i].report_category+"</td>"
 				+"<td><a href='reviewDeatil.do?review_no="+jsonObj.list[i].review_no+"'>리뷰페이지로<a/></td>"
-				+"<td><button id='"+jsonObj.list[i].report_contents+"' onclick='viewContents(this);'>신고내용보기</button></td>"
+				+"<td><button class='report' id='"+jsonObj.list[i].report_contents+"' onclick='viewContents(this);'>신고내용보기</button></td>"
 				+"<td>"+jsonObj.list[i].report_date+"</td><td id='st"+jsonObj.list[i].report_no+"'>"+jsonObj.list[i].report_status+"</td>"
-				+"<td><button id='"+jsonObj.list[i].report_no+"' onclick='changeStatus(this);'>신고처리</button></td></tr>";
+				+"<td><button class='report' id='"+jsonObj.list[i].report_no+"' onclick='changeStatus(this);'>신고처리</button></td></tr>";
 			} 
 			$(".Notice_table").html(outValues);
 			
