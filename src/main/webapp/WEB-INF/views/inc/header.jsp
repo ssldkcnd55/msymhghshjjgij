@@ -228,7 +228,9 @@ function getBasketCount(member_id)
                </c:if>
                   <li class="menu1"><a href="/farm/moveQnAPage.do" class="link_menu">고객센터</a></li>
                   <li class="menu1 lst"><a href="moveNotice.do" class="link_menu">공지사항 </a></li>
-                  <li class="menu1 lst"><a href="moveAdminPage.do" class="link_menu">관리자 페이지</a></li>
+                 <c:if test="${loginUser.member_id == 'admin'}">
+                <li class="menu1 lst"><a href="moveAdminPage.do" class="link_menu">관리자 페이지</a></li>
+               	</c:if>
 				<li class="menu1 lst" ><div><img id="weather_img" style="width: 30px;"></div><div class='weatherTitle'></div><div id="w_text"></div></li>
                </ul>
             </div>

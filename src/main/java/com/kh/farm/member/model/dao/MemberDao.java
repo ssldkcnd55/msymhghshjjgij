@@ -250,5 +250,13 @@ public class MemberDao {
 		// TODO Auto-generated method stub
 		return sqlSession.selectList("member.newauction", auction);
 	}
+	public List<Market> allmarketAmount(SqlSessionTemplate sqlSession, Market market) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList("member.allmarketAmount", market);
+	}
+	public List<Market> allbuyAmount(SqlSessionTemplate sqlSession, Market market) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList("member.allbuyAmount", market);
+	}
 
 }

@@ -256,7 +256,7 @@ function report_submit() {
 							</div>
 						</c:if>
 						
-						<c:if test="${loginUser.member_id != review.member_id}">
+						<c:if test="${loginUser.member_id != review.member_id && !empty loginUser}">
 								<div class="QnA_modify">
 								<button onclick="reportReview();">신고</button>
 								

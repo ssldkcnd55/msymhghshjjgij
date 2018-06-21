@@ -254,6 +254,7 @@ width: 20px;
 }
 
 .msg_title_name {
+	text-align:left;
 	margin-top: 2px;
    width: 222px;
     max-height: 23px;

@@ -725,7 +725,7 @@ public class MemberController {
 
 	}
 
-	// admin 최신판매/최신경매 조회
+	// admin 최신판매 조회
 	@RequestMapping(value = "newmarketDate.do")
 	public void newmarketDate(Market market, HttpServletResponse response) throws IOException {
 		System.out.println("최신판매조회 들어옴");
@@ -750,6 +750,7 @@ public class MemberController {
 
 	}
 
+	// admin 최신경매 조회
 	@RequestMapping(value = "newauctionDate.do")
 	public void newauctionDate(Auction auction, HttpServletResponse response) throws IOException {
 		System.out.println("최신경매조회 들어옴");
@@ -772,6 +773,52 @@ public class MemberController {
 		out.flush();
 		out.close();
 
+	}
+
+	// 총판매금액 조회
+	@RequestMapping(value = "AllmarketAmount.do")
+	public void marketAmount(Market market, HttpServletResponse response) throws IOException {
+		System.out.println("총판매금액조회들어옴");
+		List<Market> marketlist = memberService.allmarketAmount(market);
+		JSONArray jarr = new JSONArray();
+		for (Market m : marketlist) {
+			JSONObject json = new JSONObject();
+			
+			json.put("market_amount", m.getMarket_amount());
+
+			jarr.add(json);
+		}
+
+		JSONObject sendJson = new JSONObject();
+		sendJson.put("list", jarr);
+		response.setContentType("application/json; charset=utf-8");
+		PrintWriter out = response.getWriter();
+		out.append(sendJson.toJSONString());
+		out.flush();
+		out.close();
+	}
+
+	// 총판매개수 조회
+	@RequestMapping(value = "AllbuyAmount.do")
+	public void buyAmount(Market market, HttpServletResponse response) throws IOException {
+		System.out.println("총판매개수조회들어옴");
+		List<Market> marketlist = memberService.allbuyAmount(market);
+		JSONArray jarr = new JSONArray();
+		for (Market m : marketlist) {
+			JSONObject json = new JSONObject();
+
+			json.put("buy_amount", m.getBuy_amount());
+
+			jarr.add(json);
+		}
+
+		JSONObject sendJson = new JSONObject();
+		sendJson.put("list", jarr);
+		response.setContentType("application/json; charset=utf-8");
+		PrintWriter out = response.getWriter();
+		out.append(sendJson.toJSONString());
+		out.flush();
+		out.close();
 	}
 
 }
