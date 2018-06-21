@@ -46,6 +46,7 @@ import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.kh.farm.auction.model.vo.Auction;
 import com.kh.farm.chat.model.service.ChatService;
 import com.kh.farm.chat.model.vo.*;
 import com.kh.farm.market.model.vo.Market;
@@ -176,22 +177,21 @@ public class MemberController {
 		try {
 			// 로그인 멤버 정보 가져오기
 			Member returnMember = memberService.selectLoginCheck(member);
-			if(returnMember.getMember_approval().equals("Y")) {
+			if (returnMember.getMember_approval().equals("Y")) {
 				// System.out.println("returnMember : " + returnMember);
 				String ip = getClientIP(request);
 				System.out.println("ip : " + ip);
 				returnMember.setIp(ip);
 				int visit = memberService.insertVisit(returnMember);
 				session.setAttribute("loginUser", returnMember);
-				
-				
+
 				// 로그인 멤버 채팅 정보 가져오기
 				ArrayList<ChatList> chatList = (ArrayList<ChatList>) chatService.selectChatList(returnMember);
 				session.setAttribute("chatList", chatList);
-	
+
 				// System.out.println(chatList);
 				mv.setViewName("home");
-			}else {
+			} else {
 				mv.addObject("message", "승인되지 않은 판매자입니다.");
 				mv.setViewName("member/login");
 			}
@@ -525,40 +525,40 @@ public class MemberController {
 
 	@RequestMapping(value = "sellerSendmail.do", method = RequestMethod.POST)
 	public void sellerSendMail(HttpServletResponse response, @RequestParam("email") String mail_to) {
-			try {
+		try {
 
-				String mail_from = "JakMoolFarm" + "<jakmoolfarm@gmail.com>";
-				String title = null;
-				String contents = null;
-				// 인증번호 보내기
-				title = "JakMoolFarm 판매자 승인";
-				contents = "JakMoolFarm 판매자 승인이 완료되었습니다.";
-				mail_from = new String(mail_from.getBytes("UTF-8"), "UTF-8");
-				mail_to = new String(mail_to.getBytes("UTF-8"), "UTF-8");
-				Properties props = new Properties();
-				props.put("mail.transport.protocol", "smtp");
-				props.put("mail.smtp.host", "smtp.gmail.com");
-				props.put("mail.smtp.port", "587");
-				props.put("mail.smtp.starttls.enable", "true");
-				props.put("mail.smtp.socketFactory.port", "587");
-				props.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
-				props.put("mail.smtp.socketFactory.fallback", "false");
-				props.put("mail.smtp.auth", "true");
-				Authenticator auth = new SMTPAuthenticator();
-				Session sess = Session.getDefaultInstance(props, auth);
-				MimeMessage msg = new MimeMessage(sess);
-				msg.setFrom(new InternetAddress(mail_from));
-				msg.setRecipient(Message.RecipientType.TO, new InternetAddress(mail_to));
-				msg.setSubject(title, "UTF-8");
-				msg.setContent(contents, "text/html; charset=UTF-8");
-				msg.setHeader("Content-type", "text/html; charset=UTF-8");
-				Transport.send(msg);
-			} catch (Exception e) {
-				e.printStackTrace();
+			String mail_from = "JakMoolFarm" + "<jakmoolfarm@gmail.com>";
+			String title = null;
+			String contents = null;
+			// 인증번호 보내기
+			title = "JakMoolFarm 판매자 승인";
+			contents = "JakMoolFarm 판매자 승인이 완료되었습니다.";
+			mail_from = new String(mail_from.getBytes("UTF-8"), "UTF-8");
+			mail_to = new String(mail_to.getBytes("UTF-8"), "UTF-8");
+			Properties props = new Properties();
+			props.put("mail.transport.protocol", "smtp");
+			props.put("mail.smtp.host", "smtp.gmail.com");
+			props.put("mail.smtp.port", "587");
+			props.put("mail.smtp.starttls.enable", "true");
+			props.put("mail.smtp.socketFactory.port", "587");
+			props.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
+			props.put("mail.smtp.socketFactory.fallback", "false");
+			props.put("mail.smtp.auth", "true");
+			Authenticator auth = new SMTPAuthenticator();
+			Session sess = Session.getDefaultInstance(props, auth);
+			MimeMessage msg = new MimeMessage(sess);
+			msg.setFrom(new InternetAddress(mail_from));
+			msg.setRecipient(Message.RecipientType.TO, new InternetAddress(mail_to));
+			msg.setSubject(title, "UTF-8");
+			msg.setContent(contents, "text/html; charset=UTF-8");
+			msg.setHeader("Content-type", "text/html; charset=UTF-8");
+			Transport.send(msg);
+		} catch (Exception e) {
+			e.printStackTrace();
 
-			} finally {
+		} finally {
 
-			}
+		}
 
 	}
 
@@ -714,12 +714,61 @@ public class MemberController {
 		json.put("marketcount", result.getMarketcount());
 		json.put("auctioncount", result.getAuctioncount());
 		json.put("visitcount", result.getVisitcount());
-		
+
 		System.out.println(json.toJSONString());
 
 		response.setContentType("application/json; charset=utf-8;");
 		PrintWriter out = response.getWriter();
 		out.print(json.toJSONString());
+		out.flush();
+		out.close();
+
+	}
+
+	// admin 최신판매/최신경매 조회
+	@RequestMapping(value = "newmarketDate.do")
+	public void newmarketDate(Market market, HttpServletResponse response) throws IOException {
+		System.out.println("최신판매조회 들어옴");
+		List<Market> result = memberService.newmarket(market);
+		System.out.println("판매조회 result 값:" + result);
+		JSONArray jarr = new JSONArray();
+		for (Market m : result) {
+			JSONObject json = new JSONObject();
+			json.put("market_title", m.getMarket_title());
+			json.put("market_releasedate", m.getMarket_releasedate().toString());
+			json.put("member_id", m.getMember_id());
+			jarr.add(json);
+		}
+
+		JSONObject sendJson = new JSONObject();
+		sendJson.put("list", jarr);
+		response.setContentType("application/json; charset=utf-8");
+		PrintWriter out = response.getWriter();
+		out.append(sendJson.toJSONString());
+		out.flush();
+		out.close();
+
+	}
+
+	@RequestMapping(value = "newauctionDate.do")
+	public void newauctionDate(Auction auction, HttpServletResponse response) throws IOException {
+		System.out.println("최신경매조회 들어옴");
+		List<Auction> result = memberService.newauction(auction);
+		System.out.println("판매조회 result 값:" + result);
+		JSONArray jarr = new JSONArray();
+		for (Auction a : result) {
+			JSONObject json = new JSONObject();
+			json.put("auction_title", a.getAuction_title());
+			json.put("member_id", a.getMember_id());
+			json.put("auction_status", a.getAuction_status());
+			jarr.add(json);
+		}
+
+		JSONObject sendJson = new JSONObject();
+		sendJson.put("list", jarr);
+		response.setContentType("application/json; charset=utf-8");
+		PrintWriter out = response.getWriter();
+		out.append(sendJson.toJSONString());
 		out.flush();
 		out.close();
 
