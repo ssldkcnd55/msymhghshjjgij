@@ -51,5 +51,15 @@ public class CategoryDao {
 		return sqlSession.selectOne("category.selectCategory_name", category);
 	}
 
+	public int updateCategory_main(SqlSessionTemplate sqlSession, Category c) {
+		// TODO Auto-generated method stub
+		return sqlSession.update("category.updateCategory_main", c);
+	}
+
+	public int updateCategory_name(SqlSessionTemplate sqlSession, Category c) {
+		// TODO Auto-generated method stub
+		return sqlSession.update("category.updateCategory_name", c);
+	}
+
 	
 }

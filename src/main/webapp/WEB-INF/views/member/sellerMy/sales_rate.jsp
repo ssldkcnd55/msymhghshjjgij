@@ -59,17 +59,17 @@
 												enabled : false
 											},
 											tooltip : {
-												pointFormat : '판매량: <b>{point.y:.1f} 개</b>'
+												pointFormat : '판매량: <b>{point.y:.0f} 개</b>'
 											},
 											series : [ {
 												name : country,
 												data : visits,
 												dataLabels : {
 													enabled : true,
-													rotation : -90,
+													rotation : -360,
 													color : '#FFFFFF',
 													align : 'right',
-													format : '{point.y:.1f}', // one decimal
+													format : '{point.y:.0f}', // one decimal
 													y : 10, // 10 pixels down from the top
 													style : {
 														fontSize : '13px',

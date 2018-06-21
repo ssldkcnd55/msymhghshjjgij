@@ -72,8 +72,7 @@ var sellerInfo=[];
 								</a></td>
 								<td><strong>${item.member_name}</strong>
 									<p>${item.member_id}</p></td>
-								<td><fmt:formatNumber value="${item.market_price}"
-										pattern="#,###" />원</td>
+								<td><fmt:formatNumber value="${item.market_price}" pattern="#,###" />원</td>
 								<td>${item.buy_amount }개</td>
 								<td>2,500원</td>
 								<td><fmt:formatNumber

@@ -7,10 +7,12 @@
 }
 
 .bidding_table th, .bidding_table td {
-    padding: 8px;
     text-align: center;
     border-bottom: 1px solid #ddd;
     background-color: white;
+}
+.bidding_table td, .bidding_table th{
+    height:40px;	
 }
 .bidding_table th{
 	background: #ece6ce;
@@ -34,7 +36,7 @@
    float:left;  margin-right:30px;
 }
 .bidding_history {
-   margin-top: 40px; height: 80%; overflow: auto;
+   margin-top: 40px; height: 340px; overflow: auto;
 }
 .bidder {
    width:30%;

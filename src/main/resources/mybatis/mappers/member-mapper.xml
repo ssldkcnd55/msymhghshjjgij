@@ -40,7 +40,14 @@
 		useGeneratedKeys="true" statementType="PREPARED" flushCache="true">
 		<![CDATA[ insert into member values (
 					#{member_id}, #{member_pwd}, #{member_category}, #{member_name}, 
-					#{member_addr}, #{member_tel}, 'Y', #{member_img},'N',0) ]]>
+					#{member_addr}, #{member_tel} ]]>
+		<if test="member_category == 0">
+		<![CDATA[,'N']]>
+		</if>
+		<if test="member_category != 0">
+		<![CDATA[,'Y']]>
+		</if>
+		<![CDATA[, #{member_img},'N',0)]]>
 	</insert>
 
 	<select id="findId" parameterType="member" resultType="member">
@@ -205,5 +212,13 @@ insert into member values (
 	select member.MEMBER_ID,member.MEMBER_NAME,member.MEMBER_ADDR from member left join userpoint on member.MEMBER_ID = userpoint.MEMBER_ID where member.member_id = #{member_id}
 ]]>
 </select> 
+
+ <select id="selectAllcount" resultType="member">
+<![CDATA[
+	select * from (select count(member_id) as "membercount" from member),(select count(market_no) as "marketcount"  from market),(select count(auction_no) as "auctioncount" from auction),(select count(visit_no) as "visitcount" from visit)
+]]>
+</select>  
+
+
 
 </mapper>

@@ -108,43 +108,28 @@
 			var objStr = JSON.stringify(data);
 			var jsonObj = JSON.parse(objStr);
 			var select = jsonObj.list[0].type; 
-			alert("select : "+select);
+			/* alert("select : "+select); */
 			var outValues ="";
-			for(var i in jsonObj.list){
+			
+			if(jsonObj.list.length != 0 ){
+				for(var i in jsonObj.list){
 				console.log(jsonObj.list[i].type);
-				switch(jsonObj.list[i].type){
-				
-				case 0 : outValues += 
+				 outValues += 
 				"<a href='AuctionDetail.do?auction_no="+jsonObj.list[i].auction_no +"'>"+
        			"<div class='market'><div class='img_box' style='background-image: url(\"/farm/resources/upload/auctionUpload/"+jsonObj.list[i].auction_img+"\"); background-size: cover;'></div>"+
-       			"<div class='title_box'><p class='title' style='text-align:center;'>"+jsonObj.list[i].auction_title+"(경매대기)</p> <p class='content' style='text-align:center;'>"+jsonObj.list[i].auction_note+"</p></div> "+
-       			"</div></a>";break;
-				case 1 : outValues += 
-					"<a href='AuctionDetail.do?auction_no="+jsonObj.list[i].auction_no +"'>"+
-	       			"<div class='market'><div class='img_box' style='background-image: url(\"/farm/resources/upload/auctionUpload/"+jsonObj.list[i].auction_img+"\"); background-size: cover;'></div>"+
-	       			"<div class='title_box'><p class='title' style='text-align:center;'>"+jsonObj.list[i].auction_title+"(경매중)</p> <p class='content' style='text-align:center;'>"+jsonObj.list[i].auction_note+"</p></div> "+
-	       			"</div></a>";
-	       			break;
-				case 2 : outValues += 
-					"<a href='AuctionDetail.do?auction_no="+jsonObj.list[i].auction_no +"'>"+
-	       			"<div class='market'><div class='img_box' style='background-image: url(\"/farm/resources/upload/auctionUpload/"+jsonObj.list[i].auction_img+"\"); background-size: cover;'></div>"+
-	       			"<div class='title_box'><p class='title' style='text-align:center;'>"+jsonObj.list[i].auction_title+"(마감)</p> <p class='content' style='text-align:center;'>"+jsonObj.list[i].auction_note+"</p></div> "+
-	       			"</div></a>";
-	       			break;
-				default :outValues += 
-					"<a href='AuctionDetail.do?auction_no="+jsonObj.list[i].auction_no +"'>"+
-	       			"<div class='market'><div class='img_box' style='background-image: url(\"/farm/resources/upload/auctionUpload/"+jsonObj.list[i].auction_img+"\"); background-size: cover;'></div>"+
-	       			"<div class='title_box'><p class='title' style='text-align:center;'>"+jsonObj.list[i].auction_title+"(최신순)</p> <p class='content' style='text-align:center;'>"+jsonObj.list[i].auction_note+"</p></div> "+
-	       			"</div></a>";break;
-					}
-				
+       			"<div class='title_box'><p class='title' style='text-align:center;'>"+jsonObj.list[i].auction_title+"</p> <p class='content' style='text-align:center;'>"+jsonObj.list[i].auction_note+"</p></div> "+
+       			"</div></a>";
+				}
+				$(".auction_box").html(outValues);
+			}else{
+				alert("선택된 항목의 결과가 없습니다.");
 			}
-			$(".auction_box").html(outValues);
+				
 			
 			$(".more_remove").html();
 				outValues =
 					"</div>"+
-   					"<button class='more_market'  onclick='more_auctionCategory("+select+");' style='background-color:#A17977;margin-bottom:20px;''>경매 더보기1 ▼</button>"+
+   					"<button class='more_market'  onclick='more_auctionCategory("+select+");' style='background-color:#A17977;margin-bottom:20px;''>경매 더보기 ▼</button>"+
    					"</div>";
 			$(".more_remove").html(outValues);
 			
@@ -184,7 +169,7 @@
 			outValues+=
 				"<a href='AuctionDetail.do?auction_no="+jsonObj.list[i].auction_no+"'>"+
        			"<div class='market'><div class='img_box' style='background-image: url(\"/farm/resources/upload/auctionUpload/"+jsonObj.list[i].auction_img+"\"); background-size: cover;'></div>"+
-       			"<div class='title_box'><p class='title' style='text-align:center;'>"+jsonObj.list[i].auction_title+"(최신순)</p> <p class='content' style='text-align:center;'>"+jsonObj.list[i].auction_note+"</p></div> "+
+       			"<div class='title_box'><p class='title' style='text-align:center;'>"+jsonObj.list[i].auction_title+"</p> <p class='content' style='text-align:center;'>"+jsonObj.list[i].auction_note+"</p></div> "+
        			"</div></a>";
 			}
 			$(".auction_box").html(outValues);

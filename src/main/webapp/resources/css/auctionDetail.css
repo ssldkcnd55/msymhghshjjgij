@@ -661,8 +661,13 @@ font-size: 14pt;
  	margin :5px 5px 0 0;
  
  }
-
-
+.auction_backgroundtable{
+	background:pink;
+}
+.auction_backgroundtable tr td,.auction_backgroundtable tr th{
+	
+	height:50px;
+}
 
 #table_tr_1{
 	background: #ece6ce;

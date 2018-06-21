@@ -28,7 +28,7 @@ function numberWithCommas(x) {
  function countOperator(op)
 {	
 	 var amount=Number($('.flow_order_stock span').text());
-	$(".flow_order_count").val(Number( $(".flow_order_count").val())+Number(op) );
+	$(".flow_order_count").val(Number( $(".flow_order_count").val())+Number(op));
 	if($(".flow_order_count").val()<1)
 		{
 		$(".flow_order_count").val(1);

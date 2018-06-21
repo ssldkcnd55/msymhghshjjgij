@@ -525,7 +525,7 @@
 	<![CDATA[
 		select a.auction_no from auction a, auction_history ah
 		where a.auction_no = ah.auction_no
-		and a.auction_status = '2' group by a.auction_no
+		and a.auction_status in( '2','3','4') group by a.auction_no
 	]]>
 	</select>
 	
@@ -539,7 +539,7 @@
 	
 	<select id="selectWinBid"  parameterType="int"  resultType="AuctionCommon">
 	<![CDATA[
-		select ah.auction_no,ah.member_id,ah.auction_history_price,a.auction_title 
+		select ah.auction_no,ah.member_id,ah.auction_history_price,a.auction_title,a.auction_status
 		from auction_history ah, auction a where ah.auction_no = a.auction_no and
 		ah.AUCTION_HISTORY_PRICE = (select max(AUCTION_HISTORY_PRICE) as "AUCTION_HISTORY_PRICE" 
     	from auction_history where auction_no = #{auction_no} ) 
@@ -550,7 +550,7 @@
       where AUCTION_HISTORY_PRICE = (select max(AUCTION_HISTORY_PRICE) as "AUCTION_HISTORY_PRICE" 
     	from auction_history where auction_no = #{auction_no} ) 
     	and auction_no = #{auction_no}
-      )
+      )order by a.auction_no desc
 	]]>
 
 	</select>
@@ -561,4 +561,17 @@
 		and ah.member_id = #{member_id}
 		]]>
 	</select>
+	
+	<select id="selectbid" parameterType="int" resultType="Auction">
+		<![CDATA[
+		select auction_no, member_id, auction_title, auction_status, 
+		auction_startprice,auction_directprice, 
+		to_char(auction_startdate, 'YYYY/MM/DD') as "auction_startdate", 
+		to_char(auction_enddate, 'YYYY/MM/DD') as "auction_enddate"
+		from auction 
+		where auction_no = #{auction_no}
+		
+		]]>
+	</select>
+	
 </mapper>

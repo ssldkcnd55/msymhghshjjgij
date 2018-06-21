@@ -766,6 +766,24 @@ table.searchedMember:hover{
     line-height: 30px;
     vertical-align: middle;
 }
+
+.sell_warning_head{
+	text-align: center;
+    font-size: 11pt;
+    width: 180px;
+    height: 30px;
+    background-color: #e6473b;
+    color: white;
+    line-height: 30px;
+    vertical-align: middle;
+	
+}
+.sell_warning_head img{
+	    width: 15px;
+    vertical-align: middle;
+    margin-right: 5px;
+    margin-bottom: 3px;
+}
 .sell_alarm_head img{
 	    width: 15px;
     vertical-align: middle;

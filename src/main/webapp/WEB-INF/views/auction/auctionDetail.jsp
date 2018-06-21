@@ -6,8 +6,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Farm</title>
-<link href="/farm/resources/css/auctionDetail.css" rel="stylesheet"
-   type="text/css" />
+
+
 <link href="/farm/resources/css/bottommovemenu.css" rel="stylesheet"
    type="text/css" />   
 <link href="/farm/resources/css/style.css" rel="stylesheet"
@@ -23,7 +23,8 @@
    
 <link href="resources/time/timeTo.css" rel="stylesheet"
    type="text/css" />
-
+<link href="/farm/resources/css/auctionDetail.css" rel="stylesheet"
+   type="text/css" />
 
 <script type="text/javascript"
    src="/farm/resources/js/jquery-3.3.1.min.js"></script>
@@ -31,10 +32,16 @@
 
 <style type="text/css">
 	#time > .first:nth-child(1){
-		margin-right:10px;
+		margin-right:13px;
 	}
 	.a> .first:nth-child(1){
-		margin-right:10px;
+		margin-right:13px;
+	}
+	.auction_backgroundtable{
+	overflow-y: scroll;
+	}
+	.auction_backgroundtable tr td,.auction_backgroundtable tr th{	
+		height:40px;
 	}
 	
 
@@ -234,7 +241,7 @@ $(function(){
                  if(json.list[0].day > 0 && biddingcount > 0){
                  var outValues = "";
                     outValues =
-                       "<span class='s1'>입찰 수 : </span> <span>"+biddingcount+"</span>&nbsp;&nbsp;&nbsp; <span class='s1'>남은기간 : </span>"+
+                       "<span class='s1'>입찰 수 : </span> <span>"+(biddingcount-1)+"</span>&nbsp;&nbsp;&nbsp; <span class='s1'>남은기간 : </span>"+
                       "<span>"+json.list[0].day+"</span>";
                  }
                     
@@ -242,24 +249,24 @@ $(function(){
                   
                    
                var outValues2 = 
-                  "<table class='bidding_table'>"+
-               "<tr>"+
+                  "<table class='bidding_table' >"+
+              	 "<tr>"+
                   "<th class='bidder'>입찰자</th>"+
                   "<th class='current_price'>입찰가</th>"+
-                  "<th>입찰 시간</th>"+
-               "</tr>";
+                  "<th>입찰  시간</th>"+
+             	  "</tr>";
                
                  for(var i in json.list){
-                	 if(json.list[i].member_id != system ){
+                	 if(json.list[i].member_id != 'system' ){
                     outValues2 +=
-                       "<tr>"+
+                     "<tr>"+
                      "<td>"+json.list[i].member_id+"</td>"+
                      "<td>"+numberWithCommas(json.list[i].auction_history_price)+"원</td>"+
                      "<td>"+json.list[i].auction_history_date+"</td>"+
                      "</tr>";
                 	 }
                  }
-                   outValues2 += "</table>";
+                  outValues2 += "</table>"; 
                  $(".bidding_history").html(outValues2);
         	  }
           else{
@@ -287,26 +294,48 @@ $(function(){
          success:function(obj){
              var objStr = JSON.stringify(obj);
              var jsonObj = JSON.parse(objStr);
-            /*  alert("날짜 : "+jsonObj.auction_enddate); */
+             async: false;
+             var outValues = ""; 
+             var outValues2 = "";  
+             var outValues3 = "";
              
             if(jsonObj.status == 1){
              $('.demo1').timeTo(new Date(jsonObj.auction_enddate)); 
              $('.a').timeTo(new Date(jsonObj.auction_enddate)); 
-            }
+            var stop = 0;
+            var upadte;
+            //타이머 시간이 0이 될때
+            update = setInterval(function(){
+         	   stop = 0;
+         	   $("#time li").each(function(){
+          	  if( $(this).text()==0){
+          		 stop += 0;
+            	  }else{
+            		  stop += 1;
+            	  }
+            	   console.log( $(this).text());
+               });
+					   if(stop == 0){
+						   outValues3=  "경매 마감";
+			               outValues2=  "경매 마감"; 
+			               $("#time").html(outValues3);  
+			               $(".a").html(outValues2); 
+			               $(".button_buy").remove();
+					   }   
+            }, 1000);
             
-             var outValues = $("#time").html(); 
-             var outValues2 = $(".a").html(); 
-             
+           }
+           
               if(jsonObj.status == 0){
-                outValues+="경매 준비중";
-                outValues2+="경매 준비중";
+            	  outValues="<span style='font-weight: bold;font-size:15pt;'>경매 준비중</span>";
+                outValues2="경매 준비중";
              }else if(jsonObj.status == 2 || jsonObj.status ==3 || jsonObj.status ==4 ){
-                outValues+=  "경매 마감";
-                outValues2+=  "경매 마감";
+            	 outValues=  "경매 마감";
+                outValues2=  "경매 마감";
              }
-               $("#time").html(outValues);  
-               $(".a").html(outValues2); 
-               
+               $(".end").html(outValues);  
+               $("#a").html(outValues2); 
+             
          },error: function(request,status,errorData){
                alert("error code : " + request.status + "\nmessage" + 
                        request.responseText + "\nerror" + errorData);
@@ -421,14 +450,15 @@ $(function(){
             var objStr = JSON.stringify(data);
             var jsonObj = JSON.parse(objStr);
             
-            var outValues = "<tr id='table_tr_1'><th >번호</th><th >판매자</th><th >제목</th></tr>"; 
+            var outValues = "<tr id='table_tr_1' style='background: #ece6ce;width:60px;'><th >번호</th><th >판매자</th><th >제목</th></tr>"; 
             
             for(var i in jsonObj.list){
+            	
                   outValues += 
                      "<tr>"+
                      "<td style='text-align:center;'>"+i+"</td>"+
-                     "<td>"+jsonObj.list[i].member_id+"</td>"+
-                     "<td>"+jsonObj.list[i].auction_title+"</td>"+
+                     "<td style='text-align:center;'>"+jsonObj.list[i].member_id+"</td>"+
+                     "<td style='text-align:center;'>"+jsonObj.list[i].auction_title+"</td>"+
                      "</tr>";
                }
             $(".auction_backgroundtable").html(outValues);
@@ -459,7 +489,7 @@ $(function(){
             <div class="title_box">
                <span class="title">${auction.auction_title }</span> &nbsp; 
                <span class="release_date">경매 시작일</span>&nbsp;<span class="date">${auction.auction_startdate}</span>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
-               &nbsp; &nbsp;  <span class="end">남은시간 : </span>
+               &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; <span class="end">&nbsp; &nbsp; 남은시간 : </span>
                  <span id="time" class="demo1"></span>&nbsp; 
                  <c:choose>
                   <c:when test="${loginUser.member_id eq auction.member_id && auction.auction_status eq 0}">
@@ -547,8 +577,8 @@ $(function(){
             <div id="tab-2" class="tab-content">
                <div class="auction_history_box">
 
-                  <div class="bidding_top">
-                     <div style="width:100%; margin-left:45%;">
+                  <div class="bidding_top" style="height:500px;">
+                     <div style="width:100%; text-align:center; ">
                      <h2 class="">입찰 내역</h2>
                      </div>
 
@@ -561,7 +591,7 @@ $(function(){
 
                      <!-- 경매정보  -->
 
-                     <div class="bidding_history"></div>
+                     <div class="bidding_history" ></div>
                      <!-- 입찰 테이블 -->
                      <!--  -->
                   </div>
@@ -572,11 +602,12 @@ $(function(){
             <!-- Daily box -->
             <div id="tab-3" class="tab-content">
                <div class="auction_background" style="width:97%;height:500px;padding:10px;border:3px solid #ddd;" >
-               <h2 style="margin-left:42%;margin-bottom:20px;">경매 이력</h2>
+               <h2 style="text-align:center;margin-bottom:40px;">경매 이력</h2>
+               <div style="overflow-y: scroll;    height: 370px; overflow: auto;">
                <table class="auction_backgroundtable" style="width:90%;margin-left:45px;">
                   
                </table>
-               
+               </div>
                </div>
             </div>
             <!-- Daily box -->
@@ -584,7 +615,7 @@ $(function(){
             
       <!-- QnA box -->
              <div id="tab-4" class="tab-content" >
-             <c:if test="${loginUser.member_category eq '0'}">
+             <c:if test="${loginUser.member_category eq '1' && not empty sessionScope.loginUser}">
              <button class="auctionwrite_button" onclick="Auction_qnaMake();">문의 작성</button>
              </c:if>
              <div class="qna_box" >

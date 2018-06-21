@@ -147,7 +147,7 @@ public class AuctionDao {
 		return sqlSession.update("auction.delete_auction_qna_answer", auction_qna_no);
 	}
 
-	public List<AuctionHistory> selectAuctionHistory(SqlSessionTemplate sqlSession, int currentPage) {
+	public List<Auction> selectAuctionHistory(SqlSessionTemplate sqlSession, int currentPage) {
 		// TODO Auto-generated method stub
 		int startRow =(currentPage-1)*10+1; //1~10, 11~20 계산할 거 ex) 1, 11, 21, 31,)
 		int endRow = startRow+9;
@@ -397,6 +397,11 @@ public class AuctionDao {
 	public AuctionOrder selectAuctionPaymentInfoFromCS(SqlSessionTemplate sqlSession,AuctionCommon common) {
 		// TODO Auto-generated method stub
 		return sqlSession.selectOne("auction.selectAuctionPaymentInfoFromCS",common);
+	}
+
+	public Auction selectbid(SqlSessionTemplate sqlSession, int auction_no) {
+		return sqlSession.selectOne("auction.selectbid",auction_no);
+
 	}
 
 	

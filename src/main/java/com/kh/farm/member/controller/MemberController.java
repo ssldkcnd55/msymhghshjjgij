@@ -35,6 +35,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -159,40 +160,43 @@ public class MemberController {
 		}
 		int insertmember = memberService.insertMember(member);
 		/// 'system'과 채팅방 생성
-		
-			Chat chat = new Chat();
-			chat.setMember_id1(member.getMember_id());
-			chat.setMember_id2("system");
-			chatService.insertChat(chat);
-		
+
+		Chat chat = new Chat();
+		chat.setMember_id1(member.getMember_id());
+		chat.setMember_id2("system");
+		chatService.insertChat(chat);
+
 		///
 		return "home";
 	}
 
 	@RequestMapping(value = "login.do", method = RequestMethod.POST)
-	public ModelAndView loginCheck(ModelAndView mv,Member member, HttpSession session, HttpServletRequest request) {
+	public ModelAndView loginCheck(ModelAndView mv, Member member, HttpSession session, HttpServletRequest request) {
 
-		String viewName = null;
 		try {
 			// 로그인 멤버 정보 가져오기
 			Member returnMember = memberService.selectLoginCheck(member);
-			// System.out.println("returnMember : " + returnMember);
-			String ip = getClientIP(request);
-			System.out.println("ip : " + ip);
-			returnMember.setIp(ip);
-			int visit = memberService.insertVisit(returnMember);
-			session.setAttribute("loginUser", returnMember);
-			
-			
-			// 로그인 멤버 채팅 정보 가져오기
-			ArrayList<ChatList> chatList = (ArrayList<ChatList>) chatService.selectChatList(returnMember);
-			session.setAttribute("chatList", chatList);
-
-			// System.out.println(chatList);
-			mv.setViewName("home");
-			viewName = "home";
+			if(returnMember.getMember_approval().equals("Y")) {
+				// System.out.println("returnMember : " + returnMember);
+				String ip = getClientIP(request);
+				System.out.println("ip : " + ip);
+				returnMember.setIp(ip);
+				int visit = memberService.insertVisit(returnMember);
+				session.setAttribute("loginUser", returnMember);
+				
+				
+				// 로그인 멤버 채팅 정보 가져오기
+				ArrayList<ChatList> chatList = (ArrayList<ChatList>) chatService.selectChatList(returnMember);
+				session.setAttribute("chatList", chatList);
+	
+				// System.out.println(chatList);
+				mv.setViewName("home");
+			}else {
+				mv.addObject("message", "승인되지 않은 판매자입니다.");
+				mv.setViewName("member/login");
+			}
 		} catch (Exception e) {
-			mv.addObject("message", "로그인 실패");
+			mv.addObject("message", "로그인 실패! 아이디와 비밀번호를 확인해 주세요");
 			mv.setViewName("member/login");
 		}
 		return mv;
@@ -519,6 +523,45 @@ public class MemberController {
 		}
 	}
 
+	@RequestMapping(value = "sellerSendmail.do", method = RequestMethod.POST)
+	public void sellerSendMail(HttpServletResponse response, @RequestParam("email") String mail_to) {
+			try {
+
+				String mail_from = "JakMoolFarm" + "<jakmoolfarm@gmail.com>";
+				String title = null;
+				String contents = null;
+				// 인증번호 보내기
+				title = "JakMoolFarm 판매자 승인";
+				contents = "JakMoolFarm 판매자 승인이 완료되었습니다.";
+				mail_from = new String(mail_from.getBytes("UTF-8"), "UTF-8");
+				mail_to = new String(mail_to.getBytes("UTF-8"), "UTF-8");
+				Properties props = new Properties();
+				props.put("mail.transport.protocol", "smtp");
+				props.put("mail.smtp.host", "smtp.gmail.com");
+				props.put("mail.smtp.port", "587");
+				props.put("mail.smtp.starttls.enable", "true");
+				props.put("mail.smtp.socketFactory.port", "587");
+				props.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
+				props.put("mail.smtp.socketFactory.fallback", "false");
+				props.put("mail.smtp.auth", "true");
+				Authenticator auth = new SMTPAuthenticator();
+				Session sess = Session.getDefaultInstance(props, auth);
+				MimeMessage msg = new MimeMessage(sess);
+				msg.setFrom(new InternetAddress(mail_from));
+				msg.setRecipient(Message.RecipientType.TO, new InternetAddress(mail_to));
+				msg.setSubject(title, "UTF-8");
+				msg.setContent(contents, "text/html; charset=UTF-8");
+				msg.setHeader("Content-type", "text/html; charset=UTF-8");
+				Transport.send(msg);
+			} catch (Exception e) {
+				e.printStackTrace();
+
+			} finally {
+
+			}
+
+	}
+
 	// 접속자 ip 가져오기
 	public String getClientIP(HttpServletRequest request) {
 
@@ -593,7 +636,7 @@ public class MemberController {
 
 			for (Visit v : visitList) {
 				JSONObject json = new JSONObject();
-				json.put("count", v.getVisit_count());
+				json.put("count2", v.getVisit_count());
 				json.put("month", v.getVisit_month());
 				jarr.add(json);
 				count++;
@@ -618,10 +661,7 @@ public class MemberController {
 	// 상품판매량 그래프
 	@RequestMapping(value = "mybuy.do")
 	public void mybuygraph(HttpServletResponse response, Market market) throws IOException {
-		System.out.println("mybuy에 들어옴");
-		System.out.println("member_id 불러옴:" + market.getMember_id());
 		List<Market> marketlist = memberService.buygraph(market);
-		System.out.println(marketlist);
 		JSONArray jarr = new JSONArray();
 		for (Market m : marketlist) {
 			JSONObject json = new JSONObject();
@@ -641,22 +681,48 @@ public class MemberController {
 		out.close();
 
 	}
-	
+
 	@RequestMapping("selectSelInfo.do")
-	public void sellerInfo(@RequestParam("member_id") String member_id,HttpServletResponse response)throws IOException {
+	public void sellerInfo(@RequestParam("member_id") String member_id, HttpServletResponse response)
+			throws IOException {
 		System.out.println(member_id);
 		Member member = memberService.selectMemberInfo(member_id);
 		JSONObject json = new JSONObject();
 		json.put("member_id", member.getMember_id());
-		json.put("member_name",member.getMember_name());
+		json.put("member_name", member.getMember_name());
 		json.put("member_addr", member.getMember_addr());
-		json.put("point_point",member.getUserpoint());
-		
+		json.put("point_point", member.getUserpoint());
+
 		response.setContentType("application/json; charset=utf-8");
 		PrintWriter out = response.getWriter();
 		out.append(json.toJSONString());
 		out.flush();
 		out.close();
+	}
+
+	// admin 총회원수/총 판매 등록수/총 경매 등록수
+	@RequestMapping(value = "countAll.do")
+	public void selectAllcount(Member member, HttpServletResponse response) throws IOException {
+		System.out.println("회원수조회들어옴");
+		Member result = memberService.selectAllcount();
+
+		System.out.println("result값:" + result.getMembercount());
+
+		JSONObject json = new JSONObject();
+
+		json.put("membercount", result.getMembercount());
+		json.put("marketcount", result.getMarketcount());
+		json.put("auctioncount", result.getAuctioncount());
+		json.put("visitcount", result.getVisitcount());
+		
+		System.out.println(json.toJSONString());
+
+		response.setContentType("application/json; charset=utf-8;");
+		PrintWriter out = response.getWriter();
+		out.print(json.toJSONString());
+		out.flush();
+		out.close();
+
 	}
 
 }

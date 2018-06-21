@@ -115,7 +115,7 @@ public class AuctionServiceImpl implements AuctionService {
 	}
 
 	@Override
-	public List<AuctionHistory> selectAuctionHistory(int currentPage) {
+	public List<Auction> selectAuctionHistory(int currentPage) {
 		// TODO Auto-generated method stub
 		return auctionDao.selectAuctionHistory(sqlSession, currentPage);
 	}
@@ -336,5 +336,11 @@ public class AuctionServiceImpl implements AuctionService {
 	public AuctionOrder selectAuctionPaymentInfoFromCS(AuctionCommon common) {
 		// TODO Auto-generated method stub
 		return auctionDao.selectAuctionPaymentInfoFromCS(sqlSession,common);
+	}
+	
+	@Override
+	public Auction selectbid(int auction_no) {
+		return auctionDao.selectbid(sqlSession,auction_no);
+
 	}
 }

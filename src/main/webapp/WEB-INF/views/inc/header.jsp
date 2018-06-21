@@ -30,8 +30,8 @@ function auction_update(){
 	}
 
 //경매 유찰 검사
-/* var bidDeadlineIn;
-bidDeadlineIn = setInterval(function(){bidDeadline()}, 20000); */
+var bidDeadlineIn;
+bidDeadlineIn = setInterval(function(){bidDeadline()}, 60000);
 
 function bidDeadline(){
 	$.ajax({
@@ -40,18 +40,17 @@ function bidDeadline(){
 		dataType:'json',
 		success : function(data) {
 			var d = JSON.parse(JSON.stringify(data));
-			console.log("되니?");
 			var chat_no = "";
 			var your_id = "";
 			var ws=[];
 			var msgList=[];
 			for(i in d.list){
 				var msg = 
-				'<div class="sell_alarm_head"><img src="/farm/resources/images/sell_icon_white.png" />유찰 알림</div>';
+				'<div class="sell_warning_head"><img src="/farm/resources/images/warning.png" />유찰 알림</div>';
 				msg+='<table class="sell_alarm_table"><tr><th colspan="2">상품금액 미결제로 인해 유찰되었습니다.</th></tr>';
-				msg+='<tr><td>상품명</td><td>'+d.list[i].auction_title+'</td></tr>';
+				msg+='<tr><td>상품명</td><td><a target="blank" href="/farm/AuctionDetail.do?auction_no='+d.list[i].auction_no+'">'+d.list[i].auction_title+'</a></td></tr>';
 				msg+='</table>';
-				msg+='<table class="sell_alarm_table"><tr><td colspan="2">3회 유찰 시 사이트 이용에 제재가 이루어 질 수 있습니다</td></tr>';
+				msg+='<table class="sell_alarm_table"><tr><td colspan="2">3회 유찰 시 사이트 이용에 제재가 이루어 질 수 있습니다.</td></tr>';
 				msg+='<tr><td>현재 유찰 횟수<td><td>'+d.list[i].member_warning_count+'</td></tr>'
 				msg+='</table>';
 				
@@ -88,6 +87,8 @@ function bidDeadline(){
 	});
 	
 }
+
+
 //경매 낙찰 검사
 /* var bidding;
 bidding = setInterval(function(){auction_bidding()}, 3000); */
@@ -139,46 +140,6 @@ function getBasketCount(member_id)
 	});
 } 
 
-	/* $(function() {
-
-		$.ajax({
-					url : 'Weather.do',
-					type : 'get',
-					dataType : 'json',
-					success : function(data) {
-						var myItem = data.response.body.items.item;
-						var img = "";
-						var img_text = "";
-						var t3h_check = 0;
-						var sky_check = 0;
-
-						for ( var i in myItem) {
-							if (myItem[i].category == "T3H" && t3h_check == 0) {
-								img_text = myItem[i].fcstValue + "℃";
-								t3h_check = 1;
-							}
-
-							if (myItem[i].category == "SKY" && sky_check == 0) {
-								sky_check = 1;
-								var fv = myItem[i].fcstValue;
-								if (fv >= 0 && fv <= 2) {
-									img = "resources/images/weather/sun.png";
-								} else if (fv >= 3 && fv <= 5) {
-									img = "resources/images/weather/cloud.png";
-								} else if (fv >= 6 && fv <= 8) {
-									img = "resources/images/weather/m_cloud.png";
-								} else if (fv >= 9 && fv <= 10) {
-									img = "resources/images/weather/rain.png";
-								}
-							}
-						}
-
-						$("#weather_img").attr("src", img);
-						$("#w_text").html(img_text);
-					}
-				});
-	}); */
-
 	
 	/*검색기능*/
 
@@ -190,6 +151,55 @@ function getBasketCount(member_id)
 	function moveSearchList(){
 		location.href = "marketList.do?search="+$("#search").val();
 	}
+	
+	 $(function() {
+	      $.ajax({
+	         url : 'Weather.do',
+	         type : 'get',
+	         dataType : 'json',
+	         success : function(data) {
+	            var myItem = data.response.body.items.item;
+	            var img = "";
+	            var img_text="";
+	            var t3h_check=0;
+	            var sky_check=0;
+	            
+	            for (var i in myItem) {
+	               console.log(i);
+	               if(myItem[i].category == "T3H" && t3h_check == 0){
+	                  img_text = myItem[i].fcstValue+"℃";
+	                  t3h_check=1;
+	               }
+
+	               if(myItem[i].category == "SKY" && sky_check == 0){
+	                     sky_check=1;
+	                     var fv=myItem[i].fcstValue;
+	                     if(fv>= 0 && fv <=2){
+	                        img  ="resources/images/weather/sun.png";
+	                        $('.weatherTitle').html("맑음");
+	                     }else if(fv>= 3 && fv <=5){
+	                    	 img  ="resources/images/weather/cloud.png";
+	                    	 $('.weatherTitle').html("구름 조금");
+	                     }else if(fv>= 6 && fv <=8){
+	                    	 img  ="resources/images/weather/m_cloud.png";
+	                    	 $('.weatherTitle').html("구름 많음");
+	                     }else if(fv>= 9 && fv <=10){
+	                    	 img  ="resources/images/weather/rain.png";
+	                    	 $('.weatherTitle').html("비");
+	                     }
+	                  }
+	            }
+	            
+	            $("#weather_img").attr("src",img);
+	            $("#w_text").html(img_text);
+	         },
+	         error: function(request, status, errorData){
+	            alert("error code : " + request.status + "\n"
+	                  + "message : " + request.responseText + "\n"
+	                  + "error : " + errorData);
+	            }
+	      });
+	   }); 
 </script>
 </head>
 
@@ -217,7 +227,7 @@ function getBasketCount(member_id)
                   <li class="menu1"><a href="/farm/moveQnAPage.do" class="link_menu">고객센터</a></li>
                   <li class="menu1 lst"><a href="moveNotice.do" class="link_menu">공지사항 </a></li>
                   <li class="menu1 lst"><a href="moveAdminPage.do" class="link_menu">관리자 페이지</a></li>
-
+				<li class="menu1 lst" ><div><img id="weather_img" style="width: 30px;"></div><div class='weatherTitle'></div><div id="w_text"></div></li>
                </ul>
             </div>
             <div class="header_main">
@@ -260,7 +270,7 @@ function getBasketCount(member_id)
                </div>
             </div>
             <div class="bg"></div>
-            <button onclick="bidDeadline();">테스트</button>
+            <!-- <button onclick="bidDeadline();">테스트</button> -->
             <%-- <h1 class="logo">
 	<div id="header">
 		<div class="inner-wrap">

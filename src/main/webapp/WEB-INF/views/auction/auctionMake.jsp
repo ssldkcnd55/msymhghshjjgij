@@ -45,14 +45,9 @@
 	 //경매 즉시구매, 시작 날짜 ,마감 날짜 체크 
 	function auction_startdateCheck(){
 		var startdate = $("#startdate").val();
-		/* alert("startdate : "+startdate); */
 		var enddate = $("#enddate").val();
-		/* alert("enddate : "+enddate); */
 		var directprice =$("#directprice").val();
-		/* alert("directprice : "+directprice); */
 		var startprice =$("#startprice").val();
-		/* alert("startprice : "+startprice); */
-		
 		var result2 = true;
 		async: false;
 		
@@ -64,15 +59,13 @@
 		if(dd<10) {
 		    dd='0'+dd
 		} 
-
 		if(mm<10) {
 		    mm='0'+mm
 		} 
-		
 		today = yyyy+'-'+mm+'-'+dd;
 		/* alert("현재 날짜 : "+today); */
 				
-		if((directprice < startprice) || (directprice == startprice)){
+		if((directprice > startprice) || (directprice == startprice)){
 			alert("즉시구매가격은 시작가격보다 같거나 적게 설정할 수 없습니다.");
 			result2 = false;
 			$("#directprice").focus();
@@ -130,7 +123,7 @@
 								<td class="td1">
 									<p class="p">상품명</p>
 								</td>
-								<td class="td2" colspan="3"><input type="text"
+								<td class="td2" colspan="3"><input type="text" style="width:400px;"
 									name="auction_title"  placeholder="한글 10~15글자" required="required"> <!-- <input type="submit"
 									 name="category_no" value="카테고리검색" class="input_text_box">
 									<br> --></td>
@@ -140,7 +133,7 @@
 										<p class="p">부제목</p>
 									
 									</td>
-									<td class="td2" colspan="3"><input type="text"
+									<td class="td2" colspan="3"><input type="text" style="width:400px;"
 									name="auction_note" placeholder="한글 60~65글자" required="required"></td>
 							</tr>
 							<tr class="tr1">
@@ -164,7 +157,7 @@
 
 									<p class="p">경매시작가</p>
 								</td>
-								<td colspan="3" class="td2"><input type="number" id="startprice"
+								<td colspan="3" class="td2"><input type="number" id="startprice" min="0"
 									name="auction_startprice" required="required"> <br></td>
 							</tr>
 							<tr class="tr1">
@@ -172,10 +165,10 @@
 
 									<p class="p">즉시구매가</p>
 								</td>
-								<td colspan="3" class="td2"><input type="number" id="directprice"
-									name="auction_directprice" required="required"> <input type="checkbox"
+								<td colspan="3" class="td2"><input type="number" id="directprice" min="0"
+									name="auction_directprice" required="required"><!--  <input type="checkbox"
 									 class="input_checkbox"
-									style="margin-left: 15px;">즉시구매가설정안함<br></td>
+									style="margin-left: 15px;">즉시구매가설정안함<br> --></td>
 							</tr>
 							<tr class="tr1">
 								<td class="td3">

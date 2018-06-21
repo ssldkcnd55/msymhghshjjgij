@@ -27,6 +27,7 @@ public class MemberDao {
 
 	public int insertMember(Member member, SqlSessionTemplate sqlSession) {
 		// TODO Auto-generated method stub
+		System.out.println("카테고리:"+member.getMember_category());
 		int result = sqlSession.insert("member.insertMember", member);
 		return result;
 	}
@@ -232,6 +233,11 @@ public class MemberDao {
 	public int selectMiscaryChatNo(SqlSessionTemplate sqlSession, String member_id) {
 		// TODO Auto-generated method stub
 		return sqlSession.selectOne("chat.selectMiscaryChatNo",member_id);
+	}
+
+	public Member selectAllcount(SqlSessionTemplate sqlSession) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("member.selectAllcount");
 	}
 
 }

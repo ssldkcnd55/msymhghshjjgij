@@ -70,7 +70,7 @@
 			
 			for(var i in json.big) {
 				category_big+='<button id="'+json.big[i].category_main+'" class="deleteBig" onclick="deleteBig(this)">'
-				+'<div class="delImg"></div></button><button class="modifyBig"><div class="modImg"></div></button><button class="accordion"  onclick="toggleList();">ㆍ'
+				+'<div class="delImg"></div></button><button class="modifyBig" id="'+json.big[i].category_main+'2" onclick="updateBig(this)"><div class="modImg"></div></button><button class="accordion"  onclick="toggleList();">ㆍ'
 				+json.big[i].category_main+'</button>'
 				+'<div class="panel" id="'+json.big[i].category_main+'1" name="'+json.big[i].category_main+'"></div><hr class=\"line\">'
 			}
@@ -93,7 +93,7 @@
 						$("#"+json.name[i].category_main+"1").append("<div class='ptag'><p class='ptitle'>"+json.name[i].category_name
 								+"</p><div class='btn'><button class='Btn del' id='"+json.name[i].category_no
 								+"' onclick='deleteName(this)'>삭제</button>"
-								+"<button class='Btn mod'>수정</button></div></div>")
+								+"<button class='Btn mod' id='"+json.name[i].category_name+"1' onclick='updateName(this);'>수정</button></div></div>")
 						}
 						
 					}
@@ -148,6 +148,20 @@
 		}
 	}
 	
+	
+	//카테고리 대분류 수정
+	function updateBig(big) {
+		var big_id = big.id
+		var res = big_id.substring(0, big_id.length-1);
+		var input = prompt('수정할 대분류 카테고리의 이름을 적으세요.');
+		if(input == null) {
+			return false;
+		}else{
+			location.href='updateCategory_main.do?category_main='+input+'&category_main_ori='+res;
+		
+		}
+	}
+	
 	//카테고리 소분류 추가
 	function add_category_name(str) {
 		console.log($(str).closest('div').attr('name'));
@@ -175,6 +189,19 @@
 			location.href='addCategory_name.do?category_name='+input+"&category_main="+main;
 		
 		} 
+	}
+	
+	//카테고리 소분류 수정
+	function updateName(name) {
+		var name_id = name.id;
+		var res = name_id.substring(0, name_id.length-1);
+		var input = prompt('수정할 소분류 카테고리의 이름을 적으세요.');
+		if(input == null) {
+			return false;
+		}else{
+			location.href='updateCategory_name.do?category_name='+input+'&category_name_ori='+res;
+		
+		}
 	}
 	/* 리스트 열림 */
 	function toggleList() {

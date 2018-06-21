@@ -66,7 +66,7 @@ public interface AuctionService {
 
 	
 	/*한결*/
-	List<AuctionHistory> selectAuctionHistory(int currentPage);
+	List<Auction> selectAuctionHistory(int currentPage);
 
 	int selectAuctionHistoryCount();
 	/*한결*/
@@ -151,6 +151,9 @@ public interface AuctionService {
 	int selectMiscarry(String member_id);
 
 	AuctionOrder selectAuctionPaymentInfoFromCS(AuctionCommon common);
+
+	//옥션 입찰안에 값 셀렉트로 값  뽑
+	Auction selectbid(int auction_no);
 
 	
 

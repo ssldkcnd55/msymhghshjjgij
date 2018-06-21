@@ -23,5 +23,9 @@ public interface CategoryService {
 
 	Category selectCategory_name(Category category);
 
+	int updateCategory_main(Category c);
+
+	int updateCategory_name(Category c);
+
 	
 }

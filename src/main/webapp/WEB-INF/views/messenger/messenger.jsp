@@ -125,6 +125,7 @@
 							src="/farm/resources/images/send_msg_icon_3.png">
 					</a></th>
 				</tr>
+				<!-- <tr><td><a id="img_a" href="javascript: return false;">사진전송</a></td><td><input id="img_input" type="file" hidden="hidden" ></td></tr> -->
 			</table>
 		</div>
 	</div>

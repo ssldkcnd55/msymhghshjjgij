@@ -5,8 +5,16 @@
   
    overflow: hidden;
    float: left;
-   margin-left: 100px;
-   /* margin-top:10px; */
+   /*margin-left: 100px;
+   margin-top:10px; */
+   border-right: 1px solid #7e5957;
+}
+
+.selltabs{
+	
+   overflow: hidden;
+   float: left;
+  margin-left:24%;
    border-right: 1px solid #7e5957;
 }
 
@@ -23,6 +31,7 @@
    line-height: 35px;
    font-weight: bold;
    margin-bottom: 5px;
+   cursor:  pointer;
 }
 .tab:last-child{
 	margin-bottom:0px;
@@ -44,7 +53,8 @@ a{
 }
 
 iframe{
-	width:960px;
+	margin-left:10px;
+	width:760px;
 	height:1000px;
 	border:0px;
 	z-index: 100;

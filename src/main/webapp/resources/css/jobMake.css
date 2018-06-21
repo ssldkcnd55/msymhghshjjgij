@@ -120,7 +120,15 @@
 .li2 {
 	float: left;
 }
-
+.searchAddr{
+	background: #f27634;
+	color: white;
+	font-size: 10pt;
+	padding: 3px 6px 3px 6px;
+	cursor: pointer;
+	border-radius: 2px;
+	margin-top: 3px;
+}
 .li3 {
 	float: right;
 	margin-left: 15px;
@@ -162,4 +170,13 @@
 
 .li4_input.submit {
 	margin-right: 0px;
+}
+
+.backimg {
+	text-align: center;
+	background-size: cover;
+	position: absolute;
+	width: 420px;
+	height: 280px;
+	border: 1px solid #dcdcdc;
 }
