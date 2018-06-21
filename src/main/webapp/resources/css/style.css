@@ -121,13 +121,13 @@ img{border:0}
 		}  */
 		
 		.auction_table td{
-		padding: 10px;
+		
 		font-size: 10pt;
 		border-bottom: 1px solid #dcdcdc;
 		
 		}
 		.auction_table td:nth-child(1){
-		
+		padding: 10px;
 		text-align: left;
 	
 		

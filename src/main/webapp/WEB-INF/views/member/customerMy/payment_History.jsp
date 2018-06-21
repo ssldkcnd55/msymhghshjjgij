@@ -118,7 +118,7 @@ function numberWithCommas(x) {
 								}else if(jsonObj.list[i].buy_status == 2){
 									outValues+= "<td>배송중</td>";
 								}else if(jsonObj.list[i].buy_status == 3){
-									outValues+= "<td>배송완료</td>";
+									outValues+= "<td>배송완료<button></button></td>";
 								}else if(jsonObj.list[i].buy_status == 4){
 									outValues+= "<td class='complete'>구매확정</td>";
 								}
