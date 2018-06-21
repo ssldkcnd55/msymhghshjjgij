@@ -44,6 +44,15 @@
 		height:40px;
 	}
 	
+	#background{
+	text-decoration:none;
+	color:black;
+	}
+	
+	#hover:hover{
+	background: #f7f4ea;
+	}
+	
 
 </style>
    
@@ -455,10 +464,10 @@ $(function(){
             for(var i in jsonObj.list){
             	
                   outValues += 
-                     "<tr>"+
+                     "<tr id='hover'>"+
                      "<td style='text-align:center;'>"+(i*1+1)+"</td>"+
                      "<td style='text-align:center;'>"+jsonObj.list[i].member_id+"</td>"+
-                     "<td style='text-align:center;'>"+jsonObj.list[i].auction_title+"</td>"+
+                     "<td style='text-align:center;'><a href='/farm/AuctionDetail.do?auction_no="+jsonObj.list[i].auction_no+"' id='background'>"+jsonObj.list[i].auction_title+"</a></td>"+
                      "</tr>";
                }
             $(".auction_backgroundtable").html(outValues);
