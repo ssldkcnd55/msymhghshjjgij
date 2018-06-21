@@ -259,4 +259,9 @@ public class MemberDao {
 		return sqlSession.selectList("member.allbuyAmount", market);
 	}
 
+	public List<Market> buydategraph(SqlSessionTemplate sqlSession, Market market) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList("member.buydategraph", market);
+	}
+
 }

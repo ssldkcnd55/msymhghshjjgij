@@ -243,7 +243,13 @@ insert into member values (
 	]]>
 	</select>
 
-
+	<select id="buydategraph" parameterType="member" resultType="market">
+	<![CDATA[
+	select *
+  	from  (select m.market_title as "market_title" , sum(b.buy_AMOUNT) as "buy_AMOUNT" , b.buy_date from MARKET m ,  BUY b 
+	where m.MARKET_NO = b.MARKET_NO and m.member_id = #{member_id} group by m.market_title,m.market_no,b.buy_date order by b.buy_date asc) where ROWNUM <=6
+	]]>
+	</select>
 
 
 </mapper>

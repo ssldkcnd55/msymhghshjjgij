@@ -220,5 +220,11 @@ public class MemberServiceImpl implements MemberService {
 
 		return memberDao.allbuyAmount(sqlSession, market);
 	}
+	@Override
+
+	public List<Market> buydategraph(Market market) {
+
+		return memberDao.buydategraph(sqlSession, market);
+	}
 
 }

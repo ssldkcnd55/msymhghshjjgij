@@ -68,4 +68,6 @@ public interface MemberService {
 
 	List<Market> allbuyAmount(Market market);
 
+	List<Market> buydategraph(Market market);
+
 }
