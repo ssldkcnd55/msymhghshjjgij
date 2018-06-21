@@ -32,7 +32,7 @@
 	position: absolute;
 	right: 190px;
 	visibility: hidden;
-	z-index: 2;
+	z-index: 20;
 	padding: 0px;
 	margin: 0px;
 	overflow: hidden;
@@ -104,7 +104,7 @@
 }
 .msgframe {
 	border: 0px;
-	height: 630px;
+	height: 640px;
 	width: 360px;
 	padding: 0px;
 	margin: 0px;
@@ -311,7 +311,7 @@ width: 20px;
 /* 메신저 하단 메세지 입력부분 */
 .msg_bottom {
 	width: 342px;
-	height: 40px;
+	height: 75px;
 	background-color: #8EBD6F;
 	padding: 0px;
 	margin: 0px;
@@ -536,10 +536,59 @@ div.msg_you {
 .messenger_frame {
 	border: 2px solid #98c779;
 	border-radius: 13px;
-	height: 585px;
+	height: 620px;
 	width: 340px;
 }
-
+.chat_send_file{
+	width: 30px;
+}
+.chat_send_file_font
+{
+	
+	color: black;
+	font-size: 15px;
+    vertical-align: super;
+}
+.chat_send_file_a
+{
+	text-decoration: none;
+	color: black;
+}
+#img_a img
+{
+	height: 26px;
+    margin-left: 9px;
+}
+#file_a img
+{
+	height: 26px;
+    margin-left: 9px;
+}
+.chat_send_img
+{
+	width:144px;
+	cursor: pointer;
+}
+.msg_img_down_btn img
+{
+	width: 20px;
+}
+.list_content_img_icon
+{
+	height: 30px;
+}
+.list_content_img_span
+{
+	    line-height: 30px;
+    height: 30px;
+    vertical-align: top;
+}
+.msg_img_down_btn
+{
+	text-decoration: none;
+	color: black;
+	margin-top: 10px;
+}
 /* msg_list.jsp */
 .chat_list_table {
 	width: 340px;

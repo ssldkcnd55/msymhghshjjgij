@@ -1,0 +1,97 @@
+@charset "UTF-8";
+
+body {
+	width: 940px;
+	height: 590px;
+	overflow: hidden;
+	background-color: #222020;
+}
+
+*
+{
+	padding:0;
+}
+.table1
+{
+	width: 930px;
+	height: 450px;
+
+}
+.table1 .tr1
+{
+	height:400px;
+	text-align: center;
+	background-color: #606060;
+	
+}
+.table1 .tr1 span
+{
+	display: inline-block;
+	background-color: white;
+}
+.table1 .tr1 td, .table1 .tr2 td
+{
+	/* border-bottom: 3px solid #bdbdbd; */
+}
+.tr1Img
+{
+	max-height: 390px;
+	max-width: 900px;
+}
+.table1 .tr2
+{
+	height:40px;
+	text-align: right;
+	background-color: #3f3e3e;
+}
+.msg_img_down_btn
+{
+	background-color: #151010;
+	font-size:16px;
+	border: 1px solid #bdbdbd;
+	display: inline-block;
+	margin-right: 11px;
+    margin-top: 2px;
+    padding: 2px;
+}
+.msg_img_down_btn, .msg_img_down_icon
+{
+	height: 40px;
+	text-decoration: none;
+}
+.msg_img_down_btn font
+{
+	color: #808080;
+	height: 40px;
+    line-height: 40px;
+    vertical-align: text-bottom;
+}
+	
+
+.table2 {
+	width: 930px;
+	height: 120px;
+	background-color: #727070;
+}
+.table2 .tr1
+{	
+	margin-top: 10px;
+	padding-left: 10px;
+}
+.table2 .tr1, .table2 .tr1 td
+{
+	height: 120px;
+	overflow-y:hidden;
+	overflow-x: auto;
+	width: 915px;
+	display: inline-flex;
+}
+.images
+{
+	background-color: white;
+	height: 100px;
+	border: 1px solid #bdbdbd;
+	margin-right: 5px;
+}
+
+
