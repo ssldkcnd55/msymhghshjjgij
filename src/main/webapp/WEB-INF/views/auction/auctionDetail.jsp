@@ -456,7 +456,7 @@ $(function(){
             	
                   outValues += 
                      "<tr>"+
-                     "<td style='text-align:center;'>"+i+"</td>"+
+                     "<td style='text-align:center;'>"+(i*1+1)+"</td>"+
                      "<td style='text-align:center;'>"+jsonObj.list[i].member_id+"</td>"+
                      "<td style='text-align:center;'>"+jsonObj.list[i].auction_title+"</td>"+
                      "</tr>";

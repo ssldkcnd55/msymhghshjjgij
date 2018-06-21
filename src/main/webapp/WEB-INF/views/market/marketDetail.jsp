@@ -201,7 +201,13 @@ function qnaSearchPage(page){
 			
 			for(var i in jsonObj.list){
 				outValues += "<tr id='hover'><td>"+jsonObj.list[i].rnum+"</td>"
-				+"<td id='QnA_td'><a href='/farm/marketQnaDetail.do?qna_no="+jsonObj.list[i].market_qna_no+"&member_id=${market.member_id}'>"+jsonObj.list[i].market_qna_title+"</a></td>"
+				+"<td id='QnA_td'><a href='/farm/marketQnaDetail.do?qna_no="+jsonObj.list[i].market_qna_no+"&member_id=${market.member_id}'>";
+						if(jsonObj.list[i].market_qna_title !=null && jsonObj.list[i].market_qna_title !=""){
+							outValues += jsonObj.list[i].market_qna_title;
+						}else{
+						outValues += "제목없음";	
+						}
+						outValues +="</a></td>"
 				+"<td>"+jsonObj.list[i].member_id+"</td><td>"+jsonObj.list[i].market_qna_question_date+"</td></tr>";
 			}
 			$(".QnA_table").html(outValues);	
@@ -257,7 +263,14 @@ function qnaPage(page){
 			var count = 0;
 			for(var i in jsonObj.list){
 				outValues += "<tr id='hover'><td>"+jsonObj.list[i].rnum+"</td>"
-				+"<td id='QnA_td'><a href='/farm/marketQnaDetail.do?qna_no="+jsonObj.list[i].market_qna_no+"&member_id=${market.member_id}'>"+jsonObj.list[i].market_qna_title+"</a></td>"
+				+"<td id='QnA_td'><a href='/farm/marketQnaDetail.do?qna_no="+jsonObj.list[i].market_qna_no+"&member_id=${market.member_id}'>";
+				if(jsonObj.list[i].market_qna_title !=null && jsonObj.list[i].market_qna_title !=""){
+					outValues += jsonObj.list[i].market_qna_title;
+				}else {
+				outValues += "제목없음";	
+				}
+				outValues +="</a></td>"
+						
 				+"<td>"+jsonObj.list[i].member_id+"</td><td>"+jsonObj.list[i].market_qna_question_date+"</td></tr>";
 				count++;
 			}
@@ -330,7 +343,8 @@ function reviewSearchPage(page){
 			 
 			for(var i in jsonObj.list){
 				outValues += "<tr id='hover'><td>"+jsonObj.list[i].rnum+"</td>"
-				+"<td id='QnA_td'><a href='reviewDeatil.do?review_no="+jsonObj.list[i].review_no+"&market_no=${market.market_no}'>"+jsonObj.list[i].review_title+"</a></td>"
+				+"<td id='QnA_td'><a href='reviewDeatil.do?review_no="+jsonObj.list[i].review_no+"&market_no=${market.market_no}'>"
+						+jsonObj.list[i].review_title+"</a></td>"
 				+"<td>"+jsonObj.list[i].member_id+"</td><td>"+jsonObj.list[i].review_date+"</td></tr>";
 			}
 			$(".review_table").html(outValues);	
@@ -446,7 +460,7 @@ function dailyPage(){
 			var jsonObj = JSON.parse(objStr);
 			var count = 0;
 			var outValues = "<tr><td class='history_start' colspan='3' align='center'>"
-				+"<table class='history_title'><tr><td class='start_date' align='center'>농사시작</td></tr>"
+				+"<table class='history_title'><tr><td class='start_date' align='center'>농사일지</td></tr>"
 				+"<tr><td class='start_date' align='center'> </td></tr></table></td></tr>"
 				+"<tr><td class='space_left'></td><td></td></tr>";
 			
@@ -473,13 +487,13 @@ function dailyPage(){
 			}
 			
 			outValues += "<tr><td class='space_left'></td><td></td></tr><tr><td colspan='3' align='center'>"
-				+"<table class='history_title' cellspacing='0'><tr><td class='start_date' align='center'>농사끝</td>"
+				+"<table class='history_title' cellspacing='0'><tr><td class='start_date' align='center'>농사일지</td>"
 				+"</tr><tr><td class='start_date' align='center'> </td></tr></table></td></tr><tr><td height='100'></td></tr>";
 			if(count > 0){
 				$(".history_body").html(outValues);
 			}else{
 				$(".history_body").html("<div style='line-height: 250px;text-align:center;font-size:20pt;font-weight: bold;color:gray;'>"+
-			    		"등록된 후기가 없습니다.</div>");
+			    		"등록된 일지가 없습니다.</div>");
 			}
 
 		},error: function(request,status,errorData){
@@ -612,7 +626,9 @@ function changeprice(){
 
 				<!-- qna_Box -->
 				<div id="tab-3" class="tab-content">
+				<c:if test="${!empty loginUser}">
 					<button class="dailyMakeBtn" onclick="qnaMake();">QnA 등록</button>
+				</c:if>
 					<div class="qna_box">
 
 						<table class="QnA_table">
@@ -638,8 +654,10 @@ function changeprice(){
 				<!-- qna Box -->
 
 				<div id="tab-4" class="tab-content">
-					<button class="dailyMakeBtn" onclick="writeReview();">후기
-						쓰기</button>
+				<c:if test="${!empty loginUser}">
+					<button class="dailyMakeBtn" onclick="writeReview();">후기쓰기</button>
+					</c:if>
+						
 					<div class="qna_box">
 
 						<table class="review_table">

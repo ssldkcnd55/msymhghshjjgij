@@ -1,13 +1,19 @@
 package com.kh.farm.chat.controller;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
@@ -20,6 +26,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.farm.chat.model.service.ChatService;
 import com.kh.farm.chat.model.vo.*;
@@ -34,6 +42,104 @@ public class ChatContoller {
 	@Autowired
 	private MemberService memberService;
 
+	@RequestMapping("moveMsg_image.do")
+	public ModelAndView moveMsg_imagePage(ModelAndView mv,@RequestParam(value="img_name") String img_name,@RequestParam(value="chat_no") int chat_no )
+	{	
+		ArrayList<String> images=(ArrayList<String>)chatService.selectChatImages(chat_no);
+		mv.addObject("images", images);
+		mv.addObject("img_name", img_name);
+		mv.setViewName("messenger/msg_image");
+		return mv;
+	}
+	
+	
+	@RequestMapping("msg_img_down.do")
+	public ModelAndView fileDownMethod(HttpServletRequest request, @RequestParam("filename") String fileName)
+	{
+	String path=	request.getSession().getServletContext().getRealPath("resources/upload/chatUpload");
+		String filePath = path + "\\" + fileName;
+		File downFile = new File(filePath);
+		return new ModelAndView("msg_img_down","downFile",downFile);
+	}
+	
+	@RequestMapping(value="msg_saveFile.do",method=RequestMethod.POST)
+	public void msgSaveFile(@RequestParam(value="chat_room") String chat_room,@RequestParam(value="file") MultipartFile file,HttpServletResponse response,HttpServletRequest request) throws Exception
+	{
+		String reName=null;
+		String path = request.getSession().getServletContext().getRealPath("resources/upload/chatUpload");
+		if(file != null && file.getOriginalFilename()!="") {
+		file.transferTo(new File( path+"\\"+file.getOriginalFilename()) );
+		String oriName=file.getOriginalFilename();
+		reName=chat_room+"_"+(new SimpleDateFormat("yyyyMMddHHmmss")).format(new java.sql.Date(System.currentTimeMillis()))+"."+ file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf(".") + 1);
+		File oriFile=new File(path+"\\"+file.getOriginalFilename());
+		File reFile = new File(path+"\\"+reName);
+		if (!oriFile.renameTo(reFile)) {
+			int read = -1;
+			byte[] buf = new byte[1024];
+			// 원본을 읽기 위한 파일스트림 생성
+			FileInputStream fin = new FileInputStream(oriFile);
+			// 읽은 내용 기록할 복사본 파일 출력용 파일스트림 생성
+			FileOutputStream fout = new FileOutputStream(reFile);
+
+			// 원본 읽어서 복사본에 기록 처리
+			while ((read = fin.read(buf, 0, buf.length)) != -1) {
+				fout.write(buf, 0, read);
+			}
+			fin.close();
+			fout.close();
+			oriFile.delete(); // 원본파일 삭제
+		}
+		}
+		///
+		PrintWriter out = response.getWriter();
+		out.println(reName);
+		out.flush();
+		out.close();
+	}
+	
+	@RequestMapping(value="msg_saveImg.do",method = RequestMethod.POST)
+	public void msgSaveImg(@RequestParam(value="chat_room") String chat_room,@RequestParam(value="file") MultipartFile file,HttpServletResponse response,HttpServletRequest request) throws Exception
+	{
+		
+		String reName=null;
+		Long size = 0L;
+		String oriName=null;
+		String path = request.getSession().getServletContext().getRealPath("resources/upload/chatUpload");
+		if(file != null && file.getOriginalFilename()!="") {
+		file.transferTo(new File( path+"\\"+file.getOriginalFilename()) );
+		oriName=file.getOriginalFilename();
+		reName=chat_room+"_"+(new SimpleDateFormat("yyyyMMddHHmmss")).format(new java.sql.Date(System.currentTimeMillis()))+"."+ file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf(".") + 1);
+		File oriFile=new File(path+"\\"+file.getOriginalFilename());
+		size = oriFile.length();
+		File reFile = new File(path+"\\"+reName);
+		if (!oriFile.renameTo(reFile)) {
+			int read = -1;
+			byte[] buf = new byte[1024];
+			// 원본을 읽기 위한 파일스트림 생성
+			FileInputStream fin = new FileInputStream(oriFile);
+			// 읽은 내용 기록할 복사본 파일 출력용 파일스트림 생성
+			FileOutputStream fout = new FileOutputStream(reFile);
+
+			// 원본 읽어서 복사본에 기록 처리
+			while ((read = fin.read(buf, 0, buf.length)) != -1) {
+				fout.write(buf, 0, read);
+			}
+			fin.close();
+			fout.close();
+			oriFile.delete(); // 원본파일 삭제
+		}
+		}
+		///
+		PrintWriter out = response.getWriter();
+		JSONObject json=new JSONObject();
+		json.put("oriName", oriName);
+		json.put("reName", reName);
+		json.put("size", size);
+		out.println(json.toJSONString());
+		out.flush();
+		out.close();
+	}
+	
 	@RequestMapping(value = "recentViewList.do", method = RequestMethod.POST)
 	@ResponseBody
 	public String selectRecentViewMarketList(HttpServletResponse response, @RequestParam(value = "marketNo[]") List<String> marketNo) throws IOException {

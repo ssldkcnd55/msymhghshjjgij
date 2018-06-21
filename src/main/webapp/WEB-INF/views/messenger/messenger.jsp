@@ -5,18 +5,21 @@
 <!DOCTYPE html >
 <html>
 <head>
-<link href="/farm/resources/css/messenger.css" rel="stylesheet"
-	type="text/css" />
+<link href="/farm/resources/css/messenger.css" rel="stylesheet"type="text/css" />
 
 <meta charset="UTF-8">
 <title>messenger</title>
-<script type="text/javascript"
-	src="/farm/resources/js/jquery-3.3.1.min.js"></script>
+<script type="text/javascript"src="/farm/resources/js/jquery-3.3.1.min.js"></script>
 <script type="text/javascript" src="/farm/resources/js/messenger.js"></script>
 </head>
 
 <script type="text/javascript">
-	
+function openImgPage(img_name,chat_no){
+	window.open('moveMsg_image.do?chat_no='+chat_no+'&img_name='+img_name, '' ,'status=yes,width=950,height=600,top=30,left=300');
+}
+function openFilePage(file_name){
+	location.href='msg_img_down.do?filename='+file_name;
+}
 </script>
 <body>
 	<div class="messenger_frame">
@@ -85,8 +88,16 @@
 											pattern="yyyy-MM-dd HH:mm" /> <fmt:formatDate value="${time}" type="time"
 											 timeStyle="short" /></td>
 								</tr>
-								<tr>
-									<td colspan="2"><span class="list_content"> ${chat.chat_history_contents }</span>
+								<tr><td colspan="2">
+								<c:if test='${ (chat.chat_history_contents).indexOf("openImgPage") != -1 }'>
+								<span class="list_content"><img class="list_content_img_icon" src="resources/upload/chatUpload/img_icon.png"><span class="list_content_img_span">사진</span></span>
+								</c:if>
+								<c:if test='${ (chat.chat_history_contents).indexOf("openFilePage") != -1 }'>
+								<span class="list_content"><img class="list_content_img_icon" src="resources/upload/chatUpload/file_down_icon.png"><span class="list_content_img_span">파일</span></span>
+								</c:if>
+								<c:if test='${ (chat.chat_history_contents).indexOf("openImgPage") == -1  && (chat.chat_history_contents).indexOf("openFilePage") == -1}'>
+									<span class="list_content">${chat.chat_history_contents }</span>
+									</c:if>
 									<c:if test="${chat.chat_history_alarm > 0 }">
 									<span class="list_alarm">${chat.chat_history_alarm}</span>
 									</c:if>
@@ -121,14 +132,21 @@
 						placeholder="메시지전송..." autofocus="autofocus"></th>
 					<th><a href="javascript: return false;">
 							<!-- servlet method 실행 -->
-							<img class="send_msg_icon"
-							src="/farm/resources/images/send_msg_icon_3.png">
+							<img class="send_msg_icon"src="/farm/resources/images/send_msg_icon_3.png">
 					</a></th>
 				</tr>
-				<!-- <tr><td><a id="img_a" href="javascript: return false;">사진전송</a></td><td><input id="img_input" type="file" hidden="hidden" ></td></tr> -->
+				 <tr>
+				 <td>
+				 <a id="img_a" href="return: false;"><img src="resources/upload/chatUpload/img_icon_white.png" ></a>
+				 <a id="file_a" href="return: false;"><img src="resources/upload/chatUpload/file_down_icon_white.png" ></a>
+				 </td>
+				 <td>
+				 <form id="msg_form" action="msg_saveImg.do" method="post" ><input name="img_input" id="img_input" type="file" hidden="hidden" accept="image/*" ></form>
+				 <form id="msg_file_form" action="msg_saveFile.do" method="post" ><input name="img_input" id="file_input" type="file" hidden="hidden" ></form>
+				 </td></tr>
 			</table>
 		</div>
 	</div>
-	
+
 </body>
 </html>
