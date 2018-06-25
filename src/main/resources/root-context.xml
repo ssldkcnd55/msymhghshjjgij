@@ -19,7 +19,7 @@
 		<property name="driverClassName"
 			value="oracle.jdbc.driver.OracleDriver" />		
 		<property name="url"
-			value="jdbc:oracle:thin:@127.0.0.1:1521:xe" />		
+			value="jdbc:oracle:thin:@192.168.20.74:1521:xe" />		
 		<property name="username" value="farm" />
 		<property name="password" value="farm" />
 		<property name="defaultAutoCommit" value="false" />

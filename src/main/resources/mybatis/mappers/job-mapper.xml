@@ -14,7 +14,7 @@
 	<![CDATA[
 		select * from(
 		select rownum rnum,A.* from(select job_no, substr(job_addr,1,2) as "job_addr" ,(select case when TO_CHAR(JOB_ENDDATE,'YY/MM/DD') <= TO_CHAR(SYSDATE,'YY/MM/DD') THEN TO_CHAR(JOB_STATUS -1) ELSE '1' END  from dual )as "JOB_STATUS", job_title, member_id, job_date from job
-		order by job_no desc) A) where rnum >=  #{startRow} and rnum<= #{endRow}
+		order by job_no asc) A) where rnum >=  #{startRow} and rnum<= #{endRow}
 	]]>
 	</select>
 	<!--구인구직상세보기 -->

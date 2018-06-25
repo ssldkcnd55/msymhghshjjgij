@@ -24,6 +24,7 @@
 						var values = "<tr><th width='10%'>번호</th><th width='10%'>지역</th><th width='12%'>상태</th><th width='35%'>제목</th><th width='13%'>작성자</th><th width='20%'>작성날짜</th></tr>";
 
 						for ( var i in json.list) {
+
 							values += "<tr id='hover'><td>" + json.list[i].rnum
 									+ "</td>";
 							values += "<td>" + json.list[i].job_addr + "</td>";
@@ -41,6 +42,7 @@
 									+ json.list[i].member_id
 									+ "</td><td>"
 									+ json.list[i].job_date + "</td></tr>";
+
 						}
 						$(".job_table").html(values);
 
@@ -97,16 +99,19 @@
 					type : "post",
 					data : {
 						page : page
+
 					},
 					dataType : "json",
 					success : function(data) {
 						var jsonStr = JSON.stringify(data);
 						var json = JSON.parse(jsonStr);
-						var values = "<tr><th width='10%'>번호</th><th width='12%'>상태</th><th width='45%'>제목</th><th width='13%'>작성자</th><th width='20%'>작성날짜</th></tr>";
+						var values = "<tr><th width='10%'>번호</th><th width='10%'>지역</th><th width='12%'>상태</th><th width='35%'>제목</th><th width='13%'>작성자</th><th width='20%'>작성날짜</th></tr>";
 
 						for ( var i in json.list) {
+
 							values += "<tr id='hover'><td>" + json.list[i].rnum
 									+ "</td>";
+							values += "<td>" + json.list[i].job_addr + "</td>";
 							if (json.list[i].job_status == "1") {
 								values += "<td><span id='job_table_span_find'><strong>구인중</strong></span></td>";
 							} else {
@@ -121,6 +126,7 @@
 									+ json.list[i].member_id
 									+ "</td><td>"
 									+ json.list[i].job_date + "</td></tr>";
+
 						}
 						$(".job_table").html(values);
 
@@ -162,19 +168,18 @@
 	}
 	/*지역별 클릭시 리스트조회  */
 	function addr(addr) {
-
 		$
 				.ajax({
 					url : "jobList.do",
 					type : "post",
 					dataType : "json",
 					success : function(data) {
+
 						var jsonStr = JSON.stringify(data);
 						var json = JSON.parse(jsonStr);
 						var values = "<tr><th width='10%'>번호</th><th width='10%'>지역</th><th width='12%'>상태</th><th width='35%'>제목</th><th width='13%'>작성자</th><th width='20%'>작성날짜</th></tr>";
 
 						for ( var i in json.list) {
-
 							if (addr == json.list[i].job_addr) {
 								values += "<tr id='hover'><td>"
 										+ json.list[i].rnum + "</td>";
@@ -200,6 +205,7 @@
 						$(".job_table").html(values);
 
 						var startPage = json.list[0].startPage;
+						console.log(startPage);
 						var endPage = json.list[0].endPage;
 						var maxPage = json.list[0].maxPage;
 						var currentPage = json.list[0].currentPage;
@@ -237,80 +243,96 @@
 	}
 	/*검색 구인구직 조회  */
 	$(function() {
-		$("input[name=job_search]").keyup(function() {
-			 var search = $('#job_search2').val();
-			console.log(search);
-			$
-			.ajax({
-				url : "jobserach.do",
-				type : "post",
-				data : {
-					"job_search" : search
-				},
-				dataType : "json",
-				success : function(data) {
-					var jsonStr = JSON.stringify(data);
-					var json = JSON.parse(jsonStr);
-					var values = "<tr><th width='10%'>번호</th><th width='10%'>지역</th><th width='12%'>상태</th><th width='35%'>제목</th><th width='13%'>작성자</th><th width='20%'>작성날짜</th></tr>";
+		$("input[name=job_search]")
+				.keyup(
+						function() {
+							var search = $('#job_search2').val();
+							console.log(search);
+							$
+									.ajax({
+										url : "jobserach.do",
+										type : "post",
+										data : {
+											"job_search" : search
+										},
+										dataType : "json",
+										success : function(data) {
+											var jsonStr = JSON.stringify(data);
+											var json = JSON.parse(jsonStr);
+											var values = "<tr><th width='10%'>번호</th><th width='10%'>지역</th><th width='12%'>상태</th><th width='35%'>제목</th><th width='13%'>작성자</th><th width='20%'>작성날짜</th></tr>";
 
-					for ( var i in json.list) {
-						values += "<tr id='hover'><td>" + json.list[i].rnum
-								+ "</td>";
-						values += "<td>" + json.list[i].job_addr + "</td>";
-						if (json.list[i].job_status == "1") {
-							values += "<td><span id='job_table_span_find'><strong>구인중</strong></span></td>";
-						} else {
-							values += "<td><span id='job_table_span_finded'>마감</span></td>";
-						}
+											for ( var i in json.list) {
+												values += "<tr id='hover'><td>"
+														+ json.list[i].rnum
+														+ "</td>";
+												values += "<td>"
+														+ json.list[i].job_addr
+														+ "</td>";
+												if (json.list[i].job_status == "1") {
+													values += "<td><span id='job_table_span_find'><strong>구인중</strong></span></td>";
+												} else {
+													values += "<td><span id='job_table_span_finded'>마감</span></td>";
+												}
 
-						values += "<td id='job_td'><a href='jobDetail.do?job_no="
-								+ json.list[i].job_no
-								+ "'>"
-								+ json.list[i].job_title
-								+ "</a></td><td>"
-								+ json.list[i].member_id
-								+ "</td><td>"
-								+ json.list[i].job_date + "</td></tr>";
-					}
-					$(".job_table").html(values);
+												values += "<td id='job_td'><a href='jobDetail.do?job_no="
+														+ json.list[i].job_no
+														+ "'>"
+														+ json.list[i].job_title
+														+ "</a></td><td>"
+														+ json.list[i].member_id
+														+ "</td><td>"
+														+ json.list[i].job_date
+														+ "</td></tr>";
+											}
+											$(".job_table").html(values);
 
-					var startPage = json.list[0].startPage;
-					var endPage = json.list[0].endPage;
-					var maxPage = json.list[0].maxPage;
-					var currentPage = json.list[0].currentPage;
+											var startPage = json.list[0].startPage;
+											var endPage = json.list[0].endPage;
+											var maxPage = json.list[0].maxPage;
+											var currentPage = json.list[0].currentPage;
 
-					var values1 = "";
-					if (startPage > 5) {
-						values1 += "<a href='javascript:jobPage("
-								+ (startPage - 1) + ")'>&laquo;</a>"
-					} else {
-						values1 += "<a>&laquo;</a>";
-					}
-					for (var i = startPage; i <= endPage; i++) {
-						if (i == currentPage) {
-							values1 += "<a class='active'>" + i + "</a>";
-						} else {
-							values1 += "<a href='javascript:jobPage(" + i
-									+ ");'>" + i + "</a>";
-						}
-					}
-					if (endPage < maxPage) {
-						values1 += "<a href='javascript:jobPage("
-								+ (endPage + 1) + ")'>&raquo;</a>";
+											var values1 = "";
+											if (startPage > 5) {
+												values1 += "<a href='javascript:jobPage("
+														+ (startPage - 1)
+														+ ")'>&laquo;</a>"
+											} else {
+												values1 += "<a>&laquo;</a>";
+											}
+											for (var i = startPage; i <= endPage; i++) {
+												if (i == currentPage) {
+													values1 += "<a class='active'>"
+															+ i + "</a>";
+												} else {
+													values1 += "<a href='javascript:jobPage("
+															+ i
+															+ ");'>"
+															+ i
+															+ "</a>";
+												}
+											}
+											if (endPage < maxPage) {
+												values1 += "<a href='javascript:jobPage("
+														+ (endPage + 1)
+														+ ")'>&raquo;</a>";
 
-					} else {
-						values1 += "<a>&raquo;</a>";
-					}
-					$(".pagination").html(values1);
-				},
-				error : function(request, status, errorData) {
-					alert("error code : " + request.status + "\nmessage"
-							+ request.responseText + "\nerror" + errorData);
-				}
+											} else {
+												values1 += "<a>&raquo;</a>";
+											}
+											$(".pagination").html(values1);
+										},
+										error : function(request, status,
+												errorData) {
+											alert("error code : "
+													+ request.status
+													+ "\nmessage"
+													+ request.responseText
+													+ "\nerror" + errorData);
+										}
 
-			});
-			
-		});
+									});
+
+						});
 	});
 </script>
 <!-- Job.css -->
@@ -557,7 +579,7 @@
 							<span class='green_window'> <input type='text'
 								class='input_text' id="job_search2" name="job_search">
 							</span>
-							
+
 						</div>
 					</div>
 
