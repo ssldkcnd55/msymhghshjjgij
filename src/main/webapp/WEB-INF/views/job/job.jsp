@@ -90,9 +90,9 @@
 		}
 
 	});
+
 	/* 페이징 처리  */
 	function jobPage(page) {
-
 		$
 				.ajax({
 					url : "jobList.do",
@@ -166,6 +166,7 @@
 
 				});
 	}
+
 	/*지역별 클릭시 리스트조회  */
 	function addr(addr) {
 		$
@@ -204,7 +205,7 @@
 						}
 						$(".job_table").html(values);
 
-						var startPage = json.list[0].startPage;
+						/* var startPage = json.list[0].startPage;
 						console.log(startPage);
 						var endPage = json.list[0].endPage;
 						var maxPage = json.list[0].maxPage;
@@ -232,7 +233,7 @@
 						} else {
 							values1 += "<a>&raquo;</a>";
 						}
-						$(".pagination").html(values1);
+						$(".pagination").html(values1); */
 					},
 					error : function(request, status, errorData) {
 						alert("error code : " + request.status + "\nmessage"
@@ -240,6 +241,7 @@
 					}
 
 				});
+
 	}
 	/*검색 구인구직 조회  */
 	$(function() {
@@ -286,7 +288,7 @@
 											}
 											$(".job_table").html(values);
 
-											var startPage = json.list[0].startPage;
+											/* var startPage = json.list[0].startPage;
 											var endPage = json.list[0].endPage;
 											var maxPage = json.list[0].maxPage;
 											var currentPage = json.list[0].currentPage;
@@ -319,7 +321,7 @@
 											} else {
 												values1 += "<a>&raquo;</a>";
 											}
-											$(".pagination").html(values1);
+											$(".pagination").html(values1); */
 										},
 										error : function(request, status,
 												errorData) {

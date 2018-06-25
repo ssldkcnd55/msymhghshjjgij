@@ -25,6 +25,8 @@ public class JobDao {
 		PageNumber pnum = new PageNumber();
 		pnum.setStartRow(startRow);
 		pnum.setEndRow(endRow);
+		
+		System.out.println();
 
 		List<Job> list = sqlSession.selectList("job.jobList", pnum);
 		return (ArrayList<Job>) list;
@@ -32,7 +34,7 @@ public class JobDao {
 
 	public ArrayList<Job> searchJobList(int currentPage, SqlSessionTemplate sqlSession , PageNumber pp) {
 		int startRow = (currentPage - 1) * 10 + 1;
-		int endRow = startRow + 9;
+		int endRow = startRow + 100;
 
 		PageNumber pnum = new PageNumber();
 		pnum.setStartRow(startRow);
