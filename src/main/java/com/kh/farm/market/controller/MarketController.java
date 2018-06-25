@@ -53,6 +53,7 @@ public class MarketController {
 		JSONArray jarr = new JSONArray();
 
 		ArrayList<Market> MarketList = marketService.selectSellerMarketHistory(currentPage,pa);
+		System.out.println(";;"+MarketList);
 		int limitPage = 10;	
 		int listCount = marketService.selectSellerMarketHistoryCount();
 		int maxPage = (int) ((double) listCount / limitPage + 0.9); // ex) 41개면 '5'페이지나와야되는데 '5'를 계산해줌
@@ -65,19 +66,9 @@ public class MarketController {
 		for (Market ac : MarketList) {
 			JSONObject json = new JSONObject();
 			json.put("rnum", ac.getRnum());
-			json.put("market_no", ac.getMarket_no());
-			json.put("category_no", ac);
-			json.put("member_id", ac.getMember_id());
 			json.put("market_title", ac.getMarket_title());
-			json.put("market_note", ac.getMarket_note());
-			json.put("market_releasedate", ac.getMarket_releasedate().toString());
-			json.put("market_amount", ac.getMarket_amount());
-			json.put("market_intro", ac.getMarket_intro());
+			json.put("market_no", ac.getMarket_no());
 			json.put("market_complete", ac.getMarket_complete());
-			json.put("market_price", ac.getMarket_price());
-			json.put("search", ac.getSearch());
-			json.put("remaining", ac.getRemaining());
-			json.put("member_name", ac.getMember_name());
 			json.put("startPage", startPage);
 			json.put("endPage", endPage);
 			json.put("maxPage", maxPage);
