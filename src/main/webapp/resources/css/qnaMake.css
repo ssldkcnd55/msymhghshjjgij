@@ -3,7 +3,7 @@
 .jung_table {
 	width: 100%;
 	border-collapse: collapse;
-	border-top: 5px solid #ECE6CE;
+	border-top: 5px solid #7e5957;
 }
 
 .jung_table2 {
@@ -79,25 +79,33 @@
 	margin-top: 15px;
 	color: #fff
 }
-
+.li4:hover{
+	background: #7e5957;
+	
+}
 .li4 {
 	float: right;
 	padding: 8px;
-	background: #f27634;
+	background: #fff;
 	cursor: pointer;
 	margin-top: 15px;
-	color: #fff;
+	color: #7e5957;
+	
 }
 
+.li4_input:hover{
+	background: #7e5957;
+	color:#fff;
+}
 .li4_input{
    float: right;
    padding: 8px;
-   background: #f27634;
+   background: #fff;
    cursor: pointer;
    margin-top: 15px;
-   color: #fff;
-   border-color: #f27634;
-   border-style: none;
+   color:  #7e5957;
+   border-color: #7e5957;
+  border:1px solid #7e5957;
 }
 .li4_input.submit{
    margin-right:10px;

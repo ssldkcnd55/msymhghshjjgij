@@ -125,6 +125,7 @@ function payment() {
 							dataType:"json",
 							data: {
 								"auction_no":auction_no,
+								"your_id":your_id,
 								"member_id":my_id,
 								"buy_addr":addr,
 								"buy_tel":tel,
@@ -245,6 +246,7 @@ function paymentTest(){
 		dataType:"json",
 		data: {
 			"auction_no":auction_no,
+			"your_id":your_id,
 			"member_id":my_id,
 			"buy_addr":addr,
 			"buy_tel":tel,
