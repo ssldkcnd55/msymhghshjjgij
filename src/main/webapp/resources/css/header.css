@@ -131,6 +131,7 @@ img{border:0}
    border-bottom:1px solid #dcdcdc;
    background: #7e5957;
 }
+
 .bg{
     z-index: 299;
     left: 0;
@@ -157,4 +158,20 @@ img{border:0}
     font-family: 'Noto Sans KR';
     font-weight: 400;
     letter-spacing: -0.3px;
+}
+#weather_img{
+	float: left;
+}
+#w_text{
+	float: left;
+	margin-left: 10px;
+	font-size: 10pt;
+	color: #3b3b3b;
+	
+}
+.weatherTitle{
+	float: left;
+	margin-left: 10px;
+	font-size: 9pt;
+	color: #909090;
 }
