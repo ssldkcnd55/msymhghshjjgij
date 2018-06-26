@@ -37,7 +37,6 @@ public class WeatherController {
 	@Autowired
 	private MemberService memberService;
 	
-	
 	@RequestMapping(value = "Weather.do", method = RequestMethod.GET, produces = "application/json; application/text; application/xml; charset=utf8")
 	@ResponseBody
 	public void Weather(HttpServletResponse response, @RequestParam("id") String rid) throws ServletException, IOException {
@@ -50,6 +49,7 @@ public class WeatherController {
 		oneAddr = memAddr.substring(0,memAddr.indexOf("시 ")+1);
 		twoAddr = memAddr.substring(memAddr.indexOf("시 ")+2,memAddr.indexOf("구 ")+1);
 		}
+
 		String addr = "http://newsky2.kma.go.kr/service/SecndSrtpdFrcstInfoService2/ForecastSpaceData?serviceKey=";
 		String serviceKey = "hp%2F%2F3ly9hcciezptAxLaI4RcV63nphv5o4S12L6dmZX3PzG0AzaUKF1ddLslCxp3HH5V9GaezX2ZgNG8Nyuqhw%3D%3D";
 		String parameter = "";
