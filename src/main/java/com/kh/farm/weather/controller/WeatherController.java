@@ -16,10 +16,15 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.io.IOUtils;
 import org.json.simple.JSONObject;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.kh.farm.member.model.service.MemberService;
+import com.kh.farm.member.model.vo.Member;
 
 import jxl.Sheet;
 import jxl.Workbook;
@@ -29,10 +34,22 @@ import jxl.Workbook;
  */
 @Controller
 public class WeatherController {
+	@Autowired
+	private MemberService memberService;
+	
+	
 	@RequestMapping(value = "Weather.do", method = RequestMethod.GET, produces = "application/json; application/text; application/xml; charset=utf8")
 	@ResponseBody
-	public void Weather(HttpServletResponse response, HttpServletRequest request) throws ServletException, IOException {
+	public void Weather(HttpServletResponse response, @RequestParam("id") String rid) throws ServletException, IOException {
 		response.setContentType("application/json; charset=utf-8");
+		String oneAddr="서울특별시";
+		String twoAddr="강남구";
+		if(!rid.equals("")) {
+		Member id = memberService.selectIdCheck(rid);
+		String memAddr = id.getMember_addr();
+		oneAddr = memAddr.substring(0,memAddr.indexOf("시 ")+1);
+		twoAddr = memAddr.substring(memAddr.indexOf("시 ")+2,memAddr.indexOf("구 ")+1);
+		}
 		String addr = "http://newsky2.kma.go.kr/service/SecndSrtpdFrcstInfoService2/ForecastSpaceData?serviceKey=";
 		String serviceKey = "hp%2F%2F3ly9hcciezptAxLaI4RcV63nphv5o4S12L6dmZX3PzG0AzaUKF1ddLslCxp3HH5V9GaezX2ZgNG8Nyuqhw%3D%3D";
 		String parameter = "";
@@ -81,7 +98,7 @@ public class WeatherController {
 
 			for (int i = 0; i < row; i++) {
 				for (int j = 0; j < col; j++) {
-					if(sheet.getCell(j, i).getContents().equals("서울특별시") && sheet.getCell(j+1, i).getContents().equals("강남구")) {
+					if(sheet.getCell(j, i).getContents().equals(oneAddr) && sheet.getCell(j+1, i).getContents().equals(twoAddr)) {
 						nx=""+sheet.getCell(j+3, i).getContents();
 						ny=""+sheet.getCell(j+4, i).getContents();
 						check=1;
