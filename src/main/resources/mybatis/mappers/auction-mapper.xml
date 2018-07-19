@@ -111,8 +111,16 @@
 	<select id="selectAuctionQnAList" parameterType="pageNumber"
 		resultType="AuctionQnA">
 	<![CDATA[
-		select * from (select rownum rnum, auction_qna_no,auction_qna_title,member_id,auction_qna_question_date from auction_qna where auction_no =#{auction_no}
-		order by auction_qna_no desc) where rnum>= #{startRow} and rnum <=#{endRow}
+		select * from 
+       (select rownum rnum, 
+       aq.auction_qna_no as auction_qna_no, aq.auction_qna_title as auction_qna_title ,
+       aq.member_id as member_id,aq.auction_qna_question_date as auction_qna_question_date ,
+       a.member_id as auction_category
+       from auction_qna aq, auction a
+       where aq.auction_no=a.auction_no
+       and a.auction_no =#{auction_no}
+      order by aq.auction_qna_no desc) 
+      where rnum>=#{startRow} and rnum <=#{endRow}
 	]]>
 	</select>
 
@@ -128,7 +136,16 @@
 	<select id="selectAuctionQnADetail" parameterType="AuctionQnA"
 		resultType="AuctionQnA">
 	<![CDATA[
-		select * from auction_qna where auction_qna_no = #{auction_qna_no}
+		select aq.auction_qna_no, aq.auction_no, aq.member_id,
+      aq.AUCTION_QNA_QUESTION_DATE,
+      aq.AUCTION_QNA_ANSWER,
+      aq.AUCTION_QNA_ANSWER_DATE ,
+      aq.AUCTION_QNA_TITLE,
+      aq.AUCTION_QNA_CONTENTS ,
+      a.member_id as AUCTION_CATEGORY
+      from auction_qna aq, auction a
+      where aq.auction_no = a.auction_no 
+      and aq.auction_qna_no = #{auction_qna_no}
 	]]>
 	</select>
 
@@ -240,15 +257,19 @@
 	<select id="selectAuction_searchTitle" parameterType="PageNumber" resultType="AuctionQnA" >
 	<![CDATA[
 		select * from (select rownum rnum, member_id,auction_qna_no, auction_qna_title, auction_qna_question_date
-		from auction_qna where auction_no = #{auction_no}) where rnum >=#{startRow} and rnum <=#{endRow} and auction_qna_title like '%'||#{keyword}||'%'
+		from auction_qna where auction_no = #{auction_no}) where rnum >=#{startRow} and rnum <=#{endRow} 
+		and auction_qna_title like '%'||#{keyword}||'%'
 		order by auction_qna_no DESC
 	]]>
 	</select>
 	
 	<select id="selectAuction_searchMember_id" parameterType="PageNumber" resultType="AuctionQnA" >
 	<![CDATA[
-		select * from (select rownum rnum, member_id,auction_qna_no, auction_qna_title, auction_qna_question_date
-		from auction_qna where auction_no = #{auction_no}) where rnum >=#{startRow} and rnum <=#{endRow} and member_id like '%'||#{keyword}||'%'
+		select * from 
+		(select rownum rnum, member_id,auction_qna_no, 
+		auction_qna_title, auction_qna_question_date
+		from auction_qna where auction_no = #{auction_no}) 
+		where rnum >=#{startRow} and rnum <=#{endRow} and member_id like '%'||#{keyword}||'%'
 		order by auction_qna_no DESC
 	]]>
 	</select>
@@ -281,7 +302,7 @@
 		select * from 
 			(select rownum rnum, auction_no,
 			auction_title,auction_note,auction_img,auction_status,
-			member_id from (select * from auction order by 
+			member_id from(select * from auction order by 
 			auction_no desc)) where rnum >= #{startRow} and rnum <= #{endRow} 
 			and auction_status = '0' 
 	]]>
@@ -295,7 +316,7 @@
 			auction_title,auction_note,auction_img,auction_status,
 			member_id from (select * from auction order by 
 			auction_no desc)) where rnum >= #{startRow} and rnum <= #{endRow} 
-			and auction_status = '1'
+			and auction_status = '1' 
 	]]>
 	</select>
 	
@@ -306,7 +327,7 @@
 			auction_title,auction_note,auction_img,auction_status,
 			member_id from (select * from auction order by 
 			auction_no desc)) where rnum >= #{startRow} and rnum <= #{endRow} 
-			and auction_status in( '2','3','4')
+			and auction_status in( '2','3','4') 
 	]]>
 	</select>
 	
@@ -363,21 +384,21 @@
 			auction_title,auction_note,auction_img,auction_status,
 			member_id from (select * from auction order by 
 			auction_no desc)) where rnum >= #{startRow} and rnum <= #{endRow} 
-			and auction_status != '5' 
+			and auction_status != '5'
 	]]>
 	<if test="select == 0">
 	<![CDATA[
-		and auction_status = '0'
+		and auction_status = '0' 
 	]]>
 	</if>
 	<if test="select == 1">
 	<![CDATA[
-		and auction_status = '1'
+		and auction_status = '1'  
 	]]>
 	</if>
 	<if test="select == 2">
 	<![CDATA[
-		and auction_status in( '2','3','4')
+		and auction_status in( '2','3','4')  
 	]]>
 	</if>
 	<if test="select == 3">
@@ -446,8 +467,8 @@
 	select ac.AUCTION_IMG, ac.AUCTION_NO, ac.AUCTION_TITLE, ac.AUCTION_NOTE, mb.MEMBER_NAME, mb.MEMBER_ID,ah.AUCTION_HISTORY_PRICE as "auction_directprice"
 	from auction ac, member mb, AUCTION_HISTORY ah
 	where ac.member_id = mb.member_id and ac.auction_no = #{auction_no} and ac.auction_no = ah.AUCTION_NO 
-  and ah.AUCTION_HISTORY_PRICE = #{auction_history_price}
-  and ah.AUCTION_HISTORY_DATE = 
+  	and ah.AUCTION_HISTORY_PRICE = #{auction_history_price}
+  	and ah.AUCTION_HISTORY_DATE = 
     (select min(AUCTION_HISTORY_DATE) 
       from AUCTION_HISTORY
       where AUCTION_HISTORY_PRICE = #{auction_history_price}

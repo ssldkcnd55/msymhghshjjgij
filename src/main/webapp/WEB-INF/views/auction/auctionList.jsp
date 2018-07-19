@@ -93,7 +93,7 @@
 	//경매 카테고리
 	$(function(){
 	$("input[name='check']").click(function(){
-	var type = $(this).val();	
+	var type = $(this).val();	//체크박스에 벨류값 가져오기
 	/* alert("type : "+type); */
 	$.ajax({
 		url :"left_boxChangeList.do",
@@ -107,13 +107,17 @@
 			console.log(data);
 			var objStr = JSON.stringify(data);
 			var jsonObj = JSON.parse(objStr);
-			var select = jsonObj.list[0].type; 
-			/* alert("select : "+select); */
+			var select = jsonObj.list[0].today; 
+			var count = jsonObj.list[0].day; 
+			
+			/* alert("select : "+select); 
+			alert("count : "+count);
+			alert("type2 : "+jsonObj.hour); */
 			var outValues ="";
 			
 			if(jsonObj.list.length != 0 ){
+				alert("실행!");
 				for(var i in jsonObj.list){
-				console.log(jsonObj.list[i].type);
 				 outValues += 
 				"<a href='AuctionDetail.do?auction_no="+jsonObj.list[i].auction_no +"'>"+
        			"<div class='market'><div class='img_box' style='background-image: url(\"/farm/resources/upload/auctionUpload/"+jsonObj.list[i].auction_img+"\"); background-size: cover;'></div>"+
@@ -121,7 +125,7 @@
        			"</div></a>";
 				}
 				$(".auction_box").html(outValues);
-			}else{
+			}else {
 				alert("선택된 항목의 결과가 없습니다.");
 			}
 				

@@ -425,6 +425,7 @@ public class AuctionController {
 			jsq.put("auction_qna_title", aq.getAuction_qna_title());
 			jsq.put("member_id", aq.getMember_id());
 			jsq.put("auction_qna_question_date", aq.getAuction_qna_question_date().toString());
+			jsq.put("auction_category", aq.getAuction_category());
 			jsq.put("startPage", startPage);
 			jsq.put("endPage", endPage);
 			jsq.put("maxPage", maxPage);
@@ -770,8 +771,10 @@ public class AuctionController {
 	// 경매 카테고리
 	@RequestMapping(value = "left_boxChangeList.do", method = RequestMethod.POST)
 	@ResponseBody
-	public void selectLeft_boxChangeList(HttpServletResponse response, @RequestParam(value = "page") int currentPage,
+	public void selectLeft_boxChangeList(HttpServletResponse response, HttpServletRequest request,@RequestParam(value = "page") int currentPage,
 			@RequestParam(value = "type") int type) throws IOException {
+		/*String type2 = request.getParameter("type");
+		System.out.println("type2 :"+type2);*/
 		List<Auction> left_boxList = auctionService.selectLeft_boxChangeList(currentPage, type);
 		System.out.println("left_boxList : " + left_boxList.toString());
 		JSONArray jarr = new JSONArray();
@@ -787,6 +790,7 @@ public class AuctionController {
 			endPage = maxPage;
 		}
 
+	
 		for (Auction a : left_boxList) {
 			JSONObject json = new JSONObject();
 			json.put("rnum", a.getRnum());
@@ -800,10 +804,15 @@ public class AuctionController {
 			json.put("endPage", endPage);
 			json.put("maxPage", maxPage);
 			json.put("currentPage", currentPage);
-			json.put("type", type);
+			json.put("today", type);
+			json.put("day", listCount);
 			jarr.add(json);
 			System.out.println("카테고리 실행 ");
+			System.out.println("today : "+type);
 		}
+	
+	
+		
 
 		JSONObject sendJson = new JSONObject();
 		sendJson.put("list", jarr);
@@ -958,17 +967,12 @@ public class AuctionController {
 	
 	
 	//경매 낙찰 검사
-
 	@RequestMapping(value = "bidding.do")
 	@ResponseBody
 	public void bidding(HttpServletResponse response) throws IOException {
-		
 		ArrayList<Auction> list = auctionService.selectStatus_2();//경매 상태 2 것만 넘버 가져오기
 		System.out.println(" list : "+list);
-		
 		JSONArray jarr =new JSONArray();
-		
-		
 		for(Auction a: list) {
 			System.out.println("no :"+a.getAuction_no());
 			int auction_no = a.getAuction_no();

@@ -108,11 +108,13 @@
 								<td style="width: 10%">${auctionqna.auction_qna_question_date }</td>
 							</tr>
 						</table>
+						<c:if test="${loginUser.member_id eq auctionqna.member_id}">
 						<div class="QnA_modify">
 							<button onclick="moveAuctionQnAModify();">수정</button>
 							&nbsp;
 							<button>삭제</button>
 						</div>
+						</c:if>
 						<div class="QnA_note">
 							<p>${auctionqna.auction_qna_contents }</p>
 						</div>
@@ -125,7 +127,7 @@
 							<!-- <form action="updateauctionQnA_Answer.do" method="post" onsubmit="return seller_QnAanswer_Modify();"> -->
 							<form action="updateauctionQnA_Answer.do" method="post">
 							<c:choose>
-								<c:when test="${empty auctionqna.auction_qna_answer}">
+								<c:when test="${empty auctionqna.auction_qna_answer && loginUser.member_id == auctionqna.auction_category}">
 									<div class="QnA_comment_title">
 										<p>답글</p>
 										<div class="QnA_comment_write">
@@ -146,7 +148,8 @@
 									</form>
 								</c:when>
 								
-								<c:otherwise>
+								
+								<c:when test="${not empty auctionqna.auction_qna_answer && loginUser.member_id == auctionqna.auction_category}">
 									<div class='QnA_comment_title2'>
 										<div class='more'>
 											<table class='QnA_MODIFY2'>
@@ -171,7 +174,8 @@
 											</div>
 										</div>
 									</div>
-								</c:otherwise>
+								</c:when>
+							
 							</c:choose>
 							<!-- </form> -->
 						</div><!-- 전체 remove -->
